@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CVBS — Worldwide Venue Finding Solutions
+   CVBS, Worldwide Venue Finding Solutions
    Design system (shared). Mobile-first. Built on the cvbs-2026 visual language.
    ========================================================================== */
 
@@ -298,7 +298,7 @@ body.menu-open{overflow:hidden}
 .reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}.reveal[data-d="3"]{transition-delay:.24s}
 
 /* ==========================================================================
-   IMMERSIVE HERO (ported from original cvbs-2026 build) — overrides above
+   IMMERSIVE HERO (ported from original cvbs-2026 build), overrides above
    ========================================================================== */
 .site-header--overlay{position:fixed;left:0;right:0;top:0}
 .brand .logo-light{display:none}

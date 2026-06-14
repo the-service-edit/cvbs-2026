@@ -3,166 +3,487 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Submit a Brief | Get a Venue Shortlist in 48 Hours | CVBS</title>
-<meta name="description" content="Tell CVBS what you need — services, location, delegates, dates and budget — and get a curated venue shortlist within 48 hours. Free, no obligation.">
-<link rel="canonical" href="https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html">
-<meta name="theme-color" content="#0D2233">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="CVBS — Worldwide Venue Finding Solutions">
-<meta property="og:title" content="Submit a Brief | Get a Venue Shortlist in 48 Hours | CVBS">
-<meta property="og:description" content="Tell CVBS what you need — services, location, delegates, dates and budget — and get a curated venue shortlist within 48 hours. Free, no obligation.">
-<meta property="og:url" content="https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html">
-<meta property="og:image" content="https://the-service-edit.github.io/cvbs-2026/assets/img/venue-hero-1000.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/img/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<title>Submit your brief | CVBS</title>
+<meta name="description" content="Tell CVBS what you need and we'll source, negotiate and shortlist the right venues, free to you, within 48 hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/venue-hero-1000.webp">
-<link rel="stylesheet" href="assets/css/site.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Submit a brief", "item": "https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html"}]}</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#3BC9D9;--teal-deep:#28A8B6;--navy:#0D2233;--navy-deep:#071520;
+    --stone:#F4F1EA;--stone-deep:#ECE7DC;--white:#fff;
+    --text:#0D1F2D;--muted:#6E747B;--line:#E3DED2;--field-line:#D8D2C4;
+    --container:1400px;--gutter:clamp(1.5rem,5vw,5rem);--r-btn:12px;--r-card:14px;
+    --ease:cubic-bezier(.16,.84,.44,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--text);background:var(--stone);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{width:100%;max-width:var(--container);margin:0 auto;padding-inline:var(--gutter)}
+
+  /* nav */
+  .site-nav{position:fixed;top:0;left:0;width:100%;z-index:50;padding-block:1.1rem;background:rgba(244,241,234,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--line)}
+  .site-nav__inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .logo{height:32px;width:auto;display:block}
+  .site-nav__links{display:flex;align-items:center;gap:1.9rem}
+  .site-nav__links a{color:var(--text);text-decoration:none;font-size:.84rem;transition:color .3s var(--ease)}
+  .site-nav__links a:hover{color:var(--teal-deep)}
+  .nav-cta{border:1px solid var(--line);padding:.55rem 1.1rem;border-radius:var(--r-btn)}
+  .nav-cta:hover{border-color:var(--teal)}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0;background:none;border:none;cursor:pointer}
+  .nav-toggle span{display:block;height:2px;width:24px;border-radius:2px;background:var(--text);transition:transform .35s var(--ease),opacity .25s}
+  .mobile-menu{position:fixed;inset:0;z-index:65;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+  .mobile-menu.open{opacity:1;visibility:visible}
+  .mobile-menu__links{display:flex;flex-direction:column;gap:1.3rem;text-align:center;padding:3rem 2rem}
+  .mobile-menu__links a{color:rgba(244,241,234,.9);text-decoration:none;font-size:1.5rem;font-weight:500}
+  .mobile-menu__cta{margin-top:1rem;align-self:center;background:var(--teal);color:var(--navy)!important;padding:.9rem 2rem;border-radius:100px;font-weight:600}
+  body.menu-open{overflow:hidden}
+
+  /* header */
+  .head{padding:clamp(7rem,16vh,10rem) 0 clamp(2rem,5vh,3rem)}
+  .eyebrow{display:inline-flex;align-items:center;gap:.85rem;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+  .eyebrow::before{content:"";width:34px;height:2px;border-radius:2px;background:var(--teal)}
+  .head h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-top:1.1rem}
+  .head p{margin-top:1.1rem;color:var(--muted);font-size:1.1rem;line-height:1.6;font-weight:300;max-width:52ch}
+  .head p b{color:var(--text);font-weight:500}
+
+  /* layout: form + aside */
+  .grid{display:grid;grid-template-columns:1fr 340px;gap:clamp(1.5rem,3vw,3rem);align-items:start;padding-bottom:clamp(4rem,8vh,7rem)}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(1.6rem,3vw,2.6rem);box-shadow:0 30px 60px -40px rgba(13,34,51,.4)}
+
+  /* progress */
+  .steps{display:flex;gap:.6rem;margin-bottom:2rem;align-items:stretch}
+  .steps button{flex:1;position:relative;background:none;border:none;cursor:pointer;text-align:center;padding:0;font-family:inherit}
+  .steps .bar{position:absolute;inset:0;border-radius:9px;background:var(--stone-deep);overflow:hidden;z-index:0;transition:box-shadow .4s var(--ease)}
+  .steps .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal) 0%,var(--teal-deep) 100%);transition:width .5s var(--ease)}
+  .step__n{position:relative;z-index:1;display:block;padding:.7rem .55rem;font-size:clamp(.62rem,2.6vw,.72rem);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;transition:color .4s var(--ease)}
+  .steps.s1 .step:nth-child(1) .bar i{width:100%}
+  .steps.s2 .step:nth-child(1) .bar i,.steps.s2 .step:nth-child(2) .bar i{width:100%}
+  .steps.s3 .bar i{width:100%}
+  .steps.s1 .step:nth-child(1) .step__n,
+  .steps.s2 .step:nth-child(1) .step__n,.steps.s2 .step:nth-child(2) .step__n,
+  .steps.s3 .step__n{color:var(--white)}
+  .steps .step.active .bar{box-shadow:0 7px 20px -6px rgba(40,168,182,.6)}
+  .steps .step.active .step__n{color:var(--white)}
+
+  /* steps panels */
+  .panel{display:none}
+  .panel.active{display:block;animation:fade .4s var(--ease)}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .panel h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;margin-bottom:.4rem}
+  .panel .sub{color:var(--muted);font-size:.95rem;margin-bottom:1.6rem;font-weight:300}
+
+  .field{margin-bottom:1.3rem}
+  .field>label{display:block;font-size:.8rem;font-weight:600;letter-spacing:.01em;margin-bottom:.55rem}
+  .field .hint{color:var(--muted);font-weight:400}
+  .req{color:var(--teal-deep)}
+  .field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=date],.field input[type=number],.field select,.field textarea{
+    width:100%;background:var(--stone);border:1px solid var(--field-line);border-radius:10px;padding:.8rem .9rem;color:var(--text);font-family:inherit;font-size:.95rem;transition:border-color .25s var(--ease),background .25s var(--ease)}
+  .field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236E747B' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.2rem}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--teal);background:var(--white)}
+  .field input::placeholder,.field textarea::placeholder{color:#A9A89F}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  .field.invalid input,.field.invalid select{border-color:#d9534f;background:#fdf3f2}
+  .err{display:none;color:#c0392b;font-size:.78rem;margin-top:.4rem}
+  .field.invalid .err{display:block}
+
+  /* chip checkboxes */
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem}
+  .chip{position:relative}
+  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .chip span{display:inline-flex;align-items:center;gap:.45rem;padding:.8rem 1rem;border:1px solid var(--field-line);border-radius:10px;font-size:.9rem;cursor:pointer;transition:all .25s var(--ease);background:var(--stone)}
+  .chip input:checked+span{border-color:var(--teal);background:rgba(59,201,217,.12);color:var(--text);font-weight:500}
+  .chip input:focus-visible+span{outline:2px solid var(--teal);outline-offset:2px}
+
+  /* toggle checkbox row */
+  .check{display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.92rem;color:var(--text);margin-top:.4rem}
+  .check input{width:18px;height:18px;accent-color:var(--teal-deep);cursor:pointer}
+
+  /* nav buttons */
+  .actions{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
+  .btn{font-size:.95rem;font-weight:500;border-radius:var(--r-btn);cursor:pointer;border:none;padding:.95rem 1.7rem;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;font-family:inherit;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease)}
+  .btn svg{width:16px;height:16px}
+  .btn--navy{background:var(--navy);color:var(--white);box-shadow:0 10px 30px -14px rgba(13,34,51,.55)}
+  .btn--navy:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(13,34,51,.55)}
+  .btn--ghost{background:transparent;color:var(--navy);border:1px solid rgba(13,34,51,.28)}
+  .btn--ghost:hover{transform:translateY(-3px);border-color:var(--teal);background:rgba(59,201,217,.08)}
+  .btn[disabled]{opacity:.55;cursor:default;transform:none}
+  .btn--hidden{visibility:hidden}
+
+  /* aside */
+  .aside{position:sticky;top:90px;display:flex;flex-direction:column;gap:1.2rem}
+  .aside__card{background:var(--navy);color:#fff;border-radius:var(--r-card);padding:1.6rem}
+  .aside__card h3{font-size:1.15rem;font-weight:600;margin-bottom:1rem}
+  .aside__list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+  .aside__list li{display:flex;gap:.7rem;font-size:.9rem;line-height:1.45;color:rgba(244,241,234,.82);font-weight:300}
+  .aside__list svg{width:18px;height:18px;flex:none;color:var(--teal);margin-top:.1rem}
+  .aside__note{font-size:.82rem;color:var(--muted);line-height:1.55;font-weight:300;padding:0 .2rem}
+
+  /* success */
+  .success{display:none;text-align:center;padding:clamp(2rem,5vw,3.5rem)}
+  .success.show{display:block;animation:fade .5s var(--ease)}
+  .success__ico{width:64px;height:64px;border-radius:50%;background:rgba(59,201,217,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem}
+  .success__ico svg{width:30px;height:30px;color:var(--teal-deep)}
+  .success h2{font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem}
+  .success p{color:var(--muted);font-size:1.02rem;line-height:1.6;font-weight:300;max-width:42ch;margin:0 auto 1.6rem}
+
+  /* footer */
+  .footer{background:var(--navy-deep);color:rgba(244,241,234,.7);padding-block:clamp(3.5rem,7vh,5rem) 2rem}
+  .footer__top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:clamp(1.5rem,3vw,3rem)}
+  .footer__brand img{height:42px;width:auto}
+  .footer__brand p{margin-top:1.1rem;font-size:.92rem;line-height:1.6;font-weight:300;max-width:34ch}
+  .footer__col h5{color:var(--white);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.1rem;font-weight:500}
+  .footer__col a{display:block;color:rgba(244,241,234,.7);text-decoration:none;font-size:.92rem;margin-bottom:.7rem;font-weight:300;transition:color .3s var(--ease)}
+  .footer__col a:hover{color:var(--teal)}
+  .footer__base{margin-top:clamp(2.5rem,5vh,3.5rem);padding-top:1.6rem;border-top:1px solid rgba(244,241,234,.14);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.8rem}
+
+  @media (max-width:980px){.grid{grid-template-columns:1fr}.footer__top{grid-template-columns:1fr 1fr}.aside{position:static;flex-direction:row;flex-wrap:wrap}.aside__card{flex:1;min-width:260px}.aside__note{flex-basis:100%}}
+  @media (max-width:680px){
+    .site-nav__links{display:none}.nav-toggle{display:flex}
+    .footer__top{grid-template-columns:1fr}
+    .row{grid-template-columns:1fr}
+    .actions{flex-direction:column-reverse}.btn{width:100%;justify-content:center}.btn--hidden{display:none}
+    .aside{flex-direction:column}
+  }
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap nav">
-    <a class="brand" href="index.html" aria-label="CVBS home">
-      <img class="logo-dark" src="assets/img/logo.png" alt="CVBS — Conference Venues and Booking Services" width="45" height="38">
-      <img class="logo-light" src="assets/img/logo-white.png" alt="" width="45" height="38" aria-hidden="true">
-    </a>
-    <nav class="nav-links" aria-label="Primary"><a href="how-it-works.html">How it works</a><a href="services.html">Services</a><a href="destinations.html">Destinations</a><a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
-    <div class="nav-cta">
-      <a class="btn btn--navy" href="submit-a-brief.html">Get a shortlist</a>
-      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
+
+<nav class="site-nav" id="nav">
+  <div class="wrap site-nav__inner">
+    <a href="index.html" aria-label="CVBS home"><img class="logo" src="assets/img/logo.png" alt="CVBS"></a>
+    <div class="site-nav__links">
+      <a href="how-it-works.html">How it works</a>
+      <a href="services.html">Services</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="about.html">About</a>
+      <a href="results.html">Results</a>
+      <a href="offers.html">Offers</a>
+      <a href="contact.html">Contact</a>
+      <a href="submit-a-brief.html" class="nav-cta">Get a shortlist</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
-    <a href="how-it-works.html">How it works <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="services.html">Services <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="destinations.html">Destinations <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="results.html">Results <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="about.html">About <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="contact.html">Contact <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <a class="btn btn--navy btn--block" href="submit-a-brief.html">Get a shortlist</a>
-  </nav>
+</nav>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu__links">
+  <a href="how-it-works.html">How it works</a><a href="services.html">Services</a><a href="destinations.html">Destinations</a>
+  <a href="about.html">About</a><a href="results.html">Results</a><a href="offers.html">Offers</a><a href="contact.html">Contact</a>
+  <a href="submit-a-brief.html" class="mobile-menu__cta">Get my shortlist</a>
+</div></div>
+
+<header class="head">
+  <div class="wrap">
+    <div class="eyebrow">Concierge enquiry</div>
+    <h1>Tell us what you need.</h1>
+    <p>Share a few details and we'll start sourcing. We research, negotiate and shortlist venues across Australia and worldwide, <b>free to you</b>, with a costed shortlist within 48 hours.</p>
+  </div>
 </header>
-<main id="main">
 
-<section class="page-hero">
-  <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><b style="color:inherit;font-weight:500">Submit a brief</b></nav>
-    <span class="eyebrow" style="margin-top:1.2rem">Concierge enquiry</span>
-    <h1>Tell us what you need. We'll find the space.</h1>
-    <p class="lead">Three quick steps now saves you weeks of chasing. The more you share, the sharper your shortlist.</p>
-    <div class="btn-row mt-2"><a class="btn btn--teal" href="submit-a-brief.html">Get a shortlist <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
-  </div>
-</section>
-<section class="s-white pad"><div class="wrap hero-grid" style="align-items:start;grid-template-columns:1.5fr .5fr">
-  <div class="reveal">
-    <form class="form-card" data-wizard id="briefForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
-      <input type="hidden" name="subject" value="New venue brief from cvbs.com.au">
-      <input type="hidden" name="from_name" value="CVBS Website">
-      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-      <div class="wiz-progress"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
-
-      <!-- STEP 1 -->
-      <div class="wiz-step active">
-        <div class="fieldset-title" style="margin-top:0">Your event</div>
-        <div class="field" data-need-one><label>What do you need help with? <span class="muted">— select all that apply</span></label>
-          <div class="check-grid"><label class="check"><input type="checkbox" name="Service" value="Conference venue"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Conference venue</label><label class="check"><input type="checkbox" name="Service" value="Group accommodation"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Group accommodation</label><label class="check"><input type="checkbox" name="Service" value="Product launch / event"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Product launch / event</label><label class="check"><input type="checkbox" name="Service" value="Corporate retreat"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Corporate retreat</label><label class="check"><input type="checkbox" name="Service" value="Meeting space"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Meeting space</label><label class="check"><input type="checkbox" name="Service" value="Corporate relocation"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Corporate relocation</label></div>
-          <p class="form-note" data-need-msg hidden style="color:#c0532a">Please choose at least one.</p>
-        </div>
-        <div class="field-row two">
-          <div class="field"><label for="loc">Preferred location *</label><select id="loc" name="Preferred location" required><option value="">Select a location…</option><option>Sydney, NSW</option><option>Melbourne, VIC</option><option>Brisbane, QLD</option><option>Gold Coast, QLD</option><option>Canberra, ACT</option><option>Perth, WA</option><option>Adelaide, SA</option><option>Hunter Valley, NSW</option><option>Blue Mountains, NSW</option><option>Yarra Valley, VIC</option><option>International</option><option>Flexible / open to suggestions</option><option>Other (specify)</option></select></div>
-          <div class="field"><label for="delegates">Number of delegates *</label><select id="delegates" name="Delegates" required><option value="">Select range…</option><option>Under 20</option><option>20–50</option><option>50–100</option><option>100–200</option><option>200–300</option><option>300+</option></select></div>
-        </div>
-        <div class="field-row two">
-          <div class="field"><label for="dates">Event dates</label><input id="dates" name="Event dates" type="text" placeholder="e.g. mid-March 2027">
-            <label class="inline-check"><input type="checkbox" name="Flexible dates" value="Yes"> Dates are flexible / not yet confirmed</label></div>
-          <div class="field"><label for="duration">Event duration</label><select id="duration" name="Duration"><option value="">Select…</option><option>Half day</option><option>Full day</option><option>2 days</option><option>3 days</option><option>4 days</option><option>5 days</option><option>1 week</option><option>2 weeks</option><option>1 month+</option></select></div>
-        </div>
-        <div class="field"><label for="acc">Accommodation required?</label><select id="acc" name="Accommodation"><option value="">Select…</option><option>Yes — all delegates</option><option>Yes — some delegates</option><option>No</option><option>Not sure yet</option></select></div>
-        <div class="wiz-nav"><button type="button" class="btn btn--navy" data-next>Next: Venue needs <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+<div class="wrap">
+  <div class="grid">
+    <div class="card">
+      <!-- progress -->
+      <div class="steps s1" id="steps">
+        <button type="button" class="step active" data-step="0"><span class="step__n">1, Your event</span><span class="bar"><i></i></span></button>
+        <button type="button" class="step" data-step="1"><span class="step__n">2, Venue needs</span><span class="bar"><i></i></span></button>
+        <button type="button" class="step" data-step="2"><span class="step__n">3, Your details</span><span class="bar"><i></i></span></button>
       </div>
 
-      <!-- STEP 2 -->
-      <div class="wiz-step">
-        <div class="fieldset-title" style="margin-top:0">Venue needs <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">— all optional</span></div>
-        <div class="field"><label for="vtype">Venue type preference</label><select id="vtype" name="Venue type"><option>No preference</option><option>Hotel</option><option>Dedicated conference centre</option><option>Boutique / unique space</option><option>Resort</option><option>CBD / central</option><option>Regional / retreat</option><option>Waterfront</option></select></div>
-        <div class="field"><label>What's needed on site? <span class="muted">— select all that apply</span></label>
-          <div class="check-grid"><label class="check"><input type="checkbox" name="Requirements" value="Catering"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Catering</label><label class="check"><input type="checkbox" name="Requirements" value="AV / technology"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>AV / technology</label><label class="check"><input type="checkbox" name="Requirements" value="Breakout rooms"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Breakout rooms</label><label class="check"><input type="checkbox" name="Requirements" value="Parking"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Parking</label><label class="check"><input type="checkbox" name="Requirements" value="Accessibility"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Accessibility</label><label class="check"><input type="checkbox" name="Requirements" value="Team activities"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Team activities</label><label class="check"><input type="checkbox" name="Requirements" value="Dinner / networking"><span class="box"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>Dinner / networking</label></div></div>
-        <div class="field"><label for="setup">Room setup preference</label><select id="setup" name="Room setup"><option>Not sure / flexible</option><option>Theatre</option><option>Classroom</option><option>Boardroom</option><option>Banquet</option><option>Cabaret</option><option>U-shape</option><option>Cocktail / standing</option></select></div>
-        <div class="field-row two">
-          <div class="field"><label for="bpd">Budget per delegate (per day)</label><input id="bpd" name="Budget per delegate" type="text" placeholder="e.g. $150"></div>
-          <div class="field"><label for="tot">Total event budget</label><input id="tot" name="Total budget" type="text" placeholder="e.g. $25,000"></div>
-        </div>
-        <div class="field"><label for="notes">Anything specific we should know?</label><textarea id="notes" name="Notes" placeholder="Must-haves, the feel you're after, accessibility, anything else…"></textarea></div>
-        <div class="wiz-nav"><button type="button" class="btn btn--ghost" data-back>Back</button><button type="button" class="btn btn--navy" data-next>Next: Your details <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
-      </div>
+      <form id="briefForm" novalidate>
+        <!-- Web3Forms: replace value with your CVBS access key from web3forms.com -->
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="New venue brief from CVBS website">
+        <input type="hidden" name="from_name" value="CVBS Website">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
-      <!-- STEP 3 -->
-      <div class="wiz-step">
-        <div class="fieldset-title" style="margin-top:0">Your details <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:400">— so we can send your shortlist</span></div>
-        <div class="field-row two">
-          <div class="field"><label for="fn">First name *</label><input id="fn" name="First name" type="text" autocomplete="given-name" required></div>
-          <div class="field"><label for="ln">Last name *</label><input id="ln" name="Last name" type="text" autocomplete="family-name" required></div>
-        </div>
-        <div class="field-row two">
-          <div class="field"><label for="em">Work email *</label><input id="em" name="email" type="email" autocomplete="email" required></div>
-          <div class="field"><label for="ph">Phone number</label><input id="ph" name="Phone" type="tel" autocomplete="tel"></div>
-        </div>
-        <div class="field-row two">
-          <div class="field"><label for="co">Company / organisation *</label><input id="co" name="Company" type="text" autocomplete="organization" required></div>
-          <div class="field"><label for="rl">Your role</label><select id="rl" name="Role"><option value="">Select your role…</option><option>Executive assistant / PA</option><option>Events coordinator</option><option>Office manager</option><option>Marketing manager</option><option>HR / People & culture</option><option>Business owner</option><option>Government / public sector</option><option>Other</option></select></div>
-        </div>
-        <div class="field"><label for="hh">How did you hear about us?</label><select id="hh" name="Heard via"><option value="">Select…</option><option>Google search</option><option>Word of mouth / referral</option><option>We've used CVBS before</option><option>LinkedIn</option><option>Email</option><option>Other</option></select></div>
-        <div class="wiz-nav"><button type="button" class="btn btn--ghost" data-back>Back</button><button type="submit" class="btn btn--navy">Find my venue <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
-        <p class="form-note tac mt-1">No cost, no obligation. A curated shortlist within 48 hours.</p>
-      </div>
+        <!-- STEP 1 -->
+        <section class="panel active" data-panel="0">
+          <h2>Your event</h2>
+          <p class="sub">The essentials so we can start matching venues.</p>
 
-      <div data-form-success hidden style="padding:1.6rem;border-radius:14px;background:rgba(59,201,217,.12);border:1px solid var(--teal)">
-        <h2 class="h3" style="display:flex;gap:.6rem;align-items:center"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> Brief received.</h2>
-        <p class="muted mt-1">Thank you — we've got it. A CVBS specialist will be in touch shortly, and your shortlist will follow within 48 hours.</p>
-      </div>
-    </form>
-    <p class="form-note">Wired for Web3Forms — replace <code>YOUR_WEB3FORMS_ACCESS_KEY</code> with your free key from web3forms.com to receive briefs by email. Until then, the form shows a confirmation without sending.</p>
-  </div>
+          <div class="field" id="f-services">
+            <label>What do you need help with? <span class="req">*</span> <span class="hint">Select all that apply</span></label>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="Service" value="Conference venue finding"><span>Conference venue</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Group accommodation"><span>Group accommodation</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Product launch / event"><span>Product launch / event</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Corporate retreat"><span>Corporate retreat</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Meeting space"><span>Meeting space</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Corporate relocation"><span>Corporate relocation</span></label>
+            </div>
+            <div class="err">Please choose at least one.</div>
+          </div>
 
-  <aside class="reveal" data-d="1">
-    <div class="card" style="background:var(--navy);color:#EAF1F4;border-color:transparent">
-      <span class="eyebrow">What happens next</span>
-      <ul class="ticks" style="margin-top:1.2rem;font-size:.97rem">
-        <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> We confirm your brief and ask anything we're missing</li>
-        <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> We source and negotiate matching venues</li>
-        <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> You receive a clear shortlist within 48 hours</li>
-        <li><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> You choose — we handle the booking</li>
-      </ul>
+          <div class="field" id="f-location">
+            <label for="location">Preferred location <span class="req">*</span></label>
+            <select id="location" name="Preferred location" required>
+              <option value="">Select a location...</option>
+              <option>Sydney, NSW</option><option>Melbourne, VIC</option><option>Brisbane, QLD</option><option>Gold Coast, QLD</option>
+              <option>Canberra, ACT</option><option>Perth, WA</option><option>Adelaide, SA</option><option>Hunter Valley, NSW</option>
+              <option>Blue Mountains, NSW</option><option>Yarra Valley, VIC</option><option>International</option>
+              <option>Flexible / open to suggestions</option><option value="Other">Other (specify)</option>
+            </select>
+            <div class="err">Please choose a location.</div>
+          </div>
+          <div class="field" id="f-location-other" style="display:none">
+            <label for="locationOther" id="locationOtherLabel">Please specify location</label>
+            <input type="text" id="locationOther" name="Location detail" placeholder="e.g. Darwin, NT or Regional Victoria">
+          </div>
+
+          <div class="field" id="f-delegates">
+            <label for="delegates">Number of delegates <span class="req">*</span></label>
+            <select id="delegates" name="Delegates" required>
+              <option value="">Select range...</option>
+              <option>Under 20</option><option>20–50</option><option>50–100</option><option>100–200</option><option>200–300</option><option>300+</option>
+            </select>
+            <div class="err">Please choose a range.</div>
+          </div>
+
+          <div class="field">
+            <label>Event dates</label>
+            <div class="row">
+              <input type="date" name="Start date" id="startDate" aria-label="Start date">
+              <input type="date" name="End date" id="endDate" aria-label="End date">
+            </div>
+            <label class="check"><input type="checkbox" name="Flexible dates" value="Yes" id="flexDates"> Dates are flexible / not yet confirmed</label>
+          </div>
+
+          <div class="field">
+            <label for="duration">Event duration</label>
+            <select id="duration" name="Duration">
+              <option value="">Select...</option>
+              <option>Half day</option><option>Full day</option><option>2 days</option><option>3 days</option><option>4 days</option>
+              <option>5 days</option><option>1 week</option><option>2 weeks</option><option>1 month+</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="accom">Accommodation required?</label>
+            <select id="accom" name="Accommodation">
+              <option value="">Select...</option>
+              <option>Yes, all delegates</option><option>Yes, some delegates</option><option>No</option><option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <span></span>
+            <button type="button" class="btn btn--navy" data-next>Next: Venue needs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </section>
+
+        <!-- STEP 2 -->
+        <section class="panel" data-panel="1">
+          <h2>Venue needs</h2>
+          <p class="sub">The more you tell us, the sharper the shortlist. All optional.</p>
+
+          <div class="field">
+            <label for="venueType">Venue type preference</label>
+            <select id="venueType" name="Venue type">
+              <option value="">No preference</option>
+              <option>Hotel</option><option>Dedicated conference centre</option><option>Boutique / unique space</option>
+              <option>Resort</option><option>CBD / central</option><option>Regional / retreat</option><option>Waterfront</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>What's needed on site? <span class="hint">Select all that apply</span></label>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="Requirements" value="Catering"><span>Catering</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="AV / technology"><span>AV / technology</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="Breakout rooms"><span>Breakout rooms</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="Parking"><span>Parking</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="Accessibility"><span>Accessibility</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="Team activities"><span>Team activities</span></label>
+              <label class="chip"><input type="checkbox" name="Requirements" value="Dinner / networking space"><span>Dinner / networking</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="setup">Room setup preference</label>
+            <select id="setup" name="Room setup">
+              <option value="">Not sure / flexible</option>
+              <option>Theatre</option><option>Classroom</option><option>Boardroom</option><option>Banquet</option>
+              <option>Cabaret</option><option>U-shape</option><option>Cocktail / standing</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="field"><label for="budgetPp">Budget per delegate (per day)</label><input type="text" id="budgetPp" name="Budget per delegate" placeholder="e.g. $120"></div>
+            <div class="field"><label for="budgetTotal">Total event budget</label><input type="text" id="budgetTotal" name="Total budget" placeholder="e.g. $25,000"></div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Anything specific we should know?</label>
+            <textarea id="notes" name="Notes" placeholder="e.g. Must be near a train station. Some delegates have dietary requirements. We've used a particular venue before and want something different."></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn--ghost" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back</button>
+            <button type="button" class="btn btn--navy" data-next>Next: Your details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </section>
+
+        <!-- STEP 3 -->
+        <section class="panel" data-panel="2">
+          <h2>Your details</h2>
+          <p class="sub">So we can send your shortlist back to you.</p>
+
+          <div class="row">
+            <div class="field" id="f-first"><label for="first">First name <span class="req">*</span></label><input type="text" id="first" name="First name" placeholder="Jane" required><div class="err">Required.</div></div>
+            <div class="field" id="f-last"><label for="last">Last name <span class="req">*</span></label><input type="text" id="last" name="Last name" placeholder="Smith" required><div class="err">Required.</div></div>
+          </div>
+          <div class="field" id="f-email"><label for="email">Work email <span class="req">*</span></label><input type="email" id="email" name="Email" placeholder="jane.smith@company.com.au" required><div class="err">Please enter a valid email.</div></div>
+          <div class="row">
+            <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="Phone" placeholder="+61 4__ ___ ___"></div>
+            <div class="field" id="f-company"><label for="company">Company / organisation <span class="req">*</span></label><input type="text" id="company" name="Company" placeholder="Acme Corporation" required><div class="err">Required.</div></div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="role">Your role</label>
+              <select id="role" name="Role">
+                <option value="">Select your role...</option>
+                <option>Executive assistant / PA</option><option>Events coordinator</option><option>Office manager</option>
+                <option>Marketing manager</option><option>HR / People &amp; culture</option><option>Business owner</option>
+                <option>Government / public sector</option><option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="referral">How did you hear about us?</label>
+              <select id="referral" name="Referral">
+                <option value="">Select...</option>
+                <option>Google search</option><option>Word of mouth / referral</option><option>We've used CVBS before</option>
+                <option>LinkedIn</option><option>Email</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn--ghost" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back</button>
+            <button type="submit" class="btn btn--navy" id="submitBtn">Submit brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          </div>
+        </section>
+      </form>
+
+      <!-- success -->
+      <div class="success" id="success">
+        <div class="success__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>Brief received.</h2>
+        <p>Thank you. Karen, Anthony or Virginia will be in touch, and you'll have a costed shortlist within 48 hours. No cost, no obligation.</p>
+        <a href="index.html" class="btn btn--navy" style="display:inline-flex">Back to home</a>
+      </div>
     </div>
-    <div class="card mt-2"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 class="h4">Always free</h3><p>Paid by the venue, not you. <a class="link-arrow" href="how-we-are-paid.html" style="font-size:.95rem">How we're paid <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p></div>
-    <div class="card mt-2"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></div><h3 class="h4">Prefer to talk?</h3><p class="muted">Call 1300 000 000, Mon–Fri 8:30–5:30 AEST.</p></div>
-  </aside>
-</div></section>
 
-</main>
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <img src="assets/img/logo-white.png" alt="CVBS" width="42" height="36">
-        <p class="fnote">A free, worldwide venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
-        <div class="footer-contact" style="margin-top:1.4rem">
-          <a href="tel:1300000000"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg> 1300 000 000</a>
-          <a href="mailto:enquiries@cvbs.com.au"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> enquiries@cvbs.com.au</a>
-        </div>
+    <aside class="aside">
+      <div class="aside__card">
+        <h3>What happens next</h3>
+        <ul class="aside__list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> We research venues and negotiate rates on your behalf.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> A costed shortlist lands in your inbox within 48 hours.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You choose, we handle the booking. Free to you, always.</li>
+        </ul>
       </div>
-      <div><h4>Services</h4><ul><li><a href="conference-venue-finding.html">Conference venue finding</a></li><li><a href="group-accommodation.html">Group accommodation</a></li><li><a href="events.html">Product launches & events</a></li><li><a href="corporate-accommodation.html">Corporate accommodation</a></li></ul></div><div><h4>Company</h4><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="about.html">About</a></li><li><a href="results.html">Results</a></li><li><a href="how-we-are-paid.html">How we're paid</a></li></ul></div><div><h4>More</h4><ul><li><a href="offers.html">Current offers</a></li><li><a href="blog-index.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="submit-a-brief.html">Submit a brief</a></li></ul></div>
+      <p class="aside__note">Prefer to talk it through first? Reach the team via the <a href="contact.html">contact page</a>. We've been finding the right rooms since 1989.</p>
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/img/logo-white.png" alt="CVBS">
+        <p>A free, worldwide venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
+      </div>
+      <div class="footer__col"><h5>Services</h5>
+        <a href="services.html">Conference venue finding</a><a href="services.html">Group accommodation</a><a href="services.html">Product launches &amp; events</a><a href="services.html">Corporate relocation</a></div>
+      <div class="footer__col"><h5>Company</h5>
+        <a href="how-it-works.html">How it works</a><a href="destinations.html">Destinations</a><a href="about.html">About</a><a href="results.html">Results</a><a href="how-we-are-paid.html">How we&rsquo;re paid</a></div>
+      <div class="footer__col"><h5>More</h5>
+        <a href="offers.html">Offers</a><a href="blog-index.html">Blog</a><a href="contact.html">Contact</a><a href="submit-a-brief.html">Submit a brief</a></div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Conference Venues and Booking Services. Worldwide Venue Finding Solutions.</span>
-      <span>ABN 00 000 000 000 &nbsp;·&nbsp; Australia &amp; international</span>
+    <div class="footer__base">
+      <span>&copy; 2026 Conference Venues and Booking Services</span>
+      <span>Worldwide Venue Finding Solutions</span>
     </div>
   </div>
 </footer>
-<script src="assets/js/site.js" defer></script>
+
+<script>
+  // hamburger
+  (function(){var t=document.getElementById('navToggle'),m=document.getElementById('mobileMenu');if(!t||!m)return;
+    function set(o){m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);t.setAttribute('aria-expanded',o?'true':'false');}
+    t.addEventListener('click',function(){set(!m.classList.contains('open'));});
+    [].forEach.call(m.querySelectorAll('a'),function(a){a.addEventListener('click',function(){set(false);});});
+  })();
+
+  // wizard
+  (function(){
+    var form=document.getElementById('briefForm');
+    var panels=[].slice.call(document.querySelectorAll('.panel'));
+    var stepsEl=document.getElementById('steps');
+    var stepBtns=[].slice.call(stepsEl.querySelectorAll('.step'));
+    var cur=0, reached=0;
+
+    var locSel=document.getElementById('location'), locOther=document.getElementById('f-location-other');
+    locSel.addEventListener('change',function(){
+      var v=locSel.value, show=(v==='Other'||v==='International');
+      locOther.style.display=show?'block':'none';
+      if(show){
+        var intl=(v==='International');
+        document.getElementById('locationOtherLabel').textContent=intl?'Which city or country?':'Please specify location';
+        document.getElementById('locationOther').placeholder=intl?'e.g. Singapore, Bali, Fiji, Queenstown':'e.g. Darwin, NT or Regional Victoria';
+      }
+    });
+    var flex=document.getElementById('flexDates'), sd=document.getElementById('startDate'), ed=document.getElementById('endDate');
+    flex.addEventListener('change',function(){ var d=flex.checked; sd.disabled=d; ed.disabled=d; sd.style.opacity=ed.style.opacity=d?.5:1; });
+
+    function show(i){
+      cur=i; reached=Math.max(reached,i);
+      panels.forEach(function(p,k){p.classList.toggle('active',k===i);});
+      stepBtns.forEach(function(b,k){b.classList.toggle('active',k===i);});
+      stepsEl.className='steps s'+(i+1);
+      window.scrollTo({top:document.querySelector('.head').offsetHeight-40,behavior:'smooth'});
+    }
+    function mark(el,bad){el.classList.toggle('invalid',bad);}
+    function validate(step){
+      var ok=true;
+      if(step===0){
+        var anyService=form.querySelectorAll('input[name="Service"]:checked').length>0;
+        mark(document.getElementById('f-services'),!anyService); if(!anyService)ok=false;
+        var loc=document.getElementById('location'); mark(document.getElementById('f-location'),!loc.value); if(!loc.value)ok=false;
+        var del=document.getElementById('delegates'); mark(document.getElementById('f-delegates'),!del.value); if(!del.value)ok=false;
+      }
+      if(step===2){
+        [['first','f-first'],['last','f-last'],['company','f-company']].forEach(function(p){
+          var v=document.getElementById(p[0]).value.trim(); mark(document.getElementById(p[1]),!v); if(!v)ok=false;
+        });
+        var em=document.getElementById('email'); var ev=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value); mark(document.getElementById('f-email'),!ev); if(!ev)ok=false;
+      }
+      return ok;
+    }
+
+    [].forEach.call(document.querySelectorAll('[data-next]'),function(b){b.addEventListener('click',function(){ if(validate(cur)) show(cur+1); });});
+    [].forEach.call(document.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){ show(cur-1); });});
+    stepBtns.forEach(function(b,k){b.addEventListener('click',function(){ if(k<=reached) show(k); });});
+
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!validate(0)){show(0);return;}
+      if(!validate(2))return;
+      var btn=document.getElementById('submitBtn'); btn.disabled=true; btn.textContent='Sending…';
+      var data=new FormData(form);
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:data})
+        .then(function(r){return r.json();})
+        .then(function(j){
+          if(j.success){ form.style.display='none'; stepsEl.style.display='none'; document.getElementById('success').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+          else { btn.disabled=false; btn.textContent='Submit brief'; alert('Something went wrong. Please try again or use the contact page.'); }
+        })
+        .catch(function(){ btn.disabled=false; btn.textContent='Submit brief'; alert('Something went wrong. Please try again or use the contact page.'); });
+    });
+  })();
+</script>
 </body>
 </html>
