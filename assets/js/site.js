@@ -21,6 +21,7 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       menu.classList.toggle('open', open);
       doc.body.classList.toggle('menu-open', open);
+      if (header) header.classList.toggle('nav-open', open);
     };
     toggle.addEventListener('click', function () {
       setMenu(toggle.getAttribute('aria-expanded') !== 'true');
