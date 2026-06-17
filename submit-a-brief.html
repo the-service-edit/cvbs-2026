@@ -197,6 +197,11 @@
         <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
         <input type="hidden" name="subject" value="New venue brief from CVBS website">
         <input type="hidden" name="from_name" value="CVBS Website">
+<input type="hidden" name="Offer" id="offerField">
+<div id="offerBanner" hidden style="display:flex;gap:.65rem;align-items:flex-start;background:rgba(59,201,217,.12);border:1px solid #3BC9D9;border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1.5rem;font-size:.95rem;color:#0D2233;line-height:1.45">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28A8B6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
+  <span>You're enquiring about the <strong id="offerName"></strong> offer. We'll include this with your brief.</span>
+</div>
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
         <!-- STEP 1 -->
@@ -484,6 +489,20 @@
         .catch(function(){ btn.disabled=false; btn.textContent='Submit brief'; alert('Something went wrong. Please try again or use the contact page.'); });
     });
   })();
+</script>
+<script>
+/* Carry an offer enquiry through from the offers page */
+(function(){
+  var o=new URLSearchParams(location.search).get('offer');
+  if(!o) return;
+  o=o.replace(/[<>]/g,'').slice(0,120);
+  var set=function(id,fn){var el=document.getElementById(id);if(el)fn(el);};
+  set('offerField',function(el){el.value=o;});
+  set('offerName',function(el){el.textContent=o;});
+  set('offerBanner',function(el){el.hidden=false;});
+  var subj=document.querySelector('input[name="subject"]'); if(subj) subj.value='Offer enquiry: '+o;
+  var notes=document.getElementById('notes'); if(notes && !notes.value) notes.value='I would like to enquire about the '+o+' offer.';
+})();
 </script>
 </body>
 </html>
