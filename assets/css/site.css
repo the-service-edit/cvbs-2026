@@ -353,6 +353,15 @@ body.menu-open{overflow:hidden}
 .pkg-card .price{font-size:1.5rem;font-weight:600;color:var(--teal-deep);letter-spacing:-.02em}
 .pkg-card h3{margin-bottom:.5rem}
 .fine{font-size:.8rem;color:var(--muted);margin-top:1rem}
+/* offer banner (top of each offer block) */
+.offer-banner{position:relative;border-radius:var(--r-card);overflow:hidden;aspect-ratio:16/7;box-shadow:var(--shadow-sm)}
+.offer-banner img{width:100%;height:100%;object-fit:cover}
+.offer-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,21,32,.86),rgba(7,21,32,.12) 62%)}
+.offer-banner__txt{position:absolute;left:clamp(1.2rem,3vw,2.4rem);right:1.2rem;bottom:clamp(1.1rem,3vw,1.8rem);z-index:2;color:#fff}
+.offer-banner__txt .tag{position:static;display:inline-block;margin-bottom:.6rem}
+.offer-banner__txt h2{color:#fff;font-size:clamp(1.6rem,1.2rem + 2vw,2.6rem);line-height:1.05;margin:0;letter-spacing:-.02em}
+.offer-banner__txt .loc{display:block;margin-top:.4rem;color:rgba(255,255,255,.86);font-size:.92rem;font-weight:500}
+@media(max-width:600px){.offer-banner{aspect-ratio:4/3}}
 
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;color:var(--white)}
 .hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(160deg,#cfc6b6 0%,#54707d 45%,var(--navy) 100%)}
