@@ -7,7 +7,7 @@
   <meta name="x-apple-disable-message-reformatting">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light only">
-  <!-- ===== SUBJECT (set in Mailchimp): "This month's venue offers - points, rates and value-adds" ===== -->
+  <!-- ===== SUBJECT (set in Mailchimp): "This month's venue offers — points, rates and value-adds" ===== -->
   <title>CVBS Current Offers</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -76,7 +76,7 @@
           </tr>
 
           <!-- ============================================================ -->
-          <!-- OFFER CARD - duplicate this whole row block per offer (aim 3-4)  -->
+          <!-- OFFER CARD — duplicate this whole row block per offer (aim 3-4)  -->
           <!-- ============================================================ -->
           <tr>
             <td class="px" style="padding:26px 40px 0 40px;">
