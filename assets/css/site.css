@@ -221,7 +221,7 @@ body.menu-open{overflow:hidden}
 .quote .who .name{font-weight:600;font-size:.95rem}
 .quote .who .role{font-size:.85rem;color:var(--muted)}
 .who-av{width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:600;font-size:.95rem;flex:none;letter-spacing:.02em}
-.who-logo{height:30px;width:auto;max-width:132px;object-fit:contain;flex:none}
+.quote .who img.who-logo{height:34px;width:auto;max-width:150px;border-radius:0;object-fit:contain;flex:none}
 /* homepage service icons: bright cyan, larger, no tinted circle (matches brand icon set) */
 .svc-cards .icon{background:none;width:auto;height:auto;margin-bottom:1.1rem}
 .svc-cards .icon svg{width:42px;height:42px;color:var(--teal);stroke-width:1.6}
