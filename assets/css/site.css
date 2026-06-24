@@ -137,11 +137,12 @@ body.menu-open{overflow:hidden}
 .hero-badge b{color:var(--teal)}
 
 /* page hero (interior pages) */
-.page-hero{background:var(--navy);color:#EAF1F4;position:relative;overflow:hidden}
-.page-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 85% 10%,rgba(59,201,217,.22),transparent 55%);pointer-events:none}
-.page-hero .wrap{position:relative;z-index:1;padding-block:clamp(3.5rem,8vw,6.5rem)}
-.page-hero h1{font-size:clamp(2.3rem,1.5rem + 4vw,4.2rem);max-width:16ch;margin:1.1rem 0 1.1rem}
-.page-hero .lead{color:rgba(234,241,244,.8)}
+.page-hero{background:var(--stone);color:var(--navy);position:relative;border-bottom:1px solid var(--line)}
+.page-hero .wrap{position:relative;z-index:1;padding-block:clamp(3rem,7vw,5.5rem)}
+.page-hero .crumbs,.page-hero .crumbs a{color:var(--muted)}
+.page-hero .eyebrow{color:var(--teal-deep)}
+.page-hero h1{font-size:clamp(2.1rem,1.4rem + 3.4vw,3.7rem);max-width:18ch;margin:1rem 0 1.1rem;letter-spacing:-.02em;line-height:1.04;color:var(--navy)}
+.page-hero .lead{color:var(--muted);max-width:56ch}
 
 /* Breadcrumbs ------------------------------------------------------------- */
 .crumbs{font-size:.82rem;color:rgba(234,241,244,.7);display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
