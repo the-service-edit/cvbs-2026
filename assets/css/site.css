@@ -5,7 +5,7 @@
 
 :root{
   --teal:#3BC9D9; --teal-deep:#28A8B6;
-  --navy:#0D2233; --navy-deep:#071520;
+  --navy:#0366c6; --navy-deep:#024c97;
   --stone:#F4F1EA; --stone-deep:#ECE7DC;
   --white:#FFFFFF;
   --text:#0D1F2D; --muted:#6E747B; --line:#E3DED2; --line-dark:rgba(255,255,255,.14);
@@ -210,6 +210,20 @@ body.menu-open{overflow:hidden}
 .logos img:hover{opacity:1;transform:translateY(-2px)}
 .logos--wall{gap:clamp(1.8rem,4vw,3.2rem) clamp(2rem,5vw,4rem);row-gap:clamp(2rem,4vw,2.8rem)}
 .logos--wall img{height:46px;max-width:160px}
+
+/* ==========================================================================
+   REBRAND: teal-forward accents + signature teal section
+   ========================================================================== */
+::selection{background:var(--teal);color:#06323a}
+.card:hover{border-color:var(--teal)}
+/* signature teal stats band */
+.s-teal{background:linear-gradient(135deg,var(--teal) 0%,var(--teal-deep) 52%,#117c89 100%);color:#fff;position:relative;overflow:hidden}
+.s-teal::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 120% at 85% 0%,rgba(255,255,255,.16),transparent 55%);pointer-events:none}
+.s-teal .wrap{position:relative;z-index:1}
+.s-teal .stat .n{color:#fff}
+.s-teal .stat .l{color:rgba(255,255,255,.9)}
+/* keep the hero overlay dark for legibility, add a teal glow */
+.hero__scrim{background:linear-gradient(100deg,rgba(8,26,40,.94) 0%,rgba(8,26,40,.66) 30%,rgba(8,26,40,.3) 55%,rgba(8,26,40,.06) 82%,rgba(8,26,40,0) 100%),radial-gradient(120% 95% at 12% 90%,rgba(40,168,182,.45),transparent 55%)}
 .logos-label{text-align:center;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;font-weight:600}
 
 /* Testimonials ------------------------------------------------------------ */

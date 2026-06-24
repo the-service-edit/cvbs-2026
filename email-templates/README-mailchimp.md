@@ -1,42 +1,53 @@
-# CVBS Venue Offer — Mailchimp EDM
+# CVBS EDM templates — Mailchimp
 
-Email-safe, on-brand template (teal/navy/stone, Inter). Built for Mailchimp's paste-in HTML editor. Works in Gmail, Apple Mail, Outlook (bulletproof button included).
+Email-safe, on-brand templates (teal/navy/stone, Inter). Built for Mailchimp's **Code your own → Paste in code**. Tested structure: tables + inline CSS, 600px, mobile-responsive, bulletproof Outlook buttons.
 
-## Paste it into Mailchimp
+| File | Use it for |
+|------|-----------|
+| `cvbs-venue-offer.html` | One venue, one campaign. Handles tiered offers (worked example: Hyatt Caribbean Park). |
+| `cvbs-offers-roundup.html` | Monthly "current offers" — 3-4 venues in compact cards. Keeps you in inboxes between big offers. |
+
+## Paste into Mailchimp
 1. **Campaigns → Create → Email → Regular.**
-2. Pick your audience, set the **subject line** + **preview text** (the template has a hidden preheader, but Mailchimp's preview field overrides it — set both to match).
-3. At the template step choose **Code your own → Paste in code**.
-4. Open `cvbs-venue-offer.html`, copy everything, paste it in, **Save**.
-5. Send a **test email to yourself** before scheduling.
+2. Set audience, **subject line** + **preview text**.
+3. Template step → **Code your own → Paste in code**.
+4. Copy the whole `.html` file, paste, **Save**.
+5. **Send a test to yourself** (check on mobile — most opens are there).
+6. Once happy, **Save as template** so next month is two clicks.
 
-Tip: once it looks right, **Save as template** in Mailchimp so the next offer is two clicks away.
+## The offer template — how it's built
+The design leads with the deal, in this order: **deal band** (one-line hook) → **spec strip** (3 facts that decide relevance) → **offer panel(s)** → **deadline** → **CTA** → **brief-capture block** → **personal sign-off**.
 
-## What to edit each send
-Search the file for these and swap them:
+**Tiered offers (the Hyatt pattern).** The example splits a messy two-part offer into two clear panels: "Booking an event?" (with $5k / $10k spend tiers) and "Booking group rooms?" (room-night rewards). For a **simple offer**, delete the second panel and replace the tier lines with a plain ✓ list. For a **single-number offer** (e.g. Kimpton $110pp), put the number in the deal band and keep one short panel.
 
-- **Hero image** — `hamilton-island.jpg` → your venue image (ideally 600px wide, ~1200px for retina).
-- **Eyebrow** — `Spring 2026 • Hamilton Island • Whitsundays, QLD`.
-- **Headline + intro** — the `<h1>` and the paragraph under it.
-- **Offer box** — "The offer" heading and description.
-- **Available dates** — delete the row if not relevant.
-- **Inclusions** — the ✓ rows (copy/delete a `<tr>` to add or remove).
-- **CTA link** — appears **3 times** (hero image, button MSO + button link). Update all three to the same URL.
-- **Footer** — phone, email, intro line.
+**Brief-capture block** — the stone box near the bottom. This is the highest-value part: it converts everyone who doesn't want *this specific venue* but is still planning an event. Don't delete it. It links to `submit-a-brief.html`.
 
-## Images must be hosted (important)
-Email can't use local files. The template points at your live site:
-`https://the-service-edit.github.io/cvbs-2026/assets/img/...`
+**Personal sign-off** — set to "Karen, Anthony, Chantelle & Rychelle" in your voice. Swap names per sender.
 
-Two options:
-- **Keep that** if your GitHub Pages site is live and public — confirm the image opens in a browser.
-- **Safer:** upload the hero + logo to **Mailchimp → Content Studio**, then replace each `src="..."` with the Mailchimp-hosted URL. This guarantees images never break and survives any site change.
+## The roundup template — how it's built
+Intro → 3 offer cards (image + 2-line summary + "View offer") → a navy **brief-capture band** as the main CTA → sign-off. Duplicate or delete a card row to change the count. Aim for 3-4; more than that and nothing stands out.
 
-## Merge tags already wired
-`*|UNSUB|*`, `*|UPDATE_PROFILE|*`, `*|HTML:LIST_ADDRESS_HTML|*` (your physical address — legally required), `*|ARCHIVE|*` (view in browser). Mailchimp fills these automatically. Don't remove the unsubscribe or address — Mailchimp blocks the send without them.
+## Edit checklist each send
+- **Hero / card images** — swap the `src`. Ideally 600px wide (1200px for retina); cards crop to 190px.
+- **Deal band, eyebrow, headline, spec strip** — the scannable top.
+- **Offer panels** — tier labels and value-adds.
+- **Deadline / "Book by"** — real dates, or delete the amber strip.
+- **CTA links** — the proposal button appears in 2 places (MSO + standard); the brief block + footer have their own. Point them where you want.
+- **Fine print** — real T&Cs.
+
+## Already wired (don't remove)
+Merge tags `*|UNSUB|*`, `*|UPDATE_PROFILE|*`, `*|HTML:LIST_ADDRESS_HTML|*` (your physical address — legally required), `*|ARCHIVE|*`. Mailchimp fills these automatically and **won't send without** the unsubscribe + address.
+
+## Two things to confirm before first send
+1. **Images are hosted.** They point at `the-service-edit.github.io/cvbs-2026/...`. Open one in a browser — if it loads, you're fine. If the new site isn't public yet, upload images to **Mailchimp → Content Studio** and replace each `src`. This also future-proofs against any site change.
+2. **Contact details.** Set to `+61 414 784 999` / `aj@conferencevenues.com.au` / `conferencevenues.com.au` (from your live Hyatt send). Change if a different team member is the sender.
+
+## Get the most out of these (priority order)
+1. **Segment before sending** — send each offer only to the region/size/type likely to care. Relevance beats design.
+2. **Sequence each offer** — initial → resend to non-openers with a new subject → "dates closing" nudge.
+3. **Authenticate your domain** (SPF/DKIM/DMARC in Mailchimp) and send from a person, not a generic inbox — or design doesn't matter, you land in spam.
 
 ## Subject line ideas
-- Spring at Hamilton Island — reduced rates for your next conference
-- Up to 700 delegates in the heart of the Reef (CVBS rates)
-- A spring offer worth holding dates for
-
-Keep ~6–9 words; the strongest detail goes first.
+**Offer:** "Hyatt Caribbean Park — 5,000 points + a free perk on your event" · "Reward your delegates *and* your budget (Melbourne)"
+**Roundup:** "3 venue offers worth holding dates for" · "This month's deals — points, rates and value-adds"
+Keep ~6-9 words; strongest detail first.
