@@ -564,3 +564,14 @@ body.menu-open{overflow:hidden}
 .prose .ticks li{margin:0}
 .prose .ticks li::marker{content:""}
 .prose a.link-arrow{text-decoration:none}
+
+/* photographic interior header (opt-in via page_hero img=...) */
+.page-hero--img{background:var(--navy);color:#EAF1F4;border-bottom:0;position:relative;overflow:hidden}
+.page-hero--img .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% center;z-index:0}
+.page-hero--img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(7,21,32,.93),rgba(7,21,32,.62) 52%,rgba(7,21,32,.28))}
+.page-hero--img .wrap{position:relative;z-index:2;padding-block:clamp(4rem,9vw,7rem)}
+.page-hero--img h1{color:#fff}
+.page-hero--img .lead{color:rgba(255,255,255,.86)}
+.page-hero--img .eyebrow{color:var(--teal)}
+.page-hero--img .crumbs,.page-hero--img .crumbs a{color:rgba(255,255,255,.72)}
+.page-hero--img .link-arrow{color:#fff}
