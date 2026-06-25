@@ -575,3 +575,16 @@ body.menu-open{overflow:hidden}
 .page-hero--img .eyebrow{color:var(--teal)}
 .page-hero--img .crumbs,.page-hero--img .crumbs a{color:rgba(255,255,255,.72)}
 .page-hero--img .link-arrow{color:#fff}
+
+/* destinations hub — image-backed city cards */
+.city-card{position:relative;display:flex;align-items:flex-end;min-height:330px;border-radius:var(--r-card);overflow:hidden;isolation:isolate;background:var(--navy);box-shadow:var(--shadow-sm);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.city-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s var(--ease)}
+.city-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,21,32,.08) 35%,rgba(7,21,32,.84))}
+.city-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.city-card:hover img{transform:scale(1.06)}
+.city-card__body{padding:clamp(1.2rem,2.4vw,1.6rem);color:#fff}
+.city-card__body h3{color:#fff}
+.city-card__body p{color:rgba(255,255,255,.85);font-size:.92rem;margin-top:.35rem;line-height:1.45}
+.city-card__body .link-arrow{color:#fff;margin-top:.8rem}
+.city-card__body .link-arrow svg{transition:transform .3s var(--ease)}
+.city-card:hover .link-arrow svg{transform:translateX(4px)}
