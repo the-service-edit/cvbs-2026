@@ -304,8 +304,8 @@ body.menu-open{overflow:hidden}
 
 /* checklist */
 .ticks{list-style:none;display:grid;gap:.85rem}
-.ticks li{display:flex;gap:.7rem;align-items:flex-start}
-.ticks li svg{width:21px;height:21px;color:var(--teal-deep);flex:none;margin-top:2px}
+.ticks li{position:relative;padding-left:1.95rem}
+.ticks li svg{position:absolute;left:0;top:.28em;width:21px;height:21px;color:var(--teal-deep)}
 
 /* Utilities --------------------------------------------------------------- */
 .tac{text-align:center}.mt-1{margin-top:1rem}.mt-2{margin-top:2rem}.mb-0{margin-bottom:0}
