@@ -659,10 +659,11 @@ body.menu-open{overflow:hidden}
 .brief__call svg{width:16px;height:16px;color:var(--teal)}
 @media(max-width:640px){.brief__note{display:none}.brief__call{display:flex}}
 
-/* mobile: tidy the trust logo strip (label wraps, logos in an even grid) */
+/* mobile: tidy the trust logo strip (label wraps, logos in even bordered cells) */
 @media(max-width:640px){
-  .trustline{flex-direction:column;align-items:center;gap:1.25rem;text-align:center}
+  .trustline{flex-direction:column;align-items:center;gap:1.1rem;text-align:center}
   .trustline .lbl{letter-spacing:.12em;font-size:.66rem;flex:none;line-height:1.4}
-  .trustline .logos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem;width:100%;justify-items:center;align-items:center;flex:none}
-  .trustline .logos img{height:auto;max-height:22px;max-width:88%;object-fit:contain}
+  .trustline .logos{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;width:100%;flex:none}
+  .trustline .logos img{height:52px;width:100%;max-width:none;object-fit:contain;border:1px solid var(--line);border-radius:10px;padding:.55rem 1rem;background:#fff}
+  .trustline .logos img:hover{opacity:1;transform:none}
 }
