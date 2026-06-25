@@ -530,7 +530,7 @@ body.menu-open{overflow:hidden}
 .people{display:grid;gap:clamp(2.4rem,5vw,4rem)}
 @media(min-width:920px){.people{grid-template-columns:.92fr 1.08fr;align-items:start}}
 .team-row{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.3rem,3vw,2rem)}
-@media(min-width:600px){.team-row{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:600px){.team-row{grid-template-columns:repeat(2,1fr);max-width:420px}}
 .tm .pf{aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:linear-gradient(165deg,var(--navy),var(--teal-deep));display:grid;place-items:center;margin-bottom:.85rem}
 .tm .pf img{width:100%;height:100%;object-fit:cover}
 .tm .mono{font-size:1.9rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.02em}
