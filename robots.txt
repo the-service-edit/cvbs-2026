@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://the-service-edit.github.io/cvbs-2026/sitemap.xml
