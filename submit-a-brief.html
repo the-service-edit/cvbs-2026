@@ -504,5 +504,24 @@
   var notes=document.getElementById('notes'); if(notes && !notes.value) notes.value='I would like to enquire about the '+o+' offer.';
 })();
 </script>
+<script>
+/* Carry the homepage concierge enquiry through (dest / guests / type / accom) */
+(function(){
+  var p=new URLSearchParams(location.search);
+  var clean=function(v){return v?v.replace(/[<>]/g,'').slice(0,80):'';};
+  var dest=clean(p.get('dest')),guests=clean(p.get('guests')),type=clean(p.get('type')),accom=p.get('accom');
+  if(!dest&&!guests&&!type) return;
+  var loc=document.getElementById('location');
+  if(loc&&dest){
+    var hit=[].slice.call(loc.options).some(function(o){if(o.value===dest||o.text===dest){loc.value=o.value;return true;}return false;});
+    if(!hit){var oth=document.getElementById('locationOther'); if(oth&&!/suggest/i.test(dest)){oth.value=dest;}}
+    loc.dispatchEvent(new Event('change'));
+  }
+  var del=document.getElementById('delegates'); if(del&&guests) del.value=guests;
+  if(accom==='1'){var a=document.getElementById('accom'); if(a){a.checked=true; a.dispatchEvent(new Event('change'));}}
+  var n=document.getElementById('notes');
+  if(n&&!n.value){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
+})();
+</script>
 </body>
 </html>

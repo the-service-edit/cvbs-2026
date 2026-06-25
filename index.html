@@ -60,14 +60,14 @@
         <a href="how-it-works.html" class="btn btn--ghost-light">See how it works</a>
       </div>
       <div class="hero-proofs reveal" data-d="3">
-        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> Free to you</span>
-        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Short list in 48 hours</span>
-        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg> No obligation</span>
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> Sourcing venues since 1989</span>
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Shortlist within 48 hours</span>
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg> No fee to clients</span>
       </div>
     </div>
     <aside class="brief reveal" data-d="3" aria-label="Quick enquiry">
-      <div class="brief__head">Concierge enquiry</div>
-      <div class="brief__title">Tell us what you need.</div>
+      <div class="brief__head">Brief our team · 30 seconds</div>
+      <div class="brief__title">Tell us what you're planning.</div>
       <div class="field"><label for="h-dest">Destination</label>
         <select id="h-dest"><option>Sydney</option><option>Melbourne</option><option>Brisbane</option><option>Gold Coast</option><option>Canberra</option><option>Perth</option><option>Adelaide</option><option>Hunter Valley</option><option>International</option><option>Open to suggestions</option></select></div>
       <div class="brief__row">
@@ -76,12 +76,24 @@
       </div>
       <div class="field"><label>Accommodation</label>
         <div class="toggle on" role="switch" aria-checked="true" tabindex="0" onclick="this.classList.toggle('on');this.setAttribute('aria-checked',this.classList.contains('on'))"><span>Required</span><span class="sw"></span></div></div>
-      <a href="submit-a-brief.html" class="btn btn--teal">Find my venue <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <p class="brief__note">No cost, no obligation. A short list within 48 hours.</p>
+      <a href="submit-a-brief.html" id="heroBriefGo" class="btn btn--teal">Build my shortlist <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="brief__note">No fee, no obligation. A shortlist within 48 hours, from a real person.</p>
     </aside>
   </div>
   <div class="scroll"><span>Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
 </header>
+<script>
+(function(){
+  var go=document.getElementById('heroBriefGo'); if(!go) return;
+  var val=function(id){var el=document.getElementById(id);return el?encodeURIComponent(el.value.trim()):'';};
+  go.addEventListener('click',function(e){
+    var t=document.querySelector('.hero .toggle');
+    var accom=(t&&t.classList.contains('on'))?'1':'0';
+    e.preventDefault();
+    location.href='submit-a-brief.html?dest='+val('h-dest')+'&guests='+val('h-guests')+'&type='+val('h-type')+'&accom='+accom;
+  });
+})();
+</script>
 
 <section class="s-white pad-sm">
   <div class="wrap trustline reveal">
@@ -99,7 +111,7 @@
     </div>
     <div class="dfacts">
       <div class="dfact"><span class="n">$0</span><span class="k"><b>Free to you</b><span>We are paid by the venue, never by you.</span></span></div>
-      <div class="dfact"><span class="n">48 hrs</span><span class="k"><b>Brief to short list</b><span>A considered, like-for-like comparison, most weeks.</span></span></div>
+      <div class="dfact"><span class="n">48 hrs</span><span class="k"><b>Brief to shortlist</b><span>A considered, like-for-like comparison, most weeks.</span></span></div>
       <div class="dfact"><span class="n">100%</span><span class="k"><b>Independent</b><span>We work for you, not for one hotel group.</span></span></div>
       <div class="dfact"><span class="n">Global</span><span class="k"><b>Sourced worldwide</b><span>Australia-wide, plus islands and overseas.</span></span></div>
     </div>
@@ -130,10 +142,10 @@
     <div class="section-head"><span class="eyebrow">The concierge process</span>
       <h2 class="h2">From brief to booked, without the busywork.</h2></div>
     <div class="flow"><div class="flow-step reveal"><span class="fi"></span>
-  <div><h3>You send one brief</h3><p>Dates, numbers, location, budget. A two-minute form or a quick call. One conversation, not fifty.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
-  <div><h3>We do the chasing</h3><p>We tap 35 years of relationships to source and negotiate options across matching venues, checking availability and rates for you.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
-  <div><h3>You compare a short list</h3><p>A clear, like-for-like short list lands within 48 hours: rates, inclusions and trade-offs side by side. No spreadsheets.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
-  <div><h3>We confirm the booking</h3><p>We lock the rate, manage the contract details and stay on call through to the event. You stay in control throughout.</p></div></div></div>
+  <div><h3>You send one brief</h3><p>Dates, numbers, location, budget. A two-minute form or a quick call. One conversation instead of fifty enquiries.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
+  <div><h3>We source and negotiate</h3><p>We check real availability across matching venues, including rooms that never show as free online, then negotiate rates and inclusions on your behalf.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
+  <div><h3>You compare a shortlist</h3><p>Within 48 hours you get a like-for-like shortlist: rates, inclusions, capacities and trade-offs side by side. No spreadsheets to build.</p></div></div><div class="flow-step reveal"><span class="fi"></span>
+  <div><h3>We confirm and coordinate</h3><p>We lock the rate, handle the contract detail, and coordinate accommodation and suppliers through to the day. You stay in control throughout.</p></div></div></div>
   </div>
 </section>
 
@@ -165,8 +177,8 @@
   <div class="wrap wrap--narrow statement-block reveal">
     <span class="eyebrow">Why use us</span>
     <h2 class="h2" style="max-width:24ch;margin-top:1rem">A search engine returns six hundred rooms. We return three, and we've stood in all of them.</h2>
-    <p class="lead" style="max-width:58ch;margin-top:1.3rem">Doing it yourself means chasing availability, paying the public rate and reconciling quotes across your inbox. With CVBS, one brief goes to a person who knows the general managers by name, negotiates rates you won't see online, and hands you a short list in 48 hours. No database to scroll. No algorithm. A specialist who has done this since 1989.</p>
-    <a class="link-arrow mt-2" href="how-it-works.html">See how it works <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="lead" style="max-width:58ch;margin-top:1.3rem">Doing it yourself means chasing availability, paying the public rate and reconciling quotes across your inbox. With CVBS, one brief goes to a person who knows the general managers by name, negotiates rates you won't see online, and hands you a shortlist in 48 hours. No database to scroll. No algorithm. A specialist who has done this since 1989.</p>
+    <a class="link-arrow mt-2" href="submit-a-brief.html">Start my search <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
   </div>
 </section>
 
@@ -203,18 +215,18 @@
 
 <section class="s-stone pad" id="offers">
   <div class="wrap">
-    <div class="section-head"><span class="eyebrow">Current offers</span>
-      <h2 class="h2">On the table this month.</h2></div>
+    <div class="section-head"><span class="eyebrow">Featured venues</span>
+      <h2 class="h2">A few of the venues we know inside out.</h2></div>
     <div class="offers-mag"><article class="offer offer--lead reveal">
-  <a href="offers.html#hyatt" aria-label="Hyatt Place Essendon Fields"><div class="media" style="background:linear-gradient(150deg,#2f6e78,#0d2233)"><img src="assets/img/offers/hyatt.jpg" alt="Hyatt Place Essendon Fields" loading="lazy"><span class="tag">Book by 30 Jun 2026</span><span class="venue-name">Hyatt Place Essendon Fields</span></div></a>
-  <div class="body"><span class="loc">Melbourne, VIC</span><h3>Choose up to 4 perks</h3><p class="muted">1,700 sqm of pillarless space for up to 1,500 guests, minutes from Melbourne Airport.</p>
-  <a class="link-arrow mt-1" href="offers.html#hyatt">See the offer <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article><article class="offer reveal">
-  <a href="offers.html#hamilton-island" aria-label="Hamilton Island"><div class="media" style="background:linear-gradient(150deg,#33a5a5,#0b2a3a)"><img src="assets/img/offers/hamilton-island.jpg" alt="Hamilton Island" loading="lazy"><span class="tag">Spring 2026</span><span class="venue-name">Hamilton Island</span></div></a>
-  <div class="body"><span class="loc">Whitsundays, QLD</span><h3>Reduced rates plus value-adds</h3><p class="muted">Up to 700 delegates in the heart of the Great Barrier Reef.</p>
-  <a class="link-arrow mt-1" href="offers.html#hamilton-island">See the offer <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article><article class="offer reveal">
-  <a href="offers.html#kimpton-margot" aria-label="Kimpton Margot Sydney"><div class="media" style="background:linear-gradient(150deg,#46606f,#0a2330)"><img src="assets/img/offers/kimpton-margot.jpg" alt="Kimpton Margot Sydney" loading="lazy"><span class="tag">Apr to Jun 2026</span><span class="venue-name">Kimpton Margot Sydney</span></div></a>
-  <div class="body"><span class="loc">Sydney, NSW</span><h3>Winter day delegate from $110pp</h3><p class="muted">Heritage art-deco Sydney with menus by Luke Mangan.</p>
-  <a class="link-arrow mt-1" href="offers.html#kimpton-margot">See the offer <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article></div>
+  <a href="offers.html#hyatt" aria-label="Hyatt Place Essendon Fields"><div class="media" style="background:linear-gradient(150deg,#2f6e78,#0d2233)"><img src="assets/img/offers/hyatt.jpg" alt="Hyatt Place Essendon Fields" loading="lazy"><span class="tag">Featured venue</span><span class="venue-name">Hyatt Place Essendon Fields</span></div></a>
+  <div class="body"><span class="loc">Melbourne, VIC</span><h3>Airport-side conference space</h3><p class="muted">Flexible, pillarless event space minutes from Melbourne Airport.</p>
+  <a class="link-arrow mt-1" href="offers.html#hyatt">See the venue <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article><article class="offer reveal">
+  <a href="offers.html#hamilton-island" aria-label="Hamilton Island"><div class="media" style="background:linear-gradient(150deg,#33a5a5,#0b2a3a)"><img src="assets/img/offers/hamilton-island.jpg" alt="Hamilton Island" loading="lazy"><span class="tag">Featured venue</span><span class="venue-name">Hamilton Island</span></div></a>
+  <div class="body"><span class="loc">Whitsundays, QLD</span><h3>Conferences and incentives on the Reef</h3><p class="muted">Island meetings and rewards in the heart of the Great Barrier Reef.</p>
+  <a class="link-arrow mt-1" href="offers.html#hamilton-island">See the venue <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article><article class="offer reveal">
+  <a href="offers.html#kimpton-margot" aria-label="Kimpton Margot Sydney"><div class="media" style="background:linear-gradient(150deg,#46606f,#0a2330)"><img src="assets/img/offers/kimpton-margot.jpg" alt="Kimpton Margot Sydney" loading="lazy"><span class="tag">Featured venue</span><span class="venue-name">Kimpton Margot Sydney</span></div></a>
+  <div class="body"><span class="loc">Sydney, NSW</span><h3>Heritage art-deco, Sydney CBD</h3><p class="muted">A design-led city venue with restaurant-quality catering.</p>
+  <a class="link-arrow mt-1" href="offers.html#kimpton-margot">See the venue <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></article></div>
   </div>
 </section>
 
@@ -222,7 +234,7 @@
   <div class="wrap">
     <span class="eyebrow eyebrow--center">Ready when you are</span>
     <h2 class="mt-1">Tell us what you need. We'll find the space.</h2>
-    <p class="lead">No cost, no obligation, and a short list within 48 hours.</p>
+    <p class="lead">No cost, no obligation, and a shortlist within 48 hours.</p>
     <div class="btn-row"><a class="btn btn--teal" href="submit-a-brief.html">Start my search <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <a class="btn btn--ghost" href="how-it-works.html" style="color:#fff">See how it works</a></div>
   </div>
