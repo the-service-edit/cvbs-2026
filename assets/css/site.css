@@ -644,3 +644,12 @@ body.menu-open{overflow:hidden}
 .calc__r{display:flex;justify-content:space-between;gap:1rem;padding:.62rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.92rem;color:rgba(234,241,244,.82)}
 .calc__r span:last-child{color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
 .calc__note{font-size:.8rem;color:rgba(234,241,244,.6);line-height:1.55;margin:1rem 0}
+
+/* mobile: collapse the hero concierge form to a compact CTA strip */
+@media(max-width:640px){
+  .brief{padding:1.25rem 1.35rem}
+  .brief__head{margin-bottom:.4rem}
+  .brief__title{font-size:1.25rem;margin-bottom:1rem}
+  .brief .field,.brief__row{display:none}
+  .brief .btn{margin-top:0}
+}
