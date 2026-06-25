@@ -653,3 +653,8 @@ body.menu-open{overflow:hidden}
   .brief .field,.brief__row{display:none}
   .brief .btn{margin-top:0}
 }
+
+/* mobile hero strip: tap-to-call line */
+.brief__call{display:none;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem;color:rgba(244,241,234,.9);font-size:.86rem;font-weight:600}
+.brief__call svg{width:16px;height:16px;color:var(--teal)}
+@media(max-width:640px){.brief__note{display:none}.brief__call{display:flex}}
