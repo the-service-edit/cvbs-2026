@@ -207,7 +207,7 @@ body.menu-open{overflow:hidden}
 
 /* Logos strip ------------------------------------------------------------- */
 .logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.5rem,4vw,3.5rem)}
-.logos img{height:38px;width:auto;opacity:.95;transition:opacity .3s,transform .3s}
+.logos img{height:38px;width:auto;opacity:1;transition:opacity .3s,transform .3s}
 .logos img:hover{opacity:1;transform:translateY(-2px)}
 .logos--wall{gap:clamp(1.8rem,4vw,3.2rem) clamp(2rem,5vw,4rem);row-gap:clamp(2rem,4vw,2.8rem)}
 .logos--wall img{height:46px;max-width:160px}
@@ -485,7 +485,7 @@ body.menu-open{overflow:hidden}
 .trustline{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(1rem,3.5vw,2.8rem)}
 .trustline .lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;flex:none}
 .trustline .logos{justify-content:flex-start;gap:clamp(1.3rem,3.2vw,2.8rem);flex:1}
-.trustline .logos img{height:28px;opacity:.62}
+.trustline .logos img{height:28px;opacity:1}
 .trustline .logos img:hover{opacity:1}
 
 /* decades — asymmetric oversized numbers */
