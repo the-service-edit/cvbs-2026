@@ -658,3 +658,11 @@ body.menu-open{overflow:hidden}
 .brief__call{display:none;align-items:center;justify-content:center;gap:.5rem;margin-top:.9rem;color:rgba(244,241,234,.9);font-size:.86rem;font-weight:600}
 .brief__call svg{width:16px;height:16px;color:var(--teal)}
 @media(max-width:640px){.brief__note{display:none}.brief__call{display:flex}}
+
+/* mobile: tidy the trust logo strip (label wraps, logos in an even grid) */
+@media(max-width:640px){
+  .trustline{flex-direction:column;align-items:center;gap:1.25rem;text-align:center}
+  .trustline .lbl{letter-spacing:.12em;font-size:.66rem;flex:none;line-height:1.4}
+  .trustline .logos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem 1rem;width:100%;justify-items:center;align-items:center;flex:none}
+  .trustline .logos img{height:auto;max-height:22px;max-width:88%;object-fit:contain}
+}
