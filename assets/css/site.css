@@ -588,3 +588,14 @@ body.menu-open{overflow:hidden}
 .city-card__body .link-arrow{color:#fff;margin-top:.8rem}
 .city-card__body .link-arrow svg{transition:transform .3s var(--ease)}
 .city-card:hover .link-arrow svg{transform:translateX(4px)}
+
+/* destination featured venue cards (image + body) */
+.vcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.vcard__img{position:relative;aspect-ratio:16/10;background:var(--stone-deep);overflow:hidden}
+.vcard__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.vcard:hover .vcard__img img{transform:scale(1.05)}
+.vcard__ph{position:absolute;inset:0;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 1.2rem;font-weight:600;font-size:1.05rem;letter-spacing:-.01em;line-height:1.25}
+.vcard__body{padding:1.2rem 1.3rem 1.4rem}
+.vcard__meta{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);font-weight:600;margin:.4rem 0 .65rem}
+.vcard__body .muted{font-size:.95rem;line-height:1.5}
