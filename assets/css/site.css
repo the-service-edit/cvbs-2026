@@ -494,8 +494,8 @@ body.menu-open{overflow:hidden}
 .decades .year{font-size:clamp(4.5rem,2rem + 11vw,10.5rem);line-height:.8;letter-spacing:-.045em;font-weight:700;color:var(--navy)}
 .decades .year-cap{margin-top:1.3rem;max-width:34ch;color:var(--muted);font-size:1.08rem;line-height:1.6}
 .dfacts{border-top:1px solid var(--line)}
-.dfact{padding:clamp(1.05rem,2.4vw,1.55rem) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:6.5ch 1fr;gap:1.3rem;align-items:baseline}
-.dfact .n{font-size:clamp(1.5rem,1.2rem + 1.3vw,2.05rem);font-weight:700;color:var(--teal-deep);letter-spacing:-.02em}
+.dfact{padding:clamp(1.1rem,2.6vw,1.7rem) 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:minmax(4.5rem,max-content) 1fr;gap:clamp(1.4rem,3vw,2.6rem);align-items:center}
+.dfact .n{font-size:clamp(1.45rem,1.2rem + 1.1vw,1.95rem);font-weight:700;color:var(--teal-deep);letter-spacing:-.02em;white-space:nowrap}
 .dfact .k b{display:block;color:var(--navy);font-weight:600;font-size:1rem}
 .dfact .k span{color:var(--muted);font-size:.92rem}
 
