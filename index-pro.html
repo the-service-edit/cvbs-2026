@@ -316,15 +316,5 @@
   </div>
 </footer>
 <script src="assets/js/site.js" defer></script>
-<script>(function(){
-  var els=document.querySelectorAll('.v-pro [data-count]'); if(!els.length) return;
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(!e.isIntersecting) return; var el=e.target, end=+el.dataset.count, t0=null, dur=1200;
-    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
-      el.textContent=Math.round(end*(0.5-Math.cos(Math.PI*p)/2)); if(p<1)requestAnimationFrame(step); }
-    requestAnimationFrame(step); io.unobserve(el);
-  });},{threshold:0.4});
-  els.forEach(function(el){io.observe(el);});
-})();</script>
 </body>
 </html>

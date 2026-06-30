@@ -130,6 +130,30 @@
     show(0);
   });
 
+  /* Count-up stats */
+  (function () {
+    var nums = doc.querySelectorAll('[data-count]');
+    if (!nums.length) return;
+    if (!('IntersectionObserver' in window)) {
+      nums.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
+      return;
+    }
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target, end = parseInt(el.getAttribute('data-count'), 10) || 0, t0 = null, dur = 1200;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          el.textContent = Math.round(end * (0.5 - Math.cos(Math.PI * p) / 2));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step); cio.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function (el) { cio.observe(el); });
+  })();
+
   /* Simple single-form fallback */
   doc.querySelectorAll('[data-brief-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
