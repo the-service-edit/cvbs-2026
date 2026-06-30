@@ -756,3 +756,8 @@ body.menu-open{overflow:hidden}
 .v-pro .dcard:hover img{transform:scale(1.06)}
 .v-pro .foot-trust{margin:.4rem 0 1.4rem;padding-top:1.6rem;border-top:1px solid rgba(255,255,255,.12);font-size:.85rem;color:rgba(255,255,255,.72);text-align:center;letter-spacing:.01em;line-height:1.7}
 @media(prefers-reduced-motion:reduce){.v-pro .offer__media img,.v-pro .dcard img{transition:none}}
+
+.offer__brandrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:30px;margin-bottom:1rem}
+.offer__brand{height:30px;width:auto;max-width:48%;object-fit:contain;object-position:left center;display:block}
+.offer__brandrow .offer__tag{margin-bottom:0}
+.offer__pad .offer__tag{margin-bottom:0}
