@@ -731,5 +731,5 @@ body.menu-open{overflow:hidden}
 
 .v-strip .eyebrow::before{display:none}
 
-.offer__logo{position:absolute;left:.85rem;bottom:.85rem;z-index:2;display:flex;align-items:center;background:#fff;border-radius:11px;padding:.45rem .6rem;height:48px;max-width:55%;box-shadow:0 8px 20px -8px rgba(13,34,51,.45)}
+.offer__logo{position:absolute;left:.9rem;bottom:.9rem;z-index:2;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:.55rem .85rem;height:74px;min-width:96px;max-width:68%;box-shadow:0 10px 24px -8px rgba(13,34,51,.5)}
 .offer__logo img{max-height:100%;max-width:100%;width:auto;object-fit:contain;display:block}
