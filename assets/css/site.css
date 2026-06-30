@@ -6,9 +6,9 @@
 :root{
   --teal:#3BC9D9; --teal-deep:#28A8B6;
   --navy:#0D2233; --navy-deep:#071520;
-  --stone:#F4F1EA; --stone-deep:#ECE7DC;
+  --stone:#EEF6F7; --stone-deep:#DFEFF1;
   --white:#FFFFFF;
-  --text:#0D1F2D; --muted:#6E747B; --line:#E3DED2; --line-dark:rgba(255,255,255,.14);
+  --text:#0D1F2D; --muted:#6E747B; --line:#D6E7E9; --line-dark:rgba(255,255,255,.14);
   --container:1400px;
   --gutter:clamp(1.5rem,5vw,5rem);
   --section-y:clamp(4.5rem,11vh,9rem);
@@ -761,3 +761,4 @@ body.menu-open{overflow:hidden}
 .offer__brand{height:30px;width:auto;max-width:48%;object-fit:contain;object-position:left center;display:block}
 .offer__brandrow .offer__tag{margin-bottom:0}
 .offer__pad .offer__tag{margin-bottom:0}
+
