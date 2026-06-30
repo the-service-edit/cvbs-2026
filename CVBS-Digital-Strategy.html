@@ -43,7 +43,7 @@ em{font-style:normal; color:var(--teal-deep); font-weight:600;}
 
 .wrap{max-width:var(--read); margin:0 auto; padding:0 26px;}
 .wrap.wide{max-width:var(--wide);}
-section{padding:104px 0; position:relative; overflow:hidden; border-bottom:1px solid var(--line);}
+section{padding:104px 0; position:relative; overflow:hidden; border-bottom:1px solid var(--line); scroll-margin-top:72px;}
 @media(max-width:600px){ section{padding:70px 0} }
 
 .kick{display:inline-flex; align-items:center; gap:12px; margin-bottom:24px;}
@@ -126,6 +126,36 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,201,217,.6)}70%{box-shadow:0 0 0 9px rgba(59,201,217,0)}100%{box-shadow:0 0 0 0 rgba(59,201,217,0)}}
 .framecap{text-align:center; font-size:13px; color:var(--muted); margin-top:14px; text-transform:uppercase; letter-spacing:.14em; font-weight:600;}
 .dark .framecap,.darker .framecap{color:rgba(255,255,255,.6);}
+.live2{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+@media(max-width:820px){ .live2{grid-template-columns:1fr; gap:32px} }
+.live2 .view{height:360px;}
+.live3{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+@media(max-width:980px){ .live3{grid-template-columns:1fr; gap:32px} }
+.live3 .view{height:340px;}
+.s3head{text-align:center; margin-bottom:8px;}
+.s3head .kick{justify-content:center;}
+.s3head h2{max-width:24ch; margin:0 auto 10px;}
+.s3head .intro{max-width:46ch; margin:16px auto 0;}
+.note{font-size:12.5px; color:var(--muted); margin:6px 0 0;}
+.dark .note,.darker .note{color:rgba(255,255,255,.6);}
+.calc{margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch;}
+@media(max-width:780px){ .calc{grid-template-columns:1fr} }
+.calc .field{margin-bottom:18px;}
+.calc .field:last-of-type{margin-bottom:10px;}
+.calc .field label{display:flex; justify-content:space-between; align-items:baseline; font-size:14.5px; font-weight:600; margin-bottom:9px; gap:12px;}
+.calc .field label b{color:var(--teal-deep); font-variant-numeric:tabular-nums; font-size:15px;}
+.calc input[type=range]{width:100%; accent-color:var(--teal-deep); height:22px; cursor:pointer;}
+.calc .result{display:flex; flex-direction:column; justify-content:center; text-align:center; color:#fff; background:linear-gradient(160deg,var(--navy),var(--navy2)); border:none; box-shadow:0 26px 60px -34px rgba(0,0,0,.7);}
+.calc .result .rlabel{font-size:12.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal); font-weight:700;}
+.calc .result .big{font-size:clamp(40px,7vw,62px); font-weight:800; letter-spacing:-.04em; margin:10px 0; line-height:1; background:linear-gradient(120deg,#fff,var(--teal)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.calc .result .rsub{color:rgba(255,255,255,.78); font-size:15px;}
+.calc .result .rsub span{color:#fff; font-weight:700;}
+.calc .result .coi{margin-top:22px; padding-top:18px; border-top:1px solid var(--line-d); font-size:14px; color:rgba(255,255,255,.8);}
+.calc .result .coi b{display:block; color:var(--teal); text-transform:uppercase; letter-spacing:.14em; font-size:11px; margin-bottom:6px;}
+.calc .result .coi strong{color:#fff;}
+.dark .devlabel,.darker .devlabel{color:var(--teal);}
+.dirnote{font-size:13px; color:var(--muted); text-align:center; margin:12px 0 0;}
+.dark .dirnote,.darker .dirnote{color:rgba(255,255,255,.6);}
 
 /* comparison bars */
 .cmp{margin-top:38px;}
@@ -232,7 +262,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <div class="progress" id="prog"></div>
 <div class="topbar">
   <div class="brand"><span class="mono">CV</span>CVBS <small>Digital Strategy</small></div>
-  <div class="steps">Part <b id="cur">1</b> of 11</div>
+  <div class="steps">Part <b id="cur">1</b> of 13</div>
 </div>
 
 <!-- COVER -->
@@ -290,25 +320,57 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 3 · THE NEW DIGITAL EXPERIENCE -->
 <section id="s3" class="dark">
   <span class="glow a"></span>
-  <div class="wrap fade">
-    <div class="kick"><span class="num">3</span><span class="lbl">The new experience</span></div>
-    <h2>The new site does the selling the old one couldn't.</h2>
-    <p class="intro">It already gets the important things right.</p>
-    <div class="live" style="margin-top:38px">
-      <div class="bar"><i></i><i></i><i></i><span class="url">the-service-edit.github.io/cvbs-2026</span><a class="open" href="https://the-service-edit.github.io/cvbs-2026/" target="_blank" rel="noopener">Open ↗</a></div>
-      <div class="view">
-        <iframe src="https://the-service-edit.github.io/cvbs-2026/" title="New CVBS website concept, live" loading="lazy" scrolling="no"></iframe>
-        <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/" target="_blank" rel="noopener" aria-label="Open the new site in a new tab"></a>
-        <span class="badge"><span class="pulse"></span>Live · the new concept</span>
+  <div class="wrap wide fade">
+    <div class="s3head">
+      <div class="kick"><span class="num">3</span><span class="lbl">The new experience</span></div>
+      <h2>Three new directions. Each sells the way the old one couldn't.</h2>
+      <p class="intro">Same strategy and content, three homepage layouts to choose between.</p>
+    </div>
+    <div class="live3" style="margin-top:38px">
+      <div>
+        <div class="devlabel">Direction A</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">the-service-edit.github.io/cvbs-2026</span><a class="open" href="https://the-service-edit.github.io/cvbs-2026/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view">
+            <iframe src="https://the-service-edit.github.io/cvbs-2026/" title="New homepage, Direction A, live" loading="lazy" scrolling="no"></iframe>
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/" target="_blank" rel="noopener" aria-label="Open Direction A in a new tab"></a>
+            <span class="badge"><span class="pulse"></span>Live</span>
+          </div>
+        </div>
+        <p class="dirnote">The original concept</p>
+      </div>
+      <div>
+        <div class="devlabel">Direction B</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">the-service-edit.github.io/cvbs-2026/index-strip</span><a class="open" href="https://the-service-edit.github.io/cvbs-2026/index-strip.html" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view">
+            <iframe src="https://the-service-edit.github.io/cvbs-2026/index-strip.html" title="New homepage, Direction B, live" loading="lazy" scrolling="no"></iframe>
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/index-strip.html" target="_blank" rel="noopener" aria-label="Open Direction B in a new tab"></a>
+            <span class="badge"><span class="pulse"></span>Live</span>
+          </div>
+        </div>
+        <p class="dirnote">The strip variant</p>
+      </div>
+      <div>
+        <div class="devlabel">Direction C</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">the-service-edit.github.io/cvbs-2026/index-video</span><a class="open" href="https://the-service-edit.github.io/cvbs-2026/index-video.html" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view">
+            <iframe src="https://the-service-edit.github.io/cvbs-2026/index-video.html" title="New homepage, Direction C, live" loading="lazy" scrolling="no"></iframe>
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/index-video.html" target="_blank" rel="noopener" aria-label="Open Direction C in a new tab"></a>
+            <span class="badge"><span class="pulse"></span>Live</span>
+          </div>
+        </div>
+        <p class="dirnote">With a hero video</p>
       </div>
     </div>
-    <div class="framecap">The new site · premium, proof-led, easy to act on</div>
+    <p class="framecap">Tap any preview to open it full-size</p>
     <ul class="points">
       <li><span class="tick">✓</span><div><span class="t">It sells your real value</span><span class="d">"We return three venues, and we've stood in all of them." It puts your relationships and expertise front and centre.</span></div></li>
       <li><span class="tick">✓</span><div><span class="t">It proves you can be trusted</span><span class="d">Real client names, real quotes, your own faces. Trust is shown, not just claimed.</span></div></li>
       <li><span class="tick">✓</span><div><span class="t">It makes enquiring easy</span><span class="d">A short brief sits right at the top. People can reach you in 30 seconds, while they are most interested.</span></div></li>
     </ul>
-    <div class="takeaway"><b>In five seconds</b><p>The old site says "a small operator." The new one says "the trusted experts." That shift happens on every single visit, for free.</p></div>
+    <div class="takeaway"><b>In five seconds</b><p>The old site says "a small operator." Each new direction says "the trusted experts." That shift happens on every single visit, for free.</p></div>
   </div>
 </section>
 
@@ -335,15 +397,59 @@ footer a{color:var(--teal); text-decoration:none;}
         <div class="pair"><span class="tagx">Old</span><div class="track"><div class="fill old" data-w="32%"></div></div></div>
         <div class="pair"><span class="tagx">New</span><div class="track"><div class="fill new" data-w="88%"></div></div></div></div>
     </div>
+    <p class="note" style="text-align:center; margin-top:16px">Illustrative, to show the gap. We would confirm the real figures against your analytics.</p>
     <div class="takeaway"><b>The point</b><p>This is a business decision, not a question of taste. Every bar that grows is more enquiries from the same visitors.</p></div>
   </div>
 </section>
 
-<!-- 5 · GETTING FOUND: SEO + AEO -->
+<!-- 5 · THE MARKET / COMPETITOR REALITY-CHECK -->
+<section id="s4c" class="tint">
+  <div class="wrap wide fade">
+    <div class="s3head">
+      <div class="kick"><span class="num">5</span><span class="lbl">The market</span></div>
+      <h2>This is who you're up against online.</h2>
+      <p class="intro">Your competitors are one click away, and most of them already look the part.</p>
+    </div>
+    <div class="live3" style="margin-top:38px">
+      <div>
+        <div class="devlabel">Conference Resources</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">conferenceresources.com.au</span><a class="open" href="https://www.conferenceresources.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view"><iframe src="https://www.conferenceresources.com.au/" title="Competitor, Conference Resources, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://www.conferenceresources.com.au/" target="_blank" rel="noopener" aria-label="Open Conference Resources"></a><span class="badge"><span class="pulse"></span>Live</span></div>
+        </div>
+        <p class="dirnote">Free venue finding service</p>
+      </div>
+      <div>
+        <div class="devlabel">Conference Venue Essentials</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">conferencevenueessentials.com.au</span><a class="open" href="https://www.conferencevenueessentials.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view"><iframe src="https://www.conferencevenueessentials.com.au/" title="Competitor, Conference Venue Essentials, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://www.conferencevenueessentials.com.au/" target="_blank" rel="noopener" aria-label="Open Conference Venue Essentials"></a><span class="badge"><span class="pulse"></span>Live</span></div>
+        </div>
+        <p class="dirnote">30+ years, same model</p>
+      </div>
+      <div>
+        <div class="devlabel">The Conference Shop</div>
+        <div class="live">
+          <div class="bar"><i></i><i></i><i></i><span class="url">theconferenceshop.com.au</span><a class="open" href="https://theconferenceshop.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
+          <div class="view"><iframe src="https://theconferenceshop.com.au/" title="Competitor, The Conference Shop, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://theconferenceshop.com.au/" target="_blank" rel="noopener" aria-label="Open The Conference Shop"></a><span class="badge"><span class="pulse"></span>Live</span></div>
+        </div>
+        <p class="dirnote">Independent, like you</p>
+      </div>
+    </div>
+    <p class="note" style="text-align:center; margin-top:14px">Swap these for the competitors you actually lose work to. The point holds either way.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">They compete on looking organised</span><span class="d">Clean, current sites that say "we can handle your event." That is now the bar a buyer expects before they will trust anyone.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">You compete on what they can't copy</span><span class="d">35 years of relationships and real negotiating power. The problem today is that your site hides that, while theirs puts their best foot forward.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>The point</b><p>The goal is not to look like them. It is to finally look like the leader you already are, so your site wins before the conversation even starts.</p></div>
+  </div>
+</section>
+
+<!-- 6 · GETTING FOUND: SEO + AEO -->
 <section id="s4b" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">5</span><span class="lbl">Getting found</span></div>
+    <div class="kick"><span class="num">6</span><span class="lbl">Getting found</span></div>
     <h2>Be the answer, not just a result.</h2>
     <p class="intro">How people search is changing fast. You need to win both ways.</p>
     <div class="twoup">
@@ -362,7 +468,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 6 · HOW YOU SHOW UP ONLINE -->
 <section id="s5" class="tint">
   <div class="wrap fade center">
-    <div class="kick"><span class="num">6</span><span class="lbl">Your digital brand</span></div>
+    <div class="kick"><span class="num">7</span><span class="lbl">Your digital brand</span></div>
     <p class="statement">In five seconds online, someone should feel: <em>"These are clearly the experts. I can stop worrying about this."</em></p>
     <ul class="points" style="text-align:left; max-width:620px; margin-left:auto; margin-right:auto">
       <li><span class="tick">✓</span><div><span class="t">Keep the name, colours and logo</span><span class="d">The navy, the teal and the CVBS mark stay. That is the recognition you have earned.</span></div></li>
@@ -376,7 +482,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <section id="s6" class="dark">
   <span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">7</span><span class="lbl">The website's job</span></div>
+    <div class="kick"><span class="num">8</span><span class="lbl">The website's job</span></div>
     <h2>Treat the website as your best salesperson.</h2>
     <p class="intro">It works every hour and never forgets the pitch.</p>
     <div class="funnel">
@@ -400,7 +506,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 8 · ONE LOOK, EVERYWHERE -->
 <section id="s7">
   <div class="wrap fade">
-    <div class="kick"><span class="num">8</span><span class="lbl">One look, everywhere</span></div>
+    <div class="kick"><span class="num">9</span><span class="lbl">One look, everywhere</span></div>
     <h2>One design system across your website, Instagram and LinkedIn.</h2>
     <p class="intro">Wherever someone meets CVBS, it should feel like the same trusted business.</p>
     <div class="channels">
@@ -415,7 +521,7 @@ footer a{color:var(--teal); text-decoration:none;}
             <div class="cell deep"><span class="k">Event</span><span class="c">A product launch, done right</span></div>
             <div class="cell tealdeep"><span class="k">Destination</span><span class="c">Hunter Valley offsites</span></div>
             <div class="cell stone"><span class="k">Guide</span><span class="c">Plan a conference in 6 steps</span></div>
-            <div class="cell navy"><span class="k">Result</span><span class="c">Energex · 450 delegates</span></div>
+            <div class="cell navy"><span class="k">Result</span><span class="c">A national conference, sorted</span></div>
             <div class="cell teal"><span class="k">Venue</span><span class="c">Kimpton Margot, Sydney</span></div>
             <div class="cell deep"><span class="k">Behind the scenes</span><span class="c">A day sourcing venues</span></div>
           </div>
@@ -425,9 +531,9 @@ footer a{color:var(--teal); text-decoration:none;}
         <div class="devlabel">LinkedIn</div>
         <div class="li">
           <div class="top"><div class="av">CV</div><div><b>CVBS</b><span>Conference Venues &amp; Booking Services</span></div></div>
-          <div class="post">How one client saved 18% on a 450-delegate conference, without lifting a finger.</div>
+          <div class="post">How a recent client saved thousands on a major conference, without lifting a finger.</div>
           <div class="img"><div class="tagline">Client result</div><h5>The brief took two minutes. We did the rest.</h5></div>
-          <div class="react"><span>142 reactions</span><span>18 comments</span><span>Share</span></div>
+          <div class="react"><span>Like</span><span>Comment</span><span>Share</span></div>
         </div>
         <div class="card" style="margin-top:20px"><h4 style="margin:0 0 8px; font-size:18px">The same system, three places</h4><p style="margin:0; color:var(--muted); font-size:15.5px">The navy, teal and stone, the type, the calm confident tone: identical on the website, the feed and your LinkedIn. Repetition is what turns a look into recognition.</p></div>
       </div>
@@ -445,7 +551,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <section id="s8" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">9</span><span class="lbl">Behind the scenes</span></div>
+    <div class="kick"><span class="num">10</span><span class="lbl">Behind the scenes</span></div>
     <h2>Turn 35 years of knowledge into a shared asset.</h2>
     <p class="intro">Right now it lives in inboxes and in your heads.</p>
     <div class="kdiag">
@@ -467,11 +573,37 @@ footer a{color:var(--teal); text-decoration:none;}
   </div>
 </section>
 
-<!-- 9 · OUR PHILOSOPHY -->
+<!-- 11 · WHAT IT'S WORTH -->
+<section id="s10b" class="tint">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">11</span><span class="lbl">What it's worth</span></div>
+    <h2>The maths, in your own hands.</h2>
+    <p class="intro">Drag the sliders to your real numbers. Watch what a small lift is worth.</p>
+    <div class="calc">
+      <div class="card">
+        <div class="field"><label>Website visitors a month <b id="v_vis">800</b></label><input type="range" id="vis" min="100" max="5000" step="50" value="800"></div>
+        <div class="field"><label>Enquiry rate today <b id="v_old">2.0%</b></label><input type="range" id="oldr" min="0.5" max="10" step="0.1" value="2"></div>
+        <div class="field"><label>Enquiry rate with the new site <b id="v_new">4.0%</b></label><input type="range" id="newr" min="0.5" max="15" step="0.1" value="4"></div>
+        <div class="field"><label>Enquiries you win <b id="v_win">30%</b></label><input type="range" id="winr" min="5" max="80" step="1" value="30"></div>
+        <div class="field"><label>Average value to you per booking <b id="v_val">$2,000</b></label><input type="range" id="val" min="250" max="10000" step="50" value="2000"></div>
+        <p class="note">These are your assumptions, not our promises. Set them to match reality.</p>
+      </div>
+      <div class="card result">
+        <div class="rlabel">Extra revenue a year</div>
+        <div class="big" id="r_year">$0</div>
+        <div class="rsub"><span id="r_enq">0</span> more enquiries and <span id="r_book">0</span> more bookings a month</div>
+        <div class="coi"><b>Cost of waiting</b><span>Every month you delay is about <strong id="r_coi">$0</strong> left on the table.</span></div>
+      </div>
+    </div>
+    <div class="takeaway"><b>The point</b><p>Even a modest lift in enquiries, from a site that finally reflects your service, pays back the whole investment many times over.</p></div>
+  </div>
+</section>
+
+<!-- 12 · OUR PHILOSOPHY -->
 <section id="s9" class="darker">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade center">
-    <div class="kick"><span class="num">10</span><span class="lbl">Our philosophy</span></div>
+    <div class="kick"><span class="num">12</span><span class="lbl">Our philosophy</span></div>
     <p class="statement">Technology should never replace <em>relationships</em>.</p>
     <p style="color:rgba(255,255,255,.8); max-width:54ch; margin:26px auto 0; font-size:19px">Your value has always come from people. The relationships you have built with venue managers and suppliers over 35 years are what make CVBS different. Nothing here changes that. Technology simply removes the repetitive admin and organises what you know, so your team has better tools and more time for what matters most.</p>
     <div class="takeaway" style="max-width:600px; margin-left:auto; margin-right:auto; text-align:left"><b>The reassurance</b><p>We are not changing the heart of CVBS. We are protecting it, strengthening it, and making it easier to grow.</p></div>
@@ -481,7 +613,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 10 · THE DIGITAL ROADMAP -->
 <section id="s10" class="tint">
   <div class="wrap wide fade">
-    <div class="kick"><span class="num">11</span><span class="lbl">The roadmap</span></div>
+    <div class="kick"><span class="num">13</span><span class="lbl">The roadmap</span></div>
     <h2>A simple path, one step at a time.</h2>
     <div class="tl">
       <div class="tlnode"><div class="dotline"><i></i><span></span></div><div class="yr">Year 1</div><h3>Foundations</h3><p>Launch the new website. Bring your knowledge into one system. Let digital tools take the admin.</p></div>
@@ -543,6 +675,30 @@ footer a{color:var(--teal); text-decoration:none;}
     });
   },{threshold:.12});
   [].slice.call(document.querySelectorAll('.fade')).forEach(function(el){ io.observe(el); });
+})();
+</script>
+<script>
+(function(){
+  var vis=document.getElementById('vis');
+  if(!vis) return;
+  var oldr=document.getElementById('oldr'), newr=document.getElementById('newr'), winr=document.getElementById('winr'), val=document.getElementById('val');
+  function money(n){ return '$'+Math.round(n).toLocaleString('en-AU'); }
+  function calc(){
+    var V=+vis.value, o=+oldr.value/100, n=+newr.value/100, w=+winr.value/100, a=+val.value;
+    if(n<o){ n=o; }
+    var extraEnq=V*(n-o), extraBook=extraEnq*w, yearRev=extraBook*12*a;
+    document.getElementById('v_vis').textContent=(+vis.value).toLocaleString('en-AU');
+    document.getElementById('v_old').textContent=(+oldr.value).toFixed(1)+'%';
+    document.getElementById('v_new').textContent=(+newr.value).toFixed(1)+'%';
+    document.getElementById('v_win').textContent=winr.value+'%';
+    document.getElementById('v_val').textContent=money(a);
+    document.getElementById('r_year').textContent=money(yearRev);
+    document.getElementById('r_enq').textContent=Math.round(extraEnq*10)/10;
+    document.getElementById('r_book').textContent=Math.round(extraBook*10)/10;
+    document.getElementById('r_coi').textContent=money(yearRev/12);
+  }
+  [vis,oldr,newr,winr,val].forEach(function(el){ el.addEventListener('input',calc); el.addEventListener('change',calc); });
+  calc();
 })();
 </script>
 </body>
