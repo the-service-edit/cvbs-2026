@@ -89,12 +89,12 @@
       <p class="brief-bar__lead">Give us the rough shape of it. A specialist reads every brief and comes back with a shortlist, usually within 48 hours. No account, nothing to search.</p>
     </div>
     <div class="brief-bar__row">
-      <div class="bf"><label for="b-dest">Destination</label><select id="b-dest"><option>Pick a city, or not sure</option><option>Sydney</option><option>Melbourne</option><option>Brisbane</option><option>Gold Coast</option><option>Perth</option><option>Adelaide</option><option>Canberra</option><option>Open to suggestions</option></select></div>
-      <div class="bf"><label for="b-date">Dates</label><input id="b-date" type="text" placeholder="Rough dates"></div>
-      <div class="bf"><label for="b-att">Attendees</label><input id="b-att" type="text" inputmode="numeric" placeholder="Approx. how many"></div>
-      <div class="bf"><label for="b-type">Event type</label><select id="b-type"><option>Select type</option><option>Conference</option><option>Corporate function</option><option>Product launch</option><option>Group accommodation</option><option>Retreat or offsite</option></select></div>
+      <div class="bf"><label for="b-dest">Destination</label><select id="b-dest"><option>Where to?</option><option>Sydney, NSW</option><option>Melbourne, VIC</option><option>Brisbane, QLD</option><option>Gold Coast, QLD</option><option>Canberra, ACT</option><option>Perth, WA</option><option>Adelaide, SA</option><option>Hunter Valley, NSW</option><option>Blue Mountains, NSW</option><option>Yarra Valley, VIC</option><option>International</option><option>Flexible / open to suggestions</option></select></div>
+      <div class="bf"><label for="b-att">Attendees</label><select id="b-att"><option>How many?</option><option>Under 20</option><option>20–50</option><option>50–100</option><option>100–200</option><option>200–300</option><option>300+</option></select></div>
+      <div class="bf"><label for="b-type">Event type</label><select id="b-type"><option>Event type</option><option>Conference</option><option>Corporate function</option><option>Product launch</option><option>Group accommodation</option><option>Retreat or offsite</option></select></div>
       <a class="btn btn--teal brief-bar__go" href="submit-a-brief.html">Build my shortlist <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
+    <a class="btn btn--teal brief-bar__mcta" href="submit-a-brief.html">Start your brief <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <div class="value-row"><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13l2.5 2.5a2 2 0 0 0 2.8 0L20 9"/><path d="M4 7l4-2 4 2 4-2 4 2v6l-4 4"/></svg><div><b>A shortlist worth looking at</b><span>Like-for-like options in 48 hours</span></div></div><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M17 5.5a3 3 0 0 1 0 5.8M22 20a6 6 0 0 0-4-5.6"/></svg><div><b>We do the chasing</b><span>One brief instead of fifty enquiries</span></div></div><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg><div><b>Free to you</b><span>Venues pay our fee, not you</span></div></div><div class="vi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Negotiated, not retail</b><span>Rates and perks you won't get direct</span></div></div></div>
   </div>
 </div></section>
@@ -107,7 +107,7 @@
           a=document.getElementById('b-att'),
           t=document.getElementById('b-type');
       if(d && d.selectedIndex>0) p.set('dest', d.value);
-      if(a && a.value.trim()) p.set('guests', a.value.trim());
+      if(a && a.selectedIndex>0) p.set('guests', a.value);
       if(t && t.selectedIndex>0) p.set('type', t.value);
       var q=p.toString();
       window.location.href='submit-a-brief.html'+(q?('?'+q):'');
