@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVBS | Conference Venue Sourcing Across Australia</title>
+<meta name="description" content="CVBS is an independent conference venue sourcing service. We find, compare and negotiate venues, hotels and group accommodation across Australia and worldwide. Free to you, since 1989.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<style>
+:root{
+  --navy:#0D2233; --navy-deep:#071520; --teal:#3BC9D9; --teal-deep:#28A8B6;
+  --stone:#F4F1EA; --stone-deep:#ECE7DC; --white:#fff;
+  --ink:#0D2233; --muted:#6E747B; --line:#E5E0D5;
+  --ease:cubic-bezier(.4,0,0,1); --r:22px; --r-lg:30px; --max:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--stone);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
+.eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:var(--white);border:1px solid var(--line);color:var(--teal-deep);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.5rem .95rem;border-radius:999px}
+.eyebrow.on-dark{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#9fe1eb}
+h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)}
+.h-xl{font-size:clamp(2.6rem,1.6rem + 4.6vw,5rem)}
+.h-lg{font-size:clamp(2rem,1.4rem + 2.6vw,3.4rem)}
+.h-md{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem)}
+.lead{font-size:clamp(1.05rem,1rem + .4vw,1.3rem);color:#3c4a54;line-height:1.6}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:1rem;padding:1rem 1.7rem;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease),background .35s var(--ease),box-shadow .35s var(--ease)}
+.btn--navy{background:var(--navy);color:#fff}
+.btn--navy:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(13,34,51,.5)}
+.btn--teal{background:var(--teal-deep);color:#fff}
+.btn--teal:hover{transform:translateY(-3px);box-shadow:0 18px 44px -16px rgba(40,168,182,.6)}
+.btn--white{background:#fff;color:var(--navy)}
+.btn--white:hover{transform:translateY(-3px)}
+.btn--ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn--ghost:hover{background:var(--white)}
+.btn--ghost-light{background:transparent;border-color:rgba(255,255,255,.45);color:#fff}
+.btn--ghost-light:hover{background:rgba(255,255,255,.1)}
+.section{padding-block:clamp(3.5rem,8vw,7rem)}
+.s-stone{background:var(--stone)}
+.s-white{background:var(--white)}
+.s-navy{background:var(--navy);color:#fff}
+.sec-head{max-width:680px}
+.sec-head .h-lg{margin-top:1rem}
+.sec-head .lead{margin-top:1.1rem}
+.center{text-align:center;margin-inline:auto}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;transition:background .3s,box-shadow .3s;background:rgba(244,241,234,.7);backdrop-filter:saturate(140%) blur(14px)}
+.nav.scrolled{background:rgba(244,241,234,.95);box-shadow:0 1px 0 var(--line)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:74px}
+.nav__logo{height:34px}
+.nav__links{display:none;align-items:center;gap:1.9rem}
+.nav__links a{font-size:.95rem;font-weight:500;color:#33424d;transition:color .25s}
+.nav__links a:hover{color:var(--teal-deep)}
+.nav__cta{display:flex;align-items:center;gap:.7rem}
+.nav__toggle{display:inline-flex;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
+.nav__toggle span{width:20px;height:2px;background:var(--navy);border-radius:2px}
+@media(min-width:980px){.nav__links{display:flex}.nav__toggle{display:none}}
+
+/* hero */
+.hero{padding-top:clamp(2rem,5vw,4rem);padding-bottom:clamp(3rem,7vw,6rem)}
+.hero__grid{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+@media(min-width:940px){.hero__grid{grid-template-columns:1.02fr .98fr}}
+.hero h1{margin:1.2rem 0 0}
+.hero h1 em{font-style:normal;color:var(--teal-deep)}
+.hero .lead{margin-top:1.3rem;max-width:46ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-top:2rem}
+.hero__media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:5/6;box-shadow:0 40px 90px -50px rgba(13,34,51,.6)}
+.hero__media img{width:100%;height:100%;object-fit:cover}
+.hero__badge{position:absolute;left:1rem;bottom:1rem;right:1rem;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:16px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem}
+.hero__badge b{font-size:.95rem}.hero__badge span{font-size:.82rem;color:var(--muted)}
+.hero__badge .dot{width:38px;height:38px;border-radius:50%;background:var(--stone);display:grid;place-items:center;color:var(--teal-deep);font-weight:700;font-size:.9rem;flex:none}
+
+/* marquee */
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee__track{display:flex;align-items:center;gap:clamp(2.5rem,6vw,5rem);width:max-content;animation:marquee 38s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__track img{height:34px;width:auto;flex:none}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.trust-label{text-align:center;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2rem}
+
+/* statement */
+.statement{text-align:center}
+.statement .h-lg{max-width:18ch;margin-inline:auto}
+.statement .lead{max-width:52ch;margin:1.2rem auto 0;color:rgba(255,255,255,.75)}
+.statement em{font-style:normal;color:var(--teal)}
+
+/* roadmap timeline */
+.road{display:grid;gap:clamp(2rem,4vw,3rem);margin-top:clamp(2.5rem,5vw,4rem)}
+@media(min-width:900px){.road{grid-template-columns:.8fr 1.2fr;align-items:start}.road__head{position:sticky;top:110px}}
+.road__steps{display:grid;gap:1rem}
+.step{background:var(--stone);border-radius:var(--r);padding:clamp(1.4rem,3vw,2rem);display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.step:hover{transform:translateY(-4px);box-shadow:0 24px 50px -34px rgba(13,34,51,.4)}
+.step__n{font-size:1.7rem;font-weight:700;color:var(--teal-deep);line-height:1}
+.step h3{font-size:1.2rem;margin-bottom:.4rem}
+.step p{color:var(--muted);font-size:.97rem}
+
+/* cards grid */
+.grid{display:grid;gap:clamp(1rem,2vw,1.5rem)}
+.g-2{grid-template-columns:1fr}.g-3{grid-template-columns:1fr}.g-4{grid-template-columns:1fr 1fr}
+@media(min-width:680px){.g-2{grid-template-columns:1fr 1fr}.g-3{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.g-3{grid-template-columns:repeat(3,1fr)}.g-4{grid-template-columns:repeat(4,1fr)}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.4rem,2.6vw,1.9rem);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.card:hover{transform:translateY(-5px);box-shadow:0 30px 60px -38px rgba(13,34,51,.45)}
+.card .ic{width:48px;height:48px;border-radius:14px;background:var(--stone);display:grid;place-items:center;color:var(--teal-deep);margin-bottom:1rem}
+.card .ic svg{width:24px;height:24px}
+.card h3{font-size:1.25rem;margin-bottom:.5rem}
+.card p{color:var(--muted);font-size:.97rem}
+.card .arrow{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--teal-deep);font-weight:600;font-size:.92rem}
+
+/* testimonials */
+.quotes{display:grid;gap:clamp(1rem,2vw,1.5rem)}
+@media(min-width:820px){.quotes{grid-template-columns:1fr 1fr}}
+.quote{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.6rem,3vw,2.4rem)}
+.quote .stars{color:var(--teal-deep);letter-spacing:2px;margin-bottom:1rem}
+.quote blockquote{font-size:1.12rem;line-height:1.55;font-weight:500;letter-spacing:-.01em}
+.quote .by{margin-top:1.4rem;display:flex;align-items:center;gap:.8rem}
+.quote .by img{height:26px;width:auto}
+.quote .by .nm{font-weight:600;font-size:.95rem}
+.quote .by .rl{color:var(--muted);font-size:.85rem}
+
+/* team */
+.team{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+@media(min-width:900px){.team{grid-template-columns:1fr 1fr}}
+.team__faces{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:440px}
+.tm img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px}
+.tm .nm{font-weight:600;margin-top:.7rem}
+.tm .rl{color:var(--muted);font-size:.9rem}
+
+/* destinations */
+.dests{display:grid;gap:1rem;grid-template-columns:1fr 1fr}
+@media(min-width:880px){.dests{grid-template-columns:repeat(4,1fr)}}
+.dcard{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;display:flex;align-items:flex-end;background:var(--navy);transition:transform .4s var(--ease)}
+.dcard:hover{transform:translateY(-5px)}
+.dcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.dcard:hover img{transform:scale(1.06)}
+.dcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(7,21,32,.82))}
+.dcard span{position:relative;z-index:1;color:#fff;font-weight:600;padding:1rem 1.1rem;font-size:1.05rem}
+
+/* faq */
+.faq{max-width:780px;margin-inline:auto;margin-top:clamp(2rem,4vw,3rem)}
+.acc{border-bottom:1px solid var(--line)}
+.acc__q{width:100%;background:none;border:none;text-align:left;font-family:inherit;font-size:1.08rem;font-weight:600;color:var(--ink);padding:1.35rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;cursor:pointer}
+.acc__q .pm{flex:none;width:26px;height:26px;border-radius:50%;background:var(--stone);display:grid;place-items:center;transition:transform .35s var(--ease),background .35s}
+.acc.open .acc__q .pm{background:var(--teal-deep);color:#fff;transform:rotate(45deg)}
+.acc__a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.acc__a p{color:var(--muted);padding-bottom:1.35rem;font-size:1rem;line-height:1.6;max-width:64ch}
+
+/* cta band */
+.ctaband{margin:0 clamp(1rem,3vw,2rem);background:linear-gradient(150deg,var(--teal-deep),var(--navy));border-radius:var(--r-lg);padding:clamp(2.5rem,6vw,4.5rem) clamp(1.5rem,4vw,3rem);text-align:center;color:#fff}
+.ctaband .lead{color:rgba(255,255,255,.85);margin:1rem auto 0;max-width:48ch}
+.ctaband .btn-row{margin-top:2rem;display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+.foot{background:var(--navy);color:rgba(255,255,255,.7);padding-block:clamp(3rem,6vw,4.5rem)}
+.foot__grid{display:grid;gap:2rem}
+@media(min-width:760px){.foot__grid{grid-template-columns:1.4fr 1fr 1fr}}
+.foot h4{color:#fff;font-size:.95rem;margin-bottom:1rem}
+.foot a{display:block;padding:.3rem 0;font-size:.92rem;transition:color .25s}
+.foot a:hover{color:var(--teal)}
+.foot__bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:2.5rem;padding-top:1.5rem;font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee__track{animation:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav"><div class="wrap nav__in">
+  <a href="index-everlab.html" aria-label="CVBS home"><img class="nav__logo" src="assets/img/logo.png" alt="CVBS"></a>
+  <div class="nav__links">
+    <a href="how-it-works.html">How it works</a>
+    <a href="services.html">Services</a>
+    <a href="destinations.html">Destinations</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+  </div>
+  <div class="nav__cta">
+    <a class="btn btn--teal" href="submit-a-brief.html" style="padding:.7rem 1.3rem;font-size:.92rem">Start my search</a>
+    <button class="nav__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+
+<header class="hero section s-stone"><div class="wrap hero__grid">
+  <div>
+    <span class="eyebrow reveal">Corporate event concierge · since 1989</span>
+    <h1 class="h-xl reveal d1">Exceptional venues,<br>sourced for <em>you</em>.</h1>
+    <p class="lead reveal d2">We connect Australian organisations with the right venue and handle every detail, from one brief to a like-for-like shortlist within 48 hours. Free to you, since 1989.</p>
+    <div class="hero__cta reveal d2">
+      <a class="btn btn--navy" href="submit-a-brief.html">Get my shortlist &rarr;</a>
+      <a class="btn btn--ghost" href="how-it-works.html">See how it works</a>
+    </div>
+  </div>
+  <div class="hero__media reveal d1">
+    <img src="assets/img/venue-hero-1000.jpg" alt="A harbour-view conference venue set for an event in Sydney">
+    <div class="hero__badge"><span class="dot">48h</span><div><b>A shortlist in 48 hours</b><br><span>Negotiated, and free to you</span></div></div>
+  </div>
+</div></header>
+
+<section class="section s-white" style="padding-block:clamp(2.5rem,5vw,4rem)"><div class="wrap">
+  <p class="trust-label reveal">Trusted by Australian organisations since 1989</p>
+  <div class="marquee reveal"><div class="marquee__track" id="logoTrack"></div></div>
+</div></section>
+
+<section class="section s-navy"><div class="wrap statement">
+  <span class="eyebrow on-dark reveal">Why use us</span>
+  <h2 class="h-lg reveal d1" style="margin-top:1.1rem">Stop searching. <em>Start sourcing.</em></h2>
+  <p class="lead reveal d2">A search engine returns six hundred rooms. We return three, and we have stood in all of them. No database to scroll, no algorithm, a specialist who has done this since 1989.</p>
+</div></section>
+
+<section class="section s-stone"><div class="wrap">
+  <div class="road">
+    <div class="road__head reveal">
+      <span class="eyebrow">The concierge process</span>
+      <h2 class="h-lg" style="margin-top:1rem">Your path from brief to booked.</h2>
+      <p class="lead" style="margin-top:1rem">You stay in control of the decision. We take on everything that makes venue sourcing slow.</p>
+      <a class="btn btn--navy" style="margin-top:1.6rem" href="submit-a-brief.html">Send your brief &rarr;</a>
+    </div>
+    <div class="road__steps">
+      <div class="step reveal"><div class="step__n">01</div><div><h3>You send one brief</h3><p>Dates, numbers, location and budget. A two-minute form or a quick call. One conversation instead of fifty enquiries.</p></div></div>
+      <div class="step reveal d1"><div class="step__n">02</div><div><h3>We source and negotiate</h3><p>We check real availability across matching venues, including rooms that never show as free online, then negotiate rates and inclusions on your behalf.</p></div></div>
+      <div class="step reveal d2"><div class="step__n">03</div><div><h3>You compare a shortlist</h3><p>Within 48 hours you get a like-for-like shortlist: rates, inclusions and capacities side by side. No spreadsheets to build.</p></div></div>
+      <div class="step reveal d3"><div class="step__n">04</div><div><h3>We confirm and coordinate</h3><p>We lock the rate, handle the contract detail, and coordinate accommodation and suppliers through to the day.</p></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section s-white"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Choose your path</span><h2 class="h-lg">One team for every space you need.</h2><p class="lead">From a board meeting for twenty to a conference for hundreds, group stays, launches and ongoing corporate travel.</p></div>
+  <div class="grid g-4" style="margin-top:clamp(2rem,4vw,3rem)">
+    <a class="card reveal" href="conference-venue-finding.html"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Conference venue finding</h3><p>Board meetings to large conferences, sourced and negotiated.</p><span class="arrow">Explore &rarr;</span></a>
+    <a class="card reveal d1" href="group-accommodation.html"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 17V8"/><path d="M3 13h13a4 4 0 0 1 4 4"/><path d="M3 17h18"/></svg></div><h3>Group accommodation</h3><p>Room blocks at rates you will not find on public booking sites.</p><span class="arrow">Explore &rarr;</span></a>
+    <a class="card reveal d2" href="events.html"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div><h3>Launches &amp; events</h3><p>Spaces matched to your brand and your run sheet.</p><span class="arrow">Explore &rarr;</span></a>
+    <a class="card reveal d3" href="corporate-accommodation.html"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h.01M12 7h.01M15 7h.01M9 11h.01M12 11h.01M15 11h.01"/></svg></div><h3>Corporate accommodation</h3><p>Negotiated rates and consistent properties, managed as one relationship.</p><span class="arrow">Explore &rarr;</span></a>
+  </div>
+</div></section>
+
+<section class="section s-stone"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">In their words</span><h2 class="h-lg">The relationships that say it best.</h2></div>
+  <div class="quotes" style="margin-top:clamp(2rem,4vw,3rem)">
+    <figure class="quote reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;CVBS can do everything for you. Don't waste hours trying to do it yourself, they are the experts. They take a brief, recommend multiple options, source quotes, book venues and arrange the contracts.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/randstad.png" alt="Randstad"><span><span class="nm">Sherida Bolling</span><br><span class="rl">Executive Assistant to CEO, Randstad</span></span></figcaption></figure>
+    <figure class="quote reveal d1"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;At first I couldn't believe this service was free to us. I've price-checked them over nine years and each time could not have got a cheaper rate going directly to the venue. A cost-effective, quality service.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/energex.png" alt="Energex"><span><span class="nm">Angela Moffett</span><br><span class="rl">Energex</span></span></figcaption></figure>
+  </div>
+</div></section>
+
+<section class="section s-white"><div class="wrap team">
+  <div class="reveal">
+    <span class="eyebrow">The people</span>
+    <h2 class="h-lg" style="margin:1rem 0">You will not be passed to a call centre.</h2>
+    <p class="lead">The same small team has spent more than three decades building trust with the general managers and sales directors who run Australia's best venues. That is how a venue that is &ldquo;fully booked&rdquo; finds you a room, and how a standard rate quietly becomes a better one.</p>
+    <a class="btn btn--ghost" style="margin-top:1.6rem" href="about.html">More about CVBS &rarr;</a>
+  </div>
+  <div class="team__faces reveal d1">
+    <div class="tm"><img src="assets/img/client-1.jpg" alt="Karen Jepson"><div class="nm">Karen Jepson</div><div class="rl">Director</div></div>
+    <div class="tm"><img src="assets/img/client-2.jpg" alt="Anthony Jepson"><div class="nm">Anthony Jepson</div><div class="rl">Director</div></div>
+  </div>
+</div></section>
+
+<section class="section s-stone"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Where we work</span><h2 class="h-lg">Australia-wide, and beyond.</h2><p class="lead">From capital-city conference hotels to wine-country offsites and island incentives, we source wherever your event needs to be.</p></div>
+  <div class="dests reveal" style="margin-top:clamp(2rem,4vw,3rem)">
+    <a class="dcard" href="venue-finder-sydney.html"><img src="assets/img/dest/dest-sydney.jpg" alt="Sydney" loading="lazy" onerror="this.remove()"><span>Sydney</span></a>
+    <a class="dcard" href="venue-finder-melbourne.html"><img src="assets/img/dest/dest-melbourne.jpg" alt="Melbourne" loading="lazy" onerror="this.remove()"><span>Melbourne</span></a>
+    <a class="dcard" href="venue-finder-brisbane.html"><img src="assets/img/dest/dest-brisbane.jpg" alt="Brisbane" loading="lazy" onerror="this.remove()"><span>Brisbane</span></a>
+    <a class="dcard" href="venue-finder-gold-coast.html"><img src="assets/img/dest/dest-gold-coast.jpg" alt="Gold Coast" loading="lazy" onerror="this.remove()"><span>Gold Coast</span></a>
+  </div>
+  <div style="margin-top:1.6rem"><a class="btn btn--ghost" href="destinations.html">See all destinations &rarr;</a></div>
+</div></section>
+
+<section class="section s-white"><div class="wrap">
+  <div class="sec-head center reveal"><span class="eyebrow">FAQ</span><h2 class="h-lg">Questions, answered.</h2></div>
+  <div class="faq reveal">
+    <div class="acc"><button class="acc__q">Is CVBS really free?<span class="pm">+</span></button><div class="acc__a"><p>Yes. We're paid a standard commission by the venue you book, the same commission the venue would pay whether you came through us or not. So our sourcing, negotiation and coordination are free to you, and our negotiating often leaves you better off than booking direct.</p></div></div>
+    <div class="acc"><button class="acc__q">How does the process work?<span class="pm">+</span></button><div class="acc__a"><p>You send one brief, we source and negotiate across matching venues, you compare a like-for-like shortlist within 48 hours, and we confirm the booking and coordinate accommodation and suppliers. You stay in control of the decision throughout.</p></div></div>
+    <div class="acc"><button class="acc__q">How long does it take?<span class="pm">+</span></button><div class="acc__a"><p>For most enquiries we provide an initial shortlist within 48 hours. Larger, multi-day programs can take a little longer to pull together accurately. If your event is urgent, tell us, our relationships often let us move quickly.</p></div></div>
+    <div class="acc"><button class="acc__q">Do you work Australia-wide?<span class="pm">+</span></button><div class="acc__a"><p>Yes. We source conference venues and accommodation across every state and territory, plus international conferences, incentives and retreats. Wherever your event needs to be, we can source it.</p></div></div>
+    <div class="acc"><button class="acc__q">Can you negotiate venue rates?<span class="pm">+</span></button><div class="acc__a"><p>Yes. Rate and contract negotiation is core to what we do. We negotiate day-delegate rates, accommodation rates, room hire, minimum spends and value-adds, plus the contract terms that reduce your risk.</p></div></div>
+  </div>
+</div></section>
+
+<section class="section s-stone"><div class="ctaband reveal">
+  <h2 class="h-md" style="font-size:clamp(1.7rem,1.3rem + 1.8vw,2.6rem)">Tell us what you need. We'll find the space.</h2>
+  <p class="lead">Free to you, with a shortlist within 48 hours, from a real person.</p>
+  <div class="btn-row"><a class="btn btn--white" href="submit-a-brief.html">Get my shortlist &rarr;</a><a class="btn btn--ghost-light" href="tel:0414784999">Or call 0414 784 999</a></div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__grid">
+    <div>
+      <img src="assets/img/logo-white.png" alt="CVBS" style="height:36px" onerror="this.style.display='none'">
+      <p style="margin-top:1rem;max-width:38ch;font-size:.92rem">A free, independent venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
+      <p style="margin-top:1.2rem"><a href="tel:0414784999">Karen Jepson &middot; 0414 784 999</a><a href="mailto:karen@conferencevenues.com">karen@conferencevenues.com</a></p>
+    </div>
+    <div><h4>Services</h4><a href="conference-venue-finding.html">Conference venue finding</a><a href="group-accommodation.html">Group accommodation</a><a href="events.html">Launches &amp; events</a><a href="corporate-accommodation.html">Corporate accommodation</a></div>
+    <div><h4>Company</h4><a href="how-it-works.html">How it works</a><a href="destinations.html">Destinations</a><a href="resources.html">Resources &amp; tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+  </div>
+  <div class="foot__bottom"><span>&copy; 2026 Conference Venues and Booking Services</span><span>Conference venue finding, Australia and worldwide</span></div>
+</div></footer>
+
+<script>
+(function(){
+  var d=document;
+  /* logo marquee (duplicated for seamless loop) */
+  var logos=["elders","australand","heritage-bank","randstad","lend-lease","energex","bt-financial","nova","medtronic","kimberly-clark"];
+  var names={elders:"Elders","australand":"Australand","heritage-bank":"Heritage Bank",randstad:"Randstad","lend-lease":"Lend Lease",energex:"Energex","bt-financial":"BT Financial",nova:"Nova Systems",medtronic:"Medtronic","kimberly-clark":"Kimberly-Clark"};
+  var track=d.getElementById('logoTrack');
+  if(track){var html=logos.map(function(k){return '<img src="assets/img/logos/'+k+'.png" alt="'+(names[k]||k)+'" onerror="this.style.display=\'none\'">';}).join('');track.innerHTML=html+html;}
+  /* nav scrolled */
+  var nav=d.getElementById('nav');
+  var onScroll=function(){nav.classList.toggle('scrolled',window.scrollY>20);};
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  /* scroll reveal */
+  var rev=d.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    rev.forEach(function(el){io.observe(el);});
+  } else { rev.forEach(function(el){el.classList.add('in');}); }
+  /* accordion */
+  d.querySelectorAll('.acc__q').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var acc=btn.parentElement, a=acc.querySelector('.acc__a'), open=acc.classList.contains('open');
+      d.querySelectorAll('.acc.open').forEach(function(o){o.classList.remove('open');o.querySelector('.acc__a').style.maxHeight=null;});
+      if(!open){acc.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+})();
+</script>
+</body>
+</html>
