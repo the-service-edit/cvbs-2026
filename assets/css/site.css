@@ -725,8 +725,11 @@ body.menu-open{overflow:hidden}
 
 .offer__media{position:relative;aspect-ratio:16/10;overflow:hidden}
 .offer__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.offer__pin{position:absolute;left:.85rem;bottom:.8rem;z-index:1;font-size:.74rem;font-weight:600;color:#fff;background:rgba(13,34,51,.55);backdrop-filter:blur(6px);padding:.3rem .65rem;border-radius:999px}
+.offer__pin{position:absolute;left:.85rem;top:.8rem;z-index:1;font-size:.74rem;font-weight:600;color:#fff;background:rgba(13,34,51,.55);backdrop-filter:blur(6px);padding:.3rem .65rem;border-radius:999px}
 .offer__pad{display:flex;flex-direction:column;flex:1;padding:clamp(1.4rem,2.4vw,1.9rem)}
 .offer__pad .offer__tag{align-self:flex-start;margin-bottom:.85rem}
 
 .v-strip .eyebrow::before{display:none}
+
+.offer__logo{position:absolute;left:.85rem;bottom:.85rem;z-index:2;display:flex;align-items:center;background:#fff;border-radius:11px;padding:.45rem .6rem;height:48px;max-width:55%;box-shadow:0 8px 20px -8px rgba(13,34,51,.45)}
+.offer__logo img{max-height:100%;max-width:100%;width:auto;object-fit:contain;display:block}
