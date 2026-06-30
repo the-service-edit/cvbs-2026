@@ -760,7 +760,8 @@ body.menu-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.v-pro .offer__media img,.v-pro .dcard img{transition:none}}
 
 .offer__brandrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:30px;margin-bottom:1rem}
-.offer__brand{height:30px;width:auto;max-width:48%;object-fit:contain;object-position:left center;display:block}
+.offer .offer__brand{height:30px;max-height:30px;width:auto;max-width:48%;object-fit:contain;object-position:left center;display:block}
+@media(max-width:680px){.offer .offer__brand{height:26px;max-height:26px;max-width:52%}}
 .offer__brandrow .offer__tag{margin-bottom:0}
 .offer__pad .offer__tag{margin-bottom:0}
 
