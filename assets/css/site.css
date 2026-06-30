@@ -733,3 +733,8 @@ body.menu-open{overflow:hidden}
 
 .offer__logo{position:absolute;left:.9rem;bottom:.9rem;z-index:2;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:12px;padding:.55rem .85rem;height:74px;min-width:96px;max-width:68%;box-shadow:0 10px 24px -8px rgba(13,34,51,.5)}
 .offer__logo img{max-height:100%;max-width:100%;width:auto;object-fit:contain;display:block}
+
+.brief-bar__head{margin-bottom:clamp(1.1rem,2vw,1.5rem);padding-bottom:clamp(1.1rem,2vw,1.4rem);border-bottom:1px solid var(--line)}
+.brief-bar__head h2{font-size:clamp(1.2rem,1.9vw,1.55rem);color:var(--navy);line-height:1.15;margin:.45rem 0 .4rem}
+.brief-bar__lead{font-size:clamp(.92rem,1.1vw,1rem);color:var(--muted);line-height:1.55;max-width:64ch}
+@media(max-width:820px){.brief-bar__head{margin-bottom:1rem;padding-bottom:1rem}}
