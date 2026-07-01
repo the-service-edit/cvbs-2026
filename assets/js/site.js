@@ -3,27 +3,14 @@
   'use strict';
   var doc = document;
 
-  /* Sticky header: shade on scroll, and on mobile hide-on-down / reveal-on-up */
+  /* Sticky header: shade on scroll (always visible) */
   var header = doc.querySelector('.site-header');
   if (header) {
-    var lastY = window.scrollY || 0;
-    var isMobile = window.matchMedia('(max-width: 999px)');
     var onScroll = function () {
-      var y = window.scrollY || 0;
-      header.classList.toggle('scrolled', y > 12);
-      if (isMobile.matches && !header.classList.contains('nav-open')) {
-        if (y > 140 && y > lastY + 4) header.classList.add('nav-hide');       // scrolling down
-        else if (y < lastY - 4 || y <= 140) header.classList.remove('nav-hide'); // scrolling up / near top
-      } else {
-        header.classList.remove('nav-hide');
-      }
-      lastY = y;
+      header.classList.toggle('scrolled', (window.scrollY || 0) > 12);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    var clearHide = function () { if (!isMobile.matches) header.classList.remove('nav-hide'); };
-    if (isMobile.addEventListener) isMobile.addEventListener('change', clearHide);
-    else isMobile.addListener(clearHide);
   }
 
   /* Mobile menu */
