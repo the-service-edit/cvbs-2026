@@ -114,7 +114,33 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .content.center{align-items:center;text-align:center}
 .content.center .chip,.content.center .evbadge,.content.center .eyebrow,.content.center .filebadge,.content.center .loc2,.content.center .pricebox,.content.center .tag2,.content.center .btn,.content.center .bignum{align-self:center}
 .content.center .glass,.content.center .specbar,.content.center .foot{align-self:stretch}
+.content.center .glass.pricebox{align-self:center;width:auto}
+.content.center .price{justify-content:center}
 .statbig{font-size:96px;font-weight:800;line-height:1.0;letter-spacing:-.04em}
+.cklist{display:flex;flex-direction:column;gap:24px;margin-top:8px}
+.ckitem{display:flex;gap:20px;align-items:flex-start;font-size:37px;font-weight:600;line-height:1.28}
+.ckitem .ck{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(59,201,217,.2);border:1.5px solid rgba(59,201,217,.5);color:var(--teal)}
+.ckitem .ck svg{width:28px;height:28px}
+.statlab{font-size:34px;font-weight:500;color:rgba(255,255,255,.82);margin-top:8px;max-width:26ch}
+.bg-stone .statlab{color:#37444f}
+.trow{display:flex;align-items:baseline;gap:26px}
+.trow+.trow{margin-top:30px;padding-top:30px;border-top:1.5px solid rgba(255,255,255,.16)}
+.bg-stone .trow+.trow{border-top:1.5px solid var(--line)}
+.trow .tn{font-size:78px;font-weight:800;letter-spacing:-.04em;color:var(--teal);line-height:.9;min-width:250px}
+.bg-stone .trow .tn{color:var(--teal-deep)}
+.trow .tl{font-size:30px;font-weight:500;color:rgba(255,255,255,.85);line-height:1.3}
+.bg-stone .trow .tl{color:#37444f}
+.cmp{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+.cmpbox{border-radius:20px;padding:34px 38px}
+.cmpbox .cl{font-size:23px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.cmpbox .cx{font-size:36px;font-weight:600;line-height:1.25}
+.cmp-a{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18)}
+.cmp-a .cl{color:rgba(255,255,255,.6)}.cmp-a .cx{color:rgba(255,255,255,.82)}
+.cmp-b{background:rgba(59,201,217,.16);border:1.5px solid rgba(59,201,217,.45)}
+.cmp-b .cl{color:var(--teal)}.cmp-b .cx{color:#fff}
+.capbar{align-self:stretch;background:rgba(6,30,59,.62);border:1.5px solid rgba(255,255,255,.18);border-radius:16px;padding:26px 30px}
+.capbar .ce{font-size:22px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.capbar .ct{font-size:34px;font-weight:600;line-height:1.3}
 .foot{display:flex;width:100%;align-items:center;justify-content:space-between;padding-top:28px;margin-top:8px;border-top:1px solid rgba(255,255,255,.22)}
 .bg-stone .foot{border-top:1px solid var(--line)}
 .foot img{height:48px}
@@ -179,6 +205,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 const PHOTOS=__PHOTOS__, LOGOW="__LOGOW__", LOGOD="__LOGOD__";
 const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+const CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const rich=s=>esc(s).replace(/\*(.+?)\*/g,'<span class="accent">$1</span>').replace(/\n/g,"<br>");
 const chip=t=>`<div class="chip">${esc(t)}</div>`;
@@ -221,12 +248,29 @@ const T={
    def:{eyebrow:"Client words",quote:"“They held the room\nbefore I'd finished\nthe *brief*.”",attribution:"Events Manager, national association"}},
  cta:{name:"› Call to action",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-lg">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="btn">${esc(F('button'))} ${ARROW}</div><div class="fill"></div>${foot()}`,
    def:{eyebrow:"Your event next",headline:"Planning something\n*like this?*",body:"Send us the brief. We'll come back with a shortlist worth your time.",button:"Start your brief"}},
+ textnavy:{name:"› Text (navy)",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"Why it matters",headline:"One clear point,\nstated *simply*.",body:"One idea per slide keeps a carousel readable. Say the thing, then move on."}},
+ textlight:{name:"› Text (light)",bg:"stone",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"Why it matters",headline:"One clear point,\nstated *simply*.",body:"One idea per slide keeps a carousel readable. Say the thing, then move on."}},
+ checklist:{name:"› Checklist",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="s16"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="fill"></div><div class="cklist">${(F('items')||'').split("\n").filter(x=>x.trim()).map(x=>`<div class="ckitem"><span class="ck">${CHK}</span><span>${rich(x)}</span></div>`).join("")}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"What to ask",headline:"Before you *book*.",items:"Is the date genuinely held?\nWhat's the minimum spend?\nWhat's included in day delegate?\nWhat do AV and Wi-Fi cost?"}},
+ bigstat:{name:"› Big stat",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl statbig">${rich(F('stat'))}</div><div class="statlab">${rich(F('label'))}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"The number",stat:"48 hours",label:"From your brief to a considered shortlist."}},
+ stattrio:{name:"› Three stats",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div>${[["t1n","t1l"],["t2n","t2l"],["t3n","t3l"]].map(p=>`<div class="trow"><span class="tn">${esc(F(p[0]))}</span><span class="tl">${rich(F(p[1]))}</span></div>`).join("")}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"The result",t1n:"48 hrs",t1l:"Brief to shortlist",t2n:"18%",t2l:"Under the original budget",t3n:"140",t3l:"Delegates, rooms and all"}},
+ compare:{name:"› This vs that",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="cmp"><div class="cmpbox cmp-a"><div class="cl">${esc(F('la'))}</div><div class="cx">${rich(F('xa'))}</div></div><div class="cmpbox cmp-b"><div class="cl">${esc(F('lb'))}</div><div class="cx">${rich(F('xb'))}</div></div></div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"The difference",la:"Searching",xa:"You compare what's online.",lb:"Sourcing",xb:"We know what's actually available."}},
+ photocap:{name:"› Photo + caption",bg:"photo",render:()=>`<div class="fill"></div><div class="capbar"><div class="ce">${esc(F('eyebrow'))}</div><div class="ct">${rich(F('caption'))}</div></div><div style="height:28px"></div>${foot()}`,
+   def:{eyebrow:"On site",caption:"The pillarless plenary, set for 400."},photo:"hyatt"},
 };
 const FIELD_LABELS={badge:"Eyebrow / badge",headline:"Headline",sub:"Sub-line",pricePre:"Price label",priceBig:"Price",seriesNo:"File number",location:"Location",eyebrow:"Eyebrow",number:"Big number",tag:"Tag text",
  body:"Body text",quote:"Quote",attribution:"Attribution",button:"Button text",
+ items:"List items (one per line)",stat:"Big stat",label:"Stat label",caption:"Caption",
+ t1n:"Stat 1",t1l:"Label 1",t2n:"Stat 2",t2l:"Label 2",t3n:"Stat 3",t3l:"Label 3",
+ la:"Left label",xa:"Left text",lb:"Right label",xb:"Right text",
  s1n:"Stat 1",s1l:"Label 1",s2n:"Stat 2",s2l:"Label 2",s3n:"Stat 3",s3l:"Label 3"};
-const AREA=new Set(["headline","sub","body","quote"]);
-const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"]];
+const AREA=new Set(["headline","sub","body","quote","items","caption","xa","xb"]);
+const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"],["t1n","t1l"],["t2n","t2l"],["t3n","t3l"]];
 const CENTER_DEFAULT=new Set(["positioning","quote","cta","roundup"]);
 
 function newSlide(tmpl){const t=T[tmpl];return{template:tmpl,align:CENTER_DEFAULT.has(tmpl)?"center":"left",photo:t.photo?PHOTOS[t.photo]:null,posY:40,scrim:82,fields:Object.assign({},t.def)};}
