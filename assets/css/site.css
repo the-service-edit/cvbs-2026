@@ -886,3 +886,8 @@ body.menu-open{overflow:hidden}
 .stmt-video .eyebrow{color:var(--teal)}
 .stmt-video .link-arrow{color:#fff}
 @media(prefers-reduced-motion:reduce){.stmt-video__bg{display:none}}
+
+/* dropdown text stays dark even under the transparent hero header */
+.site-header--overlay:not(.scrolled) .nav-drop a{color:#2b3946}
+.site-header--overlay:not(.scrolled) .nav-drop a:hover{color:var(--brand);background:var(--stone)}
+.site-header--overlay:not(.scrolled) .nav-drop a:last-child{color:var(--brand)}
