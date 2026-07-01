@@ -67,7 +67,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .fill{flex:1}
 .accent{color:var(--teal)}
 .bg-stone .accent{color:var(--teal-deep)}
-.hl{font-weight:700;line-height:1.03;letter-spacing:-.035em;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.hl{font-weight:700;line-height:1.03;letter-spacing:-.035em;text-shadow:0 2px 22px rgba(0,0,0,.6)}
 .bg-stone .hl{text-shadow:none}
 .h-xl{font-size:88px}.h-lg{font-size:64px}.h-md{font-size:56px}
 .fmt-wide .h-xl{font-size:58px}.fmt-wide .h-lg{font-size:50px}.fmt-wide .h-md{font-size:46px}
@@ -76,30 +76,28 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .bg-stone .sub{color:#37444f}
 .fmt-wide .sub{font-size:26px}
 .lead-narrow{max-width:30ch}
-.eyebrow{display:inline-flex;align-items:center;gap:16px;font-size:23px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--teal);align-self:flex-start}
+.eyebrow{display:inline-flex;align-items:center;font-size:23px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--teal);align-self:flex-start}
 .bg-stone .eyebrow{color:var(--teal-deep)}
-.eyebrow::before{content:"";width:40px;height:3px;border-radius:2px;background:var(--teal)}
 /* glass (export-safe: translucent, no backdrop-filter) */
-.glass{background:linear-gradient(135deg,rgba(255,255,255,.17),rgba(255,255,255,.09));border:1.5px solid rgba(255,255,255,.30);border-radius:34px;box-shadow:0 40px 70px -30px rgba(0,0,0,.55),inset 0 2px 0 rgba(255,255,255,.38);padding:52px 54px}
-.chip{align-self:flex-start;display:inline-flex;align-items:center;gap:16px;padding:17px 27px;border-radius:999px;font-size:22px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.32);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4)}
-.chip::before{content:"";width:34px;height:3px;border-radius:2px;background:var(--teal)}
-.evbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;padding:15px 25px;border-radius:999px;font-size:22px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.32)}
-.evbadge .dot{width:8px;height:8px;border-radius:50%;background:var(--teal)}
-.filebadge{align-self:flex-start;display:inline-flex;align-items:center;border:1.5px solid rgba(255,255,255,.45);border-radius:12px;overflow:hidden;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:21px;background:rgba(255,255,255,.12)}
+.glass{background:linear-gradient(135deg,rgba(9,22,33,.60),rgba(9,22,33,.44));border:1.5px solid rgba(255,255,255,.20);border-radius:22px;box-shadow:0 40px 70px -30px rgba(0,0,0,.6),inset 0 1.5px 0 rgba(255,255,255,.22);padding:52px 54px}
+.chip{align-self:flex-start;display:inline-flex;align-items:center;padding:16px 26px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#08252c;background:var(--teal)}
+.evbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;padding:15px 25px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#08252c;background:var(--teal)}
+.evbadge .dot{width:8px;height:8px;border-radius:50%;background:#08252c}
+.filebadge{align-self:flex-start;display:inline-flex;align-items:center;border-radius:11px;overflow:hidden;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:21px;background:rgba(9,22,33,.62);border:1.5px solid rgba(255,255,255,.20)}
 .filebadge .a{padding:14px 18px;color:#fff}.filebadge .b{padding:14px 16px;background:var(--teal);color:#06262b;display:flex;align-items:center}
-.loc2{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:16px;padding:12px 22px;border-radius:999px;font-size:22px;font-weight:600;color:#fff;background:rgba(7,21,32,.5);border:1.5px solid rgba(255,255,255,.28)}
+.loc2{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:16px;padding:12px 22px;border-radius:11px;font-size:22px;font-weight:600;color:#fff;background:rgba(9,22,33,.62);border:1.5px solid rgba(255,255,255,.22)}
 .loc2 svg{width:23px;height:23px;color:var(--teal)}
-.pricebox{align-self:flex-start;padding:26px 38px;border-radius:22px;margin-top:26px}
+.pricebox{align-self:flex-start;padding:24px 36px;border-radius:14px;margin-top:26px}
 .price{display:flex;align-items:baseline;gap:16px}
-.price .pre{font-size:27px;font-weight:500;color:rgba(255,255,255,.85)}
+.price .pre{font-size:27px;font-weight:500;color:rgba(255,255,255,.9)}
 .price .big{font-size:70px;font-weight:800;letter-spacing:-.03em;color:var(--teal)}
-.specbar{align-self:stretch;display:flex;border-radius:18px;overflow:hidden;margin-top:26px;background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.09));border:1.5px solid rgba(255,255,255,.26)}
+.specbar{align-self:stretch;display:flex;border-radius:14px;overflow:hidden;margin-top:26px;background:rgba(9,22,33,.58);border:1.5px solid rgba(255,255,255,.20)}
 .specbar .s{flex:1;padding:26px 8px;text-align:center}
 .specbar .s+.s{border-left:1.5px solid rgba(255,255,255,.22)}
 .specbar .n{font-size:38px;font-weight:800;color:var(--teal);line-height:1}
 .specbar .l{font-size:18px;color:rgba(255,255,255,.85);letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
 .bignum{font-size:300px;font-weight:800;color:var(--teal);line-height:.74;letter-spacing:-.05em}
-.tag2{align-self:flex-start;position:relative;background:var(--teal);color:#06262b;font-weight:700;padding:20px 32px 20px 58px;border-radius:16px;font-size:26px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-2.5deg)}
+.tag2{align-self:flex-start;position:relative;background:var(--teal);color:#06262b;font-weight:700;padding:20px 32px 20px 58px;border-radius:11px;font-size:26px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-2.5deg)}
 .tag2::before{content:"";position:absolute;left:24px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:#06262b}
 .statbig{font-size:96px;font-weight:800;line-height:1.0;letter-spacing:-.04em}
 .foot{display:flex;align-items:center;justify-content:space-between;padding-top:28px;margin-top:8px;border-top:1px solid rgba(255,255,255,.22)}
@@ -125,7 +123,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
     <div class="photos" id="photos"></div>
     <label class="up">Upload photo<input type="file" id="upload" accept="image/*" hidden></label>
     <div class="slider" style="margin-top:12px"><span style="font-size:11px;color:#8aa0b0">POS</span><input type="range" id="posY" min="0" max="100" value="40"></div>
-    <div class="slider"><span style="font-size:11px;color:#8aa0b0">DIM</span><input type="range" id="scrim" min="20" max="95" value="72"></div>
+    <div class="slider"><span style="font-size:11px;color:#8aa0b0">DIM</span><input type="range" id="scrim" min="20" max="100" value="82"></div>
   </div>
 
   <div class="grp"><label>Content</label><div id="fields"></div></div>
@@ -191,7 +189,7 @@ const FIELD_LABELS={badge:"Eyebrow / badge",headline:"Headline",sub:"Sub-line",p
 const AREA=new Set(["headline","sub"]);
 const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"]];
 
-let state={template:"offer",format:"ig",photo:PHOTOS.kimpton,posY:40,scrim:72,fields:{}};
+let state={template:"offer",format:"ig",photo:PHOTOS.kimpton,posY:40,scrim:82,fields:{}};
 
 function loadDefaults(){const t=T[state.template];state.fields=Object.assign({},t.def);if(t.photo)state.photo=PHOTOS[t.photo];}
 
@@ -237,7 +235,7 @@ function render(){const t=T[state.template];const card=document.getElementById('
  if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${state.photo})`;
    bg.style.backgroundPosition=`center ${state.posY}%`;
    const a=state.scrim/100;
-   scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.42}) 0%,rgba(7,21,32,${a*0.22}) 42%,rgba(7,21,32,${a}) 100%)`;
+   scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.36}) 0%,rgba(7,21,32,${a*0.16}) 22%,rgba(7,21,32,${a*0.52}) 46%,rgba(7,21,32,${a}) 74%,rgba(7,21,32,${a}) 100%)`;
  } else {bg.style.display=scr.style.display="none";}
  document.getElementById('content').innerHTML=t.render();
  fit();}
