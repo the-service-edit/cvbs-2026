@@ -16,6 +16,8 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .seg button{flex:1;min-width:0;padding:9px 6px;font:inherit;font-size:12.5px;font-weight:600;color:#cfe0ea;background:#132535;border:1px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;white-space:nowrap}
 .seg button.on{background:var(--teal);color:#05222a;border-color:var(--teal)}
 .tmpls{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.tdiv{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#5f7688;margin:9px 0 1px}
+.tdiv.first{margin-top:0}
 .tmpls button{padding:11px 8px;font:inherit;font-size:12.5px;font-weight:600;color:#cfe0ea;background:#132535;border:1px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;text-align:left}
 .tmpls button.on{background:#1d3a52;border-color:var(--teal);color:#fff}
 .field{margin-bottom:12px}
@@ -291,8 +293,12 @@ document.getElementById('delslide').onclick=delSlide;
 document.getElementById('mvl').onclick=()=>moveSlide(-1);
 document.getElementById('mvr').onclick=()=>moveSlide(1);
 
-function buildTemplateButtons(){const c=document.getElementById('tmpls');c.innerHTML="";
- Object.keys(T).forEach(k=>{const b=document.createElement('button');b.textContent=T[k].name;b.className=k===cur().template?"on":"";
+const COVERS=new Set(["offer","venue","event","educational","positioning","destination","roundup","result"]);
+function tdiv(t,first){const d=document.createElement('div');d.className="tdiv"+(first?" first":"");d.textContent=t;return d;}
+function buildTemplateButtons(){const c=document.getElementById('tmpls');c.innerHTML="";c.appendChild(tdiv("Covers",true));let split=false;
+ Object.keys(T).forEach(k=>{
+  if(!COVERS.has(k)&&!split){c.appendChild(tdiv("Content pages"));split=true;}
+  const b=document.createElement('button');b.textContent=T[k].name.replace('› ','');b.className=k===cur().template?"on":"";
   b.onclick=()=>setTemplate(k);c.appendChild(b);});}
 const ALIGNS=[["left","Left"],["center","Centre"]];
 function buildAlignButtons(){const c=document.getElementById('aligns');c.innerHTML="";
