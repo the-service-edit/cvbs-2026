@@ -797,3 +797,8 @@ body.menu-open{overflow:hidden}
 .svc-photo-card .spc-body h3{color:var(--navy)}
 
 .mock-shot{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;box-shadow:0 22px 44px -30px rgba(13,34,51,.5)}
+
+.logos--trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.6rem,4vw,3.4rem);margin-top:1.6rem;max-width:1000px;margin-inline:auto}
+.logos--trust img{height:34px;width:auto;opacity:1;transition:transform .3s var(--ease)}
+.logos--trust img:hover{transform:translateY(-3px)}
+@media(max-width:680px){.logos--trust{gap:1.4rem 1.8rem}.logos--trust img{height:26px}}
