@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Digital Growth System &mdash; Service Recap</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D2233;
+    --navy-soft: #1a3548;
+    --teal: #3BC9D9;
+    --teal-bright: #5BD9E8;
+    --teal-light: #E8F9FB;
+    --teal-tint: #b8e8ee;
+    --dark: #1a1a1a;
+    --mid: #444;
+    --light: #888;
+    --border: #d8edf0;
+    --bg: #f5fbfc;
+    --white: #ffffff;
+    --amber: #f4b700;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--dark); font-size: 15px; line-height: 1.6; }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 36px 44px 28px;
+    position: relative;
+  }
+
+  /* HEADER */
+  .top-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 18px;
+    border-bottom: 3px solid var(--navy);
+    margin-bottom: 28px;
+  }
+  .top-left .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .top-left h1 {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .top-left h1 .accent { color: var(--teal); }
+  .top-left .sub {
+    font-size: 15px;
+    color: var(--mid);
+    margin-top: 10px;
+    line-height: 1.55;
+    max-width: 680px;
+  }
+  .top-right {
+    text-align: right;
+    font-size: 12.5px;
+    color: var(--light);
+    line-height: 1.6;
+  }
+  .top-right strong { color: var(--navy); }
+
+  /* TEAM STRIP */
+  .team-strip {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    color: var(--white);
+  }
+  .team-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .team-head h3 {
+    font-size: 17px;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  .team-head h3 .accent { color: var(--teal); }
+  .team-head .meta {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .team-step {
+    padding: 0 18px;
+    position: relative;
+    border-right: 1px solid rgba(255,255,255,0.12);
+  }
+  .team-step:last-child { border-right: none; }
+  .team-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .team-step-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 7px;
+    line-height: 1.25;
+  }
+  .team-step-body {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.55;
+  }
+  .team-step-body strong { color: var(--teal); font-weight: 700; }
+
+  /* FOUR PILLARS HEADER STRIP */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-bottom: 22px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .pillar {
+    padding: 14px 14px;
+    text-align: center;
+    background: var(--white);
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .pillar:last-child { border-right: none; }
+  .pillar-num {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    margin-bottom: 5px;
+  }
+  .pillar-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .pillar-sub {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.45;
+  }
+
+  /* DIAGRAM */
+  .diagram-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.55 / 1;
+    margin-bottom: 26px;
+  }
+  .diagram-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* DELIVERABLES TABLE */
+  .deliverables {
+    margin-bottom: 22px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-head h2 {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+  .section-head .meta {
+    font-size: 11.5px;
+    color: var(--light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .deliverable-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .deliverable {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .del-num {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--teal-tint);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .del-tag {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 5px;
+  }
+  .del-title {
+    font-size: 15.5px;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 7px;
+    padding-right: 24px;
+  }
+  .del-body {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  /* FEATURED DELIVERABLE */
+  .featured-deliverable {
+    margin-top: 12px;
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 22px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .featured-deliverable::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--teal);
+  }
+  .feat-left {
+    text-align: left;
+  }
+  .feat-num {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--teal);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 6px;
+  }
+  .feat-tag {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+  }
+  .feat-right { padding-right: 8px; }
+  .feat-title {
+    font-size: 19px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 9px;
+  }
+  .feat-body {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  .footer-strip {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--light);
+  }
+  .footer-strip strong { color: var(--navy); }
+
+  /* PRINT */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  @page { size: A4 portrait; margin: 8mm; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="top-strip">
+    <div class="top-left">
+      <div class="eyebrow">CVBS &middot; Service Recap</div>
+      <h1>The Digital <span class="accent">Growth System</span></h1>
+      <div class="sub">A connected setup that gives every CVBS team member one shared workflow. Enquiries, contacts, and outreach all run through the same system &mdash; so no lead gets missed, no work gets duplicated, and the brand stays consistent no matter who's on the keyboard.</div>
+    </div>
+    <div class="top-right">
+      Prepared for <strong>Karen &amp; Anthony Jepson</strong><br>
+      April 2026<br>
+      The Service Edit
+    </div>
+  </div>
+
+  <!-- FOUR PILLARS -->
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01 &middot; ATTRACT</div>
+      <div class="pillar-title">New Website</div>
+      <div class="pillar-sub">A modern home base that sells the service before the team even picks up the phone.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02 &middot; CAPTURE</div>
+      <div class="pillar-title">Brief &amp; Database</div>
+      <div class="pillar-sub">Every enquiry lands in Airtable, structured and ready to action.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03 &middot; NURTURE</div>
+      <div class="pillar-title">Email That Works</div>
+      <div class="pillar-sub">Instantly outreach plus branded EDM templates, sending from one source.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04 &middot; CONVERT</div>
+      <div class="pillar-title">Proposal Template</div>
+      <div class="pillar-sub">Custom-built venue proposal the whole team uses for cohesive branding.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">05 &middot; AMPLIFY</div>
+      <div class="pillar-title">Social Presence</div>
+      <div class="pillar-sub">LinkedIn and Instagram that showcase the team's expertise and the venues you know inside out.</div>
+    </div>
+  </div>
+
+  <!-- TEAM STRIP -->
+  <div class="team-strip">
+    <div class="team-head">
+      <h3>How a Brief Moves <span class="accent">Through the Team</span></h3>
+      <div class="meta">One workflow &middot; everyone aligned</div>
+    </div>
+    <div class="team-grid">
+      <div class="team-step">
+        <div class="team-step-num">1</div>
+        <div class="team-step-title">Brief Lands</div>
+        <div class="team-step-body">Enquiry comes in via the website form and drops straight into <strong>Airtable</strong> &mdash; tagged, timestamped, visible to everyone.</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">2</div>
+        <div class="team-step-title">Owner Assigned</div>
+        <div class="team-step-body">A team member picks it up or it's allocated from the dashboard. <strong>One owner</strong>, no overlap, no &ldquo;I thought you had it.&rdquo;</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">3</div>
+        <div class="team-step-title">Proposal Sent</div>
+        <div class="team-step-body">Open the <strong>shared template</strong>, drop in venue details, send. Every proposal goes out on-brand &mdash; no matter whose name is on it.</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">4</div>
+        <div class="team-step-title">Full Visibility</div>
+        <div class="team-step-body">Anyone on the team can open the record and see the <strong>full history</strong>. Cover, hand over, or jump in seamlessly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIAGRAM -->
+  <div class="diagram-wrap">
+    <svg class="diagram-svg" viewBox="0 0 1100 710" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+          <feOffset dx="0" dy="3" result="offsetblur"/>
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.18"/>
+          </feComponentTransfer>
+          <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+
+        <marker id="arrowTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#3BC9D9"/>
+        </marker>
+        <marker id="arrowNavy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#0D2233"/>
+        </marker>
+      </defs>
+
+      <!-- Background panels for the FIVE zones (each 208w with 4 gaps of 8) -->
+      <rect x="20" y="40" width="200" height="630" rx="8" fill="#f5fbfc" stroke="#d8edf0" stroke-width="1"/>
+      <rect x="232" y="40" width="200" height="630" rx="8" fill="#f5fbfc" stroke="#d8edf0" stroke-width="1"/>
+      <rect x="444" y="40" width="200" height="630" rx="8" fill="#f5fbfc" stroke="#d8edf0" stroke-width="1"/>
+      <rect x="656" y="40" width="200" height="630" rx="8" fill="#f5fbfc" stroke="#d8edf0" stroke-width="1"/>
+      <rect x="868" y="40" width="212" height="630" rx="8" fill="#f5fbfc" stroke="#d8edf0" stroke-width="1"/>
+
+      <!-- Zone labels -->
+      <text x="120" y="68" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="12.5" font-weight="900" letter-spacing="3">ATTRACT</text>
+      <text x="332" y="68" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="12.5" font-weight="900" letter-spacing="3">CAPTURE</text>
+      <text x="544" y="68" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="12.5" font-weight="900" letter-spacing="3">NURTURE</text>
+      <text x="756" y="68" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="12.5" font-weight="900" letter-spacing="3">CONVERT</text>
+      <text x="974" y="68" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="12.5" font-weight="900" letter-spacing="3">AMPLIFY</text>
+
+      <!-- Zone subtitles -->
+      <text x="120" y="84" text-anchor="middle" fill="#888" font-family="Lato" font-size="11" font-style="italic">Bring people in</text>
+      <text x="332" y="84" text-anchor="middle" fill="#888" font-family="Lato" font-size="11" font-style="italic">One source of truth</text>
+      <text x="544" y="84" text-anchor="middle" fill="#888" font-family="Lato" font-size="11" font-style="italic">Stay in front of them</text>
+      <text x="756" y="84" text-anchor="middle" fill="#888" font-family="Lato" font-size="11" font-style="italic">Win the work</text>
+      <text x="974" y="84" text-anchor="middle" fill="#888" font-family="Lato" font-size="11" font-style="italic">Show up where they look</text>
+
+      <!-- ============= FLOW LINES ============= -->
+      <!-- Website to Brief Form (Attract->Capture) -->
+      <path d="M 200 305 C 220 305, 225 305, 252 305" stroke="#3BC9D9" stroke-width="2.5" fill="none" marker-end="url(#arrowTeal)"/>
+
+      <!-- Brief Form to Airtable (vertical inside Capture) -->
+      <path d="M 332 360 L 332 425" stroke="#3BC9D9" stroke-width="2.5" fill="none" marker-end="url(#arrowTeal)"/>
+
+      <!-- Airtable to Instantly (Capture->Nurture) -->
+      <path d="M 412 480 C 430 480, 440 305, 464 305" stroke="#3BC9D9" stroke-width="2.5" fill="none" marker-end="url(#arrowTeal)"/>
+
+      <!-- Airtable to EDM (Capture->Nurture lower) -->
+      <path d="M 412 510 C 430 510, 440 510, 464 510" stroke="#3BC9D9" stroke-width="2.5" fill="none" marker-end="url(#arrowTeal)"/>
+
+      <!-- Airtable to Proposal Template (Capture->Convert, long sweep) -->
+      <path d="M 412 495 C 580 495, 620 405, 676 405" stroke="#3BC9D9" stroke-width="2.5" fill="none" marker-end="url(#arrowTeal)"/>
+
+      <!-- ============= NODES ============= -->
+      <!-- Node 1: WEBSITE (Attract) -->
+      <g filter="url(#softShadow)">
+        <rect x="32" y="245" width="168" height="120" rx="8" fill="#0D2233" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="116" y="272" text-anchor="middle" fill="#3BC9D9" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">01</text>
+      <text x="116" y="295" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">New Website</text>
+      <text x="116" y="318" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Lato" font-size="11.5" font-weight="400">Modern, mobile-first</text>
+      <text x="116" y="332" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Lato" font-size="11.5" font-weight="400">Sells the service clearly</text>
+      <text x="116" y="346" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Lato" font-size="11.5" font-weight="400">Built to convert</text>
+
+      <!-- Node 2: BRIEF FORM (Capture top) -->
+      <g filter="url(#softShadow)">
+        <rect x="252" y="245" width="160" height="115" rx="8" fill="#3BC9D9" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="332" y="272" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">02</text>
+      <text x="332" y="295" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">Brief Form</text>
+      <text x="332" y="316" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Smart enquiry form</text>
+      <text x="332" y="330" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">on the website</text>
+      <text x="332" y="344" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Feeds straight to Airtable</text>
+
+      <!-- Node 3: AIRTABLE DATABASE (Capture bottom - the hub) -->
+      <g filter="url(#softShadow)">
+        <rect x="252" y="425" width="160" height="115" rx="8" fill="#ffffff" stroke="#3BC9D9" stroke-width="3"/>
+      </g>
+      <text x="332" y="452" text-anchor="middle" fill="#3BC9D9" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">03 &middot; THE HUB</text>
+      <text x="332" y="475" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="15.5" font-weight="900">Airtable Database</text>
+      <text x="332" y="496" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">All contacts, briefs and</text>
+      <text x="332" y="510" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">enquiries in one place.</text>
+      <text x="332" y="524" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">Powers everything.</text>
+
+      <!-- Node 4: INSTANTLY (Nurture top) -->
+      <g filter="url(#softShadow)">
+        <rect x="464" y="245" width="160" height="115" rx="8" fill="#3BC9D9" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="544" y="272" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">04</text>
+      <text x="544" y="295" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">Instantly Outreach</text>
+      <text x="544" y="316" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Automated flows do</text>
+      <text x="544" y="330" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">the sending for you.</text>
+      <text x="544" y="344" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Set once, runs daily.</text>
+
+      <!-- Node 5: EDM TEMPLATES (Nurture bottom) -->
+      <g filter="url(#softShadow)">
+        <rect x="464" y="450" width="160" height="115" rx="8" fill="#3BC9D9" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="544" y="477" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">05</text>
+      <text x="544" y="500" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">EDM Templates</text>
+      <text x="544" y="521" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Branded to match the site.</text>
+      <text x="544" y="535" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Drop in copy and send.</text>
+      <text x="544" y="549" text-anchor="middle" fill="rgba(255,255,255,0.95)" font-family="Lato" font-size="11.5" font-weight="400">Newsletters made easy.</text>
+
+      <!-- Node 6: PROPOSAL TEMPLATE (Convert - centred vertically) -->
+      <g filter="url(#softShadow)">
+        <rect x="676" y="345" width="160" height="120" rx="8" fill="#ffffff" stroke="#3BC9D9" stroke-width="3"/>
+      </g>
+      <text x="756" y="372" text-anchor="middle" fill="#3BC9D9" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">06 &middot; SHARED ASSET</text>
+      <text x="756" y="395" text-anchor="middle" fill="#0D2233" font-family="Lato" font-size="15.5" font-weight="900">Proposal Template</text>
+      <text x="756" y="416" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">Custom-built for CVBS.</text>
+      <text x="756" y="430" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">Whole team uses it.</text>
+      <text x="756" y="444" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">Cohesive branding,</text>
+      <text x="756" y="458" text-anchor="middle" fill="#444" font-family="Lato" font-size="11.5" font-weight="400">every send.</text>
+
+      <!-- Node 7: LINKEDIN (Amplify top) -->
+      <g filter="url(#softShadow)">
+        <rect x="888" y="245" width="172" height="115" rx="8" fill="#0D2233" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="974" y="272" text-anchor="middle" fill="#3BC9D9" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">07</text>
+      <text x="974" y="295" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">LinkedIn Posting</text>
+      <text x="974" y="316" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">Industry voice from the team.</text>
+      <text x="974" y="330" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">Site visits, insights,</text>
+      <text x="974" y="344" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">venue knowledge.</text>
+
+      <!-- Node 8: INSTAGRAM (Amplify bottom) -->
+      <g filter="url(#softShadow)">
+        <rect x="888" y="450" width="172" height="115" rx="8" fill="#0D2233" stroke="#0D2233" stroke-width="2"/>
+      </g>
+      <text x="974" y="477" text-anchor="middle" fill="#3BC9D9" font-family="Lato" font-size="10.5" font-weight="900" letter-spacing="3">08</text>
+      <text x="974" y="500" text-anchor="middle" fill="#ffffff" font-family="Lato" font-size="15.5" font-weight="900">Instagram Posting</text>
+      <text x="974" y="521" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">Visual brand presence.</text>
+      <text x="974" y="535" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">Venues, events,</text>
+      <text x="974" y="549" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-family="Lato" font-size="11.5" font-weight="400">behind the scenes.</text>
+
+    </svg>
+  </div>
+
+  <!-- THE SEVEN DELIVERABLES -->
+  <div class="deliverables">
+    <div class="section-head">
+      <h2>The Seven Deliverables</h2>
+      <div class="meta">What you get</div>
+    </div>
+
+    <div class="deliverable-grid">
+      <div class="deliverable">
+        <div class="del-num">01</div>
+        <div class="del-tag">Attract</div>
+        <div class="del-title">New Website</div>
+        <div class="del-body">Modern, mobile-first build that explains what CVBS does in seconds, not minutes. Designed to lead visitors straight to the brief form &mdash; no matter which team member they're trying to reach.</div>
+      </div>
+
+      <div class="deliverable">
+        <div class="del-num">02</div>
+        <div class="del-tag">Capture</div>
+        <div class="del-title">Brief Form</div>
+        <div class="del-body">A short, smart enquiry form on the site. Captures the right detail upfront and routes to the whole team &mdash; so whoever picks it up walks in already knowing the basics.</div>
+      </div>
+
+      <div class="deliverable">
+        <div class="del-num">03</div>
+        <div class="del-tag">Capture</div>
+        <div class="del-title">Airtable + Instantly Integration</div>
+        <div class="del-body">Briefs flow into Airtable. Airtable feeds Instantly. One shared database the whole team works from &mdash; no double entry, no leads slipping through the cracks, no &ldquo;who&rsquo;s handling this one?&rdquo;</div>
+      </div>
+
+      <div class="deliverable">
+        <div class="del-num">04</div>
+        <div class="del-tag">Nurture</div>
+        <div class="del-title">Instantly + EDM Templates</div>
+        <div class="del-body">Instantly runs automated email flows in the background &mdash; the app does the sending for you, segmented by venue type and pulling fresh contacts from Airtable. Set the flow once and it runs daily without anyone lifting a finger. Branded EDM templates match the new site for one-off newsletters and venue updates.</div>
+      </div>
+
+      <div class="deliverable">
+        <div class="del-num">05</div>
+        <div class="del-tag">Amplify</div>
+        <div class="del-title">LinkedIn Posting</div>
+        <div class="del-body">The team's expertise on the platform clients actually use. Industry insights, site visit recaps, venue knowledge &mdash; positioning CVBS as the go-to.</div>
+      </div>
+
+      <div class="deliverable">
+        <div class="del-num">06</div>
+        <div class="del-tag">Amplify</div>
+        <div class="del-title">Instagram Posting</div>
+        <div class="del-body">Visual storytelling for venues, events, and the behind-the-scenes work that makes CVBS distinctive. Drives traffic back to the site.</div>
+      </div>
+    </div>
+
+    <!-- Featured deliverable: proposal template -->
+    <div class="featured-deliverable">
+      <div class="feat-left">
+        <div class="feat-num">07</div>
+        <div class="feat-tag">Convert</div>
+      </div>
+      <div class="feat-right">
+        <div class="feat-title">Custom Venue Proposal Template</div>
+        <div class="feat-body">A fully branded, ready-to-use proposal document built specifically for CVBS. Every team member opens the same template, drops in venue details, and sends a polished, on-brand proposal in minutes &mdash; not hours. Cohesive design, consistent voice, every time. Whether the proposal goes out under Karen, Anthony, Chantelle, or Rychelle, the client experience is identical.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-strip">
+    <div><strong>The Digital Growth System</strong> &middot; Service Recap &middot; April 2026</div>
+    <div>The Service Edit &middot; <strong>theserviceedit.com</strong></div>
+  </div>
+
+</div>
+</body>
+</html>

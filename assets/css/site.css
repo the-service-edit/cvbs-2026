@@ -442,7 +442,7 @@ body.menu-open{overflow:hidden}
 .dcard__city{display:block;font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
 .dcard__count{display:block;font-size:.78rem;color:rgba(238,246,247,.82);margin-top:.2rem}
 @media(max-width:680px){
-  .dest-stage{display:grid!important;grid-template-columns:1fr 1fr;gap:.7rem;height:auto!important;perspective:none;overflow:visible;-webkit-mask:none;mask:none}
+  .dest-stage{display:grid!important;grid-template-columns:1fr 1fr;gap:.7rem;height:auto!important;padding-inline:var(--gutter);perspective:none;overflow:visible;-webkit-mask:none;mask:none}
   .dest-stage .dcard{position:relative!important;left:auto!important;top:auto!important;transform:none!important;opacity:1!important;width:100%;height:auto;aspect-ratio:1;z-index:auto!important;border-radius:14px}
   .dest-stage .dcard:nth-child(n+7){display:none}
 }
