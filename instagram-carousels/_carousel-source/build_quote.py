@@ -40,48 +40,63 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .hint{font-size:11.5px;color:#8aa0b0;margin-top:8px;line-height:1.4}
 .stage{flex:1;height:100vh;overflow:auto;background:#c9d4dc;display:flex;justify-content:center;padding:26px}
 /* ---- DOCUMENT ---- */
-.doc{width:800px;flex:none;background:#fff;color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.5);align-self:flex-start}
-.dh{background:var(--navy);color:#fff;padding:34px 44px;display:flex;justify-content:space-between;align-items:flex-start}
-.dh img{height:40px}
+.doc{width:800px;flex:none;background:#fff;color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.5);align-self:flex-start;overflow:hidden}
+.ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:700}
+.ey::before{content:"";width:26px;height:2px;border-radius:2px;background:var(--teal)}
+.dh{background:var(--navy);color:#fff;padding:28px 44px;display:flex;justify-content:space-between;align-items:center}
+.dh .lg img{height:38px;display:block}
+.dh .lg .tl{font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.6);margin-top:9px;font-weight:500}
 .dh .rt{text-align:right}
-.dh .rt .k{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:700}
-.dh .rt .n{font-size:14px;color:rgba(255,255,255,.82);margin-top:6px;line-height:1.6}
-.dbody{padding:34px 44px}
-.meta{display:flex;justify-content:space-between;gap:30px;padding-bottom:22px;border-bottom:2px solid var(--navy)}
-.meta .col{font-size:13.5px;line-height:1.7}
-.meta .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:6px}
-.meta b{color:var(--ink);font-weight:700}
+.dh .rt .k{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.dh .rt .k::before{content:"";width:22px;height:2px;background:var(--teal);border-radius:2px}
+.dh .rt .n{font-size:13px;color:rgba(255,255,255,.8);margin-top:9px;line-height:1.6}
+.hero{background:var(--stone);padding:30px 44px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.08;color:var(--navy);margin:11px 0 0}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.facts .f{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+.facts .f .d{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+.dbody{padding:30px 44px}
+.prep{font-size:13.5px;color:#37444f;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.prep b{color:var(--ink)}
 table{width:100%;border-collapse:collapse;margin-top:22px}
-th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:left;padding:10px 8px;border-bottom:2px solid var(--line)}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:left;padding:0 10px 12px;border-bottom:2px solid var(--navy)}
 th.r,td.r{text-align:right}
-td{font-size:14px;padding:12px 8px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
-td .sm{display:block;font-size:12px;color:var(--muted);margin-top:2px}
-.totals{margin-top:16px;margin-left:auto;width:320px}
-.totals .tr{display:flex;justify-content:space-between;padding:8px 8px;font-size:14px}
-.totals .tr.grand{background:var(--navy);color:#fff;border-radius:10px;padding:14px 16px;font-size:20px;font-weight:800;margin-top:6px}
-.totals .tr.grand .teal{color:var(--teal)}
-.notebox{margin-top:26px;background:var(--stone);border:1px solid var(--line);border-radius:12px;padding:20px 22px}
-.notebox .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:8px}
-.notebox p{font-size:13.5px;line-height:1.6;color:#37444f;white-space:pre-wrap}
-.vgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:22px}
-.vcard{border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.vcard .vch{background:var(--stone);padding:16px 16px;border-bottom:1px solid var(--line)}
-.vcard .vn{font-size:16px;font-weight:800;color:var(--navy);line-height:1.15}
-.vcard .vl{font-size:12px;color:var(--muted);margin-top:3px}
-.vcard .vb{padding:16px}
-.vcard .vspec{font-size:12.5px;color:#37444f;line-height:1.5;min-height:52px}
-.vcard .vrate{font-size:12px;color:var(--muted);margin-top:12px}
-.vcard .vprice{font-size:26px;font-weight:800;color:var(--teal-deep);letter-spacing:-.02em}
-.vcard .vnote{font-size:12px;color:#37444f;line-height:1.45;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+tbody tr:nth-child(even){background:#f6fafb}
+td{font-size:14px;padding:13px 10px;border-bottom:1px solid var(--line);color:var(--ink);vertical-align:top}
+td.amt{font-weight:700;color:var(--navy)}
+.totals{margin-top:18px;margin-left:auto;width:340px}
+.totals .tr{display:flex;justify-content:space-between;padding:9px 10px;font-size:14px;color:#37444f}
+.totals .tr.grand{background:var(--navy);color:#fff;border-radius:12px;padding:17px 20px;font-size:15px;font-weight:600;margin-top:8px;align-items:center;box-shadow:0 16px 30px -18px rgba(10,44,82,.6)}
+.totals .tr.grand .big{font-size:27px;font-weight:800;color:var(--teal);letter-spacing:-.02em}
+.totals .tr.grand small{font-weight:400;opacity:.7;font-size:11px}
+.notebox{margin-top:26px;background:var(--stone);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.notebox .lbl{margin-bottom:10px}
+.notebox p{font-size:13.5px;line-height:1.65;color:#37444f;white-space:pre-wrap}
+.trust{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.tb{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--navy);background:var(--stone);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+.tb svg{width:15px;height:15px;color:var(--teal-deep)}
+.vgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:24px}
+.vcard{border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.vcard.pick{border-color:var(--teal);box-shadow:0 0 0 1.5px var(--teal)}
+.vcard .tag{position:absolute;top:12px;right:12px;background:var(--teal);color:#06262b;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:6px}
+.vcard .vch{background:var(--navy);padding:18px}
+.vcard .vn{font-size:17px;font-weight:800;color:#fff;line-height:1.15}
+.vcard .vl{font-size:12px;color:var(--teal);margin-top:4px;font-weight:600}
+.vcard .vb{padding:18px;display:flex;flex-direction:column;flex:1}
+.vcard .vspec{font-size:12.5px;color:#37444f;line-height:1.6;min-height:56px}
+.vcard .vrate{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:14px;font-weight:600}
+.vcard .vprice{font-size:28px;font-weight:800;color:var(--teal-deep);letter-spacing:-.02em}
+.vcard .vnote{font-size:12px;color:#37444f;line-height:1.5;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 .terms{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.6;color:var(--muted)}
-.df{background:var(--navy2);color:rgba(255,255,255,.8);padding:20px 44px;font-size:12px;line-height:1.6}
-.df b{color:#fff}
+.df{background:var(--navy2);color:rgba(255,255,255,.8);padding:22px 44px;font-size:12px;line-height:1.7}
+.df b{color:#fff}.df .teal{color:var(--teal)}
+.df .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 @media print{
  body{display:block;height:auto;background:#fff}
  .panel{display:none!important}
  .stage{padding:0;background:#fff;display:block;overflow:visible;height:auto}
  .doc{width:100%;box-shadow:none}
- @page{size:A4;margin:12mm}
+ @page{size:A4;margin:11mm}
 }
 </style></head>
 <body>
@@ -103,42 +118,46 @@ const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&g
 const money=n=>"$"+(Number(String(n).replace(/[^0-9.]/g,''))||0).toLocaleString('en-AU',{minimumFractionDigits:2,maximumFractionDigits:2});
 const num=n=>Number(String(n).replace(/[^0-9.]/g,''))||0;
 const M=k=>state.meta[k]||"";
+const TICK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+const TRUST=`<div class="trust"><span class="tb">${TICK}Free to you</span><span class="tb">${TICK}Independent since 1989</span><span class="tb">${TICK}Shortlist in 48 hours</span></div>`;
 
-function headBlock(kind){return `<div class="dh"><img src="${LOGOW}" alt="CVBS">
+function head(kind){return `<div class="dh"><div class="lg"><img src="${LOGOW}" alt="CVBS"><div class="tl">Conference Venues &amp; Booking Services</div></div>
  <div class="rt"><div class="k">${kind}</div><div class="n">${esc(M('quoteNo'))}<br>${esc(M('date'))}${M('validUntil')?`<br>Valid until ${esc(M('validUntil'))}`:""}</div></div></div>`;}
-function metaBlock(){return `<div class="meta">
- <div class="col"><div class="lbl">Prepared for</div><b>${esc(M('client'))}</b>${M('company')?`<br>${esc(M('company'))}`:""}</div>
- <div class="col"><div class="lbl">Event</div><b>${esc(M('event'))}</b>${M('destination')?`<br>${esc(M('destination'))}`:""}${M('dates')?`<br>${esc(M('dates'))}`:""}${M('delegates')?`<br>${esc(M('delegates'))} delegates`:""}</div>
- </div>`;}
-function footBlock(){return `<div class="df"><b>CVBS · Conference Venues &amp; Booking Services</b><br>
- ${esc(M('contactName'))}${M('contactPhone')?` · ${esc(M('contactPhone'))}`:""}${M('contactEmail')?` · ${esc(M('contactEmail'))}`:""}<br>
- Our service is free to you. We are paid by the venue, never by you.</div>`;}
+const fact=t=>`<span class="f"><span class="d"></span>${esc(t)}</span>`;
+function hero(ey){return `<div class="hero"><div class="ey">${ey}</div><h1>${esc(M('event'))||"&nbsp;"}</h1>
+ <div class="facts">${M('destination')?fact(M('destination')):""}${M('dates')?fact(M('dates')):""}${M('delegates')?fact(M('delegates')+' delegates'):""}</div></div>`;}
+const prep=()=>`<div class="prep">Prepared for <b>${esc(M('client'))}</b>${M('company')?', '+esc(M('company')):""}.</div>`;
+function foot(){return `<div class="df"><div class="row">
+ <div><b>CVBS · Conference Venues &amp; Booking Services</b><br>${esc(M('contactName'))}${M('contactPhone')?` · ${esc(M('contactPhone'))}`:""}${M('contactEmail')?` · <span class="teal">${esc(M('contactEmail'))}</span>`:""}</div>
+ <div style="text-align:right"><b>Free to you.</b><br>We're paid by the venue, never by you.</div></div></div>`;}
 
 function buildItemised(){let sub=0;
  const rows=state.items.map(it=>{const amt=num(it.qty)*num(it.unit);sub+=amt;
-  return `<tr><td>${esc(it.desc)||"&nbsp;"}</td><td class="r">${esc(it.qty)}</td><td class="r">${it.unit?money(it.unit):""}</td><td class="r">${money(amt)}</td></tr>`;}).join("");
+  return `<tr><td>${esc(it.desc)||"&nbsp;"}</td><td class="r">${esc(it.qty)}</td><td class="r">${it.unit?money(it.unit):""}</td><td class="r amt">${money(amt)}</td></tr>`;}).join("");
  const gst=sub*0.1, total=sub+gst;
- return `${headBlock("Quote")}<div class="dbody">${metaBlock()}
+ return `${head("Estimate")}${hero("Event estimate")}<div class="dbody">${prep()}
   <table><thead><tr><th>Description</th><th class="r">Qty</th><th class="r">Unit</th><th class="r">Amount</th></tr></thead><tbody>${rows}</tbody></table>
   <div class="totals">
    <div class="tr"><span>Subtotal</span><span>${money(sub)}</span></div>
    <div class="tr"><span>GST (10%)</span><span>${money(gst)}</span></div>
-   <div class="tr grand"><span>Estimated total</span><span class="teal">${money(total)}</span></div>
+   <div class="tr grand"><span>Estimated total <small>incl. GST</small></span><span class="big">${money(total)}</span></div>
   </div>
-  ${M('notes')?`<div class="notebox"><div class="lbl">Notes</div><p>${esc(M('notes'))}</p></div>`:""}
+  ${M('notes')?`<div class="notebox"><div class="ey lbl">Notes</div><p>${esc(M('notes'))}</p></div>`:""}
+  ${TRUST}
   <div class="terms">This is an estimate based on the details supplied and current venue rates; final pricing is confirmed on booking. Figures are indicative and subject to availability and change. CVBS is an independent venue finding service, free to the client.</div>
-  </div>${footBlock()}`;}
+  </div>${foot()}`;}
 
 function buildProposal(){
- const cards=state.venues.filter(v=>v.name||v.price).map(v=>`<div class="vcard"><div class="vch"><div class="vn">${esc(v.name)||"&nbsp;"}</div><div class="vl">${esc(v.location)}</div></div>
-  <div class="vb"><div class="vspec">${esc(v.spec).split("\n").map(x=>x).join("<br>")}</div>
+ const cards=state.venues.filter(v=>v.name||v.price).map((v,i)=>`<div class="vcard${i===0?' pick':''}">${i===0?'<span class="tag">Our pick</span>':''}<div class="vch"><div class="vn">${esc(v.name)||"&nbsp;"}</div><div class="vl">${esc(v.location)}</div></div>
+  <div class="vb"><div class="vspec">${esc(v.spec).split("\n").join("<br>")}</div>
   <div class="vrate">${esc(v.rate)}</div><div class="vprice">${v.price?money(v.price):""}</div>
   ${v.note?`<div class="vnote">${esc(v.note)}</div>`:""}</div></div>`).join("");
- return `${headBlock("Proposal")}<div class="dbody">${metaBlock()}
+ return `${head("Proposal")}${hero("Venue proposal")}<div class="dbody">${prep()}
   <div class="vgrid">${cards}</div>
-  ${M('recommendation')?`<div class="notebox"><div class="lbl">Our recommendation</div><p>${esc(M('recommendation'))}</p></div>`:""}
+  ${M('recommendation')?`<div class="notebox"><div class="ey lbl">Our recommendation</div><p>${esc(M('recommendation'))}</p></div>`:""}
+  ${TRUST}
   <div class="terms">Estimated totals are indicative, based on the brief and current venue rates, and confirmed on booking. Subject to availability. CVBS is an independent venue finding service, free to the client.</div>
-  </div>${footBlock()}`;}
+  </div>${foot()}`;}
 
 const DEF_META={quoteNo:"Q-2026-014",date:"1 July 2026",validUntil:"31 July 2026",client:"Jane Smith",company:"Acme Corporation",
  event:"National Sales Conference",destination:"Sydney, NSW",dates:"14–15 October 2026",delegates:"140",
@@ -157,47 +176,42 @@ const LABEL={quoteNo:"Quote number",date:"Date",validUntil:"Valid until",client:
 function buildModes(){const c=document.getElementById('modes');c.innerHTML="";
  [["itemised","Itemised quote"],["proposal","Venue comparison"]].forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.mode?"on":"";
   b.onclick=()=>{state.mode=k;buildModes();buildFields();render();};c.appendChild(b);});}
-function fld(k,obj){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=LABEL[k]||k;d.appendChild(l);
- const area=(k==='notes'||k==='recommendation');const el=document.createElement(area?'textarea':'input');el.value=(obj||state.meta)[k]||"";
- el.oninput=()=>{(obj||state.meta)[k]=el.value;render();};d.appendChild(el);return d;}
+function fld(k){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=LABEL[k]||k;d.appendChild(l);
+ const area=(k==='notes'||k==='recommendation');const el=document.createElement(area?'textarea':'input');el.value=state.meta[k]||"";
+ el.oninput=()=>{state.meta[k]=el.value;render();};d.appendChild(el);return d;}
 function twoCol(a,b){const w=document.createElement('div');w.className="row2";w.appendChild(fld(a));w.appendChild(fld(b));return w;}
+function fldObj(lbl,obj,key,area){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
+ const el=document.createElement(area?'textarea':'input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
+function fld2(lbl,obj,key,cls){const d=document.createElement('div');d.className="field "+cls;const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
+ const el=document.createElement('input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
 
 function buildFields(){const c=document.getElementById('fields');c.innerHTML="";
  c.appendChild(twoCol('quoteNo','date'));c.appendChild(fld('validUntil'));
  c.appendChild(twoCol('client','company'));c.appendChild(fld('event'));
  c.appendChild(twoCol('destination','dates'));c.appendChild(fld('delegates'));
  if(state.mode==='itemised'){
-   const g=document.createElement('div');g.className="grp";g.innerHTML='<label>Line items</label>';
-   const list=document.createElement('div');
+   const g=document.createElement('div');g.className="grp";g.innerHTML='<label>Line items</label>';const list=document.createElement('div');
    state.items.forEach((it,i)=>{const row=document.createElement('div');row.className="item";
-     const d=fld2("Description",it,'desc','desc');const q=fld2("Qty",it,'qty','qty');const u=fld2("Unit $",it,'unit','unit');
+     row.append(fld2("Description",it,'desc','desc'),fld2("Qty",it,'qty','qty'),fld2("Unit $",it,'unit','unit'));
      const rm=document.createElement('button');rm.className="rm";rm.textContent="×";rm.onclick=()=>{state.items.splice(i,1);buildFields();render();};
-     row.append(d,q,u,rm);list.appendChild(row);});
+     row.appendChild(rm);list.appendChild(row);});
    g.appendChild(list);
    const add=document.createElement('button');add.className="addbtn";add.textContent="+ Add line";add.onclick=()=>{state.items.push({desc:"",qty:"1",unit:"0"});buildFields();render();};
-   g.appendChild(add);c.appendChild(g);
-   c.appendChild(fld('notes'));
+   g.appendChild(add);c.appendChild(g);c.appendChild(fld('notes'));
  } else {
-   state.venues.forEach((v,i)=>{const box=document.createElement('div');box.className="vbox";box.innerHTML=`<div class="vt">Venue ${i+1}</div>`;
+   state.venues.forEach((v,i)=>{const box=document.createElement('div');box.className="vbox";box.innerHTML=`<div class="vt">Venue ${i+1}${i===0?' · our pick':''}</div>`;
      box.appendChild(fldObj("Venue name",v,'name'));box.appendChild(fldObj("Location",v,'location'));
      box.appendChild(fldObj("Key specs (one per line)",v,'spec',true));
      box.appendChild(fldObj("Rate label",v,'rate'));box.appendChild(fldObj("Price $",v,'price'));box.appendChild(fldObj("Note",v,'note'));
      c.appendChild(box);});
    c.appendChild(fld('recommendation'));
  }
- c.appendChild(sectionContact());
+ const g2=document.createElement('div');g2.className="grp";g2.innerHTML='<label>Your contact details</label>';
+ g2.appendChild(fld('contactName'));g2.appendChild(twoCol('contactPhone','contactEmail'));c.appendChild(g2);
 }
-function sectionContact(){const g=document.createElement('div');g.className="grp";g.innerHTML='<label>Your contact details</label>';
- g.appendChild(fld('contactName'));g.appendChild(twoCol('contactPhone','contactEmail'));return g;}
-function fld2(lbl,obj,key,cls){const d=document.createElement('div');d.className="field "+cls;const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
- const el=document.createElement('input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
-function fldObj(lbl,obj,key,area){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
- const el=document.createElement(area?'textarea':'input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
-function twoColObj(){return document.createElement('div');} // placeholder unused
-
 function render(){document.getElementById('doc').innerHTML=state.mode==='itemised'?buildItemised():buildProposal();}
 document.getElementById('print').onclick=()=>window.print();
-document.getElementById('download').onclick=()=>{const html="<!doctype html><html><head><meta charset='utf-8'><style>"+document.querySelector('style').innerHTML+"</style></head><body><div class='stage'>"+document.getElementById('doc').outerHTML+"</div></body></html>";
+document.getElementById('download').onclick=()=>{const html="<!doctype html><html><head><meta charset='utf-8'><style>"+document.querySelector('style').innerHTML+"</style></head><body><div class='stage' style='background:#fff;padding:0'>"+document.getElementById('doc').outerHTML+"</div></body></html>";
  const blob=new Blob([html],{type:"text/html"});const a=document.createElement('a');a.download=`cvbs-${state.mode}-quote.html`;a.href=URL.createObjectURL(blob);a.click();};
 buildModes();buildFields();render();
 </script></body></html>'''
