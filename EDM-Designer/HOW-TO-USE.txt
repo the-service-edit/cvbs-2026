@@ -1,0 +1,13 @@
+CVBS EDM DESIGNER
+
+Open CVBS-EDM-Designer.html in your browser. Works offline.
+
+1. Choose Venue offer or Offers roundup.
+2. Fill in the fields. The live 600px preview updates as you type.
+3. Click "Copy HTML for Mailchimp".
+4. In Mailchimp: Campaigns > Create > Email > Regular > Code your own >
+   Paste in code. Paste, Save, send yourself a test.
+
+Images use hosted URLs (your GitHub Pages assets). To use a new photo,
+upload it somewhere public and paste its URL into the image field.
+The unsubscribe + address footer (legally required) is already wired in.
