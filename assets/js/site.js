@@ -186,6 +186,25 @@
     }
   })();
 
+  /* Lazy ambient background videos (load only when near viewport) */
+  doc.querySelectorAll('video[data-lazy]').forEach(function (v) {
+    var src = v.querySelector('source[data-src]');
+    if (!src || !('IntersectionObserver' in window)) {
+      if (src) { src.src = src.getAttribute('data-src'); v.load(); }
+      return;
+    }
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        src.src = src.getAttribute('data-src');
+        v.load();
+        var p = v.play(); if (p && p.catch) p.catch(function () {});
+        vio.disconnect();
+      });
+    }, { rootMargin: '250px' });
+    vio.observe(v);
+  });
+
   /* Count-up stats */
   (function () {
     var nums = doc.querySelectorAll('[data-count]');
