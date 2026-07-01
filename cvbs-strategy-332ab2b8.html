@@ -236,6 +236,14 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .farrow{text-align:center; color:rgba(255,255,255,.4); font-size:18px; margin:6px 0;}
 
 /* knowledge diagram */
+.pipeline{display:flex; flex-wrap:wrap; align-items:stretch; justify-content:center; gap:10px; margin-top:26px;}
+.pipeline .pn{flex:1 1 150px; max-width:210px; background:rgba(255,255,255,.06); border:1px solid var(--line-d); border-radius:13px; padding:15px 14px; text-align:center;}
+.pipeline .pn b{display:block; font-size:14.5px; font-weight:600; color:#fff; margin-bottom:4px; letter-spacing:-.01em;}
+.pipeline .pn span{font-size:12px; color:rgba(255,255,255,.66); line-height:1.4;}
+.pipeline .pn.hub{background:rgba(59,201,217,.16); border-color:rgba(59,201,217,.45);}
+.pipeline .pn.hub b{color:var(--teal);}
+.pipeline .parrow{align-self:center; color:var(--teal); font-weight:700; font-size:18px; flex:0 0 auto;}
+@media(max-width:720px){ .pipeline{flex-direction:column} .pipeline .parrow{transform:rotate(90deg)} }
 .kdiag{display:grid; grid-template-columns:1fr auto 1fr; gap:20px; align-items:center; margin-top:42px;}
 @media(max-width:720px){ .kdiag{grid-template-columns:1fr; gap:16px} .kdiag .karrow{transform:rotate(90deg)} }
 .kchips{display:flex; flex-wrap:wrap; gap:9px;}
@@ -583,7 +591,7 @@ footer a{color:var(--teal); text-decoration:none;}
     <div class="kdiag">
       <div class="kchips"><span>Emails</span><span>Proposals</span><span>Contracts</span><span>Venue notes</span><span>Supplier deals</span><span>Karen &amp; AJ's memory</span></div>
       <div class="karrow">→</div>
-      <div class="kbox">One searchable system<small>The whole team, instant answers</small></div>
+      <div class="kbox">One shared system · Airtable<small>The whole team, one source of truth</small></div>
     </div>
     <ul class="points">
       <li><span class="tick">1</span><div><span class="t">Protect 35 years of knowledge</span><span class="d">Every proposal, venue inspection, negotiation and preferred supplier in one place. The value isn't the technology. It's making sure that knowledge is never lost.</span></div></li>
@@ -595,6 +603,17 @@ footer a{color:var(--teal); text-decoration:none;}
       <div>"Who was the GM we dealt with in Cairns?"<span>Found in seconds, ready before the call.</span></div>
       <div>"What concessions did we negotiate for that client?"<span>The full history, there when you need it.</span></div>
     </div>
+    <p class="note" style="text-align:center; margin-top:36px">And it all runs on one connected system:</p>
+    <div class="pipeline">
+      <div class="pn"><b>Brief form</b><span>on the website</span></div>
+      <div class="parrow">→</div>
+      <div class="pn hub"><b>Airtable</b><span>one source of truth</span></div>
+      <div class="parrow">→</div>
+      <div class="pn"><b>Automation</b><span>Instantly and branded EDMs send for you</span></div>
+      <div class="parrow">→</div>
+      <div class="pn"><b>Proposal template</b><span>on-brand, in minutes</span></div>
+    </div>
+    <p class="note" style="text-align:center; margin-top:16px">A brief lands, an owner picks it up, an on-brand proposal goes out, and the whole team can see the full history. No lead missed, no double-up, whoever is on the keyboard.</p>
     <div class="takeaway"><b>The reassurance</b><p>Technology never replaces your relationships. It removes the busywork around them, so the service clients feel stays exactly the same, human.</p></div>
   </div>
 </section>
