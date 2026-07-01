@@ -870,3 +870,6 @@ body.menu-open{overflow:hidden}
   .mbar__cta{border-radius:12px;padding:.85rem 1rem}
   body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
 }
+
+.ticks--x li svg{color:#B0654A}
+.ticks--x li{color:var(--muted)}
