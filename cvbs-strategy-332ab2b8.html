@@ -119,6 +119,9 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .live .view{position:relative; width:100%; height:460px; overflow:hidden; background:#f3f0e9;}
 @media(max-width:600px){ .live .view{height:340px} }
 .live .view iframe{position:absolute; top:0; left:0; border:0; transform-origin:top left; pointer-events:none; background:#fff;}
+.live .view.noembed{display:grid; place-items:center; background:linear-gradient(160deg,#f4f1ea,#e7e1d3); text-align:center; padding:20px;}
+.live .view.noembed span{display:block; font-size:11.5px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.08em; font-weight:700;}
+.live .view.noembed a{font-size:15px; font-weight:700; color:var(--teal-deep); text-decoration:none;}
 .live .view .openover{position:absolute; inset:0; display:block; z-index:2;}
 .live .badge{position:absolute; left:14px; bottom:14px; z-index:3; background:rgba(13,34,51,.82); color:#fff;
   font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;
@@ -481,18 +484,10 @@ footer a{color:var(--teal); text-decoration:none;}
         <p class="dirnote">Marketplace, strong SEO</p>
       </div>
       <div>
-        <div class="devlabel">Business Events Australia</div>
-        <div class="live">
-          <div class="bar"><i></i><i></i><i></i><span class="url">businessevents.australia.com</span><a class="open" href="https://businessevents.australia.com/" target="_blank" rel="noopener">Open ↗</a></div>
-          <div class="view"><iframe src="https://businessevents.australia.com/" title="Competitor, Business Events Australia, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://businessevents.australia.com/" target="_blank" rel="noopener" aria-label="Open Business Events Australia"></a><span class="badge"><span class="pulse"></span>Live</span></div>
-        </div>
-        <p class="dirnote">Destination marketing</p>
-      </div>
-      <div>
         <div class="devlabel">Cvent Supplier Network</div>
         <div class="live">
           <div class="bar"><i></i><i></i><i></i><span class="url">cvent.com</span><a class="open" href="https://www.cvent.com/" target="_blank" rel="noopener">Open ↗</a></div>
-          <div class="view"><iframe src="https://www.cvent.com/" title="Competitor, Cvent, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://www.cvent.com/" target="_blank" rel="noopener" aria-label="Open Cvent"></a><span class="badge"><span class="pulse"></span>Live</span></div>
+          <div class="view noembed"><div><span>Cvent blocks in-page previews</span><a href="https://www.cvent.com/" target="_blank" rel="noopener">Open cvent.com ↗</a></div></div>
         </div>
         <p class="dirnote">Enterprise platform</p>
       </div>
