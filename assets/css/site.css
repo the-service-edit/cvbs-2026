@@ -831,3 +831,23 @@ body.menu-open{overflow:hidden}
 .sub-band--strong .sub-ok{color:var(--teal-deep)}
 
 @media(max-width:999px){.site-header.nav-hide{transform:translateY(-100%)}}
+
+@media(min-width:1000px){
+  .nav-item--has{position:relative;display:flex;align-items:center}
+  .nav-top{display:inline-flex;align-items:center;gap:.25rem}
+  .nav-chev{transition:transform .25s}
+  .nav-item--has:hover .nav-chev,.nav-item--has:focus-within .nav-chev{transform:rotate(180deg)}
+  .nav-drop{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(6px);min-width:252px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 26px 54px -28px rgba(10,44,82,.4);padding:.5rem;opacity:0;visibility:hidden;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;z-index:120}
+  .nav-drop::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px}
+  .nav-item--has:hover .nav-drop,.nav-item--has:focus-within .nav-drop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .nav-drop a{display:block;padding:.62rem .85rem;border-radius:9px;font-size:.92rem;line-height:1.25;color:#2b3946;white-space:nowrap;font-weight:500}
+  .nav-drop a:hover{background:var(--stone);color:var(--brand)}
+  .nav-drop a:last-child{border-top:1px solid var(--line);margin-top:.35rem;padding-top:.72rem;color:var(--brand)}
+}
+.mobile-menu .m-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.5rem;background:none;border:0;border-bottom:1px solid var(--line);font-size:1.4rem;font-weight:600;color:inherit;font-family:inherit;padding:1rem 0;cursor:pointer;text-align:left}
+.mobile-menu .m-top .nav-chev{width:20px;height:20px;transition:transform .3s;flex:none}
+.mobile-menu .m-item.open .m-top .nav-chev{transform:rotate(180deg)}
+.mobile-menu .m-sub{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.mobile-menu .m-item.open .m-sub{max-height:560px}
+.mobile-menu .m-sub a{font-size:1.02rem;font-weight:500;padding:.62rem 0 .62rem 1rem;border-bottom:0;opacity:.9}
+.mobile-menu .m-sub a:last-child{color:var(--brand);opacity:1}
