@@ -84,8 +84,13 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .bignum{font-size:300px;font-weight:800;color:var(--teal);line-height:.74;letter-spacing:-.05em}
 .tag2{align-self:flex-start;position:relative;background:var(--teal);color:#06262b;font-weight:700;padding:20px 32px 20px 58px;border-radius:11px;font-size:26px;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-2.5deg)}
 .tag2::before{content:"";position:absolute;left:24px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:#06262b}
+.btn{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;background:var(--teal);color:#06262b;font-weight:700;font-size:30px;padding:22px 36px;border-radius:12px;margin-top:8px}
+.btn svg{width:28px;height:28px}
+.content.center{align-items:center;text-align:center}
+.content.center .chip,.content.center .evbadge,.content.center .eyebrow,.content.center .filebadge,.content.center .loc2,.content.center .pricebox,.content.center .tag2,.content.center .btn,.content.center .bignum{align-self:center}
+.content.center .glass,.content.center .specbar,.content.center .foot{align-self:stretch}
 .statbig{font-size:96px;font-weight:800;line-height:1.0;letter-spacing:-.04em}
-.foot{display:flex;align-items:center;justify-content:space-between;padding-top:28px;margin-top:8px;border-top:1px solid rgba(255,255,255,.22)}
+.foot{display:flex;width:100%;align-items:center;justify-content:space-between;padding-top:28px;margin-top:8px;border-top:1px solid rgba(255,255,255,.22)}
 .bg-stone .foot{border-top:1px solid var(--line)}
 .foot img{height:48px}
 .foot .url{font-size:24px;font-weight:600;color:rgba(255,255,255,.86)}
@@ -103,6 +108,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 
   <div class="grp"><label>Template</label><div class="tmpls" id="tmpls"></div></div>
   <div class="grp"><label>Format</label><div class="seg" id="formats"></div></div>
+  <div class="grp"><label>Align</label><div class="seg" id="aligns"></div></div>
 
   <div class="grp" id="photogrp"><label>Photo</label>
     <div class="photos" id="photos"></div>
@@ -170,19 +176,34 @@ const T={
    def:{eyebrow:"Offers roundup · June",headline:"This month's\nvenue *offers*.",sub:"Five rates worth booking, negotiated for CVBS clients."}},
  result:{name:"Client result",bg:"photo",render:()=>`${chip(F('badge'))}<div class="fill"></div><div class="hl statbig">${rich(F('headline'))}</div><div class="sub">${rich(F('sub'))}</div><div style="height:28px"></div>${foot()}`,
    def:{badge:"Client result",headline:"140 delegates.\n48 hours.\n*One* call.",sub:"A last-minute national conference, handled."},photo:"crown"},
+ content:{name:"› Content page",bg:"photo",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div style="height:28px"></div>${foot()}`,
+   def:{eyebrow:"The brief",headline:"A two-day conference\nfor *140 people*.",body:"Plenary plus three breakout rooms, full catering and rooms for interstate delegates."},photo:"crown"},
+ point:{name:"› Numbered point",bg:"photo",render:()=>`<div class="fill"></div><div class="bignum" style="font-size:200px">${esc(F('number'))}</div><div class="hl h-md" style="margin-top:8px">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div style="height:28px"></div>${foot()}`,
+   def:{number:"01",headline:"Booking the first\nvenue that says *yes*.",body:"The fastest option is rarely the best value. One comparison usually moves the price."},photo:"hyatt"},
+ quote:{name:"› Quote",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-lg">${rich(F('quote'))}</div><div class="sub">${esc(F('attribution'))}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"Client words",quote:"“They held the room\nbefore I'd finished\nthe *brief*.”",attribution:"Events Manager, national association"}},
+ cta:{name:"› Call to action",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-lg">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="btn">${esc(F('button'))} ${ARROW}</div><div class="fill"></div>${foot()}`,
+   def:{eyebrow:"Your event next",headline:"Planning something\n*like this?*",body:"Send us the brief. We'll come back with a shortlist worth your time.",button:"Start your brief"}},
 };
 const FIELD_LABELS={badge:"Eyebrow / badge",headline:"Headline",sub:"Sub-line",pricePre:"Price label",priceBig:"Price",seriesNo:"File number",location:"Location",eyebrow:"Eyebrow",number:"Big number",tag:"Tag text",
+ body:"Body text",quote:"Quote",attribution:"Attribution",button:"Button text",
  s1n:"Stat 1",s1l:"Label 1",s2n:"Stat 2",s2l:"Label 2",s3n:"Stat 3",s3l:"Label 3"};
-const AREA=new Set(["headline","sub"]);
+const AREA=new Set(["headline","sub","body","quote"]);
 const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"]];
 
-let state={template:"offer",format:"ig",photo:PHOTOS.kimpton,posY:40,scrim:82,fields:{}};
+let state={template:"offer",format:"ig",align:"left",photo:PHOTOS.kimpton,posY:40,scrim:82,fields:{}};
+const CENTER_DEFAULT=new Set(["positioning","quote","cta","roundup"]);
 
-function loadDefaults(){const t=T[state.template];state.fields=Object.assign({},t.def);if(t.photo)state.photo=PHOTOS[t.photo];}
+function loadDefaults(){const t=T[state.template];state.fields=Object.assign({},t.def);if(t.photo)state.photo=PHOTOS[t.photo];
+ state.align=CENTER_DEFAULT.has(state.template)?"center":"left";}
 
 function buildTemplateButtons(){const c=document.getElementById('tmpls');c.innerHTML="";
  Object.keys(T).forEach(k=>{const b=document.createElement('button');b.textContent=T[k].name;b.className=k===state.template?"on":"";
-  b.onclick=()=>{state.template=k;loadDefaults();syncFormatForTemplate();buildTemplateButtons();buildFields();togglePhoto();render();};c.appendChild(b);});}
+  b.onclick=()=>{state.template=k;loadDefaults();syncFormatForTemplate();buildTemplateButtons();buildAlignButtons();buildFields();togglePhoto();render();};c.appendChild(b);});}
+const ALIGNS=[["left","Left"],["center","Centre"]];
+function buildAlignButtons(){const c=document.getElementById('aligns');c.innerHTML="";
+ ALIGNS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.align?"on":"";
+  b.onclick=()=>{state.align=k;buildAlignButtons();render();};c.appendChild(b);});}
 
 const FORMATS=[["ig","Instagram 4:5"],["square","Square"],["wide","LinkedIn wide"]];
 function buildFormatButtons(){const c=document.getElementById('formats');c.innerHTML="";
@@ -221,10 +242,11 @@ function render(){const t=T[state.template];const card=document.getElementById('
  const bg=document.getElementById('bg'),scr=document.getElementById('scrim');
  if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${state.photo})`;
    bg.style.backgroundPosition=`center ${state.posY}%`;
-   const a=state.scrim/100;
-   scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.36}) 0%,rgba(7,21,32,${a*0.16}) 22%,rgba(7,21,32,${a*0.52}) 46%,rgba(7,21,32,${a}) 74%,rgba(7,21,32,${a}) 100%)`;
+   const a=state.scrim/100, bot=Math.min(a+0.15,0.97);
+   scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.34}) 0%,rgba(7,21,32,${a*0.12}) 20%,rgba(7,21,32,${a*0.5}) 44%,rgba(7,21,32,${bot}) 73%,rgba(7,21,32,${bot}) 100%)`;
  } else {bg.style.display=scr.style.display="none";}
- document.getElementById('content').innerHTML=t.render();
+ const ct=document.getElementById('content');ct.className="content"+(state.align==='center'?" center":"");
+ ct.innerHTML=t.render();
  fit();}
 
 function fit(){const card=document.getElementById('card'),wrap=document.getElementById('stagewrap'),stage=document.getElementById('stage');
@@ -242,6 +264,6 @@ document.getElementById('download').onclick=async()=>{const btn=document.getElem
  btn.textContent=old;};
 
 // init
-buildTemplateButtons();buildFormatButtons();loadDefaults();buildFields();buildPhotoThumbs();togglePhoto();render();
+buildTemplateButtons();buildFormatButtons();loadDefaults();buildAlignButtons();buildFields();buildPhotoThumbs();togglePhoto();render();
 setTimeout(fit,60);
 </script></body></html>

@@ -37,6 +37,7 @@ em{font-style:normal; color:var(--teal-deep); font-weight:600;}
 .brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:17px; letter-spacing:-.02em;}
 .brand .mono{width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:#fff;
   background:linear-gradient(135deg,var(--teal),var(--teal-deep)); font-size:13px; font-weight:700;}
+.brand .blogo{height:30px; width:auto; display:block;}
 .brand small{font-weight:500; color:var(--muted); font-size:14px;}
 .steps{margin-left:auto; font-size:14px; font-weight:600; color:var(--muted);}
 .steps b{color:var(--navy);}
@@ -173,6 +174,17 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .feed figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep); text-align:center; margin-top:10px;}
 .chanlabel{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); text-align:center; margin:46px 0 16px;}
 .li-banner{display:block; width:100%; height:auto; border-radius:14px; border:1px solid var(--line); box-shadow:0 22px 55px -34px rgba(13,34,51,.55);}
+.compgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:38px;}
+@media(max-width:820px){ .compgrid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:520px){ .compgrid{grid-template-columns:1fr} }
+.compgrid .card{display:flex; flex-direction:column; gap:11px;}
+.compgrid h4{font-size:17px; margin:0;}
+.compgrid p{font-size:14px; color:var(--muted); margin:0; flex:1; line-height:1.5;}
+.threat{align-self:flex-start; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:5px 11px; border-radius:999px;}
+.threat.vhigh{background:rgba(229,72,77,.14); color:#c0343a;}
+.threat.high{background:rgba(242,163,60,.18); color:#a86410;}
+.threat.med{background:rgba(59,201,217,.16); color:var(--teal-deep);}
+.compgrid .clink{font-size:12px; font-weight:600; color:var(--teal-deep); text-decoration:none;}
 .dark .devlabel,.darker .devlabel{color:var(--teal);}
 .dirnote{font-size:13px; color:var(--muted); text-align:center; margin:12px 0 0;}
 .dark .dirnote,.darker .dirnote{color:rgba(255,255,255,.6);}
@@ -281,7 +293,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <body>
 <div class="progress" id="prog"></div>
 <div class="topbar">
-  <div class="brand"><span class="mono">CV</span>CVBS <small>Digital Strategy</small></div>
+  <div class="brand"><img class="blogo" src="assets/img/logo.png" alt="CVBS"> <small>Digital Strategy</small></div>
   <div class="steps">Part <b id="cur">1</b> of 13</div>
 </div>
 
@@ -329,7 +341,7 @@ footer a{color:var(--teal); text-decoration:none;}
     </div>
     <div class="framecap">The current site · dated, generic, no proof</div>
     <ul class="points">
-      <li><span class="tick">1</span><div><span class="t">It opens with a vague slogan</span><span class="d">The first thing visitors see is "turning ideas into reality" over a stock slider. It could belong to any company and gives no reason to keep reading.</span></div></li>
+      <li><span class="tick">1</span><div><span class="t">It looks stuck in the past</span><span class="d">The site still links to Google+, a platform shut down in 2019, and runs on software from the same era. To a visitor it signals a business that hasn't moved on, the opposite of the truth.</span></div></li>
       <li><span class="tick">2</span><div><span class="t">It offers no proof</span><span class="d">No client names, results or faces on the page. The testimonials are hidden a click away, so a first-time visitor has nothing to build trust on.</span></div></li>
       <li><span class="tick">3</span><div><span class="t">It gives no clear next step</span><span class="d">The only way to act is "Get a Quote", tucked in the menu. Someone ready to enquire has nowhere obvious to go, so the interest is lost.</span></div></li>
     </ul>
@@ -415,41 +427,23 @@ footer a{color:var(--teal); text-decoration:none;}
   <div class="wrap wide fade">
     <div class="s3head">
       <div class="kick"><span class="num">5</span><span class="lbl">The market</span></div>
-      <h2>This is who you're up against online.</h2>
-      <p class="intro">Your competitors are one click away, and most of them already look the part.</p>
+      <h2>You're not the only name they'll look at.</h2>
+      <p class="intro">The real competitive set, and how you actually stack up online.</p>
     </div>
-    <div class="live3" style="margin-top:38px">
-      <div>
-        <div class="devlabel">Conference Resources</div>
-        <div class="live">
-          <div class="bar"><i></i><i></i><i></i><span class="url">conferenceresources.com.au</span><a class="open" href="https://www.conferenceresources.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
-          <div class="view"><iframe src="https://www.conferenceresources.com.au/" title="Competitor, Conference Resources, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://www.conferenceresources.com.au/" target="_blank" rel="noopener" aria-label="Open Conference Resources"></a><span class="badge"><span class="pulse"></span>Live</span></div>
-        </div>
-        <p class="dirnote">Free venue finding service</p>
-      </div>
-      <div>
-        <div class="devlabel">Conference Venue Essentials</div>
-        <div class="live">
-          <div class="bar"><i></i><i></i><i></i><span class="url">conferencevenueessentials.com.au</span><a class="open" href="https://www.conferencevenueessentials.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
-          <div class="view"><iframe src="https://www.conferencevenueessentials.com.au/" title="Competitor, Conference Venue Essentials, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://www.conferencevenueessentials.com.au/" target="_blank" rel="noopener" aria-label="Open Conference Venue Essentials"></a><span class="badge"><span class="pulse"></span>Live</span></div>
-        </div>
-        <p class="dirnote">30+ years, same model</p>
-      </div>
-      <div>
-        <div class="devlabel">The Conference Shop</div>
-        <div class="live">
-          <div class="bar"><i></i><i></i><i></i><span class="url">theconferenceshop.com.au</span><a class="open" href="https://theconferenceshop.com.au/" target="_blank" rel="noopener">Open ↗</a></div>
-          <div class="view"><iframe src="https://theconferenceshop.com.au/" title="Competitor, The Conference Shop, live" loading="lazy" scrolling="no"></iframe><a class="openover" href="https://theconferenceshop.com.au/" target="_blank" rel="noopener" aria-label="Open The Conference Shop"></a><span class="badge"><span class="pulse"></span>Live</span></div>
-        </div>
-        <p class="dirnote">Independent, like you</p>
-      </div>
+    <div class="compgrid">
+      <div class="card"><h4>Conference National</h4><p>Australia's largest dedicated venue sourcing company. National team, 5,000+ venues, well-established SEO.</p><span class="threat vhigh">Threat · Very high</span><a class="clink" href="https://conferencenational.com.au/" target="_blank" rel="noopener">conferencenational.com.au ↗</a></div>
+      <div class="card"><h4>Conference Venue Essentials</h4><p>The same independent venue-finding model as you, with strong corporate positioning and 30+ years behind it.</p><span class="threat high">Threat · High</span><a class="clink" href="https://www.conferencevenueessentials.com.au/" target="_blank" rel="noopener">conferencevenueessentials.com.au ↗</a></div>
+      <div class="card"><h4>Karstens</h4><p>Owns premium conference venues rather than sourcing them, and competes for the booking directly. Modern, polished site.</p><span class="threat high">Threat · High</span><a class="clink" href="https://www.karstens.com.au/" target="_blank" rel="noopener">karstens.com.au ↗</a></div>
+      <div class="card"><h4>VenueNow</h4><p>An online marketplace with instant venue discovery, a strong digital experience and good SEO.</p><span class="threat high">Threat · High</span><a class="clink" href="https://venuenow.com/" target="_blank" rel="noopener">venuenow.com ↗</a></div>
+      <div class="card"><h4>Business Events Australia</h4><p>Destination-focused rather than a venue finder, but it shapes big conference decisions.</p><span class="threat med">Threat · Medium</span><a class="clink" href="https://businessevents.australia.com/" target="_blank" rel="noopener">businessevents.australia.com ↗</a></div>
+      <div class="card"><h4>Cvent Supplier Network</h4><p>A huge international venue-sourcing platform used by enterprise event planners.</p><span class="threat high">Threat · High</span><a class="clink" href="https://www.cvent.com/" target="_blank" rel="noopener">cvent.com ↗</a></div>
     </div>
-    <p class="note" style="text-align:center; margin-top:14px">Swap these for the competitors you actually lose work to. The point holds either way.</p>
     <ul class="points">
-      <li><span class="tick">✓</span><div><span class="t">They compete on looking organised</span><span class="d">Clean, current sites that say "we can handle your event." That is now the bar a buyer expects before they will trust anyone.</span></div></li>
-      <li><span class="tick">✓</span><div><span class="t">You compete on what they can't copy</span><span class="d">35 years of relationships and real negotiating power. The problem today is that your site hides that, while theirs puts their best foot forward.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">The field splits in two</span><span class="d">Some chase the same briefs you do (Conference National, Conference Venue Essentials). Others compete on technology and reach (VenueNow, Cvent, Karstens).</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Two of them already look sharper than you online</span><span class="d">Karstens and VenueNow have modern, well-built sites. Right now yours is the most dated of the serious contenders, even though your service is the strongest.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Your relationships are what none of them can copy</span><span class="d">No platform has 35 years of direct relationships with the people who hold the rooms. Your website's only job is to make that impossible to miss.</span></div></li>
     </ul>
-    <div class="takeaway"><b>The point</b><p>The goal is not to look like them. It is to finally look like the leader you already are, so your site wins before the conversation even starts.</p></div>
+    <div class="takeaway"><b>The point</b><p>The opening is not that they are all behind. It is that your service already leads and your website is the one thing letting the side down. Fix that, and you are the obvious choice.</p></div>
   </div>
 </section>
 
