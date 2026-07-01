@@ -864,10 +864,11 @@ body.menu-open{overflow:hidden}
 
 .mbar{display:none}
 @media(max-width:820px){
-  .mbar{display:grid;grid-template-columns:auto 1fr;gap:.55rem;position:fixed;left:0;right:0;bottom:0;z-index:96;padding:.55rem .7rem calc(.55rem + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.9);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-top:1px solid var(--line)}
+  .mbar{display:grid;grid-template-columns:auto 1fr;gap:.55rem;position:fixed;left:0;right:0;bottom:0;z-index:96;transition:transform .34s var(--ease);padding:.55rem .7rem calc(.55rem + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.9);backdrop-filter:saturate(140%) blur(12px);-webkit-backdrop-filter:saturate(140%) blur(12px);border-top:1px solid var(--line)}
   .mbar__call{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:12px;font-weight:600;color:var(--navy);background:#fff;font-size:.95rem}
   .mbar__call svg{width:18px;height:18px}
   .mbar__cta{border-radius:12px;padding:.85rem 1rem}
+  .mbar.mbar--hidden{transform:translateY(140%)}
   body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
 }
 

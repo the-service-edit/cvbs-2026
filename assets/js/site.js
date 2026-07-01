@@ -162,6 +162,30 @@
     });
   });
 
+  /* Mobile bottom bar: reveal after the trust logos (or ~1 screen on interior pages) */
+  (function () {
+    var bar = doc.querySelector('.mbar');
+    if (!bar) return;
+    bar.classList.add('mbar--hidden');
+    var reveal = function () { bar.classList.remove('mbar--hidden'); };
+    var hide = function () { bar.classList.add('mbar--hidden'); };
+    var trigger = doc.querySelector('.logos--trust') || doc.querySelector('.logo-marquee') || doc.querySelector('.trustline');
+    if (trigger && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        var en = entries[0];
+        if (!en.isIntersecting && en.boundingClientRect.top < 0) reveal();
+        else if (en.isIntersecting) hide();
+      }, { threshold: 0 });
+      io.observe(trigger);
+    } else {
+      var onS = function () {
+        if ((window.scrollY || 0) > window.innerHeight * 0.8) reveal(); else hide();
+      };
+      onS();
+      window.addEventListener('scroll', onS, { passive: true });
+    }
+  })();
+
   /* Count-up stats */
   (function () {
     var nums = doc.querySelectorAll('[data-count]');

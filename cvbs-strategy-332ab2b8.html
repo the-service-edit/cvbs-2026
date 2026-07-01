@@ -185,6 +185,27 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .threat.high{background:rgba(242,163,60,.18); color:#a86410;}
 .threat.med{background:rgba(59,201,217,.16); color:var(--teal-deep);}
 .compgrid .clink{font-size:12px; font-weight:600; color:var(--teal-deep); text-decoration:none;}
+/* touchpoint flow */
+.touchflow{margin-top:42px; text-align:center;}
+.chips{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; max-width:720px; margin:0 auto;}
+.chips span{font-size:13.5px; font-weight:600; padding:9px 15px; border-radius:999px; background:rgba(255,255,255,.07); border:1px solid var(--line-d); color:#fff;}
+.touchflow .down{font-size:24px; color:var(--teal); margin:18px 0 14px;}
+.touchflow .msg{font-size:clamp(21px,3.2vw,30px); font-weight:600; letter-spacing:-.025em; max-width:24ch; margin:0 auto; line-height:1.25;}
+.touchflow .msg em{color:var(--teal);}
+/* practical example list */
+.exlist{display:grid; grid-template-columns:repeat(2,1fr); gap:2px 30px; margin-top:24px;}
+@media(max-width:600px){ .exlist{grid-template-columns:1fr} }
+.exlist span{display:flex; gap:11px; align-items:flex-start; font-size:15px; color:var(--ink); padding:10px 0; border-top:1px solid var(--line); line-height:1.4;}
+.exlist span::before{content:"\203A"; color:var(--teal-deep); font-weight:800;}
+.dark .exlist span,.darker .exlist span{color:rgba(255,255,255,.82); border-color:var(--line-d);}
+.dark .exlist span::before,.darker .exlist span::before{color:var(--teal);}
+/* big brand position */
+.bigpos{font-size:clamp(26px,4.6vw,42px); font-weight:600; letter-spacing:-.03em; line-height:1.15; max-width:22ch;}
+.bigpos em{color:var(--teal);}
+.dark .bigpos em,.darker .bigpos em{color:var(--teal);}
+.altpos{margin-top:22px; display:flex; flex-wrap:wrap; gap:10px;}
+.altpos span{font-size:13px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:7px 14px;}
+.dark .altpos span,.darker .altpos span{color:rgba(255,255,255,.6); border-color:var(--line-d);}
 .dark .devlabel,.darker .devlabel{color:var(--teal);}
 .dirnote{font-size:13px; color:var(--muted); text-align:center; margin:12px 0 0;}
 .dark .dirnote,.darker .dirnote{color:rgba(255,255,255,.6);}
@@ -294,7 +315,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <div class="progress" id="prog"></div>
 <div class="topbar">
   <div class="brand"><img class="blogo" src="assets/img/logo.png" alt="CVBS"> <small>Digital Strategy</small></div>
-  <div class="steps">Part <b id="cur">1</b> of 13</div>
+  <div class="steps">Part <b id="cur">1</b> of 14</div>
 </div>
 
 <!-- COVER -->
@@ -304,7 +325,7 @@ footer a{color:var(--teal); text-decoration:none;}
     <span class="tag">For the Directors of CVBS · June 2026</span>
     <h1>The CVBS<br><em>digital strategy</em>.</h1>
     <p class="sub">A simple plan to make 35 years of reputation work for you online.</p>
-    <div class="who">Prepared for <b>Conference Venues &amp; Booking Services</b><br>Website · Lead generation · Marketing · Digital systems</div>
+    <div class="who">Prepared for <b>Conference Venues &amp; Booking Services</b><br>Brand · Website · Social · Digital systems · Knowledge</div>
   </div>
 </header>
 
@@ -312,16 +333,21 @@ footer a{color:var(--teal); text-decoration:none;}
 <section id="s1" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">1</span><span class="lbl">The opportunity</span></div>
-    <h2>Your reputation is offline. Your customers are online.</h2>
-    <p class="intro">Closing that gap is the biggest growth lever you have.</p>
+    <div class="kick"><span class="num">1</span><span class="lbl">The big picture</span></div>
+    <h2>This is bigger than a website. It's how CVBS shows up everywhere.</h2>
+    <p class="intro">Picture someone who has never heard of CVBS, spending five minutes online. What would they conclude?</p>
     <div class="stats">
       <div class="stat"><div class="n"><span class="count" data-to="35" data-suffix="+">0</span></div><div class="l">Years of relationships and reputation, almost none of it visible online.</div></div>
       <div class="stat"><div class="n">$<span class="count" data-to="0">0</span></div><div class="l">Cost to your client. A rare advantage the current site barely explains.</div></div>
       <div class="stat"><div class="n"><span class="count" data-to="48">0</span>hr</div><div class="l">Brief to shortlist. A clear promise the old site never makes.</div></div>
       <div class="stat"><div class="n"><span class="count" data-to="100">0</span>%</div><div class="l">Independent. You work for the client, not one hotel group.</div></div>
     </div>
-    <div class="takeaway"><b>In one line</b><p>This is not a new website. It is a plan to make your reputation visible to the people searching right now.</p></div>
+    <div class="touchflow">
+      <div class="chips"><span>Website</span><span>Instagram</span><span>LinkedIn</span><span>Email</span><span>Proposals</span><span>Google</span><span>AI search</span><span>Venue brief</span><span>The team</span></div>
+      <div class="down">↓</div>
+      <p class="msg">Every touchpoint should say one thing: <em>"These people know venues better than anyone."</em></p>
+    </div>
+    <div class="takeaway"><b>In one line</b><p>This is not a website redesign. It is one connected brand system, the digital operating system for the next chapter of CVBS. One brand. One system.</p></div>
   </div>
 </section>
 
@@ -520,14 +546,18 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 6 · HOW YOU SHOW UP ONLINE -->
 <section id="s5" class="tint">
   <div class="wrap fade center">
-    <div class="kick"><span class="num">7</span><span class="lbl">Your digital brand</span></div>
-    <p class="statement">In five seconds online, someone should feel: <em>"These are clearly the experts. I can stop worrying about this."</em></p>
+    <div class="kick"><span class="num">7</span><span class="lbl">Your brand position</span></div>
+    <p class="bigpos" style="margin:0 auto">CVBS is <em>Australia's most trusted venue sourcing specialists.</em></p>
+    <p style="max-width:52ch; margin:22px auto 0; color:var(--muted); font-size:18px">One idea that every page, post and proposal reinforces. In five seconds online, someone should feel: "These are clearly the experts. I can stop worrying about this."</p>
+    <p class="note" style="text-align:center; margin-top:22px">Alternatives to weigh:</p>
+    <div class="altpos" style="justify-content:center"><span>The people behind Australia's best business events</span><span>Australia's venue experts</span></div>
+    <p class="note" style="text-align:center; margin-top:46px; font-weight:600; color:var(--teal-deep)">This is not changing your logo. It is modernising how the brand is expressed.</p>
     <div class="logoab">
       <div class="lg"><span class="lgtag">Now</span><div class="panel"><img class="oldpng" src="https://www.conferencevenues.com.au/data/uploads/CVBS_logo_header-1080x82.png" alt="CVBS current logo"></div></div>
       <div class="lgarrow">→</div>
       <div class="lg next"><span class="lgtag">Next</span><div class="panel"><img src="assets/img/logo.png" alt="CVBS logo"></div></div>
     </div>
-    <p class="note" style="text-align:center; margin-top:16px">Same name. Same navy and teal. A simpler, sharper mark.</p>
+    <p class="note" style="text-align:center; margin-top:16px">Same name. Same navy and teal. 35 years of equity kept, the mark simply polished for a digital world.</p>
     <ul class="points" style="text-align:left; max-width:640px; margin-left:auto; margin-right:auto">
       <li><span class="tick">✓</span><div><span class="t">Works at any size</span><span class="d">A wide wordmark with a tagline turns to mush on a phone or a browser tab. A simpler mark stays sharp from a favicon to a building sign.</span></div></li>
       <li><span class="tick">✓</span><div><span class="t">Recognised, not read</span><span class="d">People remember a clean mark at a glance. A line of text with a tagline attached has to be read, and most people never do.</span></div></li>
@@ -564,9 +594,13 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 8 · ONE LOOK, EVERYWHERE -->
 <section id="s7">
   <div class="wrap wide fade">
-    <div class="kick"><span class="num">9</span><span class="lbl">One look, everywhere</span></div>
-    <h2>One design system across your website, Instagram and LinkedIn.</h2>
-    <p class="intro">Wherever someone meets CVBS, it should feel like the same business. These are real posts.</p>
+    <div class="kick"><span class="num">9</span><span class="lbl">Social proof</span></div>
+    <h2>Instagram isn't for leads. It's for proof.</h2>
+    <p class="intro">People rarely discover you on Instagram. They hear about you, then check your feed to decide if you're the real deal. So what should they find?</p>
+    <div class="exlist">
+      <span>Site inspections</span><span>Hotel openings</span><span>Venue walkthroughs</span><span>Relationships with GMs</span><span>Event photos</span><span>Familiar faces</span><span>Client stories</span><span>Destination guides</span><span>Industry insights</span>
+    </div>
+    <p class="note" style="text-align:center; margin-top:24px">Evidence that CVBS is active in the industry every single week. Here is what that looks like:</p>
     <div class="feed">
       <figure><img src="instagram-carousels/01-budget-mistakes/budget-mistakes-01.png" alt="Education post: 5 mistakes that inflate your event budget" loading="lazy"><figcaption>Education</figcaption></figure>
       <figure><img src="instagram-carousels/02-searched-vs-sourced/searched-vs-sourced-01.png" alt="Positioning post: the right venue isn't searched, it's sourced" loading="lazy"><figcaption>Positioning</figcaption></figure>
@@ -576,7 +610,7 @@ footer a{color:var(--teal); text-decoration:none;}
       <figure><img src="instagram-carousels/_hero-styles/hero-03b-event-outandabout.png" alt="Industry event: out and about with IHG" loading="lazy"><figcaption>Industry event</figcaption></figure>
     </div>
     <p class="note" style="text-align:center; margin-top:16px">Real CVBS carousels, in the same navy, teal and type as the website.</p>
-    <div class="chanlabel">The same system on LinkedIn</div>
+    <div class="chanlabel">LinkedIn carries the authority</div>
     <img class="li-banner" src="instagram-carousels/_linkedin/li-04-wide-banner.png" alt="LinkedIn banner: CVBS at the IHG Hotels and Resorts showcase" loading="lazy">
     <div class="feed" style="margin-top:16px">
       <figure><img src="instagram-carousels/_linkedin/li-01-event-square.png" alt="LinkedIn post: an afternoon with IHG" loading="lazy"><figcaption>Industry event</figcaption></figure>
@@ -584,11 +618,11 @@ footer a{color:var(--teal); text-decoration:none;}
       <figure><img src="instagram-carousels/_linkedin/li-03-venue-spotlight.png" alt="LinkedIn post: Venue Files, Hyatt Place Essendon Fields" loading="lazy"><figcaption>Venue spotlight</figcaption></figure>
     </div>
     <ul class="points">
-      <li><span class="tick">✓</span><div><span class="t">A real content mix</span><span class="d">Education and planning tips, venue features, site visits, events and client results. Useful and aspirational, never just promotional.</span></div></li>
-      <li><span class="tick">✓</span><div><span class="t">Instantly recognisable</span><span class="d">Someone should know a CVBS post before they see the name. That consistency is what premium brands are built on.</span></div></li>
-      <li><span class="tick">✓</span><div><span class="t">Everything points home</span><span class="d">Every post and profile leads back to the website, where interest becomes an enquiry.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Proof, not promotion</span><span class="d">Every post is evidence you're in venues, with the GMs, at the industry events, week in and week out. That is what turns "I heard about them" into "I trust them."</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">LinkedIn carries the authority</span><span class="d">Longer-form insight and corporate credibility for the decision-makers who quietly check you out before they ever enquire.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Instantly recognisable</span><span class="d">The same navy, teal and type as everything else. Someone should know a CVBS post before they see the name.</span></div></li>
     </ul>
-    <div class="takeaway"><b>Keep it light</b><p>A handful of posts a month is plenty. The digital systems in the next part make creating them, on-brand, almost effortless.</p></div>
+    <div class="takeaway"><b>The point</b><p>Instagram and LinkedIn don't win the enquiry. They remove the doubt, so by the time someone reaches your website, they are already sold.</p></div>
   </div>
 </section>
 
@@ -596,9 +630,13 @@ footer a{color:var(--teal); text-decoration:none;}
 <section id="s8" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">10</span><span class="lbl">Behind the scenes</span></div>
-    <h2>Turn 35 years of knowledge into a shared asset.</h2>
-    <p class="intro">Right now it lives in inboxes and in your heads.</p>
+    <div class="kick"><span class="num">10</span><span class="lbl">Invisible A.I.</span></div>
+    <h2>Invisible A.I. Clients never see it. Only your team benefits.</h2>
+    <p class="intro">Not a chatbot, not a gimmick. Quiet tools that take the busywork off the team, while the service clients feel stays exactly the same, human.</p>
+    <div class="exlist">
+      <span>Draft proposals</span><span>Summarise venue PDFs</span><span>Search 35 years of emails</span><span>Build venue comparison tables</span><span>Create social posts</span><span>Write newsletters</span><span>Organise venue knowledge</span><span>Draft responses</span><span>Find past concessions</span><span>Recall supplier history</span>
+    </div>
+    <p class="note" style="text-align:center; margin-top:28px">All of it running on one searchable knowledge base:</p>
     <div class="kdiag">
       <div class="kchips"><span>Emails</span><span>Proposals</span><span>Contracts</span><span>Venue notes</span><span>Supplier deals</span><span>Karen &amp; AJ's memory</span></div>
       <div class="karrow">→</div>
@@ -655,10 +693,35 @@ footer a{color:var(--teal); text-decoration:none;}
   </div>
 </section>
 
-<!-- 10 · THE DIGITAL ROADMAP -->
+<!-- 13 · THE VISION -->
+<section id="s12b" class="dark">
+  <span class="glow a"></span><span class="glow b"></span>
+  <div class="wrap fade">
+    <div class="kick"><span class="num">13</span><span class="lbl">The vision</span></div>
+    <h2>In five years, the first name corporate Australia thinks of.</h2>
+    <p class="intro">Not because you advertised more. Because you're everywhere, and everywhere says the same thing.</p>
+    <div class="touchflow">
+      <div class="chips"><span>Website</span><span>LinkedIn</span><span>Instagram</span><span>Google</span><span>ChatGPT</span><span>AI search</span><span>Industry events</span><span>Email</span></div>
+      <div class="down">↓</div>
+      <p class="msg"><em>"These people know venues better than anyone."</em></p>
+    </div>
+    <p class="note" style="text-align:center; margin-top:46px">The biggest opportunity is no longer the website. It is the whole system:</p>
+    <div class="exlist" style="max-width:820px; margin-left:auto; margin-right:auto">
+      <span>A premium, trust-building website</span>
+      <span>A modernised, instantly recognisable brand</span>
+      <span>Instagram and LinkedIn that prove your expertise</span>
+      <span>Invisible A.I. that saves hours, service unchanged</span>
+      <span>A searchable knowledge base of 35 years</span>
+      <span>SEO and AI-search, so you're found everywhere</span>
+    </div>
+    <div class="takeaway"><b>The real proposal</b><p>This was never a website redesign. It is the next chapter of CVBS: the digital operating system that makes you the obvious choice.</p></div>
+  </div>
+</section>
+
+<!-- 14 · THE DIGITAL ROADMAP -->
 <section id="s10" class="tint">
   <div class="wrap wide fade">
-    <div class="kick"><span class="num">13</span><span class="lbl">The roadmap</span></div>
+    <div class="kick"><span class="num">14</span><span class="lbl">The roadmap</span></div>
     <h2>A simple path, one step at a time.</h2>
     <div class="tl">
       <div class="tlnode"><div class="dotline"><i></i><span></span></div><div class="yr">Year 1</div><h3>Foundations</h3><p>Launch the new website. Bring your knowledge into one system. Let digital tools take the admin.</p></div>
