@@ -1,0 +1,22 @@
+CVBS POST DESIGNER
+
+1. Double-click CVBS-Post-Designer.html to open it in your web browser
+   (Chrome, Safari or Edge). Nothing to install. Works offline.
+
+2. Pick a Template (Offer, Site visit, Event, etc.) and a Format
+   (Instagram 4:5, Square, or LinkedIn wide).
+
+3. Add a photo: click one of the starter photos, or "Upload photo" to use
+   your own. Use POS to slide the photo up/down and DIM to darken it for
+   readable text.
+
+4. Type your words in the Content fields. Wrap a word in *asterisks* to make
+   it teal. Press Enter in the headline to control line breaks.
+
+5. Tick "LinkedIn footer" for the company-name signature instead of the
+   website and Swipe.
+
+6. Click "Download PNG". The finished image saves to your Downloads,
+   ready to post.
+
+Everything is your CVBS brand: navy, teal, stone and Inter.

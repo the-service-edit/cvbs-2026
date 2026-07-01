@@ -130,6 +130,26 @@
     show(0);
   });
 
+  /* Newsletter / venue-offers signup */
+  doc.querySelectorAll('[data-subscribe]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = form.querySelector('input[type="email"]');
+      if (email && !email.checkValidity()) { email.reportValidity(); return; }
+      var ok = form.querySelector('[data-form-success]');
+      var key = (form.querySelector('[name="access_key"]') || {}).value || '';
+      var done = function () {
+        var row = form.querySelector('.sub-row'), fine = form.querySelector('.sub-fine');
+        if (row) row.style.display = 'none';
+        if (fine) fine.style.display = 'none';
+        if (ok) ok.hidden = false;
+      };
+      if (/^[0-9a-f-]{20,}$/i.test(key)) {
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) }).then(done).catch(done);
+      } else { done(); }
+    });
+  });
+
   /* Count-up stats */
   (function () {
     var nums = doc.querySelectorAll('[data-count]');

@@ -802,3 +802,30 @@ body.menu-open{overflow:hidden}
 .logos--trust img{height:34px;width:auto;opacity:1;transition:transform .3s var(--ease)}
 .logos--trust img:hover{transform:translateY(-3px)}
 @media(max-width:680px){.logos--trust{gap:1.4rem 1.8rem}.logos--trust img{height:26px}}
+
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sub-band{background:var(--navy-deep);color:#fff;padding:clamp(2.4rem,5vw,3.6rem) 0;border-top:1px solid rgba(255,255,255,.08)}
+.sub-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:center}
+.sub-band .eyebrow{color:var(--teal)}
+.sub-band .eyebrow::before{background:var(--teal)}
+.sub-title{font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.16;color:#fff;margin:.5rem 0 .55rem;letter-spacing:-.01em}
+.sub-lead{color:rgba(255,255,255,.72);font-size:.98rem;line-height:1.55;max-width:48ch}
+.sub-row{display:flex;gap:.6rem}
+.sub-form input[type=email]{flex:1;min-width:0;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;border-radius:10px;padding:.9rem 1rem;font:inherit;font-size:1rem;transition:border-color .25s,background .25s}
+.sub-form input[type=email]:focus{outline:none;border-color:var(--teal);background:rgba(255,255,255,.1)}
+.sub-form input[type=email]::placeholder{color:rgba(255,255,255,.5)}
+.sub-form .btn{white-space:nowrap}
+.sub-fine{color:rgba(255,255,255,.5);font-size:.78rem;margin-top:.75rem}
+.sub-ok{color:var(--teal);font-weight:600;font-size:1rem;margin-top:.4rem}
+@media(max-width:760px){.sub-inner{grid-template-columns:1fr;gap:1.3rem}.sub-row{flex-direction:column}.sub-form .btn{width:100%}}
+/* strong variant: light card on the offers page */
+.sub-band--strong{background:var(--stone);color:var(--navy);border-top:0;padding:clamp(2.6rem,5vw,4rem) 0}
+.sub-band--strong .sub-inner{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.8rem,4vw,2.8rem);box-shadow:0 26px 52px -40px rgba(13,34,51,.4)}
+.sub-band--strong .sub-title{color:var(--navy)}
+.sub-band--strong .eyebrow{color:var(--teal-deep)}
+.sub-band--strong .eyebrow::before{background:var(--teal)}
+.sub-band--strong .sub-lead{color:var(--muted)}
+.sub-band--strong .sub-form input[type=email]{border:1px solid var(--line);background:var(--stone);color:var(--text)}
+.sub-band--strong .sub-form input[type=email]::placeholder{color:var(--muted)}
+.sub-band--strong .sub-fine{color:var(--muted)}
+.sub-band--strong .sub-ok{color:var(--teal-deep)}
