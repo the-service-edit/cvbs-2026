@@ -1,0 +1,10 @@
+CVBS QUOTE GENERATOR
+
+Open CVBS-Quote-Generator.html in your browser. Works offline.
+
+1. Choose Itemised quote or Venue comparison.
+2. Fill in the client + event details.
+   - Itemised: add/remove line items; qty x unit and GST total calculate live.
+   - Comparison: fill up to three venue cards (leave one blank to show two).
+3. Click "Print / Save as PDF" and choose "Save as PDF" as the destination.
+   The control panel is hidden automatically; only the document prints.
