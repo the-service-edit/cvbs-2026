@@ -19,7 +19,7 @@ HTML=r'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>CVBS Post Designer</title>
 <style>
 __FONTCSS__
-:root{--teal:#3BC9D9;--teal-deep:#28A8B6;--navy:#0D2233;--navy2:#071520;--stone:#F4F1EA;--ink:#0D1F2D;--line:#E3DED2;--muted:#6E747B}
+:root{--teal:#3BC9D9;--teal-deep:#28A8B6;--navy:#0A2C52;--navy2:#061E3B;--brand:#0366C6;--stone:#EEF6F7;--stone-deep:#DFEFF1;--ink:#0D1F2D;--line:#D6E7E9;--muted:#6E747B}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;display:flex;height:100vh;overflow:hidden}
 .panel{width:392px;flex:none;height:100vh;overflow-y:auto;background:#0e1b28;border-right:1px solid rgba(255,255,255,.08);padding:22px 22px 40px}
@@ -89,19 +89,19 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .lead-narrow{max-width:30ch}
 .eyebrow{display:inline-flex;align-items:center;font-size:23px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--teal);align-self:flex-start}
 .bg-stone .eyebrow{color:var(--teal-deep)}
-.glass{background:linear-gradient(135deg,rgba(9,22,33,.60),rgba(9,22,33,.44));border:1.5px solid rgba(255,255,255,.20);border-radius:22px;box-shadow:0 40px 70px -30px rgba(0,0,0,.6),inset 0 1.5px 0 rgba(255,255,255,.22);padding:52px 54px}
+.glass{background:linear-gradient(135deg,rgba(6,30,59,.60),rgba(6,30,59,.44));border:1.5px solid rgba(255,255,255,.20);border-radius:22px;box-shadow:0 40px 70px -30px rgba(0,0,0,.6),inset 0 1.5px 0 rgba(255,255,255,.22);padding:52px 54px}
 .chip{align-self:flex-start;display:inline-flex;align-items:center;padding:16px 26px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#08252c;background:var(--teal)}
 .evbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;padding:15px 25px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#08252c;background:var(--teal)}
 .evbadge .dot{width:8px;height:8px;border-radius:50%;background:#08252c}
-.filebadge{align-self:flex-start;display:inline-flex;align-items:center;border-radius:11px;overflow:hidden;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:21px;background:rgba(9,22,33,.62);border:1.5px solid rgba(255,255,255,.20)}
+.filebadge{align-self:flex-start;display:inline-flex;align-items:center;border-radius:11px;overflow:hidden;font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:21px;background:rgba(6,30,59,.62);border:1.5px solid rgba(255,255,255,.20)}
 .filebadge .a{padding:14px 18px;color:#fff}.filebadge .b{padding:14px 16px;background:var(--teal);color:#06262b;display:flex;align-items:center}
-.loc2{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:16px;padding:12px 22px;border-radius:11px;font-size:22px;font-weight:600;color:#fff;background:rgba(9,22,33,.62);border:1.5px solid rgba(255,255,255,.22)}
+.loc2{align-self:flex-start;display:inline-flex;align-items:center;gap:12px;margin-top:16px;padding:12px 22px;border-radius:11px;font-size:22px;font-weight:600;color:#fff;background:rgba(6,30,59,.62);border:1.5px solid rgba(255,255,255,.22)}
 .loc2 svg{width:23px;height:23px;color:var(--teal)}
 .pricebox{align-self:flex-start;padding:24px 36px;border-radius:14px;margin-top:26px}
 .price{display:flex;align-items:baseline;gap:16px}
 .price .pre{font-size:27px;font-weight:500;color:rgba(255,255,255,.9)}
 .price .big{font-size:70px;font-weight:800;letter-spacing:-.03em;color:var(--teal)}
-.specbar{align-self:stretch;display:flex;border-radius:14px;overflow:hidden;margin-top:26px;background:rgba(9,22,33,.58);border:1.5px solid rgba(255,255,255,.20)}
+.specbar{align-self:stretch;display:flex;border-radius:14px;overflow:hidden;margin-top:26px;background:rgba(6,30,59,.58);border:1.5px solid rgba(255,255,255,.20)}
 .specbar .s{flex:1;padding:26px 8px;text-align:center}
 .specbar .s+.s{border-left:1.5px solid rgba(255,255,255,.22)}
 .specbar .n{font-size:38px;font-weight:800;color:var(--teal);line-height:1}
@@ -128,7 +128,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .dots{display:flex;gap:11px;align-items:center}
 .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.34)}
 .dot.on{background:var(--teal);width:30px;border-radius:6px}
-.bg-stone .dot{background:rgba(13,34,51,.22)}.bg-stone .dot.on{background:var(--teal-deep)}
+.bg-stone .dot{background:rgba(10,44,82,.22)}.bg-stone .dot.on{background:var(--teal-deep)}
 </style></head>
 <body>
 <div class="panel">
@@ -289,7 +289,7 @@ function render(){const s=cur(),t=T[s.template];const card=document.getElementBy
  if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${s.photo})`;
    bg.style.backgroundPosition=`center ${s.posY}%`;
    const a=s.scrim/100, bot=Math.min(a+0.15,0.97);
-   scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.34}) 0%,rgba(7,21,32,${a*0.12}) 20%,rgba(7,21,32,${a*0.5}) 44%,rgba(7,21,32,${bot}) 73%,rgba(7,21,32,${bot}) 100%)`;
+   scr.style.background=`linear-gradient(180deg,rgba(6,30,59,${a*0.34}) 0%,rgba(6,30,59,${a*0.12}) 20%,rgba(6,30,59,${a*0.5}) 44%,rgba(6,30,59,${bot}) 73%,rgba(6,30,59,${bot}) 100%)`;
  } else {bg.style.display=scr.style.display="none";}
  const ct=document.getElementById('content');ct.className="content"+(s.align==='center'?" center":"");
  ct.innerHTML=t.render();
