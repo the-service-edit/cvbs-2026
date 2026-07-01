@@ -851,3 +851,6 @@ body.menu-open{overflow:hidden}
 .mobile-menu .m-item.open .m-sub{max-height:560px}
 .mobile-menu .m-sub a{font-size:1.02rem;font-weight:500;padding:.62rem 0 .62rem 1rem;border-bottom:0;opacity:.9}
 .mobile-menu .m-sub a:last-child{color:var(--brand);opacity:1}
+
+.footer-credit a{color:var(--teal);font-weight:500;text-decoration:none}
+.footer-credit a:hover{text-decoration:underline}
