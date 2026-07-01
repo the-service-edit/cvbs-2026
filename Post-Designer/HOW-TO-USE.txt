@@ -1,20 +1,22 @@
-CVBS POST DESIGNER
+CVBS POST DESIGNER  (carousel edition)
 
-Open CVBS-Post-Designer.html in your browser (nothing to install, works offline).
+Open CVBS-Post-Designer.html in your browser. Nothing to install, works offline.
 
-TEMPLATES
- Cover pages: Offer, Site visit, Event, Educational, Positioning, Destination,
-   Offers roundup, Client result.
- Inner pages (marked ›): Content page, Numbered point, Quote, Call to action.
- Build a carousel by making the cover, then each inner page in turn, and
- downloading them in order (slide 1, 2, 3...).
+BUILD A CAROUSEL
+ 1. The "Slides in this carousel" strip shows your slides. Click + to add one,
+    click a slide to edit it. Duplicate / Delete / Move ◀ ▶ reorder them.
+ 2. For each slide pick a Template and fill the Content fields.
+    Cover pages: Offer, Site visit, Event, Educational, Positioning,
+    Destination, Offers roundup, Client result.
+    Inner pages (marked ›): Content page, Numbered point, Quote, Call to action.
+ 3. Format (Instagram 4:5 / Square / LinkedIn wide) applies to the whole set.
+ 4. Slide 1 shows "Swipe"; later slides get progress dots automatically.
 
-CONTROLS
- Format: Instagram 4:5, Square, or LinkedIn wide.
- Align:  Left (photo/info pages) or Centre (statement pages).
- Photo:  pick a starter or Upload your own. POS moves it up/down,
-         DIM darkens it so text stays readable on bright photos.
- Content: type your words. Wrap a word in *asterisks* for teal.
-          Press Enter in the headline to control line breaks.
+PER SLIDE
+ Align Left or Centre. Add a photo (starter or Upload), POS moves it,
+ DIM darkens it so text stays readable. Wrap a word in *asterisks* for teal.
 
-Download PNG saves a finished 2160px image to your Downloads.
+EXPORT
+ "Download carousel (.zip)"  = every slide as a numbered PNG, ready to post.
+ "Download this slide only"  = just the current slide.
+ On Instagram, upload the PNGs in order as a carousel.

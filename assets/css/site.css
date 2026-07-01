@@ -95,7 +95,7 @@ h1,h2,h3,h4{font-weight:600;line-height:1.12;letter-spacing:-.02em;color:inherit
 .s-navy .link-arrow{color:var(--teal)}
 
 /* Header / nav ------------------------------------------------------------ */
-.site-header{position:sticky;top:0;z-index:100;background:rgba(238,246,247,.82);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s,box-shadow .3s,transform .35s var(--ease);will-change:transform}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(238,246,247,.82);backdrop-filter:saturate(140%) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s,box-shadow .3s,transform .35s var(--ease)}
 .site-header.scrolled{background:rgba(238,246,247,.94);border-color:var(--line);box-shadow:0 10px 30px -24px rgba(10,44,82,.5)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:74px}
 .brand{display:flex;align-items:center;gap:.6rem}

@@ -12,6 +12,7 @@ LOGOD=datauri("logo.png","image/png")
 PHOTOS={k:datauri(f"photo_{k}.jpg","image/jpeg") for k in ["group","kimpton","hyatt","crown","sydney"]}
 photos_js="{"+",".join(f'"{k}":"{v}"' for k,v in PHOTOS.items())+"}"
 HTI=(A/"html-to-image.js").read_text()
+JSZIP=(A/"jszip.min.js").read_text()
 
 HTML=r'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -21,12 +22,11 @@ __FONTCSS__
 :root{--teal:#3BC9D9;--teal-deep:#28A8B6;--navy:#0D2233;--navy2:#071520;--stone:#F4F1EA;--ink:#0D1F2D;--line:#E3DED2;--muted:#6E747B}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;display:flex;height:100vh;overflow:hidden}
-/* ---- controls panel ---- */
-.panel{width:380px;flex:none;height:100vh;overflow-y:auto;background:#0e1b28;border-right:1px solid rgba(255,255,255,.08);padding:22px 22px 60px}
+.panel{width:392px;flex:none;height:100vh;overflow-y:auto;background:#0e1b28;border-right:1px solid rgba(255,255,255,.08);padding:22px 22px 40px}
 .panel h1{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-bottom:4px}
 .panel h1 b{color:var(--teal)}
-.panel .tag{font-size:12.5px;color:#8aa0b0;margin-bottom:20px}
-.grp{margin-bottom:20px}
+.panel .tag{font-size:12.5px;color:#8aa0b0;margin-bottom:18px}
+.grp{margin-bottom:18px}
 .grp>label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#8aa0b0;font-weight:700;margin-bottom:8px}
 .seg{display:flex;flex-wrap:wrap;gap:6px}
 .seg button{flex:1;min-width:0;padding:9px 6px;font:inherit;font-size:12.5px;font-weight:600;color:#cfe0ea;background:#132535;border:1px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;white-space:nowrap}
@@ -47,14 +47,25 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .photos .th.on{border-color:var(--teal)}
 .up{display:inline-block;font-size:12.5px;font-weight:600;color:#05222a;background:var(--teal);padding:9px 14px;border-radius:8px;cursor:pointer}
 .chk{display:flex;align-items:center;gap:8px;font-size:13px;color:#cfe0ea;cursor:pointer}
-.dl{position:sticky;bottom:0;margin-top:10px}
+/* slides strip */
+.slides{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.slidechip{display:flex;align-items:center;gap:7px;padding:8px 10px;background:#132535;border:1px solid rgba(255,255,255,.1);border-radius:9px;cursor:pointer;color:#cfe0ea;font:inherit;font-size:11.5px;font-weight:600;max-width:158px}
+.slidechip.on{border-color:var(--teal);background:#1d3a52;color:#fff}
+.slidechip .sn{background:var(--teal);color:#05222a;border-radius:5px;padding:1px 6px;font-weight:800;font-size:11px}
+.slidechip .st{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.slideadd{padding:8px 13px;background:#132535;border:1px dashed rgba(255,255,255,.28);border-radius:9px;color:#cfe0ea;cursor:pointer;font:inherit;font-weight:700;font-size:14px}
+.slideops{display:flex;gap:6px}
+.slideops button{flex:1;padding:8px 4px;font:inherit;font-size:11.5px;font-weight:600;color:#cfe0ea;background:#132535;border:1px solid rgba(255,255,255,.1);border-radius:8px;cursor:pointer}
+.slideops button:hover{border-color:var(--teal)}
+.dl{position:sticky;bottom:0;background:#0e1b28;padding-top:12px;margin-top:6px}
 .dl button{width:100%;padding:14px;font:inherit;font-size:15px;font-weight:700;color:#05222a;background:var(--teal);border:none;border-radius:11px;cursor:pointer}
+.dl button.secondary{background:#173049;color:#cfe0ea;margin-top:8px;font-size:13.5px;padding:11px}
 .dl button:active{transform:translateY(1px)}
 .hint{font-size:11.5px;color:#8aa0b0;margin-top:7px;line-height:1.4}
-/* ---- stage ---- */
+/* stage */
 .stagewrap{flex:1;height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(60% 60% at 50% 30%,#12263a,#0a121c);padding:24px;overflow:hidden}
 .stage{transform-origin:center center;box-shadow:0 40px 90px -30px rgba(0,0,0,.7);border-radius:2px}
-/* ---- CARD (export target) ---- */
+/* CARD */
 .card{position:relative;overflow:hidden;font-family:Inter;color:#fff;background:var(--navy)}
 .fmt-ig{width:1080px;height:1350px}
 .fmt-square{width:1080px;height:1080px}
@@ -78,7 +89,6 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .lead-narrow{max-width:30ch}
 .eyebrow{display:inline-flex;align-items:center;font-size:23px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--teal);align-self:flex-start}
 .bg-stone .eyebrow{color:var(--teal-deep)}
-/* glass (export-safe: translucent, no backdrop-filter) */
 .glass{background:linear-gradient(135deg,rgba(9,22,33,.60),rgba(9,22,33,.44));border:1.5px solid rgba(255,255,255,.20);border-radius:22px;box-shadow:0 40px 70px -30px rgba(0,0,0,.6),inset 0 1.5px 0 rgba(255,255,255,.22);padding:52px 54px}
 .chip{align-self:flex-start;display:inline-flex;align-items:center;padding:16px 26px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#08252c;background:var(--teal)}
 .evbadge{align-self:flex-start;display:inline-flex;align-items:center;gap:14px;padding:15px 25px;border-radius:11px;font-size:22px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#08252c;background:var(--teal)}
@@ -115,14 +125,26 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .foot.lfoot{justify-content:flex-start;gap:18px}
 .foot.lfoot .nm{font-size:23px;font-weight:700;color:#fff;line-height:1.12}
 .foot.lfoot .nm span{display:block;font-size:18px;font-weight:500;color:rgba(255,255,255,.72)}
+.dots{display:flex;gap:11px;align-items:center}
+.dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.34)}
+.dot.on{background:var(--teal);width:30px;border-radius:6px}
+.bg-stone .dot{background:rgba(13,34,51,.22)}.bg-stone .dot.on{background:var(--teal-deep)}
 </style></head>
 <body>
 <div class="panel">
   <h1>CVBS <b>Post Designer</b></h1>
-  <div class="tag">Pick a template, add your words and photo, download.</div>
+  <div class="tag">Build a carousel: add slides, edit each, export the set.</div>
 
-  <div class="grp"><label>Template</label><div class="tmpls" id="tmpls"></div></div>
-  <div class="grp"><label>Format</label><div class="seg" id="formats"></div></div>
+  <div class="grp"><label>Slides in this carousel</label>
+    <div class="slides" id="slides"></div>
+    <div class="slideops">
+      <button id="dupslide">Duplicate</button><button id="delslide">Delete</button>
+      <button id="mvl">◀ Move</button><button id="mvr">Move ▶</button>
+    </div>
+  </div>
+
+  <div class="grp"><label>Template (for this slide)</label><div class="tmpls" id="tmpls"></div></div>
+  <div class="grp"><label>Format (whole carousel)</label><div class="seg" id="formats"></div></div>
   <div class="grp"><label>Align</label><div class="seg" id="aligns"></div></div>
 
   <div class="grp" id="photogrp"><label>Photo</label>
@@ -133,11 +155,12 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
   </div>
 
   <div class="grp"><label>Content</label><div id="fields"></div></div>
-
   <div class="grp"><label class="chk"><input type="checkbox" id="li"> LinkedIn footer (company name)</label></div>
 
-  <div class="dl"><button id="download">Download PNG</button>
-   <div class="hint">Tip: wrap a word in *asterisks* to colour it teal. Use line breaks in the headline to control wrapping.</div>
+  <div class="dl">
+    <button id="downloadAll">Download carousel (.zip)</button>
+    <button id="downloadOne" class="secondary">Download this slide only</button>
+    <div class="hint">Tip: *asterisks* colour a word teal. Slide 1 shows Swipe; later slides show progress dots automatically.</div>
   </div>
 </div>
 
@@ -150,6 +173,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
   </div>
 </div>
 
+<script>__JSZIP__</script>
 <script>__HTI__</script>
 <script>
 const PHOTOS=__PHOTOS__, LOGOW="__LOGOW__", LOGOD="__LOGOD__";
@@ -157,8 +181,6 @@ const ARROW='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-w
 const PIN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>';
 const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const rich=s=>esc(s).replace(/\*(.+?)\*/g,'<span class="accent">$1</span>').replace(/\n/g,"<br>");
-
-// ---- component builders
 const chip=t=>`<div class="chip">${esc(t)}</div>`;
 const evbadge=t=>`<div class="evbadge">${esc(t).replace(/\s\|\s/,' <span class="dot"></span> ')}</div>`;
 const filebadge=(a,b)=>`<div class="filebadge"><span class="a">${esc(a)}</span><span class="b">${esc(b)}</span></div>`;
@@ -166,12 +188,14 @@ const loc=t=>`<div class="loc2">${PIN} ${esc(t)}</div>`;
 const tag2=t=>`<div class="tag2">${esc(t)}</div>`;
 const pricePill=(p,b)=>`<div class="glass pricebox"><div class="price"><span class="pre">${esc(p)}</span><span class="big">${esc(b)}</span></div></div>`;
 const specbar=a=>`<div class="specbar">${a.map(x=>`<div class="s"><div class="n">${esc(x[0])}</div><div class="l">${esc(x[1])}</div></div>`).join("")}</div>`;
-function foot(){const li=document.getElementById('li').checked;const light=T[state.template].bg==='stone';
-  if(li) return `<div class="foot lfoot"><img src="${light?LOGOD:LOGOW}"><div class="nm">CVBS<span>Conference Venues &amp; Booking Services</span></div></div>`;
-  return `<div class="foot"><img src="${light?LOGOD:LOGOW}"><span class="url">conferencevenues.com</span><span class="swipe">Swipe ${ARROW}</span></div>`;}
-const F=(k)=>state.fields[k]||"";
+let RCTX={i:0,n:1};
+function dotsHtml(){let d="";for(let k=0;k<RCTX.n;k++)d+=`<span class="dot${k===RCTX.i?' on':''}"></span>`;return `<div class="dots">${d}</div>`;}
+function foot(){const light=T[cur().template].bg==='stone';
+  if(carousel.linkedin) return `<div class="foot lfoot"><img src="${light?LOGOD:LOGOW}"><div class="nm">CVBS<span>Conference Venues &amp; Booking Services</span></div></div>`;
+  const right=(RCTX.n>1 && RCTX.i>0)?dotsHtml():`<span class="swipe">Swipe ${ARROW}</span>`;
+  return `<div class="foot"><img src="${light?LOGOD:LOGOW}"><span class="url">conferencevenues.com</span>${right}</div>`;}
+const F=(k)=>cur().fields[k]||"";
 
-// ---- templates
 const T={
  offer:{name:"Offer / EDM",bg:"photo",render:()=>`${chip(F('badge'))}<div class="fill"></div><div class="hl h-xl">${rich(F('headline'))}</div>${pricePill(F('pricePre'),F('priceBig'))}<div style="height:28px"></div>${foot()}`,
    def:{badge:"Venue offer · Sydney",headline:"Winter at\n*Kimpton Margot*.",pricePre:"Day delegate from",priceBig:"$110pp"},photo:"kimpton"},
@@ -203,85 +227,98 @@ const FIELD_LABELS={badge:"Eyebrow / badge",headline:"Headline",sub:"Sub-line",p
  s1n:"Stat 1",s1l:"Label 1",s2n:"Stat 2",s2l:"Label 2",s3n:"Stat 3",s3l:"Label 3"};
 const AREA=new Set(["headline","sub","body","quote"]);
 const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"]];
-
-let state={template:"offer",format:"ig",align:"left",photo:PHOTOS.kimpton,posY:40,scrim:82,fields:{}};
 const CENTER_DEFAULT=new Set(["positioning","quote","cta","roundup"]);
 
-function loadDefaults(){const t=T[state.template];state.fields=Object.assign({},t.def);if(t.photo)state.photo=PHOTOS[t.photo];
- state.align=CENTER_DEFAULT.has(state.template)?"center":"left";}
+function newSlide(tmpl){const t=T[tmpl];return{template:tmpl,align:CENTER_DEFAULT.has(tmpl)?"center":"left",photo:t.photo?PHOTOS[t.photo]:null,posY:40,scrim:82,fields:Object.assign({},t.def)};}
+let carousel={format:"ig",linkedin:false,slides:[newSlide("offer")],current:0};
+const cur=()=>carousel.slides[carousel.current];
+
+function setTemplate(k){const s=cur();s.template=k;s.fields=Object.assign({},T[k].def);if(T[k].photo)s.photo=PHOTOS[T[k].photo];s.align=CENTER_DEFAULT.has(k)?"center":"left";refreshAll();}
+
+function buildSlides(){const c=document.getElementById('slides');c.innerHTML="";
+ carousel.slides.forEach((s,i)=>{const b=document.createElement('button');b.className="slidechip"+(i===carousel.current?" on":"");
+  b.innerHTML=`<span class="sn">${i+1}</span><span class="st">${T[s.template].name.replace('› ','')}</span>`;
+  b.onclick=()=>{carousel.current=i;refreshAll();};c.appendChild(b);});
+ const add=document.createElement('button');add.className="slideadd";add.textContent="+";add.title="Add slide";add.onclick=addSlide;c.appendChild(add);}
+function addSlide(){carousel.slides.splice(carousel.current+1,0,newSlide("content"));carousel.current++;refreshAll();}
+function dupSlide(){const s=JSON.parse(JSON.stringify(cur()));carousel.slides.splice(carousel.current+1,0,s);carousel.current++;refreshAll();}
+function delSlide(){if(carousel.slides.length<=1)return;carousel.slides.splice(carousel.current,1);carousel.current=Math.max(0,carousel.current-1);refreshAll();}
+function moveSlide(d){const j=carousel.current+d;if(j<0||j>=carousel.slides.length)return;const s=carousel.slides.splice(carousel.current,1)[0];carousel.slides.splice(j,0,s);carousel.current=j;refreshAll();}
+document.getElementById('dupslide').onclick=dupSlide;
+document.getElementById('delslide').onclick=delSlide;
+document.getElementById('mvl').onclick=()=>moveSlide(-1);
+document.getElementById('mvr').onclick=()=>moveSlide(1);
 
 function buildTemplateButtons(){const c=document.getElementById('tmpls');c.innerHTML="";
- Object.keys(T).forEach(k=>{const b=document.createElement('button');b.textContent=T[k].name;b.className=k===state.template?"on":"";
-  b.onclick=()=>{state.template=k;loadDefaults();syncFormatForTemplate();buildTemplateButtons();buildAlignButtons();buildFields();togglePhoto();render();};c.appendChild(b);});}
+ Object.keys(T).forEach(k=>{const b=document.createElement('button');b.textContent=T[k].name;b.className=k===cur().template?"on":"";
+  b.onclick=()=>setTemplate(k);c.appendChild(b);});}
 const ALIGNS=[["left","Left"],["center","Centre"]];
 function buildAlignButtons(){const c=document.getElementById('aligns');c.innerHTML="";
- ALIGNS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.align?"on":"";
-  b.onclick=()=>{state.align=k;buildAlignButtons();render();};c.appendChild(b);});}
-
+ ALIGNS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===cur().align?"on":"";
+  b.onclick=()=>{cur().align=k;buildAlignButtons();render();};c.appendChild(b);});}
 const FORMATS=[["ig","Instagram 4:5"],["square","Square"],["wide","LinkedIn wide"]];
 function buildFormatButtons(){const c=document.getElementById('formats');c.innerHTML="";
- FORMATS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.format?"on":"";
-  b.onclick=()=>{state.format=k;buildFormatButtons();render();};c.appendChild(b);});}
-function syncFormatForTemplate(){/* keep current format */}
+ FORMATS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===carousel.format?"on":"";
+  b.onclick=()=>{carousel.format=k;buildFormatButtons();render();};c.appendChild(b);});}
 
-function buildFields(){const c=document.getElementById('fields');c.innerHTML="";const t=T[state.template];
- const keys=Object.keys(t.def);
- // group spec pairs on one row
- const done=new Set();
- keys.forEach(k=>{ if(done.has(k))return;
-  const pair=PAIRS.find(p=>p[0]===k);
-  if(pair){const wrap=document.createElement('div');wrap.className="row2";
-    pair.forEach(pk=>{wrap.appendChild(makeField(pk));done.add(pk);});c.appendChild(wrap);return;}
-  c.appendChild(makeField(k));done.add(k);
- });}
+function buildFields(){const c=document.getElementById('fields');c.innerHTML="";const t=T[cur().template];
+ const keys=Object.keys(t.def);const done=new Set();
+ keys.forEach(k=>{if(done.has(k))return;const pair=PAIRS.find(p=>p[0]===k);
+  if(pair){const wrap=document.createElement('div');wrap.className="row2";pair.forEach(pk=>{wrap.appendChild(makeField(pk));done.add(pk);});c.appendChild(wrap);return;}
+  c.appendChild(makeField(k));done.add(k);});}
 function makeField(k){const d=document.createElement('div');d.className="field";
  const lab=document.createElement('label');lab.textContent=FIELD_LABELS[k]||k;d.appendChild(lab);
- const el=document.createElement(AREA.has(k)?'textarea':'input');el.value=state.fields[k]||"";
- el.oninput=()=>{state.fields[k]=el.value;render();};d.appendChild(el);return d;}
+ const el=document.createElement(AREA.has(k)?'textarea':'input');el.value=cur().fields[k]||"";
+ el.oninput=()=>{cur().fields[k]=el.value;render();};d.appendChild(el);return d;}
 
 function buildPhotoThumbs(){const c=document.getElementById('photos');c.innerHTML="";
- Object.keys(PHOTOS).forEach(k=>{const d=document.createElement('div');d.className="th"+(state.photo===PHOTOS[k]?" on":"");
-  d.style.backgroundImage=`url(${PHOTOS[k]})`;d.onclick=()=>{state.photo=PHOTOS[k];buildPhotoThumbs();render();};c.appendChild(d);});}
+ Object.keys(PHOTOS).forEach(k=>{const d=document.createElement('div');d.className="th"+(cur().photo===PHOTOS[k]?" on":"");
+  d.style.backgroundImage=`url(${PHOTOS[k]})`;d.onclick=()=>{cur().photo=PHOTOS[k];buildPhotoThumbs();render();};c.appendChild(d);});}
 document.getElementById('upload').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
- r.onload=()=>{state.photo=r.result;buildPhotoThumbs();render();};r.readAsDataURL(f);};
-document.getElementById('posY').oninput=e=>{state.posY=+e.target.value;render();};
-document.getElementById('scrim').oninput=e=>{state.scrim=+e.target.value;render();};
-document.getElementById('li').onchange=render;
+ r.onload=()=>{cur().photo=r.result;buildPhotoThumbs();render();};r.readAsDataURL(f);};
+document.getElementById('posY').oninput=e=>{cur().posY=+e.target.value;render();};
+document.getElementById('scrim').oninput=e=>{cur().scrim=+e.target.value;render();};
+document.getElementById('li').onchange=e=>{carousel.linkedin=e.target.checked;render();};
 
-function togglePhoto(){document.getElementById('photogrp').style.display=T[state.template].bg==='photo'?'block':'none';}
+function togglePhoto(){document.getElementById('photogrp').style.display=T[cur().template].bg==='photo'?'block':'none';}
 
-function render(){const t=T[state.template];const card=document.getElementById('card');
- card.className="card fmt-"+state.format+(t.bg==='stone'?" bg-stone":"");
+function render(){const s=cur(),t=T[s.template];const card=document.getElementById('card');
+ RCTX={i:carousel.current,n:carousel.slides.length};
+ card.className="card fmt-"+carousel.format+(t.bg==='stone'?" bg-stone":"");
  const bg=document.getElementById('bg'),scr=document.getElementById('scrim');
- if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${state.photo})`;
-   bg.style.backgroundPosition=`center ${state.posY}%`;
-   const a=state.scrim/100, bot=Math.min(a+0.15,0.97);
+ if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${s.photo})`;
+   bg.style.backgroundPosition=`center ${s.posY}%`;
+   const a=s.scrim/100, bot=Math.min(a+0.15,0.97);
    scr.style.background=`linear-gradient(180deg,rgba(7,21,32,${a*0.34}) 0%,rgba(7,21,32,${a*0.12}) 20%,rgba(7,21,32,${a*0.5}) 44%,rgba(7,21,32,${bot}) 73%,rgba(7,21,32,${bot}) 100%)`;
  } else {bg.style.display=scr.style.display="none";}
- const ct=document.getElementById('content');ct.className="content"+(state.align==='center'?" center":"");
+ const ct=document.getElementById('content');ct.className="content"+(s.align==='center'?" center":"");
  ct.innerHTML=t.render();
  fit();}
 
+function refreshAll(){document.getElementById('posY').value=cur().posY;document.getElementById('scrim').value=cur().scrim;
+ document.getElementById('li').checked=carousel.linkedin;
+ buildSlides();buildTemplateButtons();buildFormatButtons();buildAlignButtons();buildFields();buildPhotoThumbs();togglePhoto();render();}
+
 function fit(){const card=document.getElementById('card'),wrap=document.getElementById('stagewrap'),stage=document.getElementById('stage');
- const cw=card.offsetWidth,ch=card.offsetHeight;const pad=48;
- const s=Math.min((wrap.clientWidth-pad)/cw,(wrap.clientHeight-pad)/ch);
- stage.style.transform=`scale(${s})`;stage.style.width=cw+"px";stage.style.height=ch+"px";}
+ const cw=card.offsetWidth,ch=card.offsetHeight,pad=48;
+ const sc=Math.min((wrap.clientWidth-pad)/cw,(wrap.clientHeight-pad)/ch);
+ stage.style.transform=`scale(${sc})`;stage.style.width=cw+"px";stage.style.height=ch+"px";}
 window.addEventListener('resize',fit);
 
-document.getElementById('download').onclick=async()=>{const btn=document.getElementById('download');const old=btn.textContent;btn.textContent="Rendering…";
- const card=document.getElementById('card');
- try{await document.fonts.ready;
-  const url=await htmlToImage.toPng(card,{pixelRatio:2,cacheBust:true,width:card.offsetWidth,height:card.offsetHeight});
-  const a=document.createElement('a');a.download=`cvbs-${state.template}-${state.format}.png`;a.href=url;a.click();
- }catch(err){alert("Export error: "+err);}
- btn.textContent=old;};
+async function shot(){await document.fonts.ready;const c=document.getElementById('card');
+ return await htmlToImage.toPng(c,{pixelRatio:2,cacheBust:true,width:c.offsetWidth,height:c.offsetHeight});}
+document.getElementById('downloadOne').onclick=async(e)=>{const b=e.target,o=b.textContent;b.textContent="Rendering…";
+ try{const u=await shot();const a=document.createElement('a');a.download=`cvbs-slide-${carousel.current+1}.png`;a.href=u;a.click();}catch(err){alert("Export error: "+err);}b.textContent=o;};
+document.getElementById('downloadAll').onclick=async(e)=>{const b=e.target,o=b.textContent;const keep=carousel.current;const zip=new JSZip();
+ try{for(let i=0;i<carousel.slides.length;i++){carousel.current=i;render();b.textContent=`Rendering ${i+1}/${carousel.slides.length}…`;
+   await new Promise(r=>setTimeout(r,40));const u=await shot();zip.file(`slide-${String(i+1).padStart(2,'0')}.png`,u.split(",")[1],{base64:true});}
+  const blob=await zip.generateAsync({type:"blob"});const a=document.createElement('a');a.download="cvbs-carousel.zip";a.href=URL.createObjectURL(blob);a.click();
+ }catch(err){alert("Export error: "+err);} carousel.current=keep;refreshAll();b.textContent=o;};
 
-// init
-buildTemplateButtons();buildFormatButtons();loadDefaults();buildAlignButtons();buildFields();buildPhotoThumbs();togglePhoto();render();
-setTimeout(fit,60);
+refreshAll();setTimeout(fit,60);
 </script></body></html>'''
 
-HTML=(HTML.replace("__FONTCSS__",fontcss).replace("__HTI__",HTI)
+HTML=(HTML.replace("__FONTCSS__",fontcss).replace("__JSZIP__",JSZIP).replace("__HTI__",HTI)
       .replace("__PHOTOS__",photos_js).replace("__LOGOW__",LOGOW).replace("__LOGOD__",LOGOD))
 out=pathlib.Path("/sessions/peaceful-eager-allen/mnt/outputs/CVBS-Post-Designer.html")
 out.write_text(HTML)
