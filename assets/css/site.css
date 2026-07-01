@@ -874,3 +874,5 @@ body.menu-open{overflow:hidden}
 
 .ticks--x li svg{color:#B0654A}
 .ticks--x li{color:var(--muted)}
+
+.site-header.nav-open .nav-cta .btn{display:none}
