@@ -129,6 +129,12 @@
   .success__ico svg{width:30px;height:30px;color:var(--teal-deep)}
   .success h2{font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem}
   .success p{color:var(--muted);font-size:1.02rem;line-height:1.6;font-weight:300;max-width:42ch;margin:0 auto 1.6rem}
+  .draft-note,.privacy-note{color:var(--muted);font-size:.79rem;line-height:1.55}
+  .draft-note{margin:-.7rem 0 1.5rem}
+  .privacy-note{margin-top:1.1rem}
+  .privacy-note a{color:var(--navy);font-weight:600}
+  .form-error{background:#fff2f1;border:1px solid #e4a09b;border-radius:10px;color:#8b2923;font-size:.88rem;line-height:1.55;margin-top:1.2rem;padding:.9rem 1rem}
+  .form-error a{font-weight:700}
 
   /* footer */
   .footer{background:var(--navy-deep);color:rgba(244,241,234,.7);padding-block:clamp(3.5rem,7vh,5rem) 2rem}
@@ -165,7 +171,7 @@
       <a href="contact.html">Contact</a>
       <a href="submit-a-brief.html" class="nav-cta">Start your brief</a>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu__links">
@@ -200,14 +206,15 @@
 <input type="hidden" name="Offer" id="offerField">
 <div id="offerBanner" hidden style="gap:.65rem;align-items:flex-start;background:rgba(59,201,217,.12);border:1px solid #3BC9D9;border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1.5rem;font-size:.95rem;color:#0D2233;line-height:1.45">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28A8B6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
-  <span>You're enquiring about the <strong id="offerName"></strong> offer. We'll include this with your brief.</span>
+  <span>You are enquiring about the <strong id="offerName"></strong> offer. We will include this with your brief.</span>
 </div>
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
         <!-- STEP 1 -->
         <section class="panel active" data-panel="0">
           <h2>Your event</h2>
-          <p class="sub">The essentials so we can start matching venues.</p>
+          <p class="sub">Just the essentials, so we can start looking.</p>
+          <p class="draft-note">Your progress is kept in this browser tab until you submit the brief or close the tab.</p>
 
           <div class="field" id="f-services">
             <label>What do you need help with? <span class="req">*</span> <span class="hint">Select all that apply</span></label>
@@ -236,6 +243,7 @@
           <div class="field" id="f-location-other" style="display:none">
             <label for="locationOther" id="locationOtherLabel">Please specify location</label>
             <input type="text" id="locationOther" name="Location detail" placeholder="e.g. Darwin, NT or Regional Victoria">
+            <div class="err">Please tell us which location you have in mind.</div>
           </div>
 
           <div class="field" id="f-delegates">
@@ -247,13 +255,14 @@
             <div class="err">Please choose a range.</div>
           </div>
 
-          <div class="field">
+          <div class="field" id="f-dates">
             <label>Event dates</label>
             <div class="row">
               <input type="date" name="Start date" id="startDate" aria-label="Start date">
               <input type="date" name="End date" id="endDate" aria-label="End date">
             </div>
             <label class="check"><input type="checkbox" name="Flexible dates" value="Yes" id="flexDates"> Dates are flexible / not yet confirmed</label>
+            <div class="err">The end date must be on or after the start date.</div>
           </div>
 
           <div class="field">
@@ -282,7 +291,7 @@
         <!-- STEP 2 -->
         <section class="panel" data-panel="1">
           <h2>Venue needs</h2>
-          <p class="sub">The more you tell us, the sharper the shortlist. All optional.</p>
+          <p class="sub">The more you tell us, the better the shortlist. All of this is optional.</p>
 
           <div class="field">
             <label for="venueType">Venue type preference</label>
@@ -334,7 +343,7 @@
         <!-- STEP 3 -->
         <section class="panel" data-panel="2">
           <h2>Your details</h2>
-          <p class="sub">So we can send your shortlist back to you.</p>
+          <p class="sub">So we know where to send your shortlist.</p>
 
           <div class="row">
             <div class="field" id="f-first"><label for="first">First name <span class="req">*</span></label><input type="text" id="first" name="First name" placeholder="Jane" required><div class="err">Required.</div></div>
@@ -365,6 +374,9 @@
             </div>
           </div>
 
+          <p class="privacy-note">By submitting, you agree that CVBS may use these details to respond to your brief and share relevant event requirements with venues when sourcing options. <a href="faq.html#confidentiality">How we handle your information</a>.</p>
+          <div class="form-error" id="formError" role="alert" hidden>Online submission is temporarily unavailable. Your details are still on this page. Please use the <a href="contact.html">contact page</a> to reach the CVBS team directly.</div>
+
           <div class="actions">
             <button type="button" class="btn btn--ghost" data-back><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Back</button>
             <button type="submit" class="btn btn--navy" id="submitBtn">Submit brief <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -375,8 +387,8 @@
       <!-- success -->
       <div class="success" id="success">
         <div class="success__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <h2>Brief received.</h2>
-        <p>Thank you. Karen, Anthony or Virginia will be in touch, and you'll have a costed shortlist within 48 hours. Free to you.</p>
+        <h2>Thank you, we have your brief.</h2>
+        <p>One of the team will be in touch, and you will have a costed shortlist within 48 hours. It costs you nothing.</p>
         <a href="index.html" class="btn btn--navy" style="display:inline-flex">Back to home</a>
       </div>
     </div>
@@ -385,12 +397,12 @@
       <div class="aside__card">
         <h3>What happens next</h3>
         <ul class="aside__list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> We research venues and negotiate rates on your behalf.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> We go looking, and negotiate rates on your behalf.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> A costed shortlist lands in your inbox within 48 hours.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You choose, we handle the booking. Free to you, always.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You choose, and we handle the booking. Free to you, always.</li>
         </ul>
       </div>
-      <p class="aside__note">Prefer to talk it through first? Reach the team via the <a href="contact.html">contact page</a>. We've been finding the right rooms since 1989.</p>
+      <p class="aside__note">Would you rather talk it through first? You will find us on the <a href="contact.html">contact page</a>. We have been finding the right rooms since 1989.</p>
     </aside>
   </div>
 </div>
@@ -418,10 +430,24 @@
 
 <script>
   // hamburger
-  (function(){var t=document.getElementById('navToggle'),m=document.getElementById('mobileMenu');if(!t||!m)return;
-    function set(o){m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);t.setAttribute('aria-expanded',o?'true':'false');}
+  (function(){var t=document.getElementById('navToggle'),m=document.getElementById('mobileMenu'),lastFocus;if(!t||!m)return;
+    function set(o){
+      if(o)lastFocus=document.activeElement;
+      m.classList.toggle('open',o);document.body.classList.toggle('menu-open',o);t.setAttribute('aria-expanded',o?'true':'false');m.setAttribute('aria-hidden',o?'false':'true');t.setAttribute('aria-label',o?'Close menu':'Open menu');
+      if(o){setTimeout(function(){var first=m.querySelector('a');if(first)first.focus();},0);}else if(lastFocus&&lastFocus.focus){lastFocus.focus();}
+    }
     t.addEventListener('click',function(){set(!m.classList.contains('open'));});
     [].forEach.call(m.querySelectorAll('a'),function(a){a.addEventListener('click',function(){set(false);});});
+    document.addEventListener('keydown',function(e){
+      if(!m.classList.contains('open'))return;
+      if(e.key==='Escape'){e.preventDefault();set(false);return;}
+      if(e.key==='Tab'){
+        var links=[].slice.call(m.querySelectorAll('a'));if(!links.length)return;
+        var first=links[0],last=links[links.length-1];
+        if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+        else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+      }
+    });
   })();
 
   // wizard
@@ -430,12 +456,13 @@
     var panels=[].slice.call(document.querySelectorAll('.panel'));
     var stepsEl=document.getElementById('steps');
     var stepBtns=[].slice.call(stepsEl.querySelectorAll('.step'));
-    var cur=0, reached=0;
+    var cur=0, reached=0, draftKey='cvbs-brief-draft-v1', saveTimer;
 
     var locSel=document.getElementById('location'), locOther=document.getElementById('f-location-other');
     locSel.addEventListener('change',function(){
       var v=locSel.value, show=(v==='Other'||v==='International');
       locOther.style.display=show?'block':'none';
+      document.getElementById('locationOther').required=show;
       if(show){
         var intl=(v==='International');
         document.getElementById('locationOtherLabel').textContent=intl?'Which city or country?':'Please specify location';
@@ -444,6 +471,40 @@
     });
     var flex=document.getElementById('flexDates'), sd=document.getElementById('startDate'), ed=document.getElementById('endDate');
     flex.addEventListener('change',function(){ var d=flex.checked; sd.disabled=d; ed.disabled=d; sd.style.opacity=ed.style.opacity=d?.5:1; });
+    sd.addEventListener('change',function(){ed.min=sd.value||'';});
+
+    function saveDraft(){
+      try{
+        var data={};
+        new FormData(form).forEach(function(value,key){
+          if(/^(access_key|subject|from_name|botcheck)$/i.test(key))return;
+          if(Object.prototype.hasOwnProperty.call(data,key)){
+            if(!Array.isArray(data[key]))data[key]=[data[key]];
+            data[key].push(value);
+          }else data[key]=value;
+        });
+        sessionStorage.setItem(draftKey,JSON.stringify(data));
+      }catch(ignore){}
+    }
+    function queueDraft(){clearTimeout(saveTimer);saveTimer=setTimeout(saveDraft,150);}
+    function restoreDraft(){
+      try{
+        var raw=sessionStorage.getItem(draftKey);if(!raw)return;
+        var data=JSON.parse(raw);
+        [].forEach.call(form.elements,function(el){
+          if(!el.name||!Object.prototype.hasOwnProperty.call(data,el.name))return;
+          var saved=Array.isArray(data[el.name])?data[el.name]:[data[el.name]];
+          if(el.type==='checkbox'||el.type==='radio')el.checked=saved.indexOf(el.value)>-1;
+          else el.value=saved[0];
+        });
+        locSel.dispatchEvent(new Event('change'));
+        flex.dispatchEvent(new Event('change'));
+        ed.min=sd.value||'';
+      }catch(ignore){}
+    }
+    form.addEventListener('input',queueDraft);
+    form.addEventListener('change',queueDraft);
+    restoreDraft();
 
     function show(i){
       cur=i; reached=Math.max(reached,i);
@@ -459,7 +520,11 @@
         var anyService=form.querySelectorAll('input[name="Service"]:checked').length>0;
         mark(document.getElementById('f-services'),!anyService); if(!anyService)ok=false;
         var loc=document.getElementById('location'); mark(document.getElementById('f-location'),!loc.value); if(!loc.value)ok=false;
+        var detail=document.getElementById('locationOther'),needsDetail=(loc.value==='Other'||loc.value==='International'),missingDetail=needsDetail&&!detail.value.trim();
+        mark(document.getElementById('f-location-other'),missingDetail);if(missingDetail)ok=false;
         var del=document.getElementById('delegates'); mark(document.getElementById('f-delegates'),!del.value); if(!del.value)ok=false;
+        var badDates=!flex.checked&&sd.value&&ed.value&&ed.value<sd.value;
+        mark(document.getElementById('f-dates'),badDates);if(badDates)ok=false;
       }
       if(step===2){
         [['first','f-first'],['last','f-last'],['company','f-company']].forEach(function(p){
@@ -478,15 +543,19 @@
       e.preventDefault();
       if(!validate(0)){show(0);return;}
       if(!validate(2))return;
-      var btn=document.getElementById('submitBtn'); btn.disabled=true; btn.textContent='Sending…';
+      var btn=document.getElementById('submitBtn'),btnHtml=btn.innerHTML,error=document.getElementById('formError');
+      error.hidden=true;
+      var key=(form.querySelector('[name="access_key"]')||{}).value||'';
+      if(!/^[0-9a-f-]{20,}$/i.test(key)){error.hidden=false;error.scrollIntoView({behavior:'smooth',block:'center'});return;}
+      btn.disabled=true; btn.textContent='Sending…';
       var data=new FormData(form);
       fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:data})
-        .then(function(r){return r.json();})
+        .then(function(r){return r.json().catch(function(){return {};}).then(function(j){j._responseOk=r.ok;return j;});})
         .then(function(j){
-          if(j.success){ form.style.display='none'; stepsEl.style.display='none'; document.getElementById('success').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
-          else { btn.disabled=false; btn.textContent='Submit brief'; alert('Something went wrong. Please try again or use the contact page.'); }
+          if(j._responseOk&&j.success){ try{sessionStorage.removeItem(draftKey);}catch(ignore){} form.style.display='none'; stepsEl.style.display='none'; document.getElementById('success').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+          else { btn.disabled=false; btn.innerHTML=btnHtml; error.hidden=false; error.scrollIntoView({behavior:'smooth',block:'center'}); }
         })
-        .catch(function(){ btn.disabled=false; btn.textContent='Submit brief'; alert('Something went wrong. Please try again or use the contact page.'); });
+        .catch(function(){ btn.disabled=false; btn.innerHTML=btnHtml; error.hidden=false; error.scrollIntoView({behavior:'smooth',block:'center'}); });
     });
   })();
 </script>
@@ -518,7 +587,19 @@
     loc.dispatchEvent(new Event('change'));
   }
   var del=document.getElementById('delegates'); if(del&&guests) del.value=guests;
-  if(accom==='1'){var a=document.getElementById('accom'); if(a){a.checked=true; a.dispatchEvent(new Event('change'));}}
+  var serviceMap={
+    'Conference':'Conference venue finding',
+    'Corporate function':'Product launch / event',
+    'Product launch':'Product launch / event',
+    'Group accommodation':'Group accommodation',
+    'Retreat or offsite':'Corporate retreat'
+  };
+  if(type&&serviceMap[type]){
+    [].slice.call(document.querySelectorAll('input[name="Service"]')).forEach(function(box){
+      if(box.value===serviceMap[type]){box.checked=true;box.dispatchEvent(new Event('change',{bubbles:true}));}
+    });
+  }
+  if(accom==='1'){var a=document.getElementById('accom'); if(a){a.value='Yes, some delegates'; a.dispatchEvent(new Event('change',{bubbles:true}));}}
   var n=document.getElementById('notes');
   if(n&&!n.value){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
 })();
