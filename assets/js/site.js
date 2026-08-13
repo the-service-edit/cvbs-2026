@@ -95,6 +95,44 @@
     update();
   })();
 
+  /* Shared form delivery helpers. Never report success unless Web3Forms confirms it. */
+  function hasWeb3FormsKey(form) {
+    var key = (form.querySelector('[name="access_key"]') || {}).value || '';
+    return /^[0-9a-f-]{20,}$/i.test(key);
+  }
+  function showSubmissionError(form, message) {
+    var error = form.querySelector('[data-form-error]');
+    if (!error) {
+      error = doc.createElement('p');
+      error.className = 'form-error';
+      error.setAttribute('data-form-error', '');
+      error.setAttribute('role', 'alert');
+      form.appendChild(error);
+    }
+    error.textContent = message + ' ';
+    var link = doc.createElement('a');
+    link.href = 'contact.html';
+    link.textContent = 'Contact the CVBS team directly.';
+    error.appendChild(link);
+    error.hidden = false;
+  }
+  function clearSubmissionError(form) {
+    var error = form.querySelector('[data-form-error]');
+    if (error) error.hidden = true;
+  }
+  function submitToWeb3Forms(form) {
+    return fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (data) {
+        if (!response.ok || !data.success) throw new Error(data.message || 'Submission failed');
+        return data;
+      });
+    });
+  }
+
   /* Multi-step brief wizard + Web3Forms submit */
   doc.querySelectorAll('[data-wizard]').forEach(function (form) {
     var steps = [].slice.call(form.querySelectorAll('.wiz-step'));
@@ -130,14 +168,18 @@
       e.preventDefault();
       if (!valid(steps[i])) return;
       var ok = form.querySelector('[data-form-success]');
-      var key = (form.querySelector('[name="access_key"]') || {}).value || '';
       var done = function () {
         form.querySelectorAll('.wiz-step,.wiz-nav,.wiz-progress').forEach(function (el) { el.style.display = 'none'; });
         if (ok) { ok.hidden = false; ok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
       };
-      if (/^[0-9a-f-]{20,}$/i.test(key)) {
-        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) }).then(done).catch(done);
-      } else { done(); }
+      clearSubmissionError(form);
+      if (!hasWeb3FormsKey(form)) {
+        showSubmissionError(form, 'Online submission is temporarily unavailable. Your answers are still on this page.');
+        return;
+      }
+      submitToWeb3Forms(form).then(done).catch(function () {
+        showSubmissionError(form, 'We could not send your brief. Your answers are still on this page, so please try again.');
+      });
     });
     show(0);
   });
@@ -149,16 +191,25 @@
       var email = form.querySelector('input[type="email"]');
       if (email && !email.checkValidity()) { email.reportValidity(); return; }
       var ok = form.querySelector('[data-form-success]');
-      var key = (form.querySelector('[name="access_key"]') || {}).value || '';
       var done = function () {
         var row = form.querySelector('.sub-row'), fine = form.querySelector('.sub-fine');
         if (row) row.style.display = 'none';
         if (fine) fine.style.display = 'none';
         if (ok) ok.hidden = false;
       };
-      if (/^[0-9a-f-]{20,}$/i.test(key)) {
-        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) }).then(done).catch(done);
-      } else { done(); }
+      var button = form.querySelector('button[type="submit"]');
+      var buttonHtml = button ? button.innerHTML : '';
+      clearSubmissionError(form);
+      if (!hasWeb3FormsKey(form)) {
+        showSubmissionError(form, 'Email signup is temporarily unavailable. We have not added your address.');
+        return;
+      }
+      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
+      submitToWeb3Forms(form).then(done).catch(function () {
+        showSubmissionError(form, 'We could not add your email. Please try again.');
+      }).then(function () {
+        if (button) { button.disabled = false; button.innerHTML = buttonHtml; }
+      });
     });
   });
 

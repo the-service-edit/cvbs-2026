@@ -30,6 +30,13 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .dl button.secondary{background:#173049;color:#cfe0ea;margin-top:8px;font-size:13px;padding:10px}
 .hint{font-size:11.5px;color:#8aa0b0;margin-top:8px;line-height:1.4}
 .stage{flex:1;height:100vh;overflow:auto;background:#c9d4dc;display:flex;justify-content:center;padding:26px}
+@media(max-width:700px){
+ body{display:block;height:auto;overflow:auto}
+ .panel{width:100%;height:auto;min-height:100vh;border-right:0;padding-bottom:28px}
+ .seg button,.dl button,.addbtn{min-height:44px}
+ .item .rm{width:44px;height:44px}
+ .stage{width:100%;height:auto;min-height:70vh;justify-content:flex-start;padding:12px;overflow:auto}
+}
 /* ---- DOCUMENT ---- */
 .doc{width:800px;flex:none;background:#fff;color:var(--ink);box-shadow:0 30px 70px -30px rgba(0,0,0,.5);align-self:flex-start;overflow:hidden}
 .ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);font-weight:700}
@@ -162,21 +169,24 @@ const DEF_VENUES=[
  {name:"Crown Sydney",location:"Barangaroo, NSW",spec:"Premium harbour venue\nLarge ballroom\nHarbour views",rate:"Day delegate from",price:"165",note:"Flagship option."}];
 
 let state={mode:"itemised",meta:Object.assign({},DEF_META),items:JSON.parse(JSON.stringify(DEF_ITEMS)),venues:JSON.parse(JSON.stringify(DEF_VENUES))};
+let fieldSerial=0;
 const LABEL={quoteNo:"Quote number",date:"Date",validUntil:"Valid until",client:"Client name",company:"Company",event:"Event",destination:"Destination",dates:"Dates",delegates:"Delegates",contactName:"Your name",contactPhone:"Phone",contactEmail:"Email",notes:"Notes",recommendation:"Recommendation"};
 
 function buildModes(){const c=document.getElementById('modes');c.innerHTML="";
- [["itemised","Itemised quote"],["proposal","Venue comparison"]].forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.mode?"on":"";
+ [["itemised","Itemised quote"],["proposal","Venue comparison"]].forEach(([k,n])=>{const b=document.createElement('button');b.type="button";b.textContent=n;b.className=k===state.mode?"on":"";b.setAttribute('aria-pressed',k===state.mode?'true':'false');
   b.onclick=()=>{state.mode=k;buildModes();buildFields();render();};c.appendChild(b);});}
-function fld(k){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=LABEL[k]||k;d.appendChild(l);
- const area=(k==='notes'||k==='recommendation');const el=document.createElement(area?'textarea':'input');el.value=state.meta[k]||"";
+function fld(k){const d=document.createElement('div');d.className="field";const id="quote-field-"+(fieldSerial++);const l=document.createElement('label');l.textContent=LABEL[k]||k;l.htmlFor=id;d.appendChild(l);
+ const area=(k==='notes'||k==='recommendation');const el=document.createElement(area?'textarea':'input');el.id=id;el.value=state.meta[k]||"";
  el.oninput=()=>{state.meta[k]=el.value;render();};d.appendChild(el);return d;}
 function twoCol(a,b){const w=document.createElement('div');w.className="row2";w.appendChild(fld(a));w.appendChild(fld(b));return w;}
-function fldObj(lbl,obj,key,area){const d=document.createElement('div');d.className="field";const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
- const el=document.createElement(area?'textarea':'input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
-function fld2(lbl,obj,key,cls){const d=document.createElement('div');d.className="field "+cls;const l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
- const el=document.createElement('input');el.value=obj[key]||"";el.oninput=()=>{obj[key]=el.value;render();};d.appendChild(el);return d;}
+function fldObj(lbl,obj,key,area){const d=document.createElement('div');d.className="field";const id="quote-field-"+(fieldSerial++);const l=document.createElement('label');l.textContent=lbl;l.htmlFor=id;d.appendChild(l);
+ const el=document.createElement(area?'textarea':'input');el.id=id;el.value=obj[key]||"";if(key==='price'){el.type='number';el.min='0';el.step='any';}
+ el.oninput=()=>{if(key==='price'&&el.value!==''&&Number(el.value)<0){el.setCustomValidity('Use zero or a positive amount.');return;}el.setCustomValidity('');obj[key]=el.value;render();};d.appendChild(el);return d;}
+function fld2(lbl,obj,key,cls){const d=document.createElement('div');d.className="field "+cls;const id="quote-field-"+(fieldSerial++);const l=document.createElement('label');l.textContent=lbl;l.htmlFor=id;d.appendChild(l);
+ const el=document.createElement('input');el.id=id;el.value=obj[key]||"";if(cls==='qty'||cls==='unit'){el.type='number';el.min='0';el.step='any';}
+ el.oninput=()=>{if((cls==='qty'||cls==='unit')&&el.value!==''&&Number(el.value)<0){el.setCustomValidity('Use zero or a positive amount.');return;}el.setCustomValidity('');obj[key]=el.value;render();};d.appendChild(el);return d;}
 
-function buildFields(){const c=document.getElementById('fields');c.innerHTML="";
+function buildFields(){const c=document.getElementById('fields');c.innerHTML="";fieldSerial=0;
  c.appendChild(twoCol('quoteNo','date'));c.appendChild(fld('validUntil'));
  c.appendChild(twoCol('client','company'));c.appendChild(fld('event'));
  c.appendChild(twoCol('destination','dates'));c.appendChild(fld('delegates'));
@@ -184,10 +194,10 @@ function buildFields(){const c=document.getElementById('fields');c.innerHTML="";
    const g=document.createElement('div');g.className="grp";g.innerHTML='<label>Line items</label>';const list=document.createElement('div');
    state.items.forEach((it,i)=>{const row=document.createElement('div');row.className="item";
      row.append(fld2("Description",it,'desc','desc'),fld2("Qty",it,'qty','qty'),fld2("Unit $",it,'unit','unit'));
-     const rm=document.createElement('button');rm.className="rm";rm.textContent="×";rm.onclick=()=>{state.items.splice(i,1);buildFields();render();};
+     const rm=document.createElement('button');rm.type="button";rm.className="rm";rm.textContent="×";rm.setAttribute('aria-label',`Remove line ${i+1}`);rm.onclick=()=>{state.items.splice(i,1);buildFields();render();};
      row.appendChild(rm);list.appendChild(row);});
    g.appendChild(list);
-   const add=document.createElement('button');add.className="addbtn";add.textContent="+ Add line";add.onclick=()=>{state.items.push({desc:"",qty:"1",unit:"0"});buildFields();render();};
+   const add=document.createElement('button');add.type="button";add.className="addbtn";add.textContent="+ Add line";add.onclick=()=>{state.items.push({desc:"",qty:"1",unit:"0"});buildFields();render();};
    g.appendChild(add);c.appendChild(g);c.appendChild(fld('notes'));
  } else {
    state.venues.forEach((v,i)=>{const box=document.createElement('div');box.className="vbox";box.innerHTML=`<div class="vt">Venue ${i+1}${i===0?' · our pick':''}</div>`;
