@@ -387,7 +387,7 @@ body.menu-open{overflow:hidden}
 
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;color:var(--white)}
 .hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(160deg,#cfc6b6 0%,#54707d 45%,var(--navy) 100%)}
-.hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
+.hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp?v=202608131600');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate3d(0,0,0) scale(1.02)}to{transform:translate3d(-26px,-13px,0) scale(1.08)}}
 .hero__scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(10,44,82,.93) 0%,rgba(10,44,82,.64) 35%,rgba(10,44,82,.22) 60%,rgba(10,44,82,.04) 84%,rgba(10,44,82,0) 100%),linear-gradient(0deg,rgba(10,44,82,.7) 0%,rgba(10,44,82,.12) 44%,rgba(10,44,82,0) 66%)}
 .hero__inner{flex:1;width:100%;max-width:var(--container);margin:0 auto;padding:clamp(7rem,14vh,9rem) var(--gutter) clamp(2.5rem,5vh,4rem);display:grid;grid-template-columns:1fr;align-items:center;gap:clamp(2rem,4vw,3rem)}
@@ -761,6 +761,7 @@ body.menu-open{overflow:hidden}
 
 .offer__brandrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:30px;margin-bottom:1rem}
 .offer .offer__brand{height:30px;max-height:30px;width:auto;max-width:48%;object-fit:contain;object-position:left center;display:block}
+.offer .offer__brand--text{height:auto;max-height:none;font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--navy);line-height:1.2}
 @media(max-width:680px){.offer .offer__brand{height:26px;max-height:26px;max-width:52%}}
 .offer__brandrow .offer__tag{margin-bottom:0}
 .offer__pad .offer__tag{margin-bottom:0}
@@ -817,6 +818,8 @@ body.menu-open{overflow:hidden}
 .sub-form .btn{white-space:nowrap}
 .sub-fine{color:rgba(255,255,255,.5);font-size:.78rem;margin-top:.75rem}
 .sub-ok{color:var(--teal);font-weight:600;font-size:1rem;margin-top:.4rem}
+.form-error{color:#ffd1d1;font-size:.84rem;line-height:1.5;margin-top:.75rem}
+.form-error a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 @media(max-width:760px){.sub-inner{grid-template-columns:1fr;gap:1.3rem}.sub-row{flex-direction:column}.sub-form .btn{width:100%}}
 /* strong variant: light card on the offers page */
 .sub-band--strong{background:var(--stone);color:var(--navy);border-top:0;padding:clamp(2.6rem,5vw,4rem) 0}
@@ -829,6 +832,7 @@ body.menu-open{overflow:hidden}
 .sub-band--strong .sub-form input[type=email]::placeholder{color:var(--muted)}
 .sub-band--strong .sub-fine{color:var(--muted)}
 .sub-band--strong .sub-ok{color:var(--teal-deep)}
+.sub-band--strong .form-error{color:#9d2f2f}
 
 
 @media(min-width:1000px){
