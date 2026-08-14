@@ -305,20 +305,32 @@
   (function stats() {
     var box = doc.getElementById('vidx-stats');
     if (!box) return;
-    var caps = VENUES.map(function (v) { return v.th; }).filter(function (n) { return n; });
-    var big = Math.max.apply(null, caps);
-    var precs = [];
-    VENUES.forEach(function (v) { if (precs.indexOf(v.pr) === -1) precs.push(v.pr); });
-    var over1000 = caps.filter(function (n) { return n >= 1000; }).length;
-    var beds = VENUES.filter(function (v) { return v.gr; }).length;
-    var rows = [
-      [VENUES.length, '', 'Major ' + city + ' venues with published capacities'],
-      [big.toLocaleString('en-AU'), 'seats', 'Largest single space in ' + city + ', theatre style'],
-      [over1000, '', 'Venues that hold 1,000 or more in one room'],
-      [beds, '', 'Venues where delegates sleep on the same site'],
-      [VENUES.filter(function (v) { return v.ceil; }).length + '/' + VENUES.length, '',
-       'Publish a ceiling height for their largest room']
-    ];
+    var used = {};
+    var pick = function (pool, key) {
+      var hit = pool.filter(function (v) { return v[key] && !used[v.n]; })
+                    .sort(function (a, b) { return b[key] - a[key]; })[0];
+      if (hit) used[hit.n] = true;
+      return hit;
+    };
+    var hotels = VENUES.filter(function (v) { return v.ty === 'hotel'; });
+    /* a qualified ceiling (a dome apex, say) is not a headline number */
+    var plainCeil = VENUES.filter(function (v) { return v.ceil && !v.ceilq; });
+
+    var big = pick(VENUES, 'th');
+    var ballroom = pick(hotels, 'th');
+    var tall = pick(plainCeil, 'ceil');
+    var beds = pick(VENUES, 'gr');
+
+    var rows = [];
+    if (big) rows.push([big.th.toLocaleString('en-AU'), 'seats',
+      'Largest single space in ' + city + ', ' + big.sp + ' at ' + big.n]);
+    if (ballroom) rows.push([ballroom.th.toLocaleString('en-AU'), 'seats',
+      'Largest hotel ballroom, ' + ballroom.sp + ' at ' + ballroom.n]);
+    if (tall) rows.push([tall.ceil + 'm', '',
+      'Highest ceiling on record, ' + tall.sp + ' at ' + tall.n]);
+    if (beds) rows.push([beds.gr.toLocaleString('en-AU'), 'rooms',
+      'Most delegate beds on one site, at ' + beds.n]);
+
     box.innerHTML = '<span class="vidx-stats__tag">' + city + ' at a glance</span>' +
       rows.map(function (r) {
         return '<div class="vidx-stat"><div class="vidx-stat__n">' + r[0] +
@@ -364,16 +376,17 @@
 
     if (countEl) {
       if (!rows.length) {
-        countEl.innerHTML = '<span>No venues in the index match those filters.</span>';
+        countEl.innerHTML = '<span>No venues match those filters.</span>';
       } else if (limited) {
-        countEl.innerHTML = '<span>Showing the <b>' + DEFAULT_SHOWN + '</b> largest of ' +
-          VENUES.length + ' ' + city + ' venues, by ' + setupLabel + ' capacity. ' +
-          'Filter above, or <button type="button" class="vidx-showall" id="vidx-showall">show all ' +
-          VENUES.length + '</button>.</span>';
+        countEl.innerHTML = '<span>Showing the largest ' + city + ' venues by ' + setupLabel +
+          ' capacity. Filter above, or <button type="button" class="vidx-showall" id="vidx-showall">see them all</button>.</span>';
       } else {
-        countEl.innerHTML = '<span><b>' + rows.length + '</b> of ' + VENUES.length + ' ' +
-          city + ' venues match, largest ' + setupLabel + ' capacity first.' +
-          (showAll && !filtered ? ' <button type="button" class="vidx-showall" id="vidx-showall">Show fewer</button>' : '') + '</span>' +
+        countEl.innerHTML = '<span>' +
+          (filtered
+            ? '<b>' + rows.length + '</b> ' + (rows.length === 1 ? 'venue' : 'venues') +
+              ' match, largest ' + setupLabel + ' capacity first.'
+            : 'Every ' + city + ' venue we hold, largest ' + setupLabel + ' capacity first. ' +
+              '<button type="button" class="vidx-showall" id="vidx-showall">Show fewer</button>') + '</span>' +
           (hiddenForNoData ? '<span class="vidx-hidden">' + hiddenForNoData +
             ' more ' + (hiddenForNoData === 1 ? 'venue does' : 'venues do') +
             ' not publish a ' + setupLabel + ' capacity. Ask us and we will confirm ' +
@@ -399,6 +412,8 @@
         '<td class="vidx-c-name">' +
           '<div class="vidx-name">' + v.n + '</div>' +
           '<div class="vidx-space">' + v.sp + '</div>' +
+          (v.worked ? '<span class="vidx-tag vidx-tag--worked">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Worked with</span> ' : '') +
           (t ? '<span class="vidx-tag vidx-tag--' + v.ty + '">' + t + '</span>' : '') +
         '</td>' +
         '<td data-l="Precinct">' + v.pr + '</td>' +
