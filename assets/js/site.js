@@ -268,6 +268,8 @@
   if (!tbody || !fCap || !fSetup || !fPrec || !fType) return;
 
   var TYPE_LABEL = { conv: 'Convention centre', hotel: 'Hotel', event: 'Event venue' };
+  var SETUPS = [['th','Theatre'],['bq','Banquet'],['cab','Cabaret'],['cl','Classroom'],
+                ['ck','Cocktail'],['ush','U-shape'],['bd','Boardroom']];
   var sortKey = 'cap';
   var sortDir = -1;
 
@@ -277,6 +279,11 @@
   var cell = function (n) {
     var v = fmt(n);
     return v === null ? '<span class="vidx-none">Not published</span>' : v;
+  };
+  var metres = function (v) {
+    if (v.ceil === null || v.ceil === undefined) return '<span class="vidx-none">Not published</span>';
+    var t = v.ceil + 'm';
+    return v.ceilq ? t + '<span class="vidx-qual">' + v.ceilq + '</span>' : t;
   };
   var capOf = function (v) {
     var n = v[fSetup.value];
@@ -306,7 +313,9 @@
       [VENUES.length, '', 'Major ' + city + ' venues with published capacities'],
       [big.toLocaleString('en-AU'), 'seats', 'Largest single space in ' + city + ', theatre style'],
       [over1000, '', 'Venues that hold 1,000 or more in one room'],
-      [beds, '', 'Venues where delegates sleep on the same site']
+      [beds, '', 'Venues where delegates sleep on the same site'],
+      [VENUES.filter(function (v) { return v.ceil; }).length + '/' + VENUES.length, '',
+       'Publish a ceiling height, which we have read and recorded']
     ];
     box.innerHTML = '<span class="vidx-stats__tag">' + city + ' at a glance</span>' +
       rows.map(function (r) {
@@ -339,6 +348,7 @@
     rows.sort(function (a, b) {
       var x, y;
       if (sortKey === 'cap') { x = capOf(a); y = capOf(b); }
+      else if (sortKey === 'ceil') { x = a.ceil; y = b.ceil; }
       else { x = a[sortKey]; y = b[sortKey]; }
       if (x === null || x === undefined) return 1;   /* nulls always last */
       if (y === null || y === undefined) return -1;
@@ -360,15 +370,19 @@
     }
 
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="7"><div class="vidx-empty">Nothing in the index matches that brief. ' +
+      tbody.innerHTML = '<tr><td colspan="8"><div class="vidx-empty">Nothing in the index matches that brief. ' +
         'That does not mean nothing in ' + city + ' does. ' +
         '<a href="submit-a-brief.html">Send us the brief</a> and we will go looking.</div></td></tr>';
       return;
     }
 
-    tbody.innerHTML = rows.map(function (v) {
+    tbody.innerHTML = rows.map(function (v, i) {
       var t = TYPE_LABEL[v.ty] || '';
-      return '<tr>' +
+      var pid = 'vidx-spec-' + i;
+      var setupRows = SETUPS.map(function (s) {
+        return '<div class="vidx-spec__row"><dt>' + s[1] + '</dt><dd>' + cell(v[s[0]]) + '</dd></div>';
+      }).join('');
+      return '<tr class="vidx-row">' +
         '<td class="vidx-c-name">' +
           '<div class="vidx-name">' + v.n + '</div>' +
           '<div class="vidx-space">' + v.sp + '</div>' +
@@ -377,16 +391,50 @@
         '<td data-l="Precinct">' + v.pr + '</td>' +
         '<td class="num" data-l="Largest space"><span class="vidx-cap">' + cell(capOf(v)) + '</span>' +
           '<div class="vidx-setup">' + setupLabel + '</div></td>' +
-        '<td class="num" data-l="Banquet">' + cell(v.bq) + '</td>' +
+        '<td class="num" data-l="Ceiling">' + metres(v) + '</td>' +
         '<td class="num" data-l="Meeting rooms">' + cell(v.br) + '</td>' +
         '<td class="num" data-l="Guest rooms">' +
           (v.gr === 0 ? '<span class="vidx-none">None</span>' : cell(v.gr)) + '</td>' +
         '<td class="vidx-c-suit"><div class="vidx-suit">' + v.note + '</div></td>' +
-        '<td class="vidx-c-enq"><a class="vidx-enq" href="submit-a-brief.html?dest=' +
-          encodeURIComponent(city) + '&venue=' + encodeURIComponent(v.n) + '">Enquire' +
-          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></td>' +
-      '</tr>';
+        '<td class="vidx-c-enq">' +
+          '<button type="button" class="vidx-more" aria-expanded="false" aria-controls="' + pid + '">' +
+            'Full specs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
+          '<a class="vidx-enq" href="submit-a-brief.html?dest=' + encodeURIComponent(city) +
+            '&venue=' + encodeURIComponent(v.n) + '">Enquire' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+        '</td>' +
+      '</tr>' +
+      '<tr class="vidx-specrow" id="' + pid + '" hidden><td colspan="8">' +
+        '<div class="vidx-spec">' +
+          '<div class="vidx-spec__col"><h4>' + v.sp + '</h4><dl>' + setupRows + '</dl></div>' +
+          '<div class="vidx-spec__col"><h4>The room itself</h4><dl>' +
+            '<div class="vidx-spec__row"><dt>Floor area</dt><dd>' +
+              (v.area ? fmt(v.area) + ' sqm' : '<span class="vidx-none">Not published</span>') + '</dd></div>' +
+            '<div class="vidx-spec__row"><dt>Ceiling height</dt><dd>' + metres(v) + '</dd></div>' +
+            '<div class="vidx-spec__row"><dt>Meeting rooms</dt><dd>' + cell(v.br) + '</dd></div>' +
+            '<div class="vidx-spec__row"><dt>Guest rooms</dt><dd>' +
+              (v.gr === 0 ? '<span class="vidx-none">None on site</span>' : cell(v.gr)) + '</dd></div>' +
+          '</dl></div>' +
+          '<div class="vidx-spec__col"><h4>Second largest space</h4>' +
+            (v.s_name
+              ? '<p class="vidx-spec__second"><b>' + v.s_name + '</b></p><dl><div class="vidx-spec__row">' +
+                '<dt>Theatre</dt><dd>' + cell(v.s_th) + '</dd></div></dl>' +
+                (v.s_th && v.th ? '<p class="vidx-spec__note">The two largest rooms seat <b>' +
+                  fmt(v.s_th + v.th) + '</b> between them, which is the ceiling on a plenary plus one concurrent stream.</p>' : '')
+              : '<p class="vidx-spec__note">This venue does not publish a second space.</p>') +
+          '</div>' +
+        '</div>' +
+      '</td></tr>';
     }).join('');
+
+    tbody.querySelectorAll('.vidx-more').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var panel = doc.getElementById(btn.getAttribute('aria-controls'));
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        if (panel) panel.hidden = open;
+      });
+    });
   }
 
   doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (th) {
