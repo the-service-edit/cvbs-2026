@@ -270,6 +270,8 @@
   var TYPE_LABEL = { conv: 'Convention centre', hotel: 'Hotel', event: 'Event venue' };
   var SETUPS = [['th','Theatre'],['bq','Banquet'],['cab','Cabaret'],['cl','Classroom'],
                 ['ck','Cocktail'],['ush','U-shape'],['bd','Boardroom']];
+  var DEFAULT_SHOWN = 6;
+  var showAll = false;
   var sortKey = 'cap';
   var sortDir = -1;
 
@@ -315,7 +317,7 @@
       [over1000, '', 'Venues that hold 1,000 or more in one room'],
       [beds, '', 'Venues where delegates sleep on the same site'],
       [VENUES.filter(function (v) { return v.ceil; }).length + '/' + VENUES.length, '',
-       'Publish a ceiling height, which we have read and recorded']
+       'Publish a ceiling height for their largest room']
     ];
     box.innerHTML = '<span class="vidx-stats__tag">' + city + ' at a glance</span>' +
       rows.map(function (r) {
@@ -356,16 +358,26 @@
       return (x - y) * sortDir;
     });
 
+    var filtered = (minCap > 0 || prec || type);
+    var limited = !filtered && !showAll && rows.length > DEFAULT_SHOWN;
+    var shown = limited ? DEFAULT_SHOWN : rows.length;
+
     if (countEl) {
-      if (rows.length) {
+      if (!rows.length) {
+        countEl.innerHTML = '<span>No venues in the index match those filters.</span>';
+      } else if (limited) {
+        countEl.innerHTML = '<span>Showing the <b>' + DEFAULT_SHOWN + '</b> largest of ' +
+          VENUES.length + ' ' + city + ' venues, by ' + setupLabel + ' capacity. ' +
+          'Filter above, or <button type="button" class="vidx-showall" id="vidx-showall">show all ' +
+          VENUES.length + '</button>.</span>';
+      } else {
         countEl.innerHTML = '<span><b>' + rows.length + '</b> of ' + VENUES.length + ' ' +
-          city + ' venues match, largest ' + setupLabel + ' capacity first.</span>' +
+          city + ' venues match, largest ' + setupLabel + ' capacity first.' +
+          (showAll && !filtered ? ' <button type="button" class="vidx-showall" id="vidx-showall">Show fewer</button>' : '') + '</span>' +
           (hiddenForNoData ? '<span class="vidx-hidden">' + hiddenForNoData +
             ' more ' + (hiddenForNoData === 1 ? 'venue does' : 'venues do') +
             ' not publish a ' + setupLabel + ' capacity. Ask us and we will confirm ' +
             (hiddenForNoData === 1 ? 'it' : 'them') + ' with the venue.</span>' : '');
-      } else {
-        countEl.innerHTML = '<span>No venues in the index match those filters.</span>';
       }
     }
 
@@ -377,12 +389,13 @@
     }
 
     tbody.innerHTML = rows.map(function (v, i) {
+      var over = i >= shown;
       var t = TYPE_LABEL[v.ty] || '';
       var pid = 'vidx-spec-' + i;
       var setupRows = SETUPS.map(function (s) {
         return '<div class="vidx-spec__row"><dt>' + s[1] + '</dt><dd>' + cell(v[s[0]]) + '</dd></div>';
       }).join('');
-      return '<tr class="vidx-row">' +
+      return '<tr class="vidx-row' + (over ? ' vidx-row--over" hidden' : '"') + '>' +
         '<td class="vidx-c-name">' +
           '<div class="vidx-name">' + v.n + '</div>' +
           '<div class="vidx-space">' + v.sp + '</div>' +
@@ -406,6 +419,7 @@
       '</tr>' +
       '<tr class="vidx-specrow" id="' + pid + '" hidden><td colspan="8">' +
         '<div class="vidx-spec">' +
+          '<div class="vidx-spec__col vidx-spec__col--wide"><p class="vidx-spec__full">' + v.note + '</p></div>' +
           '<div class="vidx-spec__col"><h4>' + v.sp + '</h4><dl>' + setupRows + '</dl></div>' +
           '<div class="vidx-spec__col"><h4>The room itself</h4><dl>' +
             '<div class="vidx-spec__row"><dt>Floor area</dt><dd>' +
@@ -426,6 +440,9 @@
         '</div>' +
       '</td></tr>';
     }).join('');
+
+    var sa = doc.getElementById('vidx-showall');
+    if (sa) sa.addEventListener('click', function () { showAll = !showAll; render(); });
 
     tbody.querySelectorAll('.vidx-more').forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -468,6 +485,7 @@
   if (resetBtn) {
     resetBtn.addEventListener('click', function () {
       fCap.value = '0'; fSetup.value = 'th'; fPrec.value = ''; fType.value = '';
+      showAll = false;
       sortKey = 'cap'; sortDir = -1;
       doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (o) {
         o.classList.remove('asc', 'desc');
