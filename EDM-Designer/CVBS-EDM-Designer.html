@@ -29,13 +29,6 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .previewwrap{width:600px;flex:none;background:#fff;box-shadow:0 30px 70px -30px rgba(0,0,0,.5);height:max-content}
 iframe{width:600px;border:0;display:block}
 .bar{position:fixed;top:14px;right:22px;background:rgba(10,44,82,.9);color:#fff;font-size:12px;font-weight:600;padding:8px 14px;border-radius:8px;backdrop-filter:blur(6px)}
-@media(max-width:700px){
- body{display:block;height:auto;overflow:auto}
- .panel{width:100%;height:auto;min-height:100vh;border-right:0;padding-bottom:28px}
- .seg button,.dl button{min-height:44px}
- .stage{width:100%;height:auto;min-height:70vh;justify-content:flex-start;padding:12px;overflow:auto}
- .bar{display:none}
-}
 </style></head>
 <body>
 <div class="panel">
@@ -143,7 +136,7 @@ function buildRoundup(){
  return shell(inner,F('preheader'));}
 
 const DEF={
- offer:{preheader:"A limited-time rate at one of Sydney's best venues.",dealBand:"Winter day delegate from $110pp",hero:BASE+"assets/img/offers/kimpton-margot.jpg",
+ offer:{preheader:"A limited-time rate at one of Sydney's best venues.",dealBand:"Winter day delegate from $110pp",hero:BASE+"assets/img/offers/kimpton.jpg",
   eyebrow:"Venue offer · Sydney",headline:"Winter at Kimpton Margot",intro:"A limited winter rate at one of Sydney's most characterful heritage hotels, available April to June 2026.",
   s1:"Up to 120 delegates",s2:"Sydney CBD",s3:"April–June 2026",offerTitle:"What's included",
   inclusions:"Seasonal menus by Luke Mangan\nBarista coffee and juice shots on arrival\nA plated working lunch\nFull-service day delegate, start to finish",
@@ -151,8 +144,8 @@ const DEF={
   signoff:"Karen, Anthony, Chantelle & Rychelle\nCVBS",finePrint:"Subject to availability. New bookings only. Terms and conditions apply."},
  roundup:{preheader:"This month's venue offers, negotiated for CVBS clients.",eyebrow:"Offers roundup · June",headline:"This month's venue offers",
   intro:"A few rates worth booking this month. Every one negotiated for CVBS clients.",
-  c1img:BASE+"assets/img/offers/kimpton-margot.jpg",c1title:"Kimpton Margot, Sydney",c1blurb:"Winter day delegate from $110pp, April to June.",c1url:BASE+"offers.html",
-  c2img:BASE+"assets/img/offers/hyatt-caribbean-park.jpg",c2title:"Hyatt Place, Essendon Fields",c2blurb:"1,700 sqm pillarless, minutes from the airport.",c2url:BASE+"offers.html",
+  c1img:BASE+"assets/img/offers/kimpton.jpg",c1title:"Kimpton Margot, Sydney",c1blurb:"Winter day delegate from $110pp, April to June.",c1url:BASE+"offers.html",
+  c2img:BASE+"assets/img/offers/hyatt.jpg",c2title:"Hyatt Place, Essendon Fields",c2blurb:"1,700 sqm pillarless, minutes from the airport.",c2url:BASE+"offers.html",
   c3img:BASE+"assets/img/offers/hamilton-island.jpg",c3title:"Hamilton Island",c3blurb:"Up to 700 delegates in the Whitsundays.",c3url:BASE+"offers.html",
   ctaText:"Send us your brief",briefUrl:BASE+"submit-a-brief.html",signoff:"Karen, Anthony, Chantelle & Rychelle\nCVBS"}
 };
@@ -167,16 +160,14 @@ const ORDER={offer:["preheader","dealBand","eyebrow","headline","hero","intro","
  roundup:["preheader","eyebrow","headline","intro","c1img","c1title","c1blurb","c1url","c2img","c2title","c2blurb","c2url","c3img","c3title","c3blurb","c3url","ctaText","briefUrl","signoff"]};
 
 let state={mode:"offer",fields:Object.assign({},DEF.offer)};
-let cleanFields=JSON.stringify(state.fields),fieldSerial=0;
-const isDirty=()=>JSON.stringify(state.fields)!==cleanFields;
 function buildModes(){const c=document.getElementById('modes');c.innerHTML="";
- [["offer","Venue offer"],["roundup","Offers roundup"]].forEach(([k,n])=>{const b=document.createElement('button');b.type="button";b.textContent=n;b.className=k===state.mode?"on":"";b.setAttribute('aria-pressed',k===state.mode?'true':'false');
-  b.onclick=()=>{if(k===state.mode)return;if(isDirty()&&!confirm("Switch email type and discard the edits in this draft?"))return;state.mode=k;state.fields=Object.assign({},DEF[k]);cleanFields=JSON.stringify(state.fields);buildModes();buildFields();render();};c.appendChild(b);});}
+ [["offer","Venue offer"],["roundup","Offers roundup"]].forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===state.mode?"on":"";
+  b.onclick=()=>{state.mode=k;state.fields=Object.assign({},DEF[k]);buildModes();buildFields();render();};c.appendChild(b);});}
 function mkField(k){const d=document.createElement('div');d.className="field";
- const id="edm-field-"+(fieldSerial++);const l=document.createElement('label');l.textContent=LABEL[k]||k;l.htmlFor=id;d.appendChild(l);
- const el=document.createElement(AREA.has(k)?'textarea':'input');el.id=id;el.value=state.fields[k]||"";
+ const l=document.createElement('label');l.textContent=LABEL[k]||k;d.appendChild(l);
+ const el=document.createElement(AREA.has(k)?'textarea':'input');el.value=state.fields[k]||"";
  el.oninput=()=>{state.fields[k]=el.value;render();};d.appendChild(el);return d;}
-function buildFields(){const c=document.getElementById('fields');c.innerHTML="";fieldSerial=0;
+function buildFields(){const c=document.getElementById('fields');c.innerHTML="";
  if(state.mode==='roundup'){
    ["preheader","eyebrow","headline","intro"].forEach(k=>c.appendChild(mkField(k)));
    [1,2,3].forEach(i=>{const box=document.createElement('div');box.className="card-edit";
@@ -199,6 +190,5 @@ document.getElementById('copy').onclick=async(e)=>{const b=e.target,o=b.textCont
  setTimeout(()=>b.textContent=o,1400);};
 document.getElementById('download').onclick=()=>{const blob=new Blob([window._html],{type:"text/html"});
  const a=document.createElement('a');a.download=`cvbs-edm-${state.mode}.html`;a.href=URL.createObjectURL(blob);a.click();};
-window.addEventListener('beforeunload',e=>{if(!isDirty())return;e.preventDefault();e.returnValue="";});
 buildModes();buildFields();render();
 </script></body></html>

@@ -51,13 +51,6 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 /* stage */
 .stagewrap{flex:1;height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(60% 60% at 50% 30%,#12263a,#0a121c);padding:24px;overflow:hidden}
 .stage{transform-origin:center center;box-shadow:0 40px 90px -30px rgba(0,0,0,.7);border-radius:2px}
-@media(max-width:700px){
- body{display:block;height:auto;overflow:auto}
- .panel{width:100%;height:auto;min-height:100vh;border-right:0;padding-bottom:28px}
- .seg button,.tmpls button,.slideops button,.slideadd,.dl button{min-height:44px}
- .photos .th{width:56px;height:56px}
- .stagewrap{width:100%;height:70vh;min-height:480px;padding:12px}
-}
 /* CARD */
 .card{position:relative;overflow:hidden;font-family:Inter;color:#fff;background:var(--navy)}
 .fmt-ig{width:1080px;height:1350px}
@@ -169,8 +162,8 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
   <div class="grp" id="photogrp"><label>Photo</label>
     <div class="photos" id="photos"></div>
     <label class="up">Upload photo<input type="file" id="upload" accept="image/*" hidden></label>
-    <div class="slider" style="margin-top:12px"><label for="posY" style="font-size:11px;color:#8aa0b0">POS</label><input type="range" id="posY" min="0" max="100" value="40"></div>
-    <div class="slider"><label for="scrimRange" style="font-size:11px;color:#8aa0b0">DIM</label><input type="range" id="scrimRange" min="20" max="100" value="82"></div>
+    <div class="slider" style="margin-top:12px"><span style="font-size:11px;color:#8aa0b0">POS</span><input type="range" id="posY" min="0" max="100" value="40"></div>
+    <div class="slider"><span style="font-size:11px;color:#8aa0b0">DIM</span><input type="range" id="scrim" min="20" max="100" value="82"></div>
   </div>
 
   <div class="grp"><label>Content</label><div id="fields"></div></div>
@@ -186,7 +179,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 <div class="stagewrap" id="stagewrap">
   <div class="stage" id="stage">
     <div class="card fmt-ig" id="card">
-      <div class="bg" id="bg"></div><div class="scrim" id="scrimLayer"></div>
+      <div class="bg" id="bg"></div><div class="scrim" id="scrim"></div>
       <div class="content" id="content"></div>
     </div>
   </div>
@@ -282,19 +275,18 @@ const CENTER_DEFAULT=new Set(["positioning","quote","cta","roundup"]);
 
 function newSlide(tmpl){const t=T[tmpl];return{template:tmpl,align:CENTER_DEFAULT.has(tmpl)?"center":"left",photo:t.photo?PHOTOS[t.photo]:null,posY:40,scrim:82,fields:Object.assign({},t.def)};}
 let carousel={format:"ig",linkedin:false,slides:[newSlide("offer")],current:0};
-let fieldSerial=0;
 const cur=()=>carousel.slides[carousel.current];
 
 function setTemplate(k){const s=cur();s.template=k;s.fields=Object.assign({},T[k].def);if(T[k].photo)s.photo=PHOTOS[T[k].photo];s.align=CENTER_DEFAULT.has(k)?"center":"left";refreshAll();}
 
 function buildSlides(){const c=document.getElementById('slides');c.innerHTML="";
- carousel.slides.forEach((s,i)=>{const b=document.createElement('button');b.type="button";b.className="slidechip"+(i===carousel.current?" on":"");b.setAttribute('aria-pressed',i===carousel.current?'true':'false');
+ carousel.slides.forEach((s,i)=>{const b=document.createElement('button');b.className="slidechip"+(i===carousel.current?" on":"");
   b.innerHTML=`<span class="sn">${i+1}</span><span class="st">${T[s.template].name.replace('› ','')}</span>`;
   b.onclick=()=>{carousel.current=i;refreshAll();};c.appendChild(b);});
- const add=document.createElement('button');add.type="button";add.className="slideadd";add.textContent="+";add.title="Add slide";add.setAttribute('aria-label','Add slide');add.onclick=addSlide;c.appendChild(add);}
+ const add=document.createElement('button');add.className="slideadd";add.textContent="+";add.title="Add slide";add.onclick=addSlide;c.appendChild(add);}
 function addSlide(){carousel.slides.splice(carousel.current+1,0,newSlide("content"));carousel.current++;refreshAll();}
 function dupSlide(){const s=JSON.parse(JSON.stringify(cur()));carousel.slides.splice(carousel.current+1,0,s);carousel.current++;refreshAll();}
-function delSlide(){if(carousel.slides.length<=1)return;if(!confirm("Delete this slide? This cannot be undone."))return;carousel.slides.splice(carousel.current,1);carousel.current=Math.max(0,carousel.current-1);refreshAll();}
+function delSlide(){if(carousel.slides.length<=1)return;carousel.slides.splice(carousel.current,1);carousel.current=Math.max(0,carousel.current-1);refreshAll();}
 function moveSlide(d){const j=carousel.current+d;if(j<0||j>=carousel.slides.length)return;const s=carousel.slides.splice(carousel.current,1)[0];carousel.slides.splice(j,0,s);carousel.current=j;refreshAll();}
 document.getElementById('dupslide').onclick=dupSlide;
 document.getElementById('delslide').onclick=delSlide;
@@ -306,34 +298,34 @@ function tdiv(t,first){const d=document.createElement('div');d.className="tdiv"+
 function buildTemplateButtons(){const c=document.getElementById('tmpls');c.innerHTML="";c.appendChild(tdiv("Covers",true));let split=false;
  Object.keys(T).forEach(k=>{
   if(!COVERS.has(k)&&!split){c.appendChild(tdiv("Content pages"));split=true;}
-  const b=document.createElement('button');b.type="button";b.textContent=T[k].name.replace('› ','');b.className=k===cur().template?"on":"";b.setAttribute('aria-pressed',k===cur().template?'true':'false');
+  const b=document.createElement('button');b.textContent=T[k].name.replace('› ','');b.className=k===cur().template?"on":"";
   b.onclick=()=>setTemplate(k);c.appendChild(b);});}
 const ALIGNS=[["left","Left"],["center","Centre"]];
 function buildAlignButtons(){const c=document.getElementById('aligns');c.innerHTML="";
- ALIGNS.forEach(([k,n])=>{const b=document.createElement('button');b.type="button";b.textContent=n;b.className=k===cur().align?"on":"";b.setAttribute('aria-pressed',k===cur().align?'true':'false');
+ ALIGNS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===cur().align?"on":"";
   b.onclick=()=>{cur().align=k;buildAlignButtons();render();};c.appendChild(b);});}
 const FORMATS=[["ig","Instagram 4:5"],["square","Square"],["wide","LinkedIn wide"]];
 function buildFormatButtons(){const c=document.getElementById('formats');c.innerHTML="";
- FORMATS.forEach(([k,n])=>{const b=document.createElement('button');b.type="button";b.textContent=n;b.className=k===carousel.format?"on":"";b.setAttribute('aria-pressed',k===carousel.format?'true':'false');
+ FORMATS.forEach(([k,n])=>{const b=document.createElement('button');b.textContent=n;b.className=k===carousel.format?"on":"";
   b.onclick=()=>{carousel.format=k;buildFormatButtons();render();};c.appendChild(b);});}
 
-function buildFields(){const c=document.getElementById('fields');c.innerHTML="";fieldSerial=0;const t=T[cur().template];
+function buildFields(){const c=document.getElementById('fields');c.innerHTML="";const t=T[cur().template];
  const keys=Object.keys(t.def);const done=new Set();
  keys.forEach(k=>{if(done.has(k))return;const pair=PAIRS.find(p=>p[0]===k);
   if(pair){const wrap=document.createElement('div');wrap.className="row2";pair.forEach(pk=>{wrap.appendChild(makeField(pk));done.add(pk);});c.appendChild(wrap);return;}
   c.appendChild(makeField(k));done.add(k);});}
 function makeField(k){const d=document.createElement('div');d.className="field";
- const id="post-field-"+(fieldSerial++);const lab=document.createElement('label');lab.textContent=FIELD_LABELS[k]||k;lab.htmlFor=id;d.appendChild(lab);
- const el=document.createElement(AREA.has(k)?'textarea':'input');el.id=id;el.value=cur().fields[k]||"";
+ const lab=document.createElement('label');lab.textContent=FIELD_LABELS[k]||k;d.appendChild(lab);
+ const el=document.createElement(AREA.has(k)?'textarea':'input');el.value=cur().fields[k]||"";
  el.oninput=()=>{cur().fields[k]=el.value;render();};d.appendChild(el);return d;}
 
 function buildPhotoThumbs(){const c=document.getElementById('photos');c.innerHTML="";
  Object.keys(PHOTOS).forEach(k=>{const d=document.createElement('div');d.className="th"+(cur().photo===PHOTOS[k]?" on":"");
-  d.style.backgroundImage=`url(${PHOTOS[k]})`;d.setAttribute('role','button');d.setAttribute('tabindex','0');d.setAttribute('aria-label',`Use ${k} photo`);d.onclick=()=>{cur().photo=PHOTOS[k];buildPhotoThumbs();render();};d.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();d.click();}};c.appendChild(d);});}
+  d.style.backgroundImage=`url(${PHOTOS[k]})`;d.onclick=()=>{cur().photo=PHOTOS[k];buildPhotoThumbs();render();};c.appendChild(d);});}
 document.getElementById('upload').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
  r.onload=()=>{cur().photo=r.result;buildPhotoThumbs();render();};r.readAsDataURL(f);};
 document.getElementById('posY').oninput=e=>{cur().posY=+e.target.value;render();};
-document.getElementById('scrimRange').oninput=e=>{cur().scrim=+e.target.value;render();};
+document.getElementById('scrim').oninput=e=>{cur().scrim=+e.target.value;render();};
 document.getElementById('li').onchange=e=>{carousel.linkedin=e.target.checked;render();};
 
 function togglePhoto(){document.getElementById('photogrp').style.display=T[cur().template].bg==='photo'?'block':'none';}
@@ -341,7 +333,7 @@ function togglePhoto(){document.getElementById('photogrp').style.display=T[cur()
 function render(){const s=cur(),t=T[s.template];const card=document.getElementById('card');
  RCTX={i:carousel.current,n:carousel.slides.length};
  card.className="card fmt-"+carousel.format+(t.bg==='stone'?" bg-stone":"");
- const bg=document.getElementById('bg'),scr=document.getElementById('scrimLayer');
+ const bg=document.getElementById('bg'),scr=document.getElementById('scrim');
  if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${s.photo})`;
    bg.style.backgroundPosition=`center ${s.posY}%`;
    const a=s.scrim/100, bot=Math.min(a+0.15,0.97);
@@ -351,7 +343,7 @@ function render(){const s=cur(),t=T[s.template];const card=document.getElementBy
  ct.innerHTML=t.render();
  fit();}
 
-function refreshAll(){document.getElementById('posY').value=cur().posY;document.getElementById('scrimRange').value=cur().scrim;
+function refreshAll(){document.getElementById('posY').value=cur().posY;document.getElementById('scrim').value=cur().scrim;
  document.getElementById('li').checked=carousel.linkedin;
  buildSlides();buildTemplateButtons();buildFormatButtons();buildAlignButtons();buildFields();buildPhotoThumbs();togglePhoto();render();}
 

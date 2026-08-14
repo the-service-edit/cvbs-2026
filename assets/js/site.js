@@ -95,44 +95,6 @@
     update();
   })();
 
-  /* Shared form delivery helpers. Never report success unless Web3Forms confirms it. */
-  function hasWeb3FormsKey(form) {
-    var key = (form.querySelector('[name="access_key"]') || {}).value || '';
-    return /^[0-9a-f-]{20,}$/i.test(key);
-  }
-  function showSubmissionError(form, message) {
-    var error = form.querySelector('[data-form-error]');
-    if (!error) {
-      error = doc.createElement('p');
-      error.className = 'form-error';
-      error.setAttribute('data-form-error', '');
-      error.setAttribute('role', 'alert');
-      form.appendChild(error);
-    }
-    error.textContent = message + ' ';
-    var link = doc.createElement('a');
-    link.href = 'contact.html';
-    link.textContent = 'Contact the CVBS team directly.';
-    error.appendChild(link);
-    error.hidden = false;
-  }
-  function clearSubmissionError(form) {
-    var error = form.querySelector('[data-form-error]');
-    if (error) error.hidden = true;
-  }
-  function submitToWeb3Forms(form) {
-    return fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    }).then(function (response) {
-      return response.json().catch(function () { return {}; }).then(function (data) {
-        if (!response.ok || !data.success) throw new Error(data.message || 'Submission failed');
-        return data;
-      });
-    });
-  }
-
   /* Multi-step brief wizard + Web3Forms submit */
   doc.querySelectorAll('[data-wizard]').forEach(function (form) {
     var steps = [].slice.call(form.querySelectorAll('.wiz-step'));
@@ -168,18 +130,14 @@
       e.preventDefault();
       if (!valid(steps[i])) return;
       var ok = form.querySelector('[data-form-success]');
+      var key = (form.querySelector('[name="access_key"]') || {}).value || '';
       var done = function () {
         form.querySelectorAll('.wiz-step,.wiz-nav,.wiz-progress').forEach(function (el) { el.style.display = 'none'; });
         if (ok) { ok.hidden = false; ok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
       };
-      clearSubmissionError(form);
-      if (!hasWeb3FormsKey(form)) {
-        showSubmissionError(form, 'Online submission is temporarily unavailable. Your answers are still on this page.');
-        return;
-      }
-      submitToWeb3Forms(form).then(done).catch(function () {
-        showSubmissionError(form, 'We could not send your brief. Your answers are still on this page, so please try again.');
-      });
+      if (/^[0-9a-f-]{20,}$/i.test(key)) {
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) }).then(done).catch(done);
+      } else { done(); }
     });
     show(0);
   });
@@ -191,25 +149,16 @@
       var email = form.querySelector('input[type="email"]');
       if (email && !email.checkValidity()) { email.reportValidity(); return; }
       var ok = form.querySelector('[data-form-success]');
+      var key = (form.querySelector('[name="access_key"]') || {}).value || '';
       var done = function () {
         var row = form.querySelector('.sub-row'), fine = form.querySelector('.sub-fine');
         if (row) row.style.display = 'none';
         if (fine) fine.style.display = 'none';
         if (ok) ok.hidden = false;
       };
-      var button = form.querySelector('button[type="submit"]');
-      var buttonHtml = button ? button.innerHTML : '';
-      clearSubmissionError(form);
-      if (!hasWeb3FormsKey(form)) {
-        showSubmissionError(form, 'Email signup is temporarily unavailable. We have not added your address.');
-        return;
-      }
-      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
-      submitToWeb3Forms(form).then(done).catch(function () {
-        showSubmissionError(form, 'We could not add your email. Please try again.');
-      }).then(function () {
-        if (button) { button.disabled = false; button.innerHTML = buttonHtml; }
-      });
+      if (/^[0-9a-f-]{20,}$/i.test(key)) {
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) }).then(done).catch(done);
+      } else { done(); }
     });
   });
 
@@ -289,4 +238,197 @@
       if (ok) { ok.hidden = false; ok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
     });
   });
+})();
+
+/* ==========================================================================
+   Venue index. Shared across every destination page.
+   Each city page carries a <script type="application/json" id="vidx-data">
+   island and an empty .vidx shell. This renders, filters and sorts it.
+   Adding a new city means adding data, not code.
+   ========================================================================== */
+(function () {
+  'use strict';
+  var doc = document;
+  var island = doc.getElementById('vidx-data');
+  var root = doc.getElementById('vidx');
+  if (!island || !root) return;
+
+  var VENUES;
+  try { VENUES = JSON.parse(island.textContent); } catch (e) { return; }
+  if (!VENUES || !VENUES.length) return;
+
+  var city = root.getAttribute('data-city') || '';
+  var tbody = doc.getElementById('vidx-body');
+  var countEl = doc.getElementById('vidx-count');
+  var fCap = doc.getElementById('vidx-cap');
+  var fSetup = doc.getElementById('vidx-setup');
+  var fPrec = doc.getElementById('vidx-prec');
+  var fType = doc.getElementById('vidx-type');
+  var resetBtn = doc.getElementById('vidx-reset');
+  if (!tbody || !fCap || !fSetup || !fPrec || !fType) return;
+
+  var TYPE_LABEL = { conv: 'Convention centre', hotel: 'Hotel', event: 'Event venue' };
+  var sortKey = 'cap';
+  var sortDir = -1;
+
+  var fmt = function (n) {
+    return (n === null || n === undefined) ? null : n.toLocaleString('en-AU');
+  };
+  var cell = function (n) {
+    var v = fmt(n);
+    return v === null ? '<span class="vidx-none">Not published</span>' : v;
+  };
+  var capOf = function (v) {
+    var n = v[fSetup.value];
+    return (n === null || n === undefined) ? null : n;
+  };
+
+  /* Precinct options, built from the data so a new city needs no edits here */
+  var precincts = [];
+  VENUES.forEach(function (v) { if (precincts.indexOf(v.pr) === -1) precincts.push(v.pr); });
+  precincts.sort().forEach(function (p) {
+    var o = doc.createElement('option');
+    o.value = p; o.textContent = p;
+    fPrec.appendChild(o);
+  });
+
+  /* At a glance rail, derived from the data so it can never contradict the table */
+  (function stats() {
+    var box = doc.getElementById('vidx-stats');
+    if (!box) return;
+    var caps = VENUES.map(function (v) { return v.th; }).filter(function (n) { return n; });
+    var big = Math.max.apply(null, caps);
+    var precs = [];
+    VENUES.forEach(function (v) { if (precs.indexOf(v.pr) === -1) precs.push(v.pr); });
+    var over1000 = caps.filter(function (n) { return n >= 1000; }).length;
+    var beds = VENUES.filter(function (v) { return v.gr; }).length;
+    var rows = [
+      [VENUES.length, '', 'Major ' + city + ' venues with published capacities'],
+      [big.toLocaleString('en-AU'), 'seats', 'Largest single space in ' + city + ', theatre style'],
+      [over1000, '', 'Venues that hold 1,000 or more in one room'],
+      [beds, '', 'Venues where delegates sleep on the same site']
+    ];
+    box.innerHTML = '<span class="vidx-stats__tag">' + city + ' at a glance</span>' +
+      rows.map(function (r) {
+        return '<div class="vidx-stat"><div class="vidx-stat__n">' + r[0] +
+          (r[1] ? '<small>' + r[1] + '</small>' : '') + '</div>' +
+          '<div class="vidx-stat__l">' + r[2] + '</div></div>';
+      }).join('');
+  })();
+
+  function render() {
+    var minCap = +fCap.value;
+    var prec = fPrec.value;
+    var type = fType.value;
+    var setupLabel = fSetup.options[fSetup.selectedIndex].text.toLowerCase();
+    var hiddenForNoData = 0;
+
+    var rows = VENUES.filter(function (v) {
+      if (prec && v.pr !== prec) return false;
+      if (type && v.ty !== type) return false;
+      var c = capOf(v);
+      if (c === null) {
+        /* Venue does not publish this setup. Keep it visible at "any size",
+           hide it only when the planner has set a capacity floor. */
+        if (minCap > 0) { hiddenForNoData++; return false; }
+        return true;
+      }
+      return c >= minCap;
+    });
+
+    rows.sort(function (a, b) {
+      var x, y;
+      if (sortKey === 'cap') { x = capOf(a); y = capOf(b); }
+      else { x = a[sortKey]; y = b[sortKey]; }
+      if (x === null || x === undefined) return 1;   /* nulls always last */
+      if (y === null || y === undefined) return -1;
+      if (typeof x === 'string') return x.localeCompare(y) * sortDir;
+      return (x - y) * sortDir;
+    });
+
+    if (countEl) {
+      if (rows.length) {
+        countEl.innerHTML = '<span><b>' + rows.length + '</b> of ' + VENUES.length + ' ' +
+          city + ' venues match, largest ' + setupLabel + ' capacity first.</span>' +
+          (hiddenForNoData ? '<span class="vidx-hidden">' + hiddenForNoData +
+            ' more ' + (hiddenForNoData === 1 ? 'venue does' : 'venues do') +
+            ' not publish a ' + setupLabel + ' capacity. Ask us and we will confirm ' +
+            (hiddenForNoData === 1 ? 'it' : 'them') + ' with the venue.</span>' : '');
+      } else {
+        countEl.innerHTML = '<span>No venues in the index match those filters.</span>';
+      }
+    }
+
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="7"><div class="vidx-empty">Nothing in the index matches that brief. ' +
+        'That does not mean nothing in ' + city + ' does. ' +
+        '<a href="submit-a-brief.html">Send us the brief</a> and we will go looking.</div></td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map(function (v) {
+      var t = TYPE_LABEL[v.ty] || '';
+      return '<tr>' +
+        '<td class="vidx-c-name">' +
+          '<div class="vidx-name">' + v.n + '</div>' +
+          '<div class="vidx-space">' + v.sp + '</div>' +
+          (t ? '<span class="vidx-tag vidx-tag--' + v.ty + '">' + t + '</span>' : '') +
+        '</td>' +
+        '<td data-l="Precinct">' + v.pr + '</td>' +
+        '<td class="num" data-l="Largest space"><span class="vidx-cap">' + cell(capOf(v)) + '</span>' +
+          '<div class="vidx-setup">' + setupLabel + '</div></td>' +
+        '<td class="num" data-l="Banquet">' + cell(v.bq) + '</td>' +
+        '<td class="num" data-l="Meeting rooms">' + cell(v.br) + '</td>' +
+        '<td class="num" data-l="Guest rooms">' +
+          (v.gr === 0 ? '<span class="vidx-none">None</span>' : cell(v.gr)) + '</td>' +
+        '<td class="vidx-c-suit"><div class="vidx-suit">' + v.note + '</div></td>' +
+        '<td class="vidx-c-enq"><a class="vidx-enq" href="submit-a-brief.html?dest=' +
+          encodeURIComponent(city) + '&venue=' + encodeURIComponent(v.n) + '">Enquire' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (th) {
+    var setState = function () {
+      doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (o) {
+        o.classList.remove('asc', 'desc');
+        o.setAttribute('aria-sort', 'none');
+        var a = o.querySelector('.vidx-arr'); if (a) a.textContent = '↕';
+      });
+      th.classList.add(sortDir === 1 ? 'asc' : 'desc');
+      th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+      var arr = th.querySelector('.vidx-arr');
+      if (arr) arr.textContent = sortDir === 1 ? '↑' : '↓';
+    };
+    th.addEventListener('click', function () {
+      var k = th.getAttribute('data-k');
+      if (sortKey === k) { sortDir *= -1; }
+      else { sortKey = k; sortDir = (k === 'n' || k === 'pr') ? 1 : -1; }
+      setState();
+      render();
+    });
+    th.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); th.click(); }
+    });
+  });
+
+  [fCap, fSetup, fPrec, fType].forEach(function (el) {
+    el.addEventListener('change', render);
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function () {
+      fCap.value = '0'; fSetup.value = 'th'; fPrec.value = ''; fType.value = '';
+      sortKey = 'cap'; sortDir = -1;
+      doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (o) {
+        o.classList.remove('asc', 'desc');
+        o.setAttribute('aria-sort', 'none');
+        var a = o.querySelector('.vidx-arr'); if (a) a.textContent = '↕';
+      });
+      render();
+    });
+  }
+
+  render();
 })();

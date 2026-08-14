@@ -68,6 +68,19 @@
   </div>
   <div class="scroll"><span>Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M6 14l6 6 6-6"/></svg></div>
 </header>
+<script>
+(function(){
+  var go=document.getElementById('heroBriefGo'); if(!go) return;
+  var val=function(id){var el=document.getElementById(id);return el?encodeURIComponent(el.value.trim()):'';};
+  go.addEventListener('click',function(e){
+    var t=document.querySelector('.hero .toggle');
+    var accom=(t&&t.classList.contains('on'))?'1':'0';
+    e.preventDefault();
+    location.href='submit-a-brief.html?dest='+val('h-dest')+'&guests='+val('h-guests')+'&type='+val('h-type')+'&accom='+accom;
+  });
+})();
+</script>
+
 <section class="s-white" style="padding-top:0;padding-bottom:0"><div class="wrap">
   <div class="brief-bar reveal">
     <div class="brief-bar__head">
@@ -242,18 +255,18 @@
         <p class="offer__venue">Hyatt Place Melbourne, Caribbean Park</p>
         <ul class="offer__list"><li>Free value-add on events from $5,000</li><li>Group stays: up to 30,000 points and a free room per 20 booked</li><li>171 rooms set in 275 acres of parkland</li></ul>
         <div class="offer__foot"><span class="offer__valid">Bookings held 23 Jun – 31 Aug 2026</span>
-          <a class="link-arrow" href="submit-a-brief.html?offer=Hyatt%20Place%20Melbourne%2C%20Caribbean%20Park">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <a class="link-arrow" href="submit-a-brief.html">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       </div>
     </article>
 <article class="offer reveal">
       <div class="offer__media" style="background:linear-gradient(150deg,#3BC9D9,#0A2C52)"><img src="assets/img/offers/hamilton-island.jpg" alt="Hamilton Island" loading="lazy" onerror="this.remove()"><span class="offer__pin">Whitsundays, QLD</span></div>
       <div class="offer__pad">
-        <div class="offer__brandrow"><span class="offer__brand offer__brand--text">Hamilton Island</span><span class="offer__tag">Limited offer</span></div>
+        <div class="offer__brandrow"><img class="offer__brand" src="assets/img/offers/hamilton-logo.jpg" alt="Hamilton Island" loading="lazy" onerror="this.remove()"><span class="offer__tag">Limited offer</span></div>
         <h3 class="offer__deal">Reduced rates, plus complimentary rooms and upgrades</h3>
         <p class="offer__venue">Hamilton Island</p>
         <ul class="offer__list"><li>Special CVBS rates on Sept & Oct 2026 dates</li><li>Complimentary rooms, upgrades and an organiser's buggy</li><li>Conference facilities for up to 700 delegates</li></ul>
         <div class="offer__foot"><span class="offer__valid">Select dates · Sep–Oct 2026</span>
-          <a class="link-arrow" href="submit-a-brief.html?offer=Hamilton%20Island">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <a class="link-arrow" href="submit-a-brief.html">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       </div>
     </article>
 <article class="offer reveal">
@@ -264,7 +277,7 @@
         <p class="offer__venue">Ace Hotel Sydney</p>
         <ul class="offer__list"><li>Free AV package: projector, screens and mics</li><li>Coffee cart or complimentary barista coffees</li><li>Boutique event spaces: Brick, Clay and Tyne</li></ul>
         <div class="offer__foot"><span class="offer__valid">Events to arrive by 31 Aug 2026</span>
-          <a class="link-arrow" href="submit-a-brief.html?offer=Ace%20Hotel%20Sydney">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <a class="link-arrow" href="submit-a-brief.html">Enquire <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
       </div>
     </article>
     </div>
