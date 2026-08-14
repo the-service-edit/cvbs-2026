@@ -315,6 +315,8 @@
   var fSetup = doc.getElementById('vidx-setup');
   var fPrec = doc.getElementById('vidx-prec');
   var fType = doc.getElementById('vidx-type');
+  var fQ = doc.getElementById('vidx-q');
+  var fAccom = doc.getElementById('vidx-accom');
   var resetBtn = doc.getElementById('vidx-reset');
   if (!tbody || !fCap || !fSetup || !fPrec || !fType) return;
 
@@ -394,12 +396,17 @@
     var minCap = +fCap.value;
     var prec = fPrec.value;
     var type = fType.value;
+    var q = fQ ? fQ.value.trim().toLowerCase() : '';
+    var accom = fAccom ? fAccom.value : '';
     var setupLabel = fSetup.options[fSetup.selectedIndex].text.toLowerCase();
     var hiddenForNoData = 0;
 
     var rows = VENUES.filter(function (v) {
       if (prec && v.pr !== prec) return false;
       if (type && v.ty !== type) return false;
+      if (q && (v.n + ' ' + v.sp + ' ' + v.pr).toLowerCase().indexOf(q) === -1) return false;
+      if (accom === 'yes' && !v.gr) return false;
+      if (accom === 'no' && v.gr) return false;
       var c = capOf(v);
       if (c === null) {
         /* Venue does not publish this setup. Keep it visible at "any size",
@@ -421,7 +428,7 @@
       return (x - y) * sortDir;
     });
 
-    var filtered = (minCap > 0 || prec || type);
+    var filtered = (minCap > 0 || prec || type || q || accom);
     var limited = !filtered && !showAll && rows.length > DEFAULT_SHOWN;
     var shown = limited ? DEFAULT_SHOWN : rows.length;
 
@@ -507,6 +514,36 @@
       '</td></tr>';
     }).join('');
 
+    var hand = doc.getElementById('vidx-handoff');
+    if (hand) {
+      if (filtered && rows.length) {
+        var bits = [];
+        if (minCap) bits.push(minCap + '+ delegates');
+        bits.push(setupLabel);
+        if (prec) bits.push(prec);
+        if (type) bits.push(({conv:'convention centre', hotel:'hotel', event:'dedicated event venue'})[type]);
+        if (accom === 'yes') bits.push('accommodation on site');
+        if (accom === 'no') bits.push('venue only');
+        if (q) bits.push('matching "' + fQ.value.trim() + '"');
+        var href = 'submit-a-brief.html?dest=' + encodeURIComponent(city) +
+          (minCap ? '&guests=' + encodeURIComponent(minCap) : '') +
+          (accom === 'yes' ? '&accom=1' : '') +
+          '&filters=' + encodeURIComponent(bits.join(', ')) +
+          '&matched=' + encodeURIComponent(rows.slice(0, 8).map(function (v) { return v.n; }).join('; '));
+        hand.innerHTML =
+          '<p class="vidx-handoff__q"><b>' + rows.length + ' ' +
+            (rows.length === 1 ? 'venue matches' : 'venues match') +
+            '.</b> Want us to check availability on your dates and negotiate them?</p>' +
+          '<p class="vidx-handoff__s">' + bits.join(' &middot; ') + '</p>' +
+          '<a class="btn btn--teal" href="' + href + '">Check these venues for me' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+        hand.hidden = false;
+      } else {
+        hand.hidden = true;
+        hand.innerHTML = '';
+      }
+    }
+
     var sa = doc.getElementById('vidx-showall');
     if (sa) sa.addEventListener('click', function () { showAll = !showAll; render(); });
 
@@ -544,13 +581,18 @@
     });
   });
 
-  [fCap, fSetup, fPrec, fType].forEach(function (el) {
-    el.addEventListener('change', render);
+  [fCap, fSetup, fPrec, fType, fAccom].forEach(function (el) {
+    if (el) el.addEventListener('change', render);
   });
+  if (fQ) {
+    var t;
+    fQ.addEventListener('input', function () { clearTimeout(t); t = setTimeout(render, 160); });
+  }
 
   if (resetBtn) {
     resetBtn.addEventListener('click', function () {
       fCap.value = '0'; fSetup.value = 'th'; fPrec.value = ''; fType.value = '';
+      if (fQ) fQ.value = ''; if (fAccom) fAccom.value = '';
       showAll = false;
       sortKey = 'cap'; sortDir = -1;
       doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (o) {

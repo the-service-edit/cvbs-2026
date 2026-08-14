@@ -624,5 +624,24 @@
   }
 })();
 </script>
+<script>
+/* Carry a whole filtered result set through from the venue index */
+(function(){
+  var p=new URLSearchParams(location.search);
+  var f=p.get('filters'); if(!f) return;
+  var clean=function(v){return v?v.replace(/[<>]/g,'').slice(0,400):'';};
+  f=clean(f);
+  var matched=clean(p.get('matched'));
+  var dest=clean(p.get('dest')).slice(0,80);
+  var subj=document.querySelector('input[name="subject"]');
+  if(subj) subj.value='Venue index enquiry'+(dest?': '+dest:'');
+  var n=document.getElementById('notes');
+  if(n){
+    n.value='From the '+(dest?dest+' ':'')+'venue index. I filtered for: '+f+'.'+
+      (matched?' That returned: '+matched+'.':'')+
+      ' Please check availability on my dates and come back with rates.';
+  }
+})();
+</script>
 </body>
 </html>

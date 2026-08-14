@@ -553,3 +553,42 @@ VENUES = [
    src2="https://ovolohotels.com/events/"),
 
 ]
+# ---------------------------------------------------------------------------
+# CLAIMS REGISTER
+# Every qualitative superlative used in the answer block or the venue notes.
+# These age faster than capacities do. Re-verify each before any copy review.
+# ---------------------------------------------------------------------------
+CLAIMS = [
+ dict(claim="ICC Sydney's Grand Ballroom is the largest ballroom in Australia",
+      source="https://iccsydney.com.au/organisers/banquets-cocktail/",
+      note="ICC's own marketing claim, attributed as such on the page. Not independently verified.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="Above 2,000 seated in one room, Sydney has four options and none is a hotel",
+      source="Derived from this data set; the four are Sydney Showground, ICC Sydney, Sydney Opera House, Sydney Town Hall",
+      note="Refuted once already. The first draft missed Town Hall, the Opera House and the Hordern. Re-run the check whenever a venue is added.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="The Fullerton has the largest pillarless hotel ballroom in Sydney",
+      source="https://www.fullertonhotels.com/fullerton-hotel-sydney/meetings-and-events/the-grand-ballroom",
+      note="The hotel's own claim. Checked against Hilton 1,100, Hyatt 850sqm, Sofitel Wentworth 629sqm. The Star's 1,077sqm room is larger but is an event centre, not a hotel ballroom, so the qualifier is load bearing. Do not drop the word hotel.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="Hilton Sydney and Hyatt Regency are the only other Sydney hotels seating 1,000+ in one room",
+      source="Derived from this data set across 53 venues",
+      note="Re-derive whenever a hotel is added or refurbished.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="Hyatt Regency Sydney is Australia's largest hotel by room count (878)",
+      source="https://www.hyatt.com/en-US/hotel/australia/hyatt-regency-sydney/sydrs",
+      note="Was true at time of check. A larger hotel opening anywhere in Australia breaks it.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="ICC Sydney is the only Sydney venue that can run a plenary, a trade exhibition and concurrent breakouts on the same day",
+      source="Derived: 32,600sqm exhibition halls plus 70 meeting rooms plus two 2,500+ plenary spaces",
+      note="Sydney Showground could arguably contest this. Softening to 'the only venue in the CBD' would be safer if challenged.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="Sydney Town Hall's Centennial Hall is the largest conference plenary in the CBD",
+      source="https://www.cityofsydney.nsw.gov.au/-/media/corporate/files/places-and-spaces/sydney-town-hall/venue-specifications-2025-06.pdf",
+      note="2,008 across floor and galleries. True within this data set for the Sydney CBD precinct.",
+      verified="2026-08-14", review="2027-02-14"),
+ dict(claim="No venue pays to appear in this index",
+      source="CVBS editorial policy",
+      note="Must remain true. The moment a venue pays for placement, this line has to come off the page.",
+      verified="2026-08-14", review="ongoing"),
+]

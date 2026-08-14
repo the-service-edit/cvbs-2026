@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/venue-hero-1600.webp?v=202608141600">
+<link rel="preload" as="image" href="assets/img/dest/dest-sydney-1000.webp?v=202608141600" imagesrcset="assets/img/dest/dest-sydney-640.webp 640w, assets/img/dest/dest-sydney-1000.webp 1000w, assets/img/dest/dest-sydney-1600.webp 1600w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/site.css?v=202608141600">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Destinations", "item": "https://the-service-edit.github.io/cvbs-2026/destinations.html"}, {"@type": "ListItem", "position": 3, "name": "Sydney", "item": "https://the-service-edit.github.io/cvbs-2026/venue-finder-sydney.html"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "serviceType": "Venue finding in Sydney", "provider": {"@type": "Organization", "name": "Conference Venues and Booking Services"}, "areaServed": ["Australia", "Worldwide"], "description": "Sourcing conference venues, group accommodation and event spaces across Sydney, CBD, harbourside and beyond. Negotiated rates, free to you.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD", "description": "Free to the client, CVBS is paid by the venue."}}</script>
@@ -49,13 +49,24 @@
 <main id="main">
 
 <section class="page-hero page-hero--img">
-  <img class="ph-bg" src="assets/img/dest/dest-sydney.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+  <picture>
+    <source type="image/webp" srcset="assets/img/dest/dest-sydney-640.webp 640w, assets/img/dest/dest-sydney-1000.webp 1000w, assets/img/dest/dest-sydney-1600.webp 1600w" sizes="100vw">
+    <img class="ph-bg" src="assets/img/dest/dest-sydney-1000.jpg" srcset="assets/img/dest/dest-sydney-640.jpg 640w, assets/img/dest/dest-sydney-1000.jpg 1000w, assets/img/dest/dest-sydney-1600.jpg 1600w" sizes="100vw" width="1536" height="1024" alt="" aria-hidden="true" fetchpriority="high" onerror="this.style.display='none'">
+  </picture>
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="destinations.html">Destinations</a><span>/</span><b style="color:inherit;font-weight:500">Sydney</b></nav>
     <span class="eyebrow" style="margin-top:1.2rem">Sydney · Venue finding</span>
     <h1>Conference & Event Venues in Sydney</h1>
     <p class="lead">Sourcing conference venues, group accommodation and event spaces across Sydney, CBD, harbourside and beyond. Negotiated rates, free to you.</p>
-    <a class="link-arrow mt-2" href="#venue-index">See the Sydney venue capacities <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="cta-row mt-2">
+      <a class="btn btn--teal" href="submit-a-brief.html?dest=Sydney">Start your Sydney brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--ghost" href="#venue-index" style="color:#fff;border-color:rgba(255,255,255,.4)">Explore Sydney venues</a>
+    </div>
+    <div class="hero-proofs">
+      <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg> Venue finding since 1989</div>
+      <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Shortlist within 48 hours</div>
+      <div class="pf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2.2 2.6 5 3 5 1.1 5 3-2.2 3-5 3-5-1.1-5-3"/></svg> Free to you, paid by the venue</div>
+    </div>
   </div>
 </section>
 <section class="s-white"><div class="wrap hero-grid" style="align-items:start">
@@ -81,88 +92,6 @@
     </div>
   </div>
 </section>
-<section class="s-white pad"><div class="wrap wrap--narrow">
-  <div class="section-head"><span class="eyebrow">Where to start</span><h2 class="h2">Not sure where in Sydney your event belongs?</h2>
-    <p class="lead">A quick steer, based on what you are running. Tell us the detail and we will shortlist what suits it, rather than the obvious names.</p></div>
-  <div class="dl"><div class="dl-row"><div class="dl-need">Large conferences and exhibitions</div><div class="dl-pick">ICC Sydney, Hyatt Regency, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Premium gala dinners</div><div class="dl-pick">Shangri-La, Crown Sydney, Sofitel</div></div><div class="dl-row"><div class="dl-need">Residential conferences (delegates stay on site)</div><div class="dl-pick">Hyatt Regency, Sofitel, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Fly-in, fly-out meetings</div><div class="dl-pick">Sydney Airport precinct hotels</div></div><div class="dl-row"><div class="dl-need">Brand events and product launches</div><div class="dl-pick">W Sydney, Doltone House, harbourside venues</div></div></div>
-</div></section>
-<section class="s-stone pad"><div class="wrap">
-  <div class="section-head"><span class="eyebrow">Featured venues</span><h2 class="h2">A closer look at a few we know well.</h2>
-    <p class="lead">Venues we have worked with for years, and what each one is really good for. We source right across the market, so treat this as a starting point rather than a list.</p></div>
-  <div class="vfeat"><article class="vrow reveal">
-      <div class="vrow__media"><img src="assets/img/venues/icc-sydney.jpg" alt="ICC Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>ICC Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">01 / Featured venue</div>
-        <h3 class="vrow__name">ICC Sydney</h3>
-        <div class="vrow__meta">Darling Harbour · 70 meeting rooms · Grand Ballroom to 2,784 theatre</div>
-        <p class="vrow__desc">Australia's premier convention and exhibition centre, home to Australia's largest ballroom at 2,784 theatre under a 9 metre ceiling, 70 meeting rooms and 32,600 square metres of exhibition halls. Built for large-scale conferences, exhibitions and summits.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about ICC Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal alt">
-      <div class="vrow__media"><img src="assets/img/venues/hyatt-regency-sydney.jpg" alt="Hyatt Regency Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Hyatt Regency Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">02 / Featured venue</div>
-        <h3 class="vrow__name">Hyatt Regency Sydney</h3>
-        <div class="vrow__meta">Darling Harbour · 878 rooms · two ballrooms, each to 1,000 theatre</div>
-        <p class="vrow__desc">Australia's largest hotel, suited to big residential conferences where delegates stay on site, with extensive event space beside the water.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Hyatt Regency Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal">
-      <div class="vrow__media"><img src="assets/img/venues/sofitel-sydney-darling-harbour.jpg" alt="Sofitel Sydney Darling Harbour, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Sofitel Sydney Darling Harbour</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">03 / Featured venue</div>
-        <h3 class="vrow__name">Sofitel Sydney Darling Harbour</h3>
-        <div class="vrow__meta">Darling Harbour · 590 rooms · Magnifique Ballroom to 450 theatre</div>
-        <p class="vrow__desc">Directly opposite ICC Sydney, a natural accommodation and gala-dinner partner for convention-centre events.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Sofitel Sydney Darling Harbour <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal alt">
-      <div class="vrow__media"><img src="assets/img/venues/shangri-la-sydney.jpg" alt="Shangri-La Sydney, The Rocks, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Shangri-La Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">04 / Featured venue</div>
-        <h3 class="vrow__name">Shangri-La Sydney</h3>
-        <div class="vrow__meta">The Rocks · 564 rooms · Grand Ballroom to 800 theatre</div>
-        <p class="vrow__desc">Harbour-view luxury with a flexible grand ballroom, well suited to premium conferences and gala dinners overlooking the bridge and Opera House.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Shangri-La Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal">
-      <div class="vrow__media"><img src="assets/img/venues/the-fullerton-sydney.jpg" alt="The Fullerton Hotel Sydney, Sydney CBD, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>The Fullerton Hotel Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">05 / Featured venue</div>
-        <h3 class="vrow__name">The Fullerton Hotel Sydney</h3>
-        <div class="vrow__meta">Sydney CBD · 416 rooms · Grand Ballroom to 1,400 theatre, 1,058 sqm</div>
-        <p class="vrow__desc">Heritage grandeur in the former GPO on Martin Place, with the largest pillarless hotel ballroom in Sydney. Suited to galas, conferences and prestige functions in the CBD.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about The Fullerton Hotel Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal alt">
-      <div class="vrow__media"><img src="assets/img/venues/w-sydney.jpg" alt="W Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>W Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">06 / Featured venue</div>
-        <h3 class="vrow__name">W Sydney</h3>
-        <div class="vrow__meta">Darling Harbour · 588 rooms · Great Room to 500 theatre</div>
-        <p class="vrow__desc">A design-led waterfront hotel on Darling Harbour, modern and style-forward, well suited to product launches, brand events and conferences that want a contemporary edge.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about W Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal">
-      <div class="vrow__media"><img src="assets/img/venues/crown-sydney.jpg" alt="Crown Sydney, Barangaroo, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Crown Sydney</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">07 / Featured venue</div>
-        <h3 class="vrow__name">Crown Sydney</h3>
-        <div class="vrow__meta">Barangaroo · 349 rooms · Pearl Ballroom to 390 theatre</div>
-        <p class="vrow__desc">Six-star luxury for high-end executive meetings, board retreats and prestige functions on the Barangaroo waterfront.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Crown Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal alt">
-      <div class="vrow__media"><img src="assets/img/venues/doltone-house.jpg" alt="Doltone House, Jones Bay Wharf, Hyde Park & more, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Doltone House</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">08 / Featured venue</div>
-        <h3 class="vrow__name">Doltone House</h3>
-        <div class="vrow__meta">Jones Bay Wharf, Hyde Park & more · Heritage Wharf to 900 theatre</div>
-        <p class="vrow__desc">A dedicated events specialist rather than a hotel, with harbour and city settings for boardroom meetings through to large conferences and functions.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Doltone House <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article><article class="vrow reveal">
-      <div class="vrow__media"><img src="assets/img/venues/the-star-event-centre.jpg" alt="Sydney Event Centre, Pyrmont, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Sydney Event Centre</div>'"></div>
-      <div class="vrow__body">
-        <div class="vrow__num">09 / Featured venue</div>
-        <h3 class="vrow__name">Sydney Event Centre</h3>
-        <div class="vrow__meta">Pyrmont · Main Room to 1,460 theatre, 2,200 cocktail</div>
-        <p class="vrow__desc">A large-scale event venue at The Star precinct in Pyrmont, formerly The Star Event Centre, used for gala dinners, awards nights, exhibitions and conferences, with 2,200 standing in the main room.</p>
-        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Sydney Event Centre <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div></article></div>
-</div></section>
 <section class="s-white pad" id="venue-index">
   <div class="wrap">
     <div class="section-head"><span class="eyebrow">Sydney venue index</span>
@@ -171,6 +100,8 @@
 
     <div class="vidx" id="vidx" data-city="Sydney">
       <div class="vidx-controls">
+        <div class="vidx-ctl"><label for="vidx-q">Search by name</label>
+          <input type="search" id="vidx-q" placeholder="ICC, Hyatt, Darling Harbour" autocomplete="off"></div>
         <div class="vidx-ctl"><label for="vidx-cap">Minimum capacity</label>
           <select id="vidx-cap"><option value="0">Any size</option><option value="50">50+</option><option value="100">100+</option><option value="200">200+</option><option value="400">400+</option><option value="800">800+</option><option value="1500">1,500+</option></select></div>
         <div class="vidx-ctl"><label for="vidx-setup">Room setup</label>
@@ -179,10 +110,13 @@
           <select id="vidx-prec"><option value="">All precincts</option></select></div>
         <div class="vidx-ctl"><label for="vidx-type">Venue type</label>
           <select id="vidx-type"><option value="">Any type</option><option value="conv">Convention centre</option><option value="hotel">Hotel</option><option value="event">Dedicated event venue</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-accom">Accommodation</label>
+          <select id="vidx-accom"><option value="">Any</option><option value="yes">Rooms on site</option><option value="no">Venue only</option></select></div>
         <button class="vidx-reset" id="vidx-reset" type="button">Reset filters</button>
       </div>
 
       <div class="vidx-count" id="vidx-count" role="status" aria-live="polite"></div>
+      <div class="vidx-handoff" id="vidx-handoff" hidden></div>
       <p class="vidx-sortnote">Sorted by capacity. Use the filters above to narrow the list.</p>
 
       <div class="vidx-scroll">
@@ -207,20 +141,135 @@
     </div>
   </div>
 </section>
+<section class="s-stone pad" id="sydney-brief-solved">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">What we actually do with it</span>
+      <h2 class="h2">A Sydney brief, solved.</h2>
+      <p class="lead">The index tells you what the rooms hold. This is the part that is not published anywhere.</p></div>
+    <div class="brief-proof">
+      <div class="brief-card reveal">
+        <span class="brief-card__tag">An example brief</span>
+        <dl>
+          <div class="brief-card__row"><dt>Delegates</dt><dd>120</dd></div>
+          <div class="brief-card__row"><dt>Format</dt><dd>Three day residential conference</dd></div>
+          <div class="brief-card__row"><dt>Location</dt><dd>Sydney CBD</dd></div>
+          <div class="brief-card__row"><dt>Accommodation</dt><dd>Required, on site</dd></div>
+          <div class="brief-card__row"><dt>Breakouts</dt><dd>Six concurrent rooms</dd></div>
+          <div class="brief-card__row"><dt>Dates</dt><dd>Peak season, fixed</dd></div>
+        </dl>
+      </div>
+      <div class="brief-steps reveal" data-d="1">
+        <div class="brief-step">
+          <h3>We read it against what we already know</h3>
+          <p>Six concurrent breakouts plus 120 beds on one site rules out most of the CBD immediately. That is a judgement about inventory, not a search result.</p>
+        </div>
+        <div class="brief-step">
+          <h3>Four venues shortlisted inside 48 hours</h3>
+          <p>Costed, compared like for like, on one page. Not four separate venue proposals in four different formats for you to reconcile.</p>
+        </div>
+        <div class="brief-step">
+          <h3>We negotiate the conference and the rooms together</h3>
+          <p>Room nights are the leverage. Packaging accommodation with the conference is what moves the rate, and it is why we ask about beds before we ask about budget.</p>
+        </div>
+        <div class="brief-step">
+          <h3>You choose. We hold the venue.</h3>
+          <p>Contracting, rooming lists and the run of show stay with the same person who took your brief.</p>
+        </div>
+        <div class="brief-outcome">
+          <span class="brief-outcome__tag">Karen to supply</span>
+          <p>This is where a real, substantiated Sydney outcome belongs: a negotiated saving, a percentage below the venue's opening proposal, added inclusions, or a room secured in a period that was showing as full. One verifiable number does more here than any amount of copy. The brief above is illustrative and is labelled as such until that number lands.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="s-white pad"><div class="wrap wrap--narrow">
+  <div class="section-head"><span class="eyebrow">Where to start</span><h2 class="h2">Not sure where in Sydney your event belongs?</h2>
+    <p class="lead">A quick steer, based on what you are running. Tell us the detail and we will shortlist what suits it, rather than the obvious names.</p></div>
+  <p class="muted" style="font-size:.86rem;margin:-.5rem 0 1.2rem">Based on venue suitability, not paid placement. No venue pays to be recommended here.</p>
+  <div class="dl"><div class="dl-row"><div class="dl-need">Large conferences and exhibitions</div><div class="dl-pick">ICC Sydney, Hyatt Regency, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Premium gala dinners</div><div class="dl-pick">Shangri-La, Crown Sydney, Sofitel</div></div><div class="dl-row"><div class="dl-need">Residential conferences (delegates stay on site)</div><div class="dl-pick">Hyatt Regency, Sofitel, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Fly-in, fly-out meetings</div><div class="dl-pick">Sydney Airport precinct hotels</div></div><div class="dl-row"><div class="dl-need">Brand events and product launches</div><div class="dl-pick">W Sydney, Doltone House, harbourside venues</div></div></div>
+</div></section>
 <section class="s-stone pad"><div class="wrap">
+  <div class="section-head"><span class="eyebrow">Featured venues</span><h2 class="h2">A closer look at a few we know well.</h2>
+    <p class="lead">Venues we have worked with for years, and what each one is really good for. We source right across the market, so treat this as a starting point rather than a list.</p></div>
+  <div class="vfeat"><article class="vrow reveal">
+      <div class="vrow__media"><img src="assets/img/venues/icc-sydney.jpg" alt="ICC Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>ICC Sydney</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">01 / Featured venue</div>
+        <h3 class="vrow__name">ICC Sydney</h3>
+        <div class="vrow__meta">Darling Harbour · 70 meeting rooms · Grand Ballroom to 2,784 theatre</div>
+        <p class="vrow__desc">Australia's premier convention and exhibition centre, home to Australia's largest ballroom at 2,784 theatre under a 9 metre ceiling, 70 meeting rooms and 32,600 square metres of exhibition halls. Built for large-scale conferences, exhibitions and summits.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about ICC Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article><article class="vrow reveal alt">
+      <div class="vrow__media"><img src="assets/img/venues/hyatt-regency-sydney.jpg" alt="Hyatt Regency Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Hyatt Regency Sydney</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">02 / Featured venue</div>
+        <h3 class="vrow__name">Hyatt Regency Sydney</h3>
+        <div class="vrow__meta">Darling Harbour · 878 rooms · two ballrooms, each to 1,000 theatre</div>
+        <p class="vrow__desc">Australia's largest hotel, suited to big residential conferences where delegates stay on site, with extensive event space beside the water.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Hyatt Regency Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article><article class="vrow reveal">
+      <div class="vrow__media"><img src="assets/img/venues/shangri-la-sydney.jpg" alt="Shangri-La Sydney, The Rocks, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Shangri-La Sydney</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">03 / Featured venue</div>
+        <h3 class="vrow__name">Shangri-La Sydney</h3>
+        <div class="vrow__meta">The Rocks · 564 rooms · Grand Ballroom to 800 theatre</div>
+        <p class="vrow__desc">Harbour-view luxury with a flexible grand ballroom, well suited to premium conferences and gala dinners overlooking the bridge and Opera House.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Shangri-La Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article><article class="vrow reveal alt">
+      <div class="vrow__media"><img src="assets/img/venues/the-fullerton-sydney.jpg" alt="The Fullerton Hotel Sydney, Sydney CBD, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>The Fullerton Hotel Sydney</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">04 / Featured venue</div>
+        <h3 class="vrow__name">The Fullerton Hotel Sydney</h3>
+        <div class="vrow__meta">Sydney CBD · 416 rooms · Grand Ballroom to 1,400 theatre, 1,058 sqm</div>
+        <p class="vrow__desc">Heritage grandeur in the former GPO on Martin Place, with the largest pillarless hotel ballroom in Sydney. Suited to galas, conferences and prestige functions in the CBD.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about The Fullerton Hotel Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article><article class="vrow reveal">
+      <div class="vrow__media"><img src="assets/img/venues/w-sydney.jpg" alt="W Sydney, Darling Harbour, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>W Sydney</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">05 / Featured venue</div>
+        <h3 class="vrow__name">W Sydney</h3>
+        <div class="vrow__meta">Darling Harbour · 588 rooms · Great Room to 500 theatre</div>
+        <p class="vrow__desc">A design-led waterfront hotel on Darling Harbour, modern and style-forward, well suited to product launches, brand events and conferences that want a contemporary edge.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about W Sydney <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article><article class="vrow reveal alt">
+      <div class="vrow__media"><img src="assets/img/venues/doltone-house.jpg" alt="Doltone House, Jones Bay Wharf, Hyde Park & more, Sydney" loading="lazy" onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>Doltone House</div>'"></div>
+      <div class="vrow__body">
+        <div class="vrow__num">06 / Featured venue</div>
+        <h3 class="vrow__name">Doltone House</h3>
+        <div class="vrow__meta">Jones Bay Wharf, Hyde Park & more · Heritage Wharf to 900 theatre</div>
+        <p class="vrow__desc">A dedicated events specialist rather than a hotel, with harbour and city settings for boardroom meetings through to large conferences and functions.</p>
+        <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Doltone House <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div></article></div>
+</div></section>
+<section class="s-white pad"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Local knowledge</span><h2 class="h2">Where in Sydney to hold it.</h2>
     <p class="lead">The precinct you choose shapes everything from how easily delegates arrive to what you will pay for dinner. These are the ones we source across most, and what each is good for.</p></div>
   <div class="grid g-3"><div class="card"><h3 class="h4">Sydney CBD</h3><p class="muted" style="margin-top:.35rem">The default for corporate conferences. Walkable to transport, accommodation and dining, with the widest choice of hotels and meeting space.</p></div><div class="card"><h3 class="h4">Darling Harbour</h3><p class="muted" style="margin-top:.35rem">Home to ICC Sydney and the largest conference hotels. The precinct for big conferences, exhibitions and residential programs.</p></div><div class="card"><h3 class="h4">Circular Quay</h3><p class="muted" style="margin-top:.35rem">Harbour-front prestige beside the Opera House and the ferries. Suited to premium events that want the postcard Sydney backdrop.</p></div><div class="card"><h3 class="h4">Barangaroo</h3><p class="muted" style="margin-top:.35rem">The newest waterfront precinct, anchored by Crown Sydney. Polished and corporate, good for executive events and high-end functions.</p></div><div class="card"><h3 class="h4">North Sydney</h3><p class="muted" style="margin-top:.35rem">Across the bridge and handy for north-shore teams, with a growing cluster of meeting hotels and easy transport.</p></div><div class="card"><h3 class="h4">Sydney Airport</h3><p class="muted" style="margin-top:.35rem">Mascot and the airport precinct suit fly-in, fly-out meetings and interstate delegates who land, meet and leave the same day.</p></div><div class="card"><h3 class="h4">Surry Hills and Central</h3><p class="muted" style="margin-top:.35rem">Creative, design-led spaces near Central station. A fit for brand events, launches and offsites with character.</p></div><div class="card"><h3 class="h4">The Rocks</h3><p class="muted" style="margin-top:.35rem">Historic harbourside Sydney, home to Shangri-La. Heritage atmosphere and harbour views for conferences and gala dinners.</p></div></div>
 </div></section>
-<section class="s-white pad"><div class="wrap">
+<section class="s-stone pad"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Why CVBS in Sydney</span><h2 class="h2">Local access, negotiated rates.</h2></div>
+  <div class="team-grid">
+    <div class="team-photo reveal">
+      <img src="assets/img/client-1.jpg" alt="Karen Jepson, Director, CVBS" loading="lazy" onerror="this.closest('.team-photo').remove()">
+    </div>
+    <div class="team-copy reveal" data-d="1">
+      <h3>One brief. A real person on the other end.</h3>
+      <p>Everything above this point is information. It is genuinely useful, and no other venue finder in Australia publishes it. But it is not the thing you are actually buying.</p>
+      <p>What you are buying is someone who has already had the conversation with the person who holds that room, knows what they will move on and when, and will pick up the phone rather than send you a portal login. Whoever takes your Sydney brief stays your point of contact from the first call through to the final invoice.</p>
+      <p class="who">Karen, Anthony, Chantelle and Rychelle<span>Sourcing Australian conference venues since 1989</span></p>
+      <div class="btn-row mt-2"><a class="btn btn--teal" href="submit-a-brief.html?dest=Sydney">Start your Sydney brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--ghost" href="about.html">Meet the team</a></div>
+    </div>
+  </div>
+
   <div class="grid g-3">
     <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13l2.5 2.5a2 2 0 0 0 2.8 0L20 9"/><path d="M4 7l4-2 4 2 4-2 4 2v6l-4 4"/></svg></div><h3 class="h4">We know who holds the rooms</h3><p>Direct relationships with Sydney hotel sales teams, venue general managers and event decision-makers, the people who hold the rooms and set the rates.</p></div>
     <div class="card reveal" data-d="1"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3 class="h4">48-hour shortlist</h3><p>Matching Sydney options, compared side by side, within two days.</p></div>
     <div class="card reveal" data-d="2"><div class="icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 class="h4">Free to you</h3><p>Paid by the venue, our Sydney sourcing costs you nothing.</p></div>
   </div>
 </div></section>
-<section class="s-stone pad"><div class="wrap wrap--narrow">
+<section class="s-white pad"><div class="wrap wrap--narrow">
       <div class="section-head center"><span class="eyebrow eyebrow--center">FAQ</span><h2 class="h2">Sydney venue finding, common questions</h2></div>
       <div class="faq reveal"><details><summary>How much does it cost to use CVBS to find a venue in Sydney?<span class="pm"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">Nothing. Our Sydney venue finding service is free to you, we're paid a standard commission by the venue you book, so you get our sourcing and negotiating at no cost, and usually at a better rate than booking direct.</div></details><details><summary>How quickly can you find Sydney venues?<span class="pm"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">We deliver a shortlist of matching Sydney venues within 48 hours of receiving your brief, with rates and inclusions ready to compare.</div></details><details><summary>Do you cover group accommodation in Sydney as well as venues?<span class="pm"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">Yes. We can package delegate or group accommodation in Sydney with your venue as a single negotiation, which often strengthens the rate on both.</div></details></div></div></section>
 <section class="cta-band pad">
@@ -234,24 +283,6 @@
 </section>
 
 </main>
-<section class="sub-band"><div class="wrap sub-inner">
-  <div class="sub-copy"><span class="eyebrow">Negotiated venue offers</span>
-    <h2 class="sub-title">Hear about the next one first.</h2>
-    <p class="sub-lead">Every so often we negotiate a rate or an inclusion worth knowing about. We send those to the people planning events, and nothing else.</p></div>
-  <form class="sub-form" data-subscribe action="https://api.web3forms.com/submit" method="POST">
-    <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
-    <input type="hidden" name="subject" value="New venue-offers subscriber">
-    <input type="hidden" name="from_name" value="CVBS website">
-    <input type="text" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <label class="sr-only" for="sub-email">Work email</label>
-    <div class="sub-row">
-      <input id="sub-email" type="email" name="email" required placeholder="Your work email" autocomplete="email">
-      <button type="submit" class="btn btn--teal">Send me offers <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    </div>
-    <p class="sub-ok" data-form-success hidden>Thank you, you are on the list. We will be in touch the next time we have something worth sharing.</p>
-    <p class="sub-fine">Occasional emails. Unsubscribe anytime. We use your email only for CVBS updates.</p>
-  </form>
-</div></section>
 <nav class="mbar" aria-label="Quick actions">
   <a class="mbar__call" href="tel:0414784999"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg> Call</a>
   <a class="mbar__cta btn btn--teal" href="submit-a-brief.html">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
