@@ -2,12 +2,4 @@
 _original-backup/
 Thumbs.db
 CVBS-Digital-Strategy.html
-public-dist/
-
-# Local safety net from the Aug 2026 copy rewrite
-_backup-pre-copy-rewrite/
-
-# Internal working documents, not for the repo
-CVBS-Copy-Rewrite-Audit.html
-CVBS-Rebuild-Assessment-Aug-2026.html
-CVBS-Prototype-Venue-Index.html
+CVBS-Digital-Strategy.html
