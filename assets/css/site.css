@@ -918,6 +918,11 @@ body.menu-open{overflow:hidden}
 .vidx-stat__n small{font-size:.42em;font-weight:600;color:var(--teal);letter-spacing:.02em;margin-left:.3rem}
 .vidx-stat__l{font-size:.82rem;color:rgba(255,255,255,.66);margin-top:.4rem;line-height:1.45}
 
+/* Boundary statement. Says what the index is not, which is what makes it an index. */
+.vidx-scope{margin-top:clamp(1.5rem,3vw,2.25rem);border-left:3px solid var(--stone-deep);padding:.15rem 0 .15rem 1.25rem;max-width:92ch}
+.vidx-scope p{font-size:.95rem;color:#4a5762;line-height:1.6}
+.vidx-scope b{color:var(--text);font-weight:600}
+
 /* Controls */
 .vidx-controls{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(1rem,2vw,1.35rem);display:grid;gap:.9rem;grid-template-columns:1fr;box-shadow:var(--shadow-sm);margin-top:clamp(1.75rem,3.5vw,2.5rem)}
 @media(min-width:640px){.vidx-controls{grid-template-columns:repeat(2,1fr)}}
@@ -946,12 +951,12 @@ body.menu-open{overflow:hidden}
   .vidx-table{min-width:1040px;table-layout:fixed}
   .vidx-table col.c-name{width:17%}
   .vidx-table col.c-prec{width:10%}
-  .vidx-table col.c-cap{width:8.5%}
-  .vidx-table col.c-bq{width:7.5%}
+  .vidx-table col.c-cap{width:9%}
+  .vidx-table col.c-ceil{width:8%}
   .vidx-table col.c-br{width:9%}
   .vidx-table col.c-gr{width:8.5%}
-  .vidx-table col.c-suit{width:31%}
-  .vidx-table col.c-enq{width:8%}
+  .vidx-table col.c-suit{width:29%}
+  .vidx-table col.c-enq{width:9.5%}
 }
 .vidx-table thead th{background:var(--navy);color:#fff;text-align:left;padding:.85rem .95rem;font-weight:600;font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;white-space:normal;line-height:1.25;vertical-align:bottom}
 .vidx-table th.is-sortable{cursor:pointer;user-select:none;transition:background .25s var(--ease)}
@@ -980,9 +985,32 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .vidx-empty{padding:3rem 1.25rem;text-align:center;color:var(--muted)}
 .vidx-empty a{color:var(--brand);font-weight:600;text-decoration:underline}
 
-/* Foot note */
-.vidx-note{font-size:.83rem;color:var(--muted);margin-top:1.1rem;max-width:86ch;line-height:1.6}
-.vidx-note b{color:var(--text);font-weight:600}
+/* Methodology. On the page, not in a comment. */
+.vidx-method{margin-top:clamp(1.5rem,3vw,2rem);background:#fff;border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(1.15rem,2.4vw,1.6rem) clamp(1.15rem,2.6vw,1.9rem);max-width:92ch}
+.vidx-method__h{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--teal-deep);margin-bottom:.75rem}
+.vidx-method p{font-size:.87rem;color:#4a5762;line-height:1.65}
+.vidx-method p+p{margin-top:.7rem}
+.vidx-method b{color:var(--text);font-weight:600}
+
+/* Ceiling qualifier, e.g. "at the dome apex; 9m to the rigging star" */
+.vidx-qual{display:block;font-size:.72rem;color:var(--muted);font-weight:400;line-height:1.35;margin-top:.2rem;white-space:normal}
+
+/* Full specification panel. Always in the DOM so it stays readable and citable. */
+.vidx-more{display:inline-flex;align-items:center;gap:.3rem;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;font-size:.8rem;font-weight:600;color:var(--brand);white-space:nowrap;margin-bottom:.55rem}
+.vidx-more svg{width:13px;height:13px;transition:transform .3s var(--ease)}
+.vidx-more:hover{text-decoration:underline}
+.vidx-more[aria-expanded="true"] svg{transform:rotate(180deg)}
+.vidx-specrow>td{background:var(--stone);padding:0 !important}
+.vidx-spec{display:grid;gap:clamp(1.1rem,2.5vw,2.25rem);padding:clamp(1.15rem,2.4vw,1.6rem) clamp(1rem,2vw,1.5rem);border-top:2px solid var(--teal)}
+@media(min-width:700px){.vidx-spec{grid-template-columns:repeat(3,1fr)}}
+.vidx-spec__col h4{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted);margin-bottom:.7rem}
+.vidx-spec__row{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;padding:.4rem 0;border-bottom:1px solid var(--line)}
+.vidx-spec__row:last-child{border-bottom:none}
+.vidx-spec__row dt{font-size:.85rem;color:#4a5762}
+.vidx-spec__row dd{font-size:.9rem;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums;text-align:right}
+.vidx-spec__second{font-size:.95rem;color:var(--navy);margin-bottom:.4rem}
+.vidx-spec__note{font-size:.82rem;color:var(--muted);line-height:1.5;margin-top:.7rem}
+.vidx-specrow:hover>td{background:var(--stone)}
 
 /* Mobile: the table becomes stacked cards. No horizontal scrolling. */
 @media(max-width:1099px){
@@ -1000,6 +1028,12 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .vidx-table td.vidx-c-enq{padding-top:.9rem}
   .vidx-table td.num{text-align:right}
   .vidx-table td[data-l] .vidx-setup{grid-column:2;margin-top:.1rem}
+  .vidx-table td[data-l] .vidx-qual{grid-column:2;text-align:right}
+  .vidx-table tr.vidx-specrow{padding:0;border:none;box-shadow:none;background:none;margin-top:-1rem;margin-bottom:1rem}
+  .vidx-table tr.vidx-specrow>td{background:#fff;border:1px solid var(--line);border-radius:var(--r-card)}
+  .vidx-spec{grid-template-columns:1fr;border-top:2px solid var(--teal);border-radius:var(--r-card)}
+  .vidx-table td.vidx-c-enq{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+  .vidx-more{margin-bottom:0}
   .vidx-empty{background:#fff;border:1px solid var(--line);border-radius:var(--r-card)}
   .vidx-sortnote{display:block}
 }
