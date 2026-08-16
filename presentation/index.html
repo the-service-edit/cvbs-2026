@@ -281,6 +281,16 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .cmp thead th.us{background:rgba(59,201,217,.14);border-radius:9px 9px 0 0}
 .cmp tbody tr:last-child td.us{border-radius:0 0 9px 9px}
 .srcnote{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+.tline.four{grid-template-columns:repeat(4,1fr)}
+.tline.four .t p{max-width:28ch}
+.lifecycle{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:24px}
+.lifecycle .s{border:1px solid var(--line);background:#fff;border-radius:100px;padding:9px 16px;font-size:13px;font-weight:600;color:var(--navy)}
+.dark .lifecycle .s{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#fff}
+.lifecycle .s.hi{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.lifecycle .s.loop{border-style:dashed;border-color:var(--teal-deep);color:var(--teal-deep);background:transparent}
+.lifecycle .a{color:var(--teal-deep);font-size:15px}
+.askchip{display:inline-block;margin-top:22px;border:1px dashed var(--teal-deep);color:var(--teal-deep);border-radius:100px;padding:11px 20px;font-size:14px;font-weight:600}
+.dark .askchip{border-color:var(--teal);color:var(--teal)}
 .dark .eco .node{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
 .dark .eco .node span{color:rgba(255,255,255,.6)}
 .dark .eco .link{background:rgba(255,255,255,.24)}
@@ -561,7 +571,26 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   </div>
 </section>
 
-<!-- ================= 14 · USER JOURNEYS ================= -->
+<!-- ================= 15 &middot; WHO IT IS BUILT FOR ================= -->
+<section class="slide stone" data-sec="Who it is for">
+  <div class="pad">
+    <div class="eyebrow">Who this is built for</div>
+    <h2 style="margin-bottom:14px">Six audiences, and <span class="accent-d">six pages already built for them</span>.</h2>
+    <p class="lede" style="max-width:86ch;margin-bottom:26px">These are not personas we invented. Each one already has its own page on the new site, and most of them are visible in the client list CVBS has built since 1989.</p>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">01 &middot; SALES CONFERENCES</div><h3>The annual kick off</h3><p>A hundred and fifty to five hundred people, dates locked a year ahead, and a room that has to hold energy for two days. Usually run by a marketing or events lead who wants real options quickly.</p></div>
+      <div class="card"><div class="num">02 &middot; MEDICAL AND PHARMACEUTICAL</div><h3>Compliance comes first</h3><p>Medtronic, Pfizer, Novo Nordisk and Bausch &amp; Lomb are all in the client list. This audience works to rules about venue, catering and hospitality that most organisers never encounter, and needs someone who already knows them.</p></div>
+      <div class="card"><div class="num">03 &middot; ASSOCIATIONS</div><h3>A committee that changes each year</h3><p>Accommodation, meeting space, exhibition and catering, negotiated together, often for an organiser doing it for the first and only time.</p></div>
+      <div class="card"><div class="num">04 &middot; GOVERNMENT</div><h3>Value has to be demonstrable</h3><p>Not just felt. An independent shortlist, with rates negotiated on their behalf and the reasoning written down, is exactly the evidence a procurement process asks for.</p></div>
+      <div class="card"><div class="num">05 &middot; EXECUTIVE MEETINGS AND RETREATS</div><h3>Small, and high stakes</h3><p>Twenty senior people, where the room matters more than the rate. This is where knowing what a space actually feels like beats any filter on any platform.</p></div>
+      <div class="card"><div class="num">06 &middot; THE OCCASIONAL ORGANISER</div><h3>Handed an event on top of a full job</h3><p>The executive assistant or office manager who does this once or twice a year. They value a free expert more than anyone else does, and they become the most loyal clients CVBS has.</p></div>
+    </div>
+    <p class="lede" style="max-width:80ch;margin-top:24px">Different people, one problem. Too many venues, too little time, and no way to know whether a rate is fair.</p>
+    <span class="askchip">Have we read this right? Tell us who is missing and we will build for them next.</span>
+  </div>
+</section>
+
+<!-- ================= 16 · USER JOURNEYS ================= -->
 <section class="slide dark" data-sec="User journeys">
   <div class="pad">
     <div class="eyebrow">Three real journeys</div>
@@ -818,7 +847,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 <section class="slide" data-sec="Email">
   <div class="pad">
     <div class="eyebrow">The program</div>
-    <h2 style="margin-bottom:16px">Eleven reasons to be <span class="accent-d">in the inbox</span>.</h2>
+    <h2 style="margin-bottom:16px">Twelve reasons to be <span class="accent-d">in the inbox</span>.</h2>
     <p class="lede" style="max-width:84ch;margin-bottom:28px">Nobody needs a venue finder until they suddenly need one urgently, and there is no way to predict which week that is. So the job of email is not to find the right person, it is to be there when the trigger fires with a ten second way to raise a hand. Two sends a month, every month, all ending on the same button.</p>
     <div class="mcol">
       <div class="m">
@@ -847,11 +876,21 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
           <li><b>What venues are charging.</b> CVBS sees hundreds of quotes. Almost nobody else can write this</li>
           <li><b>The next twelve months.</b> Sent when calendars and budgets get set</li>
           <li><b>The tools.</b> The budget calculator and the venue checklist, sent as a gift</li>
+          <li><b>After the event.</b> How did it go, and would you use them again</li>
           <li><b>Are we still useful?</b> Cleans the list, and produces replies</li>
         </ul>
       </div>
     </div>
-    <p class="small" style="margin-top:26px;opacity:.75">Half of them ask for a reply rather than a click. A reply lands in Anthony&rsquo;s inbox as a conversation, which is worth more than any click ever is.</p>
+    <div class="lifecycle">
+      <span class="s">Discover</span><span class="a">&rarr;</span>
+      <span class="s">Enquire</span><span class="a">&rarr;</span>
+      <span class="s">Shortlist</span><span class="a">&rarr;</span>
+      <span class="s">Book</span><span class="a">&rarr;</span>
+      <span class="s">The event</span><span class="a">&rarr;</span>
+      <span class="s hi">How did it go?</span><span class="a">&rarr;</span>
+      <span class="s loop">Their next event</span>
+    </div>
+    <p class="small" style="margin-top:20px;opacity:.78">The website ends at the brief. The business does not. The two steps after the event are the cheapest new business CVBS will ever write, and they are the ones nobody has time to do by hand. Half these emails ask for a reply rather than a click, and a reply lands in Anthony&rsquo;s inbox as a conversation.</p>
   </div>
 </section>
 
@@ -930,7 +969,8 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   <div class="pad">
     <div class="eyebrow">Why the answer changes</div>
     <h2 style="margin-bottom:16px">Their shortlist is an algorithm. <span class="accent">Yours is four people who have been there.</span></h2>
-    <p class="lede" style="max-width:84ch;margin-bottom:28px">Every platform in this market is racing to automate the part CVBS is best at. That is good news, because it turns the human part into the differentiator rather than the overhead. The advantage was always there. What was missing was somewhere to see it.</p>
+    <p class="lede" style="max-width:88ch;margin-bottom:14px">An algorithm can search a database. It cannot tell you which ballroom actually feels empty with a hundred and twenty people in it. Every platform in this market is racing to automate the part CVBS is best at, which is good news, because it turns the human part into the differentiator rather than the overhead.</p>
+    <p class="lede" style="max-width:88ch;margin-bottom:28px">Technology should make CVBS easier to find. It should not try to replace what makes CVBS worth finding. The advantage was always there. What was missing was somewhere to see it.</p>
     <div class="grid" style="grid-template-columns:repeat(2,1fr)">
       <div class="card"><div class="num">01 &middot; WHO DOES THE WORK</div><h3>Four people, not a filter</h3><p>A platform matches a brief against a database. CVBS matches it against venues four people have walked through, eaten in and run events at. The About and Results pages now put those four on the screen with names and faces, which is the one thing a marketplace cannot copy.</p></div>
       <div class="card"><div class="num">02 &middot; JUDGEMENT OVER VOLUME</div><h3>Three venues, and the reason for each</h3><p>An algorithm returns everything matching a filter and leaves the deciding to you. CVBS returns a recommendation and can say why, including what went wrong somewhere else last time. The site is built to show that, not to list rooms.</p></div>
@@ -985,27 +1025,32 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 <!-- ================= 26 &middot; TWELVE MONTHS ================= -->
 <section class="slide dark" data-sec="The system">
   <div class="pad">
-    <div class="eyebrow">Where this goes</div>
-    <h2 style="margin-bottom:14px">Twelve months of this, and <span class="accent">CVBS looks different</span>.</h2>
-    <p class="lede" style="max-width:76ch">Nothing here is a campaign that finishes. Every month adds to what the month before it built.</p>
-    <div class="tline">
+    <div class="eyebrow">From here</div>
+    <h2 style="margin-bottom:14px">What the next twelve months <span class="accent">actually look like</span>.</h2>
+    <p class="lede" style="max-width:80ch">Nothing here is a campaign that finishes. Every stage decides what the next one does, and every month adds to what the month before it built.</p>
+    <div class="tline four">
       <div class="t">
-        <div class="w">Month one</div>
-        <h3>Everything is live</h3>
-        <p>The website, two email templates and a full social system, all running and all pointing at the same brief form.</p>
+        <div class="w">Launch</div>
+        <h3>Live and measurable</h3>
+        <p>Website live, analytics connected, every form tested end to end, and the three email templates loaded into Mailchimp.</p>
       </div>
       <div class="t">
-        <div class="w">Month six</div>
-        <h3>The list knows CVBS</h3>
-        <p>Six more cities in the venue index. Dozens of posts and a run of EDMs behind you. Organisers who have seen CVBS long before they needed it.</p>
+        <div class="w">Months one to three</div>
+        <h3>The rhythm starts</h3>
+        <p>Two sends a month, the social system running on the new templates, and the first cities added to the venue index.</p>
       </div>
       <div class="t">
-        <div class="w">Month twelve</div>
-        <h3>The brand looks its size</h3>
-        <p>Venue and destination pages answering the questions organisers actually search, and an email list worth more than any single campaign could be.</p>
+        <div class="w">Months three to six</div>
+        <h3>The first read</h3>
+        <p>What people searched, where the enquiries came from and which destinations performed. The first month where the plan is shaped by evidence rather than judgement.</p>
+      </div>
+      <div class="t">
+        <div class="w">Months six to twelve</div>
+        <h3>Build on what worked</h3>
+        <p>Expand the venue and destination content where the demand actually is, so twelve months in the site is answering the questions organisers are really asking.</p>
       </div>
     </div>
-    <p class="small" style="margin-top:34px;opacity:.72">Thirty-seven years of venue knowledge, finally visible to the people looking for it.</p>
+    <p class="small" style="margin-top:30px;opacity:.72">Thirty-seven years of venue knowledge, finally visible to the people looking for it. The only thing we cannot do is start it without you.</p>
   </div>
 </section>
 
