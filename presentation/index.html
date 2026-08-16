@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="googlebot" content="noindex, nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>CVBS · A new digital experience</title>
 <link rel="icon" href="assets/brand/logo.png">
 <style>
@@ -312,10 +312,120 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .k .kl{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
 .dark .k .kl{color:rgba(255,255,255,.55)}
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+
+/* ============================================================================
+   MOBILE. Everything above is desktop-first, so this block is the override.
+   On a phone a fixed-height slide cannot work, so slides become full-height
+   scroll panes and every multi-column layout stacks. Swipe still changes slide,
+   because the swipe handler only reads horizontal movement.
+   ============================================================================ */
+@media (max-width: 860px){
+  html,body{overflow:hidden}
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding-bottom:64px}
+  .slide.center{justify-content:flex-start}
+  .pad{padding:76px 22px 30px}
+  .center .pad,.pad.center{padding-top:80px}
+
+  h1{font-size:clamp(30px,7.4vw,44px);line-height:1.08}
+  h2{font-size:clamp(24px,6.1vw,34px);line-height:1.14}
+  h3{font-size:17px}
+  .lede{font-size:16px;line-height:1.6;max-width:none}
+  .eyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:16px}
+  .small{font-size:12.5px}
+
+  /* every multi-column layout stacks */
+  .two,.pad.two{grid-template-columns:1fr !important;gap:26px}
+  .grid{grid-template-columns:1fr !important;gap:12px}
+  .dgrid{grid-template-columns:1fr !important}
+  .jz{grid-template-columns:1fr !important;gap:14px}
+  .mcol{grid-template-columns:1fr !important;gap:14px}
+  .tline,.tline.four{grid-template-columns:1fr !important;gap:0}
+  .anat{grid-template-columns:1fr !important;gap:22px}
+  .card{padding:18px 18px 16px;border-radius:12px}
+  .mcol .m{padding:18px 18px 16px}
+
+  /* the timeline turns into a vertical list */
+  .tline .t{padding:0 0 22px 26px}
+  .tline .t::before{top:0;left:7px;right:auto;bottom:0;width:2px;height:auto}
+  .tline .t::after{top:2px;left:1px;width:12px;height:12px}
+  .tline .t p{max-width:none}
+  .tline .t:last-child::before{bottom:22px}
+
+  /* frames: fill the width instead of a vw fraction */
+  .browser,.phone{width:100% !important;max-width:100% !important}
+  .browser .view,.phone .view{height:52vh !important}
+  .anat .shotbox .view{height:44vh !important}
+  .view.live{height:52vh}
+  .phone{border-width:6px;border-radius:26px}
+  .ba{border-radius:10px}
+
+  /* the comparison table scrolls sideways rather than crushing */
+  .cmpwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -22px;padding:0 22px}
+  .cmp{min-width:660px;font-size:12.5px}
+  .cmp th,.cmp td{padding:10px 11px}
+  .cmp tbody th{width:24%;font-size:12px}
+
+  .eco .tier{gap:8px}
+  .eco .node{padding:9px 13px;font-size:12px}
+  .eco .hub{padding:14px 26px;font-size:16px}
+  .lifecycle{gap:7px}
+  .lifecycle .s{padding:7px 12px;font-size:12px}
+  .flow{flex-wrap:wrap;gap:7px}
+  .hscroll{gap:12px}
+  .post img{width:190px !important;height:auto !important}
+  .chip{font-size:12.5px;padding:7px 13px}
+  .openbtn{padding:12px 20px;font-size:13px;margin-top:18px}
+  .askchip{font-size:12.5px;padding:10px 15px}
+  .srcnote{font-size:10.5px}
+
+  /* chrome gets out of the way */
+  .navbtn{width:38px;height:38px;font-size:14px;top:auto;bottom:14px;transform:none;opacity:.92}
+  #prev{left:12px}#next{right:12px}
+  #hud{bottom:22px;padding:0 62px;font-size:9.5px;letter-spacing:.14em}
+  #hud .sec{max-width:44vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #helphint{display:none}
+
+  /* the mail reader */
+  #mailview{padding:0}
+  .gwin{width:100%;height:100%;border-radius:0;max-height:none}
+  .gtop{padding:14px 16px 0}
+  .gtop .gsub{font-size:16px;line-height:1.25}
+  .gmeta{padding:10px 16px}
+  .gwho b{font-size:13px}
+  .gwho span{font-size:11.5px}
+  .gwhen{display:none}
+  .ghint{padding:9px 16px;font-size:10px;gap:8px}
+  .gbody img{width:100%}
+}
+
+@media (max-width: 860px) and (orientation: landscape){
+  .pad{padding-top:58px}
+  .browser .view,.phone .view{height:64vh !important}
+}
+
+@media (hover: none){
+  .mailtrig::after{opacity:.92}
+  .navbtn{opacity:1}
+}
+
+/* mobile: keep content clear of the fixed bottom chrome, and give the
+   before/after slider a usable height on a narrow screen */
+@media (max-width: 860px){
+  .pad{padding-bottom:96px}
+  #hudscrim{display:block}
+  .ba{max-width:100% !important;width:100% !important}
+  .ba img{width:100%}
+  .anat .steps{max-height:none}
+  .browser[style*="calc"]{max-width:100% !important}
+}
+#hudscrim{display:none;position:fixed;left:0;right:0;bottom:0;height:78px;z-index:55;pointer-events:none;
+  background:linear-gradient(to top,rgba(255,255,255,.96) 34%,rgba(255,255,255,0));}
+.dark-hud #hudscrim{background:linear-gradient(to top,rgba(6,30,59,.96) 34%,rgba(6,30,59,0));}
 </style>
 </head>
 <body>
 <div id="progress"></div>
+<div id="hudscrim"></div>
 <div id="hud"><span class="sec"></span><span class="cnt"></span></div>
 <button class="navbtn" id="prev" aria-label="Previous">←</button>
 <button class="navbtn" id="next" aria-label="Next">→</button>
@@ -916,6 +1026,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
     <div class="eyebrow">Who else is in the running</div>
     <h2 style="margin-bottom:14px">Organisers compare <span class="accent-d">before they enquire</span>.</h2>
     <p class="lede" style="max-width:90ch">By the time somebody contacts CVBS they have usually already looked at a marketplace like VenueNow, or started doing it themselves. Those platforms now match briefs with AI, and they are genuinely good at volume. What an algorithm cannot tell you is what a room is actually like on the day. The service was never the problem. Until now, the comparison was happening on a page that did not represent it.</p>
+    <div class="cmpwrap">
     <table class="cmp">
       <thead>
         <tr>
@@ -960,6 +1071,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
           <td>Nothing</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="srcnote">Marketplace figures are taken from VenueNow&rsquo;s own site, August 2026, where it states a target response time of under 24 hours, no cost to corporate bookers, and AI-assisted venue matching. Other independent finders, such as The Venue Agency, run the same commission model as CVBS, which makes the comparison a matter of who looks more credible and who knows the venues better.</p>
   </div>
 </section>
@@ -1190,14 +1302,16 @@ function openMail(el){
   fr.classList.remove('ready'); fall.classList.remove('hide');
   img.src = el.dataset.img; fall.scrollTop = 0;
   const hint=document.getElementById('ghintl');
-  if(el.dataset.href){
+  const small = window.matchMedia('(max-width:860px)').matches;
+  if(el.dataset.href && !small){
     hint.textContent = 'The links work. Try "See the offer" \u00b7 Esc to close';
     let settled=false;
     fr.onload = ()=>{ settled=true; fr.classList.add('ready'); fall.classList.add('hide'); };
     fr.src = el.dataset.href;
     setTimeout(()=>{ if(!settled){ fr.removeAttribute('src'); fr.classList.remove('ready'); fall.classList.remove('hide'); } }, 2500);
   } else {
-    hint.textContent = 'Scroll inside the message \u00b7 Esc to close';
+    hint.textContent = small ? 'Scroll the message \u00b7 Tap outside to close'
+                             : 'Scroll inside the message \u00b7 Esc to close';
     fr.removeAttribute('src');
   }
   mv.classList.add('on');
