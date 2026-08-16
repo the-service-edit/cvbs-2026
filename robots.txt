@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /presentation/
 
 Sitemap: https://the-service-edit.github.io/cvbs-2026/sitemap.xml

@@ -21,3 +21,6 @@ email-templates/
 _edm-source/
 _to_delete/
 CVBS-Concept-Audit-and-Pricing-Aug-2026.html
+
+# The deck is published at /presentation (noindex). The working copy stays out.
+!presentation/

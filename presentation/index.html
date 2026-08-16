@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVBS · A new digital experience</title>
+<link rel="icon" href="assets/brand/logo.png">
+<style>
+/* ============ CVBS PRESENTATION ============ */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/inter-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/inter-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/inter-latin-700-normal.woff2) format('woff2')}
+:root{
+  --teal:#3BC9D9; --teal-deep:#28A8B6; --navy:#0A2C52; --navy-deep:#061E3B;
+  --blue:#0366C6; --stone:#EEF6F7; --stone-deep:#DFEFF1; --line:#D6E7E9;
+  --ink:#0D1F2D; --muted:#6E747B; --gold:#E0B341; --white:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--navy-deep)}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font-family:inherit}
+
+/* ---- deck chrome ---- */
+#deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease,visibility 0s .55s;background:var(--white);overflow:hidden}
+.slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .55s ease}
+.slide.dark{background:var(--navy-deep);color:var(--white)}
+.slide.stone{background:var(--stone)}
+.pad{padding:min(7vh,64px) min(6vw,88px)}
+.scrollwrap{overflow-y:auto;max-height:100%;scrollbar-width:thin}
+.center{align-items:center;text-align:center}
+
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-deep));width:0;z-index:60;transition:width .4s ease}
+#hud{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:0 26px;z-index:60;pointer-events:none;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+#hud .sec{color:var(--muted);font-weight:600;transition:color .3s}
+#hud .cnt{color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+.dark-hud #hud .sec,.dark-hud #hud .cnt{color:rgba(255,255,255,.55)}
+.navbtn{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.85);backdrop-filter:blur(10px);color:var(--navy);font-size:17px;cursor:pointer;z-index:60;display:flex;align-items:center;justify-content:center;transition:all .25s;opacity:.85}
+.navbtn:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+#prev{left:18px}#next{right:18px}
+.dark-hud .navbtn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#fff}
+.dark-hud .navbtn:hover{background:var(--teal);border-color:var(--teal)}
+#helphint{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:60;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .6s;pointer-events:none}
+#helphint.show{opacity:.8}
+.dark-hud #helphint{color:rgba(255,255,255,.5)}
+
+/* ---- type ---- */
+.eyebrow{display:flex;align-items:center;gap:12px;text-transform:uppercase;letter-spacing:.24em;font-size:12px;font-weight:600;color:var(--teal-deep);margin-bottom:22px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--teal)}
+.dark .eyebrow{color:var(--teal)}
+.center .eyebrow{justify-content:center}
+h1{font-weight:700;letter-spacing:-.03em;line-height:1.04;font-size:clamp(38px,5.6vw,76px)}
+h2{font-weight:700;letter-spacing:-.03em;line-height:1.08;font-size:clamp(28px,3.6vw,50px)}
+h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
+.accent{color:var(--teal)}
+.accent-d{color:var(--teal-deep)}
+.lede{font-size:clamp(16px,1.45vw,20px);line-height:1.65;color:var(--muted);font-weight:400;max-width:64ch}
+.dark .lede{color:rgba(255,255,255,.72)}
+.small{font-size:13.5px;line-height:1.6;color:var(--muted)}
+.dark .small{color:rgba(255,255,255,.6)}
+
+/* ---- components ---- */
+.browser{border-radius:12px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(6,30,59,.45);border:1px solid var(--line);background:#fff}
+.browser .bar{display:flex;align-items:center;gap:8px;background:#EDF1F4;padding:9px 14px;border-bottom:1px solid var(--line)}
+.browser .bar i{width:10px;height:10px;border-radius:50%;background:#D3DCE3}
+.browser .bar i:nth-child(1){background:#F2B8B5}.browser .bar i:nth-child(2){background:#F2DCA9}.browser .bar i:nth-child(3){background:#B5D9BE}
+.browser .url{flex:1;margin-left:8px;background:#fff;border:1px solid var(--line);border-radius:6px;font-size:11px;color:var(--muted);padding:4px 12px;text-align:left;white-space:nowrap;overflow:hidden}
+.browser .view{position:relative;overflow:hidden;background:#fff}
+/* scroll-it-yourself page panels (no auto-pan) */
+.pan .view{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(6,30,59,.3) transparent}
+.pan .view img{width:100%;display:block}
+.pan .view::-webkit-scrollbar{width:9px}
+.pan .view::-webkit-scrollbar-track{background:transparent}
+.pan .view::-webkit-scrollbar-thumb{background:rgba(6,30,59,.28);border-radius:9px;border:2px solid #fff}
+.pan .view::-webkit-scrollbar-thumb:hover{background:rgba(6,30,59,.45)}
+/* social system strips */
+.hscroll{display:flex;gap:18px;overflow-x:auto;overscroll-behavior-x:contain;padding:4px 2px 14px;scrollbar-width:thin;scrollbar-color:rgba(6,30,59,.3) transparent;width:100%}
+.dark .hscroll{scrollbar-color:rgba(255,255,255,.35) transparent}
+.hscroll::-webkit-scrollbar{height:9px}
+.hscroll::-webkit-scrollbar-track{background:transparent}
+.hscroll::-webkit-scrollbar-thumb{background:rgba(6,30,59,.26);border-radius:9px}
+.dark .hscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3)}
+.post{flex:0 0 auto;display:flex;flex-direction:column;gap:9px}
+.post img{display:block;border-radius:13px;box-shadow:0 22px 60px -18px rgba(6,30,59,.5);border:1px solid rgba(255,255,255,.1)}
+.post .cap{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center}
+.dark .post .cap{color:rgba(255,255,255,.62)}
+.ratio{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--teal-deep);border:1px solid var(--line);border-radius:100px;padding:2px 8px;margin-left:7px;vertical-align:middle}
+.dark .ratio{color:var(--teal);border-color:rgba(255,255,255,.22)}
+.scrollhint{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+.dark .scrollhint{color:rgba(255,255,255,.55)}
+.scrollhint b{font-weight:700;font-size:13px;letter-spacing:0;animation:nudge 1.9s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+.phone{border-radius:34px;border:8px solid #10233B;overflow:hidden;box-shadow:0 26px 70px -18px rgba(6,30,59,.5);background:#fff;position:relative}
+.phone .view{overflow:hidden;position:relative}
+.phone.pan .view{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(6,30,59,.3) transparent}
+.phone.pan .view::-webkit-scrollbar{width:7px}
+.phone.pan .view::-webkit-scrollbar-track{background:transparent}
+.phone.pan .view::-webkit-scrollbar-thumb{background:rgba(6,30,59,.3);border-radius:7px}
+.tag{position:absolute;top:14px;left:14px;z-index:5;background:var(--navy);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:6px 12px;border-radius:100px}
+.tag.aft{background:var(--teal-deep)}
+
+/* live site frame */
+.browser .bar .livelink{margin-left:10px;flex:none;font-size:11px;font-weight:600;color:var(--teal-deep);text-decoration:none;white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:6px;padding:4px 10px}
+.browser .bar .livelink:hover{border-color:var(--teal)}
+.openbtn{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--teal);color:#06323A;border-radius:100px;padding:14px 26px;font-size:14px;font-weight:700;letter-spacing:.02em;text-decoration:none;border:1px solid var(--teal);transition:transform .2s ease,box-shadow .2s ease}
+.openbtn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(59,201,217,.6)}
+.openbtn b{font-weight:700}
+.framecap{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:center}
+/* ---------- click-to-enlarge mail viewer ---------- */
+.mailtrig{cursor:zoom-in;position:relative}
+.mailtrig::after{content:"Click to enlarge";position:absolute;left:50%;bottom:10px;transform:translateX(-50%);
+  background:rgba(6,30,59,.88);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:7px 13px;border-radius:100px;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}
+.mailtrig:hover::after{opacity:1}
+#mailview{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
+  background:rgba(4,18,36,.86);backdrop-filter:blur(6px);padding:26px}
+#mailview.on{display:flex}
+.gwin{width:min(96vw,900px);height:min(94vh,880px);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 40px 120px -20px rgba(0,0,0,.7);font-family:Inter,system-ui,sans-serif}
+.gtop{display:flex;align-items:center;gap:14px;padding:16px 22px 0 22px}
+.gtop .gsub{flex:1;font-size:21px;font-weight:500;color:#202124;letter-spacing:-.2px;line-height:1.3}
+.gtop .gclose{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:#f1f3f4;color:#5f6368;font-size:19px;line-height:1;cursor:pointer}
+.gtop .gclose:hover{background:#e4e6e8}
+.gmeta{display:flex;align-items:center;gap:12px;padding:14px 22px 14px 22px;border-bottom:1px solid #e8eaed}
+.gav{flex:none;width:38px;height:38px;border-radius:50%;background:#0A2C52;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.gwho{flex:1;min-width:0}
+.gwho b{display:block;font-size:14px;color:#202124;font-weight:600}
+.gwho span{font-size:12.5px;color:#5f6368}
+.gwhen{flex:none;font-size:12.5px;color:#5f6368;white-space:nowrap}
+.gbody{flex:1;min-height:0;position:relative;background:#DFEFF1}
+.gbody .gfall{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.gbody .gfall img{width:600px;max-width:100%;display:block;margin:0 auto}
+.gbody .gfall.hide{display:none}
+.gbody iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#DFEFF1;opacity:0;transition:opacity .25s ease}
+.gbody iframe.ready{opacity:1}
+.ghint{padding:9px 22px;background:#fff;border-top:1px solid #e8eaed;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#80868b;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ghint a{color:var(--teal-deep);text-decoration:none}
+@media (max-width:760px){ .gbody img{width:100%} .gtop .gsub{font-size:17px} }
+.dark .framecap{color:rgba(255,255,255,.62)}
+.view.live{position:relative;height:min(62vh,560px);background:#fff}
+.view.live iframe{position:absolute;top:0;left:0;width:1440px;border:0;background:#fff;transform-origin:top left;opacity:0;transition:opacity .5s}
+.view.live iframe.ready{opacity:1}
+.livefall{position:absolute;inset:0;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
+.livefall img{width:100%;display:block}
+.livefall.hide{display:none}
+
+/* before/after slider */
+.ba{position:relative;user-select:none;overflow:hidden;border-radius:12px;box-shadow:0 30px 80px -20px rgba(6,30,59,.45);border:1px solid var(--line)}
+.ba img{width:100%;pointer-events:none}
+.ba .after{position:absolute;inset:0;overflow:hidden}
+.ba .after img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top left}
+.ba .handle{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(6,30,59,.2);cursor:ew-resize;z-index:6}
+.ba .handle::after{content:"◂ ▸";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:var(--navy);border-radius:100px;font-size:11px;letter-spacing:2px;padding:9px 13px;white-space:nowrap;box-shadow:0 8px 24px rgba(6,30,59,.35);font-weight:700}
+.ba .lbl{position:absolute;top:14px;z-index:5;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:6px 12px;border-radius:100px;color:#fff}
+.ba .lbl.b{left:14px;background:rgba(10,44,82,.85)}
+.ba .lbl.a{right:14px;background:var(--teal-deep)}
+
+/* cards */
+.grid{display:grid;gap:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 26px 24px;text-align:left}
+.dark .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+.card .num{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--teal-deep);margin-bottom:12px}
+.dark .card .num{color:var(--teal)}
+.card h3{margin-bottom:8px}
+.card p{font-size:13.5px;line-height:1.62;color:var(--muted)}
+.dark .card p{color:rgba(255,255,255,.65)}
+
+/* flow arrows */
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.flow .step{background:#fff;border:1px solid var(--line);border-radius:100px;padding:10px 20px;font-size:14px;font-weight:600;color:var(--navy);white-space:nowrap}
+.flow .step.hi{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.flow .arr{color:var(--teal-deep);font-size:15px}
+.dark .flow .step{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#fff}
+.dark .flow .arr{color:var(--teal)}
+.flow.faded .step{background:transparent;color:var(--muted);border-style:dashed}
+
+/* video underlay statement slides */
+.vwrap{position:absolute;inset:0;overflow:hidden}
+.vwrap video,.vwrap img.poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vwrap::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(6,30,59,.90) 0%,rgba(6,30,59,.74) 45%,rgba(6,30,59,.40) 100%)}
+.vwrap.light::after{background:linear-gradient(100deg,rgba(6,30,59,.72) 0%,rgba(6,30,59,.50) 45%,rgba(6,30,59,.26) 100%)}
+.vwrap.centre::after{background:radial-gradient(120% 90% at 50% 50%,rgba(6,30,59,.72) 0%,rgba(6,30,59,.52) 55%,rgba(6,30,59,.34) 100%)}
+.vcontent{position:relative;z-index:2}
+
+/* pills / chips */
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:100px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--navy)}
+.chip i{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.dark .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#fff}
+
+/* stepper (homepage anatomy) */
+.anat{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:center}
+.anat .shotbox{position:relative}
+.anat .shotbox .view{height:min(62vh,560px)}
+.anat .shotbox .view img{width:100%;transition:transform .9s cubic-bezier(.55,.06,.28,.99)}
+.steps{display:flex;flex-direction:column;gap:6px;max-height:min(64vh,580px);overflow-y:auto;padding-right:6px;scrollbar-width:thin}
+.stp{border:1px solid var(--line);border-left:3px solid transparent;background:#fff;border-radius:10px;padding:13px 16px;cursor:pointer;transition:all .25s;text-align:left}
+.stp:hover{border-color:var(--teal)}
+.stp.on{border-left-color:var(--teal);box-shadow:0 10px 30px -12px rgba(6,30,59,.18)}
+.stp .t{font-weight:600;font-size:14.5px;color:var(--navy);display:flex;gap:10px;align-items:baseline}
+.stp .t em{font-style:normal;font-size:10.5px;color:var(--teal-deep);letter-spacing:.16em;font-weight:700}
+.stp .d{display:none;font-size:12.8px;color:var(--muted);line-height:1.6;margin-top:8px}
+.stp.on .d{display:block}
+.stp .d b{color:var(--navy);font-weight:600}
+
+/* page purpose cards */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:20px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.pcard .nm{font-weight:700;font-size:15px;color:var(--navy);letter-spacing:-.01em}
+.pcard .row{font-size:12.3px;line-height:1.5;color:var(--muted)}
+.pcard .row b{display:block;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:3px;font-weight:700}
+.pcard .row.q{font-style:italic;color:var(--ink)}
+
+/* journeys */
+.jz{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.jz .j{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+.jz .q{font-size:15.5px;font-weight:600;color:var(--navy);line-height:1.4;margin-bottom:6px}
+.jz .who{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-deep);font-weight:700;margin-bottom:16px}
+.jz ol{list-style:none;display:flex;flex-direction:column}
+.jz li{font-size:13.5px;color:var(--muted);padding:7px 0 7px 22px;position:relative;line-height:1.45}
+.jz li::before{content:"";position:absolute;left:6px;top:14px;width:7px;height:7px;border-radius:50%;background:var(--stone-deep);border:2px solid var(--teal-deep)}
+.jz li:not(:last-child)::after{content:"";position:absolute;left:11px;top:24px;bottom:-8px;width:1px;background:var(--line)}
+.jz li.end{color:var(--navy);font-weight:600}
+.jz li.end::before{background:var(--teal)}
+.dark .jz .j{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.dark .jz .q{color:#fff}
+.dark .jz .who{color:var(--teal)}
+.dark .jz li{color:rgba(255,255,255,.66)}
+.dark .jz li::before{background:rgba(255,255,255,.12);border-color:var(--teal)}
+.dark .jz li:not(:last-child)::after{background:rgba(255,255,255,.18)}
+.dark .jz li.end{color:#fff}
+
+/* details grid */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dcard{background:#fff;border:1px solid var(--line);border-radius:13px;overflow:hidden;text-align:left}
+.dcard .im{height:150px;overflow:hidden;border-bottom:1px solid var(--line);background:var(--stone)}
+.dcard .im img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,top center)}
+.dcard .tx{padding:16px 18px}
+.dcard .tx b{font-size:13.5px;color:var(--navy);display:block;margin-bottom:5px;font-weight:600}
+.dcard .tx p{font-size:12.3px;line-height:1.55;color:var(--muted)}
+
+/* ecosystem map */
+.eco{display:flex;flex-direction:column;align-items:center;gap:0}
+.eco .hub{background:var(--navy);color:#fff;border-radius:14px;padding:18px 42px;font-weight:700;font-size:18px;letter-spacing:-.01em;box-shadow:0 18px 50px -12px rgba(6,30,59,.5)}
+.eco .tier{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.eco .node{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 18px;font-size:13px;font-weight:600;color:var(--navy)}
+.eco .node span{display:block;font-size:10.8px;font-weight:500;color:var(--muted);margin-top:2px}
+.eco .link{width:1px;height:26px;background:var(--line)}
+.mcol{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mcol .m{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 24px 24px;display:flex;flex-direction:column;gap:10px}
+.dark .mcol .m{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.15)}
+.mcol .m .lab{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-deep)}
+.dark .mcol .m .lab{color:var(--teal)}
+.mcol .m h3{font-size:19px;letter-spacing:-.01em}
+.mcol .m p{font-size:14px;line-height:1.62;color:var(--muted)}
+.dark .mcol .m p{color:rgba(255,255,255,.68)}
+.mcol .m ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.mcol .m li{font-size:13.5px;line-height:1.5;color:var(--muted);padding-left:20px;position:relative}
+.dark .mcol .m li{color:rgba(255,255,255,.7)}
+.mcol .m li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.tline{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;margin-top:14px}
+.tline .t{position:relative;padding:34px 26px 0 0}
+.tline .t::before{content:"";position:absolute;top:9px;left:0;right:0;height:2px;background:rgba(255,255,255,.16)}
+.tline .t::after{content:"";position:absolute;top:3px;left:0;width:14px;height:14px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 5px rgba(59,201,217,.18)}
+.tline .t .w{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.tline .t h3{font-size:21px;margin-bottom:10px;letter-spacing:-.02em}
+.tline .t p{font-size:14.5px;line-height:1.62;color:rgba(255,255,255,.68);max-width:34ch}
+/* ---------- competitor comparison ---------- */
+.cmp{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+.cmp th,.cmp td{text-align:left;padding:13px 16px;vertical-align:top;border-bottom:1px solid var(--line)}
+.cmp thead th{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:11px}
+.cmp thead th.us{color:var(--teal-deep)}
+.cmp tbody th{font-weight:600;color:var(--navy);width:20%;font-size:13.5px}
+.cmp td{color:var(--muted);line-height:1.55;width:26.6%}
+.cmp td.us{background:rgba(59,201,217,.09);color:var(--navy);font-weight:600}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom:0}
+.cmp .colus{position:relative}
+.cmp thead th.us{background:rgba(59,201,217,.14);border-radius:9px 9px 0 0}
+.cmp tbody tr:last-child td.us{border-radius:0 0 9px 9px}
+.srcnote{font-size:11px;color:var(--muted);margin-top:14px;line-height:1.6}
+.dark .eco .node{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+.dark .eco .node span{color:rgba(255,255,255,.6)}
+.dark .eco .link{background:rgba(255,255,255,.24)}
+.dark .eco .hub{background:var(--teal-deep);box-shadow:0 18px 50px -12px rgba(0,0,0,.55)}
+
+/* toggle */
+.tgl{display:inline-flex;border:1px solid var(--line);border-radius:100px;overflow:hidden;background:#fff}
+.tgl button{border:0;background:transparent;padding:8px 20px;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:.04em}
+.tgl button.on{background:var(--navy);color:#fff}
+
+/* misc layout helpers */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.logo{height:40px;width:auto}
+.klist{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+.k{text-align:center}
+.k .kv{font-size:clamp(26px,3vw,40px);font-weight:700;letter-spacing:-.03em;color:var(--navy)}
+.dark .k .kv{color:#fff}
+.k .kv span{color:var(--teal)}
+.k .kl{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
+.dark .k .kl{color:rgba(255,255,255,.55)}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="hud"><span class="sec"></span><span class="cnt"></span></div>
+<button class="navbtn" id="prev" aria-label="Previous">←</button>
+<button class="navbtn" id="next" aria-label="Next">→</button>
+<div id="helphint">← → to navigate · F for fullscreen</div>
+<main id="deck">
+
+<!-- ================= 01 · COVER ================= -->
+<section class="slide dark center" data-sec="Opening">
+  <div class="vwrap centre"><img class="poster" src="assets/brand/bg-cover.jpg" alt=""></div>
+  <div class="vcontent pad center" style="display:flex;flex-direction:column;align-items:center;gap:0">
+    <img class="logo" src="assets/brand/logo-white.png" alt="CVBS" style="height:52px;margin-bottom:38px">
+    <h1 style="max-width:16ch">A digital presence built around <span class="accent">how people find venues</span>.</h1>
+    <p class="lede" style="margin-top:26px;max-width:60ch">Three pieces of work, built to run as one. A website that turns interest into a brief, social content that puts CVBS in front of organisers before they are ready to enquire, and an email system that keeps CVBS in mind between events.</p>
+    <div style="display:flex;gap:10px;margin-top:26px;flex-wrap:wrap;justify-content:center">
+      <span class="chip"><i></i>The website</span>
+      <span class="chip"><i></i>Social</span>
+      <span class="chip"><i></i>Email</span>
+    </div>
+    <p class="small" style="margin-top:44px;letter-spacing:.2em;text-transform:uppercase;font-weight:600">Conference Venues &amp; Booking Services · August 2026</p>
+  </div>
+</section>
+
+<!-- ================= 02 · TRANSITION ================= -->
+<section class="slide dark center" data-sec="Opening">
+  <div class="pad center" style="display:flex;flex-direction:column;align-items:center">
+    <h2 style="max-width:22ch">Before we look at what changed, let's look at <span class="accent">why it needed to change</span>.</h2>
+  </div>
+</section>
+
+<!-- ================= 03 &middot; THE THREE PARTS ================= -->
+<section class="slide dark" data-sec="The three parts">
+  <div class="pad">
+    <div class="eyebrow">What this project actually is</div>
+    <h2 style="margin-bottom:18px">Three parts, <span class="accent">working as one</span>.</h2>
+    <p class="lede" style="max-width:80ch;margin-bottom:30px">A website is where people land. It is not what brings them there, and it is not what keeps CVBS in mind between events. Social has been doing that job for a while now. What changes from here is that all three finally look and behave like the same company, and feed the same destination.</p>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">01 &middot; THE WEBSITE</div><h3>Somewhere worth arriving</h3><p>Rebuilt from the ground up. A site that explains the service in the first screen, shows the venues rather than describing them, and turns interest into a brief instead of a downloaded form.</p></div>
+      <div class="card"><div class="num">02 &middot; SOCIAL</div><h3>Already in market, now aligned</h3><p>The channels are running and the audience is there. From here every post carries the same navy, teal and typeface as the website, so organisers who meet CVBS on Instagram recognise it when they land on the site.</p></div>
+      <div class="card"><div class="num">03 &middot; EMAIL</div><h3>A reason to come back</h3><p>Rebuilt on the same system. Venue offers arriving with people who are actively planning, and every link pointing back at CVBS rather than at the hotel.</p></div>
+    </div>
+    <p class="small" style="margin-top:26px;opacity:.72">The rest of this presentation is those three, in that order.</p>
+  </div>
+</section>
+
+<!-- ================= 04 · BEFORE: FRAMING ================= -->
+<section class="slide stone" data-sec="Before">
+  <div class="pad two">
+    <div>
+      <div class="eyebrow">The starting point</div>
+      <h2>CVBS had evolved.<br>The website <span class="accent-d">hadn't evolved with it</span>.</h2>
+      <p class="lede" style="margin-top:22px">Behind the scenes: thirty-seven years of venue relationships, a trusted team, and clients who keep coming back. The website told very little of that story, and asked a lot of anyone trying to enquire.</p>
+      <div style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap">
+        <span class="chip"><i></i>Built on an ageing template</span>
+        <span class="chip"><i></i>Quote form supplied as a PDF</span>
+        <span class="chip"><i></i>No venues to explore</span>
+      </div>
+    </div>
+    <div class="browser" style="max-width:calc(min(58vh,520px) * 1.1247);margin:0 auto">
+      <div class="bar"><i></i><i></i><i></i><span class="url">conferencevenues.com.au</span></div>
+      <div class="view" style="height:auto"><img src="assets/shots/old-home-desktop-full.jpg" alt="Previous CVBS website homepage, entire page" style="display:block;width:100%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 · BEFORE: LIMITATIONS ================= -->
+<section class="slide" data-sec="Before">
+  <div class="pad">
+    <div class="eyebrow">What was holding it back</div>
+    <h2 style="margin-bottom:30px">Six limitations, seen through a <span class="accent-d">client's eyes</span>.</h2>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">01 · FIRST IMPRESSION</div><h3>The scale of CVBS wasn't visible</h3><p>The homepage opened on a dated template: a stock hero image, one button, and three short paragraphs. Nothing above the fold signalled an established, professional operation.</p></div>
+      <div class="card"><div class="num">02 · SERVICE CLARITY</div><h3>The service took work to understand</h3><p>What CVBS does, that it's free to the client, and why it beats searching alone was spread across inner pages. A first-time visitor had to assemble the story themselves.</p></div>
+      <div class="card"><div class="num">03 · VENUE DISCOVERY</div><h3>There were no venues to discover</h3><p>No destinations to browse, no venue pages, no way to move from "I need a venue in Sydney" to seeing what's possible. The site described a service, but never showed the product.</p></div>
+      <div class="card"><div class="num">04 · TRUST</div><h3>The proof was buried</h3><p>Since 1989, the client list, the testimonials: all real, all persuasive, and almost all sitting on the About page rather than working for CVBS at every step.</p></div>
+      <div class="card"><div class="num">05 · CONVERSION</div><h3>Enquiring meant downloading a PDF</h3><p>"Get a Quote" led to a downloadable PDF form, with the online version marked coming soon. Every extra step at the exact moment of intent costs enquiries.</p></div>
+      <div class="card"><div class="num">06 · MOBILE</div><h3>Mobile was an afterthought</h3><p>The layout technically responded, but hierarchy, tap targets and enquiry pathways weren't designed for the device many organisers first reach for.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 · BEFORE: ANNOTATED ================= -->
+<section class="slide stone" data-sec="Before">
+  <div class="pad two" style="grid-template-columns:1fr 1.15fr">
+    <div>
+      <div class="eyebrow">The previous homepage</div>
+      <h2>A brochure,<br>not a <span class="accent-d">starting point</span>.</h2>
+      <p class="lede" style="margin-top:20px">This is respectful honesty rather than criticism: the site served its era. But each of these details quietly worked against the calibre of the service behind it.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:26px">
+        <div class="chip" style="align-self:flex-start"><i></i>The entire homepage: a hero, three paragraphs, a footer</div>
+        <div class="chip" style="align-self:flex-start"><i></i>Navigation written in company terms, not client terms</div>
+        <div class="chip" style="align-self:flex-start"><i></i>One button on the whole page, pointing at offers</div>
+        <div class="chip" style="align-self:flex-start"><i></i>Footer still links to Google+, retired in 2019</div>
+      </div>
+    </div>
+    <div class="browser" style="max-width:calc(min(60vh,540px) * 1.1247);margin:0 auto">
+      <div class="bar"><i></i><i></i><i></i><span class="url">conferencevenues.com.au</span></div>
+      <div class="view" style="height:auto"><img src="assets/shots/old-home-desktop-full.jpg" alt="Previous homepage, entire page" style="display:block;width:100%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 · THE SHIFT ================= -->
+<section class="slide dark center" data-sec="The shift">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div class="eyebrow">The strategy</div>
+    <h2 style="max-width:18ch">From online brochure to <span class="accent">venue-finding experience</span>.</h2>
+    <div style="margin-top:44px;display:flex;flex-direction:column;gap:18px;align-items:center">
+      <div class="flow faded"><span class="step">Browse</span><span class="arr">→</span><span class="step">Read</span><span class="arr">→</span><span class="step">Search elsewhere</span><span class="arr">→</span><span class="step">Work out what to do</span></div>
+      <div style="font-size:11px;letter-spacing:.24em;color:rgba(255,255,255,.45);font-weight:700">BECOMES</div>
+      <div class="flow"><span class="step">Discover</span><span class="arr">→</span><span class="step">Understand</span><span class="arr">→</span><span class="step">Trust</span><span class="arr">→</span><span class="step">Explore</span><span class="arr">→</span><span class="step hi">Enquire</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 · PRINCIPLES ================= -->
+<section class="slide dark" data-sec="The shift">
+  <div class="pad">
+    <div class="eyebrow">Six principles behind the rebuild</div>
+    <h2 style="margin-bottom:30px">Every decision traces back to <span class="accent">one of these</span>.</h2>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">CLARITY</div><p style="font-size:14.5px">Anyone landing on any page should understand what CVBS does, and that it costs them nothing, within seconds.</p></div>
+      <div class="card"><div class="num">DISCOVERY</div><p style="font-size:14.5px">Make finding the right destination and venue feel like exploring, not searching. Give visitors somewhere to go next.</p></div>
+      <div class="card"><div class="num">TRUST</div><p style="font-size:14.5px">Bring 1989, the client list, the testimonials and the real people forward, so credibility is felt before it's needed.</p></div>
+      <div class="card"><div class="num">GUIDANCE</div><p style="font-size:14.5px">Help visitors understand what happens after they enquire, so starting a brief feels safe rather than committal.</p></div>
+      <div class="card"><div class="num">CONVERSION</div><p style="font-size:14.5px">A clear, low-friction next step from every page: tell us about your event, and we do the searching.</p></div>
+      <div class="card"><div class="num">MOBILE</div><p style="font-size:14.5px">Design the experience for the device organisers actually reach for first, not as a shrunken desktop.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 · REVEAL: SLIDER ================= -->
+<section class="slide stone" data-sec="The reveal">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center">
+    <div class="eyebrow">The transformation</div>
+    <h2 style="margin-bottom:26px;text-align:center">Drag to compare. <span class="accent-d">Same company, new front door.</span></h2>
+    <div class="ba" id="ba-home" style="width:min(78vw,1020px)">
+      <span class="lbl b">Before</span><span class="lbl a">After</span>
+      <img src="assets/shots/old-home-desktop-fold.jpg" alt="Previous homepage">
+      <div class="after"><img src="assets/shots/new-home-desktop-fold.jpg" alt="New homepage"></div>
+      <div class="handle" style="left:50%"></div>
+    </div>
+    <p class="small" style="margin-top:18px;text-align:center">Both captured at the same desktop size. The full page tour comes later; this is the first three seconds.</p>
+  </div>
+</section>
+
+<!-- ================= 09 · REVEAL: ENQUIRY ================= -->
+<section class="slide" data-sec="The reveal">
+  <div class="pad two">
+    <div>
+      <div class="eyebrow">The moment that matters most</div>
+      <h2>From a PDF download to a <span class="accent-d">guided brief</span>.</h2>
+      <p class="lede" style="margin-top:20px">On the previous site, the highest-intent visitors, the ones ready to enquire, were handed a PDF form to download, fill in and send back. The new site meets that same moment with a short guided brief: your event, your venue needs, your details, done.</p>
+      <p class="lede" style="margin-top:14px">The thank-you screen then explains exactly what happens next, so the conversation starts with confidence.</p>
+    </div>
+    <div class="ba" id="ba-enq">
+      <span class="lbl b">Before</span><span class="lbl a">After</span>
+      <img src="assets/shots/old-quote-desktop-fold.jpg" alt="Previous get a quote page">
+      <div class="after"><img src="assets/shots/new-submit-a-brief-desktop-fold.jpg" alt="New start your brief page"></div>
+      <div class="handle" style="left:50%"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 · HOMEPAGE HAS A JOB ================= -->
+<section class="slide dark" data-sec="Homepage">
+  <div class="vwrap light"><img class="poster" src="assets/brand/bg-homepage.jpg" alt=""></div>
+  <div class="vcontent pad two">
+    <div>
+      <div class="eyebrow">The new homepage</div>
+      <h2>The homepage <span class="accent">now has a job</span>.</h2>
+      <p class="lede" style="margin-top:20px">It is no longer a collection of information. It answers a visitor's questions in the order they actually ask them, and every section exists to move someone one step closer to a confident enquiry.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div class="chip"><i></i>1 · Where am I?</div>
+      <div class="chip"><i></i>2 · What does CVBS do?</div>
+      <div class="chip"><i></i>3 · Why should I use them instead of searching myself?</div>
+      <div class="chip"><i></i>4 · Can they help with my type of event?</div>
+      <div class="chip"><i></i>5 · Where could I hold it?</div>
+      <div class="chip"><i></i>6 · Why should I trust them?</div>
+      <div class="chip"><i></i>7 · What should I do next?</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 · HOMEPAGE ANATOMY ================= -->
+<section class="slide stone" data-sec="Homepage">
+  <div class="pad">
+    <div class="eyebrow">Section by section</div>
+    <h2 style="margin-bottom:24px">Every section has a <span class="accent-d">purpose</span>. Click through them.</h2>
+    <div class="anat">
+      <div class="browser shotbox">
+        <div class="bar"><i></i><i></i><i></i><span class="url">Home</span></div>
+        <div class="view"><img id="anat-img" src="assets/shots/new-home-desktop-full.jpg" alt="New homepage sections"></div>
+      </div>
+      <div class="steps" id="anat-steps">
+        <button class="stp on" data-y="0"><span class="t"><em>01</em>Hero</span><span class="d"><b>What it is:</b> the brand line, one sentence of who CVBS is, and two clear paths. <b>Why it exists:</b> to state the proposition and settle "where am I?" instantly. <b>What it should achieve:</b> confidence to keep going, or a straight line to starting a brief.</span></button>
+        <button class="stp" data-y="0.0821"><span class="t"><em>02</em>Start-your-brief bar</span><span class="d"><b>What it is:</b> a short, friendly capture of destination, dates and delegates. <b>Why it exists:</b> some visitors arrive ready; they shouldn't have to hunt for the form. <b>What it should achieve:</b> an immediate pathway for high-intent arrivals.</span></button>
+        <button class="stp" data-y="0.1491"><span class="t"><em>03</em>Destination discovery</span><span class="d"><b>What it is:</b> Australia's key event destinations, presented visually. <b>Why it exists:</b> discovery is brought forward so visitors can move from inspiration straight into relevant exploration. <b>What it should achieve:</b> turn passive browsing into a journey with a next step.</span></button>
+        <button class="stp" data-y="0.2318"><span class="t"><em>04</em>How your event comes together</span><span class="d"><b>What it is:</b> the four-step process, in plain language. <b>Why it exists:</b> uncertainty about "what happens if I enquire?" is the quiet reason people don't. <b>What it should achieve:</b> make the service feel simple, personal and safe.</span></button>
+        <button class="stp" data-y="0.3933"><span class="t"><em>05</em>Services</span><span class="d"><b>What it is:</b> conference venues, group accommodation, launches and events, corporate accommodation. <b>Why it exists:</b> organisers need to see their kind of event reflected back. <b>What it should achieve:</b> "yes, they handle exactly what I'm planning."</span></button>
+        <button class="stp" data-y="0.4770"><span class="t"><em>06</em>Statement moment</span><span class="d"><b>What it is:</b> ambient video behind a single promise about vouching for venues. <b>Why it exists:</b> a breathing space that carries the brand's confidence between the practical sections. <b>What it should achieve:</b> a feeling of calm assurance, not a harder sell.</span></button>
+        <button class="stp" data-y="0.5488"><span class="t"><em>07</em>The team, and the words of clients</span><span class="d"><b>What it is:</b> the same small team from first call to final invoice, alongside the organisations CVBS has worked with. <b>Why it exists:</b> people trust people; logos and longevity turn a claim into a track record. <b>What it should achieve:</b> move the conversation from what CVBS says to what CVBS has done.</span></button>
+        <button class="stp" data-y="0.7438"><span class="t"><em>08</em>Offers</span><span class="d"><b>What it is:</b> current, negotiated venue offers. <b>Why it exists:</b> a reason to return, and proof the venue relationships are live, not historical. <b>What it should achieve:</b> timely engagement, and a nudge for the undecided.</span></button>
+        <button class="stp" data-y="0.8750"><span class="t"><em>09</em>Closing CTA + newsletter</span><span class="d"><b>What it is:</b> "Tell us about your event. We know where to look," plus a newsletter for the not-yet-ready. <b>Why it exists:</b> every journey needs a destination; this one has two, matched to intent. <b>What it should achieve:</b> convert confidence into action, or keep the relationship warm.</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 · EVERY PAGE: MAP ================= -->
+<section class="slide" data-sec="Site architecture">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div class="eyebrow">How the pages connect</div>
+    <h2 style="margin-bottom:34px">One destination, <span class="accent-d">from wherever you land</span>.</h2>
+    <div class="eco">
+      <div class="tier">
+        <div class="node">Google &amp; referrals<span>how people arrive</span></div>
+        <div class="node">Venue Finder pages<span>16 destination entry points</span></div>
+        <div class="node">Offers &amp; EDMs<span>reasons to come back</span></div>
+      </div>
+      <div class="link"></div>
+      <div class="hub">Home</div>
+      <div class="link"></div>
+      <div class="tier">
+        <div class="node">How It Works<span>removes uncertainty</span></div>
+        <div class="node">Destinations<span>opens exploration</span></div>
+        <div class="node">Results<span>provides evidence</span></div>
+        <div class="node">About<span>puts people behind it</span></div>
+      </div>
+      <div class="link"></div>
+      <div class="tier">
+        <div class="node" style="background:var(--teal-deep);border-color:var(--teal-deep);color:#fff">Start your brief<span style="color:rgba(255,255,255,.75)">every path leads here</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 · PAGE PURPOSES ================= -->
+<section class="slide stone" data-sec="Site architecture">
+  <div class="pad">
+    <div class="eyebrow">Page by page</div>
+    <h2 style="margin-bottom:24px">Every page answers a question, and points <span class="accent-d">somewhere next</span>.</h2>
+    <div class="pgrid">
+      <div class="pcard"><div class="nm">Home</div><div class="row"><b>Job</b>Establish the proposition and route people by intent.</div><div class="row q">"Can CVBS help me find the right venue?"</div><div class="row"><b>Next</b>Explore destinations · understand the service · start a brief</div></div>
+      <div class="pcard"><div class="nm">How It Works</div><div class="row"><b>Job</b>Remove uncertainty about what happens after you enquire.</div><div class="row q">"What actually happens if I use CVBS?"</div><div class="row"><b>Next</b>Start a brief</div></div>
+      <div class="pcard"><div class="nm">Destinations</div><div class="row"><b>Job</b>Turn destination inspiration into structured discovery, 16 locations plus international.</div><div class="row q">"Where could we hold our event?"</div><div class="row"><b>Next</b>Explore a location's venue finder</div></div>
+      <div class="pcard"><div class="nm">Venue Finder</div><div class="row"><b>Job</b>Meet high-intent, city-specific searches with real venues and local knowledge.</div><div class="row q">"Which venues could work for my event?"</div><div class="row"><b>Next</b>Explore → shortlist → enquire</div></div>
+      <div class="pcard"><div class="nm">Results</div><div class="row"><b>Job</b>Provide evidence: client organisations, testimonials, real briefs solved.</div><div class="row q">"Can I trust them with our event?"</div><div class="row"><b>Next</b>Enquire with greater confidence</div></div>
+      <div class="pcard"><div class="nm">About</div><div class="row"><b>Job</b>Put Karen, Anthony and the team behind the service, with the story since 1989.</div><div class="row q">"Who am I actually working with?"</div><div class="row"><b>Next</b>Meet the team → start a brief</div></div>
+      <div class="pcard"><div class="nm">Offers</div><div class="row"><b>Job</b>Give visitors a live reason to return, and show the venue relationships at work.</div><div class="row q">"What opportunities are available right now?"</div><div class="row"><b>Next</b>Enquire about an offer</div></div>
+      <div class="pcard"><div class="nm">Start your brief</div><div class="row"><b>Job</b>Convert intent into a conversation with the least possible friction.</div><div class="row q">"How do I get started?"</div><div class="row"><b>Next</b>A shortlist conversation with the CVBS team</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 · USER JOURNEYS ================= -->
+<section class="slide dark" data-sec="User journeys">
+  <div class="pad">
+    <div class="eyebrow">Three real journeys</div>
+    <h2 style="margin-bottom:26px">The architecture is intentional. <span class="accent">Watch it work.</span></h2>
+    <div class="jz">
+      <div class="j">
+        <div class="who">Journey 01 · High intent</div>
+        <div class="q">"I need a conference venue in Sydney."</div>
+        <ol>
+          <li>Searches Google for Sydney conference venues</li>
+          <li>Lands on the Sydney Venue Finder</li>
+          <li>Explores venues, capacities and precincts</li>
+          <li>Sees the 48-hour shortlist promise and free-to-you model</li>
+          <li class="end">Starts a Sydney brief</li>
+        </ol>
+      </div>
+      <div class="j">
+        <div class="who">Journey 02 · Exploring options</div>
+        <div class="q">"We're considering several destinations."</div>
+        <ol>
+          <li>Arrives on the homepage</li>
+          <li>Browses Destinations</li>
+          <li>Compares Sydney, the Gold Coast, the Hunter Valley</li>
+          <li>Reads How It Works to understand the service</li>
+          <li class="end">Enquires with a shortlist of places in mind</li>
+        </ol>
+      </div>
+      <div class="j">
+        <div class="who">Journey 03 · Needs convincing</div>
+        <div class="q">"I've heard of CVBS, but what do they actually do?"</div>
+        <ol>
+          <li>Arrives on the homepage</li>
+          <li>Reads How It Works</li>
+          <li>Checks Results for evidence</li>
+          <li>Meets the team on About</li>
+          <li class="end">Starts a brief, knowing who's on the other end</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 15 · VENUE FINDER ================= -->
+<section class="slide dark" data-sec="Venue Finder">
+  <div class="pad two" style="grid-template-columns:1fr 1.15fr">
+    <div>
+      <div class="eyebrow">The biggest evolution</div>
+      <h2>The Venue Finder meets people <span class="accent">where their search begins</span>.</h2>
+      <p class="lede" style="margin-top:20px">Nobody searches for "venue sourcing agency". They search for conference venues in Sydney. Sixteen destination pages now answer exactly that, with real venues, published capacities, precinct guidance and local knowledge, before anyone is asked to enquire.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
+        <div class="chip"><i></i>Gives useful information first, asks for the enquiry second</div>
+        <div class="chip"><i></i>Sydney leads: real rooms, real numbers, filterable by size and setup</div>
+        <div class="chip"><i></i>Creates stronger foundations for organic discovery over time</div>
+        <div class="chip"><i></i>A template every other destination can grow into</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div class="browser pan" style="width:100%">
+        <div class="bar"><i></i><i></i><i></i><span class="url">/venue-finder-sydney</span></div>
+        <div class="view" style="height:min(64vh,580px)"><img src="assets/shots/new-venue-finder-sydney-desktop-full.jpg" alt="Sydney Venue Finder, full page"></div>
+      </div>
+      <span class="scrollhint"><b>&#8595;</b> Scroll the page inside the frame</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 16 · MOBILE ================= -->
+<section class="slide stone" data-sec="Mobile">
+  <div class="pad two" style="grid-template-columns:1.1fr 1fr">
+    <div>
+      <div class="eyebrow">Designed for the small screen</div>
+      <h2>Mobile isn't a smaller website. <span class="accent-d">It's a rethought one.</span></h2>
+      <p class="lede" style="margin-top:20px">Many organisers first meet CVBS on a phone, from a search, a shared link or an email. On mobile, the experience re-prioritises rather than shrinks:</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:22px">
+        <div class="chip"><i></i>"Start your brief" stays visible from the first screen</div>
+        <div class="chip"><i></i>Navigation collapses into a clean, single-thumb menu</div>
+        <div class="chip"><i></i>Content reorders for scanning: proposition, proof, path</div>
+        <div class="chip"><i></i>Destination discovery becomes a swipe-friendly journey</div>
+        <div class="chip"><i></i>Forms are broken into short, phone-sized steps</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:26px;justify-content:center;align-items:flex-start">
+      <div class="phone pan" style="width:min(23vw,250px)">
+        <span class="tag aft">Home</span>
+        <div class="view" style="height:min(60vh,530px)"><img src="assets/shots/new-home-mobile-full-1.jpg" alt="New homepage on mobile"><img src="assets/shots/new-home-mobile-full-2.jpg" alt=""><img src="assets/shots/new-home-mobile-full-3.jpg" alt=""></div>
+      </div>
+      <div class="phone pan" style="width:min(23vw,250px);margin-top:44px">
+        <span class="tag aft">Sydney</span>
+        <div class="view" style="height:min(60vh,530px)"><img src="assets/shots/new-venue-finder-sydney-mobile-full-1.jpg" alt="Sydney venue finder on mobile"><img src="assets/shots/new-venue-finder-sydney-mobile-full-2.jpg" alt=""><img src="assets/shots/new-venue-finder-sydney-mobile-full-3.jpg" alt=""><img src="assets/shots/new-venue-finder-sydney-mobile-full-4.jpg" alt=""></div>
+      </div>
+    </div>
+    <span class="scrollhint" style="grid-column:2;justify-self:center"><b>&#8595;</b> Scroll either phone</span>
+  </div>
+</section>
+
+<!-- ================= 17 · LIVE SITE ================= -->
+<section class="slide dark" data-sec="Walkthrough">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center">
+    <div class="eyebrow">The site itself</div>
+    <h2 style="text-align:center;margin-bottom:18px">Have a look <span class="accent">around it</span>.</h2>
+    <div class="browser" style="width:min(74vw,1120px)">
+      <div class="bar"><i></i><i></i><i></i><span class="url" id="liveurl">the-service-edit.github.io/cvbs-2026</span><a class="livelink" href="https://the-service-edit.github.io/cvbs-2026/" target="_blank" rel="noopener">Open in a tab &#8599;</a></div>
+      <div class="view live" id="liveview">
+        <iframe id="livesite" title="The new CVBS website, live" data-src="https://the-service-edit.github.io/cvbs-2026/"></iframe>
+        <div class="livefall" id="livefall"><img src="assets/shots/new-home-desktop-full.jpg" alt="The new CVBS homepage, full page"></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center">
+      <span class="chip"><i></i>Clearer navigation</span>
+      <span class="chip"><i></i>Destination discovery</span>
+      <span class="chip"><i></i>Sydney Venue Finder</span>
+      <span class="chip"><i></i>Enquiry pathways throughout</span>
+    </div>
+    <p class="small" style="margin-top:14px;text-align:center;opacity:.7">Scroll inside the frame to move through the real site. Click the background to get the arrow keys back.</p>
+  </div>
+</section>
+
+<!-- ================= 18 · SMALL DETAILS ================= -->
+<section class="slide" data-sec="Details">
+  <div class="pad">
+    <div class="eyebrow">Small details, big difference</div>
+    <h2 style="margin-bottom:24px">The changes you feel <span class="accent-d">more than you notice</span>.</h2>
+    <div class="dgrid">
+      <div class="dcard"><div class="im"><img src="assets/shots/new-home-desktop-fold.jpg" style="--pos:top center" alt=""></div><div class="tx"><b>CTA language</b><p>"Start your brief" and "Tell us about your event" replace "Get a Quote". Enquiring reads as beginning a conversation, not requesting paperwork.</p></div></div>
+      <div class="dcard"><div class="im"><img src="assets/shots/new-how-it-works-desktop-fold.jpg" style="--pos:center 30%" alt=""></div><div class="tx"><b>Guidance before commitment</b><p>The four-step process appears on nearly every page, so the answer to "what happens next?" is never more than a glance away.</p></div></div>
+      <div class="dcard"><div class="im"><img src="assets/shots/new-results-desktop-fold.jpg" style="--pos:center 20%" alt=""></div><div class="tx"><b>Trust, made ambient</b><p>Since 1989, free to you, shortlist in 48 hours: the reassurance strip travels with the visitor instead of living on one page.</p></div></div>
+      <div class="dcard"><div class="im"><img src="assets/shots/new-destinations-desktop-fold.jpg" style="--pos:center 60%" alt=""></div><div class="tx"><b>Cards you want to touch</b><p>Destinations and venues are presented as considered, hoverable cards, with consistent imagery that sells the experience of the event itself.</p></div></div>
+      <div class="dcard"><div class="im"><img src="assets/shots/new-offers-desktop-fold.jpg" style="--pos:center 30%" alt=""></div><div class="tx"><b>Offers with substance</b><p>Each offer names the venue, the inclusions and the timeframe, then connects straight to an enquiry, so interest never dead-ends.</p></div></div>
+      <div class="dcard"><div class="im"><img src="assets/shots/new-contact-desktop-fold.jpg" style="--pos:center 25%" alt=""></div><div class="tx"><b>Real people, named</b><p>Contact and About lead with Karen and Anthony rather than a generic inbox. You know who picks up the brief before you send it.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 19 · SOCIAL: INSTAGRAM & FACEBOOK ================= -->
+<section class="slide dark" data-sec="Social">
+  <div class="pad" style="display:flex;flex-direction:column;align-items:center">
+    <div class="eyebrow">Beyond the website</div>
+    <h2 style="text-align:center;max-width:24ch">Social that looks like it came from <span class="accent">the same company</span>.</h2>
+    <p class="lede" style="margin-top:16px;max-width:76ch;text-align:center">The channels are already active and the audience is already there. What is new is the look. Instagram and Facebook now run on the website's own design language: Inter, navy and teal, and the frosted glass panels already used in the site's navigation and hero. Real venue photography, never stock illustration. Six post types, each a full carousel.</p>
+    <div class="hscroll" style="margin-top:22px">
+      <div class="post"><img src="assets/social/soc-ig-offer.jpg" width="256" height="320" alt="Offer post design"><span class="cap">Offer / EDM</span></div>
+      <div class="post"><img src="assets/social/soc-ig-site-visit.jpg" width="256" height="320" alt="Site visit post design"><span class="cap">Site visit</span></div>
+      <div class="post"><img src="assets/social/soc-ig-destination.jpg" width="256" height="320" alt="Destination post design"><span class="cap">Destination</span></div>
+      <div class="post"><img src="assets/social/soc-ig-education.jpg" width="256" height="320" alt="Education post design"><span class="cap">Education</span></div>
+      <div class="post"><img src="assets/social/soc-ig-client-result.jpg" width="256" height="320" alt="Client result post design"><span class="cap">Client result</span></div>
+      <div class="post"><img src="assets/social/soc-ig-positioning.jpg" width="256" height="320" alt="Positioning post design"><span class="cap">Positioning</span></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px">
+      <span class="chip"><i></i>Built at 1080 &times; 1350, the tallest frame the feed allows<span class="ratio">4:5</span></span>
+      <span class="chip"><i></i>Delivered as ready-to-post images and editable Canva files</span>
+      <span class="chip"><i></i>Every post closes on the same footer and the same next step</span>
+    </div>
+    <span class="scrollhint"><b>&#8594;</b> Scroll the row to see all six</span>
+  </div>
+</section>
+
+<!-- ================= 20 · SOCIAL: LINKEDIN ================= -->
+<section class="slide stone" data-sec="Social">
+  <div class="pad two" style="grid-template-columns:1fr 1.2fr">
+    <div>
+      <div class="eyebrow">LinkedIn</div>
+      <h2>The same system, <span class="accent-d">re-cut for a different room</span>.</h2>
+      <p class="lede" style="margin-top:20px">LinkedIn is where the people who sign off on a conference actually are, and the frame there is square rather than tall. The templates re-compose rather than get resized, so a post reads as designed for the platform instead of borrowed from another one.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
+        <div class="chip"><i></i>1:1 for the feed, 1.91:1 for banners and link previews</div>
+        <div class="chip"><i></i>Out and about: real faces on the service, not stock people</div>
+        <div class="chip"><i></i>Venue Files turns venue knowledge into a repeatable format</div>
+        <div class="chip"><i></i>Positioning posts carry the searched-versus-sourced line</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+      <div class="hscroll" style="padding-bottom:12px">
+        <div class="post"><img src="assets/social/soc-li-out-and-about.jpg" width="270" height="270" alt="LinkedIn out and about post"><span class="cap">Out and about</span></div>
+        <div class="post"><img src="assets/social/soc-li-venue-files.jpg" width="270" height="270" alt="LinkedIn venue files post"><span class="cap">Venue Files</span></div>
+        <div class="post"><img src="assets/social/soc-li-positioning.jpg" width="270" height="270" alt="LinkedIn positioning post"><span class="cap">Positioning</span></div>
+      </div>
+      <span class="scrollhint" style="margin-top:-4px"><b>&#8594;</b> Scroll the row</span>
+      <div class="post" style="width:100%;max-width:560px"><img src="assets/social/soc-li-banner.jpg" style="width:100%;height:auto" alt="LinkedIn banner and link preview"><span class="cap">Banner and link preview<span class="ratio">1.91:1</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 21 &middot; EMAIL: THE PROBLEM ================= -->
+<section class="slide stone" data-sec="Email">
+  <div class="pad two" style="grid-template-columns:1.25fr .75fr">
+    <div>
+      <div class="eyebrow">The EDMs today</div>
+      <h2>Every link in the current email <span class="accent-d">sends the booking somewhere else</span>.</h2>
+      <p class="lede" style="margin-top:18px;max-width:62ch">The venue offers themselves are strong. The email around them is working for the hotel rather than for CVBS.</p>
+      <div class="grid" style="grid-template-columns:repeat(2,1fr);margin-top:26px">
+        <div class="card"><div class="num">01 &middot; THE TRAFFIC</div><h3>The only button goes to the hotel</h3><p>"Check Out The Westin Singapore Here" is the single prominent call to action, and it points at the venue's own site. The reader leaves, books direct, and CVBS is not in the transaction. The CVBS contact details sit below it in plain grey text.</p></div>
+        <div class="card"><div class="num">02 &middot; THE OFFER</div><h3>The deal is two screens down</h3><p>A hundred words of hotel brochure copy and three photographs come before the rate. On a phone that is a lot of scrolling before anyone learns the number is SGD 330.</p></div>
+        <div class="card"><div class="num">03 &middot; THE READER</div><h3>Nothing in it is personal</h3><p>No name, no city, no reference to what the reader is actually planning. One email goes to everyone, so it reads as a forwarded flyer rather than a message from Karen.</p></div>
+        <div class="card"><div class="num">04 &middot; THE BRANDING</div><h3>It is the hotel's email, not CVBS's</h3><p>CVBS appears as a thin strip at the very top. The largest thing on the first screen is THE WESTIN SINGAPORE. The reader remembers the hotel, not who sent it.</p></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:11px;align-items:center">
+      <div class="phone pan" style="width:min(20vw,258px)">
+        <div class="view" data-img="assets/edm/cvbs-edm-before.jpg" data-subject="CVBS Venue Review - The Westin Singapore" data-from="Anthony Jepson" data-addr="aj@conferencevenues.com.au" data-when="Thursday" style="height:min(64vh,580px)"><img src="assets/edm/cvbs-edm-before.jpg" alt="The current CVBS offer email, full length"></div>
+      </div>
+      <span class="framecap">The current EDM</span>
+      <span class="scrollhint" style="margin-top:0"><b>&#8853;</b> Click to open it full size</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 22 &middot; EMAIL: THE FIX ================= -->
+<section class="slide dark" data-sec="Email">
+  <div class="pad two" style="grid-template-columns:1fr 1.05fr">
+    <div>
+      <div class="eyebrow">The three templates</div>
+      <h2>The same offers, <span class="accent">pointed back at CVBS</span>.</h2>
+      <p class="lede" style="margin-top:20px">Three templates, one system. An introduction for people who have not heard from CVBS in a while, a monthly roundup that keeps CVBS in the inbox between big offers, and a single-venue email for when one offer deserves the whole message. All built in Mailchimp, so the next one is a matter of swapping the venue, not briefing a designer.</p>
+      <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
+        <div class="chip"><i></i><b>01</b>&nbsp; Every link lands on a CVBS page, so the enquiry stays with CVBS</div>
+        <div class="chip"><i></i><b>02</b>&nbsp; The rate sits one screen in, above the description rather than below it</div>
+        <div class="chip"><i></i><b>03</b>&nbsp; Named greeting, and built to be segmented by city and event type</div>
+        <div class="chip"><i></i><b>04</b>&nbsp; CVBS branded throughout. The venue is the content, not the sender</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="openbtn" href="assets/edm/cvbs-intro-edm.html" target="_blank" rel="noopener">Introduction <b>&#8599;</b></a>
+        <a class="openbtn" href="assets/edm/cvbs-offers-edm.html" target="_blank" rel="noopener">Roundup <b>&#8599;</b></a>
+        <a class="openbtn" href="assets/edm/cvbs-single-offer-edm.html" target="_blank" rel="noopener">Single venue <b>&#8599;</b></a>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:11px;align-items:center">
+        <div class="browser pan" style="width:min(17vw,232px)">
+          <div class="bar"><i></i><i></i><i></i><span class="url">A free pair of hands for your next event</span><a class="livelink" href="assets/edm/cvbs-intro-edm.html" target="_blank" rel="noopener">Open &#8599;</a></div>
+          <div class="view" data-img="assets/edm/cvbs-edm-intro-full.jpg" data-subject="A free pair of hands for your next event" data-from="Conference Venues" data-addr="karen@conferencevenues.com" data-when="9:04 AM (2 hours ago)" data-href="assets/edm/cvbs-intro-edm.html" style="height:min(60vh,540px)"><img src="assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email, full length"></div>
+        </div>
+        <span class="framecap">Introduction</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;align-items:center">
+        <div class="browser pan" style="width:min(17vw,232px)">
+          <div class="bar"><i></i><i></i><i></i><span class="url">Three offers we negotiated, and the dates they cover</span><a class="livelink" href="assets/edm/cvbs-offers-edm.html" target="_blank" rel="noopener">Open &#8599;</a></div>
+          <div class="view" data-img="assets/edm/cvbs-edm-full.jpg" data-subject="Three venues, three offers, and the dates they cover" data-from="Conference Venues" data-addr="aj@conferencevenues.com.au" data-when="8:12 AM (3 hours ago)" data-href="assets/edm/cvbs-offers-edm.html" style="height:min(60vh,540px)"><img src="assets/edm/cvbs-edm-full.jpg" alt="The CVBS monthly offers email, full length"></div>
+        </div>
+        <span class="framecap">Monthly roundup</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;align-items:center">
+        <div class="browser pan" style="width:min(17vw,232px)">
+          <div class="bar"><i></i><i></i><i></i><span class="url">Marina Bay from level 32, and what the Westin is offering on it</span><a class="livelink" href="assets/edm/cvbs-single-offer-edm.html" target="_blank" rel="noopener">Open &#8599;</a></div>
+          <div class="view" data-img="assets/edm/cvbs-edm-single-full.jpg" data-subject="Marina Bay from level 32, and what the Westin is offering on it" data-from="Conference Venues" data-addr="aj@conferencevenues.com.au" data-when="7:48 AM (4 hours ago)" data-href="assets/edm/cvbs-single-offer-edm.html" style="height:min(60vh,540px)"><img src="assets/edm/cvbs-edm-single-full.jpg" alt="The CVBS single offer email for The Westin Singapore, full length"></div>
+        </div>
+        <span class="framecap">One venue, one message</span>
+      </div>
+    </div>
+    <span class="scrollhint" style="grid-column:2;justify-self:center"><b>&#8853;</b> Click any email to open it full size</span>
+  </div>
+</section>
+
+<!-- ================= 23 &middot; THE EMAIL PROGRAM ================= -->
+<section class="slide" data-sec="Email">
+  <div class="pad">
+    <div class="eyebrow">The program</div>
+    <h2 style="margin-bottom:16px">Eleven reasons to be <span class="accent-d">in the inbox</span>.</h2>
+    <p class="lede" style="max-width:84ch;margin-bottom:28px">Nobody needs a venue finder until they suddenly need one urgently, and there is no way to predict which week that is. So the job of email is not to find the right person, it is to be there when the trigger fires with a ten second way to raise a hand. Two sends a month, every month, all ending on the same button.</p>
+    <div class="mcol">
+      <div class="m">
+        <div class="lab">Every month</div>
+        <h3>The rhythm</h3>
+        <ul>
+          <li><b>The venue review.</b> We were at this one. What it is really like, what it seats, who it suits</li>
+          <li><b>The offers roundup.</b> Three current offers, and the dates each one covers</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">Whenever it happens</div>
+        <h3>The reasons to send</h3>
+        <ul>
+          <li><b>A single venue offer.</b> When one venue gives CVBS something worth the whole email</li>
+          <li><b>The seasonal deadline.</b> Christmas spaces in August, EOFY in April, conference season in October</li>
+          <li><b>The introduction.</b> For anyone who has gone quiet, or any list CVBS adds</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">A few times a year</div>
+        <h3>The ones that build trust</h3>
+        <ul>
+          <li><b>The case note.</b> One event in six sentences, brief to booking</li>
+          <li><b>The destination edition.</b> One city for 40, for 200 and for 800</li>
+          <li><b>What venues are charging.</b> CVBS sees hundreds of quotes. Almost nobody else can write this</li>
+          <li><b>The next twelve months.</b> Sent when calendars and budgets get set</li>
+          <li><b>The tools.</b> The budget calculator and the venue checklist, sent as a gift</li>
+          <li><b>Are we still useful?</b> Cleans the list, and produces replies</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top:26px;opacity:.75">Half of them ask for a reply rather than a click. A reply lands in Anthony&rsquo;s inbox as a conversation, which is worth more than any click ever is.</p>
+  </div>
+</section>
+
+<!-- ================= 24 &middot; WHAT IT NOW DOES ================= -->
+<section class="slide dark" data-sec="The website">
+  <div class="pad">
+    <div class="eyebrow">Where the website lands</div>
+    <h2 style="margin-bottom:30px">Six things the site <span class="accent">now does on its own</span>.</h2>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">EXPLAINS</div><p style="font-size:14.5px">What CVBS does, that it's free to you, and why it works, within the first screen of every page.</p></div>
+      <div class="card"><div class="num">GUIDES</div><p style="font-size:14.5px">Visitors move through destinations and venues with a clear next step at every point.</p></div>
+      <div class="card"><div class="num">PROVES</div><p style="font-size:14.5px">Since 1989, recognisable clients and real testimonials now work on every journey, not just the About page.</p></div>
+      <div class="card"><div class="num">CONNECTS</div><p style="font-size:14.5px">Destinations, venues, offers, expertise and enquiries link into one continuous experience.</p></div>
+      <div class="card"><div class="num">CONVERTS</div><p style="font-size:14.5px">Interest becomes a guided brief rather than a downloaded PDF, with the least friction at the moment of highest intent.</p></div>
+      <div class="card"><div class="num">SCALES</div><p style="font-size:14.5px">New destinations, venues, offers, content and campaigns all have a natural home waiting for them.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 26 &middot; THE COMPETITIVE SET ================= -->
+<section class="slide stone" data-sec="The market">
+  <div class="pad">
+    <div class="eyebrow">Who else is in the running</div>
+    <h2 style="margin-bottom:14px">Organisers compare <span class="accent-d">before they enquire</span>.</h2>
+    <p class="lede" style="max-width:90ch">By the time somebody contacts CVBS they have usually already looked at a marketplace like VenueNow, or started doing it themselves. Those platforms now match briefs with AI, and they are genuinely good at volume. What an algorithm cannot tell you is what a room is actually like on the day. The service was never the problem. Until now, the comparison was happening on a page that did not represent it.</p>
+    <table class="cmp">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="us">CVBS</th>
+          <th>Venue marketplaces</th>
+          <th>Doing it yourself</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>What it costs you</th>
+          <td class="us">Nothing. The venue pays</td>
+          <td>Nothing. The venue pays</td>
+          <td>Nothing, except a week of your time</td></tr>
+        <tr><th>Who does the work</th>
+          <td class="us">Karen, Anthony, Chantelle and Rychelle. By name, and you can ring them</td>
+          <td>AI matching, with a team behind it you have not met</td>
+          <td>You, after hours</td></tr>
+        <tr><th>How the shortlist is made</th>
+          <td class="us">Three options, chosen by someone who has stood in the room</td>
+          <td>Filtered from a database and matched by algorithm</td>
+          <td>Whatever ranks on Google that day</td></tr>
+        <tr><th>What they know about the venue</th>
+          <td class="us">Thirty-seven years of site visits, and what went wrong last time</td>
+          <td>The listing the venue wrote about itself</td>
+          <td>The venue&rsquo;s own sales page</td></tr>
+        <tr><th>Who negotiates</th>
+          <td class="us">CVBS, against rates they see every week</td>
+          <td>Sometimes, at platform scale</td>
+          <td>You, with nothing to benchmark against</td></tr>
+        <tr><th>Speed</th>
+          <td class="us">A considered shortlist, usually inside 48 hours</td>
+          <td>A response target of under 24 hours</td>
+          <td>Two to three weeks of back and forth</td></tr>
+        <tr><th>Who you contract with</th>
+          <td class="us">The venue, directly</td>
+          <td>The venue, directly</td>
+          <td>The venue</td></tr>
+        <tr><th>Between events</th>
+          <td class="us">Offers, venue reviews, and a person who remembers your last one</td>
+          <td>A login you forget</td>
+          <td>Nothing</td></tr>
+      </tbody>
+    </table>
+    <p class="srcnote">Marketplace figures are taken from VenueNow&rsquo;s own site, August 2026, where it states a target response time of under 24 hours, no cost to corporate bookers, and AI-assisted venue matching. Other independent finders, such as The Venue Agency, run the same commission model as CVBS, which makes the comparison a matter of who looks more credible and who knows the venues better.</p>
+  </div>
+</section>
+
+<!-- ================= 27 &middot; WHY IT LANDS DIFFERENTLY NOW ================= -->
+<section class="slide dark" data-sec="The market">
+  <div class="pad">
+    <div class="eyebrow">Why the answer changes</div>
+    <h2 style="margin-bottom:16px">Their shortlist is an algorithm. <span class="accent">Yours is four people who have been there.</span></h2>
+    <p class="lede" style="max-width:84ch;margin-bottom:28px">Every platform in this market is racing to automate the part CVBS is best at. That is good news, because it turns the human part into the differentiator rather than the overhead. The advantage was always there. What was missing was somewhere to see it.</p>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="card"><div class="num">01 &middot; WHO DOES THE WORK</div><h3>Four people, not a filter</h3><p>A platform matches a brief against a database. CVBS matches it against venues four people have walked through, eaten in and run events at. The About and Results pages now put those four on the screen with names and faces, which is the one thing a marketplace cannot copy.</p></div>
+      <div class="card"><div class="num">02 &middot; JUDGEMENT OVER VOLUME</div><h3>Three venues, and the reason for each</h3><p>An algorithm returns everything matching a filter and leaves the deciding to you. CVBS returns a recommendation and can say why, including what went wrong somewhere else last time. The site is built to show that, not to list rooms.</p></div>
+      <div class="card"><div class="num">03 &middot; BEING FOUND AT ALL</div><h3>In the comparison, not after it</h3><p>Marketplaces win by answering the question people actually type into Google. The venue index does the same for CVBS, city by city, with capacity answers no listing page provides, so the comparison includes CVBS from the start.</p></div>
+      <div class="card"><div class="num">04 &middot; STAYING HUMAN</div><h3>A reply, not a notification</h3><p>Half the emails ask for a reply rather than a click, and a real person answers it. A login cannot hold a relationship together across events that are years apart. Karen remembering the last one is worth more than any recommendation engine.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 28 &middot; WHAT RUNS EVERY MONTH ================= -->
+<section class="slide" data-sec="The system">
+  <div class="pad">
+    <div class="eyebrow">How it runs</div>
+    <h2 style="margin-bottom:16px">What happens <span class="accent-d">every month</span>.</h2>
+    <p class="lede" style="max-width:76ch;margin-bottom:28px">The website is built once. The other two only work if they keep going, so they are set up to run on a rhythm rather than in bursts.</p>
+    <div class="mcol">
+      <div class="m">
+        <div class="lab">Social</div>
+        <h3>The rhythm you already have</h3>
+        <ul>
+          <li>Instagram, Facebook and LinkedIn, continuing as they are</li>
+          <li>Now on the post formats in this presentation, so every month is faster than the last</li>
+          <li>Venue offers, site visits, destinations and the education posts</li>
+          <li>Each post linking to a page on the new site rather than a dead end</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">Email</div>
+        <h3>Two sends, every month</h3>
+        <ul>
+          <li>The monthly roundup, so CVBS stays in the inbox between big offers</li>
+          <li>A single-venue send whenever a venue gives CVBS something worth passing on</li>
+          <li>Segmented by city and event type, so relevance does the work</li>
+          <li>Every link lands on a CVBS page, not the hotel's</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">The venue index</div>
+        <h3>The part that compounds</h3>
+        <ul>
+          <li>Another city, another set of venues, another page each month</li>
+          <li>Answers the capacity questions organisers are already searching</li>
+          <li>Each page feeds the destination pages, the social posts and the EDMs</li>
+          <li>Built once, working for CVBS for years</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top:26px;opacity:.75">None of it needs Karen or Anthony to write a word. You pass on the offers and the venue knowledge you already have. We turn it into the content.</p>
+  </div>
+</section>
+
+<!-- ================= 26 &middot; TWELVE MONTHS ================= -->
+<section class="slide dark" data-sec="The system">
+  <div class="pad">
+    <div class="eyebrow">Where this goes</div>
+    <h2 style="margin-bottom:14px">Twelve months of this, and <span class="accent">CVBS looks different</span>.</h2>
+    <p class="lede" style="max-width:76ch">Nothing here is a campaign that finishes. Every month adds to what the month before it built.</p>
+    <div class="tline">
+      <div class="t">
+        <div class="w">Month one</div>
+        <h3>Everything is live</h3>
+        <p>The website, two email templates and a full social system, all running and all pointing at the same brief form.</p>
+      </div>
+      <div class="t">
+        <div class="w">Month six</div>
+        <h3>The list knows CVBS</h3>
+        <p>Six more cities in the venue index. Dozens of posts and a run of EDMs behind you. Organisers who have seen CVBS long before they needed it.</p>
+      </div>
+      <div class="t">
+        <div class="w">Month twelve</div>
+        <h3>The brand looks its size</h3>
+        <p>Venue and destination pages answering the questions organisers actually search, and an email list worth more than any single campaign could be.</p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:34px;opacity:.72">Thirty-seven years of venue knowledge, finally visible to the people looking for it.</p>
+  </div>
+</section>
+
+<!-- ================= 27 &middot; BIGGER PICTURE ================= -->
+<section class="slide dark" data-sec="The system">
+  <div class="vwrap centre"><img class="poster" src="assets/brand/bg-foundation.jpg" alt=""></div>
+  <div class="vcontent pad" style="display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div class="eyebrow">The bigger picture</div>
+    <h2 style="max-width:26ch;margin-bottom:12px">Not a finished website. <span class="accent">A system that keeps working.</span></h2>
+    <p class="lede" style="text-align:center;margin-bottom:30px">Everything CVBS does from here already has somewhere to live and something to feed. Add a destination, a venue, an offer or a campaign, and the structure knows where it goes.</p>
+    <div class="eco">
+      <div class="tier">
+        <div class="node">Destination content</div>
+        <div class="node">Venue Finder pages</div>
+        <div class="node">Offers</div>
+        <div class="node">Social campaigns</div>
+        <div class="node">Email marketing</div>
+        <div class="node">Search discovery</div>
+      </div>
+      <div class="link"></div>
+      <div class="hub">The website</div>
+      <div class="link"></div>
+      <div class="tier">
+        <div class="node" style="background:var(--teal);border-color:var(--teal);color:#06323A;font-weight:700">Enquiries</div>
+        <div class="node" style="background:#fff;border-color:#fff;color:var(--navy);font-weight:700">The CVBS team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 21 · FINAL ================= -->
+<section class="slide dark center" data-sec="Close">
+  <div class="vwrap"><video muted loop playsinline preload="none" data-lazy poster="assets/brand/hero-video-poster.jpg"><source data-src="assets/video/hero.mp4" type="video/mp4"></video></div>
+  <div class="vcontent pad center" style="display:flex;flex-direction:column;align-items:center">
+    <h1 style="max-width:17ch">Built for where CVBS is now. <span class="accent">Designed for where CVBS is going.</span></h1>
+    <p class="lede" style="margin-top:26px;max-width:58ch">A website worth arriving at, social that makes CVBS familiar, and email that brings people back. Running together, month after month.</p>
+    <p class="lede" style="margin-top:18px;max-width:52ch;opacity:.8">We would love to keep building it with you.</p>
+    <img class="logo" src="assets/brand/logo-white.png" alt="CVBS" style="height:44px;margin-top:52px">
+    <p class="small" style="margin-top:16px;letter-spacing:.2em;text-transform:uppercase;font-weight:600">Conference Venues &amp; Booking Services</p>
+  </div>
+</section>
+
+
+<div id="mailview" role="dialog" aria-modal="true" aria-label="Email preview">
+  <div class="gwin" id="gwin">
+    <div class="gtop">
+      <div class="gsub" id="gsub"></div>
+      <button class="gclose" id="gclose" aria-label="Close">&times;</button>
+    </div>
+    <div class="gmeta">
+      <div class="gav" id="gav">C</div>
+      <div class="gwho"><b id="gfrom"></b><span id="gaddr"></span></div>
+      <div class="gwhen" id="gwhen"></div>
+    </div>
+    <div class="gbody" id="gbody">
+      <div class="gfall" id="gfall"><img id="gimg" src="" alt=""></div>
+      <iframe id="gframe" title="Email preview"></iframe>
+    </div>
+    <div class="ghint">
+      <span id="ghintl">The links work &middot; Esc to close</span>
+      <a id="gopen" href="#" target="_blank" rel="noopener">Open the real email in a new tab &#8599;</a>
+    </div>
+  </div>
+</div>
+</main>
+<script>
+/* ============ deck engine ============ */
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const prog=document.getElementById('progress');
+const secEl=document.querySelector('#hud .sec');
+const cntEl=document.querySelector('#hud .cnt');
+function go(n,init){
+  n=Math.max(0,Math.min(slides.length-1,n));
+  if(n===cur&&!init)return;
+  slides[cur].classList.remove('on');
+  cur=n;
+  const s=slides[cur];
+  s.classList.add('on');
+  document.body.classList.toggle('dark-hud',s.classList.contains('dark'));
+  prog.style.width=((cur+1)/slides.length*100)+'%';
+  secEl.textContent=s.dataset.sec||'';
+  cntEl.textContent=String(cur+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');
+  // lazy videos: play on slide entry, pause others
+  slides.forEach((sl,i)=>{ sl.querySelectorAll('video').forEach(v=>{
+    if(i===cur){
+      if(v.dataset.lazy!==undefined&&!v.dataset.loaded){const src=v.querySelector('source');src.src=src.dataset.src;v.load();v.dataset.loaded='1';}
+      if(!v.controls) v.play().catch(()=>{});
+    } else { if(!v.paused) v.pause(); }
+  });});
+  if(s.querySelector('#livesite')) mountLive();
+  location.hash='s'+(cur+1);
+}
+
+/* live site frame: load on slide entry, scale a 1440px desktop view into the frame,
+   fall back to the scrollable full-page screenshot if it cannot load */
+function fitLive(){
+  const v=document.getElementById('liveview'), f=document.getElementById('livesite');
+  if(!v||!f) return;
+  const scale=v.clientWidth/1440;
+  f.style.transform='scale('+scale+')';
+  f.style.height=(v.clientHeight/scale)+'px';
+}
+let liveMounted=false;
+function mountLive(){
+  const f=document.getElementById('livesite'), fall=document.getElementById('livefall');
+  if(!f||liveMounted) return;
+  liveMounted=true;
+  fitLive();
+  if(!navigator.onLine) return;                 // offline: keep the scrollable screenshot
+  // probe the origin with an image before framing it, so a blocked or offline
+  // load leaves the screenshot in place instead of an empty white frame
+  const probe=new Image();
+  let settled=false;
+  const fail=()=>{ if(!settled){settled=true;} };
+  probe.onload=()=>{ if(settled) return; settled=true;
+    f.addEventListener('load',()=>{f.classList.add('ready');fall.classList.add('hide');});
+    f.src=f.dataset.src;
+  };
+  probe.onerror=fail;
+  setTimeout(fail,5000);
+  probe.src=f.dataset.src.replace(/\/$/,'')+'/favicon.ico?t='+Date.now();
+}
+addEventListener('resize',fitLive);
+/* clicking outside the frame returns keyboard control to the deck */
+addEventListener('click',e=>{ if(!e.target.closest('#liveview')&&document.activeElement&&document.activeElement.id==='livesite') document.activeElement.blur(); });
+/* ---------- click-to-enlarge mail viewer ---------- */
+const mv=document.getElementById('mailview');
+function openMail(el){
+  document.getElementById('gsub').textContent   = el.dataset.subject || '';
+  document.getElementById('gfrom').textContent  = el.dataset.from || 'CVBS';
+  document.getElementById('gaddr').textContent  = (el.dataset.addr? '<'+el.dataset.addr+'>  ':'') + 'to me';
+  document.getElementById('gwhen').textContent  = el.dataset.when || '';
+  document.getElementById('gav').textContent    = (el.dataset.from||'C').trim().charAt(0).toUpperCase();
+  const link=document.getElementById('gopen'); link.href = el.dataset.href || '#';
+  const fall=document.getElementById('gfall'), img=document.getElementById('gimg'), fr=document.getElementById('gframe');
+  fr.classList.remove('ready'); fall.classList.remove('hide');
+  img.src = el.dataset.img; fall.scrollTop = 0;
+  const hint=document.getElementById('ghintl');
+  if(el.dataset.href){
+    hint.textContent = 'The links work. Try "See the offer" \u00b7 Esc to close';
+    let settled=false;
+    fr.onload = ()=>{ settled=true; fr.classList.add('ready'); fall.classList.add('hide'); };
+    fr.src = el.dataset.href;
+    setTimeout(()=>{ if(!settled){ fr.removeAttribute('src'); fr.classList.remove('ready'); fall.classList.remove('hide'); } }, 2500);
+  } else {
+    hint.textContent = 'Scroll inside the message \u00b7 Esc to close';
+    fr.removeAttribute('src');
+  }
+  mv.classList.add('on');
+}
+function closeMail(){ mv.classList.remove('on'); const fr=document.getElementById('gframe'); fr.removeAttribute('src'); fr.classList.remove('ready'); }
+document.querySelectorAll('[data-img]').forEach(el=>{
+  el.classList.add('mailtrig');
+  el.addEventListener('click', e=>{ if(e.target.closest('a')) return; e.preventDefault(); openMail(el); });
+});
+document.getElementById('gclose').onclick=closeMail;
+mv.addEventListener('click', e=>{ if(!e.target.closest('.gwin')) closeMail(); });
+addEventListener('keydown', e=>{ if(e.key==='Escape' && mv.classList.contains('on')){ e.stopPropagation(); closeMail(); } }, true);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.getElementById('prev').onclick=()=>go(cur-1);
+addEventListener('keydown',e=>{
+  if(document.getElementById('mailview').classList.contains('on')) return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '&&!e.target.closest('video')){e.preventDefault();go(cur+1);}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1);}
+  else if(e.key==='Home'){go(0);}
+  else if(e.key==='End'){go(slides.length-1);}
+  else if(e.key.toLowerCase()==='f'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}
+});
+/* swipe */
+let tx=null;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>60)go(cur+(dx<0?1:-1));tx=null;},{passive:true});
+
+/* before/after sliders */
+document.querySelectorAll('.ba').forEach(ba=>{
+  const after=ba.querySelector('.after'),handle=ba.querySelector('.handle');
+  function set(x){
+    const r=ba.getBoundingClientRect();
+    let p=Math.max(2,Math.min(98,(x-r.left)/r.width*100));
+    after.style.clipPath=`inset(0 0 0 ${p}%)`;
+    handle.style.left=p+'%';
+  }
+  set(ba.getBoundingClientRect().left+ba.getBoundingClientRect().width/2);
+  let drag=false;
+  ba.addEventListener('pointerdown',e=>{drag=true;set(e.clientX);ba.setPointerCapture(e.pointerId);});
+  ba.addEventListener('pointermove',e=>{if(drag)set(e.clientX);});
+  addEventListener('pointerup',()=>drag=false);
+});
+
+/* homepage anatomy stepper */
+const anatImg=document.getElementById('anat-img');
+const stepsBox=document.getElementById('anat-steps');
+if(stepsBox){
+  const stps=[...stepsBox.querySelectorAll('.stp')];
+  function activate(b){
+    stps.forEach(s=>s.classList.remove('on'));b.classList.add('on');
+    const f=parseFloat(b.dataset.y);
+    const view=anatImg.parentElement;
+    const travel=Math.max(0,anatImg.offsetHeight-view.offsetHeight);
+    const y=Math.min(anatImg.offsetHeight*f, travel);
+    anatImg.style.transform=`translateY(-${y}px)`;
+  }
+  stps.forEach(b=>b.addEventListener('click',()=>activate(b)));
+  anatImg.addEventListener('load',()=>activate(stps[0]));
+  if(anatImg.complete)setTimeout(()=>activate(stps[0]),300);
+}
+
+/* init */
+const m=location.hash.match(/^#s(\d+)$/);
+go(m?parseInt(m[1])-1:0,true);
+const hint=document.getElementById('helphint');
+hint.classList.add('show');setTimeout(()=>hint.classList.remove('show'),5000);
+</script>
+</body>
+</html>
