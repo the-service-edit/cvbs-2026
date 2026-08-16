@@ -11,3 +11,13 @@ _backup-pre-copy-rewrite/
 CVBS-Copy-Rewrite-Audit.html
 CVBS-Rebuild-Assessment-Aug-2026.html
 CVBS-Prototype-Venue-Index.html
+
+# Client pitch deck, internal
+CVBS-Website-Presentation/
+CVBS-Website-Presentation.zip
+
+# Internal working files, not for the public site
+email-templates/
+_edm-source/
+_to_delete/
+CVBS-Concept-Audit-and-Pricing-Aug-2026.html
