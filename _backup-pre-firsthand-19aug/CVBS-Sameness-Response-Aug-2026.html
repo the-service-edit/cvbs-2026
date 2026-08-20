@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CVBS: Answering the Sameness Talk</title>
+<style>
+:root{
+  --navy:#061E3B; --teal:#1F818C; --teal-lite:#28A8B6;
+  --ink:#12212F; --muted:#6A7077; --line:#E3E7EB; --bg:#FAFBFC;
+  --warn:#B4472A; --ok:#1F7A55;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 28px 120px}
+header.masthead{background:var(--navy);color:#fff;padding:64px 28px 56px;margin-bottom:52px}
+header.masthead .inner{max-width:860px;margin:0 auto}
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-lite);font-weight:600;margin:0 0 14px}
+header.masthead h1{font-size:40px;line-height:1.14;margin:0 0 16px;font-weight:700;letter-spacing:-.02em}
+header.masthead p{margin:0;color:#B9C6D4;font-size:17px;max-width:640px}
+h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+  font-weight:700;margin:0 0 6px}
+.sec{margin:0 0 64px;padding-top:8px}
+.sec > h3{font-size:29px;line-height:1.2;letter-spacing:-.02em;margin:0 0 20px;font-weight:700;color:var(--navy)}
+h4{font-size:19px;margin:34px 0 10px;font-weight:700;color:var(--navy);letter-spacing:-.01em}
+h5{font-size:15.5px;margin:24px 0 6px;font-weight:700;color:var(--ink)}
+p{margin:0 0 16px}
+ul,ol{margin:0 0 18px;padding-left:22px}
+li{margin:0 0 9px}
+strong{font-weight:650;color:var(--navy)}
+hr{border:0;border-top:1px solid var(--line);margin:56px 0}
+.lead{font-size:19px;line-height:1.55;color:var(--ink)}
+.pull{border-left:3px solid var(--teal);padding:2px 0 2px 20px;margin:26px 0;
+  font-size:20px;line-height:1.42;font-weight:650;color:var(--navy);letter-spacing:-.01em}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:20px 0}
+.card.warn{border-color:#EBC9BE;background:#FFF9F7}
+.card.ok{border-color:#C6E3D5;background:#F6FCF9}
+.card > *:last-child{margin-bottom:0}
+.card .tag{display:inline-block;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:700;color:var(--teal);margin:0 0 8px}
+.card.warn .tag{color:var(--warn)}
+.card.ok .tag{color:var(--ok)}
+table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14.5px}
+th{text-align:left;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;padding:0 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:13px 12px 13px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child,th:first-child{padding-left:0}
+.num{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;
+  border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:700;
+  margin-right:9px;flex:none}
+.step{display:flex;gap:0;align-items:flex-start;margin:0 0 16px}
+.step .body{flex:1}
+.step .body p{margin:0}
+.step .body .t{font-weight:650;color:var(--navy);display:block;margin-bottom:2px}
+.small{font-size:13.5px;color:var(--muted);line-height:1.55}
+.tick li{list-style:none;position:relative;padding-left:22px}
+.tick{padding-left:0}
+.tick li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;
+  border-radius:50%;background:var(--teal)}
+.cross li:before{background:#C9CFD5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+@media(max-width:680px){.grid2{grid-template-columns:1fr}header.masthead h1{font-size:30px}.sec>h3{font-size:24px}}
+.mini{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.mini h6{margin:0 0 6px;font-size:14px;font-weight:700;color:var(--navy)}
+.mini p{margin:0;font-size:14px;color:var(--muted);line-height:1.55}
+.toc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 26px;margin:0 0 60px}
+.toc ol{margin:0;padding-left:20px}
+.toc li{margin:0 0 6px;font-size:15px}
+.toc a{color:var(--navy);text-decoration:none;font-weight:600}
+.toc a:hover{color:var(--teal)}
+.footer{border-top:1px solid var(--line);padding-top:26px;color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <p class="eyebrow">CVBS &middot; Strategy note &middot; 19 August 2026</p>
+    <h1>Answering the sameness talk</h1>
+    <p>How to turn Dion Workman's Incentivise Live 2026 session into a sharper CVBS position, a sharper presentation, and a stronger reason to keep paying for the work.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="toc">
+  <ol>
+    <li><a href="#s1">The thing to get right first</a></li>
+    <li><a href="#s2">Pick a position: what CVBS should be famous for</a></li>
+    <li><a href="#s3">The sacrifice, and why 27 venues becomes a strength</a></li>
+    <li><a href="#s4">Remarkable: five things worth remarking on</a></li>
+    <li><a href="#s5">Operations: the shortlist is the brand</a></li>
+    <li><a href="#s6">Reputation: the contradiction audit</a></li>
+    <li><a href="#s7">What changes in the presentation, slide by slide</a></li>
+    <li><a href="#s8">The retainer argument Dion just made for you</a></li>
+    <li><a href="#s9">Weakest parts, and what makes this impossible to ignore</a></li>
+    <li><a href="#s10">Do this in the next ten days</a></li>
+  </ol>
+</div>
+
+<section class="sec" id="s1">
+  <h2>Start here</h2>
+  <h3>The thing to get right first</h3>
+
+  <p class="lead">Dion's talk is a four part argument: pick a position, make it remarkable, prove it through operations, let reputation compound. His central warning is that organisations all look the same because they use the same data, tools, consultants and language, and that the tell is a homepage full of phrases like "end to end solutions" and "every detail expertly managed".</p>
+
+  <p>Before any of that gets applied to CVBS, it has to be applied to your presentation. Because your deck currently opens on three parts: website, social, email.</p>
+
+  <div class="card warn">
+    <span class="tag">The risk nobody will say out loud</span>
+    <p>Your client has just spent a day being trained to spot capability lists. A deck structured as "here are the three services we provide" is, in the language they just learned, a same same deck. It does not matter that the work behind it is excellent. Slide 13 of Dion's deck is a wall of phrases like <em>end to end event solutions</em> and <em>tailored to your unique requirements</em>. A channel list is the same species.</p>
+  </div>
+
+  <p>The fix is not a rebuild. It is a reframe at the front and a relabel throughout. Your deck should not sell three channels. It should sell one job:</p>
+
+  <p class="pull">Make CVBS the venue finder Australian organisers assume they should call.</p>
+
+  <p>Website, social and email then sit underneath as the mechanism, not the offer. This is worth doing for commercial reasons, not just aesthetic ones. A channel list is priced against other channel lists. A positioning engagement is priced against the cost of being forgettable, which Dion has just spent a day quantifying for you in the room.</p>
+
+  <p>One more thing to hold on to. Dion's layer model, near the end of his deck, splits a business into internal capability, market signals, and marketplace conclusion. Layer 1 is hiring, training, processes, culture. Layer 3 is the reputation that forms in the buyer's head. Layer 2 is proposals, presentations, campaigns, partnerships, sales conversations.</p>
+
+  <p><strong>Layer 2 is your entire job.</strong> Say that in the room. It puts your work inside a model they already accept, and it makes clear that CVBS cannot do it themselves, because the whole point of Layer 2 is that it has to be repeated and consistent across every surface at once.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s2">
+  <h2>Topic one</h2>
+  <h3>Pick a position: what CVBS should be famous for</h3>
+
+  <p>Dion's test for a position is four questions: is it relevant, is it a decision making tool, is it simple, is it noble. And it should reflect an inherent strength, not an aspiration you have not earned.</p>
+
+  <p>CVBS has one asset that no competitor, no marketplace and no assistant can copy: four named people have physically stood in the rooms they recommend, and have been doing it since 1989.</p>
+
+  <p>Three candidate positions, with an honest read on each.</p>
+
+  <table>
+    <thead><tr><th style="width:24%">Position</th><th style="width:34%">What the buyer would say</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Firsthand</strong><br><span class="small">Known for: first hand knowledge of the room</span></td>
+        <td>"They have actually been in these rooms."</td>
+        <td><strong>Recommend.</strong> True today, not aspirational. Passes all four of Dion's tests. It is a working decision filter: would we put forward a venue none of us has visited? No. And it is the only position in the category that an algorithm structurally cannot claim.</td>
+      </tr>
+      <tr>
+        <td><strong>Fit</strong><br><span class="small">Known for: the right room, not the most rooms</span></td>
+        <td>"They know which room, not just which venues."</td>
+        <td>Weaker. It is the outcome of firsthand knowledge rather than a position of its own, and every competitor already claims to match briefs well. Not ownable.</td>
+      </tr>
+      <tr>
+        <td><strong>No regrets</strong><br><span class="small">Known for: removing career risk</span></td>
+        <td>"Nothing went wrong and nobody blamed me."</td>
+        <td>Strategically accurate, since Dion is right that B2B buyers are buying credibility and career protection. But it is loss framed, and you have already ruled loss framing out of this deck. Keep it as the underlying insight, not the headline.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card ok">
+    <span class="tag">The recommendation</span>
+    <p><strong>Firsthand.</strong> The single sentence to aim for in the buyer's head is: <em>"They have actually been in the room."</em></p>
+    <p style="margin-top:12px">This is not a new idea for CVBS. It is already the angle in the competitor slide, "their shortlist is an algorithm, yours is four people who have been there". What changes is that it stops being one good line on one slide and becomes the thing every other decision is filtered through.</p>
+  </div>
+
+  <p>Important: do not pick this for them. Dion's own framing is that sameness is a leadership problem, not a marketing problem, and that the hard part is not choosing, it is giving up. If you arrive having chosen, Karen will resist it, correctly. Arrive with three options and the price of each, and make the leadership team choose in the room. The choosing is the buy in.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s3">
+  <h2>Topic one, continued</h2>
+  <h3>The sacrifice, and why 27 venues becomes a strength</h3>
+
+  <p>Dion is blunt that every reputation requires sacrifice. Westin gave up luxury, food, meetings and technology leadership to own sleep. Volvo gave up sports car credibility and excitement to own safety. If nothing is being given up, no position has been taken.</p>
+
+  <div class="grid2">
+    <div class="mini">
+      <h6>What CVBS gives up</h6>
+      <p>Any claim to comprehensive national coverage. "Any venue, anywhere." Speed leadership, which you already decided not to claim. Padding a shortlist with a venue nobody has visited. Volume as a measure of success.</p>
+    </div>
+    <div class="mini">
+      <h6>What CVBS gains</h6>
+      <p>Permission to say no to a venue. Permission to publish an opinion. A content engine that runs on work already happening. A hiring filter. And the only defensible answer to an AI shortlist.</p>
+    </div>
+  </div>
+
+  <p>Here is the payoff that makes this worth doing, and it is the most useful sentence in this document.</p>
+
+  <div class="card ok">
+    <span class="tag">The reframe</span>
+    <p>The Sydney venue index has 27 venues. Tagvenue lists 678. Cvent has 6,229 across Australia. Measured against a comprehensiveness position, 27 is the index's biggest weakness and it is the number a sceptical client will find.</p>
+    <p style="margin-top:12px">Measured against a firsthand position, <strong>27 is the proof</strong>. Twenty seven rooms we have stood in. Each one with a name and a date attached. The number stops being an apology and becomes the argument.</p>
+  </div>
+
+  <p>Change the slide headline from a count of venues to a claim about knowledge, and add two columns to the index mock: <strong>visited by</strong> and <strong>last visited</strong>. That single change does four jobs at once. It proves the position, it disarms the breadth objection, it gives assistants a specific dated fact to quote, and it gives you an obvious reason for an annual refresh, which is retainer work.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s4">
+  <h2>Topic two</h2>
+  <h3>Remarkable: five things worth remarking on</h3>
+
+  <p>Dion's definition is the useful part. Remarkable means worthy of remark. Not bigger, better or more expensive. It can be unusually thoughtful, unexpectedly generous, brilliantly simple, or a friction removed in a way nobody expected.</p>
+
+  <p>Five candidates for CVBS, ranked by value against effort.</p>
+
+  <div class="step"><span class="num">1</span><div class="body">
+    <span class="t">Publish who visited, and when, on every venue</span>
+    <p>"Karen Jepson, March 2026." Nobody in this category does this anywhere in the world. The visits already happen, so the cost is a spreadsheet column and a discipline. It proves the position, it is a specific dated fact an assistant can quote, and it is the highest return item on this list by a distance.</p>
+  </div></div>
+
+  <div class="step"><span class="num">2</span><div class="body">
+    <span class="t">Publish day delegate package bands</span>
+    <p>Verified as genuinely unoccupied in Australia. Capacity data is everywhere, rates are partly published, but nobody publishes DDP ranges. This is Dion's "unexpectedly generous" and it is the single biggest wedge available. It needs Karen's sign off and it is worth pushing hard for.</p>
+  </div></div>
+
+  <div class="step"><span class="num">3</span><div class="body">
+    <span class="t">Send the venues you did not shortlist, and why</span>
+    <p>Dion's slide on small signals includes "the things you ignore" and "the way you say no". Every competitor shows you only the yes. A one page note listing four venues considered and rejected, with a real reason for each, costs nothing, is impossible to fake without firsthand knowledge, and is the strongest trust signal available in the category.</p>
+  </div></div>
+
+  <div class="step"><span class="num">4</span><div class="body">
+    <span class="t">Filter on ceiling height</span>
+    <p>This is literally Dion's "friction removed in an unexpected way". Nobody filters on it, ICC buries it inside a PDF, and it is the specification that kills a production build two weeks out. Small feature, disproportionate remark value with exactly the buyer who matters.</p>
+  </div></div>
+
+  <div class="step"><span class="num">5</span><div class="body">
+    <span class="t">Ninety seconds of phone video per venue, shot by whoever visited</span>
+    <p>Not marketing footage. "Here is the pre function space, and here is where it bottlenecks at four hundred." One asset doing three jobs: proof of the position, index content, and social content that writes itself. It also fixes the flagged risk of AI generated imagery being used to represent real venues.</p>
+  </div></div>
+
+  <div class="card warn">
+    <span class="tag">Say this out loud to Karen</span>
+    <p>Items 3 and 5 involve publishing things that are not flattering about venues that pay CVBS commission. That is a real commercial tension and it is a leadership decision, not a marketing one. How honest CVBS is allowed to be is the question that determines how remarkable it can be. Put it on the table rather than designing around it.</p>
+  </div>
+</section>
+
+<hr>
+
+<section class="sec" id="s5">
+  <h2>Topic three</h2>
+  <h3>Operations: the shortlist is the brand</h3>
+
+  <p>Dion's line is that marketing is what you say and operations is what you do, and that reputation is built from a sea of small signals: the speed of reply, the structure of the proposal, the questions you ask, the way you recover from a mistake.</p>
+
+  <p>You cannot change CVBS's operations. You can do two things, and the second one is worth money.</p>
+
+  <h4>Make one invisible strength visible</h4>
+  <p>This is one of Dion's own no regret actions. CVBS's invisible strength is the site inspection. It happens, it costs real time, and the buyer never sees evidence of it. Every item in the remarkable list above is a way of exposing it.</p>
+
+  <h4>Redesign the highest frequency asset, which is not the website</h4>
+
+  <div class="card">
+    <span class="tag">Add this to scope</span>
+    <p>The shortlist document is CVBS's most repeated brand artefact and it is almost certainly a Word attachment. It is the thing the organiser forwards to their CEO, unedited, at the exact moment the decision is being justified internally. It reaches the right person, at the right moment, more reliably than any page on the website.</p>
+    <p style="margin-top:12px">A designed shortlist template, built to be forwarded, is worth more per hour than another homepage revision. It is also visible, ongoing and easy to price.</p>
+  </div>
+
+  <h4>Design for the three exhale moments</h4>
+  <p>Dion's phrase for the moments where a customer waits, worries or wonders what happens next. For an event organiser there are three obvious ones:</p>
+  <ul class="tick">
+    <li><strong>Waiting to hear whether the date holds.</strong> Silence here is where confidence leaks. One automatic, human sounding acknowledgement with a named person and a time.</li>
+    <li><strong>Having to justify the venue internally.</strong> Give them a one page "why this venue" they can forward without editing. That is career protection delivered as a deliverable, and it is the most under served moment in the whole journey.</li>
+    <li><strong>The week before the event.</strong> A short check in from the person who visited the room. Costs nothing, remembered for years.</li>
+  </ul>
+
+  <h4>The leaking tap</h4>
+  <p>Dion asks whether the plumber's own taps leak. CVBS advises clients on arrival experiences, delegate flow and moments that matter. So ask the question back, gently, on a slide: <em>what happens when someone arrives at yours?</em></p>
+  <p>Then show the real answers. The brief form is off system with its own CSS, its own font weights, a different header and footer, and it is the destination of every call to action on the site. Eight city pages share one generic destination photo, including Byron Bay, the Yarra Valley and the Mornington Peninsula. The about page says thirty five years when it is thirty seven.</p>
+  <p>Those were on the fix list already. Under this framework they stop being tidy ups and become position contradictions, which is a far easier thing to get approved.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s6">
+  <h2>Topic four</h2>
+  <h3>Reputation: the contradiction audit</h3>
+
+  <p>Dion's model: reputation is what people assume before they have evidence, it is formed by the buyer rather than declared by the business, it accumulates from repeated signals, and it breaks on pattern contradiction. Known for fresh thinking, then you arrive with ideas they have already seen.</p>
+
+  <h4>The three things a buyer should believe before they have any facts</h4>
+  <ol>
+    <li>They have actually been in these rooms.</li>
+    <li>They will tell me what is wrong with a venue, not only what is right.</li>
+    <li>They have done this recently, for people my size, in my city.</li>
+  </ol>
+
+  <h4>Where CVBS currently contradicts itself</h4>
+
+  <table>
+    <thead><tr><th style="width:33%">The claim</th><th>The contradiction</th></tr></thead>
+    <tbody>
+      <tr><td>We know these destinations firsthand</td><td>Eight destination tiles and eight city heroes reuse one generic image. Publishing the wrong photograph of a region you claim to know is the most literal possible contradiction of a firsthand position.</td></tr>
+      <tr><td>Four real, named people</td><td>Karen and Anthony's photographs appear on the results page as "Sarah M." and "David R.". Under a firsthand position, invented testimonial faces are the single worst contradiction on the site. This one is now non negotiable.</td></tr>
+      <tr><td>Four real, named people</td><td>Two of the four are gradient initial tiles next to two real photographs on the about page.</td></tr>
+      <tr><td>We know each city specifically</td><td>"Local access, negotiated rates" repeated identically across every city page. That is Dion's sameness wall, written by us. Karen's signed forty word note per city is the fix.</td></tr>
+      <tr><td>We are considered and thorough</td><td>Thirty five years stated where it is thirty seven. A firm that is careless with its own founding date invites a question about how careful it is with a capacity figure.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="small">Worth noticing: Dion's framework, applied honestly, lands on almost exactly the fix list that already existed. That is a good sign. It also means every one of those items can now be sold in the vocabulary the client just adopted, which is a much easier conversation than a defect list.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s7">
+  <h2>The deck</h2>
+  <h3>What changes in the presentation, slide by slide</h3>
+
+  <p>Eight changes. None of them require rebuilding the deck.</p>
+
+  <div class="step"><span class="num">1</span><div class="body">
+    <span class="t">New opening slide: "What do you want CVBS to be famous for?"</span>
+    <p>Their question, their framework, in the first thirty seconds. It signals you were listening, and it sets the meeting up as a positioning conversation rather than a website review. Credit Dion once, here, by name. Then stop crediting him.</p>
+  </div></div>
+
+  <div class="step"><span class="num">2</span><div class="body">
+    <span class="t">Move the market and the search and AI slides to the front</span>
+    <p>Dion's shape is problem, then sameness, then the cost of ambiguity, then the answer. Your deck currently reveals the site and then explains the market. Reversing that makes your argument follow the shape they were just taught, which makes it feel true rather than merely correct.</p>
+  </div></div>
+
+  <div class="step"><span class="num">3</span><div class="body">
+    <span class="t">Build the sameness wall slide, from real competitors</span>
+    <p>Take the actual homepage headlines of VenueNow, Tagvenue, Cvent Australia and three Australian venue finding agencies. Set them all in the same grey, same size, no logos. Then drop CVBS's current line in among them and let the room find it. This is Dion's slide 13 rebuilt from CVBS's real category. <strong>It is the highest impact new slide in the deck and it takes about an hour.</strong></p>
+  </div></div>
+
+  <div class="step"><span class="num">4</span><div class="body">
+    <span class="t">Relabel the competitor comparison as a position, not a feature table</span>
+    <p>The line is already right. Add the word Position above it so it reads as the answer to the opening question rather than as a feature comparison.</p>
+  </div></div>
+
+  <div class="step"><span class="num">5</span><div class="body">
+    <span class="t">Recast the venue index slide</span>
+    <p>From a count of venues to a claim about knowledge. Add visited by and last visited to the mock. See section three.</p>
+  </div></div>
+
+  <div class="step"><span class="num">6</span><div class="body">
+    <span class="t">Recast the monthly retainer slide as repetition</span>
+    <p>Headline it on Dion's own argument: a reputation is a pattern, and patterns need repetition. The three channels sit underneath as the mechanism. See the next section, this is the commercial centre of the whole thing.</p>
+  </div></div>
+
+  <div class="step"><span class="num">7</span><div class="body">
+    <span class="t">Add the leaking taps slide</span>
+    <p>Use the before screenshots you already have. "You design arrival experiences for a living. Here is what happens when someone arrives at yours." Then the four contradictions from section six. Handled warmly it is the most persuasive slide in the deck, because it is the only one where the evidence is entirely theirs.</p>
+  </div></div>
+
+  <div class="step"><span class="num">8</span><div class="body">
+    <span class="t">Close on their homework, already done</span>
+    <p>Dion sent the room away with three actions, including asking three customers what comes to mind first, and asking each leader independently what the business wants to be known for. Arrive having done both. Two client calls and four one line answers from Karen, Anthony, Chantelle and Rychelle. Then put the four answers on one slide.</p>
+    <p style="margin-top:10px"><strong>If those four answers differ, and they will, that slide sells the engagement on its own.</strong> No design work in the deck comes close to it.</p>
+  </div></div>
+</section>
+
+<hr>
+
+<section class="sec" id="s8">
+  <h2>Commercial</h2>
+  <h3>The retainer argument Dion just made for you</h3>
+
+  <p>This is the part worth reading twice.</p>
+
+  <p>Dion's closing argument is that reputation is formed by the buyer, not declared by the business. It is built from repeated signals encountered often enough, in enough different places, for the market to recognise a pattern. The reward for repetition is that the buyer's shortcut gets stronger and the choice gets easier.</p>
+
+  <p class="pull">A retainer is the only way to buy repetition. Dion has just spent a day explaining to your client why they need one.</p>
+
+  <p>Reframe the monthly work accordingly. The current framing is social, email, and index expansion, which is a list of activities. The new framing is:</p>
+
+  <div class="card">
+    <p><strong>The monthly work exists to manufacture the repeated signals that let a reputation form.</strong> A website is a single signal, published once. A reputation needs the same underlying idea appearing in enough places, often enough, for the market to recognise the pattern. That is what the retainer buys, and it is the only thing that can buy it.</p>
+  </div>
+
+  <p>Two consequences worth acting on.</p>
+  <ul class="tick">
+    <li><strong>It defends the build fee and the retainer separately.</strong> The build is the position made concrete. The retainer is the repetition. Under Dion's model neither works without the other, which makes the "let us pause social to fund the website" outcome much harder for them to propose. That was the main risk in the pricing position and this largely disarms it.</li>
+    <li><strong>It gives you a defensible new line item.</strong> The shortlist template, the why this venue one pager, and the monthly assistant check are all Layer 2 signal work. They are visible, repeatable, and they are not website maintenance, so they price separately.</li>
+  </ul>
+</section>
+
+<hr>
+
+<section class="sec" id="s9">
+  <h2>Self critique</h2>
+  <h3>Weakest parts, and what makes this impossible to ignore</h3>
+
+  <h5>The weakest part</h5>
+  <p>Parroting. If the deck borrows Dion's furniture wholesale, the numbered pillars, the "no regret actions" headers, the exact phrasing, it reads as flattery and you lose authority in the room. Use the structure and the tests. Borrow no more than three of his phrases across the entire deck. Credit him once at the start and never again.</p>
+
+  <h5>What could go generic</h5>
+  <p>"Pick a position" is the most common piece of advice in marketing. What stops this from being generic is the sacrifice list and the contradiction audit, because those are specific, uncomfortable and clearly about CVBS. If the deck contains the advice but not the sacrifice, it is a summary of somebody else's talk.</p>
+
+  <h5>Where the inspiration could misfire</h5>
+  <p>Dion's session was built for event agencies. His worked example is an agency choosing between creativity, engagement and transformation. CVBS is a sourcing business, not an agency. The failure mode is CVBS returning excited about being "transformational", which is not true of them and cannot be operationalised. Pre empt it by putting the three realistic positions on the table before they invent a fourth.</p>
+
+  <h5>What competitors would do</h5>
+  <p>Send a "great session, here is a summary and some thoughts" email within forty eight hours. It is fast, it is polite, and it is forgotten by Friday.</p>
+
+  <h5>What makes this impossible to ignore</h5>
+  <p>Turning up having done their homework for them. Two of their customers asked what comes to mind first. Four leaders asked independently what they want to be known for. Six real competitor headlines on one grey slide. Their own four answers, side by side, probably not matching.</p>
+  <p>Nobody else in their supply chain will do that, and it cannot be done by an AI, an agency deck template or a well written email. It is the firsthand position, demonstrated rather than described, by the person recommending it.</p>
+</section>
+
+<hr>
+
+<section class="sec" id="s10">
+  <h2>Next</h2>
+  <h3>Do this in the next ten days</h3>
+
+  <div class="card warn">
+    <span class="tag">Timing</span>
+    <p>Post conference inspiration has a short half life. Two weeks out, the framework is a nice memory. Book the session inside ten days while they are still using the vocabulary.</p>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:8%"></th><th style="width:52%">Action</th><th>Effort</th></tr></thead>
+    <tbody>
+      <tr><td><span class="num">1</span></td><td>Send a two line note now: one question from the talk, an offer to bring the answers. Do not send a summary.</td><td>10 min</td></tr>
+      <tr><td><span class="num">2</span></td><td>Ask Karen, Anthony, Chantelle and Rychelle, separately: what do we want to be known for? One line each, no discussion between them.</td><td>4 emails</td></tr>
+      <tr><td><span class="num">3</span></td><td>Ask two recent clients: when you think about CVBS, what is the first thing that comes to mind?</td><td>2 calls</td></tr>
+      <tr><td><span class="num">4</span></td><td>Build the sameness wall slide from six real competitor headlines.</td><td>1 hr</td></tr>
+      <tr><td><span class="num">5</span></td><td>Add the three position options and the sacrifice each requires.</td><td>1 hr</td></tr>
+      <tr><td><span class="num">6</span></td><td>Recast the index slide and the retainer slide. Add visited by and last visited.</td><td>2 hrs</td></tr>
+      <tr><td><span class="num">7</span></td><td>Add the leaking taps slide and the four answers slide.</td><td>2 hrs</td></tr>
+      <tr><td><span class="num">8</span></td><td>Move the market and search slides forward. Reorder only, no new content.</td><td>30 min</td></tr>
+      <tr><td><span class="num">9</span></td><td>Clear the P1 contradictions before presenting: destination images, the Sarah M and David R photographs, the two initial tiles, thirty five versus thirty seven years.</td><td>5 to 7 hrs</td></tr>
+    </tbody>
+  </table>
+
+  <p>Items 2 and 3 are the ones that decide whether this lands. Everything else is craft.</p>
+</section>
+
+<div class="footer">
+  <p>Source: Dion Workman, "Clarity Creates Advantage", MICE presentation, Incentivise Live 2026, August 2026. 158 slides, read in full. Framework: Position, Remarkable, Operations, Reputation.</p>
+  <p>Internal working document. Not for client distribution in this form.</p>
+</div>
+
+</div>
+</body>
+</html>

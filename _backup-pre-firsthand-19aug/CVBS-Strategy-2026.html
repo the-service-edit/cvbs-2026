@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVBS · The Next Decade · Business Transformation Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#3BC9D9; --teal-deep:#28A8B6;
+  --navy:#0D2233; --navy2:#071520;
+  --stone:#F4F1EA; --stone-deep:#ECE7DC;
+  --ink:#0D1F2D; --muted:#6E747B;
+  --line:rgba(13,31,45,.10);
+  --line-d:rgba(255,255,255,.12);
+  --glass:rgba(255,255,255,.55);
+  --glass-d:rgba(255,255,255,.045);
+  --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 18px 50px -28px rgba(13,34,51,.45);
+  --shadow-d:0 1px 0 rgba(255,255,255,.08) inset, 0 24px 60px -30px rgba(0,0,0,.7);
+  --maxw:1120px;
+  --r:18px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--ink); background:var(--stone);
+  -webkit-font-smoothing:antialiased; line-height:1.62; font-size:16.5px;
+  letter-spacing:-.005em;
+}
+h1,h2,h3,h4{margin:0; font-weight:600; letter-spacing:-.03em; line-height:1.08;}
+p{margin:0 0 1.05em;}
+a{color:inherit;}
+em{font-style:italic;}
+.serif{font-family:'Newsreader',Georgia,serif; font-weight:400; letter-spacing:-.01em;}
+
+/* ---------- progress + top bar ---------- */
+.progress{position:fixed; top:0; left:0; height:3px; width:0%; z-index:120;
+  background:linear-gradient(90deg,var(--teal),var(--teal-deep)); transition:width .15s linear;}
+.topbar{position:fixed; top:0; left:0; right:0; z-index:110; height:60px;
+  display:flex; align-items:center; gap:18px; padding:0 max(20px,calc((100vw - var(--maxw))/2 + 20px));
+  background:rgba(244,241,234,.72); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+  border-bottom:1px solid var(--line);}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:-.02em; font-size:16px;}
+.brand .mono{width:30px; height:30px; border-radius:9px; display:grid; place-items:center; color:#fff;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep)); font-size:12px; font-weight:800; letter-spacing:.02em;
+  box-shadow:0 6px 16px -6px rgba(40,168,182,.7);}
+.brand small{font-weight:500; color:var(--muted); letter-spacing:.01em;}
+.topnav{margin-left:auto; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; max-width:62vw;}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{flex:0 0 auto; font-size:12.5px; font-weight:500; color:var(--muted); text-decoration:none;
+  padding:7px 11px; border-radius:9px; white-space:nowrap; transition:.2s var(--ease);}
+.topnav a:hover{color:var(--ink); background:rgba(13,31,45,.05);}
+.topnav a.on{color:var(--navy); background:rgba(59,201,217,.16);}
+@media(max-width:860px){ .topnav{display:none} .topbar{height:54px} }
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+section{padding:96px 0; position:relative; overflow:hidden;}
+@media(max-width:680px){ section{padding:66px 0} }
+.eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:11.5px; font-weight:600;
+  text-transform:uppercase; letter-spacing:.24em; color:var(--teal-deep); margin-bottom:22px;}
+.eyebrow::before{content:""; width:26px; height:2px; background:var(--teal); border-radius:2px;}
+.dark .eyebrow{color:var(--teal);} .dark .eyebrow::before{background:var(--teal);}
+.snum{font-size:12px; font-weight:700; letter-spacing:.18em; color:var(--muted); opacity:.7;}
+h2.big{font-size:clamp(30px,5vw,52px); max-width:18ch;}
+.lede{font-size:clamp(17px,2.1vw,21px); color:var(--muted); max-width:60ch; margin-top:22px; line-height:1.55;}
+.dark .lede{color:rgba(255,255,255,.72);}
+.tealword{color:var(--teal-deep);} .dark .tealword{color:var(--teal);}
+
+/* section colour modes */
+.dark{background:var(--navy); color:#fff;}
+.dark h2,.dark h3,.dark h4{color:#fff;}
+.darker{background:var(--navy2); color:#fff;}
+.stone2{background:var(--stone-deep);}
+.dark::before,.darker::before{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(900px 480px at 12% -8%,rgba(59,201,217,.16),transparent 60%),
+             radial-gradient(700px 500px at 105% 8%,rgba(40,168,182,.12),transparent 55%);}
+.dark>*,.darker>*{position:relative; z-index:1;}
+
+/* ---------- glass cards ---------- */
+.card{background:var(--glass); border:1px solid var(--line); border-radius:var(--r);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); box-shadow:var(--shadow); padding:26px 24px;}
+.dark .card,.darker .card{background:var(--glass-d); border:1px solid var(--line-d); box-shadow:var(--shadow-d);}
+.grid{display:grid; gap:18px;}
+.g2{grid-template-columns:repeat(2,1fr);} .g3{grid-template-columns:repeat(3,1fr);} .g4{grid-template-columns:repeat(4,1fr);}
+@media(max-width:900px){ .g3,.g4{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:620px){ .g2,.g3,.g4{grid-template-columns:1fr} }
+.card h4{font-size:17.5px; margin-bottom:9px; letter-spacing:-.02em;}
+.card p{font-size:14.5px; color:var(--muted); margin-bottom:0;}
+.dark .card p,.darker .card p{color:rgba(255,255,255,.7);}
+.card .ic{width:38px; height:38px; border-radius:11px; display:grid; place-items:center; margin-bottom:16px;
+  background:linear-gradient(135deg,rgba(59,201,217,.22),rgba(40,168,182,.12)); color:var(--teal-deep);
+  font-weight:700; font-size:16px;}
+.dark .card .ic,.darker .card .ic{color:var(--teal);}
+
+/* metric stat */
+.stat .n{font-size:clamp(30px,4.4vw,46px); font-weight:700; letter-spacing:-.04em;
+  background:linear-gradient(135deg,var(--teal-deep),var(--navy)); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1;}
+.dark .stat .n,.darker .stat .n{background:linear-gradient(135deg,#fff,var(--teal)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.stat .l{font-size:13px; color:var(--muted); margin-top:10px;}
+.dark .stat .l,.darker .stat .l{color:rgba(255,255,255,.7);}
+
+/* meta strip: priority / effort / roi */
+.meta{display:flex; flex-wrap:wrap; gap:10px; margin:30px 0 8px;}
+.pill{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600;
+  padding:8px 14px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.5);}
+.dark .pill,.darker .pill{border-color:var(--line-d); background:rgba(255,255,255,.06); color:#fff;}
+.pill b{font-weight:700;}
+.dot{width:8px; height:8px; border-radius:50%;}
+.d-hi{background:#E5484D;} .d-med{background:#F2A33C;} .d-lo{background:#3BC9D9;}
+.tag{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep);}
+
+/* compare table */
+.tablewrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); margin-top:8px;}
+.dark .tablewrap,.darker .tablewrap{border-color:var(--line-d);}
+table{width:100%; border-collapse:collapse; font-size:14px; min-width:560px;}
+th,td{text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+.dark th,.dark td,.darker th,.darker td{border-color:var(--line-d);}
+thead th{font-size:11.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; background:rgba(13,31,45,.03);}
+.dark thead th,.darker thead th{background:rgba(255,255,255,.04); color:rgba(255,255,255,.7);}
+tbody tr:last-child td{border-bottom:none;}
+td.cat{font-weight:600; color:var(--ink); width:18%;}
+.dark td.cat,.darker td.cat{color:#fff;}
+td.old{color:var(--muted);}
+.dark td.old,.darker td.old{color:rgba(255,255,255,.55);}
+td.new{color:var(--ink); font-weight:500;}
+.dark td.new,.darker td.new{color:#fff;}
+.win{font-size:11px; font-weight:700; color:var(--teal-deep);}
+.dark .win,.darker .win{color:var(--teal);}
+
+/* speaker notes */
+.notes{margin-top:30px; border-left:3px solid var(--teal); padding:18px 22px; border-radius:0 14px 14px 0;
+  background:rgba(59,201,217,.07); font-size:14.5px;}
+.dark .notes,.darker .notes{background:rgba(59,201,217,.10);}
+.notes .lbl{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); display:block; margin-bottom:8px;}
+.dark .notes .lbl,.darker .notes .lbl{color:var(--teal);}
+.notes p{font-style:italic; color:var(--ink); margin:0;}
+.dark .notes p,.darker .notes p{color:rgba(255,255,255,.85);}
+
+/* visual suggestion */
+.viz{margin-top:14px; font-size:12.5px; color:var(--muted); display:flex; gap:9px; align-items:flex-start;}
+.viz b{color:var(--teal-deep); font-weight:700; text-transform:uppercase; letter-spacing:.1em; font-size:11px; white-space:nowrap; padding-top:1px;}
+.dark .viz,.darker .viz{color:rgba(255,255,255,.6);} .dark .viz b,.darker .viz b{color:var(--teal);}
+
+/* labelled block */
+.block{margin-top:34px;}
+.block>h3{font-size:13px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:18px; font-weight:700;}
+.dark .block>h3,.darker .block>h3{color:var(--teal);}
+.subhead{font-size:clamp(20px,2.6vw,26px); margin:38px 0 16px; letter-spacing:-.025em;}
+
+/* problem/impact rows */
+.prob{border:1px solid var(--line); border-radius:var(--r); padding:0; overflow:hidden; background:rgba(255,255,255,.4);}
+.prob .row{display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:0;}
+.prob .row>div{padding:18px 20px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+.prob .row>div:last-child{border-right:none;}
+.prob .row:last-child>div{border-bottom:none;}
+.prob .row.head>div{font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; background:rgba(13,31,45,.03);}
+.prob .ttl{font-weight:600; font-size:14.5px; margin-bottom:5px;}
+.prob .txt{font-size:13.5px; color:var(--muted); margin:0;}
+.prob .out{font-size:13.5px; color:var(--teal-deep); font-weight:600;}
+@media(max-width:760px){ .prob .row{grid-template-columns:1fr} .prob .row>div{border-right:none;} }
+
+.kicker{font-size:clamp(19px,2.4vw,23px); line-height:1.5; max-width:40ch; font-weight:500; letter-spacing:-.02em;}
+hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
+.dark hr.rule,.darker hr.rule{border-color:var(--line-d);}
+.toc{display:grid; grid-template-columns:repeat(2,1fr); gap:2px 30px; margin-top:10px;}
+@media(max-width:620px){ .toc{grid-template-columns:1fr} }
+.toc a{display:flex; gap:14px; align-items:baseline; padding:13px 4px; border-bottom:1px solid var(--line-d); text-decoration:none; transition:.2s;}
+.toc a:hover{padding-left:10px;} .toc a span{color:var(--teal); font-weight:700; font-size:13px; min-width:24px;}
+.toc a b{font-weight:500; font-size:15.5px;}
+
+/* ---------- cover ---------- */
+.cover{min-height:100vh; display:flex; flex-direction:column; justify-content:center; background:var(--navy2);
+  padding-top:60px;}
+.cover::after{content:""; position:absolute; inset:0;
+  background:radial-gradient(1100px 700px at 78% 18%,rgba(59,201,217,.22),transparent 58%),
+             radial-gradient(800px 600px at 0% 100%,rgba(40,168,182,.14),transparent 55%);}
+.cover .wrap{position:relative; z-index:1;}
+.cover .conf{font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.55);
+  border:1px solid var(--line-d); padding:6px 13px; border-radius:999px; display:inline-block; margin-bottom:34px;}
+.cover h1{font-size:clamp(38px,8vw,86px); letter-spacing:-.045em; line-height:.98; color:#fff;}
+.cover h1 em{font-style:normal; background:linear-gradient(120deg,var(--teal),var(--teal-deep)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.cover .sub{font-size:clamp(17px,2.4vw,22px); color:rgba(255,255,255,.74); max-width:54ch; margin-top:28px;}
+.cover .credits{display:flex; flex-wrap:wrap; gap:38px; margin-top:54px; padding-top:30px; border-top:1px solid var(--line-d);}
+.cover .credits div{font-size:13.5px; color:rgba(255,255,255,.6);}
+.cover .credits div b{display:block; color:#fff; font-weight:600; font-size:15px; margin-top:3px; letter-spacing:-.01em;}
+.scrollcue{margin-top:46px; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.5); display:flex; align-items:center; gap:12px;}
+.scrollcue::after{content:""; width:46px; height:1px; background:rgba(255,255,255,.3);}
+
+footer{background:var(--navy2); color:rgba(255,255,255,.6); padding:60px 0; text-align:center; font-size:13px; position:relative;}
+footer .mono{width:40px;height:40px;margin:0 auto 18px;border-radius:11px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--teal),var(--teal-deep));font-weight:800;}
+footer a{color:var(--teal); text-decoration:none;}
+.fadeup{opacity:0; transform:translateY(24px); transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.fadeup.in{opacity:1; transform:none;}
+@media(prefers-reduced-motion:reduce){ .fadeup{opacity:1; transform:none; transition:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+
+<div class="topbar">
+  <div class="brand"><span class="mono">CV</span>CVBS <small>· Strategy 2026</small></div>
+  <nav class="topnav" id="topnav">
+    <a href="#s1">Summary</a>
+    <a href="#s2">Audit</a>
+    <a href="#s3">Redesign</a>
+    <a href="#s4">Comparison</a>
+    <a href="#s5">Brand</a>
+    <a href="#s6">Website</a>
+    <a href="#s7">Instagram</a>
+    <a href="#s8">AI</a>
+    <a href="#s9">Automation</a>
+    <a href="#s10">Future</a>
+  </nav>
+</div>
+
+<!-- ========== COVER ========== -->
+<header class="cover" id="top">
+  <div class="wrap">
+    <span class="conf">Confidential · Prepared for the Directors of CVBS</span>
+    <h1>The Next<br>Decade of <em>CVBS</em>.</h1>
+    <p class="sub">A business transformation strategy. How Australia's most experienced venue sourcing team turns three decades of relationships into the country's most modern, trusted and scalable conference consultancy.</p>
+    <div class="credits">
+      <div>Prepared for<b>Conference Venues &amp; Booking Services</b></div>
+      <div>Engagement<b>Brand · Digital · AI · Operations</b></div>
+      <div>Date<b>June 2026</b></div>
+      <div>Horizon<b>Three to five years</b></div>
+    </div>
+    <div class="scrollcue">Scroll to begin</div>
+  </div>
+</header>
+
+<!-- ========== SECTION 1 · EXECUTIVE SUMMARY ========== -->
+<section id="s1" class="stone2">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">01</span>
+      <div class="eyebrow" style="margin-top:14px">Executive Summary</div>
+      <h2 class="big">CVBS sells a premium service through a website that signals the opposite.</h2>
+      <p class="lede">The gap between what CVBS delivers and what its digital presence communicates is the single largest unpriced asset in the business. Closing it is not a redesign. It is a repositioning that compounds across revenue, margin and capacity.</p>
+    </div>
+
+    <div class="grid g4 fadeup" style="margin-top:46px">
+      <div class="card stat"><div class="n">1989</div><div class="l">Relationships and reputation compounding for over three decades, almost none of it visible online.</div></div>
+      <div class="card stat"><div class="n">$0</div><div class="l">Cost to the client. A genuinely rare commercial model that the current site barely explains.</div></div>
+      <div class="card stat"><div class="n">48hr</div><div class="l">Brief to shortlist. A concrete service promise the old site never makes.</div></div>
+      <div class="card stat"><div class="n">100s</div><div class="l">Of planning hours saved per client, today framed as "we do the legwork" rather than measured value.</div></div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Where CVBS is today</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">A</div><h4>An elite service</h4><p>Deep supplier relationships, real negotiating leverage, and a free-to-client model that removes the buyer's risk. The offer is genuinely top-tier.</p></div>
+        <div class="card"><div class="ic">B</div><h4>A liability-grade website</h4><p>A dated WordPress site that reads as a small directory listing. It undersells price, omits proof, and gives a high-value buyer no reason to trust it.</p></div>
+        <div class="card"><div class="ic">C</div><h4>Founder-dependent operations</h4><p>Knowledge of venues, rates and client history lives in inboxes and the directors' heads. This caps growth and concentrates risk in two people.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Where CVBS could be</h3>
+      <p class="kicker serif">Australia's definitive conference and venue sourcing consultancy: premium in perception, instrumented with data, and operating with the leverage of a team twice its size.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The five moves that matter most</h3>
+      <div class="grid g2">
+        <div class="card"><div class="tag">Move 01 · Reposition</div><h4 style="margin-top:8px">Reframe CVBS from "venue finder" to strategic procurement advisor</h4><p>Lead with savings, risk reduction and hours returned, not with "free worldwide venue research". The redesign concept already does this; it should be shipped, not shelved.</p></div>
+        <div class="card"><div class="tag">Move 02 · Convert</div><h4 style="margin-top:8px">Replace the brochure site with a conversion engine</h4><p>The redesign's 30-second brief, 48-hour promise and client proof are designed to turn anonymous traffic into qualified enquiries. That is a revenue change, not a cosmetic one.</p></div>
+        <div class="card"><div class="tag">Move 03 · Systematise</div><h4 style="margin-top:8px">Turn 30 years of venue and rate knowledge into a searchable internal asset</h4><p>An internal AI assistant over the venue database, past proposals and contracts removes the founder bottleneck and lets the team answer in seconds what currently takes hours.</p></div>
+        <div class="card"><div class="tag">Move 04 · Automate</div><h4 style="margin-top:8px">Remove the busywork between enquiry and booking</h4><p>Proposal drafting, follow-ups, CRM updates and reporting are repetitive and automatable. Reclaiming this time is reclaiming sellable capacity.</p></div>
+        <div class="card"><div class="tag">Move 05 · Compound</div><h4 style="margin-top:8px">Build proprietary venue and pricing intelligence</h4><p>Every brief CVBS handles is data no competitor has. Captured properly, it becomes benchmarking, predictive budgeting and a defensible moat.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Biggest opportunities vs. biggest risks</h3>
+      <div class="grid g2">
+        <div class="card"><h4 style="color:var(--teal-deep)">Opportunities</h4><p style="margin-bottom:10px">· Premium repositioning unlocks higher-value clients and larger events.</p><p style="margin-bottom:10px">· A converting website turns existing traffic into measurably more enquiries at near-zero marginal cost.</p><p style="margin-bottom:10px">· AI and automation expand capacity without expanding headcount.</p><p>· Proprietary data creates a service no booking platform can replicate.</p></div>
+        <div class="card"><h4 style="color:#E5648A">Risks of standing still</h4><p style="margin-bottom:10px">· The current site actively discredits a premium service and loses trust before contact.</p><p style="margin-bottom:10px">· Knowledge concentrated in two founders is an existential continuity risk.</p><p style="margin-bottom:10px">· AI booking tools and venue marketplaces are commoditising "search" exactly where CVBS still competes on it.</p><p>· Every month of delay is enquiries, margin and capacity left on the table.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Expected commercial outcomes</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Lever</th><th>Mechanism</th><th>Indicative outcome</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">Conversion</td><td class="new">Repositioned, proof-led site with a frictionless brief</td><td class="new">More qualified enquiries from the same traffic; higher quality of brief</td></tr>
+            <tr><td class="cat">Revenue mix</td><td class="new">Premium perception attracts larger, more complex events</td><td class="new">Higher average booking value and commission per engagement</td></tr>
+            <tr><td class="cat">Capacity</td><td class="new">AI + automation remove proposal, admin and reporting load</td><td class="new">Reclaimed hours per week per consultant, redeployed to selling</td></tr>
+            <tr><td class="cat">Continuity</td><td class="new">Knowledge systematised out of inboxes and founders' heads</td><td class="new">Lower key-person risk; faster onboarding; a sellable, scalable asset</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="viz"><b>Note</b><span>Figures are presented as directional levers, not forecasts. Exact ranges should be modelled against CVBS's real enquiry volume, conversion and commission data in phase one.</span></p>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-hi"></span>Priority <b>Foundational</b></span>
+      <span class="pill">Effort <b>Programme of work, phased</b></span>
+      <span class="pill">ROI <b>Compounding across every lever below</b></span>
+    </div>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Open here. The point to land in the room is that nothing in this document asks CVBS to become a different business. It asks the business to make what it already does visible, measurable and repeatable. Frame the website not as a cost but as the highest-leverage salesperson the company will ever hire, available every hour of every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 2 · CURRENT WEBSITE AUDIT ========== -->
+<section id="s2">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">02</span>
+      <div class="eyebrow" style="margin-top:14px">Current Website Audit</div>
+      <h2 class="big">A premium service hidden behind a <span class="tealword">2010-era directory listing</span>.</h2>
+      <p class="lede">Audited live at conferencevenues.com.au. The findings below are not opinions about taste. Each is a point where the site costs CVBS trust, enquiries or margin before a prospect ever makes contact.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Executive summary of the audit</h3>
+      <p>The current site is built on WordPress 5.1 (a release now years out of support), centres a slider headline about "turning ideas into reality", and leads with the word <em>FREE</em> in a way that reads as discount rather than premium. It states what CVBS does but never proves it: no named clients on the homepage, no measurable outcomes, no faces, no recent dates. For a service whose entire value rests on trust and relationships, the site communicates neither.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Current state · scored by dimension</h3>
+      <div class="grid g4">
+        <div class="card stat"><div class="n">3/10</div><div class="l">First impression &amp; visual quality</div></div>
+        <div class="card stat"><div class="n">2/10</div><div class="l">Trust &amp; proof of outcomes</div></div>
+        <div class="card stat"><div class="n">4/10</div><div class="l">Messaging &amp; positioning clarity</div></div>
+        <div class="card stat"><div class="n">3/10</div><div class="l">Conversion &amp; lead capture</div></div>
+      </div>
+      <p class="viz" style="margin-top:18px"><b>Method</b><span>Scores are a directional, expert assessment against a benchmark of best-in-class B2B service sites, intended to prioritise fixes, not to be precise metrics.</span></p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>What is limiting growth · problem → impact → fix</h3>
+      <div class="prob">
+        <div class="row head"><div>Problem &amp; why it matters</div><div>Commercial impact</div><div>Recommended fix &amp; outcome</div></div>
+        <div class="row">
+          <div><div class="ttl">"FREE" leads, value follows</div><p class="txt">The strongest word on the page signals cheap, not premium. A high-value buyer reads "free" as "low stakes".</p></div>
+          <div><p class="txt">Attracts price-led, low-value enquiries and repels the corporate clients CVBS is built to serve.</p></div>
+          <div><div class="out">Lead with outcomes and proof; reframe "free" as "paid by the venue, never by you". Attracts larger, better-fit briefs.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">No proof on the homepage</div><p class="txt">No named clients, testimonials, faces or numbers. Trust is asserted, never evidenced.</p></div>
+          <div><p class="txt">Visitors cannot verify credibility, so they bounce or default to a known booking platform.</p></div>
+          <div><div class="out">Surface client logos, quotes and measurable results immediately. Trust built in seconds, not paragraphs.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">Generic stock slider headline</div><p class="txt">"Turning ideas into reality" says nothing specific and could belong to any company in any sector.</p></div>
+          <div><p class="txt">Wastes the most valuable real estate on the site; no differentiation, no hook, no reason to stay.</p></div>
+          <div><div class="out">A sharp, ownable proposition above the fold. Communicates the offer in one read.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">Weak, buried calls to action</div><p class="txt">"Get a Quote" sits in the nav; the homepage offers no single, obvious next step.</p></div>
+          <div><p class="txt">Interested visitors have nowhere frictionless to act, so intent leaks away unmeasured.</p></div>
+          <div><div class="out">A persistent, low-friction "brief us" action on every screen. Captures intent at the moment it peaks.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">Dated platform &amp; performance</div><p class="txt">WordPress 5.1, heavy slider, large unoptimised images, dated markup.</p></div>
+          <div><p class="txt">Slower loads and weaker mobile experience suppress both rankings and conversion.</p></div>
+          <div><div class="out">Modern, fast, mobile-first build. Better Core Web Vitals lift SEO and reduce drop-off.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">Keyword-stuffed, thin content</div><p class="txt">Meta keywords list 40+ terms; pages are short and descriptive, not authoritative.</p></div>
+          <div><p class="txt">No content depth to rank for valuable queries or to demonstrate expertise.</p></div>
+          <div><div class="out">A genuine resource and insight layer. Earns organic traffic and positions CVBS as the authority.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">No defined user journey</div><p class="txt">Pages exist as a list; nothing guides a visitor from arrival to enquiry.</p></div>
+          <div><p class="txt">Each visitor must self-navigate, so most never reach the point of contact.</p></div>
+          <div><div class="out">A deliberate path: hook → proof → process → brief. Every page engineered to move toward enquiry.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Quick-reference findings</h3>
+      <div class="grid g3">
+        <div class="card"><h4>Brand perception</h4><p>Reads as a small operator, not a 35-year specialist. Undermines the premium fees and access CVBS has earned.</p></div>
+        <div class="card"><h4>Information hierarchy</h4><p>Three equal service blurbs with no priority. The eye has nowhere to go and no sense of what matters most.</p></div>
+        <div class="card"><h4>Photography</h4><p>Generic and inconsistent. None of it conveys the calibre of venues CVBS actually places clients into.</p></div>
+        <div class="card"><h4>Typography &amp; layout</h4><p>Default theme styling, cramped spacing, no typographic system. Nothing signals craft or care.</p></div>
+        <div class="card"><h4>Accessibility</h4><p>Fixed-scale viewport disables zoom; low-contrast and unstructured content create real barriers and legal exposure.</p></div>
+        <div class="card"><h4>Mobile experience</h4><p>Where most B2B research now begins, the slider and dense nav degrade badly on a phone.</p></div>
+      </div>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-hi"></span>Priority <b>Critical</b></span>
+      <span class="pill">Effort <b>Resolved by the redesign already built</b></span>
+      <span class="pill">ROI <b>Every uplift downstream depends on fixing this</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>Annotated screenshot of the live homepage with five callout pins, each naming a leak point and its cost.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Be unsentimental here, but never insulting. The directors built a great business in spite of this site, not because of it. The message is that the website is the only part of CVBS that a prospect meets before a human does, and right now it is the weakest representative of the company. That is fixable, and it has already been started.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 3 · REDESIGN REVIEW ========== -->
+<section id="s3" class="dark">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum" style="color:rgba(255,255,255,.5)">03</span>
+      <div class="eyebrow" style="margin-top:14px">Redesign Review</div>
+      <h2 class="big">The concept is a genuine repositioning. Now it has to <span class="tealword">earn the premium it promises</span>.</h2>
+      <p class="lede">Reviewed live at the-service-edit.github.io/cvbs-2026. This is a critique, not a compliment. The concept gets the strategy right; the notes below are what separates a strong redesign from a category-defining one.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>What the redesign gets right</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">01</div><h4>It sells the relationship, not the search</h4><p>"A search engine returns six hundred rooms. We return three, and we've stood in all of them." This is the whole business in one line, and it reframes CVBS above every booking platform.</p></div>
+        <div class="card"><div class="ic">02</div><h4>It makes a concrete promise</h4><p>Free to you · shortlist in 48 hours · independent. Three specific, repeated proof points replace the old site's vague "we do the legwork".</p></div>
+        <div class="card"><div class="ic">03</div><h4>It converts from the first screen</h4><p>A 30-second brief form sits in the hero. Intent is captured at peak interest instead of being routed to a buried quote page.</p></div>
+        <div class="card"><div class="ic">04</div><h4>It shows real proof</h4><p>Named clients (Elders, Lend Lease, Energex, Medtronic), real quotes, and the directors' own faces and number. Trust is evidenced, not asserted.</p></div>
+        <div class="card"><div class="ic">05</div><h4>It has a clear narrative spine</h4><p>Hero → trust → process → services → people → proof → venues → act. A visitor is guided, not left to wander.</p></div>
+        <div class="card"><div class="ic">06</div><h4>It reads as premium before a word is read</h4><p>Restraint, space, a confident palette and considered type signal a high-end consultancy. Perception shifts in the first second.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Where it must go further · honest critique</h3>
+      <div class="prob" style="background:rgba(255,255,255,.04)">
+        <div class="row head"><div>Observation</div><div>Why it matters commercially</div><div>Recommendation</div></div>
+        <div class="row">
+          <div><div class="ttl">Proof is qualitative, not quantified</div><p class="txt">Strong quotes, but no hard numbers: dollars saved, hours returned, events delivered.</p></div>
+          <div><p class="txt">A premium buyer wants evidence of outcome, not just sentiment. Numbers de-risk the decision.</p></div>
+          <div><div class="out">Add a measured results layer: total events, average saving, delegates placed, years of relationship.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">The brief form promises a lot of pages it must deliver</div><p class="txt">Destination, service and venue-finder URLs are referenced but need real depth behind them.</p></div>
+          <div><p class="txt">Thin sub-pages would break the premium promise the homepage makes and hurt SEO.</p></div>
+          <div><div class="out">Treat Section 6 as the build spec. Each destination and service page must carry genuine, rankable substance.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">No live signal of recency or activity</div><p class="txt">Nothing shows the business is active this month: no recent offers feed, no dated content.</p></div>
+          <div><p class="txt">Static premium can read as dormant. Buyers trust momentum.</p></div>
+          <div><div class="out">A live offers and insights feed, dated. Proves the relationships are working right now.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">Conversion is single-mode</div><p class="txt">One path: submit a brief. No lighter-commitment option for early-stage researchers.</p></div>
+          <div><p class="txt">Buyers months from booking leave with nothing, and CVBS captures no contact.</p></div>
+          <div><div class="out">Add lead magnets (planning guides, budget calculator) to capture early intent and nurture it.</div></div>
+        </div>
+        <div class="row">
+          <div><div class="ttl">No groundwork for the AI layer</div><p class="txt">The site is conventionally structured; nothing yet hooks the assistant and tools in Sections 8 to 10.</p></div>
+          <div><p class="txt">Retrofitting later costs more. The platform should be AI-ready by design.</p></div>
+          <div><div class="out">Build on structured content and clean data now, so the recommendation engine and assistant slot in.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The five-second test</h3>
+      <p class="kicker serif">Before reading a sentence, the old site says "a small directory, proceed with caution." The redesign says "an established, confident specialist who works at this level every day." That perception shift is the entire commercial point, and it happens for free, on every single visit.</p>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-med"></span>Priority <b>High</b></span>
+      <span class="pill">Effort <b>Refine and extend the existing concept</b></span>
+      <span class="pill">ROI <b>Direct lift to enquiry quality and volume</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>Two phone mockups side by side, old vs. new hero, with a "first second" perception caption under each.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>The directors will want reassurance that the redesign was money well spent. It was. The honest framing: the concept is strategically correct and most of the hard thinking is done. What remains is to deepen the proof, build out the supporting pages with real substance, and make the platform ready for the AI and automation layers in the rest of this document. Praise the direction, then point at the next 20 percent.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 4 · SIDE-BY-SIDE COMPARISON ========== -->
+<section id="s4" class="stone2">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">04</span>
+      <div class="eyebrow" style="margin-top:14px">Side-by-Side Comparison</div>
+      <h2 class="big">Every dimension, and <span class="tealword">why the new site wins commercially</span>.</h2>
+      <p class="lede">Not "the new one looks nicer." For each category, the column that matters is the last one: the business outcome the change drives.</p>
+    </div>
+
+    <div class="tablewrap fadeup" style="margin-top:40px">
+      <table>
+        <thead><tr><th>Category</th><th>Current site</th><th>Redesign concept</th><th>Why it wins commercially</th></tr></thead>
+        <tbody>
+          <tr><td class="cat">First impression</td><td class="old">Dated slider, generic stock</td><td class="new">Confident, spacious, specialist</td><td class="new"><span class="win">+</span> Credibility in the first second lowers bounce and raises enquiry intent.</td></tr>
+          <tr><td class="cat">Trust</td><td class="old">Asserted, no evidence</td><td class="new">Named clients, quotes, faces</td><td class="new"><span class="win">+</span> Proof shortens the decision and reduces the need to "shop around".</td></tr>
+          <tr><td class="cat">Professionalism</td><td class="old">Small-operator feel</td><td class="new">Consultancy-grade</td><td class="new"><span class="win">+</span> Supports premium positioning and the fees and access that come with it.</td></tr>
+          <tr><td class="cat">Authority</td><td class="old">Implied by age only</td><td class="new">"Since 1989", relationships foregrounded</td><td class="new"><span class="win">+</span> Experience becomes a selling weapon instead of a hidden fact.</td></tr>
+          <tr><td class="cat">Visual hierarchy</td><td class="old">Three equal blurbs</td><td class="new">Guided narrative spine</td><td class="new"><span class="win">+</span> Directs attention toward the enquiry, lifting conversion.</td></tr>
+          <tr><td class="cat">Navigation</td><td class="old">Flat link list</td><td class="new">Intent-based journeys</td><td class="new"><span class="win">+</span> Buyers reach the right page faster; fewer drop-offs.</td></tr>
+          <tr><td class="cat">Messaging</td><td class="old">"Free worldwide research"</td><td class="new">Outcomes, savings, 48-hour promise</td><td class="new"><span class="win">+</span> Speaks to value and risk, attracting higher-quality briefs.</td></tr>
+          <tr><td class="cat">Emotional response</td><td class="old">Indifference</td><td class="new">Reassurance, "I'm in safe hands"</td><td class="new"><span class="win">+</span> Emotional trust is what converts a high-stakes B2B decision.</td></tr>
+          <tr><td class="cat">Conversion</td><td class="old">Buried "Get a Quote"</td><td class="new">30-second brief in the hero</td><td class="new"><span class="win">+</span> Captures intent at its peak; more enquiries from the same traffic.</td></tr>
+          <tr><td class="cat">Mobile</td><td class="old">Degrades badly</td><td class="new">Mobile-first</td><td class="new"><span class="win">+</span> Wins the majority of B2B research that now starts on a phone.</td></tr>
+          <tr><td class="cat">Accessibility</td><td class="old">Zoom disabled, low contrast</td><td class="new">Skip links, structure, contrast</td><td class="new"><span class="win">+</span> Wider reach, better SEO, reduced legal exposure.</td></tr>
+          <tr><td class="cat">SEO</td><td class="old">Keyword-stuffed, thin</td><td class="new">Structured, content-led</td><td class="new"><span class="win">+</span> Earns rankings for valuable queries instead of chasing them.</td></tr>
+          <tr><td class="cat">Readability</td><td class="old">Default theme type</td><td class="new">Considered typographic system</td><td class="new"><span class="win">+</span> Easier reading means more of the message actually lands.</td></tr>
+          <tr><td class="cat">Photography</td><td class="old">Generic, inconsistent</td><td class="new">Real venues, real people</td><td class="new"><span class="win">+</span> Shows the calibre CVBS delivers; aspiration sells the service.</td></tr>
+          <tr><td class="cat">Calls to action</td><td class="old">Weak, singular</td><td class="new">Persistent, clear, repeated</td><td class="new"><span class="win">+</span> A next step always in reach captures more intent.</td></tr>
+          <tr><td class="cat">Lead generation</td><td class="old">Passive quote form</td><td class="new">Brief engine + proof + offers</td><td class="new"><span class="win">+</span> A system designed to generate enquiries, not just receive them.</td></tr>
+          <tr><td class="cat">Overall CX</td><td class="old">Functional at best</td><td class="new">Premium, guided, reassuring</td><td class="new"><span class="win">+</span> The experience itself becomes proof of the service quality.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-hi"></span>Priority <b>Decision point</b></span>
+      <span class="pill">Effort <b>Approve and ship the redesign</b></span>
+      <span class="pill">ROI <b>Compounds on every dimension above</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A scrollable split-screen: old site on the left, new on the right, locked together as the viewer scrolls each category.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Walk three or four rows live on screen, not all seventeen. Always end each on the right-hand column. The discipline to hold in the room: never let the conversation settle on "which looks better." Every comparison resolves to enquiries, trust, or revenue. That is what keeps this a business decision, not a taste debate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 5 · BRAND EVOLUTION ========== -->
+<section id="s5">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">05</span>
+      <div class="eyebrow" style="margin-top:14px">Brand Evolution</div>
+      <h2 class="big">Evolve the brand without spending the <span class="tealword">trust it has banked since 1989</span>.</h2>
+      <p class="lede">CVBS does not need reinvention. It needs articulation. The goal is to make 35 years of equity legible to a modern, premium buyer, without discarding the recognition that equity carries.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Positioning · the one move</h3>
+      <p class="kicker serif">From "free worldwide venue research" to "Australia's trusted conference and venue sourcing consultancy. We source what you cannot find, and negotiate what you cannot get, at no cost to you."</p>
+      <p style="margin-top:22px; max-width:62ch; color:var(--muted)">The word "consultancy" does heavy lifting. It moves CVBS out of the directory category, where it competes against free tools, and into the advisory category, where it competes on expertise, access and outcomes. Everything else in the brand should reinforce that single shift.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The brand system, evolved</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">A</div><h4>Messaging</h4><p>Lead with outcomes: hours saved, rates negotiated, risk removed. "Free" becomes "paid by the venue, never by you", a proof of independence rather than a discount.</p></div>
+        <div class="card"><div class="ic">Aa</div><h4>Tone of voice</h4><p>Understated concierge. Confident, precise, never loud. The voice of someone who has done this ten thousand times and does not need to oversell.</p></div>
+        <div class="card"><div class="ic">◆</div><h4>Visual identity</h4><p>Keep the CVBS monogram and gradient as the recognisable anchor. Modernise the system around it: space, restraint, and a clear hierarchy.</p></div>
+        <div class="card"><div class="ic">●</div><h4>Colour evolution</h4><p>Retain navy and teal as the equity colours. Add stone as a premium neutral and use teal sparingly, as an accent of confidence rather than a flood.</p></div>
+        <div class="card"><div class="ic">T</div><h4>Typography</h4><p>Inter for clarity and modernity, with tight tracking on headlines and a restrained serif for moments of editorial warmth. Type becomes a signal of craft.</p></div>
+        <div class="card"><div class="ic">▦</div><h4>Photography</h4><p>Real venues, real rooms, real people. Editorial, calm, aspirational. Never generic stock. The imagery should look like the events CVBS actually delivers.</p></div>
+        <div class="card"><div class="ic">＋</div><h4>Iconography &amp; graphic language</h4><p>Fine-line, precise marks. A quiet system of eyebrows, rules and the short teal bar that reads as considered, not decorative.</p></div>
+        <div class="card"><div class="ic">◑</div><h4>Brand personality</h4><p>The trusted insider. Discreet, well-connected, unflappable. The person every executive assistant wishes they had on speed dial.</p></div>
+        <div class="card"><div class="ic">◇</div><h4>Emotional positioning</h4><p>Relief and reassurance. CVBS removes the single most stressful, time-consuming part of an event from a busy person's plate.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Differentiation · what only CVBS can say</h3>
+      <div class="grid g2">
+        <div class="card"><h4>Access, not search</h4><p>Booking platforms list what is public. CVBS knows what is actually available, because a real person knows the general managers by name. That access cannot be commoditised.</p></div>
+        <div class="card"><h4>Aligned, not conflicted</h4><p>Paid by the venue, working for the client, independent of any one group. The model itself is the differentiator, and almost no competitor can claim it as cleanly.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The five-second feeling</h3>
+      <p class="kicker serif">Within five seconds of discovering CVBS, somebody should feel: <span class="tealword">"These people are the quiet experts. They are clearly the best at this, they will save me hours and money, and I can stop worrying about it."</span></p>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-med"></span>Priority <b>High</b></span>
+      <span class="pill">Effort <b>Articulation, not rebrand</b></span>
+      <span class="pill">ROI <b>Higher-value clients, premium fees, easier sales</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A one-page brand-at-a-glance: monogram, palette swatches, type specimen, voice principles, and the five-second feeling as the headline.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Reassure the directors that "evolution" means keeping what customers recognise, the name, the monogram, the navy and teal, and changing how confidently it is expressed. The risk is not changing too much; it is changing too little and remaining invisible to the premium buyer. The single sentence to leave them with is the positioning line: trusted consultancy, not free directory.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 6 · WEBSITE STRATEGY ========== -->
+<section id="s6" class="dark">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum" style="color:rgba(255,255,255,.5)">06</span>
+      <div class="eyebrow" style="margin-top:14px">Website Strategy</div>
+      <h2 class="big">Treat the website as the <span class="tealword">highest-performing salesperson</span> CVBS will ever hire.</h2>
+      <p class="lede">It works every hour, never forgets the pitch, and costs nothing per conversation. The job of the site is singular: turn an anonymous visitor into a qualified, well-briefed enquiry. Every page below is justified by how it contributes to that.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The conversion architecture</h3>
+      <div class="grid g4">
+        <div class="card"><div class="tag">Layer 1</div><h4 style="margin-top:8px">Hook</h4><p>Homepage and destination landing pages. Win the first five seconds and route intent to the brief.</p></div>
+        <div class="card"><div class="tag">Layer 2</div><h4 style="margin-top:8px">Prove</h4><p>Results, testimonials, case studies, the people. De-risk the decision with evidence.</p></div>
+        <div class="card"><div class="tag">Layer 3</div><h4 style="margin-top:8px">Help</h4><p>Resources, guides, tools and calculators. Capture early-stage researchers and build authority.</p></div>
+        <div class="card"><div class="tag">Layer 4</div><h4 style="margin-top:8px">Convert</h4><p>The 30-second brief, persistent CTAs, and portals that turn enquiries into managed relationships.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Page architecture · purpose and contribution to enquiries</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Page / module</th><th>Purpose</th><th>How it drives enquiries</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">Homepage</td><td class="new">Hook, proof, route to brief</td><td class="new">The primary conversion surface; every element points to "start my search".</td></tr>
+            <tr><td class="cat">Service pages</td><td class="new">Depth on each offer</td><td class="new">Capture specific-intent searchers and qualify the type of enquiry.</td></tr>
+            <tr><td class="cat">Destination pages</td><td class="new">City and region landing pages</td><td class="new">Rank for "conference venues [city]" and convert local intent.</td></tr>
+            <tr><td class="cat">Venue pages</td><td class="new">Featured venues CVBS knows</td><td class="new">Demonstrate access and calibre; seed venue-name search traffic.</td></tr>
+            <tr><td class="cat">Resources &amp; guides</td><td class="new">Planning and conference guides</td><td class="new">Lead magnets that capture early-stage researchers' contact details.</td></tr>
+            <tr><td class="cat">Planning tools</td><td class="new">Budget &amp; timeline calculators</td><td class="new">Interactive value that earns trust and a reason to make contact.</td></tr>
+            <tr><td class="cat">Case studies</td><td class="new">Real engagements, real outcomes</td><td class="new">Proof for high-value buyers comparing options.</td></tr>
+            <tr><td class="cat">Testimonials</td><td class="new">Named client voices</td><td class="new">Social proof at the point of decision.</td></tr>
+            <tr><td class="cat">Insights / blog</td><td class="new">Industry trends &amp; authority</td><td class="new">Organic reach and positioning as the category expert.</td></tr>
+            <tr><td class="cat">Interactive venue search</td><td class="new">Guided, not exhaustive</td><td class="new">Engages without commoditising; always ends in a brief.</td></tr>
+            <tr><td class="cat">Comparison tools</td><td class="new">Like-for-like shortlists</td><td class="new">Shows the core value (the curated three) on the site itself.</td></tr>
+            <tr><td class="cat">Client portal</td><td class="new">Shortlists, status, documents</td><td class="new">Retention and referrals; makes the service sticky.</td></tr>
+            <tr><td class="cat">Supplier portal</td><td class="new">Venue offers &amp; availability</td><td class="new">Better data in means faster, sharper shortlists out.</td></tr>
+            <tr><td class="cat">Knowledge centre</td><td class="new">Searchable FAQ &amp; how-it-works</td><td class="new">Removes friction and objections before enquiry.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The performance foundations</h3>
+      <div class="grid g4">
+        <div class="card"><h4>SEO strategy</h4><p>Destination and service pages targeting real buyer queries, plus an insight layer that earns authority and links.</p></div>
+        <div class="card"><h4>Conversion optimisation</h4><p>Persistent brief CTA, social proof near every decision point, and continuous testing of form and headline.</p></div>
+        <div class="card"><h4>Performance</h4><p>Fast, modern build with strong Core Web Vitals. Speed is both a ranking factor and a conversion factor.</p></div>
+        <div class="card"><h4>Mobile-first &amp; accessible</h4><p>Designed for the phone where research begins, and built to accessibility standards for reach and reduced risk.</p></div>
+      </div>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-hi"></span>Priority <b>Critical</b></span>
+      <span class="pill">Effort <b>Phased build on the redesign foundation</b></span>
+      <span class="pill">ROI <b>Direct, measurable enquiry growth</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A sitemap diagram colour-coded by the four conversion layers, with arrows showing how every page funnels toward the brief.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>The frame that resonates with owners: this is not a list of pages, it is a sales funnel made of pages. Phase it. Ship the homepage, brief, proof and core service and destination pages first, because those drive enquiries immediately. Portals, tools and the knowledge centre are phase two and three, and several of them set up the AI layer in the next section.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 7 · INSTAGRAM STRATEGY ========== -->
+<section id="s7" class="stone2">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">07</span>
+      <div class="eyebrow" style="margin-top:14px">Instagram Strategy</div>
+      <h2 class="big">Turn Instagram from a noticeboard into a <span class="tealword">silent sales channel</span>.</h2>
+      <p class="lede">For a venue business, Instagram is uniquely suited: the product is visual, aspirational and shareable. The objective is not vanity reach. It is to keep CVBS top of mind with the assistants, EAs and event managers who send the briefs, and to route them to the website.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Five content pillars</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">01</div><h4>Venue showcases</h4><p>The rooms CVBS can access. Aspirational, well-shot, with a quiet "we can get you in here" subtext.</p></div>
+        <div class="card"><div class="ic">02</div><h4>Destination inspiration</h4><p>Sydney harbourside, Hunter Valley, Hamilton Island. Sell the idea of the event before the logistics.</p></div>
+        <div class="card"><div class="ic">03</div><h4>Planning education</h4><p>Quick, genuinely useful tips for event organisers. Builds authority and saves the audience time.</p></div>
+        <div class="card"><div class="ic">04</div><h4>Proof &amp; client stories</h4><p>Outcomes, savings and testimonials, presented with discretion. Social proof in the feed.</p></div>
+        <div class="card"><div class="ic">05</div><h4>The people &amp; the partnerships</h4><p>The directors, behind the scenes, supplier relationships. Humanise the trusted-insider brand.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Format &amp; direction</h3>
+      <div class="grid g4">
+        <div class="card"><h4>Grid style</h4><p>The liquid-glass, editorial look already established: navy, teal accent, stone, consistent type. Cohesive at a glance.</p></div>
+        <div class="card"><h4>Reels</h4><p>Short venue walk-throughs and "three venues for X" formats. Reels are the reach engine; lead with the space.</p></div>
+        <div class="card"><h4>Stories</h4><p>Current offers, polls, quick tips, behind the scenes. The daily, lower-stakes touchpoint.</p></div>
+        <div class="card"><h4>Carousels</h4><p>Educational and comparison content. High saves and shares; the format that builds authority.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Suggested monthly rhythm</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Week</th><th>Feed post</th><th>Reel</th><th>Carousel</th><th>Stories</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">Week 1</td><td class="new">Venue showcase</td><td class="new">Venue walk-through</td><td class="new">"5 questions to ask any venue"</td><td class="new">Current offer + poll</td></tr>
+            <tr><td class="cat">Week 2</td><td class="new">Destination feature</td><td class="new">"3 venues in [city]"</td><td class="new">Planning timeline guide</td><td class="new">Behind the scenes</td></tr>
+            <tr><td class="cat">Week 3</td><td class="new">Client outcome</td><td class="new">Director tip to camera</td><td class="new">Budget-saving breakdown</td><td class="new">Q&amp;A box</td></tr>
+            <tr><td class="cat">Week 4</td><td class="new">Partnership spotlight</td><td class="new">Trend or "what's booking now"</td><td class="new">Case study, anonymised</td><td class="new">Recap + CTA to brief</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="viz" style="margin-top:16px"><b>Cadence</b><span>Roughly four feed posts, four reels, four carousels and ongoing stories per month: sustainable for a small team, especially with the AI-assisted production in Section 8.</span></p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>How Instagram drives enquiries</h3>
+      <div class="grid g3">
+        <div class="card"><h4>Top of mind</h4><p>When the brief lands on an EA's desk, CVBS is the name they already follow and trust. Demand capture, not creation.</p></div>
+        <div class="card"><h4>Routed to convert</h4><p>Every bio link, offer story and carousel ends at the website's brief form. Social attention becomes site enquiries.</p></div>
+        <div class="card"><h4>Cross-channel compounding</h4><p>The same assets feed LinkedIn (where the buyers are) and the email newsletter. One production effort, three channels.</p></div>
+      </div>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-lo"></span>Priority <b>Medium, high leverage</b></span>
+      <span class="pill">Effort <b>Light with AI-assisted production</b></span>
+      <span class="pill">ROI <b>Demand capture at near-zero marginal cost</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A mock 9-tile Instagram grid in the brand style, plus the monthly calendar as a clean planner graphic.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Pre-empt the objection that "social media doesn't sell venues." It does not sell directly; it keeps CVBS in front of the exact people who write the briefs, and routes them to the site. Stress that the calendar is deliberately modest and that Section 8 makes the production almost free. Consistency beats volume here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 8 · AI TRANSFORMATION ========== -->
+<section id="s8" class="dark">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum" style="color:rgba(255,255,255,.5)">08</span>
+      <div class="eyebrow" style="margin-top:14px">AI Transformation Strategy</div>
+      <h2 class="big">The real prize is not a chatbot. It is <span class="tealword">turning 35 years of knowledge into leverage</span>.</h2>
+      <p class="lede">CVBS's competitive advantage is information: which venues, which rates, which relationships, which past deals. Today that lives in inboxes and two people's memories. AI's job is to make it instantly retrievable, and to remove the repetitive work that stops the team from selling. This is the largest opportunity in this document.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The principle</h3>
+      <p class="kicker serif">AI should not replace the relationships that make CVBS valuable. It should remove everything around them, so the team spends its hours on negotiation and advice, not admin and search.</p>
+    </div>
+
+    <!-- 8.1 Sales -->
+    <div class="block fadeup">
+      <h3>8.1 · Sales</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">◷</div><h4>Lead qualification</h4><p>Incoming briefs scored and enriched automatically, so the team prioritises the highest-value enquiries first.</p></div>
+        <div class="card"><div class="ic">▤</div><h4>Proposal &amp; quote generation</h4><p>Draft shortlists and quotes assembled from the venue database in minutes, ready for human review, not built from scratch.</p></div>
+        <div class="card"><div class="ic">↻</div><h4>CRM updates</h4><p>Calls and emails summarised and logged automatically. The pipeline stays current without anyone updating it by hand.</p></div>
+        <div class="card"><div class="ic">✎</div><h4>Follow-up &amp; onboarding</h4><p>Personalised follow-up and onboarding sequences drafted in the CVBS voice, triggered at the right moment.</p></div>
+        <div class="card"><div class="ic">◳</div><h4>Meeting summaries</h4><p>Every client call transcribed and summarised into actions, so nothing is lost and no one re-types notes.</p></div>
+        <div class="card"><div class="ic">◫</div><h4>Pipeline &amp; forecasting</h4><p>Live pipeline reporting and simple forecasting from CRM data, replacing the end-of-month spreadsheet scramble.</p></div>
+      </div>
+    </div>
+
+    <!-- 8.2 Marketing -->
+    <div class="block fadeup">
+      <h3>8.2 · Marketing</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">✒</div><h4>Content &amp; blog</h4><p>Destination guides, insight articles and SEO pages drafted from CVBS's own knowledge, edited by a human for voice.</p></div>
+        <div class="card"><div class="ic">@</div><h4>Email &amp; newsletter</h4><p>Campaign and newsletter drafts, segmented and personalised, produced in a fraction of the usual time.</p></div>
+        <div class="card"><div class="ic">▶</div><h4>Social &amp; video</h4><p>Reel scripts, captions and carousel copy generated against the Section 7 calendar. The production bottleneck disappears.</p></div>
+        <div class="card"><div class="ic">★</div><h4>Case study generation</h4><p>Past engagements turned into polished, anonymised case studies from CRM and email records.</p></div>
+        <div class="card"><div class="ic">◎</div><h4>Personalisation</h4><p>Content and offers tailored to industry and event type, lifting relevance and response.</p></div>
+        <div class="card"><div class="ic">▣</div><h4>Campaign reporting</h4><p>Performance pulled together and explained in plain language, so marketing decisions are made on evidence.</p></div>
+      </div>
+    </div>
+
+    <!-- 8.3 Operations -->
+    <div class="block fadeup">
+      <h3>8.3 · Operations</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">▦</div><h4>Venue database management</h4><p>AI keeps records current, flags gaps, and structures messy venue data into a clean, queryable asset.</p></div>
+        <div class="card"><div class="ic">✉</div><h4>Supplier communication</h4><p>Routine availability and rate requests drafted and tracked automatically, freeing the team for negotiation.</p></div>
+        <div class="card"><div class="ic">▱</div><h4>Document generation</h4><p>Contracts, confirmations and templates produced from structured data, consistent every time.</p></div>
+        <div class="card"><div class="ic">◰</div><h4>Knowledge management</h4><p>SOPs, policies and procedures captured once and surfaced on demand, ending tribal knowledge.</p></div>
+        <div class="card"><div class="ic">⌗</div><h4>Internal search</h4><p>Natural-language search across everything CVBS holds. Answers in seconds, not an inbox archaeology dig.</p></div>
+        <div class="card"><div class="ic">⊞</div><h4>Workflow automation</h4><p>The hand-offs between enquiry, sourcing, quote and booking orchestrated rather than manually chased.</p></div>
+      </div>
+    </div>
+
+    <!-- 8.4 Client experience -->
+    <div class="block fadeup">
+      <h3>8.4 · Client experience</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">◐</div><h4>AI conference assistant</h4><p>A site assistant that answers planning questions instantly and warms the lead before a human takes over.</p></div>
+        <div class="card"><div class="ic">◈</div><h4>Venue recommendation engine</h4><p>Brief in, candidate venues out, drawn from CVBS's real knowledge. A starting point the team then refines.</p></div>
+        <div class="card"><div class="ic">$</div><h4>Budget assistant</h4><p>Instant ballpark budgets from event type, numbers and destination. Useful value before any commitment.</p></div>
+        <div class="card"><div class="ic">☑</div><h4>Planning checklists &amp; reminders</h4><p>Automated, tailored checklists and timely reminders keep clients' events on track and CVBS in the loop.</p></div>
+        <div class="card"><div class="ic">⚖</div><h4>Proposal comparison</h4><p>The like-for-like shortlist rendered as an interactive comparison clients can explore themselves.</p></div>
+        <div class="card"><div class="ic">▥</div><h4>Client dashboards &amp; self-service</h4><p>A portal where clients track shortlists, documents and status, reducing back-and-forth and lifting retention.</p></div>
+      </div>
+    </div>
+
+    <!-- 8.5 Internal knowledge assistant -->
+    <div class="block fadeup">
+      <h3>8.5 · The internal knowledge assistant · the centrepiece</h3>
+      <p style="max-width:64ch; color:rgba(255,255,255,.78)">A private AI assistant trained on CVBS's own data: the venue database, supplier agreements, hotel contracts, past proposals, case studies, preferred suppliers, planning procedures, SOPs, policies and templates. Staff ask in plain English and get answers in seconds, with the source attached. This is what dissolves the founder bottleneck.</p>
+      <div class="grid g2" style="margin-top:24px">
+        <div class="card" style="background:rgba(59,201,217,.08)"><h4>"Find venues in Brisbane for 450 delegates under $280 per person."</h4><p>Instant shortlist from the live database, instead of an hour of memory and email-searching.</p></div>
+        <div class="card" style="background:rgba(59,201,217,.08)"><h4>"Show me hotels similar to the Hilton Adelaide."</h4><p>Comparable properties by capacity, style and rate, surfaced from CVBS's own records.</p></div>
+        <div class="card" style="background:rgba(59,201,217,.08)"><h4>"Which suppliers have previously worked with this client?"</h4><p>Relationship history retrieved in seconds, so the team walks in already informed.</p></div>
+        <div class="card" style="background:rgba(59,201,217,.08)"><h4>"What proposal did we prepare for Company X?"</h4><p>Past proposals found and reused, turning previous work into a head start every time.</p></div>
+      </div>
+      <div class="grid g3" style="margin-top:22px">
+        <div class="card stat"><div class="n">Seconds</div><div class="l">To answer what now takes a senior person 20–60 minutes of searching.</div></div>
+        <div class="card stat"><div class="n">De-risked</div><div class="l">Knowledge survives leave, illness and succession. It no longer lives in two heads.</div></div>
+        <div class="card stat"><div class="n">Days, not weeks</div><div class="l">New staff become productive far faster with the whole company's memory on tap.</div></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Sequencing · where to start</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Phase</th><th>Focus</th><th>Why first</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">Phase 1 (0–6 mo)</td><td class="new">Internal knowledge assistant + proposal/quote drafting + meeting summaries</td><td class="new">Highest internal time saving, lowest client-facing risk, removes the founder bottleneck.</td></tr>
+            <tr><td class="cat">Phase 2 (6–18 mo)</td><td class="new">AI-assisted marketing, CRM automation, client assistant &amp; recommendation engine</td><td class="new">Builds on clean data; lifts both demand and conversion.</td></tr>
+            <tr><td class="cat">Phase 3 (18 mo+)</td><td class="new">Self-service dashboards, predictive budgeting, venue intelligence</td><td class="new">Turns accumulated data into proprietary, defensible products.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-hi"></span>Priority <b>Strategic, highest leverage</b></span>
+      <span class="pill">Effort <b>Phased; start with internal assistant</b></span>
+      <span class="pill">ROI <b>Capacity, continuity and a durable data moat</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A central "CVBS knowledge core" diagram with the data sources feeding in and the five use-case groups radiating out.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>This is the section that justifies the engagement. Anchor it on continuity: ask the directors what happens to the business if either of them is unavailable for a month. The honest answer today is "it stalls." The internal assistant is the insurance policy and the growth engine at once. Lead with the four example questions on screen; they make the abstract instantly concrete and almost always win the room.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 9 · AUTOMATION ========== -->
+<section id="s9">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum">09</span>
+      <div class="eyebrow" style="margin-top:14px">Automation Opportunities</div>
+      <h2 class="big">Every hour reclaimed from admin is an hour <span class="tealword">returned to selling</span>.</h2>
+      <p class="lede">Automation is the practical layer beneath the AI strategy. Using tools CVBS can adopt incrementally (Zapier, Make, n8n, Google Workspace, a CRM and the major AI models), the repetitive connective work between systems disappears. Estimates below are directional and should be confirmed against real volumes.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The automation ledger</h3>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Process</th><th>Today</th><th>Automated future</th><th>Hours / wk</th><th>Difficulty</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td class="cat">New enquiry intake</td><td class="old">Manual reading, sorting, replying</td><td class="new">Brief auto-captured, enriched, acknowledged, routed</td><td class="new">3–5</td><td class="new">Low</td><td class="new">High</td></tr>
+            <tr><td class="cat">CRM data entry</td><td class="old">Hand-logged after each contact</td><td class="new">Emails &amp; calls auto-summarised into the CRM</td><td class="new">3–4</td><td class="new">Low</td><td class="new">High</td></tr>
+            <tr><td class="cat">Proposal assembly</td><td class="old">Built from scratch each time</td><td class="new">Drafted from the database, human-finished</td><td class="new">4–6</td><td class="new">Medium</td><td class="new">High</td></tr>
+            <tr><td class="cat">Follow-ups</td><td class="old">Remembered and typed manually</td><td class="new">Triggered sequences in the CVBS voice</td><td class="new">2–3</td><td class="new">Low</td><td class="new">Medium</td></tr>
+            <tr><td class="cat">Meeting notes</td><td class="old">Typed up or lost</td><td class="new">Auto-transcribed, summarised, actioned</td><td class="new">2–3</td><td class="new">Low</td><td class="new">Medium</td></tr>
+            <tr><td class="cat">Calendar coordination</td><td class="old">Email ping-pong</td><td class="new">Self-serve booking links, auto-reminders</td><td class="new">1–2</td><td class="new">Low</td><td class="new">Medium</td></tr>
+            <tr><td class="cat">Supplier requests</td><td class="old">Individually written &amp; chased</td><td class="new">Templated, dispatched and tracked automatically</td><td class="new">2–4</td><td class="new">Medium</td><td class="new">High</td></tr>
+            <tr><td class="cat">Document generation</td><td class="old">Manual editing of templates</td><td class="new">Contracts &amp; confirmations from structured data</td><td class="new">2–3</td><td class="new">Medium</td><td class="new">Medium</td></tr>
+            <tr><td class="cat">Reporting</td><td class="old">End-of-month spreadsheet build</td><td class="new">Live dashboards, auto-refreshed</td><td class="new">2–3</td><td class="new">Medium</td><td class="new">Medium</td></tr>
+            <tr><td class="cat">Content production</td><td class="old">Slow, sporadic, manual</td><td class="new">AI-drafted to calendar, human-edited</td><td class="new">3–5</td><td class="new">Low</td><td class="new">High</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="viz" style="margin-top:16px"><b>Indicative total</b><span>Roughly 24 to 38 hours per week of recoverable capacity across a small team. Even at the low end, that is close to a full additional person's worth of selling time, without adding headcount. Validate against CVBS's real workload before committing to figures.</span></p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The toolchain</h3>
+      <div class="grid g4">
+        <div class="card"><h4>AI models</h4><p>Claude, ChatGPT and Gemini for drafting, summarising and reasoning over CVBS content.</p></div>
+        <div class="card"><h4>Orchestration</h4><p>Zapier, Make or n8n to connect apps; MCP to give AI safe, direct access to CVBS systems.</p></div>
+        <div class="card"><h4>Workspace &amp; CRM</h4><p>Google Workspace plus a fit-for-purpose CRM as the single source of truth for clients and pipeline.</p></div>
+        <div class="card"><h4>Comms automation</h4><p>Email, calendar and supplier workflows automated end to end, with humans approving what matters.</p></div>
+      </div>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-med"></span>Priority <b>High, quick wins available</b></span>
+      <span class="pill">Effort <b>Incremental, low-risk</b></span>
+      <span class="pill">ROI <b>~Up to a full FTE of capacity reclaimed</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A before/after flow: tangled manual hand-offs on the left, a clean automated pipeline on the right, with the hours-saved total called out.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Keep this grounded and unhyped. The directors do not need to believe in AI; they need to believe they will get hours back. Start with the two lowest-difficulty, highest-impact rows (enquiry intake and CRM logging) as a pilot. A visible early win builds the confidence to fund the rest. Always caveat the hours as estimates to be validated; credibility matters more than a big number.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 10 · FUTURE OPPORTUNITIES ========== -->
+<section id="s10" class="darker">
+  <div class="wrap">
+    <div class="fadeup">
+      <span class="snum" style="color:rgba(255,255,255,.5)">10</span>
+      <div class="eyebrow" style="margin-top:14px">Future Opportunities</div>
+      <h2 class="big">Build the products that make CVBS <span class="tealword">impossible to replace</span>.</h2>
+      <p class="lede">Everything so far modernises the existing business. This section is about advantage that compounds: turning the data CVBS generates every week into intelligence no competitor and no booking platform can match.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The moat · why data is the long game</h3>
+      <p class="kicker serif">Every brief CVBS sources is a data point on real availability, real negotiated rates and real client preferences. No marketplace has it, because that knowledge only exists where the relationships do. Captured systematically, it becomes a product.</p>
+    </div>
+
+    <div class="block fadeup">
+      <h3>Ambitious bets</h3>
+      <div class="grid g3">
+        <div class="card"><div class="ic">◈</div><h4>AI venue matching</h4><p>Brief to ranked shortlist, learning from every outcome CVBS confirms. The curated "three" generated, then refined by experts.</p></div>
+        <div class="card"><div class="ic">$</div><h4>Predictive budgeting</h4><p>Accurate budget forecasts from years of real negotiated rates. Advice no one without the data can give.</p></div>
+        <div class="card"><div class="ic">▣</div><h4>Venue intelligence platform</h4><p>A live view of availability, pricing trends and capacity across CVBS's network. The business's nervous system.</p></div>
+        <div class="card"><div class="ic">▤</div><h4>Conference trend reports</h4><p>Benchmarks and an annual report drawn from CVBS data. Authority, lead generation and PR in one asset.</p></div>
+        <div class="card"><div class="ic">▥</div><h4>Client &amp; supplier dashboards</h4><p>Self-service portals that deepen relationships on both sides and create switching costs.</p></div>
+        <div class="card"><div class="ic">◉</div><h4>Voice AI assistant</h4><p>Brief CVBS by speaking. "Find me a Gold Coast resort for 200 next March." Frictionless capture.</p></div>
+        <div class="card"><div class="ic">⌗</div><h4>Internal AI search &amp; knowledge graph</h4><p>The internal assistant matured into a connected map of venues, suppliers, clients and history.</p></div>
+        <div class="card"><div class="ic">◎</div><h4>Recommendation &amp; benchmarking</h4><p>"Clients like you chose…" and "you saved X versus market" as standard, evidenced reassurance.</p></div>
+        <div class="card"><div class="ic">◷</div><h4>Predictive planning</h4><p>Anticipate demand peaks and book ahead of the rush, turning CVBS from reactive to advisory.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The roadmap</h3>
+      <div class="grid g3">
+        <div class="card"><div class="tag">Year 1</div><h4 style="margin-top:8px">Foundations</h4><p>Ship the site. Stand up the internal knowledge assistant. Automate intake, CRM and proposals. Start capturing structured data on every brief.</p></div>
+        <div class="card"><div class="tag">Years 2–3</div><h4 style="margin-top:8px">Intelligence</h4><p>Recommendation engine, client assistant and dashboards live. Predictive budgeting in beta. The first annual trend report published.</p></div>
+        <div class="card"><div class="tag">Years 3–5</div><h4 style="margin-top:8px">Platform</h4><p>Venue intelligence platform and voice capture mature. CVBS is positioned as the data-backed category leader, not just a service.</p></div>
+      </div>
+    </div>
+
+    <div class="block fadeup">
+      <h3>The destination</h3>
+      <p class="kicker serif">In five years, CVBS should be the conference sourcing consultancy that knows the market better than anyone, because it has the relationships <em>and</em> the data, and competitors can copy neither quickly.</p>
+    </div>
+
+    <div class="meta fadeup">
+      <span class="pill"><span class="dot d-lo"></span>Priority <b>Visionary, sequenced</b></span>
+      <span class="pill">Effort <b>Compounds on phases 1–2</b></span>
+      <span class="pill">ROI <b>Durable competitive advantage</b></span>
+    </div>
+
+    <p class="viz fadeup"><b>Suggested visual</b><span>A three-horizon timeline (Foundations → Intelligence → Platform) with each bet plotted on it, building toward the data-moat endpoint.</span></p>
+
+    <div class="notes fadeup">
+      <span class="lbl">Speaker notes</span>
+      <p>Hold the ambition lightly. None of this is required in year one, and saying so builds trust. The point is direction: every practical step earlier in this document also lays a brick toward these products. The closing line for the whole presentation: this was never a website redesign. It is the roadmap for the next decade of CVBS, and the first step is simply to begin.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="mono">CV</div>
+    <p style="color:#fff; font-weight:600; font-size:16px; margin-bottom:6px">The Next Decade of CVBS</p>
+    <p>Business transformation strategy · Brand · Digital · AI · Operations · June 2026</p>
+    <p style="margin-top:18px; font-size:12px; opacity:.7">Prepared for the Directors of Conference Venues &amp; Booking Services · Confidential</p>
+    <p style="margin-top:10px"><a href="#top">Back to top ↑</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog');
+  var links=[].slice.call(document.querySelectorAll('.topnav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=h.scrollTop||document.body.scrollTop;
+    var max=h.scrollHeight-h.clientHeight;
+    prog.style.width=(max>0?(sc/max*100):0)+'%';
+    var idx=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i]&&secs[i].getBoundingClientRect().top<=120) idx=i; }
+    links.forEach(function(l,i){ l.classList.toggle('on',i===idx); });
+  }
+  document.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  [].slice.call(document.querySelectorAll('.fadeup')).forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>

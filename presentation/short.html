@@ -311,6 +311,27 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .k .kv span{color:var(--teal)}
 .k .kl{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
 .dark .k .kl{color:rgba(255,255,255,.55)}
+/* ---- tight variant, used by the search + AI slides ---- */
+.pad.tight{padding:min(5vh,40px) min(6vw,88px)}
+.pad.tight .lede{font-size:clamp(15px,1.28vw,18px);line-height:1.6}
+.pad.tight .card{padding:20px 22px 19px;border-radius:12px}
+.pad.tight .card p{font-size:13px;line-height:1.56}
+.pad.tight .card h3{font-size:clamp(16px,1.35vw,19px);margin-bottom:6px}
+.pad.tight .mcol{gap:16px}
+.pad.tight .mcol .m{padding:20px 19px 19px;gap:8px}
+.pad.tight .m h3{font-size:16px}
+.pad.tight .m .lab{margin-bottom:2px}
+.pad.tight .m li{font-size:12.9px;line-height:1.46}
+.pad.tight .askchip{margin-top:14px}
+.pad.tight .card .num{font-size:10px;letter-spacing:.16em;margin-bottom:9px}
+.pad.tight .k .kv{font-size:clamp(24px,2.5vw,34px)}
+.pad.tight .klist{gap:0}
+.pad.tight .klist .k{text-align:left;flex:0 0 auto;padding:2px 34px 2px 0;margin-right:34px;border-right:1px solid var(--line)}
+.pad.tight .klist .k:last-child{border-right:0;margin-right:0}
+.dark .pad.tight .klist .k{border-right-color:rgba(255,255,255,.16)}
+.pad.tight .k .kl{font-size:10.5px;letter-spacing:.105em;max-width:31ch;margin-top:6px}
+.pad.tight .askchip{margin-top:16px;padding:9px 18px;font-size:13px}
+.pad.tight .srcnote{margin-top:12px;font-size:10.5px}
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
 
 /* ============================================================================
@@ -377,6 +398,12 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   .openbtn{padding:12px 20px;font-size:13px;margin-top:18px}
   .askchip{font-size:12.5px;padding:10px 15px}
   .srcnote{font-size:10.5px}
+  .pad.tight{padding:34px 22px 44px}
+  .pad.tight .klist{flex-direction:column;gap:20px;margin-bottom:26px!important}
+  .pad.tight .klist .k{border-right:0;margin-right:0;padding:0}
+  .pad.tight .k .kl{max-width:34ch}
+  .pad.tight .card p{font-size:14px;line-height:1.6}
+  .pad.tight .lede{font-size:16px}
 
   /* chrome gets out of the way */
   .navbtn{width:38px;height:38px;font-size:14px;top:auto;bottom:14px;transform:none;opacity:.92}
@@ -837,6 +864,84 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   </div>
 </section>
 
+
+<!-- ================= 28 &middot; WHAT CHANGED IN SEARCH ================= -->
+<section class="slide stone" data-sec="Being found">
+  <div class="pad tight">
+    <div class="eyebrow">How organisers look now</div>
+    <h2 style="margin-bottom:12px">Three in four planners now use AI <span class="accent-d">to find venues</span>.</h2>
+    <p class="lede" style="max-width:96ch;margin-bottom:22px">Cvent asked one thousand six hundred and fifty event planners in March this year, and that is what came back. Organisers are still searching, they are just not always looking at a page of results any more. They are reading an answer with a few names in it, and those names are the shortlist before anyone has picked up the phone. So the question is no longer only whether CVBS ranks. It is whether CVBS is in the answer.</p>
+    <div class="klist" style="justify-content:flex-start;margin-bottom:26px">
+      <div class="k"><div class="kv">75<span>%</span></div><div class="kl">Planners using AI to search for venues</div></div>
+      <div class="k"><div class="kv">68<span>%</span></div><div class="kl">Google searches that end without a click</div></div>
+      <div class="k"><div class="kv">38<span>%</span></div><div class="kl">AI answers citing a top ten result, down from 76%</div></div>
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="card"><div class="num">SEO &middot; SEARCH ENGINE OPTIMISATION</div><h3>Being found</h3><p>The original job, and it has not gone away. Somebody searches for a conference venue in Melbourne, and a CVBS page is there, near the top, loading properly on their phone.</p></div>
+      <div class="card"><div class="num">AEO &middot; ANSWER ENGINE OPTIMISATION</div><h3>Being quoted</h3><p>Written so an assistant can lift a clear, correct answer straight off a CVBS page and say where it came from. Assistants quote pages that state the answer plainly, early, and back it with real figures.</p></div>
+      <div class="card"><div class="num">DEO &middot; DECISION ENGINE OPTIMISATION</div><h3>Being chosen</h3><p>The one that matters most here. An organiser asks an assistant who should source this venue for them, CVBS is one of the names it offers, and the reason it gives holds up.</p></div>
+    </div>
+    <p class="srcnote">Sources: Cvent 2026 Global Planner Sourcing Report, 1,650 planners, published March 2026. SparkToro and Similarweb, US desktop and mobile clickstream, January to April 2026. Ahrefs on where AI Overview citations come from, 2026. Decision engine optimisation is our name for the third one. The industry has not settled on a term for it yet, which is usually a sign of ground that is still moving.</p>
+  </div>
+</section>
+
+<!-- ================= 29 &middot; WHAT WE DO ABOUT IT ================= -->
+<section class="slide dark" data-sec="Being found">
+  <div class="pad tight">
+    <div class="eyebrow">What we do about it</div>
+    <h2 style="margin-bottom:12px">There is no setting for this. <span class="accent">It is publishing what CVBS already knows.</span></h2>
+    <p class="lede" style="max-width:94ch;margin-bottom:22px">Assistants quote pages that answer the question in public, from a source that reads like it knows what it is talking about. CVBS has thirty-seven years of exactly that, and until this year almost none of it was written down anywhere a machine could read. The work is not clever. It is putting the knowledge on the page and checking what comes back.</p>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="card"><div class="num">01 &middot; BEING FOUND</div><h3>The foundation still has to be there</h3><p>A page for every destination and every venue, fast, structured and readable, so the searches organisers still type land somewhere real rather than on a PDF. That is what the new site fixed, and it is the part everything else sits on.</p></div>
+      <div class="card"><div class="num">02 &middot; BEING QUOTED</div><h3>The venue index is the citable part</h3><p>Capacity, room specifications and ceiling heights, read off each venue&rsquo;s own published charts, with the answer stated in the first two lines of the page. Cvent&rsquo;s planners named room specifications and floor plans as the hardest part of sourcing. That is what the index publishes, city by city.</p></div>
+      <div class="card"><div class="num">03 &middot; BEING CHOSEN</div><h3>The half that is not on the website</h3><p>An assistant asked to recommend a venue finder does not answer from your site. It assembles the answer somewhere else, then checks the site to see whether it holds up. CVBS has thirty-seven years, four named people and recognisable clients, and until this month almost none of it was connected to anything a machine could verify. That is the next slide.</p></div>
+      <div class="card"><div class="num">04 &middot; BEING CHECKED</div><h3>We ask the assistants, every month</h3><p>The same questions an organiser would ask, put to ChatGPT, Gemini and Google&rsquo;s own answers, written down and compared with last month. Whatever comes back wrong, or leaves CVBS out, becomes the next page we build.</p></div>
+    </div>
+    <span class="askchip">Try it in the room. Ask an assistant to shortlist a Sydney conference venue for four hundred people, and see who it names.</span>
+  </div>
+</section>
+
+
+<!-- ================= 30 &middot; BEING CHOSEN, IN DETAIL ================= -->
+<section class="slide stone" data-sec="Being found">
+  <div class="pad tight">
+    <div class="eyebrow">Being chosen</div>
+    <h2 style="margin-bottom:10px">Being quoted happens on your page. <span class="accent-d">Being chosen happens somewhere else.</span></h2>
+    <p class="lede" style="max-width:104ch;margin-bottom:16px">An assistant asked who should source a venue does not read your website and decide. It assembles the answer from records it did not write and you do not own: LinkedIn, Google, the business register, the directories. Your site is only what it checks afterwards. Two halves, and one of them is not on the site.</p>
+    <div class="mcol">
+      <div class="m">
+        <div class="lab">Built this month</div>
+        <h3>On the site</h3>
+        <ul>
+          <li><b>One identity, not three.</b> Every page now carries a single machine-readable record of CVBS under one permanent identifier, tied to the four people, the services and the fact it costs the organiser nothing</li>
+          <li><b>The answer on the homepage.</b> Who CVBS is, who pays and who it is not right for, in the opening lines, because most people arriving from an assistant land on the homepage</li>
+          <li><b>A page written to be quoted back.</b> How to choose a venue finder, the five questions worth putting to any finder including CVBS</li>
+          <li><b>Clients named in words.</b> A logo is an image file. The sentence underneath it is what gets read</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">The ask</div>
+        <h3>Only CVBS can supply this</h3>
+        <ul>
+          <li><b>The links that prove CVBS exists.</b> LinkedIn, the Google listing, the ABN record. Nothing on the site connects CVBS to a single record outside it, and that gap does more damage than everything else combined</li>
+          <li><b>Two clients who will put their name to a sentence.</b> Nobody can repeat a quote from &ldquo;Sarah M.&rdquo;</li>
+          <li><b>The logo wall, confirmed.</b> Three of the ten no longer trade under that name</li>
+          <li><b>Memberships and accreditations,</b> if CVBS holds any</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">Every month</div>
+        <h3>How we know it is working</h3>
+        <ul>
+          <li><b>The assistant check.</b> The questions an organiser would ask, put to ChatGPT, Gemini and Google, written down and compared with last month</li>
+          <li><b>The measure is not a ranking.</b> It is whether CVBS gets named, and whether the reason holds</li>
+          <li><b>Whatever comes back wrong</b> becomes the next page we write. That is how the venue index got built</li>
+        </ul>
+      </div>
+    </div>
+    <span class="askchip">Two of these need ten minutes from Karen, and they are worth more than everything else here.</span>
+  </div>
+</section>
 
 <!-- ================= 28 &middot; WHAT RUNS EVERY MONTH ================= -->
 <section class="slide" data-sec="The system">

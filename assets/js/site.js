@@ -317,8 +317,17 @@
   var fType = doc.getElementById('vidx-type');
   var fQ = doc.getElementById('vidx-q');
   var fAccom = doc.getElementById('vidx-accom');
+  var fSeen = doc.getElementById('vidx-seen');
   var resetBtn = doc.getElementById('vidx-reset');
   if (!tbody || !fCap || !fSetup || !fPrec || !fType) return;
+
+  /* The site visit option only exists once there is a site visit to show. An
+     empty filter is worse than no filter, so it removes itself until Karen has
+     filled in at least one 'seen' record in the data. */
+  if (fSeen && !VENUES.some(function (v) { return v.seen; })) {
+    var so = fSeen.querySelector('option[value="seen"]');
+    if (so) so.parentNode.removeChild(so);
+  }
 
   var TYPE_LABEL = { conv: 'Convention centre', hotel: 'Hotel', event: 'Event venue' };
   var SETUPS = [['th','Theatre'],['bq','Banquet'],['cab','Cabaret'],['cl','Classroom'],
@@ -398,6 +407,7 @@
     var type = fType.value;
     var q = fQ ? fQ.value.trim().toLowerCase() : '';
     var accom = fAccom ? fAccom.value : '';
+    var seenF = fSeen ? fSeen.value : '';
     var setupLabel = fSetup.options[fSetup.selectedIndex].text.toLowerCase();
     var hiddenForNoData = 0;
 
@@ -407,6 +417,10 @@
       if (q && (v.n + ' ' + v.sp + ' ' + v.pr).toLowerCase().indexOf(q) === -1) return false;
       if (accom === 'yes' && !v.gr) return false;
       if (accom === 'no' && v.gr) return false;
+      /* Firsthand filters. 'worked' is CVBS booking history, confirmed by Karen.
+         'seen' is the site visit record and prints only where a visit is logged. */
+      if (seenF === 'worked' && !v.worked) return false;
+      if (seenF === 'seen' && !v.seen) return false;
       var c = capOf(v);
       if (c === null) {
         /* Venue does not publish this setup. Keep it visible at "any size",
@@ -428,7 +442,7 @@
       return (x - y) * sortDir;
     });
 
-    var filtered = (minCap > 0 || prec || type || q || accom);
+    var filtered = (minCap > 0 || prec || type || q || accom || seenF);
     var limited = !filtered && !showAll && rows.length > DEFAULT_SHOWN;
     var shown = limited ? DEFAULT_SHOWN : rows.length;
 
@@ -472,6 +486,7 @@
           '<div class="vidx-space">' + v.sp + '</div>' +
           (v.worked ? '<span class="vidx-tag vidx-tag--worked">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Worked with</span> ' : '') +
+          (v.seen ? '<div class="vidx-seen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Walked by ' + v.seen + '</div>' : '') +
           (t ? '<span class="vidx-tag vidx-tag--' + v.ty + '">' + t + '</span>' : '') +
         '</td>' +
         '<td data-l="Precinct">' + v.pr + '</td>' +
@@ -492,7 +507,9 @@
       '</tr>' +
       '<tr class="vidx-specrow" id="' + pid + '" hidden><td colspan="8">' +
         '<div class="vidx-spec">' +
-          '<div class="vidx-spec__col vidx-spec__col--wide"><p class="vidx-spec__full">' + v.note + '</p></div>' +
+          '<div class="vidx-spec__col vidx-spec__col--wide"><p class="vidx-spec__full">' + v.note + '</p>' +
+            (v.seen ? '<p class="vidx-spec__seen"><b>We have been in this room.</b> Walked by ' + v.seen +
+              '. Ask us what the floor plan does not tell you.</p>' : '') + '</div>' +
           '<div class="vidx-spec__col"><h4>' + v.sp + '</h4><dl>' + setupRows + '</dl></div>' +
           '<div class="vidx-spec__col"><h4>The room itself</h4><dl>' +
             '<div class="vidx-spec__row"><dt>Floor area</dt><dd>' +
@@ -524,6 +541,8 @@
         if (type) bits.push(({conv:'convention centre', hotel:'hotel', event:'dedicated event venue'})[type]);
         if (accom === 'yes') bits.push('accommodation on site');
         if (accom === 'no') bits.push('venue only');
+        if (seenF === 'worked') bits.push('venues we have worked with');
+        if (seenF === 'seen') bits.push('venues we have been inside');
         if (q) bits.push('matching "' + fQ.value.trim() + '"');
         var href = 'submit-a-brief.html?dest=' + encodeURIComponent(city) +
           (minCap ? '&guests=' + encodeURIComponent(minCap) : '') +
@@ -581,7 +600,7 @@
     });
   });
 
-  [fCap, fSetup, fPrec, fType, fAccom].forEach(function (el) {
+  [fCap, fSetup, fPrec, fType, fAccom, fSeen].forEach(function (el) {
     if (el) el.addEventListener('change', render);
   });
   if (fQ) {
@@ -592,7 +611,7 @@
   if (resetBtn) {
     resetBtn.addEventListener('click', function () {
       fCap.value = '0'; fSetup.value = 'th'; fPrec.value = ''; fType.value = '';
-      if (fQ) fQ.value = ''; if (fAccom) fAccom.value = '';
+      if (fQ) fQ.value = ''; if (fAccom) fAccom.value = ''; if (fSeen) fSeen.value = '';
       showAll = false;
       sortKey = 'cap'; sortDir = -1;
       doc.querySelectorAll('.vidx-table th.is-sortable').forEach(function (o) {

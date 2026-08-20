@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVBS · The Next Decade · Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#3BC9D9; --teal-deep:#28A8B6;
+  --navy:#0D2233; --navy2:#071520;
+  --stone:#F4F1EA; --stone-deep:#ECE7DC;
+  --ink:#0D1F2D; --muted:#5C636B;
+  --line:rgba(13,31,45,.12);
+  --line-d:rgba(255,255,255,.16);
+  --maxw:760px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--ink); background:var(--stone);
+  -webkit-font-smoothing:antialiased;
+  font-size:20px; line-height:1.72; letter-spacing:-.003em;
+}
+@media(max-width:600px){ body{font-size:18px} }
+h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.025em; line-height:1.12;}
+p{margin:0 0 1.1em;}
+strong{font-weight:600;}
+em{font-style:normal; color:var(--teal-deep); font-weight:600;}
+
+/* progress + minimal top bar */
+.progress{position:fixed; top:0; left:0; height:4px; width:0%; z-index:60;
+  background:linear-gradient(90deg,var(--teal),var(--teal-deep)); transition:width .15s linear;}
+.topbar{position:fixed; top:0; left:0; right:0; z-index:50; height:58px;
+  display:flex; align-items:center; gap:12px;
+  padding:0 22px; background:rgba(244,241,234,.85);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);}
+.brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:17px; letter-spacing:-.02em;}
+.brand .mono{width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:#fff;
+  background:linear-gradient(135deg,var(--teal),var(--teal-deep)); font-size:13px; font-weight:700;}
+.brand small{font-weight:500; color:var(--muted); font-size:14px;}
+.steps{margin-left:auto; font-size:14px; font-weight:600; color:var(--muted);}
+.steps b{color:var(--navy);}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+section{padding:84px 0; border-bottom:1px solid var(--line);}
+@media(max-width:600px){ section{padding:58px 0} }
+
+.kick{display:flex; align-items:center; gap:14px; margin-bottom:26px;}
+.kick .num{width:46px; height:46px; flex:0 0 auto; border-radius:50%; display:grid; place-items:center;
+  font-size:17px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--teal),var(--teal-deep));}
+.kick .lbl{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.18em; color:var(--teal-deep);}
+h2{font-size:clamp(27px,5.4vw,40px); max-width:18ch; margin-bottom:8px;}
+.intro{font-size:clamp(19px,2.4vw,23px); color:var(--ink); max-width:34ch; margin-top:20px;}
+
+/* simple point list */
+.points{list-style:none; padding:0; margin:34px 0 0;}
+.points li{display:flex; gap:16px; align-items:flex-start; padding:20px 0; border-top:1px solid var(--line);}
+.points li:last-child{border-bottom:1px solid var(--line);}
+.points .tick{flex:0 0 auto; width:30px; height:30px; border-radius:50%; margin-top:2px;
+  display:grid; place-items:center; background:rgba(59,201,217,.16); color:var(--teal-deep); font-weight:700; font-size:15px;}
+.points .t{font-weight:600; display:block; margin-bottom:3px;}
+.points .d{color:var(--muted); font-size:17px; line-height:1.6;}
+@media(max-width:600px){ .points .d{font-size:16px} }
+
+/* takeaway band */
+.takeaway{margin-top:36px; background:rgba(59,201,217,.10); border-radius:16px; padding:22px 24px;}
+.takeaway b{display:block; font-size:13px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:6px;}
+.takeaway p{margin:0; font-size:18px; font-weight:500;}
+
+/* big quote / feeling */
+.quote{font-size:clamp(22px,3.4vw,30px); font-weight:500; line-height:1.4; max-width:24ch; letter-spacing:-.02em; margin-top:10px;}
+
+/* simple two-column compare */
+.vs{margin-top:34px; border-radius:16px; overflow:hidden; border:1px solid var(--line);}
+.vs .r{display:grid; grid-template-columns:1fr 1fr;}
+.vs .r>div{padding:18px 20px; border-top:1px solid var(--line);}
+.vs .r:first-child>div{border-top:none;}
+.vs .r .o{background:rgba(13,31,45,.03); color:var(--muted); font-size:16px;}
+.vs .r .n{background:rgba(59,201,217,.07); font-weight:500; font-size:16px;}
+.vs .h>div{font-size:12px; text-transform:uppercase; letter-spacing:.12em; font-weight:700; padding:13px 20px;}
+.vs .h .o{color:var(--muted);} .vs .h .n{color:var(--teal-deep);}
+@media(max-width:600px){ .vs .r .o,.vs .r .n{font-size:15px; padding:15px 16px} }
+
+/* dark sections */
+.dark{background:var(--navy); color:#fff; border-bottom:none;}
+.dark h2{color:#fff;}
+.dark .intro{color:#fff;}
+.dark .kick .lbl{color:var(--teal);}
+.dark .points li{border-color:var(--line-d);}
+.dark .points .d{color:rgba(255,255,255,.74);}
+.dark .points .tick{background:rgba(59,201,217,.2); color:var(--teal);}
+.dark .takeaway{background:rgba(59,201,217,.14);}
+.dark em{color:var(--teal);}
+
+/* ask-list (example questions) */
+.asks{margin-top:30px; display:grid; gap:14px;}
+.asks div{background:rgba(255,255,255,.06); border:1px solid var(--line-d); border-radius:14px; padding:18px 22px; font-size:18px; font-weight:500;}
+.asks div span{display:block; color:rgba(255,255,255,.66); font-weight:400; font-size:15.5px; margin-top:5px;}
+.asks.light div{background:rgba(59,201,217,.08); border-color:var(--line); color:var(--ink);}
+.asks.light div span{color:var(--muted);}
+
+/* cover */
+.cover{min-height:100vh; display:flex; flex-direction:column; justify-content:center;
+  background:var(--navy2); color:#fff; padding:90px 0 60px; position:relative; overflow:hidden; border:none;}
+.cover::after{content:""; position:absolute; inset:0;
+  background:radial-gradient(900px 600px at 80% 20%,rgba(59,201,217,.22),transparent 60%);}
+.cover .wrap{position:relative; z-index:1;}
+.cover .tag{font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6);
+  border:1px solid var(--line-d); padding:7px 15px; border-radius:999px; display:inline-block; margin-bottom:30px;}
+.cover h1{font-size:clamp(40px,9vw,72px); letter-spacing:-.04em; line-height:1;}
+.cover h1 em{background:linear-gradient(120deg,var(--teal),var(--teal-deep)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+.cover .sub{font-size:clamp(18px,2.6vw,23px); color:rgba(255,255,255,.78); max-width:30ch; margin-top:26px;}
+.cover .who{margin-top:44px; padding-top:24px; border-top:1px solid var(--line-d); font-size:16px; color:rgba(255,255,255,.66);}
+.cover .who b{color:#fff; font-weight:600;}
+
+footer{background:var(--navy2); color:rgba(255,255,255,.6); padding:54px 0; text-align:center; font-size:15px; border:none;}
+footer a{color:var(--teal); text-decoration:none;}
+.fade{opacity:0; transform:translateY(18px); transition:.6s cubic-bezier(.22,.61,.36,1);}
+.fade.in{opacity:1; transform:none;}
+@media(prefers-reduced-motion:reduce){ .fade{opacity:1; transform:none} html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="topbar">
+  <div class="brand"><span class="mono">CV</span>CVBS <small>Strategy</small></div>
+  <div class="steps">Part <b id="cur">1</b> of 10</div>
+</div>
+
+<header class="cover" id="top">
+  <div class="wrap">
+    <span class="tag">For the Directors of CVBS · June 2026</span>
+    <h1>The next decade of <em>CVBS</em>.</h1>
+    <p class="sub">A simple plan for the next three to five years.</p>
+    <div class="who">Prepared for <b>Conference Venues &amp; Booking Services</b><br>Brand · Website · Marketing · Operations · Growth</div>
+  </div>
+</header>
+
+<!-- 1 -->
+<section id="s1">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">1</span><span class="lbl">The big picture</span></div>
+    <h2>You have a brilliant service and a website that hides it.</h2>
+    <p class="intro">That gap is the biggest opportunity in the business.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">Where you are today</span><span class="d">A trusted, expert service built over 35 years. But the website makes you look like a small directory, not the specialists you are.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Where you could be</span><span class="d">Australia's clear leader in conference and venue sourcing. The same great service, finally shown the way it deserves.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">What it takes</span><span class="d">Launch the new website, let technology handle the busywork, and turn 35 years of know-how into something the whole team can use.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>In one line</b><p>This is not a new website. It is a plan to make what you already do brilliantly visible to the right people.</p></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">2</span><span class="lbl">The old website</span></div>
+    <h2>It loses people before you ever speak to them.</h2>
+    <p class="intro">Three problems are costing you enquiries.</p>
+    <ul class="points">
+      <li><span class="tick">1</span><div><span class="t">It leads with "free"</span><span class="d">The biggest word on the page makes a premium service look cheap. It attracts the wrong enquiries and puts off the right ones.</span></div></li>
+      <li><span class="tick">2</span><div><span class="t">It offers no proof</span><span class="d">No client names, no results, no faces. Visitors have no reason to trust it, so they leave.</span></div></li>
+      <li><span class="tick">3</span><div><span class="t">It gives no clear next step</span><span class="d">Someone ready to enquire has nowhere obvious to go, so the interest is simply lost.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>Why it matters</b><p>The website is the first thing a client meets, before any of you. Right now it is your weakest salesperson.</p></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s3" class="dark">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">3</span><span class="lbl">The new website</span></div>
+    <h2>It does the selling the old one never could.</h2>
+    <p class="intro">The new design already gets the important things right.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">It sells your real value</span><span class="d">"We return three venues, and we've stood in all of them." It puts your relationships and expertise front and centre.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">It proves you can be trusted</span><span class="d">Real client names, real quotes, and your own faces. Trust is shown, not just claimed.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">It makes enquiring easy</span><span class="d">A short brief sits right at the top. People can reach you in 30 seconds, while they are most interested.</span></div></li>
+    </ul>
+    <p style="margin-top:30px; color:rgba(255,255,255,.78); font-size:18px">One thing to add: a few real numbers. Dollars saved, hours returned, events delivered. Proof in figures will make it even harder to ignore.</p>
+    <div class="takeaway"><b>In five seconds</b><p>The old site says "a small operator." The new one says "the trusted experts." That shift happens on every visit, for free.</p></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">4</span><span class="lbl">Old vs new</span></div>
+    <h2>The same business, shown two very different ways.</h2>
+    <div class="vs">
+      <div class="r h"><div class="o">Old website</div><div class="n">New website</div></div>
+      <div class="r"><div class="o">Looks dated and generic</div><div class="n">Looks premium and confident</div></div>
+      <div class="r"><div class="o">No proof or client names</div><div class="n">Real clients and results</div></div>
+      <div class="r"><div class="o">Leads with "free"</div><div class="n">Leads with value and trust</div></div>
+      <div class="r"><div class="o">Hard to enquire</div><div class="n">Enquire in 30 seconds</div></div>
+      <div class="r"><div class="o">Weak on phones</div><div class="n">Built for phones first</div></div>
+    </div>
+    <div class="takeaway"><b>The point</b><p>Every change earns more trust and more enquiries. It is a business decision, not a question of taste.</p></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">5</span><span class="lbl">The brand</span></div>
+    <h2>Keep what people recognise. Show it with more confidence.</h2>
+    <p class="intro">No need to start over. Just express it better.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">Keep the name, colours and logo</span><span class="d">The navy, the teal and the CVBS monogram stay. That is the recognition you have earned.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Lead with outcomes</span><span class="d">Hours saved, better rates, less stress. "Free" becomes "paid by the venue, never by you."</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Sound like the trusted insider</span><span class="d">Calm, expert, well-connected. The person every busy organiser wishes they had on speed dial.</span></div></li>
+    </ul>
+    <p class="quote">What should someone feel in the first five seconds? <em>"These are clearly the experts. I can stop worrying about this."</em></p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section id="s6" class="dark">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">6</span><span class="lbl">The website's job</span></div>
+    <h2>Treat the website as your best salesperson.</h2>
+    <p class="intro">It works every hour, and it never forgets the pitch.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">Catch attention</span><span class="d">A strong homepage and pages for each city, so people searching for venues find you first.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Build trust</span><span class="d">Client stories, results and your team, so people feel safe choosing you.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Make it easy to act</span><span class="d">A simple brief form and clear next step on every page, so interest turns into enquiries.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>How to do it</b><p>Build it in stages. Launch the parts that bring in enquiries first; add the helpful extras later.</p></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">7</span><span class="lbl">Instagram</span></div>
+    <h2>Stay front of mind with the people who send the briefs.</h2>
+    <p class="intro">A simple, steady presence. Not a second job.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">Show beautiful venues and destinations</span><span class="d">Your product is visual. The rooms and places you can access sell themselves.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Share simple, helpful tips</span><span class="d">Quick advice for event organisers builds trust and shows your expertise.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Point everything back to the website</span><span class="d">When someone needs a venue, you are the name they already follow and trust.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>Keep it light</b><p>A handful of posts a month is plenty. The tools in this plan make creating them almost effortless.</p></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s8" class="dark">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">8</span><span class="lbl">Our philosophy</span></div>
+    <h2>Technology should never replace relationships.</h2>
+    <p class="intro">Your value has always come from people.</p>
+    <p style="color:rgba(255,255,255,.82)">The relationships you have built with venue managers, hotel groups and suppliers over 35 years are what make CVBS different. Nothing in this plan changes that.</p>
+    <p style="color:rgba(255,255,255,.82)">Technology has one job here: to quietly remove repetitive admin, organise your shared knowledge, and give the team more time for what they do best. Clients keep working directly with experienced consultants. Those consultants simply have better tools, faster answers and more time to focus on what matters most.</p>
+    <div class="takeaway"><b>The reassurance</b><p>We are not changing the heart of CVBS. We are protecting it, strengthening it, and making it easier to grow.</p></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="s9">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">9</span><span class="lbl">Working smarter behind the scenes</span></div>
+    <h2>Three ways to strengthen CVBS from the inside.</h2>
+    <p class="intro">None of this changes the service. It changes how easily you deliver it.</p>
+    <ul class="points">
+      <li><span class="tick">1</span><div><span class="t">Protect 35 years of knowledge</span><span class="d">Every proposal, venue inspection, negotiation and preferred supplier, gathered into one place the whole team can search in seconds. The value isn't the technology. It's making sure that knowledge is never lost.</span></div></li>
+      <li><span class="tick">2</span><div><span class="t">Give the team more time with clients</span><span class="d">Drafting proposals, finding past events, repetitive emails, meeting notes and contracts, all quietly handled in the background. Clients receive exactly the same personal service. The consultants simply have more hours for where they are most valuable, close to a full extra person's worth of time each week, without hiring anyone.</span></div></li>
+      <li><span class="tick">3</span><div><span class="t">A business that doesn't rely on Karen and AJ remembering everything</span><span class="d">Their decades of experience become an asset the whole team can draw on. Instead of asking Karen, a consultant simply searches one system:</span></div></li>
+    </ul>
+    <div class="asks light">
+      <div>"Have we used this venue before?"<span>One search, instant answer.</span></div>
+      <div>"Who was the GM we dealt with in Cairns?"<span>Found in seconds, ready before the call.</span></div>
+      <div>"What concessions did we negotiate for that client?"<span>The full history, there when you need it.</span></div>
+    </div>
+    <div class="takeaway"><b>The biggest opportunity</b><p>This turns decades of experience into a shared business asset: a company that is easier to run, less dependent on any one person, and ready to grow.</p></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="s10" class="dark">
+  <div class="wrap fade">
+    <div class="kick"><span class="num">10</span><span class="lbl">The road ahead</span></div>
+    <h2>Build the thing no competitor can copy: your own knowledge.</h2>
+    <p class="intro">A simple path, one step at a time.</p>
+    <ul class="points">
+      <li><span class="tick">✓</span><div><span class="t">Year 1 · Foundations</span><span class="d">Launch the new website. Set up the team's assistant. Let technology take the admin.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Years 2–3 · Smarter</span><span class="d">Helpful tools for clients, and quick, accurate budgets from your own real numbers.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Years 3–5 · The leader</span><span class="d">Known as the experts who simply know the market better than anyone else.</span></div></li>
+    </ul>
+    <div class="takeaway"><b>The destination</b><p>This was never a website redesign. It is the plan for the next decade of CVBS. The first step is simply to begin.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="color:#fff; font-weight:600; margin-bottom:6px">The Next Decade of CVBS</p>
+    <p style="font-size:14px">Prepared for the Directors · June 2026 · Confidential</p>
+    <p style="margin-top:14px"><a href="#top">Back to top ↑</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog'), cur=document.getElementById('cur');
+  var secs=[].slice.call(document.querySelectorAll('section'));
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop, max=h.scrollHeight-h.clientHeight;
+    prog.style.width=(max>0?sc/max*100:0)+'%';
+    var n=1; secs.forEach(function(s,i){ if(s.getBoundingClientRect().top<=140) n=i+1; });
+    cur.textContent=n;
+  }
+  document.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  [].slice.call(document.querySelectorAll('.fade')).forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

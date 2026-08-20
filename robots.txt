@@ -1,5 +1,35 @@
 User-agent: *
 Allow: /
+
+# Working files. Not part of the site.
 Disallow: /presentation/
+Disallow: /hub/
+Disallow: /Quote-Generator/
+Disallow: /Post-Designer/
+Disallow: /EDM-Designer/
+Disallow: /email-templates/
+Disallow: /instagram-carousels/
+Disallow: /CVBS-Strategy-2026.html
+Disallow: /CVBS-Strategy-Simple.html
+Disallow: /CVBS-Digital-Strategy.html
+Disallow: /CVBS-Copy-Rewrite-Audit.html
+Disallow: /CVBS-Concept-Audit-and-Pricing-Aug-2026.html
+Disallow: /CVBS-Rebuild-Assessment-Aug-2026.html
+Disallow: /CVBS-Sameness-Response-Aug-2026.html
+Disallow: /CVBS-Being-Chosen-Supply-List.html
+Disallow: /CVBS-What-Karen-Must-Supply.html
+Disallow: /CVBS-Identity-Note-Aug-2026.html
+Disallow: /CVBS-site-visit-log-Sydney.csv
+Disallow: /CVBS-SERVICES-ECOSYSTEM-V2.html
+Disallow: /cvbs-services-ecosystem.html
+Disallow: /cvbs-strategy-332ab2b8.html
+Disallow: /CVBS-Post-Designer.html
+Disallow: /CVBS-Prototype-Venue-Index.html
+Disallow: /cvbs-landing-mockup.html
+Disallow: /cvbs-landing-page.html
+Disallow: /index-pro.html
+Disallow: /index-video.html
+Disallow: /index-strip.html
+Disallow: /index-everlab.html
 
 Sitemap: https://the-service-edit.github.io/cvbs-2026/sitemap.xml

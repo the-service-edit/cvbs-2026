@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 """Sydney venue index data.
 
+seen = the firsthand record. A single string, "Name, Month Year", naming the
+CVBS person who has most recently been inside the venue and when. None means
+nobody has filled it in yet, and the page prints nothing rather than implying
+a visit. THIS IS THE MOST IMPORTANT FIELD ON THE PAGE and the only claim on it
+that no competitor and no assistant can copy. Never write one without Karen.
+Fill it from the site visit log, not from memory. One wrong date costs the page
+its credibility, exactly like a wrong capacity.
+
 worked = CVBS has worked with this venue. Currently set to the nine venues the
 site already presents as "venues we know inside out" in the Featured section.
 KAREN TO CONFIRM AND EXTEND. Do not set True without her say-so.
@@ -23,7 +31,7 @@ CITY = "Sydney"
 
 VENUES = [
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Showground", sp="The Dome", pr="Sydney Olympic Park", ty="conv",
    th=7000, bq=4000, cl=None, ck=6000, cab=None, ush=None, bd=None,
    br=None, gr=0, area=7200, ceil=42.0, ceilq="at the dome apex; 9m to the rigging star",
@@ -33,7 +41,7 @@ VENUES = [
    src2="https://www.sydneyshowground.com.au/globalassets/document-library/sydney-showground/fact-sheets/the-dome-ss_venue-fact-sheets_2022.pdf"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="ICC Sydney", sp="Grand Ballroom", pr="Darling Harbour", ty="conv",
    th=2784, bq=2000, cl=1764, ck=2880, cab=1296, ush=None, bd=None,
    br=70, gr=0, area=None, ceil=9.0, ceilq=None,
@@ -43,7 +51,7 @@ VENUES = [
    src2="https://www.iccsydney.com.au/wp-content/uploads/2023/06/iccs-conv-l5-grand-ballroom-floor-box-and-service-cupboards.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Opera House", sp="Concert Hall", pr="Circular Quay", ty="event",
    th=2102, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=None, gr=0, area=None, ceil=15.0, ceilq="over the centre line",
@@ -53,7 +61,7 @@ VENUES = [
    src2="https://www.sydneyoperahouse.com/sites/default/files/collaborodam_assets/functionroomscapacities.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Town Hall", sp="Centennial Hall", pr="Sydney CBD", ty="event",
    th=2008, bq=800, cl=280, ck=1500, cab=580, ush=None, bd=None,
    br=9, gr=0, area=913, ceil=20.0, ceilq=None,
@@ -63,7 +71,7 @@ VENUES = [
    src2="https://www.cityofsydney.nsw.gov.au/-/media/corporate/files/places-and-spaces/sydney-town-hall/venue-specifications-2025-06.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Royal Randwick Racecourse", sp="Winx Pavilion", pr="Eastern Suburbs", ty="event",
    th=1692, bq=1300, cl=None, ck=3000, cab=1144, ush=None, bd=None,
    br=17, gr=0, area=None, ceil=6.2, ceilq=None,
@@ -73,7 +81,7 @@ VENUES = [
    src2="https://www.australianturfclub.com.au/spaces/winx-stand-royal-randwick/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Le Montage", sp="Montage Ballroom", pr="Lilyfield", ty="event",
    th=1600, bq=1500, cl=None, ck=1800, cab=1000, ush=None, bd=None,
    br=11, gr=0, area=None, ceil=6.0, ceilq="Navarra publishes up to 6m for the venue, not for the ballroom alone",
@@ -83,7 +91,7 @@ VENUES = [
    src2="https://navarravenues.com.au/venues/le-montage/"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Sydney Event Centre", sp="Main Room", pr="Pyrmont", ty="event",
    th=1460, bq=960, cl=657, ck=2200, cab=768, ush=None, bd=None,
    br=None, gr=0, area=1077, ceil=12.0, ceilq=None,
@@ -93,7 +101,7 @@ VENUES = [
    src2="https://www.star.com.au/sites/default/files/2024-06/Event-Centre-SalesKit-Nov-2018.pdf"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="The Fullerton Hotel Sydney", sp="The Grand Ballroom", pr="Sydney CBD", ty="hotel",
    th=1400, bq=1000, cl=660, ck=1200, cab=800, ush=None, bd=None,
    br=15, gr=416, area=1058, ceil=6.0, ceilq=None,
@@ -103,7 +111,7 @@ VENUES = [
    src2="https://www.fullertonhotels.com/fullerton-hotel-sydney/meetings-and-events/meeting-spaces"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Accor Stadium", sp="Millennium Room", pr="Sydney Olympic Park", ty="event",
    th=1200, bq=850, cl=None, ck=1500, cab=850, ush=None, bd=None,
    br=16, gr=0, area=1200, ceil=6.0, ceilq="the stadium quotes both 6m and 6.5m for this room",
@@ -113,7 +121,7 @@ VENUES = [
    src2="https://accorstadium.com.au/room/millennium-room/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Hilton Sydney", sp="Grand Ballroom", pr="Sydney CBD", ty="hotel",
    th=1100, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=28, gr=None, area=920, ceil=6.0, ceilq=None,
@@ -123,7 +131,7 @@ VENUES = [
    src2="https://www.hilton.com/en/hotels/sydhitw-hilton-sydney/events/"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Hyatt Regency Sydney", sp="Grand Ballroom", pr="Darling Harbour", ty="hotel",
    th=1000, bq=750, cl=552, ck=1000, cab=520, ush=None, bd=None,
    br=23, gr=878, area=850, ceil=8.5, ceilq=None,
@@ -133,7 +141,7 @@ VENUES = [
    src2="https://www.hyatt.com/content/dam/hotel/propertysites/assets/regency/sydrs/documents/en_US/special-events/meetings/Capacity-Chart-English.pdf"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Doltone House Jones Bay Wharf", sp="Heritage Wharf", pr="Pyrmont", ty="event",
    th=900, bq=680, cl=400, ck=1000, cab=None, ush=None, bd=None,
    br=8, gr=0, area=None, ceil=None, ceilq=None,
@@ -143,7 +151,7 @@ VENUES = [
    src2="https://doltonehouse.com.au/space/loft/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Curzon Hall", sp="Lady Mary's Pavilion", pr="Marsfield", ty="event",
    th=890, bq=570, cl=420, ck=800, cab=400, ush=None, bd=None,
    br=11, gr=0, area=660, ceil=7.0, ceilq="Navarra publishes up to 7m for the venue, not for the pavilion alone",
@@ -153,7 +161,7 @@ VENUES = [
    src2="https://navarravenues.com.au/venues/curzon-hall/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sheraton Grand Sydney Hyde Park", sp="Grand Ballroom", pr="Sydney CBD", ty="hotel",
    th=850, bq=500, cl=360, ck=900, cab=None, ush=None, bd=None,
    br=20, gr=558, area=650, ceil=4.1, ceilq=None,
@@ -163,7 +171,7 @@ VENUES = [
    src2="https://www.marriott.com/en-us/hotels/sydsi-sheraton-grand-sydney-hyde-park/events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Cricket Ground", sp="Noble Dining Room", pr="Moore Park", ty="event",
    th=820, bq=560, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=25, gr=0, area=None, ceil=None, ceilq=None,
@@ -173,7 +181,7 @@ VENUES = [
    src2="https://www.scgevents.com.au/function-rooms/captains-bar"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Shangri-La Sydney", sp="Grand Ballroom", pr="The Rocks", ty="hotel",
    th=800, bq=500, cl=400, ck=850, cab=410, ush=None, bd=None,
    br=24, gr=564, area=670, ceil=4.15, ceilq=None,
@@ -183,7 +191,7 @@ VENUES = [
    src2="https://www.shangri-la.com/sydney/shangrila/meetings-events/event-spaces/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sofitel Sydney Wentworth", sp="Wentworth Ballroom", pr="Sydney CBD", ty="hotel",
    th=800, bq=500, cl=462, ck=800, cab=400, ush=None, bd=None,
    br=15, gr=436, area=629, ceil=5.3, ceilq=None,
@@ -193,7 +201,7 @@ VENUES = [
    src2="https://www.sofitelsydney.com.au/wentworth-ballroom"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Four Seasons Hotel Sydney", sp="Grand Ballroom", pr="The Rocks", ty="hotel",
    th=800, bq=480, cl=336, ck=900, cab=416, ush=76, bd=None,
    br=11, gr=531, area=683, ceil=5.6, ceilq=None,
@@ -203,7 +211,7 @@ VENUES = [
    src2="https://www.fourseasons.com/sydney/meetings-and-events/function-rooms/level-two/gallery_rooms/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Luna Park Sydney", sp="The Big Top", pr="Milsons Point", ty="event",
    th=750, bq=600, cl=570, ck=1000, cab=None, ush=None, bd=None,
    br=8, gr=0, area=None, ceil=9.0, ceilq="at the eaves; 14m at the centre",
@@ -213,7 +221,7 @@ VENUES = [
    src2="https://www.lunaparksydney.com/corporate-events/immersive-big-top"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Waterview in Bicentennial Park", sp="Lake Room", pr="Sydney Olympic Park", ty="event",
    th=605, bq=504, cl=None, ck=700, cab=350, ush=None, bd=None,
    br=3, gr=0, area=None, ceil=6.6, ceilq=None,
@@ -223,7 +231,7 @@ VENUES = [
    src2="https://waterviewvenue.com.au/wp-content/uploads/2024/03/2024-Business-Events-Fact-Sheets-.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Masonic Centre", sp="Banquet Hall", pr="Sydney CBD", ty="conv",
    th=550, bq=380, cl=300, ck=600, cab=380, ush=60, bd=40,
    br=12, gr=0, area=555, ceil=7.0, ceilq=None,
@@ -233,7 +241,7 @@ VENUES = [
    src2="https://sydneymasoniccentre.com.au/property/banquet-hall/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Novotel Sydney Olympic Park", sp="Freshwater Ballroom", pr="Sydney Olympic Park", ty="hotel",
    th=550, bq=320, cl=270, ck=540, cab=250, ush=None, bd=None,
    br=12, gr=177, area=414, ceil=4.5, ceilq=None,
@@ -243,7 +251,7 @@ VENUES = [
    src2="https://www.novotelsydneyolympicpark.com.au/meetings"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="W Sydney", sp="Great Room", pr="Darling Harbour", ty="hotel",
    th=500, bq=360, cl=339, ck=600, cab=None, ush=60, bd=None,
    br=8, gr=588, area=592, ceil=5.6, ceilq=None,
@@ -253,7 +261,7 @@ VENUES = [
    src2="https://www.marriott.com/en-us/hotels/sydwh-w-sydney/events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Rydges World Square", sp="Grand Sydney Ballroom", pr="Sydney CBD", ty="hotel",
    th=500, bq=350, cl=280, ck=550, cab=250, ush=None, bd=None,
    br=12, gr=458, area=500, ceil=3.0, ceilq=None,
@@ -263,7 +271,7 @@ VENUES = [
    src2="https://www.rydges.com/accommodation/sydney-nsw/world-square-sydney-cbd/meetings-events/all-venues/"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Doltone House Hyde Park", sp="Ballroom", pr="Sydney CBD", ty="event",
    th=500, bq=480, cl=None, ck=650, cab=400, ush=None, bd=None,
    br=3, gr=0, area=None, ceil=5.0, ceilq=None,
@@ -273,7 +281,7 @@ VENUES = [
    src2="https://doltonehouse.com.au/space/manhattan-avenue/"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Sofitel Sydney Darling Harbour", sp="Magnifique Ballroom", pr="Darling Harbour", ty="hotel",
    th=450, bq=300, cl=276, ck=450, cab=None, ush=60, bd=80,
    br=7, gr=590, area=497, ceil=5.0, ceilq=None,
@@ -283,7 +291,7 @@ VENUES = [
    src2="https://sofitel.accor.com/en/hotels/9729/meetings.html"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Aerial UTS Function Centre", sp="Full venue, five rooms combined", pr="Surry Hills & Central", ty="conv",
    th=450, bq=350, cl=270, ck=450, cab=270, ush=None, bd=None,
    br=5, gr=0, area=494, ceil=None, ceilq=None,
@@ -293,7 +301,7 @@ VENUES = [
    src2="https://aerialfunctioncentre.com.au/venue/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Dockside", sp="Cockle Bay Room", pr="Darling Harbour", ty="event",
    th=440, bq=312, cl=None, ck=450, cab=162, ush=None, bd=None,
    br=2, gr=0, area=None, ceil=None, ceilq=None,
@@ -303,7 +311,7 @@ VENUES = [
    src2="https://docksidegroup.com.au/corporate-events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Swissotel Sydney", sp="Blaxland Ballroom", pr="Sydney CBD", ty="hotel",
    th=400, bq=288, cl=210, ck=400, cab=240, ush=None, bd=None,
    br=8, gr=369, area=400, ceil=4.35, ceilq="at the highest point; 2.7m at the lowest",
@@ -313,7 +321,7 @@ VENUES = [
    src2="https://www.swissotel.com/hotels/sydney/meeting-events/meeting-rooms/maple-room/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="South Eveleigh", sp="The Eveleigh", pr="Redfern and Eveleigh", ty="event",
    th=400, bq=340, cl=None, ck=550, cab=280, ush=None, bd=None,
    br=6, gr=0, area=None, ceil=None, ceilq=None,
@@ -323,7 +331,7 @@ VENUES = [
    src2="https://www.southeveleigh.com/explore/events-functions-venues/functions"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Crown Sydney", sp="Pearl Ballroom", pr="Barangaroo", ty="hotel",
    th=390, bq=340, cl=125, ck=390, cab=280, ush=None, bd=None,
    br=11, gr=349, area=573, ceil=4.7, ceilq=None,
@@ -333,7 +341,7 @@ VENUES = [
    src2="https://www.crownsydney.com.au/getmedia/90d6bc48-070b-4095-aa3d-5cc4c3b84dc0/Crown-Sydney-Events-Pearl-Ballroom.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Novotel Sydney International Airport", sp="Grand Ballroom", pr="Sydney Airport", ty="hotel",
    th=380, bq=260, cl=120, ck=400, cab=208, ush=None, bd=None,
    br=11, gr=271, area=320, ceil=4.0, ceilq=None,
@@ -343,7 +351,7 @@ VENUES = [
    src2="https://www.novotelsydneyairport.com.au/meetings-and-events/meeting-rooms/grand-ballroom"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Amora Hotel Jamison Sydney", sp="Whiteley Ballroom", pr="Sydney CBD", ty="hotel",
    th=370, bq=260, cl=180, ck=350, cab=208, ush=66, bd=None,
    br=8, gr=415, area=None, ceil=None, ceilq=None,
@@ -353,7 +361,7 @@ VENUES = [
    src2="https://www.amorahotels.com/sydney/meetings-events/venues/whiteley-ballroom"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="InterContinental Sydney", sp="Boronia Ballroom", pr="Circular Quay", ty="hotel",
    th=350, bq=240, cl=150, ck=400, cab=200, ush=57, bd=42,
    br=14, gr=509, area=497, ceil=4.3, ceilq=None,
@@ -363,7 +371,7 @@ VENUES = [
    src2="https://www.sydney.intercontinental.com/hotel/venues/boronia-ballroom/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Australian National Maritime Museum", sp="Lighthouse Gallery", pr="Darling Harbour", ty="event",
    th=350, bq=250, cl=None, ck=400, cab=200, ush=None, bd=None,
    br=11, gr=0, area=400, ceil=13.0, ceilq=None,
@@ -373,7 +381,7 @@ VENUES = [
    src2="https://www.sea.museum/venues/venue-spaces"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Kimpton Margot Sydney", sp="The Hammond Room", pr="Sydney CBD", ty="hotel",
    th=280, bq=None, cl=None, ck=None, cab=136, ush=None, bd=None,
    br=6, gr=172, area=344, ceil=None, ceilq=None,
@@ -383,7 +391,7 @@ VENUES = [
    src2="https://www.kimptonmargotsydney.com/meeting-room-venue-sydney/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="The Grace Hotel", sp="Wilarra-Jarara", pr="Sydney CBD", ty="hotel",
    th=279, bq=240, cl=141, ck=400, cab=192, ush=None, bd=None,
    br=11, gr=387, area=371, ceil=2.4, ceilq=None,
@@ -393,7 +401,7 @@ VENUES = [
    src2="https://www.gracehotel.com.au/meetings-events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="PARKROYAL Darling Harbour", sp="Blackwattle Bay Room", pr="Darling Harbour", ty="hotel",
    th=273, bq=162, cl=120, ck=150, cab=72, ush=None, bd=45,
    br=7, gr=None, area=208, ceil=3.4, ceilq=None,
@@ -403,7 +411,7 @@ VENUES = [
    src2="https://www.panpacific.com/en/hotels-and-resorts/pr-darling-harbour-sydney/meet/meet-venues/rose-bay-room.html"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Sydney Harbour Marriott Hotel at Circular Quay", sp="Thomas Keneally I and II", pr="Circular Quay", ty="hotel",
    th=270, bq=200, cl=144, ck=300, cab=None, ush=57, bd=51,
    br=14, gr=595, area=288, ceil=2.8, ceilq=None,
@@ -413,7 +421,7 @@ VENUES = [
    src2="https://www.marriott.com/en-us/hotels/sydmc-sydney-harbour-marriott-hotel-at-circular-quay/events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Rydges Sydney Central", sp="Oxford I and II", pr="Surry Hills & Central", ty="hotel",
    th=270, bq=220, cl=150, ck=320, cab=144, ush=70, bd=70,
    br=15, gr=309, area=253, ceil=2.4, ceilq=None,
@@ -423,7 +431,7 @@ VENUES = [
    src2="https://www.rydges.com/accommodation/sydney-nsw/sydney-central/venues/oxford-i-ii/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Pullman Sydney Hyde Park", sp="Ibis Room", pr="Sydney CBD", ty="hotel",
    th=250, bq=180, cl=150, ck=250, cab=None, ush=80, bd=None,
    br=8, gr=241, area=264, ceil=None, ceilq=None,
@@ -433,7 +441,7 @@ VENUES = [
    src2="https://www.pullmansydneyhydepark.com.au/en/meeting-rooms/ibis-room.html"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Taronga Zoo Sydney", sp="Dalang Ballroom", pr="Mosman", ty="event",
    th=250, bq=250, cl=None, ck=300, cab=None, ush=None, bd=None,
    br=13, gr=None, area=None, ceil=None, ceilq=None,
@@ -443,7 +451,7 @@ VENUES = [
    src2="https://taronga.org.au/sydney-zoo/functions-and-venue-hire"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="L'Aqua", sp="Terrace Room", pr="Darling Harbour", ty="event",
    th=180, bq=144, cl=None, ck=320, cab=112, ush=None, bd=None,
    br=2, gr=0, area=None, ceil=None, ceilq=None,
@@ -453,7 +461,7 @@ VENUES = [
    src2="https://docksidegroup.com.au/corporate-events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Pullman at Sydney Olympic Park", sp="Nexus 1 and 2", pr="Sydney Olympic Park", ty="hotel",
    th=140, bq=100, cl=80, ck=140, cab=80, ush=40, bd=40,
    br=5, gr=218, area=156, ceil=3.8, ceilq=None,
@@ -463,7 +471,7 @@ VENUES = [
    src2="https://www.pullmansydneyolympicpark.com.au/meetings"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Novotel Sydney Darling Square", sp="Darling Harbour Room", pr="Darling Harbour", ty="hotel",
    th=130, bq=110, cl=66, ck=140, cab=100, ush=None, bd=None,
    br=6, gr=230, area=168, ceil=2.4, ceilq=None,
@@ -473,7 +481,7 @@ VENUES = [
    src2="https://www.novotelsydneydarlingsquare.com.au/meetings/darling-harbour-room"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="View Sydney", sp="Bradfield Rooms", pr="North Sydney", ty="hotel",
    th=120, bq=78, cl=46, ck=120, cab=65, ush=None, bd=None,
    br=7, gr=None, area=162, ceil=None, ceilq=None,
@@ -483,7 +491,7 @@ VENUES = [
    src2="https://viewhotels.com.au/sydney/meetings-and-events/rooms-and-spaces/bradfield-rooms/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="QT Sydney", sp="Market Room", pr="Sydney CBD", ty="hotel",
    th=50, bq=32, cl=20, ck=50, cab=40, ush=25, bd=36,
    br=8, gr=198, area=79, ceil=None, ceilq=None,
@@ -493,7 +501,7 @@ VENUES = [
    src2="https://www.qthotels.com/sydney-cbd/venues-events/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Hordern Pavilion", sp="Main Hall", pr="Moore Park", ty="event",
    th=None, bq=1400, cl=None, ck=3500, cab=None, ush=None, bd=None,
    br=None, gr=0, area=3600, ceil=13.0, ceilq="to the dome; 6.2m under the trusses between columns",
@@ -503,7 +511,7 @@ VENUES = [
    src2="https://playbillvenues.com.au/app/uploads/2025/06/HP_Function-Hire-Pack.pdf"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Museum of Contemporary Art Australia", sp="Foundation Hall", pr="The Rocks", ty="event",
    th=None, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=5, gr=0, area=None, ceil=7.0, ceilq=None,
@@ -513,7 +521,7 @@ VENUES = [
    src2="https://www.mca.com.au/venue-hire/"),
 
  dict(
-   worked=True,
+   worked=True, seen=None,
    n="Doltone House Darling Island", sp="Darling Island", pr="Pyrmont", ty="event",
    th=None, bq=750, cl=None, ck=1200, cab=None, ush=None, bd=None,
    br=3, gr=0, area=None, ceil=None, ceilq=None,
@@ -523,7 +531,7 @@ VENUES = [
    src2="https://doltonehouse.com.au/space/parkview/"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="The Epping Club", sp="The Grand Ballroom", pr="Epping", ty="event",
    th=None, bq=500, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=5, gr=0, area=None, ceil=None, ceilq=None,
@@ -533,7 +541,7 @@ VENUES = [
    src2="https://www.eppingclubevents.com.au/conference-spaces"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Novotel Sydney Central", sp="The Ballroom", pr="Surry Hills & Central", ty="hotel",
    th=None, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=14, gr=255, area=265, ceil=None, ceilq=None,
@@ -543,7 +551,7 @@ VENUES = [
    src2="https://www.novotelsydneycentral.com.au/meetings/port-jackson-room"),
 
  dict(
-   worked=False,
+   worked=False, seen=None,
    n="Ovolo Woolloomooloo", sp="Piper Room", pr="Woolloomooloo", ty="hotel",
    th=None, bq=120, cl=None, ck=150, cab=None, ush=None, bd=None,
    br=12, gr=100, area=None, ceil=None, ceilq="high ceilings and original timber beams, but no measurement is published",

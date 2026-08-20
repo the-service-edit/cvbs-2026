@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CVBS — Landing Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#3BC9D9; --teal-deep:#28A8B6;
+    --navy:#0D2233; --navy2:#071520;
+    --stone:#F4F1EA; --stone-deep:#ECE7DC;
+    --text:#0D1F2D; --muted:#6E747B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:#E7E2D8;
+    color:var(--text);
+    padding:48px 40px 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .stage{max-width:1320px;margin:0 auto}
+  .stage-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:8px}
+  .stage-head h1{font-size:15px;font-weight:600;letter-spacing:.02em;color:var(--navy)}
+  .stage-head span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .board{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .panel{
+    border-radius:22px;overflow:hidden;position:relative;
+    box-shadow:0 24px 60px -28px rgba(7,21,32,.45);
+    min-height:380px;display:flex;flex-direction:column;
+  }
+
+  /* shared bits */
+  .nav{display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.04em}
+  .nav .links{display:flex;gap:22px;text-transform:uppercase;font-weight:500}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.16em;font-size:13px}
+  .brand .dot{width:18px;height:18px;border-radius:6px;background:linear-gradient(135deg,var(--teal),var(--teal-deep))}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--teal-deep)}
+  .eyebrow::before{content:"";width:24px;height:2px;background:var(--teal)}
+  .pill{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 22px;font-size:13px;font-weight:600;letter-spacing:.01em}
+  .arrow{font-size:14px}
+
+  /* ---------- PANEL 1: HERO ---------- */
+  .hero{background:var(--navy2);color:#fff}
+  .hero-photo{position:absolute;inset:0;background:var(--navy) url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1300&q=80') center/cover;}
+  .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,21,32,.55) 0%,rgba(7,21,32,.35) 38%,rgba(7,21,32,.82) 100%)}
+  .hero-inner{position:relative;z-index:2;padding:26px 30px 28px;display:flex;flex-direction:column;height:100%;gap:18px}
+  .hero .nav .links a, .hero .brand{color:#fff}
+  .hero-mid{margin-top:auto;display:flex;flex-direction:column;gap:18px}
+  .hero h2{font-size:40px;line-height:.98;font-weight:700;letter-spacing:-.03em}
+  .hero h2 .t{color:var(--teal)}
+  .hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+  .hero p{max-width:300px;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.82)}
+  .hero .pill{background:#fff;color:var(--navy)}
+  .stats{display:flex;gap:14px;border-top:1px solid rgba(255,255,255,.18);padding-top:18px}
+  .stat{flex:1}
+  .stat .big{font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .stat .sm{font-size:11px;line-height:1.4;color:rgba(255,255,255,.7);margin-top:4px}
+  .lang{border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 12px;font-size:11px;display:flex;gap:8px;align-items:center}
+
+  /* interactive brief */
+  .brief{
+    background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-radius:18px;padding:18px 18px 16px;
+  }
+  .brief .ln{font-size:18px;line-height:1.7;font-weight:500;color:rgba(255,255,255,.92)}
+  .brief select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    font-family:inherit;font-size:16px;font-weight:600;color:#fff;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
+    border-radius:10px;padding:5px 30px 5px 12px;margin:3px 2px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%233BC9D9' stroke-width='1.6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center;
+  }
+  .brief select:focus{outline:none;border-color:var(--teal)}
+  .brief select option{color:var(--navy)}
+  .brief-cta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px}
+  .brief-cta .pill{background:var(--teal);color:var(--navy);border:none;cursor:pointer;font-family:inherit}
+  .brief-cta .note{font-size:11px;color:rgba(255,255,255,.7)}
+  .brief.done{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .brief.done .tick{width:34px;height:34px;border-radius:50%;background:var(--teal);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700}
+  .brief.done h3{font-size:20px;font-weight:600;letter-spacing:-.01em;color:#fff}
+  .brief.done p{font-size:13px;color:rgba(255,255,255,.82);line-height:1.5;max-width:330px}
+  .brief.done .again{font-size:12px;font-weight:600;color:var(--teal);background:none;border:none;cursor:pointer;font-family:inherit;padding:4px 0}
+
+  /* ---------- PANEL 2: CATEGORIES (teal accent) ---------- */
+  .cats{background:var(--teal);color:var(--navy)}
+  .cats .inner{padding:26px 30px 24px;display:flex;flex-direction:column;height:100%}
+  .cats .nav .links a,.cats .brand{color:var(--navy)}
+  .cats h2{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:30px 0 6px}
+  .cats .toggle{display:flex;gap:18px;font-size:13px;font-weight:600;margin-bottom:18px}
+  .cats .toggle .on{border-bottom:2px solid var(--navy);padding-bottom:4px}
+  .cats .toggle .off{color:rgba(13,34,51,.5)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:auto}
+  .card{background:rgba(255,255,255,.55);border-radius:14px;overflow:hidden}
+  .card.feat{background:var(--navy);color:#fff;box-shadow:0 16px 30px -16px rgba(7,21,32,.6)}
+  .card .ph{height:78px;background:#cfd6d8 center/cover}
+  .card .body{padding:11px 12px 14px}
+  .card .num{font-size:11px;font-weight:600;opacity:.7}
+  .card .name{font-size:14px;font-weight:600;margin-top:2px}
+  .card .desc{font-size:10.5px;line-height:1.4;margin-top:6px;color:rgba(13,34,51,.6)}
+  .card.feat .desc{color:rgba(255,255,255,.78)}
+  .cats .controls{display:flex;gap:10px;margin-top:16px}
+  .cats .controls b{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px}
+  .cats .controls .filled{background:var(--navy);color:#fff}
+
+  /* ---------- PANEL 3: POPULAR VENUES (stone) ---------- */
+  .venues{background:var(--stone);color:var(--text)}
+  .venues .inner{padding:26px 30px 24px;display:flex;flex-direction:column;height:100%}
+  .venues h2{font-size:38px;font-weight:700;letter-spacing:-.025em;line-height:1.02;margin:22px 0 8px}
+  .venues .lead{font-size:12.5px;color:var(--muted);max-width:230px}
+  .venues .row{display:flex;gap:14px;margin:22px 0 auto}
+  .vcard{flex:1;border-radius:16px;overflow:hidden;position:relative;min-height:210px;background:var(--navy) center/cover;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:14px}
+  .vcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,21,32,.05),rgba(7,21,32,.72));z-index:1}
+  .vcard>*{position:relative;z-index:2}
+  .vtag{align-self:flex-start;background:rgba(255,255,255,.92);color:var(--navy);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:5px 10px;border-radius:999px}
+  .vname{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .vmeta{font-size:11px;color:rgba(255,255,255,.78);margin-top:3px}
+  .vlink{margin-top:8px;font-size:11px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+  .venues .pill{background:var(--navy);color:#fff;align-self:flex-start}
+
+  /* ---------- PANEL 4: SERVICES (navy) ---------- */
+  .services{background:var(--navy);color:#fff}
+  .services .inner{padding:26px 30px 24px;display:flex;flex-direction:column;height:100%}
+  .services .nav .links a,.services .brand{color:#fff}
+  .services h2{font-size:38px;font-weight:700;letter-spacing:-.025em;margin:24px 0 8px}
+  .services .lead{font-size:12.5px;color:rgba(255,255,255,.72);max-width:240px}
+  .slist{margin:24px 0 auto;border-top:1px solid rgba(255,255,255,.14)}
+  .srow{display:flex;align-items:center;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .srow .nm{font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .srow .nm.t{color:var(--teal)}
+  .srow .pg{font-size:11px;color:rgba(255,255,255,.5)}
+  .srow .ar{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:13px}
+  .services .pill{background:var(--teal);color:var(--navy);align-self:flex-start;margin-top:6px}
+
+  .foot{margin-top:30px;text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  @media(max-width:980px){.board{grid-template-columns:1fr}.hero h2{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="stage-head">
+    <h1>CVBS — Website concept</h1>
+    <span>Conference Venues &amp; Booking Services · conferencevenues.com</span>
+  </div>
+
+  <div class="board">
+
+    <!-- PANEL 1 HERO -->
+    <section class="panel hero">
+      <div class="hero-photo"></div>
+      <div class="hero-inner">
+        <div class="nav">
+          <div class="brand"><span class="dot"></span>CVBS</div>
+          <div class="links"><a>Venues</a><a>Services</a><a>About</a><a>Insights</a></div>
+          <div class="lang">Brief <span class="arrow">→</span></div>
+        </div>
+        <div class="hero-mid">
+          <span class="eyebrow">Sourcing venues since 1989</span>
+          <h2>SOURCE THE <span class="t">RIGHT VENUE</span></h2>
+          <div class="brief" id="brief">
+            <div class="ln">
+              I'm planning
+              <select id="f-type" aria-label="Event type">
+                <option>a conference</option>
+                <option>a board meeting</option>
+                <option>an away day</option>
+                <option>a gala dinner</option>
+                <option>a training day</option>
+              </select>
+              for
+              <select id="f-size" aria-label="Headcount">
+                <option>up to 50</option>
+                <option>50–150</option>
+                <option>150–400</option>
+                <option>400+</option>
+              </select>
+              guests, near
+              <select id="f-loc" aria-label="Location">
+                <option>London</option>
+                <option>the South East</option>
+                <option>the Midlands</option>
+                <option>the North</option>
+                <option>Wales</option>
+                <option>Scotland</option>
+              </select>
+              around
+              <select id="f-when" aria-label="Timing">
+                <option>this autumn</option>
+                <option>Q1 2027</option>
+                <option>spring 2027</option>
+                <option>flexible</option>
+              </select>.
+            </div>
+            <div class="brief-cta">
+              <span class="note">Free to you · 12,000+ venues · shortlist in 48 hours</span>
+              <button class="pill" id="brief-go">Get my shortlist <span class="arrow">→</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2 CATEGORIES -->
+    <section class="panel cats">
+      <div class="inner">
+        <div class="nav">
+          <div class="brand"><span class="dot" style="background:var(--navy)"></span>CVBS</div>
+          <div class="links"><a>Venues</a><a>Services</a><a>About</a><a>Insights</a></div>
+        </div>
+        <h2>WE SOURCE FOR</h2>
+        <div class="toggle"><span class="on">Corporate</span><span class="off">Association</span><span class="off">Private</span></div>
+        <div class="cards">
+          <div class="card">
+            <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=400&q=80')"></div>
+            <div class="body"><div class="num">01</div><div class="name">Conferences</div><div class="desc">Plenaries, breakouts and exhibition space for 50 to 2,000.</div></div>
+          </div>
+          <div class="card feat">
+            <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=400&q=80')"></div>
+            <div class="body"><div class="num">02</div><div class="name">Board &amp; meetings</div><div class="desc">Private, well-appointed rooms for leadership and away days.</div></div>
+          </div>
+          <div class="card">
+            <div class="ph" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=80')"></div>
+            <div class="body"><div class="num">03</div><div class="name">Galas &amp; dinners</div><div class="desc">Ballrooms and banqueting for awards and celebrations.</div></div>
+          </div>
+        </div>
+        <div class="controls"><b>←</b><b class="filled">→</b></div>
+      </div>
+    </section>
+
+    <!-- PANEL 3 POPULAR VENUES -->
+    <section class="panel venues">
+      <div class="inner">
+        <div class="nav">
+          <div class="brand"><span class="dot"></span>CVBS</div>
+          <div class="links"><a>Venues</a><a>Services</a><a>About</a><a>Insights</a></div>
+        </div>
+        <h2>POPULAR<br>VENUES</h2>
+        <p class="lead">A sourced shortlist, not a search engine. Here is where briefs are landing this season.</p>
+        <div class="row">
+          <div class="vcard" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80')">
+            <span class="vtag">London</span>
+            <div>
+              <div class="vname">The Brewery</div>
+              <div class="vmeta">Up to 1,200 · City of London</div>
+              <span class="vlink">View venue <span class="arrow">→</span></span>
+            </div>
+          </div>
+          <div class="vcard" style="background-image:url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80')">
+            <span class="vtag">Newport</span>
+            <div>
+              <div class="vname">Celtic Manor</div>
+              <div class="vmeta">Up to 1,500 · Resort &amp; golf</div>
+              <span class="vlink">View venue <span class="arrow">→</span></span>
+            </div>
+          </div>
+        </div>
+        <span class="pill">View all venues <span class="arrow">→</span></span>
+      </div>
+    </section>
+
+    <!-- PANEL 4 SERVICES -->
+    <section class="panel services">
+      <div class="inner">
+        <div class="nav">
+          <div class="brand"><span class="dot"></span>CVBS</div>
+          <div class="links"><a>Venues</a><a>Services</a><a>About</a><a>Insights</a></div>
+        </div>
+        <h2>OUR SERVICES</h2>
+        <p class="lead">From the first brief to the signed contract, we handle the venue so your team handles the event.</p>
+        <div class="slist">
+          <div class="srow"><div><div class="nm t">Venue sourcing</div></div><div class="ar">→</div></div>
+          <div class="srow"><div><div class="nm">Site visits</div></div><div class="ar">→</div></div>
+          <div class="srow"><div><div class="nm">Rate negotiation</div></div><div class="ar">→</div></div>
+          <div class="srow"><div><div class="nm">Contracting</div></div><div class="ar">→</div></div>
+        </div>
+        <span class="pill">All services <span class="arrow">→</span></span>
+      </div>
+    </section>
+
+  </div>
+  <div class="foot">CVBS · The right venue isn't searched. It's sourced.</div>
+</div>
+<script>
+  var brief=document.getElementById('brief');
+  var go=document.getElementById('brief-go');
+  function val(id){var s=document.getElementById(id);return s.options[s.selectedIndex].text;}
+  go.addEventListener('click',function(){
+    var type=val('f-type'),size=val('f-size'),loc=val('f-loc'),when=val('f-when');
+    brief.classList.add('done');
+    brief.innerHTML=
+      '<div class="tick">✓</div>'+
+      '<h3>Brief received</h3>'+
+      '<p>A sourcing consultant is building your shortlist for '+type+
+      ' ('+size+' guests) near '+loc+', '+when+'. Expect tailored options within 48 hours, free of charge.</p>'+
+      '<button class="again" id="brief-again">Start another brief</button>';
+    document.getElementById('brief-again').addEventListener('click',function(){location.reload();});
+  });
+</script>
+</body>
+</html>

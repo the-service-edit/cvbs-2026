@@ -6,7 +6,7 @@ from venues_sydney import VENUES, CITY
 VERIFIED = "14 August 2026"
 
 keys = ['n','sp','pr','ty','th','bq','cl','ck','cab','ush','bd','br','gr',
-        'area','ceil','ceilq','s_name','s_th','note','worked']
+        'area','ceil','ceilq','s_name','s_th','note','worked','seen']
 island = json.dumps([{k: v[k] for k in keys} for v in VENUES], ensure_ascii=False, separators=(',', ':'))
 
 items = []
