@@ -84,7 +84,7 @@ INDEX = '''<section class="s-white pad" id="venue-index">
         </table>
       </div>
 
-      <p class="vidx-method">Every figure is the venue's own published capacity for the space named, read from that venue's own capacity chart, floor plan or technical spec, and last checked {verified}. Where a venue publishes nothing we say so rather than estimate. Capacities are ceilings, not plans. <b>No venue pays to appear here.</b> We do not publish rates, because the rate you are offered depends on your dates and your room nights. That is the part we negotiate, and it is free to you.</p>
+      <p class="vidx-method">Every figure is the venue's own published capacity for the space named, read from that venue's own capacity chart, floor plan or technical spec, and last checked {verified}. Where a venue publishes nothing we say so rather than estimate. Capacities are ceilings, not plans. <b>Venues appear here on suitability alone.</b> We do not publish rates, because the rate you are offered depends on your dates and your room nights. That is the part we negotiate, and it is free to you.</p>
     </div>
   </div>
 </section>
