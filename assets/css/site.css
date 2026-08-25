@@ -1134,3 +1134,18 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 /* The experience filter carries the longest option label in the control row. */
 .vidx-ctl:has(#vidx-seen){min-width:16rem}
 .vidx-ctl #vidx-seen{min-width:15rem}
+
+/* --- Homepage offer cards: whole card clicks through to the full offer --- */
+.offer:has(.offer__hit){position:relative}
+.offer__hit{position:absolute;inset:0;z-index:1}
+.offer:has(.offer__hit):hover{border-color:var(--teal);box-shadow:var(--shadow-md)}
+.offer:has(.offer__hit):focus-within{outline:2px solid var(--teal);outline-offset:3px}
+.offer__full{position:static;display:inline-flex;align-items:center;gap:.4rem;font-weight:600;font-size:.95rem;color:var(--teal-deep);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .25s var(--ease)}
+.offer__full svg{transition:transform .3s var(--ease)}
+.offer:hover .offer__full{border-bottom-color:currentColor}
+.offer:hover .offer__full svg{transform:translateX(3px)}
+.offer__enq{position:relative;z-index:2}
+.offer:has(.offer__hit) .offer__media img{transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+.offer:has(.offer__hit):hover .offer__media img{transform:scale(1.04)}
+.offer:has(.offer__hit) .offer__foot{flex-direction:column;align-items:flex-start;gap:.85rem}
+.offer__acts{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%}
