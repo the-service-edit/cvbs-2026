@@ -60,6 +60,7 @@ button{font-family:inherit}
 .s-navy .display em{color:var(--teal)}
 h1,h2,h3,h4{font-weight:600;line-height:1.12;letter-spacing:-.02em;color:inherit}
 .h2{font-size:clamp(1.9rem,1.3rem + 2.6vw,3.1rem);line-height:1.08;letter-spacing:-.025em}
+.h2--sm{font-size:clamp(1.5rem,1.2rem + 1.4vw,2.05rem);line-height:1.15}
 .h3{font-size:clamp(1.3rem,1.1rem + .9vw,1.7rem)}
 .h4{font-size:1.15rem}
 .lead{font-size:clamp(1.1rem,1.02rem + .45vw,1.4rem);color:#37444f;max-width:var(--maxread);line-height:1.5}
@@ -209,8 +210,12 @@ body.menu-open{overflow:hidden}
 .logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.5rem,4vw,3.5rem)}
 .logos img{height:38px;width:auto;opacity:1;transition:opacity .3s,transform .3s}
 .logos img:hover{opacity:1;transform:translateY(-2px)}
-.logos--wall{gap:clamp(1.8rem,4vw,3.2rem) clamp(2rem,5vw,4rem);row-gap:clamp(2rem,4vw,2.8rem)}
-.logos--wall img{height:46px;max-width:160px}
+.logos--wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-items:center;align-items:center;gap:clamp(1.6rem,3vw,2.2rem) clamp(1.5rem,4vw,3rem);max-width:1120px;margin-inline:auto}
+@media(min-width:720px){.logos--wall{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.logos--wall img{height:auto;width:auto;max-height:40px;max-width:min(150px,100%);object-fit:contain}
+.logos--wall img[src*="heritage"],.logos--wall img[src*="kimberly"],.logos--wall img[src*="medtronic"]{max-height:30px;max-width:min(185px,100%)}
+.logos--wall img[src*="randstad"],.logos--wall img[src*="australand"]{max-height:52px;max-width:min(100px,100%)}
+.logos--wall img[src*="elders"]{max-height:34px}
 
 /* ==========================================================================
    REBRAND: teal-forward accents + signature teal section
@@ -531,7 +536,7 @@ body.menu-open{overflow:hidden}
 @media(min-width:920px){.people{grid-template-columns:.92fr 1.08fr;align-items:start}}
 .team-row{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.3rem,3vw,2rem)}
 @media(min-width:600px){.team-row{grid-template-columns:repeat(2,1fr);max-width:420px}}
-@media(min-width:760px){.team-row--4{grid-template-columns:repeat(4,minmax(0,1fr));max-width:none;gap:clamp(1rem,2vw,1.5rem)}}
+@media(min-width:760px){.team-row--4{grid-template-columns:repeat(4,minmax(0,1fr));max-width:1160px;gap:clamp(1rem,2vw,1.6rem)}}
 .tm .pf{aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:linear-gradient(165deg,var(--navy),var(--teal-deep));display:grid;place-items:center;margin-bottom:.85rem}
 .tm .pf img{width:100%;height:100%;object-fit:cover}
 .tm .mono{font-size:1.9rem;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.02em}
@@ -559,6 +564,12 @@ body.menu-open{overflow:hidden}
   .offers-mag .offer--lead .body h3{font-size:1.55rem}}
 .offer .venue-name{position:absolute;left:.9rem;bottom:.85rem;right:.9rem;color:#fff;font-weight:600;font-size:1.05rem;text-shadow:0 1px 10px rgba(0,0,0,.45)}
 .offer .loc{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* about — belief list in two columns off the page rail */
+.ticks--2{padding:0;max-width:1120px;margin:0 0 1.6rem}
+.ticks--2 li{margin:0}
+.ticks--2 li::marker{content:""}
+@media(min-width:880px){.ticks--2{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(2rem,4vw,3.4rem);row-gap:1.1rem}}
 
 /* prose component fixes — keep ticks + arrow links clean inside editorial prose */
 .prose .ticks{list-style:none;margin:1.4rem 0 1.7rem;padding:0;gap:.9rem}
@@ -1150,3 +1161,59 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .offer:has(.offer__hit):hover .offer__media img{transform:scale(1.04)}
 .offer:has(.offer__hit) .offer__foot{flex-direction:column;align-items:flex-start;gap:.85rem}
 .offer__acts{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:100%}
+
+/* ==========================================================================
+   Conference venue finding: rate card, draft state, worked example
+   ========================================================================== */
+:root{--draft:#B4690E;--draft-bg:#FDF6EC;--draft-line:#E9C89A}
+
+/* --- shared draft treatment. Remove .is-draft on the section to publish. --- */
+.ratecard__badge{flex:none;display:inline-block;background:var(--draft);color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:.3rem .6rem;border-radius:var(--r-pill)}
+.ratecard__flag,.worked__flag{display:none;align-items:flex-start;gap:.85rem;background:var(--draft-bg);border-bottom:1px solid var(--draft-line);padding:.95rem clamp(1.1rem,2.4vw,1.6rem);font-size:.86rem;line-height:1.5;color:#5B4423}
+.ratecard__flagtxt b{color:var(--draft)}
+.is-draft .ratecard__flag,.is-draft .worked__flag{display:flex}
+.is-draft .ratecard,.is-draft .worked{border-color:var(--draft-line);box-shadow:0 0 0 1px var(--draft-line) inset,var(--shadow-sm)}
+.is-draft .prov{background:var(--draft-bg);border-bottom:1px dotted var(--draft);border-radius:4px;padding:.1rem .35rem;color:#5B4423}
+.is-draft .shortlist b,.is-draft .ruledout b{color:#5B4423}
+
+/* --- rate card --- */
+.ratecard{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--shadow-sm)}
+.ratecard__scroll{overflow-x:auto}
+.ratetable{width:100%;border-collapse:collapse;min-width:560px;font-size:clamp(.9rem,1.6vw,1rem)}
+.ratetable caption{caption-side:top;text-align:left;padding:clamp(1.1rem,2.4vw,1.6rem) clamp(1.1rem,2.4vw,1.6rem) .5rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ratetable th,.ratetable td{text-align:left;padding:.85rem clamp(1.1rem,2.4vw,1.6rem);border-bottom:1px solid var(--line)}
+.ratetable thead th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--line)}
+.ratetable tbody th{font-weight:600;color:var(--navy);white-space:nowrap}
+.ratetable tbody td{color:var(--text);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ratetable tbody tr:last-child th,.ratetable tbody tr:last-child td{border-bottom:0}
+.ratetable tbody tr:hover{background:var(--stone)}
+.ratecard__note{margin:0;padding:1rem clamp(1.1rem,2.4vw,1.6rem);background:var(--stone);border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+
+/* --- worked example --- */
+.worked{background:#fff;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;box-shadow:var(--shadow-sm)}
+.worked__grid{display:grid;gap:clamp(1.6rem,3.5vw,3rem);padding:clamp(1.4rem,3vw,2.4rem)}
+@media(min-width:900px){.worked__grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}}
+.worked__brief{background:var(--stone);border-radius:var(--r-card);padding:clamp(1.3rem,2.6vw,1.8rem);align-self:start}
+.brieflist{display:grid;grid-template-columns:auto 1fr;gap:.55rem 1.1rem;margin:1rem 0 0}
+.brieflist dt{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:.18rem}
+.brieflist dd{margin:0;font-size:.95rem;line-height:1.5;color:var(--text)}
+.shortlist{counter-reset:sl;list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.9rem}
+.shortlist li{position:relative;padding-left:2.4rem;font-size:.95rem;line-height:1.6;color:var(--muted)}
+.shortlist li::before{counter-increment:sl;content:counter(sl,decimal-leading-zero);position:absolute;left:0;top:.05rem;font-size:.78rem;font-weight:700;color:var(--teal-deep);letter-spacing:.04em}
+.shortlist b{color:var(--navy);font-weight:600}
+.ruledout{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:.9rem}
+.ruledout li{position:relative;padding-left:2.4rem;font-size:.95rem;line-height:1.6;color:var(--muted)}
+.ruledout li::before{content:"";position:absolute;left:.55rem;top:.62em;width:10px;height:1.5px;background:var(--muted);border-radius:2px}
+.ruledout b{color:var(--navy);font-weight:600;letter-spacing:.01em}
+@media(max-width:699px){
+  .ratetable{min-width:0;display:block}
+  .ratetable thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .ratetable tbody,.ratetable tr,.ratetable tbody th,.ratetable tbody td{display:block}
+  .ratetable tbody tr{border-bottom:1px solid var(--line);padding:.75rem 0}
+  .ratetable tbody tr:last-child{border-bottom:0}
+  .ratetable tbody tr:hover{background:none}
+  .ratetable tbody th{border-bottom:0;padding-bottom:.45rem;font-size:1.02rem}
+  .ratetable tbody td{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:0;padding-top:.22rem;padding-bottom:.22rem}
+  .ratetable tbody td::before{content:attr(data-label);color:var(--muted);font-size:.86rem;font-weight:500;white-space:nowrap}
+  .ratetable caption{display:block;width:100%;padding-bottom:.9rem;letter-spacing:.08em}
+}
