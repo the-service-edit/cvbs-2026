@@ -80,118 +80,6 @@
     <p class="form-note">We source across the whole Sydney market, in every precinct, not a fixed list.</p>
   </aside>
 </div></section>
-<section class="s-stone pad" id="sydney-at-a-glance">
-  <div class="wrap">
-    <div class="vidx-lede">
-    <div class="vidx-answer">
-      <span class="vidx-answer__tag">Sydney, in short</span>
-      <p><b>Sydney's largest conference venue is ICC Sydney at Darling Harbour.</b> Its Grand Ballroom seats 2,784 theatre style under a 9 metre ceiling and is, on ICC's own description, the largest ballroom in Australia. Above 2,000 delegates seated in one room the market is small, and none of it is a hotel: Sydney Showground's Dome takes 7,000, the Opera House Concert Hall 2,102, and Sydney Town Hall's Centennial Hall 2,008.</p>
-      <p><b>Between 500 and 1,500 delegates the constraint becomes accommodation.</b> The Fullerton Hotel Sydney holds 1,400 theatre across 1,058 pillarless square metres, the largest pillarless hotel ballroom in the city. Hilton Sydney at 1,100 and Hyatt Regency at 1,000 are the only other Sydney hotels seating more than 1,000 in one room, and Hyatt is the one that can run two at once. Below 400 the CBD carries the deepest supply, and the constraint stops being capacity. It becomes availability on your dates, and the rate. <a href="#venue-index">See the room by room numbers</a>.</p>
-    </div>
-      <aside class="vidx-stats" id="vidx-stats" aria-label="Sydney at a glance"></aside>
-    </div>
-  </div>
-</section>
-<section class="s-white pad" id="venue-index">
-  <div class="wrap">
-    <div class="section-head"><span class="eyebrow">Sydney venue index</span>
-      <h2 class="h2">The Sydney rooms we know, and what they actually hold.</h2>
-      <p class="lead">Published capacities, ceiling heights and floor areas, each one read off the venue's own documents. Filter by size, setup, precinct and type, or narrow it to the venues we have worked with ourselves.</p></div>
-
-    <div class="vidx" id="vidx" data-city="Sydney">
-      <div class="vidx-controls">
-        <div class="vidx-ctl"><label for="vidx-q">Search by name</label>
-          <input type="search" id="vidx-q" placeholder="ICC, Hyatt, Darling Harbour" autocomplete="off"></div>
-        <div class="vidx-ctl"><label for="vidx-cap">Minimum capacity</label>
-          <select id="vidx-cap"><option value="0">Any size</option><option value="50">50+</option><option value="100">100+</option><option value="200">200+</option><option value="400">400+</option><option value="800">800+</option><option value="1500">1,500+</option></select></div>
-        <div class="vidx-ctl"><label for="vidx-setup">Room setup</label>
-          <select id="vidx-setup"><option value="th">Theatre</option><option value="bq">Banquet</option><option value="cab">Cabaret</option><option value="cl">Classroom</option><option value="ck">Cocktail</option></select></div>
-        <div class="vidx-ctl"><label for="vidx-prec">Precinct</label>
-          <select id="vidx-prec"><option value="">All precincts</option></select></div>
-        <div class="vidx-ctl"><label for="vidx-type">Venue type</label>
-          <select id="vidx-type"><option value="">Any type</option><option value="conv">Convention centre</option><option value="hotel">Hotel</option><option value="event">Dedicated event venue</option></select></div>
-        <div class="vidx-ctl"><label for="vidx-accom">Accommodation</label>
-          <select id="vidx-accom"><option value="">Any</option><option value="yes">Rooms on site</option><option value="no">Venue only</option></select></div>
-        <div class="vidx-ctl"><label for="vidx-seen">Our experience</label>
-          <select id="vidx-seen"><option value="">Every venue in the index</option><option value="worked">Venues we have worked with</option><option value="seen">Venues we have been inside</option></select></div>
-        <button class="vidx-reset" id="vidx-reset" type="button">Reset filters</button>
-      </div>
-
-      <div class="vidx-count" id="vidx-count" role="status" aria-live="polite"></div>
-      <div class="vidx-handoff" id="vidx-handoff" hidden></div>
-      <p class="vidx-sortnote">Sorted by capacity. Use the filters above to narrow the list.</p>
-
-      <div class="vidx-scroll">
-        <table class="vidx-table">
-          <caption class="sr-only">Sydney conference and event venues with published capacities, sortable by venue, precinct, capacity, ceiling height, meeting rooms and guest rooms. Each row expands to a full specification.</caption>
-          <colgroup><col class="c-name"><col class="c-prec"><col class="c-cap"><col class="c-ceil"><col class="c-br"><col class="c-gr"><col class="c-suit"><col class="c-enq"></colgroup>
-          <thead><tr>
-            <th scope="col" class="is-sortable" data-k="n" tabindex="0" role="button" aria-sort="none">Venue<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
-            <th scope="col" class="is-sortable" data-k="pr" tabindex="0" role="button" aria-sort="none">Precinct<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
-            <th scope="col" class="is-sortable num" data-k="cap" tabindex="0" role="button" aria-sort="descending">Largest space<span class="vidx-arr" aria-hidden="true">&#8595;</span></th>
-            <th scope="col" class="is-sortable num" data-k="ceil" tabindex="0" role="button" aria-sort="none">Ceiling<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
-            <th scope="col" class="is-sortable num" data-k="br" tabindex="0" role="button" aria-sort="none">Meeting rooms<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
-            <th scope="col" class="is-sortable num" data-k="gr" tabindex="0" role="button" aria-sort="none">Guest rooms<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
-            <th scope="col">Suited to</th>
-            <th scope="col"><span class="sr-only">Full specification and enquiry</span></th>
-          </tr></thead>
-          <tbody id="vidx-body"></tbody>
-        </table>
-      </div>
-
-      <p class="vidx-method">Every figure is the venue's own published capacity for the space named, read from that venue's own capacity chart, floor plan or technical spec, and last checked 14 August 2026. Where a venue publishes nothing we say so rather than estimate. Capacities are ceilings, not plans. <b>Venues appear here on suitability alone.</b> We do not publish rates, because the rate you are offered depends on your dates and your room nights. That is the part we negotiate, and it is free to you.</p>
-      <p class="vidx-method vidx-method--seen"><b>The part a capacity chart cannot tell you.</b> A floor plan will give you the square metres. It will not tell you where the pre-function space bottlenecks once the room is full, which loading dock your production crew will struggle with, or how the light falls in the ballroom at four in the afternoon. That is what we are for, and it is the reason we walk these rooms rather than read about them.</p>
-    </div>
-  </div>
-</section>
-<section class="s-stone pad" id="sydney-brief-solved">
-  <div class="wrap">
-    <div class="section-head"><span class="eyebrow">What we actually do with it</span>
-      <h2 class="h2">A Sydney brief, solved.</h2>
-      <p class="lead">The index tells you what the rooms hold. This is the part that is not published anywhere.</p></div>
-    <div class="brief-proof">
-      <div class="brief-card reveal">
-        <span class="brief-card__tag">An example brief</span>
-        <dl>
-          <div class="brief-card__row"><dt>Delegates</dt><dd>120</dd></div>
-          <div class="brief-card__row"><dt>Format</dt><dd>Three day residential conference</dd></div>
-          <div class="brief-card__row"><dt>Location</dt><dd>Sydney CBD</dd></div>
-          <div class="brief-card__row"><dt>Accommodation</dt><dd>Required, on site</dd></div>
-          <div class="brief-card__row"><dt>Breakouts</dt><dd>Six concurrent rooms</dd></div>
-          <div class="brief-card__row"><dt>Dates</dt><dd>Peak season, fixed</dd></div>
-        </dl>
-      </div>
-      <div class="brief-steps reveal" data-d="1">
-        <div class="brief-step">
-          <h3>We read it against what we already know</h3>
-          <p>Six concurrent breakouts plus 120 beds on one site rules out most of the CBD immediately. That is a judgement about inventory, not a search result.</p>
-        </div>
-        <div class="brief-step">
-          <h3>Four venues shortlisted inside 48 hours</h3>
-          <p>Costed, compared like for like, on one page. Not four separate venue proposals in four different formats for you to reconcile.</p>
-        </div>
-        <div class="brief-step">
-          <h3>We negotiate the conference and the rooms together</h3>
-          <p>Room nights are the leverage. Packaging accommodation with the conference is what moves the rate, and it is why we ask about beds before we ask about budget.</p>
-        </div>
-        <div class="brief-step">
-          <h3>You choose. We hold the venue.</h3>
-          <p>Contracting, rooming lists and the run of show stay with the same person who took your brief.</p>
-        </div>
-        <div class="brief-outcome">
-          <span class="brief-outcome__tag">Karen to supply</span>
-          <p>This is where a real, substantiated Sydney outcome belongs: a negotiated saving, a percentage below the venue's opening proposal, added inclusions, or a room secured in a period that was showing as full. One verifiable number does more here than any amount of copy. The brief above is illustrative and is labelled as such until that number lands.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="s-white pad"><div class="wrap wrap--narrow">
-  <div class="section-head"><span class="eyebrow">Where to start</span><h2 class="h2">Not sure where in Sydney your event belongs?</h2>
-    <p class="lead">A quick steer, based on what you are running. Tell us the detail and we will shortlist what suits it, rather than the obvious names.</p></div>
-  <p class="muted" style="font-size:.86rem;margin:-.5rem 0 1.2rem">Based on venue suitability alone.</p>
-  <div class="dl"><div class="dl-row"><div class="dl-need">Large conferences and exhibitions</div><div class="dl-pick">ICC Sydney, Hyatt Regency, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Premium gala dinners</div><div class="dl-pick">Shangri-La, Crown Sydney, Sofitel</div></div><div class="dl-row"><div class="dl-need">Residential conferences (delegates stay on site)</div><div class="dl-pick">Hyatt Regency, Sofitel, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Fly-in, fly-out meetings</div><div class="dl-pick">Sydney Airport precinct hotels</div></div><div class="dl-row"><div class="dl-need">Brand events and product launches</div><div class="dl-pick">W Sydney, Doltone House, harbourside venues</div></div></div>
-</div></section>
 <section class="s-stone pad"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Featured venues</span><h2 class="h2">A closer look at a few we know well.</h2>
     <p class="lead">Venues we have worked with for years, and what each one is really good for. We source right across the market, so treat this as a starting point rather than a list.</p></div>
@@ -244,6 +132,64 @@
         <p class="vrow__desc">A dedicated events specialist rather than a hotel, with harbour and city settings for boardroom meetings through to large conferences and functions.</p>
         <a class="link-arrow" href="submit-a-brief.html?dest=Sydney">Enquire about Doltone House <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div></article></div>
+</div></section>
+<section class="s-white pad" id="venue-index">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">Sydney venue index</span>
+      <h2 class="h2">The Sydney rooms we know, and what they actually hold.</h2>
+      <p class="lead">Published capacities, ceiling heights and floor areas, each one read off the venue's own documents. Filter by size, setup, precinct and type, or narrow it to the venues we have worked with ourselves.</p></div>
+
+    <div class="vidx" id="vidx" data-city="Sydney">
+      <div class="vidx-controls">
+        <div class="vidx-ctl"><label for="vidx-q">Search by name</label>
+          <input type="search" id="vidx-q" placeholder="ICC, Hyatt, Darling Harbour" autocomplete="off"></div>
+        <div class="vidx-ctl"><label for="vidx-cap">Minimum capacity</label>
+          <select id="vidx-cap"><option value="0">Any size</option><option value="50">50+</option><option value="100">100+</option><option value="200">200+</option><option value="400">400+</option><option value="800">800+</option><option value="1500">1,500+</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-setup">Room setup</label>
+          <select id="vidx-setup"><option value="th">Theatre</option><option value="bq">Banquet</option><option value="cab">Cabaret</option><option value="cl">Classroom</option><option value="ck">Cocktail</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-prec">Precinct</label>
+          <select id="vidx-prec"><option value="">All precincts</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-type">Venue type</label>
+          <select id="vidx-type"><option value="">Any type</option><option value="conv">Convention centre</option><option value="hotel">Hotel</option><option value="event">Dedicated event venue</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-accom">Accommodation</label>
+          <select id="vidx-accom"><option value="">Any</option><option value="yes">Rooms on site</option><option value="no">Venue only</option></select></div>
+        <div class="vidx-ctl"><label for="vidx-seen">Our experience</label>
+          <select id="vidx-seen"><option value="">Every venue in the index</option><option value="worked">Venues we have worked with</option><option value="seen">Venues we have been inside</option></select></div>
+        <button class="vidx-reset" id="vidx-reset" type="button">Reset filters</button>
+      </div>
+
+      <div class="vidx-count" id="vidx-count" role="status" aria-live="polite"></div>
+      <div class="vidx-handoff" id="vidx-handoff" hidden></div>
+      <p class="vidx-sortnote">Sorted by capacity. Use the filters above to narrow the list.</p>
+
+      <div class="vidx-scroll">
+        <table class="vidx-table">
+          <caption class="sr-only">Sydney conference and event venues with published capacities, sortable by venue, precinct, capacity, ceiling height, meeting rooms and guest rooms. Each row expands to a full specification.</caption>
+          <colgroup><col class="c-name"><col class="c-prec"><col class="c-cap"><col class="c-ceil"><col class="c-br"><col class="c-gr"><col class="c-suit"><col class="c-enq"></colgroup>
+          <thead><tr>
+            <th scope="col" class="is-sortable" data-k="n" tabindex="0" role="button" aria-sort="none">Venue<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
+            <th scope="col" class="is-sortable" data-k="pr" tabindex="0" role="button" aria-sort="none">Precinct<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
+            <th scope="col" class="is-sortable num" data-k="cap" tabindex="0" role="button" aria-sort="descending">Largest space<span class="vidx-arr" aria-hidden="true">&#8595;</span></th>
+            <th scope="col" class="is-sortable num" data-k="ceil" tabindex="0" role="button" aria-sort="none">Ceiling<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
+            <th scope="col" class="is-sortable num" data-k="br" tabindex="0" role="button" aria-sort="none">Meeting rooms<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
+            <th scope="col" class="is-sortable num" data-k="gr" tabindex="0" role="button" aria-sort="none">Guest rooms<span class="vidx-arr" aria-hidden="true">&#8597;</span></th>
+            <th scope="col">Suited to</th>
+            <th scope="col"><span class="sr-only">Full specification and enquiry</span></th>
+          </tr></thead>
+          <tbody id="vidx-body"></tbody>
+        </table>
+      </div>
+
+      <p class="vidx-method">Every figure is the venue's own published capacity for the space named, read from that venue's own capacity chart, floor plan or technical spec, and last checked 14 August 2026. Where a venue publishes nothing we say so rather than estimate. Capacities are ceilings, not plans. <b>Venues appear here on suitability alone.</b> We do not publish rates, because the rate you are offered depends on your dates and your room nights. That is the part we negotiate, and it is free to you.</p>
+      <p class="vidx-method vidx-method--seen"><b>The part a capacity chart cannot tell you.</b> A floor plan will give you the square metres. It will not tell you where the pre-function space bottlenecks once the room is full, which loading dock your production crew will struggle with, or how the light falls in the ballroom at four in the afternoon. That is what we are for, and it is the reason we walk these rooms rather than read about them.</p>
+    </div>
+  </div>
+</section>
+<section class="s-stone pad"><div class="wrap wrap--narrow">
+  <div class="section-head"><span class="eyebrow">Where to start</span><h2 class="h2">Not sure where in Sydney your event belongs?</h2>
+    <p class="lead">A quick steer, based on what you are running. Tell us the detail and we will shortlist what suits it, rather than the obvious names.</p></div>
+  <p class="muted" style="font-size:.86rem;margin:-.5rem 0 1.2rem">Based on venue suitability alone.</p>
+  <div class="dl"><div class="dl-row"><div class="dl-need">Large conferences and exhibitions</div><div class="dl-pick">ICC Sydney, Hyatt Regency, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Premium gala dinners</div><div class="dl-pick">Shangri-La, Crown Sydney, Sofitel</div></div><div class="dl-row"><div class="dl-need">Residential conferences (delegates stay on site)</div><div class="dl-pick">Hyatt Regency, Sofitel, The Fullerton</div></div><div class="dl-row"><div class="dl-need">Fly-in, fly-out meetings</div><div class="dl-pick">Sydney Airport precinct hotels</div></div><div class="dl-row"><div class="dl-need">Brand events and product launches</div><div class="dl-pick">W Sydney, Doltone House, harbourside venues</div></div></div>
 </div></section>
 <section class="s-white pad"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Local knowledge</span><h2 class="h2">Where in Sydney to hold it.</h2>
