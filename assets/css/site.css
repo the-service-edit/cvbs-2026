@@ -956,6 +956,7 @@ body.menu-open{overflow:hidden}
 .team-copy p{color:var(--muted);margin-top:.9rem;line-height:1.65;max-width:56ch}
 .team-copy .who{margin-top:1.2rem;font-size:.9rem;color:var(--text);font-weight:600}
 .team-copy .who span{display:block;font-weight:400;color:var(--muted);margin-top:.2rem}
+.team-grid + .grid{margin-top:clamp(2.75rem,6vw,4.5rem)}
 
 /* Boundary statement. Says what the index is not, which is what makes it an index. */
 /* Controls */
