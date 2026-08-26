@@ -718,6 +718,8 @@ body.menu-open{overflow:hidden}
 .pcard__body h3{font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.15;margin-bottom:.7rem;color:var(--navy)}
 .pcard__body p{font-size:clamp(1rem,1.4vw,1.12rem);line-height:1.6;color:var(--muted);max-width:54ch}
 .pcard:last-child{margin-bottom:0}
+/* cards must always sit lighter than the ground they stack on: stone card on white section (homepage), white card on stone section (service pages) */
+.s-stone .pcard{background:#fff}
 @media(max-width:680px){.pcard{grid-template-columns:1fr;gap:.6rem;top:calc(86px + var(--i)*16px);min-height:0}.pcard__n{font-size:2.6rem}}
 @media(prefers-reduced-motion:reduce){.pcard{position:static}}
 
@@ -1216,4 +1218,11 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .ratetable tbody td{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:0;padding-top:.22rem;padding-bottom:.22rem}
   .ratetable tbody td::before{content:attr(data-label);color:var(--muted);font-size:.86rem;font-weight:500;white-space:nowrap}
   .ratetable caption{display:block;width:100%;padding-bottom:.9rem;letter-spacing:.08em}
+}
+
+/* image heroes: on narrow screens the 90deg wash hid the photo entirely.
+   Vertical scrim + art-directed portrait crop so the room reads. 26 Aug 2026 */
+@media (max-width:760px){
+  .page-hero--img::after{background:linear-gradient(180deg,rgba(6,30,59,.42) 0%,rgba(6,30,59,.72) 42%,rgba(6,30,59,.93) 100%)}
+  .page-hero--img .ph-bg{object-position:52% 62%}
 }
