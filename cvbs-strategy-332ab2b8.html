@@ -321,13 +321,50 @@ footer a{color:var(--teal); text-decoration:none;}
 .fade{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1);}
 .fade.in{opacity:1; transform:none;}
 @media(prefers-reduced-motion:reduce){ .fade{opacity:1; transform:none} .glow{animation:none} html{scroll-behavior:auto} }
+
+/* ===== email marketing (section 9) ===== */
+.mailframe{border-radius:16px; overflow:hidden; border:1px solid var(--line); background:#fff;
+  box-shadow:0 30px 70px -40px rgba(13,34,51,.55);}
+.mailframe .mhead{display:flex; align-items:center; gap:12px; padding:13px 16px; border-bottom:1px solid var(--line); background:#fff;}
+.mailframe .mhead .av{width:34px; height:34px; border-radius:50%; flex:0 0 auto; display:grid; place-items:center;
+  color:#fff; font-size:12px; font-weight:800; background:linear-gradient(135deg,var(--teal),var(--teal-deep));}
+.mailframe .mhead .mw{min-width:0; flex:1;}
+.mailframe .mhead .sub{font-size:14px; font-weight:600; color:var(--ink); letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.mailframe .mhead .frm{font-size:12px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.mailframe .mhead .when{font-size:11.5px; color:var(--muted); flex:0 0 auto;}
+.mailframe .mbody{position:relative; width:100%; height:460px; overflow:hidden; background:#fff;}
+@media(max-width:600px){ .mailframe .mbody{height:360px} }
+.mailframe .mbody img{display:block; width:100%; height:auto;}
+.mailframe .mbody iframe{position:absolute; top:0; left:0; border:0; transform-origin:top left; pointer-events:none; background:#fff;}
+.mailframe .mbody .openover{position:absolute; inset:0; display:block; z-index:2;}
+.mailframe .mbody::after{content:""; position:absolute; left:0; right:0; bottom:0; height:74px; pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.94));}
+.mailframe .badge{position:absolute; left:14px; bottom:14px; z-index:3; background:rgba(13,34,51,.82); color:#fff;
+  font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;}
+.mails3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:26px;}
+@media(max-width:980px){ .mails3{grid-template-columns:1fr; max-width:430px; margin-left:auto; margin-right:auto} }
+.mails3 .mbody{height:430px;}
+.mails3 .mhead .when{display:none;}
+.mailfig{margin:0; min-width:0;}
+.mailfig figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep); text-align:center; margin-top:12px;}
+.prog3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:26px; align-items:start;}
+@media(max-width:900px){ .prog3{grid-template-columns:1fr} }
+.prog3 .lab{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:9px;}
+.prog3 h4{font-size:19px; margin:0 0 10px; font-weight:600; letter-spacing:-.02em;}
+.prog3 ul{list-style:none; margin:0; padding:0;}
+.prog3 li{font-size:14.5px; color:var(--muted); line-height:1.5; padding:10px 0; border-top:1px solid var(--line);}
+.prog3 li b{color:var(--ink); font-weight:600;}
+.lifeline{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin-top:36px;}
+.lifeline span{font-size:13.5px; font-weight:600; padding:9px 14px; border-radius:999px; background:#fff; border:1px solid var(--line); color:var(--ink);}
+.lifeline span.hi{background:rgba(59,201,217,.14); border-color:rgba(59,201,217,.42); color:var(--teal-deep);}
+.lifeline i{font-style:normal; color:var(--teal-deep); font-weight:700; font-size:15px;}
 </style>
 </head>
 <body>
 <div class="progress" id="prog"></div>
 <div class="topbar">
   <div class="brand"><img class="blogo" src="assets/img/logo.png" alt="CVBS"> <small>Digital Strategy</small></div>
-  <div class="steps">Part <b id="cur">1</b> of 12</div>
+  <div class="steps">Part <b id="cur">1</b> of 13</div>
 </div>
 
 <!-- COVER -->
@@ -336,7 +373,7 @@ footer a{color:var(--teal); text-decoration:none;}
   <div class="wrap">
     <span class="tag">For the Directors of CVBS · June 2026</span>
     <h1>The CVBS<br><em>digital strategy</em>.</h1>
-    <p class="sub">A simple plan to make 35 years of reputation work for you online.</p>
+    <p class="sub">A simple plan to make 37 years of reputation work for you online.</p>
     <div class="who">Prepared for <b>Conference Venues &amp; Booking Services</b><br>Brand · Website · Social · Digital systems · Knowledge</div>
   </div>
 </header>
@@ -504,7 +541,7 @@ footer a{color:var(--teal); text-decoration:none;}
     <ul class="points">
       <li><span class="tick">✓</span><div><span class="t">The field splits in two</span><span class="d">Some chase the same briefs you do (Conference National, Conference Venue Essentials). Others compete on technology and reach (VenueNow, Cvent, Karstens).</span></div></li>
       <li><span class="tick">✓</span><div><span class="t">Several already look sharper than you online</span><span class="d">Venue Crew, Karstens and VenueNow all have modern, well-built sites, and Venue Crew runs the same free model with a client portal. Right now yours is the most dated of the serious contenders, though your service is the strongest.</span></div></li>
-      <li><span class="tick">✓</span><div><span class="t">Your relationships are what none of them can copy</span><span class="d">No platform has 35 years of direct relationships with the people who hold the rooms. Your website's only job is to make that impossible to miss.</span></div></li>
+      <li><span class="tick">✓</span><div><span class="t">Your relationships are what none of them can copy</span><span class="d">No platform has 37 years of direct relationships with the people who hold the rooms. Your website's only job is to make that impossible to miss.</span></div></li>
     </ul>
     <div class="takeaway"><b>The point</b><p>The opening is not that they are all behind. It is that your service already leads and your website is the one thing letting the side down. Fix that, and you are the obvious choice.</p></div>
   </div>
@@ -536,7 +573,7 @@ footer a{color:var(--teal); text-decoration:none;}
       <div class="lgarrow">→</div>
       <div class="lg next"><span class="lgtag">Next</span><div class="panel"><img src="assets/img/logo.png" alt="CVBS logo"></div></div>
     </div>
-    <p class="note" style="text-align:center; margin-top:16px">Same name. Same navy and teal. 35 years of equity kept, the mark simply polished for a digital world.</p>
+    <p class="note" style="text-align:center; margin-top:16px">Same name. Same navy and teal. 37 years of equity kept, the mark simply polished for a digital world.</p>
     
   </div>
 </section>
@@ -578,15 +615,137 @@ footer a{color:var(--teal); text-decoration:none;}
   </div>
 </section>
 
-<!-- 8 · DIGITAL SYSTEMS BEHIND THE SCENES -->
+<!-- 9 · EMAIL MARKETING -->
+<section id="s9e" class="tint">
+  <div class="wrap wide fade">
+    <div class="kick"><span class="num">9</span><span class="lbl">Email marketing</span></div>
+    <h2>Email is the one channel you own outright.</h2>
+    <p class="intro">Rankings move and feeds change the rules. Your list doesn't. It is the only place you can reach a client without asking anyone's permission, and right now it is the part of CVBS working hardest for somebody else.</p>
+
+    <div class="mailframe" style="margin-top:38px">
+      <div class="mhead">
+        <span class="av">AJ</span>
+        <span class="mw">
+          <span class="sub">CVBS Venue Review · The Westin Singapore</span>
+          <span class="frm">Anthony Jepson &lt;aj@conferencevenues.com.au&gt;</span>
+        </span>
+        <span class="when">Thursday</span>
+      </div>
+      <div class="mbody">
+        <img src="presentation/assets/edm/cvbs-edm-before.jpg" alt="The current CVBS offer email for The Westin Singapore" loading="lazy">
+        <span class="badge">The EDM you send today</span>
+      </div>
+    </div>
+    <p class="note" style="text-align:center; margin-top:14px">The offer itself is excellent. Four things around it are sending the booking somewhere else.</p>
+
+    <ul class="points">
+      <li><span class="tick">1</span><div><span class="t">The only button goes to the hotel</span><span class="d">"Check Out The Westin Singapore Here" is the one prominent call to action, and it points at the venue's own website. The reader leaves, books direct, and CVBS is not in the transaction. Your own contact details sit underneath it in grey.</span></div></li>
+      <li><span class="tick">2</span><div><span class="t">The offer is two screens down</span><span class="d">A hundred words of hotel brochure copy and three photographs come before the rate. On a phone that is a long scroll before anyone learns the number, and most readers never get there.</span></div></li>
+      <li><span class="tick">3</span><div><span class="t">Nothing in it is personal</span><span class="d">No name, no city, no reference to what the reader is actually planning. It arrives looking like a forwarded flyer rather than a note from someone they know.</span></div></li>
+      <li><span class="tick">4</span><div><span class="t">It is the hotel's email, not yours</span><span class="d">CVBS appears as a thin strip at the very top. The largest thing on the first screen is the venue's name. The reader remembers the hotel, not who sent it.</span></div></li>
+    </ul>
+
+    <div class="chanlabel">The same offers, pointed back at CVBS</div>
+    <p class="note" style="text-align:center; margin:-6px auto 0; max-width:60ch">Three templates, one system. An introduction for anyone who hasn't heard from you in a while, a monthly roundup that holds the inbox between the big offers, and a single-venue email for when one venue gives you something worth the whole send.</p>
+
+    <div class="mails3">
+      <figure class="mailfig">
+        <div class="mailframe">
+          <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">A free pair of hands for your next event</span><span class="frm">Conference Venues</span></span></div>
+          <div class="mbody">
+            <img src="presentation/assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email" loading="lazy">
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-intro-edm.html" target="_blank" rel="noopener" aria-label="Open introduction in a new tab"></a>
+          </div>
+        </div>
+        <figcaption>Introduction</figcaption>
+      </figure>
+      <figure class="mailfig">
+        <div class="mailframe">
+          <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">Three venues, three offers, and the dates they cover</span><span class="frm">Conference Venues</span></span></div>
+          <div class="mbody">
+            <img src="presentation/assets/edm/cvbs-edm-full.jpg" alt="The CVBS monthly offers email" loading="lazy">
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-offers-edm.html" target="_blank" rel="noopener" aria-label="Open monthly roundup in a new tab"></a>
+          </div>
+        </div>
+        <figcaption>Monthly roundup</figcaption>
+      </figure>
+      <figure class="mailfig">
+        <div class="mailframe">
+          <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">Marina Bay from level 32, and what the Westin is offering on it</span><span class="frm">Conference Venues</span></span></div>
+          <div class="mbody">
+            <img src="presentation/assets/edm/cvbs-edm-single-full.jpg" alt="The CVBS single venue email" loading="lazy">
+            <a class="openover" href="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-single-offer-edm.html" target="_blank" rel="noopener" aria-label="Open one venue, one message in a new tab"></a>
+          </div>
+        </div>
+        <figcaption>One venue, one message</figcaption>
+      </figure>
+    </div>
+    <p class="framecap">Tap any one to open the real email full size</p>
+
+    <div class="exlist" style="margin-top:30px">
+      <span>Every link lands on a CVBS page, so the enquiry stays with you</span>
+      <span>The rate sits one screen in, above the description instead of below it</span>
+      <span>A named greeting, and half the sends ask for a reply rather than a click</span>
+      <span>CVBS branded throughout. The venue is the content, not the sender</span>
+      <span>From name is Conference Venues, so the inbox learns the business, not a person</span>
+      <span>Replies land with a real, watched mailbox, because the replies are the leads</span>
+    </div>
+    <p class="note" style="text-align:center; margin-top:20px; max-width:66ch; margin-left:auto; margin-right:auto">No list segmenting, and none needed. "Reply with the city you usually hold events in" is segmentation done by the reader, and every reply is a warm lead sitting in Anthony's inbox.</p>
+
+    <div class="chanlabel">Twelve reasons to be in the inbox</div>
+    <p class="note" style="text-align:center; margin:-6px auto 0; max-width:66ch">Nobody needs a venue finder until they suddenly need one urgently, and there is no way to predict which week that is. So the job of email isn't to find the right person. It is to be there when the trigger fires, with a ten second way to raise a hand. Two sends a month, every month, all ending on the same button.</p>
+
+    <div class="prog3">
+      <div class="card">
+        <div class="lab">Every month</div>
+        <h4>The rhythm</h4>
+        <ul>
+          <li><b>The venue review.</b> We were at this one. What it is really like, what it seats, who it suits</li>
+          <li><b>The offers roundup.</b> Three current offers, and the dates each one covers</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="lab">Whenever it happens</div>
+        <h4>The reasons to send</h4>
+        <ul>
+          <li><b>A single venue offer.</b> When one venue gives CVBS something worth the whole email</li>
+          <li><b>The seasonal deadline.</b> Christmas spaces in August, EOFY in April, conference season in October</li>
+          <li><b>The introduction.</b> For anyone who has gone quiet, or any new list you add</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="lab">A few times a year</div>
+        <h4>The ones that build trust</h4>
+        <ul>
+          <li><b>The case note.</b> One event in six sentences, brief to booking</li>
+          <li><b>The destination edition.</b> One city for 40, for 200 and for 800</li>
+          <li><b>What venues are charging.</b> You see hundreds of quotes. Almost nobody else can write this</li>
+          <li><b>The next twelve months.</b> Sent when calendars and budgets get set</li>
+          <li><b>The tools.</b> The budget calculator and the venue checklist, sent as a gift</li>
+          <li><b>After the event.</b> How did it go, and would you use them again</li>
+          <li><b>Are we still useful?</b> Cleans the list, and reliably produces replies</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lifeline">
+      <span>Discover</span><i>→</i><span>Enquire</span><i>→</i><span>Shortlist</span><i>→</i><span>Book</span><i>→</i><span>The event</span><i>→</i><span class="hi">How did it go?</span><i>→</i><span class="hi">Their next event</span>
+    </div>
+    <p class="note" style="text-align:center; margin-top:16px; max-width:70ch; margin-left:auto; margin-right:auto">The website ends at the brief. The business doesn't. The two sends after an event are the cheapest new business CVBS will ever write, and they are the ones nobody has time to do by hand.</p>
+
+    <div class="takeaway"><b>The point</b><p>Search brings you people who have never heard of you. Your list is full of people who already trust you. Two sends a month keeps CVBS in front of them for the eleven months they don't need a venue, so you are the first name in their head on the week they do.</p></div>
+  </div>
+</section>
+
+<!-- 10 · DIGITAL SYSTEMS BEHIND THE SCENES -->
 <section id="s8" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">9</span><span class="lbl">Invisible A.I.</span></div>
+    <div class="kick"><span class="num">10</span><span class="lbl">Invisible A.I.</span></div>
     <h2>Invisible A.I. Clients never see it. Only your team benefits.</h2>
     <p class="intro">Not a chatbot, not a gimmick. Quiet tools that take the busywork off the team, while the service clients feel stays exactly the same, human.</p>
     <div class="exlist">
-      <span>Draft proposals</span><span>Summarise venue PDFs</span><span>Search 35 years of emails</span><span>Build venue comparison tables</span><span>Write newsletters</span><span>Automate follow-up emails</span><span>Organise venue knowledge</span><span>Draft responses</span><span>Find past concessions</span><span>Recall supplier history</span>
+      <span>Draft proposals</span><span>Summarise venue PDFs</span><span>Search 37 years of emails</span><span>Build venue comparison tables</span><span>Write newsletters</span><span>Automate follow-up emails</span><span>Organise venue knowledge</span><span>Draft responses</span><span>Find past concessions</span><span>Recall supplier history</span>
     </div>
     <p class="note" style="text-align:center; margin-top:28px">All of it running on one searchable knowledge base:</p>
     <div class="kdiag">
@@ -595,7 +754,7 @@ footer a{color:var(--teal); text-decoration:none;}
       <div class="kbox">One shared system · Airtable<small>The whole team, one source of truth</small></div>
     </div>
     <ul class="points">
-      <li><span class="tick">1</span><div><span class="t">Protect 35 years of knowledge</span><span class="d">Every proposal, venue inspection, negotiation and preferred supplier in one place. The value isn't the technology. It's making sure that knowledge is never lost.</span></div></li>
+      <li><span class="tick">1</span><div><span class="t">Protect 37 years of knowledge</span><span class="d">Every proposal, venue inspection, negotiation and preferred supplier in one place. The value isn't the technology. It's making sure that knowledge is never lost.</span></div></li>
       <li><span class="tick">2</span><div><span class="t">Give the team more time with clients</span><span class="d">Proposals, past events, repetitive emails and notes handled quietly in the background. Clients get the same personal service; the team gets close to a full extra person's worth of time each week, without hiring anyone.</span></div></li>
       <li><span class="tick">3</span><div><span class="t">A business that doesn't rely on remembering everything</span><span class="d">Instead of asking Karen, a consultant simply searches one system:</span></div></li>
     </ul>
@@ -622,7 +781,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 11 · WHAT IT'S WORTH -->
 <section id="s10b" class="tint">
   <div class="wrap fade">
-    <div class="kick"><span class="num">10</span><span class="lbl">What it's worth</span></div>
+    <div class="kick"><span class="num">11</span><span class="lbl">What it's worth</span></div>
     <h2>The maths, in your own hands.</h2>
     <p class="intro">Drag the sliders to your real numbers. Watch what a small lift is worth.</p>
     <div class="calc">
@@ -655,7 +814,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <section id="whynow" class="dark">
   <span class="glow a"></span><span class="glow b"></span>
   <div class="wrap fade">
-    <div class="kick"><span class="num">11</span><span class="lbl">Why now</span></div>
+    <div class="kick"><span class="num">12</span><span class="lbl">Why now</span></div>
     <h2>In five years, the first name corporate Australia thinks of.</h2>
     <p class="intro">Four reasons to start this year, not in two.</p>
     <div class="exlist" style="max-width:840px">
@@ -676,7 +835,7 @@ footer a{color:var(--teal); text-decoration:none;}
 <!-- 12 · THE DECISION -->
 <section id="decision" class="tint">
   <div class="wrap fade">
-    <div class="kick"><span class="num">12</span><span class="lbl">The decision</span></div>
+    <div class="kick"><span class="num">13</span><span class="lbl">The decision</span></div>
     <h2>Approve the plan. Pick the direction.</h2>
     <p class="intro">One decision unlocks the whole system.</p>
     <ul class="points">
@@ -710,9 +869,9 @@ footer a{color:var(--teal); text-decoration:none;}
 
   // scale live site embeds to fit their frame, responsively, showing desktop layout
   function fitFrames(){
-    [].slice.call(document.querySelectorAll('.live .view')).forEach(function(v){
+    [].slice.call(document.querySelectorAll('.live .view, .mailframe .mbody')).forEach(function(v){
       var f=v.querySelector('iframe'); if(!f) return;
-      var base=1280, scale=v.clientWidth/base;
+      var base=v.classList.contains('mbody')?640:1280, scale=v.clientWidth/base;
       f.style.width=base+'px';
       f.style.height=Math.ceil(v.clientHeight/scale)+'px';
       f.style.transform='scale('+scale+')';
