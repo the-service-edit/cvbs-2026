@@ -205,9 +205,10 @@
         <input type="hidden" name="subject" value="New venue brief from CVBS website">
         <input type="hidden" name="from_name" value="CVBS Website">
 <input type="hidden" name="Offer" id="offerField">
+<input type="hidden" name="Venue" id="venueField">
 <div id="offerBanner" hidden style="gap:.65rem;align-items:flex-start;background:rgba(59,201,217,.12);border:1px solid #3BC9D9;border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1.5rem;font-size:.95rem;color:#0D2233;line-height:1.45">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#28A8B6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>
-  <span>You are enquiring about the <strong id="offerName"></strong> offer. We will include this with your brief.</span>
+  <span><span id="offerPre">You are enquiring about the </span><strong id="offerName"></strong><span id="offerPost"> offer. We will include this with your brief.</span><span id="offerFilled"></span></span>
 </div>
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
@@ -561,17 +562,98 @@
   })();
 </script>
 <script>
-/* Carry an offer enquiry through from the offers page */
+/* Carry an offer enquiry through from the offers page, and prefill what the offer already tells us */
 (function(){
-  var o=new URLSearchParams(location.search).get('offer');
-  if(!o) return;
-  o=o.replace(/[<>]/g,'').slice(0,120);
-  var set=function(id,fn){var el=document.getElementById(id);if(el)fn(el);};
-  set('offerField',function(el){el.value=o;});
-  set('offerName',function(el){el.textContent=o;});
-  set('offerBanner',function(el){el.hidden=false;el.style.display='flex';});
-  var subj=document.querySelector('input[name="subject"]'); if(subj) subj.value='Offer enquiry: '+o;
-  var notes=document.getElementById('notes'); if(notes && !notes.value) notes.value='I would like to enquire about the '+o+' offer.';
+  var raw=new URLSearchParams(location.search).get('offer');
+  if(!raw) return;
+  raw=raw.replace(/[<>]/g,'').slice(0,120);
+
+  /* One record per live offer. Keys are matched loosely, so both
+     ?offer=Ace%20Hotel%20Sydney and ?offer=ace-hotel-sydney work. */
+  var OFFERS={
+    'acehotelsydney':{
+      label:'Ace Hotel Sydney',
+      location:'Sydney, NSW',
+      venueType:'Boutique / unique space',
+      services:['Conference venue finding'],
+      requirements:['AV / technology'],
+      note:'I saw the Ace Hotel Sydney offer: complimentary AV package and barista coffee for events arriving by 31 August 2026. Please check Brick, Clay or Tyne against my dates.'
+    },
+    'hyattplacemelbournecaribbeanpark':{
+      label:'Hyatt Place Melbourne, Caribbean Park',
+      location:'Melbourne, VIC',
+      venueType:'Hotel',
+      services:['Conference venue finding'],
+      note:'I saw the Hyatt Place Melbourne, Caribbean Park offer: 5,000 World of Hyatt points plus a free extra on new bookings held to 31 August 2026. Please check availability on my dates.'
+    },
+    'hamiltonisland':{
+      label:'Hamilton Island',
+      location:'Other',
+      locationDetail:'Hamilton Island, Whitsundays QLD',
+      venueType:'Resort',
+      services:['Conference venue finding'],
+      note:'I saw the Hamilton Island spring offer: reduced CVBS rates plus value-adds. The released dates are 3 to 16 September, 16 to 20 October and 23 to 31 October 2026. Please check what suits us.'
+    }
+  };
+
+  var key=raw.toLowerCase().replace(/[^a-z0-9]/g,'');
+  var data=OFFERS[key]||null;
+  var label=data?data.label:raw;
+  var filled=[];
+
+  var el=function(id){return document.getElementById(id);};
+  var f;
+  if((f=el('offerField'))) f.value=label;
+  if((f=el('offerName'))) f.textContent=label;
+  var subj=document.querySelector('input[name="subject"]'); if(subj) subj.value='Offer enquiry: '+label;
+
+  if(data){
+    /* Never overwrite something the visitor has already chosen. */
+    var loc=el('location');
+    if(loc&&!loc.value&&data.location){
+      var hit=[].slice.call(loc.options).some(function(o){
+        if(o.value===data.location||o.text===data.location){loc.value=o.value;return true;}
+        return false;});
+      if(hit){
+        loc.dispatchEvent(new Event('change',{bubbles:true}));
+        var detail=el('locationOther');
+        if(detail&&!detail.value&&data.locationDetail){detail.value=data.locationDetail;detail.dispatchEvent(new Event('input',{bubbles:true}));}
+        filled.push(data.locationDetail||data.location);
+      }
+    }
+
+    var vt=el('venueType');
+    if(vt&&!vt.value&&data.venueType){
+      [].slice.call(vt.options).forEach(function(o){if(o.text===data.venueType)vt.value=o.value||o.text;});
+      if(vt.value){vt.dispatchEvent(new Event('change',{bubbles:true}));filled.push('venue type');}
+    }
+
+    var tick=function(name,values,announce){
+      if(!values||!values.length)return;
+      var boxes=[].slice.call(document.querySelectorAll('input[name="'+name+'"]'));
+      if(boxes.some(function(b){return b.checked;}))return;
+      boxes.forEach(function(b){
+        if(values.indexOf(b.value)>-1){b.checked=true;b.dispatchEvent(new Event('change',{bubbles:true}));if(announce)filled.push(announce);}
+      });
+    };
+    tick('Service',data.services,null);
+    tick('Requirements',data.requirements,'the AV requirement');
+  }
+
+  var notes=el('notes');
+  if(notes&&!notes.value){
+    notes.value=data?data.note:'I would like to enquire about the '+label+' offer.';
+    notes.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+
+  var hint=el('offerFilled');
+  if(hint&&filled.length){
+    hint.textContent=' We have pre-filled '+
+      (filled.length>1?filled.slice(0,-1).join(', ')+' and '+filled[filled.length-1]:filled[0])+
+      '. Change anything that is not right.';
+  }
+
+  if((f=el('offerBanner'))){f.hidden=false;f.style.display='flex';}
 })();
 </script>
 <script>
@@ -606,23 +688,62 @@
   }
   if(accom==='1'){var a=document.getElementById('accom'); if(a){a.value='Yes, some delegates'; a.dispatchEvent(new Event('change',{bubbles:true}));}}
   var n=document.getElementById('notes');
-  if(n&&!n.value){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
+  if(n&&!n.value&&!p.get('venue')&&!p.get('filters')){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
 })();
 </script>
 <script>
-/* Carry a named venue through from a destination venue index row */
+/* Carry a named venue through from a featured card or a venue index row */
 (function(){
   var p=new URLSearchParams(location.search);
   var venue=p.get('venue'); if(!venue) return;
-  venue=venue.replace(/[<>]/g,'').slice(0,120);
-  var dest=(p.get('dest')||'').replace(/[<>]/g,'').slice(0,80);
+  var clean=function(v,n){return v?v.replace(/[<>]/g,'').slice(0,n||120):'';};
+  venue=clean(venue);
+  var dest=clean(p.get('dest'),80);
+  var el=function(id){return document.getElementById(id);};
+  var filled=[];
+
   var subj=document.querySelector('input[name="subject"]');
   if(subj) subj.value='Venue enquiry: '+venue;
-  var n=document.getElementById('notes');
-  if(n){
-    n.value='From the '+(dest?dest+' ':'')+'venue index: I would like availability and a rate for '+venue+
-      (dest?', plus any comparable options in '+dest:'')+'.';
+  var vf=el('venueField'); if(vf) vf.value=venue;
+
+  /* Nothing here overwrites a value the visitor has already entered. */
+  var loc=el('location');
+  if(loc&&dest){
+    if(!loc.value){
+      var norm=function(v){return (v||'').split(',')[0].trim().toLowerCase();};
+      [].slice.call(loc.options).some(function(o){
+        if(!o.value) return false;
+        if(norm(o.value)===norm(dest)){loc.value=o.value;loc.dispatchEvent(new Event('change',{bubbles:true}));return true;}
+        return false;});
+    }
+    if(loc.value&&loc.selectedIndex>-1) filled.push(loc.options[loc.selectedIndex].text);
   }
+
+  var svc=[].slice.call(document.querySelectorAll('input[name="Service"]'));
+  if(svc.length&&!svc.some(function(b){return b.checked;})){
+    svc.forEach(function(b){
+      if(b.value==='Conference venue finding'){
+        b.checked=true;b.dispatchEvent(new Event('change',{bubbles:true}));filled.push('conference venue finding');
+      }});
+  }
+
+  var n=el('notes');
+  if(n&&!n.value){
+    n.value='I would like availability and a rate for '+venue+
+      (dest?', plus any comparable options in '+dest:'')+'.';
+    n.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+
+  var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost'),hint=el('offerFilled');
+  if(pre) pre.textContent='You are enquiring about ';
+  if(nm) nm.textContent=venue;
+  if(post) post.textContent='. We will include this with your brief.';
+  if(hint&&filled.length){
+    hint.textContent=' We have pre-filled '+
+      (filled.length>1?filled.slice(0,-1).join(', ')+' and '+filled[filled.length-1]:filled[0])+
+      '. Change anything that is not right.';
+  }
+  var ban=el('offerBanner'); if(ban){ban.hidden=false;ban.style.display='flex';}
 })();
 </script>
 <script>
@@ -630,18 +751,31 @@
 (function(){
   var p=new URLSearchParams(location.search);
   var f=p.get('filters'); if(!f) return;
-  var clean=function(v){return v?v.replace(/[<>]/g,'').slice(0,400):'';};
+  var clean=function(v,n){return v?v.replace(/[<>]/g,'').slice(0,n||400):'';};
   f=clean(f);
   var matched=clean(p.get('matched'));
-  var dest=clean(p.get('dest')).slice(0,80);
+  var dest=clean(p.get('dest'),80);
+  var el=function(id){return document.getElementById(id);};
+
   var subj=document.querySelector('input[name="subject"]');
   if(subj) subj.value='Venue index enquiry'+(dest?': '+dest:'');
-  var n=document.getElementById('notes');
-  if(n){
+  var n=el('notes');
+  if(n&&!n.value){
     n.value='From the '+(dest?dest+' ':'')+'venue index. I filtered for: '+f+'.'+
       (matched?' That returned: '+matched+'.':'')+
       ' Please check availability on my dates and come back with rates.';
+    n.dispatchEvent(new Event('input',{bubbles:true}));
   }
+
+  var loc=el('location');
+  var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost'),hint=el('offerFilled');
+  if(pre) pre.textContent='You have sent us your ';
+  if(nm) nm.textContent=(dest?dest+' ':'')+'venue index filters';
+  if(post) post.textContent='. We will include them with your brief.';
+  if(hint&&loc&&loc.value&&loc.selectedIndex>-1){
+    hint.textContent=' We have pre-filled '+loc.options[loc.selectedIndex].text+'. Change anything that is not right.';
+  }
+  var ban=el('offerBanner'); if(ban){ban.hidden=false;ban.style.display='flex';}
 })();
 </script>
 </body>
