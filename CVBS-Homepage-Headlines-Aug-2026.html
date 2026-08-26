@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Homepage headline options | CVBS working document</title>
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/venue-hero-1600.webp?v=202608131600">
+<link rel="stylesheet" href="assets/css/site.css?v=202608261415">
+<style>
+/* Working-document chrome only. Nothing here ships. */
+.hl-bar{position:fixed;left:0;right:0;bottom:0;z-index:120;background:rgba(6,30,59,.93);backdrop-filter:blur(14px);
+  border-top:1px solid rgba(255,255,255,.14);color:#EAF1F4;padding:.7rem clamp(1rem,3vw,1.6rem)}
+.hl-bar__in{max-width:1400px;margin-inline:auto;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.hl-bar__lab{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#3BC9D9;flex:none}
+.hl-chips{display:flex;gap:.4rem;flex-wrap:wrap;flex:1;min-width:240px}
+.hl-chip{width:2.1rem;height:2.1rem;border-radius:8px;border:1px solid rgba(255,255,255,.24);background:transparent;
+  color:#EAF1F4;font-weight:600;font-size:.86rem;cursor:pointer;transition:.18s cubic-bezier(.16,.84,.44,1)}
+.hl-chip:hover{background:rgba(255,255,255,.12)}
+.hl-chip[aria-current="true"]{background:#28A8B6;border-color:#28A8B6;color:#fff}
+.hl-chip[data-control="1"]{border-style:dashed}
+.hl-now{font-size:.86rem;color:rgba(234,241,244,.82);flex:none;max-width:44ch}
+.hl-now b{color:#fff;font-weight:600}
+.hl-keys{font-size:.72rem;color:rgba(234,241,244,.5);flex:none}
+body.hl-live{padding-bottom:5.4rem}
+body.hl-live .hero{min-height:calc(100svh - 5.4rem)}
+body.hl-bare .hl-bar,body.hl-bare .hl-sheet,body.hl-bare .site-header,body.hl-bare .scroll{display:none}
+body.hl-bare{padding-bottom:0}
+body.hl-bare .hero__inner{padding-top:2.6rem}
+
+.hl-sheet{background:var(--navy-deep);color:#EAF1F4;padding-block:clamp(3.5rem,8vh,6rem)}
+.hl-sheet h2{font-size:clamp(1.7rem,1.2rem+1.6vw,2.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.1;color:#fff}
+.hl-sheet h3{font-size:1.02rem;font-weight:600;color:#fff}
+.hl-rec{border:1px solid rgba(59,201,217,.4);background:rgba(59,201,217,.08);border-radius:16px;padding:clamp(1.4rem,3vw,2.2rem);margin-bottom:2.6rem}
+.hl-rec p{color:rgba(234,241,244,.86);max-width:78ch}
+.hl-rec p+p{margin-top:.9rem}
+.hl-grid{display:grid;gap:1rem}
+@media(min-width:900px){.hl-grid{grid-template-columns:repeat(2,1fr)}}
+.hl-card{border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:1.5rem 1.6rem 1.7rem;background:rgba(255,255,255,.035);
+  cursor:pointer;transition:.2s cubic-bezier(.16,.84,.44,1);text-align:left;color:inherit;font:inherit;width:100%;display:block}
+.hl-card:hover{background:rgba(255,255,255,.075);border-color:rgba(59,201,217,.5);transform:translateY(-3px)}
+.hl-card[aria-current="true"]{border-color:#3BC9D9;background:rgba(59,201,217,.1)}
+.hl-card__no{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#3BC9D9;display:flex;gap:.7rem;align-items:center}
+.hl-card__no span{color:rgba(234,241,244,.5);letter-spacing:.08em}
+.hl-card__line{font-size:clamp(1.15rem,1rem+.55vw,1.5rem);font-weight:600;letter-spacing:-.025em;line-height:1.18;color:#fff;margin:.75rem 0 1rem}
+.hl-card__line em{font-style:normal;color:#3BC9D9}
+.hl-card dl{display:grid;grid-template-columns:auto 1fr;gap:.45rem .9rem;font-size:.9rem;line-height:1.5}
+.hl-card dt{color:#3BC9D9;font-weight:600;white-space:nowrap;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding-top:.15rem}
+.hl-card dd{color:rgba(234,241,244,.82)}
+.hl-tag{display:inline-block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.28rem .6rem;border-radius:999px;margin-left:auto}
+.hl-tag--rec{background:#28A8B6;color:#fff}
+.hl-tag--ctl{background:rgba(255,255,255,.14);color:rgba(234,241,244,.8)}
+.hl-tag--risk{background:rgba(224,179,65,.18);color:#E0B341;border:1px solid rgba(224,179,65,.35)}
+.hl-note{margin-top:2.8rem;border-top:1px solid rgba(255,255,255,.13);padding-top:2rem;display:grid;gap:1.6rem}
+@media(min-width:900px){.hl-note{grid-template-columns:repeat(2,1fr)}}
+.hl-note p{color:rgba(234,241,244,.8);font-size:.95rem;max-width:62ch}
+.hl-note h3{margin-bottom:.5rem}
+.hl-phone{margin-top:2.8rem;border-top:1px solid rgba(255,255,255,.13);padding-top:2rem}
+.hl-phone__frame{width:390px;max-width:100%;height:720px;border:10px solid #061E3B;border-radius:34px;overflow:hidden;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.8);background:#0A2C52;margin-top:1.2rem}
+.hl-phone iframe{width:390px;height:700px;border:0;display:block}
+.hl-eyebrow{display:inline-flex;align-items:center;gap:.85rem;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:#3BC9D9;margin-bottom:1rem}
+.hl-eyebrow::before{content:"";width:34px;height:2px;border-radius:2px;background:#3BC9D9}
+.hl-wm{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#E0B341;flex:none}
+</style>
+</head>
+<body class="hl-live">
+<header class="site-header site-header--overlay">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="CVBS home">
+      <img src="assets/img/logo.png" alt="CVBS, Conference Venues and Booking Services" width="45" height="38">
+    </a>
+    <nav class="nav-links" aria-label="Primary"><a href="how-it-works.html">How it works</a><a href="services.html">Services</a><a href="destinations.html">Destinations</a><a href="results.html">Results</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+    <div class="nav-cta"><a class="btn btn--teal" href="submit-a-brief.html">Start your brief</a></div>
+  </div>
+</header>
+
+<main id="main">
+<header class="hero hero--center" id="top">
+  <div class="hero__media" aria-hidden="true"><div class="kb"></div></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <div class="lede">
+      <div class="eyebrow" id="hl-eyebrow">Independent venue finders &middot; since 1989</div>
+      <h1 id="hl-h1">The right venue isn't searched.<br>It's <em>sourced</em>.</h1>
+      <p class="subhead subhead--bold" id="hl-sub"></p>
+      <div class="cta-row">
+        <a href="submit-a-brief.html" class="btn btn--teal">Start planning your event <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="how-it-works.html" class="btn btn--ghost-light">See how it works</a>
+      </div>
+      <div class="hero-proofs">
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> A shortlist of venues we can speak for.</span>
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Independent, and always on your side.</span>
+        <span class="pf"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.4 7.7-8 9-4.6-1.3-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg> Four people, and relationships built since 1989.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hl-sheet" id="sheet"><div class="wrap">
+  <div class="hl-eyebrow">Homepage headline, August 2026</div>
+  <h2>Nine ways to say the same thing.<br>Only one of them is worth changing for.</h2>
+
+  <div class="hl-rec" style="margin-top:2rem">
+    <h3 style="font-size:1.15rem;margin-bottom:.9rem">The recommendation: option 3.</h3>
+    <p><strong style="color:#fff">"The right venue isn't found. It's known."</strong> One word changes, and the whole position changes with it. "Sourced" is the word CVBS uses about itself. It is a supplier's word, and every venue finder in the country claims it. "Known" is the word the buyer would use about the value they are actually getting, and it is the one thing a search engine, a directory and an AI answer cannot do at any price.</p>
+    <p>It also keeps the sentence shape the brand already owns, which was the reason to keep the original line in the first place. The socials, the deck and the brand spec all still work. Nothing has to be re-shot. And it points directly at the firsthand position, without making a claim the site cannot yet prove.</p>
+    <p style="color:rgba(234,241,244,.6);font-size:.9rem">Everything below is presented so the team can see the sacrifice each option demands. The eyebrow, buttons, photograph and three proof lines are held constant in every version, so the only variable on screen is the headline and the paragraph under it.</p>
+  </div>
+
+  <div class="hl-eyebrow" style="margin-top:.6rem">The nine, and what each one costs</div>
+  <div class="hl-grid" id="hl-cards"></div>
+
+  <div class="hl-phone">
+    <div class="hl-eyebrow">On a phone, where most of them will read it</div>
+    <p style="color:rgba(234,241,244,.8);max-width:62ch">Two-sentence headlines and long ones wrap to four or five lines here. This is the test that kills lines, not the desktop view.</p>
+    <div class="hl-phone__frame"><iframe id="hl-phone-frame" title="Mobile preview" src="CVBS-Homepage-Headlines-Aug-2026.html?opt=3&amp;bare=1"></iframe></div>
+  </div>
+
+  <div class="hl-note">
+    <div>
+      <h3>The weakest part of this exercise</h3>
+      <p>Every one of these lines is a promise about knowing venues firsthand, and the site can only prove it in Sydney. The venue index has a "seen" field on every venue and it is still empty. Until Karen fills the site visit log, options 2, 7 and 8 are writing cheques the site cannot cash. Pick a line the evidence can carry today, or fill the log first and then pick.</p>
+    </div>
+    <div>
+      <h3>What a competitor would do</h3>
+      <p>Options 4 and 6. "Your event deserves more than a search result" and "tell us about your event, we will tell you where it belongs" are lines any venue finder in Australia could put up tomorrow, because they claim nothing that has to be true. They read well and they defend nothing.</p>
+    </div>
+    <div>
+      <h3>What feels generic</h3>
+      <p>The "deserves more than" construction. It is the single most used shape in service marketing, it flatters the reader instead of telling them something, and it puts the competitor in the headline rather than CVBS. Mel's instinct underneath it is right, which is to speak to the organiser about their event. Options 3, 5 and 6 keep that instinct without borrowing the construction.</p>
+    </div>
+    <div>
+      <h3>What would make it impossible to ignore</h3>
+      <p>Not the headline. The proof line under it. "A search engine has never been in the room" becomes unanswerable the day the homepage can say who walked the room and when. That is a data problem, not a copy problem, and it is worth more than any of these nine sentences.</p>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<div class="hl-bar" id="hl-bar">
+  <div class="hl-bar__in">
+    <span class="hl-bar__lab">Headline</span>
+    <span class="hl-wm">Working doc</span>
+    <div class="hl-chips" id="hl-chips"></div>
+    <span class="hl-now" id="hl-now"></span>
+    <span class="hl-keys">&larr; &rarr; to cycle</span>
+  </div>
+</div>
+
+<script>
+const SUB_BASE = "Conference Venues and Booking Services is an independent venue finding service, and since 1989 we have been sourcing conference venues, event spaces and group accommodation for Australian organisations.";
+
+const OPTIONS = [
+  {
+    n: 1, tag: "Control", tagClass: "hl-tag--ctl", name: "Current line, live today",
+    h1: "The right venue isn't searched.<br>It's <em>sourced</em>.",
+    flat: "The right venue isn't searched. It's sourced.",
+    sub: SUB_BASE + " Tell us about your event and we will find the setting that suits it.",
+    claims: "That venue finding is a craft, not a lookup.",
+    sacrifice: "None, which is the problem. It is a definition, not a promise, and it is about CVBS rather than the reader.",
+    breaks: "\"Sourced\" is the industry's word for itself. An organiser does not go to work wanting something sourced."
+  },
+  {
+    n: 2, tag: "Sharpest", tagClass: "hl-tag--risk", name: "The firsthand claim, stated hard",
+    h1: "A search engine has never been <em>in the room</em>.",
+    flat: "A search engine has never been in the room.",
+    sub: SUB_BASE + " We put forward the places we can speak for, and we tell you the drawbacks as well as the pitch.",
+    claims: "That CVBS has stood in the venues it recommends. It is the only line here a competitor cannot copy by Friday.",
+    sacrifice: "It commits the whole business to the site visit log. Every page after it has to carry evidence of who was there.",
+    breaks: "The moment an organiser asks \"which rooms have you been in?\" and the answer is Sydney only. Do not run this until the log is filled."
+  },
+  {
+    n: 3, tag: "Recommended", tagClass: "hl-tag--rec", name: "Same shape, the buyer's word",
+    h1: "The right venue isn't found.<br>It's <em>known</em>.",
+    flat: "The right venue isn't found. It's known.",
+    sub: SUB_BASE + " Tell us about your event and we will tell you where it should be held, and why.",
+    claims: "That knowledge, not searching, is what CVBS sells. It implies firsthand without over-claiming it.",
+    sacrifice: "Almost nothing. Continuity with the socials and the deck is kept, which is why the original line was kept in the first place.",
+    breaks: "Only if the pages behind it fail to demonstrate knowing. The destination rewrites and the index already do."
+  },
+  {
+    n: 4, tag: null, tagClass: "", name: "Mel's line, present tense",
+    h1: "Your event deserves <em>more</em> than a search result.",
+    flat: "Your event deserves more than a search result.",
+    sub: SUB_BASE + " Tell us about your event and we will find the setting that suits it.",
+    claims: "Nothing. It flatters the reader and criticises the alternative.",
+    sacrifice: "Ownability. Any of the six competitors could run this line unchanged.",
+    breaks: "\"Deserves more than\" is the most worn shape in service marketing. It also puts Google in the headline instead of CVBS."
+  },
+  {
+    n: 5, tag: null, tagClass: "", name: "The division of labour",
+    h1: "You know the event you want to run.<br>We know <em>where it should happen</em>.",
+    flat: "You know the event you want to run. We know where it should happen.",
+    sub: SUB_BASE + " Tell us the shape of your event and we will do the rest, at no cost to you.",
+    claims: "A clean split of expertise. Warm, across-the-table, exactly the voice in the lock.",
+    sacrifice: "Length. It is a two-line headline on desktop and a five-line one on a phone.",
+    breaks: "On mobile. Check the phone preview before anyone falls in love with it."
+  },
+  {
+    n: 6, tag: null, tagClass: "", name: "The invitation",
+    h1: "Tell us about your event.<br>We will tell you <em>where it belongs</em>.",
+    flat: "Tell us about your event. We will tell you where it belongs.",
+    sub: SUB_BASE + " One of our team reads every brief personally and comes back with venues worth considering, usually within 48 hours.",
+    claims: "That the process starts with a conversation. \"Belongs\" is the best word on this page.",
+    sacrifice: "It turns the hero into a CTA, and the brief bar directly underneath already does that job.",
+    breaks: "Two calls to action stacked on top of each other. One of them has to give way."
+  },
+  {
+    n: 7, tag: null, tagClass: "hl-tag--risk", name: "The uncomfortable truth",
+    h1: "Every venue looks good <em>online</em>.",
+    flat: "Every venue looks good online.",
+    sub: "That is why we go and see them. " + SUB_BASE + " We put forward the places we can speak for, and tell you the drawbacks as well as the pitch.",
+    claims: "That photography is not evidence. Every organiser who has been burned by a room will stop on this.",
+    sacrifice: "It opens on a negative, and it says something slightly rude about the venues CVBS is paid by.",
+    breaks: "In the venue relationship. Worth asking Karen whether she would be comfortable with a hotel GM reading it."
+  },
+  {
+    n: 8, tag: null, tagClass: "", name: "The position, verbatim",
+    h1: "We only put forward venues we can <em>speak for</em>.",
+    flat: "We only put forward venues we can speak for.",
+    sub: SUB_BASE + " Tell us about your event and we will come back with somewhere worth considering, and with the reasons why.",
+    claims: "Exactly what the site already says it stands for. No gap between headline and behaviour.",
+    sacrifice: "Drama. It is honest and slightly flat, and it starts with \"we\" rather than the reader.",
+    breaks: "It reads as a policy, not a promise. Better as the line under the headline than as the headline."
+  },
+  {
+    n: 9, tag: null, tagClass: "hl-tag--risk", name: "The stake",
+    h1: "Two hundred people will walk into a room <em>you chose</em>.",
+    flat: "Two hundred people will walk into a room you chose.",
+    sub: "Choosing it should not come down to guesswork. " + SUB_BASE + " Tell us about your event and we will find the setting that suits it.",
+    claims: "That the decision carries personal risk, which is the truest thing on this page about how the buyer actually feels.",
+    sacrifice: "Warmth. It leads with the reader's fear, and CVBS's voice is hospitality, not insurance.",
+    breaks: "If the rest of the page does not immediately relieve the pressure it creates. Included so the team can see the range, not because it should ship."
+  }
+];
+
+const params = new URLSearchParams(location.search);
+const bare = params.get("bare") === "1";
+if (bare) document.body.classList.add("hl-bare");
+
+const elH1 = document.getElementById("hl-h1");
+const elSub = document.getElementById("hl-sub");
+const elNow = document.getElementById("hl-now");
+const elChips = document.getElementById("hl-chips");
+const elCards = document.getElementById("hl-cards");
+const elFrame = document.getElementById("hl-phone-frame");
+let current = parseInt(params.get("opt") || "3", 10);
+if (!OPTIONS.some(o => o.n === current)) current = 3;
+
+function render(n, scroll) {
+  const o = OPTIONS.find(x => x.n === n);
+  if (!o) return;
+  current = n;
+  elH1.innerHTML = o.h1;
+  elSub.textContent = o.sub;
+  if (elNow) elNow.innerHTML = "<b>" + o.n + " of " + OPTIONS.length + ".</b> " + o.name;
+  document.querySelectorAll(".hl-chip").forEach(c => c.setAttribute("aria-current", c.dataset.n == n ? "true" : "false"));
+  document.querySelectorAll(".hl-card").forEach(c => c.setAttribute("aria-current", c.dataset.n == n ? "true" : "false"));
+  if (elFrame) elFrame.src = "CVBS-Homepage-Headlines-Aug-2026.html?opt=" + n + "&bare=1";
+  if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+  if (!bare) history.replaceState(null, "", "?opt=" + n);
+}
+
+if (!bare) {
+  OPTIONS.forEach(o => {
+    const b = document.createElement("button");
+    b.className = "hl-chip";
+    b.dataset.n = o.n;
+    if (o.n === 1) b.dataset.control = "1";
+    b.textContent = o.n;
+    b.title = o.flat;
+    b.addEventListener("click", () => render(o.n, true));
+    elChips.appendChild(b);
+  });
+
+  OPTIONS.forEach(o => {
+    const c = document.createElement("button");
+    c.className = "hl-card";
+    c.dataset.n = o.n;
+    c.innerHTML =
+      '<div class="hl-card__no">Option ' + o.n + '<span>' + o.name + '</span>' +
+      (o.tag ? '<span class="hl-tag ' + o.tagClass + '">' + o.tag + '</span>' : '') + '</div>' +
+      '<div class="hl-card__line">' + o.h1.replace(/<br>/g, " ") + '</div>' +
+      '<dl><dt>Claims</dt><dd>' + o.claims + '</dd>' +
+      '<dt>Costs</dt><dd>' + o.sacrifice + '</dd>' +
+      '<dt>Breaks</dt><dd>' + o.breaks + '</dd></dl>';
+    c.addEventListener("click", () => render(o.n, true));
+    elCards.appendChild(c);
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") render(current === OPTIONS.length ? 1 : current + 1, false);
+    if (e.key === "ArrowLeft") render(current === 1 ? OPTIONS.length : current - 1, false);
+  });
+}
+
+render(current, false);
+
+const hdr = document.querySelector(".site-header");
+if (hdr) {
+  const onScroll = () => hdr.classList.toggle("scrolled", window.scrollY > 40);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+</script>
+</body>
+</html>

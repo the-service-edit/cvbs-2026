@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>CVBS presentation audit &middot; August 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#3BC9D9;--teal-deep:#1B7480;--navy:#0A2C52;--navy-deep:#061E3B;--stone:#EEF6F7;--line:#D6E7E9;--ink:#0D1F2D;--muted:#5F656C;--red:#B4322B;--amber:#8A6410;--green:#1E6B4F}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:0 30px}
+header{background:var(--navy-deep);color:#fff;padding:66px 0 54px;margin-bottom:0}
+header .eyebrow{text-transform:uppercase;letter-spacing:.24em;font-size:11.5px;font-weight:600;color:var(--teal);margin-bottom:18px}
+header h1{font-size:clamp(31px,4.4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.06;max-width:20ch}
+header p{margin-top:20px;max-width:74ch;color:rgba(255,255,255,.74);font-size:17px}
+header .meta{margin-top:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-size:clamp(23px,2.7vw,33px);font-weight:700;letter-spacing:-.025em;line-height:1.14;margin-bottom:8px}
+h2 .n{color:var(--teal-deep);font-variant-numeric:tabular-nums;margin-right:12px}
+h3{font-size:19px;font-weight:600;letter-spacing:-.015em;margin:30px 0 8px}
+h4{font-size:15.5px;font-weight:600;margin:20px 0 5px}
+p{margin-bottom:13px;max-width:86ch}
+.lede{font-size:17.5px;color:var(--muted);max-width:80ch;margin-bottom:26px}
+ul,ol{margin:0 0 15px 21px;max-width:86ch}
+li{margin-bottom:8px}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.6px;background:var(--stone);padding:2px 6px;border-radius:4px}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:5px;vertical-align:2px;margin-right:9px}
+.t-fix{background:#DFF0E8;color:var(--green)}
+.t-you{background:#FBE9E8;color:var(--red)}
+.t-dec{background:#FBF1DA;color:var(--amber)}
+.box{border:1px solid var(--line);border-radius:13px;padding:22px 24px;margin:18px 0;background:#fff}
+.box.hot{border-color:#F0C9C6;background:#FDF7F7}
+.box.warm{border-color:#EDD9AE;background:#FDFAF3}
+.box.cool{border-left:3px solid var(--teal-deep);border-radius:0 11px 11px 0;background:var(--stone);border-top:0;border-right:0;border-bottom:0;padding:18px 22px}
+.box h4{margin-top:0}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.was{color:var(--muted)}
+td.now{color:var(--navy);font-weight:500}
+.rule{font-size:13.5px;color:var(--muted);margin-top:6px}
+.kick{font-size:20px;font-weight:600;letter-spacing:-.015em;line-height:1.42;color:var(--navy);max-width:70ch;margin:6px 0 20px}
+.small{font-size:13px;color:var(--muted)}
+footer{background:var(--stone);padding:40px 0;font-size:13.5px;color:var(--muted)}
+del{color:var(--muted);text-decoration-color:#C8615A}
+ins{text-decoration:none;color:var(--navy);font-weight:500;background:#E6F5F7;padding:0 3px;border-radius:3px}
+@media print{header{background:#fff;color:var(--ink)}header h1,header .meta,header p{color:var(--ink)}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Internal &middot; not for the client</div>
+    <h1>Presentation audit, and what to do before the room.</h1>
+    <p>Thirty-five slides read four ways: every factual claim, every line of copy against the voice lock, every slide measured and screenshotted at four screen sizes, and the whole thing read once as Karen would read it.</p>
+    <div class="meta">19 August 2026 &middot; CVBS-Website-Presentation &middot; 35 slides</div>
+  </div>
+</header>
+
+<section>
+<div class="wrap">
+<h2><span class="n">01</span>The verdict</h2>
+<p class="kick">The deck is a beautiful account of what you made. It is not yet an account of what CVBS gets. Twenty of thirty-five slides describe a website Karen can open in a browser. None of them mentions money.</p>
+<p>That is the whole finding. Everything below is either a defect I have already fixed or a consequence of that one gap. The craft is not in question and it will not be what decides the meeting. What decides the meeting is whether Karen can answer, out loud, three questions the deck currently leaves blank: what did the last twelve months of my money buy, what does this cost, and what happens if it does not work.</p>
+<p>The second finding, and the more urgent one commercially: <strong>the deck as written arms her to cannibalise you.</strong> Four separate lines told her the website is finished, runs itself, is built once, and that social only got a facelift. Read in sequence they compose her counter-offer for her: pause the social for a year and put that money into the build. I have rewritten all four. The defence itself still needs building, and it is in section four.</p>
+
+<h3>How to read the tags</h3>
+<p><span class="tag t-fix">Fixed</span> Already changed in <code>index.html</code> and <code>short.html</code>. Committed to your folder and to <code>presentation/</code>. You still need to push.</p>
+<p><span class="tag t-dec">Your call</span> A real finding, but the fix changes strategy or needs a fact only you or Karen has.</p>
+<p><span class="tag t-you">Costs you the meeting</span> Do this before you walk in.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">02</span>What I already fixed</h2>
+<p class="lede">Twenty-eight changes across both deck files. Nothing here changed an argument, only its accuracy, its legibility or its voice.</p>
+
+<h3>Claims that were wrong or exposed</h3>
+<table>
+<thead><tr><th style="width:26%">Where</th><th style="width:37%">Was</th><th style="width:37%">Now</th></tr></thead>
+<tbody>
+<tr><td><strong>Slide 29</strong><br><span class="small">Why the answer changes</span></td>
+<td class="was">"capacity answers no listing page provides"</td>
+<td class="now">The retracted exclusivity claim had survived in softened wording, and it is still false. Cvent publishes 6,229 Australian venues with a nine-setup matrix. Rewritten to the defensible version: the capacity table with thirty-seven years of judgement on the same page.</td></tr>
+<tr><td><strong>Slide 17</strong><br><span class="small">Venue Finder</span></td>
+<td class="was">"Sixteen destination pages now answer exactly that, with real venues, published capacities"</td>
+<td class="now">Only Sydney has the index. I checked: <code>venue-finder-sydney.html</code> is 111KB with the data island, Melbourne, Cairns and Hobart are 29KB templates with no capacity data at all. Now says Sydney is built out in full and is the pattern the other fifteen fill in.</td></tr>
+<tr><td><strong>Slide 28</strong><br><span class="small">Comparison table</span></td>
+<td class="was">Row header "Speed". Source note named The Venue Agency's commission model with no citation.</td>
+<td class="now">Row is now "What comes back, and when", and the source note states plainly that the two figures are not measuring the same thing. Competitor name removed.</td></tr>
+<tr><td><strong>Slide 25</strong><br><span class="small">Email templates</span></td>
+<td class="was"><code>karen@conferencevenues.com</code> in the intro email mock</td>
+<td class="now"><code>.com.au</code>, matching the other two. It renders in the click-to-open reader, so it was visible.</td></tr>
+<tr><td><strong>Slide 27</strong><br><span class="small">What the site does</span></td>
+<td class="was">"it costs the client nothing... within the first screen of every page"</td>
+<td class="now">"the organiser pays nothing because the venue pays the commission... on the first screen of almost every page". Two fixes: "costs you nothing" appeared four times with no disclosure of how CVBS is paid, and "every page" contradicted slide 20's "nearly every page".</td></tr>
+<tr><td><strong>Slide 23</strong><br><span class="small">LinkedIn</span></td>
+<td class="was">"1.91:1 for banners and link previews"</td>
+<td class="now">1.91:1 is the link preview. LinkedIn banners are 4:1. A marketer in the room catches that.</td></tr>
+<tr><td><strong>Slide 31</strong><br><span class="small">Search and AI</span></td>
+<td class="was">Cvent's finding on room specs quoted with no source on that slide</td>
+<td class="now">Its own source note added. Also flagged the Cvent sample as global, which it is.</td></tr>
+</tbody>
+</table>
+
+<h3>The four lines that were arming her</h3>
+<table>
+<thead><tr><th style="width:26%">Where</th><th style="width:37%">Was</th><th style="width:37%">Now</th></tr></thead>
+<tbody>
+<tr><td><strong>Slide 27</strong></td><td class="was">"Six things the site now does <strong>on its own</strong>."</td><td class="now">"Six things the site does that the old one could not."</td></tr>
+<tr><td><strong>Slide 32</strong></td><td class="was">"<strong>The website is built once.</strong>"</td><td class="now">"The website is the destination. It has no traffic of its own, which is what the other two are for."</td></tr>
+<tr><td><strong>Slide 32</strong></td><td class="was">"<strong>Built once</strong>, working for CVBS for years"</td><td class="now">"Every city added keeps earning. Every month skipped is a page that never existed."</td></tr>
+<tr><td><strong>Slide 22</strong></td><td class="was">"The channels are already active... <strong>What is new is the look.</strong>"</td><td class="now">Rewritten. That sentence valued twelve months and $26,000 of your work at "a look", in front of the person paying for it.</td></tr>
+</tbody>
+</table>
+
+<h3>Voice: you were marking down your own paid work</h3>
+<p>Seven lines told Karen, in her own meeting, that the social you are being paid to run has been misaligned, borrowed from another platform, and pointing at dead ends. All seven rewritten. The worst three:</p>
+<table>
+<thead><tr><th style="width:26%">Where</th><th style="width:37%">Was</th><th style="width:37%">Now</th></tr></thead>
+<tbody>
+<tr><td><strong>Slide 32</strong></td><td class="was">"Each post linking to a page on the new site rather than <strong>a dead end</strong>"</td><td class="now">"Every post now has somewhere to send people: the destination, the venue, the offer"</td></tr>
+<tr><td><strong>Slide 3</strong></td><td class="was">"all three <strong>finally</strong> look and behave like the same company"</td><td class="now">"all three point at the same place, so the work each one does adds to the other two"</td></tr>
+<tr><td><strong>Slide 3</strong></td><td class="was">"Already in market, <strong>now aligned</strong>"</td><td class="now">"Already running, now with somewhere to send people"</td></tr>
+</tbody>
+</table>
+<p class="rule">Also fixed: "the templates re-compose rather than get resized... instead of borrowed from another one" (that was you describing your own LinkedIn output as borrowed), "every month is faster than the last" (Karen is not buying your production speed), and "The annual kick off" to "kick-off".</p>
+
+<h3>Layout: the deck was silently cutting content off</h3>
+<p>Every slide is a fixed-height box with <code>overflow:hidden</code>, so anything taller than the screen disappeared without a scrollbar. At 1440 by 810, which is a MacBook in fullscreen, this was live:</p>
+<ul>
+<li><strong>Slide 25</strong> lost 72px: the eyebrow entirely, the top half of the headline sliced through mid-letter, and the "click any email to open it full size" hint gone. At 1366 by 768 it lost 107px.</li>
+<li><strong>Slide 28</strong> lost the eyebrow and the entire VenueNow source note. The one slide where you cite your sources was cutting the citation off.</li>
+<li><strong>Slide 15</strong> lost "Have we read this right? Tell us who is missing and we will build for them next." That is the most engaging line on the slide.</li>
+<li><strong>Slide 23</strong> lost two of the four LinkedIn chips.</li>
+<li>Eight slides collided with the fixed bottom bar. The comparison table's last row was sitting on top of "THE MARKET".</li>
+</ul>
+<p>Fixed three ways: content now scrolls instead of vanishing, a compact layout variant is applied to the nine densest slides, and every slide clears the bottom bar. At 1440 by 810 the whole deck now fits except one slide by 26px of whitespace. Before this pass, seven slides were losing real content.</p>
+
+<h3>Contrast</h3>
+<p>Roughly half of every headline in the deck was below the accessibility floor. The teal <code>#28A8B6</code> on white measures 2.85:1 where 4.5:1 is required for text and 3:1 for large text, and on the stone background it drops to 2.60:1. On a projector, which is always worse than a monitor, the coloured half of your headlines was the hardest thing in the room to read.</p>
+<p>Changed <code>--teal-deep</code> to <code>#1B7480</code> (5.45:1 on white, 4.97:1 on stone) and <code>--muted</code> body copy to <code>#666C74</code>. It is the same teal family, deeper. <strong>If you hate it, it is one line in the CSS to revert.</strong> Screenshots are in the chat.</p>
+
+<h3>Mobile</h3>
+<p>Two slides had content permanently unreachable on a phone, not just below the fold but horizontally off-screen with no way to scroll to it. Slide 14's page grid stayed four columns at 390px wide, so the Venue Finder and Start Your Brief cards, the two conversion pages, were entirely invisible. Slide 25's three email frames formed a 1,496px row of which 46% of the first frame was visible. Both fixed. Worth knowing because that is the version anyone reads when you send the link.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">03</span>The new slide: three channels, three jobs</h2>
+<p class="lede">Slide 21, opening the social section. Facebook and Instagram for the organisers, Karen's LinkedIn for the judgement, the CVBS page for the credential check.</p>
+<p>This is the strongest new revenue argument in the deck and it is worth understanding why, because you should say it out loud in the room rather than letting the slide carry it.</p>
+<div class="box cool">
+<h4>It creates a new line without touching the old one</h4>
+<p>Instagram and Facebook are framed as continuing exactly as they are. The two LinkedIn channels are the part that is not running yet. That means the slide asks for <em>more</em> budget rather than reallocated budget, and it makes the existing retainer look like the foundation the new work sits on rather than the pot the new work could come out of. It is a quiet piece of anti-cannibalisation.</p>
+</div>
+<div class="box cool">
+<h4>Karen's LinkedIn is the one thing a marketplace cannot copy, and it is currently a repost button</h4>
+<p>The whole competitive argument of slides 28 and 29 is that CVBS is four people who have stood in the room. Karen's personal LinkedIn is the only channel where that person actually speaks. Right now it mirrors Instagram. The slide names that plainly and offers the fix: you draft from what she already knows, she approves, it goes out in her name. She writes nothing.</p>
+</div>
+<div class="box cool">
+<h4>The empty company page connects straight to the AI slides</h4>
+<p>The last bullet on the third column is "this is also the page an assistant reads when someone asks it whether CVBS is worth calling". That is deliberate. It ties the social section to slides 30 and 31 so the two are not read as separate asks, and it makes an empty LinkedIn page a visible commercial hole rather than a housekeeping item.</p>
+</div>
+<p><span class="tag t-dec">Your call</span> The slide says Karen's LinkedIn "today it mirrors Instagram, and it is the one channel that should not". That is the only sentence in the deck that criticises something Karen does personally. It is true and it is the reason the slide works, but read it back and decide whether you want to say it or have it on screen.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">04</span>The four things that will cost you the meeting</h2>
+<p class="lede">None of these are fixable by editing a sentence. Ranked by what Karen does with them.</p>
+
+<div class="box hot">
+<h4><span class="tag t-you">One</span>There is no evidence in thirty-five slides</h4>
+<p>Not one follower count, one open rate, one click, one enquiry, one traffic figure. The words KPI, ROI and metric do not appear in the file. "Analytics" appears once, on slide 33, in the future tense.</p>
+<p>Karen's first real question is <em>"we already pay you $26,000 a year, what has that returned?"</em> and the deck's own answer, on slide 22, was that it bought a look. She will ask it. There is nothing on screen to answer with.</p>
+<p><strong>What to do, and it is one hour of work:</strong> open Mailchimp and pull the open and click rate on Anthony's last Westin send. Open whatever analytics exist and pull one traffic number, however unflattering. Low is better for you, because low is the gap you are closing. Then look up monthly Australian search volume for "conference venues sydney" and "conference venue finder". If real demand exists and CVBS ranks nowhere, that single line turns the venue index from a content argument into a revenue argument. Send me whatever you find and I will build the slide.</p>
+</div>
+
+<div class="box hot">
+<h4><span class="tag t-you">Two</span>She will say "let's pause the social to pay for the website"</h4>
+<p>She will say it warmly, as though she is solving your problem. The four lines that wrote it for her are now fixed, but the defence does not exist. Right now it lives in one clause on slide 32.</p>
+<p><strong>What to build:</strong> one slide, immediately after "what happens every month" and immediately before you name the number. Two columns of equal weight. Left, build it and keep the engine running. Right, pause the social to pay for the build, shaded in the same faded grey the deck already uses for the "before" flow on slide 7. The right column ends with: a better-looking website, and the same enquiries.</p>
+<p>The line that lands it, in your own words in the room: <em>the website is the shopfront, social and email are the street, and pausing the street to pay for the shopfront saves $26,000 and buys a shop nobody walks past.</em></p>
+<p>Say the word and I will build it. It needs one number from you: what share of visits to the current site came from social or email last quarter.</p>
+</div>
+
+<div class="box hot">
+<h4><span class="tag t-you">Three</span>Key person risk, and it is on screen in monospace</h4>
+<p>Slide 19's browser chrome reads <code>the-service-edit.github.io/cvbs-2026</code>. Karen is looking at her company's new website living on your personal GitHub, under your agency's name. She will ask who owns the site, the domain, the Mailchimp account, the Canva files that slide 22 promises her, and what happens to all of it if this ends. Then Anthony will ask the quieter version: what happens if you are unavailable for three months.</p>
+<p>The deck does not acknowledge that either question exists. For a sole operator asking a thirty-seven-year-old family business for $68,000 in year one, this is <em>the</em> objection, and silence on it reads as not having thought about it.</p>
+<p><strong>One slide, one hour.</strong> Domain, hosting, repository, Mailchimp, Canva, analytics, all in CVBS's name, listed. Plus one line on what happens if you are not available. It is pure reassurance and it costs you nothing to give.</p>
+</div>
+
+<div class="box hot">
+<h4><span class="tag t-you">Four</span>The ask is a feeling</h4>
+<p>Thirty-five slides built to close $32,000 plus $36,000 a year end on <em>"We would love to keep building it with you."</em> There is no price, no options, no first step, no review point, no exit.</p>
+<p>You chose no pricing deliberately and I am not arguing with that. But no pricing means Karen anchors on the only number in her head, which is the $3,000 she paid in 2012. And an open-ended commitment with no exit is exactly the shape of thing a family business defers.</p>
+<p><strong>Shrink the yes.</strong> Replace slide 33's twelve-month roadmap with ninety days: real dates, who does what including what Karen and Chantelle owe you, a fixed fee for the ninety days, one review meeting at day ninety, and CVBS's explicit right to stop there. Then show the twelve months as what happens if it works. She will not commit to $68,000 in the room. She will commit to ninety days, and ninety days that hit their numbers is a twelve-month client.</p>
+</div>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">05</span>The order is wrong</h2>
+<p class="lede">The single highest return in this document, and it costs thirty minutes with no new content.</p>
+<p>The best slide in the deck is 28, the CVBS versus marketplaces versus doing-it-yourself table. It is the only place in thirty-five slides where you demonstrate work Karen could not have done herself, about her market, with a citation. It flatters her by making her four people the product. It is the reason to hire an agency rather than a web developer.</p>
+<p><strong>It sits at 28 of 35.</strong> Seventy-nine percent of the way in, after twenty slides of website architecture, at the point where attention is worst.</p>
+<div class="box warm">
+<h4>Open on it</h4>
+<p>Cover, then the competitive table, then the Westin email teardown (slide 25: <em>"the reader leaves, books direct, and CVBS is not in the transaction"</em>, which is a live revenue leak happening this month), and only then "here is what we built about it".</p>
+<p>The meeting stops being a design review and becomes a threat briefing with a solution attached. Every website slide after it becomes evidence instead of decoration.</p>
+</div>
+<h3>What to cut to make room</h3>
+<table>
+<thead><tr><th style="width:14%">Slide</th><th style="width:30%">What it is</th><th>Why it goes</th></tr></thead>
+<tbody>
+<tr><td><strong>2</strong></td><td>"Before we look at what changed"</td><td>One sentence. That is a spoken transition, not a slide.</td></tr>
+<tr><td><strong>6</strong></td><td>A brochure, not a starting point</td><td>Reuses the same old-homepage screenshot already shown full-page on slide 4. The old site appears three times. Once is enough in front of the woman who paid for it.</td></tr>
+<tr><td><strong>8</strong></td><td>Six principles</td><td>CLARITY, DISCOVERY, TRUST, GUIDANCE, CONVERSION, MOBILE. Not one word is about venue finding. It could be pasted into a pitch for a dentist. Slide 27 restates the same six as outcomes.</td></tr>
+<tr><td><strong>14</strong></td><td>Page by page</td><td>Eight cards times four fields is thirty-two text zones on one screen. Physically unreadable at presentation distance, and slide 13's diagram already makes the point.</td></tr>
+<tr><td><strong>34</strong></td><td>Bigger picture</td><td>Literally the same diagram component as slide 13 with the hub relabelled, twenty slides later.</td></tr>
+</tbody>
+</table>
+<p class="rule">Five slides, 14% of the deck, removable without losing a single argument. That buys the room back for the evidence slide, the two-paths slide, the ownership slide and the ninety-day slide, which is a straight swap of decoration for commercial content.</p>
+<h3>The other long trough</h3>
+<p>Slides 11 to 16 are six consecutive slides of website architecture. Slide 12 is the worst: nine stepper buttons each carrying "what it is / why it exists / what it should achieve", roughly 450 words. Nobody clicks nine. They click two and you narrate the other seven. The live site is in the room on slide 19. Six slides describing a website you can open in a browser is showing your working, not selling.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">06</span>Claims register: your call</h2>
+<p class="lede">Things I did not change because the fix needs a fact only you or Karen has.</p>
+
+<h3><span class="tag t-you">Costs you the meeting</span>The offers page contradicts the deck</h3>
+<p>Two of the three offers on the live site are expired: Hyatt Place Essendon Fields had a book-by of 30 June, and the Kimpton Margot $110 day delegate rate ran April to June. The deck says "current, negotiated venue offers", "live, not historical" and "what opportunities are available right now" across slides 12, 14 and 20. <strong>Slide 19 embeds the live site with an open-in-a-tab link.</strong> If anyone scrolls to the offers page during the meeting, the deck and the site contradict each other while your words are still on screen. Get new dates from both venues or cut back to one live offer.</p>
+
+<h3><span class="tag t-you">Costs you the meeting</span>Pre-run the assistant test on slide 31</h3>
+<p>The chip at the bottom of slide 31 dares the room to ask an assistant to shortlist a Sydney conference venue. It is the strongest moment in that section and it is live ammunition. The new site is not on <code>conferencevenues.com.au</code> yet, so CVBS will almost certainly not be named. That is fine, it is the point, but you need to have run it first and decided how you frame the result. If a competitor comes back by name, you want to have seen that before Karen does.</p>
+
+<h3><span class="tag t-dec">Your call</span>Named pharmaceutical clients, on a published URL</h3>
+<p>Slide 15 names Medtronic, Pfizer, Novo Nordisk and Bausch &amp; Lomb. I checked and they are already on CVBS's own live site and About page, so this is their published client list, not something you invented. But the deck is published on <em>your</em> domain, unlisted rather than private, and it names four regulated-sector clients alongside a competitor critique. Worth one sentence with Karen confirming she is comfortable, or swap to sector descriptors.</p>
+
+<h3><span class="tag t-dec">Your call</span>Who agreed to 48 hours?</h3>
+<p>"The 48-hour shortlist promise" appears on slides 16, 20 and 28, and it is published on the live site. That is a service level commitment made by you on behalf of four people who have to hit it. Anthony will notice. Confirm with Karen that 48 hours is the promise CVBS will actually make, or soften it to "usually" everywhere.</p>
+
+<h3><span class="tag t-dec">Your call</span>Will the venues wear it?</h3>
+<p>Slide 25's whole argument is "every link lands on a CVBS page, so the enquiry stays with CVBS", and slide 24 takes the Westin's own email apart. CVBS's business is built on venue relationships. Nobody in this deck has asked whether the hotels supplying those co-op offers will accept being intermediated out of their own email. Karen will know the answer instantly. Ask her before the slide is on screen, not after.</p>
+
+<h3><span class="tag t-dec">Your call</span>The background photographs</h3>
+<p>Still unresolved from the last checklist. The source files were named <code>ChatGPT_Image_...</code>. If someone asks "which venue is that?", the answer needs to exist. You are pitching a deck whose central argument is that real people who have stood in the room beat generated answers. Generated hero imagery inside that argument is a risk worth ten minutes.</p>
+
+<h3><span class="tag t-dec">Your call</span>"Six post types, each a full carousel"</h3>
+<p>Slide 22 promises six full carousels and shows six cover designs. If the interior slides are not built, that is a deliverable overclaim sitting in a deck you are using to sell a retainer. Either build them or say "six post formats".</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">07</span>Voice: what is left</h2>
+<p class="lede">The self-criticism is fixed. What remains is a register problem, and it is systemic rather than line by line.</p>
+<p><strong>"Rather than" appears twenty times.</strong> That is the deck's verbal tic and it is the reason the whole thing reads like a comparison document instead of a conversation. "Actually" appears fourteen times, which reads defensive. "Every" thirty-seven times. Ten separate assertions of "since 1989" or "thirty-seven years".</p>
+<p><strong>Three headline patterns are each used five or more times.</strong> Number plus noun ("Three parts", "Six limitations", "Six audiences", "Six things", "Twelve reasons", "Three in four") ten times, by which point the audience is counting the counting. Negation flips ("A brochure, not a starting point", "Four people, not a filter", "A reply, not a notification") seven times, three of them on one slide. "Every X..." five times.</p>
+<p><strong>Twenty-two question marks.</strong> Slide 11 has seven rhetorical questions in a row, slide 14 has eight more. Even voiced as the organiser, at that density it is a device rather than Karen talking.</p>
+<div class="box cool">
+<h4>The deck talks about the website far more than it talks about CVBS's business</h4>
+<p>Count the sentences whose subject is a page, a template, a section or a send, against the sentences whose subject is an organiser or a venue. The first group wins comfortably. Slide 15 and slides 28 and 29 are the only stretches that consistently pass the across-the-table test, because they are about who is booking and why. They are the model for everything else.</p>
+</div>
+<h3>The five weakest sentences, with replacements</h3>
+<table>
+<thead><tr><th style="width:12%">Slide</th><th style="width:44%">Now</th><th style="width:44%">Instead</th></tr></thead>
+<tbody>
+<tr><td><strong>12</strong></td><td class="was">"discovery is brought forward so visitors can move from inspiration straight into relevant exploration... turn passive browsing into a journey with a next step"</td><td class="now">"Someone who knows they want the Gold Coast but not much else can start there, on the first screen, and be looking at real rooms a click later."</td></tr>
+<tr><td><strong>14</strong></td><td class="was">"Convert intent into a conversation with the least possible friction."</td><td class="now">"Someone who is ready to talk can tell us about their event in about two minutes, and knows what happens after they press send."</td></tr>
+<tr><td><strong>27</strong></td><td class="was">"New destinations, venues, offers, content and campaigns all have a natural home waiting for them."</td><td class="now">"When CVBS adds Cairns, or a new venue in Perth, or an offer worth telling people about, there is already a page shaped for it. Nothing has to be rebuilt to make room."</td></tr>
+<tr><td><strong>32</strong></td><td class="was">"Each post linking to a page on the new site rather than a dead end"</td><td class="now">Fixed. The fuller version if you want it: "The organiser who liked a Hunter Valley post on Tuesday can be reading about the rooms on Wednesday."</td></tr>
+<tr><td><strong>23</strong></td><td class="was">"The templates re-compose rather than get resized"</td><td class="now">Fixed. "LinkedIn is where the people who sign off on a conference actually sit, so these are drawn square from the start."</td></tr>
+</tbody>
+</table>
+<p class="rule">Slide 12 and slide 14 together are seventeen cards of specification, both built on a three-field template. Back to back they are exactly the listing failure the voice lock names. If only one survives, keep 14 and cut 12 to three or four sections narrated in prose.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<h2><span class="n">08</span>The next three hours, in order</h2>
+<ol>
+<li><strong>Push.</strong> The deck files are updated in your folder and in <code>presentation/</code>. Nothing is live until you commit and push.</li>
+<li><strong>Fix the offers page.</strong> New dates from Hyatt Place and Kimpton Margot, or cut back to Hamilton Island alone. Then tell me and I will re-shoot the two EDM screenshots so the deck and the site agree. <span class="small">45 minutes</span></li>
+<li><strong>Pull one number.</strong> Mailchimp open and click rate on the last Westin send. That is the highest value hour in your day and it unlocks the evidence slide. <span class="small">1 hour</span></li>
+<li><strong>Run the assistant query yourself.</strong> "Shortlist a Sydney conference venue for 400 people." Screenshot what comes back. <span class="small">5 minutes</span></li>
+<li><strong>Reorder.</strong> Move slide 28 to position 3, slide 25 to position 4, cut slides 2, 6, 8, 14 and 34. Tell me and I will do it. <span class="small">30 minutes of mine</span></li>
+<li><strong>Decide the number, the first step and the follow-up</strong> before you sit down, not in the room. There is no pricing on screen, so the close is entirely on you.</li>
+<li><strong>Run the whole deck end to end</strong> on the machine and screen you will present from. Fullscreen with F, arrow through all thirty-five, click every scroll pane. Slide 19 needs internet.</li>
+</ol>
+<div class="box warm">
+<h4>And the thing that would actually close it</h4>
+<p>Walk in with month one already done. September's social made, next week's EDM built and ready to send, and Karen's first LinkedIn post drafted and sitting in her inbox for approval. You are then not asking them to buy a retainer. You are asking them not to stop something that is already moving.</p>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<p>Audit run 19 August 2026 against <code>CVBS-Website-Presentation/index.html</code> and <code>short.html</code> at 35 and 21 slides. Layout measured at 1920&times;1080, 1600&times;900, 1440&times;810, 1366&times;768 and 390&times;844. Contrast ratios calculated against WCAG 2.1 AA. Site claims checked against the working files in the project folder.</p>
+</div>
+</footer>
+
+</body>
+</html>

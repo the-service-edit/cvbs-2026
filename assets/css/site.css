@@ -1257,8 +1257,8 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   /* 2. Short subhead on phones. The long identity sentence stays in
         the DOM for crawlers and answer engines, it just does not eat
         eight lines of a 393px screen. */
-  .sh-lg{display:none}
-  .sh-sm{display:inline}
+  .hero .sh-lg{display:none}
+  .hero .sh-sm{display:inline}
   .hero .subhead{margin-top:.85rem;font-size:1rem;line-height:1.5}
   .hero .subhead--bold{font-weight:500}
 
@@ -1275,8 +1275,8 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   /* 4. Proofs stack left-aligned as a block, optically centred, so
         the three lines share one left edge instead of ragging. */
   .hero--center .hero-proofs{flex-direction:column;align-items:flex-start;
-    width:max-content;max-width:100%;margin-inline:auto;margin-top:1.15rem;gap:.6rem}
-  .hero-proofs .pf{font-size:.86rem;gap:.5rem;align-items:flex-start;line-height:1.35}
+    width:100%;margin-top:1.15rem;gap:.6rem;text-align:left}
+  .hero-proofs .pf{font-size:clamp(.78rem,3.4vw,.9rem);gap:.5rem;align-items:flex-start;line-height:1.35}
   .hero-proofs .pf svg{width:19px;height:19px;margin-top:1px}
 
   /* 5. The card lifts off the hero on desktop. On a phone the hero is
@@ -1291,4 +1291,26 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .value-row{grid-template-columns:1fr;gap:.95rem}
   .vi b{font-size:.95rem}
   .vi span{font-size:.86rem;line-height:1.4}
+}
+
+/* 7. Short-form subhead is phone-only. The long identity sentence is
+      the default everywhere else, and stays in the DOM on phones. */
+.sh-sm{display:none}
+
+/* 8. The brief card lifts up to 56px into the hero. When hero content
+      is taller than the viewport, `align-items:center` split the
+      overflow top and bottom, eating the padding that was meant to
+      keep the card off the copy: the last proof line was cropped at
+      1024, 1280 and 1440 wide. `safe center` centres when it fits and
+      falls back to start when it does not, so the bottom padding is
+      always honoured. */
+.hero__inner{align-items:safe center}
+@media(min-width:641px){
+  .hero--center .hero__inner{padding-bottom:clamp(4.5rem,7vh,6rem)}
+}
+
+/* 9. On a 375px phone the header CTA wrapped to two lines and crowded
+      the menu button. Tighten it below 400px so it stays one line. */
+@media(max-width:400px){
+  .site-header .nav-cta .btn{padding:.78rem 1rem;font-size:.88rem}
 }
