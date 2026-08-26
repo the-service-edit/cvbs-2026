@@ -14,9 +14,9 @@
 @font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/inter-latin-600-normal.woff2) format('woff2')}
 @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/inter-latin-700-normal.woff2) format('woff2')}
 :root{
-  --teal:#3BC9D9; --teal-deep:#28A8B6; --navy:#0A2C52; --navy-deep:#061E3B;
+  --teal:#3BC9D9; --teal-deep:#1B7480; --navy:#0A2C52; --navy-deep:#061E3B;
   --blue:#0366C6; --stone:#EEF6F7; --stone-deep:#DFEFF1; --line:#D6E7E9;
-  --ink:#0D1F2D; --muted:#6E747B; --gold:#E0B341; --white:#fff;
+  --ink:#0D1F2D; --muted:#666C74; --gold:#E0B341; --white:#fff;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--navy-deep)}
@@ -177,6 +177,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .dark .flow .step{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:#fff}
 .dark .flow .arr{color:var(--teal)}
 .flow.faded .step{background:transparent;color:var(--muted);border-style:dashed}
+.dark .flow.faded .step{color:rgba(255,255,255,.72)}
 
 /* video underlay statement slides */
 .vwrap{position:absolute;inset:0;overflow:hidden}
@@ -317,12 +318,6 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .pad.tight .card{padding:20px 22px 19px;border-radius:12px}
 .pad.tight .card p{font-size:13px;line-height:1.56}
 .pad.tight .card h3{font-size:clamp(16px,1.35vw,19px);margin-bottom:6px}
-.pad.tight .mcol{gap:16px}
-.pad.tight .mcol .m{padding:20px 19px 19px;gap:8px}
-.pad.tight .m h3{font-size:16px}
-.pad.tight .m .lab{margin-bottom:2px}
-.pad.tight .m li{font-size:12.9px;line-height:1.46}
-.pad.tight .askchip{margin-top:14px}
 .pad.tight .card .num{font-size:10px;letter-spacing:.16em;margin-bottom:9px}
 .pad.tight .k .kv{font-size:clamp(24px,2.5vw,34px)}
 .pad.tight .klist{gap:0}
@@ -332,6 +327,55 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 .pad.tight .k .kl{font-size:10.5px;letter-spacing:.105em;max-width:31ch;margin-top:6px}
 .pad.tight .askchip{margin-top:16px;padding:9px 18px;font-size:13px}
 .pad.tight .srcnote{margin-top:12px;font-size:10.5px}
+/* ---- .tight, continued: components used on the densest slides ---- */
+.pad.tight h2{font-size:clamp(26px,3.05vw,41px)}
+.pad.tight .eyebrow{margin-bottom:16px;font-size:11px;letter-spacing:.2em}
+.pad.tight .mcol{gap:14px}
+.pad.tight .mcol .m{padding:20px 19px 19px;border-radius:13px;gap:8px}
+.pad.tight .mcol .m h3{font-size:17px}
+.pad.tight .mcol .m li{font-size:12.6px;line-height:1.46;padding-left:17px}
+.pad.tight .mcol .m li::before{top:6px;width:6px;height:6px}
+.pad.tight .mcol .m ul{gap:6px}
+.pad.tight .mcol .m .lab{font-size:10px;letter-spacing:.17em}
+.pad.tight .cmp{font-size:13px;margin-top:14px}
+.pad.tight .cmp th,.pad.tight .cmp td{padding:9.5px 13px}
+.pad.tight .cmp tbody th{font-size:12.5px}
+.pad.tight .chip{font-size:12.2px;padding:7px 13px}
+.pad.tight .grid{gap:14px}
+.pad.tight .dcard .im{height:126px}
+.pad.tight .dcard .tx{padding:13px 15px}
+.pad.tight .dcard .tx p{font-size:11.8px}
+.pad.tight .pcard{padding:16px;gap:8px}
+.pad.tight .pcard .row{font-size:11.8px}
+.pad.tight .jz{gap:16px}
+.pad.tight .jz .j{padding:19px}
+.pad.tight .jz li{font-size:12.6px;padding:5.5px 0 5.5px 20px}
+.pad.tight .small{font-size:12.6px}
+.pad.tight .lifecycle .s{font-size:12px}
+
+@media (min-width:861px) and (max-height:880px){
+  .pad.tight .browser .view{height:min(52vh,470px)!important}
+  .pad.tight .phone .view{height:min(52vh,460px)!important}
+  .pad.tight .cmp{font-size:12.4px;margin-top:11px}
+  .pad.tight .cmp th,.pad.tight .cmp td{padding:7.4px 12px}
+  .pad.tight .srcnote{margin-top:9px}
+  .pad.tight .lifecycle .s{font-size:11.4px;padding:7px 12px}
+}
+
+/* ---- fixed-height slides used to CLIP overflowing content silently.
+   The pad now scrolls instead, and always clears the HUD. ---- */
+@media (min-width:861px){
+  .slide > .pad, .slide > .vcontent{max-height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent}
+  .dark > .pad, .dark > .vcontent{scrollbar-color:rgba(255,255,255,.24) transparent}
+  .slide > .pad::-webkit-scrollbar, .slide > .vcontent::-webkit-scrollbar{width:6px}
+  .slide > .pad::-webkit-scrollbar-thumb, .slide > .vcontent::-webkit-scrollbar-thumb{background:rgba(0,0,0,.16);border-radius:4px}
+  .dark > .pad::-webkit-scrollbar-thumb, .dark > .vcontent::-webkit-scrollbar-thumb{background:rgba(255,255,255,.22)}
+  .slide > .pad{padding-bottom:max(58px,min(7vh,64px))}
+}
+@media (min-width:861px) and (max-height:900px){
+  .slide > .pad{padding-top:min(4.2vh,40px);padding-bottom:max(54px,min(4.2vh,40px))}
+  .pad.tight{padding-top:min(3.6vh,34px);padding-bottom:max(52px,min(3.6vh,34px))}
+}
 @media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
 
 /* ============================================================================
@@ -398,6 +442,8 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   .openbtn{padding:12px 20px;font-size:13px;margin-top:18px}
   .askchip{font-size:12.5px;padding:10px 15px}
   .srcnote{font-size:10.5px}
+  .pgrid{grid-template-columns:1fr}
+  .emailrow{flex-direction:column;align-items:center!important}
   .pad.tight{padding:34px 22px 44px}
   .pad.tight .klist{flex-direction:column;gap:20px;margin-bottom:26px!important}
   .pad.tight .klist .k{border-right:0;margin-right:0;padding:0}
@@ -487,10 +533,10 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   <div class="pad">
     <div class="eyebrow">What this project actually is</div>
     <h2 style="margin-bottom:18px">Three parts, <span class="accent">working as one</span>.</h2>
-    <p class="lede" style="max-width:80ch;margin-bottom:30px">A website is where people land. It is not what brings them there, and it is not what keeps CVBS in mind between events. Social has been doing that job for a while now. What changes from here is that all three finally look and behave like the same company, and feed the same destination.</p>
+    <p class="lede" style="max-width:80ch;margin-bottom:30px">A website is where people land. It is not what brings them there, and it is not what keeps CVBS in mind between events. Social has been doing that job for a while now, and it will keep doing it. What changes from here is that all three point at the same place, so the work each one does adds to the other two instead of stopping where it lands.</p>
     <div class="grid" style="grid-template-columns:repeat(3,1fr)">
       <div class="card"><div class="num">01 &middot; THE WEBSITE</div><h3>Somewhere worth arriving</h3><p>Rebuilt from the ground up. A site that explains the service in the first screen, shows the venues rather than describing them, and turns interest into a brief instead of a downloaded form.</p></div>
-      <div class="card"><div class="num">02 &middot; SOCIAL</div><h3>Already in market, now aligned</h3><p>The channels are running and the audience is there. From here every post carries the same navy, teal and typeface as the website, so organisers who meet CVBS on Instagram recognise it when they land on the site.</p></div>
+      <div class="card"><div class="num">02 &middot; SOCIAL</div><h3>Already running, now with somewhere to send people</h3><p>The channels are active and the audience is built. From here every post carries the same navy, teal and typeface as the website, so an organiser who has been following CVBS on Instagram for months arrives on the site already knowing who they are dealing with.</p></div>
       <div class="card"><div class="num">03 &middot; EMAIL</div><h3>A reason to come back</h3><p>Rebuilt on the same system. Venue offers arriving with people who are actively planning, and every link pointing back at CVBS rather than at the hotel.</p></div>
     </div>
     <p class="small" style="margin-top:26px;opacity:.72">The rest of this presentation is those three, in that order.</p>
@@ -639,7 +685,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 11 · HOMEPAGE ANATOMY ================= -->
 <section class="slide stone" data-sec="Homepage">
-  <div class="pad">
+  <div class="pad tight">
     <div class="eyebrow">Section by section</div>
     <h2 style="margin-bottom:24px">Every section has a <span class="accent-d">purpose</span>. Click through them.</h2>
     <div class="anat">
@@ -710,12 +756,12 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 15 &middot; WHO IT IS BUILT FOR ================= -->
 <section class="slide stone" data-sec="Who it is for">
-  <div class="pad">
+  <div class="pad tight">
     <div class="eyebrow">Who this is built for</div>
     <h2 style="margin-bottom:14px">Six audiences, and <span class="accent-d">six pages already built for them</span>.</h2>
     <p class="lede" style="max-width:86ch;margin-bottom:26px">These are not personas we invented. Each one already has its own page on the new site, and most of them are visible in the client list CVBS has built since 1989.</p>
     <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="card"><div class="num">01 &middot; SALES CONFERENCES</div><h3>The annual kick off</h3><p>A hundred and fifty to five hundred people, dates locked a year ahead, and a room that has to hold energy for two days. Usually run by a marketing or events lead who wants real options quickly.</p></div>
+      <div class="card"><div class="num">01 &middot; SALES CONFERENCES</div><h3>The annual kick-off</h3><p>A hundred and fifty to five hundred people, dates locked a year ahead, and a room that has to hold energy for two days. Usually run by a marketing or events lead who wants real options quickly.</p></div>
       <div class="card"><div class="num">02 &middot; MEDICAL AND PHARMACEUTICAL</div><h3>Compliance comes first</h3><p>Medtronic, Pfizer, Novo Nordisk and Bausch &amp; Lomb are all in the client list. This audience works to rules about venue, catering and hospitality that most organisers never encounter, and needs someone who already knows them.</p></div>
       <div class="card"><div class="num">03 &middot; ASSOCIATIONS</div><h3>A committee that changes each year</h3><p>Accommodation, meeting space, exhibition and catering, negotiated together, often for an organiser doing it for the first and only time.</p></div>
       <div class="card"><div class="num">04 &middot; GOVERNMENT</div><h3>Value has to be demonstrable</h3><p>Not just felt. An independent shortlist, with rates negotiated on their behalf and the reasoning written down, is exactly the evidence a procurement process asks for.</p></div>
@@ -776,7 +822,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
     <div>
       <div class="eyebrow">The biggest evolution</div>
       <h2>The Venue Finder meets people <span class="accent">where their search begins</span>.</h2>
-      <p class="lede" style="margin-top:20px">Nobody searches for "venue sourcing agency". They search for conference venues in Sydney. Sixteen destination pages now answer exactly that, with real venues, published capacities, precinct guidance and local knowledge, before anyone is asked to enquire.</p>
+      <p class="lede" style="margin-top:20px">Nobody searches for "venue sourcing agency". They search for conference venues in Sydney. Sixteen destination pages now answer exactly that. Sydney is built out in full, with real rooms and published capacities read off each venue's own charts, and it is the pattern the other fifteen fill in, a city at a time.</p>
       <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
         <div class="chip"><i></i>Gives useful information first, asks for the enquiry second</div>
         <div class="chip"><i></i>Sydney leads: real rooms, real numbers, filterable by size and setup</div>
@@ -861,12 +907,54 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   </div>
 </section>
 
+<!-- ================= 18b &middot; SOCIAL: THREE CHANNELS, THREE JOBS ================= -->
+<section class="slide stone" data-sec="Social">
+  <div class="pad tight">
+    <div class="eyebrow">Beyond the website</div>
+    <h2 style="margin-bottom:12px">Three channels, and <span class="accent-d">three different jobs</span>.</h2>
+    <p class="lede" style="max-width:96ch;margin-bottom:24px">At the moment all three are carrying the same content, and one of them is carrying nothing at all. They are not the same audience. The person scrolling Instagram on a Sunday and the person who has to justify a venue choice to a board are two different people, thinking about two different things, and they should not be reading the same post.</p>
+    <div class="mcol">
+      <div class="m">
+        <div class="lab">Instagram and Facebook</div>
+        <h3>Where organisers fall for a venue</h3>
+        <ul>
+          <li>Running now, with an audience that has been built up over years</li>
+          <li>Venues, offers, destinations and site visits, the things people stop scrolling for</li>
+          <li>The job is familiarity, so CVBS is already a name when someone finally needs one</li>
+          <li>Continues exactly as it is, now with somewhere to send people</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">Karen&rsquo;s LinkedIn</div>
+        <h3>Where the judgement lives</h3>
+        <ul>
+          <li>Today it mirrors Instagram, and it is the one channel that should not</li>
+          <li>Karen&rsquo;s own read on a room: what worked, what she would not do again, what four hundred people actually feel like in that space</li>
+          <li>Written for the person signing the contract, not the person browsing</li>
+          <li>We draft it from what Karen already knows, she approves it, it goes out in her name</li>
+        </ul>
+      </div>
+      <div class="m">
+        <div class="lab">The CVBS page</div>
+        <h3>Where the company gets checked</h3>
+        <ul>
+          <li>It exists and it is empty, and it is the first thing a new organiser or a procurement team looks at</li>
+          <li>The company layer: clients, results, the team, and each new city of the venue index</li>
+          <li>Karen&rsquo;s posts land here as well, so the two build each other rather than competing</li>
+          <li>This is also the page an assistant reads when someone asks it whether CVBS is worth calling</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small" style="margin-top:22px;opacity:.8">Nothing here changes what already works on Instagram and Facebook. The two LinkedIn channels are the part that is not running yet, and between them they reach the person who signs off the conference and the search that happens before anybody rings.</p>
+  </div>
+</section>
+
 <!-- ================= 19 · SOCIAL: INSTAGRAM & FACEBOOK ================= -->
 <section class="slide dark" data-sec="Social">
   <div class="pad" style="display:flex;flex-direction:column;align-items:center">
     <div class="eyebrow">Beyond the website</div>
     <h2 style="text-align:center;max-width:24ch">Social that looks like it came from <span class="accent">the same company</span>.</h2>
-    <p class="lede" style="margin-top:16px;max-width:76ch;text-align:center">The channels are already active and the audience is already there. What is new is the look. Instagram and Facebook now run on the website's own design language: Inter, navy and teal, and the frosted glass panels already used in the site's navigation and hero. Real venue photography, never stock illustration. Six post types, each a full carousel.</p>
+    <p class="lede" style="margin-top:16px;max-width:76ch;text-align:center">The channels are active, the audience is built, and the rhythm is already there. What the website adds is a place for all of it to land. Instagram and Facebook now run on the same design language as the site, Inter, navy and teal, with the frosted glass panels used in the navigation and hero, and real venue photography throughout. Six post types, each one a full carousel.</p>
     <div class="hscroll" style="margin-top:22px">
       <div class="post"><img src="assets/social/soc-ig-offer.jpg" width="256" height="320" alt="Offer post design"><span class="cap">Offer / EDM</span></div>
       <div class="post"><img src="assets/social/soc-ig-site-visit.jpg" width="256" height="320" alt="Site visit post design"><span class="cap">Site visit</span></div>
@@ -886,13 +974,13 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 20 · SOCIAL: LINKEDIN ================= -->
 <section class="slide stone" data-sec="Social">
-  <div class="pad two" style="grid-template-columns:1fr 1.2fr">
+  <div class="pad tight two" style="grid-template-columns:1fr 1.2fr">
     <div>
       <div class="eyebrow">LinkedIn</div>
       <h2>The same system, <span class="accent-d">re-cut for a different room</span>.</h2>
-      <p class="lede" style="margin-top:20px">LinkedIn is where the people who sign off on a conference actually are, and the frame there is square rather than tall. The templates re-compose rather than get resized, so a post reads as designed for the platform instead of borrowed from another one.</p>
+      <p class="lede" style="margin-top:20px">LinkedIn is where the people who sign off on a conference actually sit, and the frame there is square rather than tall. So these are drawn square from the start. Same venues, same voice, built for the room they are going into.</p>
       <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
-        <div class="chip"><i></i>1:1 for the feed, 1.91:1 for banners and link previews</div>
+        <div class="chip"><i></i>1:1 for the feed, and 1.91:1 for the link preview that appears when a page is shared</div>
         <div class="chip"><i></i>Out and about: real faces on the service, not stock people</div>
         <div class="chip"><i></i>Venue Files turns venue knowledge into a repeatable format</div>
         <div class="chip"><i></i>Positioning posts carry the searched-versus-sourced line</div>
@@ -905,14 +993,14 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
         <div class="post"><img src="assets/social/soc-li-positioning.jpg" width="270" height="270" alt="LinkedIn positioning post"><span class="cap">Positioning</span></div>
       </div>
       <span class="scrollhint" style="margin-top:-4px"><b>&#8594;</b> Scroll the row</span>
-      <div class="post" style="width:100%;max-width:560px"><img src="assets/social/soc-li-banner.jpg" style="width:100%;height:auto" alt="LinkedIn banner and link preview"><span class="cap">Banner and link preview<span class="ratio">1.91:1</span></span></div>
+      <div class="post" style="width:100%;max-width:560px"><img src="assets/social/soc-li-banner.jpg" style="width:100%;height:auto" alt="LinkedIn banner and link preview"><span class="cap">Shared link preview<span class="ratio">1.91:1</span></span></div>
     </div>
   </div>
 </section>
 
 <!-- ================= 21 &middot; EMAIL: THE PROBLEM ================= -->
 <section class="slide stone" data-sec="Email">
-  <div class="pad two" style="grid-template-columns:1.25fr .75fr">
+  <div class="pad tight two" style="grid-template-columns:1.25fr .75fr">
     <div>
       <div class="eyebrow">The EDMs today</div>
       <h2>Every link in the current email <span class="accent-d">sends the booking somewhere else</span>.</h2>
@@ -936,12 +1024,12 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 22 &middot; EMAIL: THE FIX ================= -->
 <section class="slide dark" data-sec="Email">
-  <div class="pad two" style="grid-template-columns:1fr 1.05fr">
+  <div class="pad tight two" style="grid-template-columns:1fr 1.05fr">
     <div>
       <div class="eyebrow">The three templates</div>
       <h2>The same offers, <span class="accent">pointed back at CVBS</span>.</h2>
-      <p class="lede" style="margin-top:20px">Three templates, one system. An introduction for people who have not heard from CVBS in a while, a monthly roundup that keeps CVBS in the inbox between big offers, and a single-venue email for when one offer deserves the whole message. All built in Mailchimp, so the next one is a matter of swapping the venue, not briefing a designer.</p>
-      <div style="display:flex;flex-direction:column;gap:9px;margin-top:24px">
+      <p class="lede" style="margin-top:20px">Three templates, one system. An introduction for people who have not heard from CVBS in a while, a monthly roundup that keeps CVBS in the inbox between the big offers, and a single-venue email for when one venue has given CVBS something worth passing on.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px">
         <div class="chip"><i></i><b>01</b>&nbsp; Every link lands on a CVBS page, so the enquiry stays with CVBS</div>
         <div class="chip"><i></i><b>02</b>&nbsp; The rate sits one screen in, above the description rather than below it</div>
         <div class="chip"><i></i><b>03</b>&nbsp; Named greeting, and built to be segmented by city and event type</div>
@@ -953,11 +1041,11 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
         <a class="openbtn" href="assets/edm/cvbs-single-offer-edm.html" target="_blank" rel="noopener">Single venue <b>&#8599;</b></a>
       </div>
     </div>
-    <div style="display:flex;gap:14px;justify-content:center;align-items:flex-start">
+    <div class="emailrow" style="display:flex;gap:14px;justify-content:center;align-items:flex-start">
       <div style="display:flex;flex-direction:column;gap:11px;align-items:center">
         <div class="browser pan" style="width:min(17vw,232px)">
           <div class="bar"><i></i><i></i><i></i><span class="url">A free pair of hands for your next event</span><a class="livelink" href="assets/edm/cvbs-intro-edm.html" target="_blank" rel="noopener">Open &#8599;</a></div>
-          <div class="view" data-img="assets/edm/cvbs-edm-intro-full.jpg" data-subject="A free pair of hands for your next event" data-from="Conference Venues" data-addr="karen@conferencevenues.com" data-when="9:04 AM (2 hours ago)" data-href="assets/edm/cvbs-intro-edm.html" style="height:min(60vh,540px)"><img src="assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email, full length"></div>
+          <div class="view" data-img="assets/edm/cvbs-edm-intro-full.jpg" data-subject="A free pair of hands for your next event" data-from="Conference Venues" data-addr="karen@conferencevenues.com.au" data-when="9:04 AM (2 hours ago)" data-href="assets/edm/cvbs-intro-edm.html" style="height:min(60vh,540px)"><img src="assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email, full length"></div>
         </div>
         <span class="framecap">Introduction</span>
       </div>
@@ -982,7 +1070,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 23 &middot; THE EMAIL PROGRAM ================= -->
 <section class="slide" data-sec="Email">
-  <div class="pad">
+  <div class="pad tight">
     <div class="eyebrow">The program</div>
     <h2 style="margin-bottom:16px">Twelve reasons to be <span class="accent-d">in the inbox</span>.</h2>
     <p class="lede" style="max-width:84ch;margin-bottom:28px">Nobody needs a venue finder until they suddenly need one urgently, and there is no way to predict which week that is. So the job of email is not to find the right person, it is to be there when the trigger fires with a ten second way to raise a hand. Two sends a month, every month, all ending on the same button.</p>
@@ -1035,9 +1123,9 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 <section class="slide dark" data-sec="The website">
   <div class="pad">
     <div class="eyebrow">Where the website lands</div>
-    <h2 style="margin-bottom:30px">Six things the site <span class="accent">now does on its own</span>.</h2>
+    <h2 style="margin-bottom:30px">Six things the site does <span class="accent">that the old one could not</span>.</h2>
     <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="card"><div class="num">EXPLAINS</div><p style="font-size:14.5px">What CVBS does, that it costs the client nothing, and why it works, within the first screen of every page.</p></div>
+      <div class="card"><div class="num">EXPLAINS</div><p style="font-size:14.5px">What CVBS does, that the organiser pays nothing because the venue pays the commission, and why that works, on the first screen of almost every page.</p></div>
       <div class="card"><div class="num">GUIDES</div><p style="font-size:14.5px">Visitors move through destinations and venues with a clear next step at every point.</p></div>
       <div class="card"><div class="num">PROVES</div><p style="font-size:14.5px">Since 1989, recognisable clients and real testimonials now work on every journey, not just the About page.</p></div>
       <div class="card"><div class="num">CONNECTS</div><p style="font-size:14.5px">Destinations, venues, offers, expertise and enquiries link into one continuous experience.</p></div>
@@ -1049,7 +1137,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
 
 <!-- ================= 26 &middot; THE COMPETITIVE SET ================= -->
 <section class="slide stone" data-sec="The market">
-  <div class="pad">
+  <div class="pad tight">
     <div class="eyebrow">Who else is in the running</div>
     <h2 style="margin-bottom:14px">Organisers compare <span class="accent-d">before they enquire</span>.</h2>
     <p class="lede" style="max-width:90ch">By the time somebody contacts CVBS they have usually already looked at a marketplace like VenueNow, or started doing it themselves. Those platforms now match briefs with AI, and they are genuinely good at volume. What an algorithm cannot tell you is what a room is actually like on the day. The service was never the problem. Until now, the comparison was happening on a page that did not represent it.</p>
@@ -1084,7 +1172,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
           <td class="us">CVBS, against rates they see every week</td>
           <td>Sometimes, at platform scale</td>
           <td>You, with nothing to benchmark against</td></tr>
-        <tr><th>Speed</th>
+        <tr><th>What comes back, and when</th>
           <td class="us">A considered shortlist, usually inside 48 hours</td>
           <td>A response target of under 24 hours</td>
           <td>Two to three weeks of back and forth</td></tr>
@@ -1099,13 +1187,13 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
       </tbody>
     </table>
     </div>
-    <p class="srcnote">Marketplace figures are taken from VenueNow&rsquo;s own site, August 2026, where it states a target response time of under 24 hours, no cost to corporate bookers, and AI-assisted venue matching. Other independent finders, such as The Venue Agency, run the same commission model as CVBS, which makes the comparison a matter of who looks more credible and who knows the venues better.</p>
+    <p class="srcnote">Marketplace figures are taken from VenueNow&rsquo;s own site, August 2026, where it states a target response time of under 24 hours, no cost to corporate bookers, and AI-assisted venue matching. The two speed figures are not measuring the same thing: a marketplace is quoting how fast it acknowledges a brief, CVBS is quoting how long it takes to come back with three venues worth looking at. Other independent finders are paid the same way CVBS is, so against them the comparison is simply who looks more credible and who knows the venues better.</p>
   </div>
 </section>
 
 <!-- ================= 27 &middot; WHY IT LANDS DIFFERENTLY NOW ================= -->
 <section class="slide dark" data-sec="The market">
-  <div class="pad">
+  <div class="pad tight">
     <div class="eyebrow">Why the answer changes</div>
     <h2 style="margin-bottom:16px">Their shortlist is an algorithm. <span class="accent">Yours is four people who have been there.</span></h2>
     <p class="lede" style="max-width:88ch;margin-bottom:14px">An algorithm can search a database. It cannot tell you which ballroom actually feels empty with a hundred and twenty people in it. Every platform in this market is racing to automate the part CVBS is best at, which is good news, because it turns the human part into the differentiator rather than the overhead.</p>
@@ -1113,7 +1201,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
     <div class="grid" style="grid-template-columns:repeat(2,1fr)">
       <div class="card"><div class="num">01 &middot; WHO DOES THE WORK</div><h3>Four people, not a filter</h3><p>A platform matches a brief against a database. CVBS matches it against venues four people have walked through, eaten in and run events at. The About and Results pages now put those four on the screen with names and faces, which is the one thing a marketplace cannot copy.</p></div>
       <div class="card"><div class="num">02 &middot; JUDGEMENT OVER VOLUME</div><h3>Three venues, and the reason for each</h3><p>An algorithm returns everything matching a filter and leaves the deciding to you. CVBS returns a recommendation and can say why, including what went wrong somewhere else last time. The site is built to show that, not to list rooms.</p></div>
-      <div class="card"><div class="num">03 &middot; BEING FOUND AT ALL</div><h3>In the comparison, not after it</h3><p>Marketplaces win by answering the question people actually type into Google. The venue index does the same for CVBS, city by city, with capacity answers no listing page provides, so the comparison includes CVBS from the start.</p></div>
+      <div class="card"><div class="num">03 &middot; BEING FOUND AT ALL</div><h3>In the comparison, not after it</h3><p>Marketplaces win by answering the question people actually type into Google. The venue index does the same for CVBS, city by city. The marketplaces publish capacities too. What they cannot publish is a capacity table with thirty-seven years of judgement sitting on the same page, which is the version an organiser trusts and an assistant quotes.</p></div>
       <div class="card"><div class="num">04 &middot; STAYING HUMAN</div><h3>A reply, not a notification</h3><p>Half the emails ask for a reply rather than a click, and a real person answers it. A login cannot hold a relationship together across events that are years apart. Karen remembering the last one is worth more than any recommendation engine.</p></div>
     </div>
   </div>
@@ -1124,7 +1212,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   <div class="pad tight">
     <div class="eyebrow">How organisers look now</div>
     <h2 style="margin-bottom:12px">Three in four planners now use AI <span class="accent-d">to find venues</span>.</h2>
-    <p class="lede" style="max-width:96ch;margin-bottom:22px">Cvent asked one thousand six hundred and fifty event planners in March this year, and that is what came back. Organisers are still searching, they are just not always looking at a page of results any more. They are reading an answer with a few names in it, and those names are the shortlist before anyone has picked up the phone. So the question is no longer only whether CVBS ranks. It is whether CVBS is in the answer.</p>
+    <p class="lede" style="max-width:96ch;margin-bottom:22px">Cvent asked one thousand six hundred and fifty event planners around the world in March this year, and that is what came back. Organisers are still searching, they are just not always looking at a page of results any more. They are reading an answer with a few names in it, and those names are the shortlist before anyone has picked up the phone. So the question is no longer only whether CVBS ranks. It is whether CVBS is in the answer.</p>
     <div class="klist" style="justify-content:flex-start;margin-bottom:26px">
       <div class="k"><div class="kv">75<span>%</span></div><div class="kl">Planners using AI to search for venues</div></div>
       <div class="k"><div class="kv">68<span>%</span></div><div class="kl">Google searches that end without a click</div></div>
@@ -1148,52 +1236,11 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
     <div class="grid" style="grid-template-columns:repeat(2,1fr)">
       <div class="card"><div class="num">01 &middot; BEING FOUND</div><h3>The foundation still has to be there</h3><p>A page for every destination and every venue, fast, structured and readable, so the searches organisers still type land somewhere real rather than on a PDF. That is what the new site fixed, and it is the part everything else sits on.</p></div>
       <div class="card"><div class="num">02 &middot; BEING QUOTED</div><h3>The venue index is the citable part</h3><p>Capacity, room specifications and ceiling heights, read off each venue&rsquo;s own published charts, with the answer stated in the first two lines of the page. Cvent&rsquo;s planners named room specifications and floor plans as the hardest part of sourcing. That is what the index publishes, city by city.</p></div>
-      <div class="card"><div class="num">03 &middot; BEING CHOSEN</div><h3>The half that is not on the website</h3><p>An assistant asked to recommend a venue finder does not answer from your site. It assembles the answer somewhere else, then checks the site to see whether it holds up. CVBS has thirty-seven years, four named people and recognisable clients, and until this month almost none of it was connected to anything a machine could verify. That is the next slide.</p></div>
+      <div class="card"><div class="num">03 &middot; BEING CHOSEN</div><h3>Four names, and the proof behind them</h3><p>An assistant recommending a venue finder reads who they are, who they have worked for and what other people say about them. Karen, Anthony, Chantelle and Rychelle, working since 1989, with recognisable clients and real testimonials on the page. That is the part CVBS already has.</p></div>
       <div class="card"><div class="num">04 &middot; BEING CHECKED</div><h3>We ask the assistants, every month</h3><p>The same questions an organiser would ask, put to ChatGPT, Gemini and Google&rsquo;s own answers, written down and compared with last month. Whatever comes back wrong, or leaves CVBS out, becomes the next page we build.</p></div>
     </div>
     <span class="askchip">Try it in the room. Ask an assistant to shortlist a Sydney conference venue for four hundred people, and see who it names.</span>
-  </div>
-</section>
-
-
-<!-- ================= 30 &middot; BEING CHOSEN, IN DETAIL ================= -->
-<section class="slide stone" data-sec="Being found">
-  <div class="pad tight">
-    <div class="eyebrow">Being chosen</div>
-    <h2 style="margin-bottom:10px">Being quoted happens on your page. <span class="accent-d">Being chosen happens somewhere else.</span></h2>
-    <p class="lede" style="max-width:104ch;margin-bottom:16px">An assistant asked who should source a venue does not read your website and decide. It assembles the answer from records it did not write and you do not own: LinkedIn, Google, the business register, the directories. Your site is only what it checks afterwards. Two halves, and one of them is not on the site.</p>
-    <div class="mcol">
-      <div class="m">
-        <div class="lab">Built this month</div>
-        <h3>On the site</h3>
-        <ul>
-          <li><b>One identity, not three.</b> Every page now carries a single machine-readable record of CVBS under one permanent identifier, tied to the four people, the services and the fact it costs the organiser nothing</li>
-          <li><b>The answer on the homepage.</b> Who CVBS is, who pays and who it is not right for, in the opening lines, because most people arriving from an assistant land on the homepage</li>
-          <li><b>A page written to be quoted back.</b> How to choose a venue finder, the five questions worth putting to any finder including CVBS</li>
-          <li><b>Clients named in words.</b> A logo is an image file. The sentence underneath it is what gets read</li>
-        </ul>
-      </div>
-      <div class="m">
-        <div class="lab">The ask</div>
-        <h3>Only CVBS can supply this</h3>
-        <ul>
-          <li><b>The links that prove CVBS exists.</b> LinkedIn, the Google listing, the ABN record. Nothing on the site connects CVBS to a single record outside it, and that gap does more damage than everything else combined</li>
-          <li><b>Two clients who will put their name to a sentence.</b> Nobody can repeat a quote from &ldquo;Sarah M.&rdquo;</li>
-          <li><b>The logo wall, confirmed.</b> Three of the ten no longer trade under that name</li>
-          <li><b>Memberships and accreditations,</b> if CVBS holds any</li>
-        </ul>
-      </div>
-      <div class="m">
-        <div class="lab">Every month</div>
-        <h3>How we know it is working</h3>
-        <ul>
-          <li><b>The assistant check.</b> The questions an organiser would ask, put to ChatGPT, Gemini and Google, written down and compared with last month</li>
-          <li><b>The measure is not a ranking.</b> It is whether CVBS gets named, and whether the reason holds</li>
-          <li><b>Whatever comes back wrong</b> becomes the next page we write. That is how the venue index got built</li>
-        </ul>
-      </div>
-    </div>
-    <span class="askchip">Two of these need ten minutes from Karen, and they are worth more than everything else here.</span>
+    <p class="srcnote">The sourcing figures are from the Cvent 2026 Global Planner Sourcing Report, published March 2026, which names meeting room specifications and images, videos and floor plans as the most influential factors when planners evaluate a venue, and reports that a quarter of planners find researching venue specifications the hardest stage of sourcing.</p>
   </div>
 </section>
 
@@ -1202,16 +1249,16 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
   <div class="pad">
     <div class="eyebrow">How it runs</div>
     <h2 style="margin-bottom:16px">What happens <span class="accent-d">every month</span>.</h2>
-    <p class="lede" style="max-width:76ch;margin-bottom:28px">The website is built once. The other two only work if they keep going, so they are set up to run on a rhythm rather than in bursts.</p>
+    <p class="lede" style="max-width:76ch;margin-bottom:28px">The website is the destination. It has no traffic of its own, which is what the other two are for, so they are set up to run on a rhythm rather than in bursts.</p>
     <div class="mcol">
       <div class="m">
         <div class="lab">Social</div>
         <h3>The rhythm you already have</h3>
         <ul>
           <li>Instagram, Facebook and LinkedIn, continuing as they are</li>
-          <li>Now on the post formats in this presentation, so every month is faster than the last</li>
+          <li>On the post formats in this presentation, so the look holds without anyone rebuilding it</li>
           <li>Venue offers, site visits, destinations and the education posts</li>
-          <li>Each post linking to a page on the new site rather than a dead end</li>
+          <li>Every post now has somewhere to send people: the destination, the venue, the offer</li>
         </ul>
       </div>
       <div class="m">
@@ -1231,7 +1278,7 @@ h3{font-weight:600;letter-spacing:-.02em;font-size:clamp(17px,1.5vw,21px)}
           <li>Another city, another set of venues, another page each month</li>
           <li>Answers the capacity questions organisers are already searching</li>
           <li>Each page feeds the destination pages, the social posts and the EDMs</li>
-          <li>Built once, working for CVBS for years</li>
+          <li>Every city added keeps earning. Every month skipped is a page that never existed</li>
         </ul>
       </div>
     </div>
