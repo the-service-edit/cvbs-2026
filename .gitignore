@@ -53,3 +53,6 @@ _backup-pre-index-removal-27aug/
 
 # Skill sources (delivered to Mel's account, not part of the site)
 _skills/
+
+# Safety copies written by the venue and site visit scripts
+*.bak

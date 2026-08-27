@@ -492,9 +492,13 @@
   (function recentBand() {
     var box = doc.getElementById('vidx-recent');
     if (!box) return;
+    /* CVBS visit a lot of venues, so this list grows without limit. Newest
+       first, a handful shown, the rest in the DOM behind one control so a
+       crawler still reads every record while the page stays short. */
+    var RECENT_SHOWN = 4;
     var withVisit = VENUES.filter(hasPhotos).sort(function (a, b) {
       return String(b.visit.on || '').localeCompare(String(a.visit.on || ''));
-    }).slice(0, 6);
+    });
     if (!withVisit.length) {
       /* Nothing to show. Hide the band and, where the band is the whole point
          of its section, hide the section too, so the page never carries an
@@ -514,58 +518,129 @@
           'there. Every photograph is one of ours, taken on the day.</p>' +
       '</div>' +
       '<ul class="vidx-recent__grid">' +
-        withVisit.map(function (v) {
+        withVisit.map(function (v, i) {
           var meta = [v.sp, v.pr, TYPE_LABEL[v.ty] || ''].filter(Boolean).join(' &middot; ');
+          /* Only rows the venue actually publishes. Nine rows of "Not published"
+             was honest and looked like a broken table, and the boutique hotels
+             worth walking are exactly the ones that publish least. The gaps go
+             into one line underneath instead, which reads as the offer it is
+             rather than as missing data. */
+          var unpub = [];
           var setups = SETUPS.map(function (st) {
-            return specRow(st[1], cell(v[st[0]]));
+            var n = v[st[0]];
+            if (n === null || n === undefined) { unpub.push(st[1].toLowerCase()); return ''; }
+            return specRow(st[1], fmt(n));
           }).join('');
-          var room =
-            specRow('Floor area', v.area ? fmt(v.area) + ' sqm' : '<span class="vidx-none">Not published</span>') +
-            specRow('Ceiling height', metres(v)) +
-            specRow('Meeting rooms', cell(v.br)) +
-            specRow('Guest rooms', v.gr === 0 ? '<span class="vidx-none">None on site</span>' : cell(v.gr)) +
-            (v.s_name ? specRow('Second space', esc(v.s_name) + (v.s_th ? ', ' + fmt(v.s_th) + ' theatre' : '')) : '');
-          return '<li class="vrec">' +
-            '<header class="vrec__head">' +
-              '<p class="vrec__w">' + ICON_EYE + 'Walked by ' + esc(visitAttr(v)) + '</p>' +
-              '<h3 class="vrec__n">' + esc(v.n) + '</h3>' +
-              '<p class="vrec__meta">' + meta + '</p>' +
-            '</header>' +
-            '<div class="vrec__words">' +
+          var roomRows = [];
+          if (v.area) roomRows.push(specRow('Floor area', fmt(v.area) + ' sqm'));
+          else unpub.push('floor area');
+          if (v.ceil) roomRows.push(specRow('Ceiling height', metres(v)));
+          else unpub.push('ceiling height');
+          if (v.br) roomRows.push(specRow('Meeting rooms', fmt(v.br)));
+          else unpub.push('meeting rooms');
+          if (v.gr === 0) roomRows.push(specRow('Guest rooms', '<span class="vidx-none">None on site</span>'));
+          else if (v.gr) roomRows.push(specRow('Guest rooms', fmt(v.gr)));
+          if (v.s_name) roomRows.push(specRow('Second space',
+            esc(v.s_name) + (v.s_th ? ', ' + fmt(v.s_th) + ' theatre' : '')));
+          var room = roomRows.join('');
+          var rest = v.visit.photos.slice(1);
+          var lead = v.visit.photos[0];
+          var pid = 'vrec-d-' + i;
+          var more = [];
+          if (setups || room) more.push('the full specification');
+          if (rest.length) more.push(rest.length + (rest.length === 1 ? ' more photograph' : ' more photographs'));
+          return '<li class="vrec"' + (i >= RECENT_SHOWN ? ' hidden data-vrec-over' : '') + '>' +
+            '<div class="vrec__lead">' +
+              '<div class="vrec__media">' +
+                '<button type="button" class="vidx-visit__btn" data-vlb="1"' +
+                  ' data-l="' + esc(lead.l || lead.s) + '" data-c="' + esc(lead.c || '') + '"' +
+                  ' data-a="' + esc(v.n + (v.sp ? ', ' + v.sp : '') + '. Photographed by ' + visitAttr(v) + '.') + '"' +
+                  ' aria-label="Enlarge photograph of ' + esc(v.n) + '">' +
+                  '<img src="' + esc(lead.s) + '" alt="' + esc(lead.c || v.n) + '" loading="lazy" decoding="async"' +
+                    (lead.w ? ' width="' + lead.w + '"' : '') + (lead.h ? ' height="' + lead.h + '"' : '') + '>' +
+                '</button>' +
+              '</div>' +
+              '<div class="vrec__words">' +
+                '<p class="vrec__w">' + ICON_EYE + 'Walked by ' + esc(visitAttr(v)) + '</p>' +
+                '<h3 class="vrec__n">' + esc(v.n) + '</h3>' +
+                '<p class="vrec__meta">' + meta + '</p>' +
+                (v.visit.note ? '<p class="vrec__note"><b>What the floor plan does not tell you.</b> ' +
+                  esc(v.visit.note) + '</p>'
+                  : (lead.c ? '<p class="vrec__note">' + esc(lead.c) + '</p>' : '')) +
+                '<div class="vrec__acts">' +
+                  (more.length ? '<button type="button" class="vrec__toggle" aria-expanded="false"' +
+                    ' aria-controls="' + pid + '">' + more.join(' and ').replace(/^./, function (c) { return c.toUpperCase(); }) +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+                    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                    '<path d="M6 9l6 6 6-6"/></svg></button>' : '') +
+                  '<a class="vidx-enq" href="submit-a-brief.html?dest=' + encodeURIComponent(city) +
+                    '&venue=' + encodeURIComponent(v.n) + '">Ask us about this room' +
+                    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+                    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                    '<path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="vrec__detail" id="' + pid + '" hidden>' +
               (v.note ? '<p class="vrec__sum">' + esc(v.note) + '</p>' : '') +
-              (v.visit.note ? '<p class="vrec__note"><b>What the floor plan does not tell you.</b> ' +
-                esc(v.visit.note) + '</p>' : '') +
-              '<a class="vidx-enq vrec__enq" href="submit-a-brief.html?dest=' + encodeURIComponent(city) +
-                '&venue=' + encodeURIComponent(v.n) + '">Ask us about this room' +
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
-                'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+              '<div class="vrec__specs">' +
+                (setups ? '<div class="vrec__speccol"><h4>' + esc(v.sp || 'Largest space') +
+                  '</h4><dl>' + setups + '</dl></div>' : '') +
+                (room ? '<div class="vrec__speccol"><h4>The venue itself</h4><dl>' + room + '</dl></div>' : '') +
+                (unpub.length ? '<p class="vrec__unpub">Not published by the venue: ' + unpub.join(', ') +
+                  '. Ask us and we will confirm ' + (unpub.length === 1 ? 'it' : 'them') +
+                  ' against your brief.</p>' : '') +
+              '</div>' +
+              (rest.length ? '<ul class="vrec__photos">' +
+                rest.map(function (q, k) {
+                  var qc = q.c || '';
+                  return '<li class="vidx-visit__item">' +
+                    '<button type="button" class="vidx-visit__btn" data-vlb="1"' +
+                      ' data-l="' + esc(q.l || q.s) + '" data-c="' + esc(qc) + '"' +
+                      ' data-a="' + esc(v.n + (v.sp ? ', ' + v.sp : '') + '. Photographed by ' + visitAttr(v) + '.') + '"' +
+                      ' aria-label="Enlarge photograph ' + pad2(k + 1) + ' of ' + esc(v.n) + '">' +
+                      '<img src="' + esc(q.s) + '" alt="' + esc(qc || v.n) + '" loading="lazy" decoding="async">' +
+                    '</button>' +
+                    (qc ? '<p class="vidx-visit__cap"><span class="vidx-visit__num">' + pad2(k + 1) +
+                      '</span>' + esc(qc) + '</p>' : '') +
+                  '</li>';
+                }).join('') + '</ul>' : '') +
             '</div>' +
-            '<div class="vrec__specs">' +
-              '<div class="vrec__speccol"><h4>' + esc(v.sp || 'Largest space') + '</h4><dl>' + setups + '</dl></div>' +
-              '<div class="vrec__speccol"><h4>The room itself</h4><dl>' + room + '</dl></div>' +
-            '</div>' +
-            '<ul class="vrec__photos">' +
-              v.visit.photos.map(function (q, i) {
-                var qc = q.c || '';
-                return '<li class="vidx-visit__item">' +
-                  '<button type="button" class="vidx-visit__btn" data-vlb="1"' +
-                    ' data-l="' + esc(q.l || q.s) + '" data-c="' + esc(qc) + '"' +
-                    ' data-a="' + esc(v.n + (v.sp ? ', ' + v.sp : '') + '. Photographed by ' + visitAttr(v) + '.') + '"' +
-                    ' aria-label="Enlarge photograph ' + pad2(i) + ' of ' + esc(v.n) + '">' +
-                    '<img src="' + esc(q.s) + '" alt="' + esc(qc || v.n) + '" loading="lazy" decoding="async"' +
-                      (q.w ? ' width="' + q.w + '"' : '') + (q.h ? ' height="' + q.h + '"' : '') + '>' +
-                  '</button>' +
-                  (qc ? '<p class="vidx-visit__cap"><span class="vidx-visit__num">' + pad2(i) + '</span>' +
-                    esc(qc) + '</p>' : '') +
-                '</li>';
-              }).join('') +
-            '</ul>' +
           '</li>';
         }).join('') +
       '</ul>' +
-      '<p class="vidx-recent__foot">Every capacity above is the venue’s own published figure for the ' +
+      (withVisit.length > RECENT_SHOWN
+        ? '<button type="button" class="vidx-recent__all" id="vidx-recent-all">' +
+            'Show the earlier visits' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+            '<path d="M6 9l6 6 6-6"/></svg></button>'
+        : '') +
+      '<p class="vidx-recent__foot">Every capacity here is the venue’s own published figure for the ' +
         'space named. The photograph and the note beside it are ours.</p>';
     box.hidden = false;
+
+    /* One delegated listener for every record, so adding a venue costs nothing. */
+    box.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target.closest('.vrec__toggle') : null;
+      if (!t) return;
+      var panel = doc.getElementById(t.getAttribute('aria-controls'));
+      if (!panel) return;
+      var open = t.getAttribute('aria-expanded') === 'true';
+      t.setAttribute('aria-expanded', open ? 'false' : 'true');
+      panel.hidden = open;
+    });
+
+    var allBtn = doc.getElementById('vidx-recent-all');
+    if (allBtn) {
+      allBtn.addEventListener('click', function () {
+        var over = box.querySelectorAll('[data-vrec-over]');
+        var opening = over.length && over[0].hidden;
+        Array.prototype.forEach.call(over, function (li) { li.hidden = !opening; });
+        allBtn.classList.toggle('is-open', opening);
+        allBtn.firstChild.nodeValue = opening ? 'Show fewer visits' : 'Show the earlier visits';
+      });
+    }
 
     /* The page is authored for its normal state, which is this section hidden,
        because most venues have no site visit logged. Revealing it inserts a

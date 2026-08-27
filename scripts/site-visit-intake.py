@@ -276,6 +276,25 @@ def main():
             say('    %-28s %s%s' % (f[:28], w or 'no date', ('   ' + g) if g else ''))
 
         notes = read_notes(folder)
+        if notes is not None:
+            # New photographs dropped into a folder that already has a notes.txt
+            # would otherwise be skipped in silence. Append a stub line for each
+            # one instead, so the file always lists everything in the folder.
+            fresh = [f for f, w, g, _ in shots if f not in notes['caps']]
+            if fresh:
+                if not DRY:
+                    with io.open(os.path.join(folder, 'notes.txt'), 'a', encoding='utf-8') as fh:
+                        fh.write('\n')
+                        for f in fresh:
+                            when = dict((a, b) for a, b, _, _ in
+                                        [(x[0], x[1], None, None) for x in shots]).get(f)
+                            fh.write('\n# added %s%s\n%s: \n'
+                                     % (os.path.basename(folder), '  taken ' + when if when else '', f))
+                say('  > %d new photo%s added to notes.txt, needs a line each'
+                    % (len(fresh), '' if len(fresh) == 1 else 's'))
+                for f in fresh:
+                    problems.append('%s: no caption yet for %s' % (venue, f))
+
         if notes is None:
             if not DRY:
                 write_notes_template(folder, '', when_human,
