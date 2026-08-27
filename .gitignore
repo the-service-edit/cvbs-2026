@@ -50,3 +50,6 @@ _DROP PHOTOS HERE/site-visits/*
 
 # Local safety net from the 27 Aug index table removal
 _backup-pre-index-removal-27aug/
+
+# Skill sources (delivered to Mel's account, not part of the site)
+_skills/

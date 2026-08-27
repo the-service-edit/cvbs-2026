@@ -560,6 +560,16 @@ VENUES = [
    src="https://ovolohotels.com/events/",
    src2="https://ovolohotels.com/events/"),
 
+
+ dict(
+   worked=False, seen=None,
+   n="The EVE Hotel Sydney", sp="Rooftop Boardroom", pr="Redfern and Eveleigh", ty="hotel",
+   th=None, bq=None, cl=None, ck=None, cab=None, ush=None, bd=14,
+   br=None, gr=102, area=None, ceil=None, ceilq=None,
+   s_name=None, s_th=None,
+   note="A 102 room hotel in the Wunderlich Lane precinct between Redfern and Surry Hills, built for small residential programs, board level meetings and private dinners rather than plenaries. It publishes no setup capacities, floor areas or ceiling heights at all, and the only space the hotel runs itself is a boardroom for fourteen. Both restaurant venues changed operators in August 2026 and the replacements open later in the year, so the rooftop hire capacity is unsettled until they do.",
+   src="https://theevehotel.com.au/functions-and-events/",
+   src2="https://www.tfehotels.com/en/hotels/collection/eve-hotel-sydney/"),
 ]
 # ---------------------------------------------------------------------------
 # CLAIMS REGISTER
