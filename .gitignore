@@ -34,3 +34,19 @@ _backup-pre-mobile-hero-26aug/
 
 # Local safety net from the 26 Aug email section
 _backup-pre-email-section-26aug/
+
+# Local safety net from the 27 Aug site visit record build
+_backup-pre-site-visits-27aug/
+
+# The site visit preview and its stand-in photographs. Sample content, and the
+# whole point of it is that sample site visit records never reach the site.
+CVBS-Site-Visit-Preview.html
+_preview-site-visits/
+
+# Photos waiting on scripts/site-visit-intake.py. The originals stay local, only
+# the processed and metadata-stripped versions are committed.
+_DROP PHOTOS HERE/site-visits/*
+!_DROP PHOTOS HERE/site-visits/readme.txt
+
+# Local safety net from the 27 Aug index table removal
+_backup-pre-index-removal-27aug/

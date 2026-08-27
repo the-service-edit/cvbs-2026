@@ -319,12 +319,15 @@
   var fAccom = doc.getElementById('vidx-accom');
   var fSeen = doc.getElementById('vidx-seen');
   var resetBtn = doc.getElementById('vidx-reset');
-  if (!tbody || !fCap || !fSetup || !fPrec || !fType) return;
+  /* The table and its filters are optional. Sydney publishes the answer block,
+     the at a glance rail and the site visit records without them, and a page
+     that carries only those must still work. Only the table code is gated. */
+  var hasTable = !!(tbody && fCap && fSetup && fPrec && fType);
 
   /* The site visit option only exists once there is a site visit to show. An
      empty filter is worse than no filter, so it removes itself until Karen has
      filled in at least one 'seen' record in the data. */
-  if (fSeen && !VENUES.some(function (v) { return v.seen; })) {
+  if (hasTable && fSeen && !VENUES.some(function (v) { return v.seen; })) {
     var so = fSeen.querySelector('option[value="seen"]');
     if (so) so.parentNode.removeChild(so);
   }
@@ -350,18 +353,21 @@
     return v.ceilq ? t + '<span class="vidx-qual">' + v.ceilq + '</span>' : t;
   };
   var capOf = function (v) {
-    var n = v[fSetup.value];
+    var n = v[fSetup ? fSetup.value : 'th'];
     return (n === null || n === undefined) ? null : n;
   };
 
-  /* Precinct options, built from the data so a new city needs no edits here */
-  var precincts = [];
-  VENUES.forEach(function (v) { if (precincts.indexOf(v.pr) === -1) precincts.push(v.pr); });
-  precincts.sort().forEach(function (p) {
-    var o = doc.createElement('option');
-    o.value = p; o.textContent = p;
-    fPrec.appendChild(o);
-  });
+  /* Precinct options, built from the data so a new city needs no edits here.
+     Only where the filter exists at all. */
+  if (fPrec) {
+    var precincts = [];
+    VENUES.forEach(function (v) { if (precincts.indexOf(v.pr) === -1) precincts.push(v.pr); });
+    precincts.sort().forEach(function (p) {
+      var o = doc.createElement('option');
+      o.value = p; o.textContent = p;
+      fPrec.appendChild(o);
+    });
+  }
 
   /* At a glance rail, derived from the data so it can never contradict the table */
   (function stats() {
@@ -399,6 +405,266 @@
           (r[1] ? '<small>' + r[1] + '</small>' : '') + '</div>' +
           '<div class="vidx-stat__l">' + r[2] + '</div></div>';
       }).join('');
+  })();
+
+
+  /* --- site visit record --------------------------------------------------
+     v.visit = {by, when, on, note, photos: [{s, l, c, w, h}]}
+       by    who from CVBS was in the room
+       when  human date, "March 2026"
+       on    sortable date, "2026-03", used by the recently visited band
+       note  what the floor plan does not tell you
+       s/l   small and large image paths, c the caption, w/h the small size
+
+     Renders only where a visit is logged. No visit, no markup, no claim.
+     Never hand write a visit record. It comes from the site visit intake
+     script, which reads the date off the photograph itself. See
+     scripts/site-visit-intake.py. ---------------------------------------- */
+
+  var esc = function (s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  };
+  var pad2 = function (i) { return (i < 9 ? '0' : '') + (i + 1); };
+  var hasPhotos = function (v) {
+    return !!(v && v.visit && v.visit.photos && v.visit.photos.length);
+  };
+  var visitAttr = function (v) {
+    var vis = v.visit || {};
+    return (vis.by || 'CVBS') + (vis.when ? ', ' + vis.when : '');
+  };
+  var ICON_EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>';
+  var ICON_CAM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M3 8.5h3.2l1.4-2.2h7.8l1.4 2.2H21v10H3z"/><circle cx="12" cy="13" r="3.1"/></svg>';
+
+  function visitCount(v) {
+    if (!hasPhotos(v)) return '';
+    var n = v.visit.photos.length;
+    return '<span class="vidx-seen__n">' + ICON_CAM + n + (n === 1 ? ' photo' : ' photos') + '</span>';
+  }
+
+  function visitBlock(v) {
+    if (!hasPhotos(v)) return '';
+    var vis = v.visit;
+    var who = esc(vis.by || 'CVBS');
+    var when = vis.when ? esc(vis.when) : '';
+    var attrib = esc(v.n + (v.sp ? ', ' + v.sp : '') + '. Photographed by ' + visitAttr(v) + '.');
+    return '<div class="vidx-visit">' +
+      '<div class="vidx-visit__head">' +
+        '<span class="vidx-visit__tag">' + ICON_EYE + 'Site visit record</span>' +
+        '<p class="vidx-visit__who"><b>Walked by ' + who + '</b>' + (when ? ', ' + when : '') + '</p>' +
+        '<p class="vidx-visit__prov">Photographed by us on the day. Not supplied by the venue.</p>' +
+      '</div>' +
+      (vis.note ? '<p class="vidx-visit__note"><b>What the floor plan does not tell you.</b> ' +
+        esc(vis.note) + '</p>' : '') +
+      '<ul class="vidx-visit__strip">' +
+        vis.photos.map(function (p, i) {
+          var cap = p.c || '';
+          var alt = cap || (v.n + ', ' + (v.sp || 'event space'));
+          return '<li class="vidx-visit__item">' +
+            '<button type="button" class="vidx-visit__btn" data-vlb="1"' +
+              ' data-l="' + esc(p.l || p.s) + '"' +
+              ' data-c="' + esc(cap) + '"' +
+              ' data-a="' + attrib + '"' +
+              ' aria-label="Enlarge photograph ' + pad2(i) + ' of ' + esc(v.n) + '">' +
+              '<img src="' + esc(p.s) + '" alt="' + esc(alt) + '" loading="lazy" decoding="async"' +
+                (p.w ? ' width="' + p.w + '"' : '') + (p.h ? ' height="' + p.h + '"' : '') + '>' +
+            '</button>' +
+            (cap ? '<p class="vidx-visit__cap"><span class="vidx-visit__num">' + pad2(i) + '</span>' +
+              esc(cap) + '</p>' : '') +
+          '</li>';
+        }).join('') +
+      '</ul>' +
+    '</div>';
+  }
+
+  /* The recently visited band. Sits above the filters. A full venue record per
+     visit: the photograph we took, a short summary of what the room suits, the
+     complete published specification, and the date we were in it. This is the
+     firsthand version of a venue listing, and it is deliberately slower to read
+     than a table row, because a table row is what everybody else has.
+     It hides itself entirely while there is nothing to show, so the page never
+     advertises an empty promise. */
+  (function recentBand() {
+    var box = doc.getElementById('vidx-recent');
+    if (!box) return;
+    var withVisit = VENUES.filter(hasPhotos).sort(function (a, b) {
+      return String(b.visit.on || '').localeCompare(String(a.visit.on || ''));
+    }).slice(0, 6);
+    if (!withVisit.length) {
+      /* Nothing to show. Hide the band and, where the band is the whole point
+         of its section, hide the section too, so the page never carries an
+         empty heading promising rooms we have walked. */
+      box.hidden = true;
+      return;
+    }
+
+    function specRow(dt, dd) {
+      return '<div class="vidx-spec__row"><dt>' + dt + '</dt><dd>' + dd + '</dd></div>';
+    }
+
+    box.innerHTML =
+      '<div class="vidx-recent__head">' +
+        '<span class="vidx-recent__tag">' + ICON_EYE + 'Recently visited</span>' +
+        '<p class="vidx-recent__sub">The rooms we have most recently stood in, with the date we were ' +
+          'there. Every photograph is one of ours, taken on the day.</p>' +
+      '</div>' +
+      '<ul class="vidx-recent__grid">' +
+        withVisit.map(function (v) {
+          var meta = [v.sp, v.pr, TYPE_LABEL[v.ty] || ''].filter(Boolean).join(' &middot; ');
+          var setups = SETUPS.map(function (st) {
+            return specRow(st[1], cell(v[st[0]]));
+          }).join('');
+          var room =
+            specRow('Floor area', v.area ? fmt(v.area) + ' sqm' : '<span class="vidx-none">Not published</span>') +
+            specRow('Ceiling height', metres(v)) +
+            specRow('Meeting rooms', cell(v.br)) +
+            specRow('Guest rooms', v.gr === 0 ? '<span class="vidx-none">None on site</span>' : cell(v.gr)) +
+            (v.s_name ? specRow('Second space', esc(v.s_name) + (v.s_th ? ', ' + fmt(v.s_th) + ' theatre' : '')) : '');
+          return '<li class="vrec">' +
+            '<header class="vrec__head">' +
+              '<p class="vrec__w">' + ICON_EYE + 'Walked by ' + esc(visitAttr(v)) + '</p>' +
+              '<h3 class="vrec__n">' + esc(v.n) + '</h3>' +
+              '<p class="vrec__meta">' + meta + '</p>' +
+            '</header>' +
+            '<div class="vrec__words">' +
+              (v.note ? '<p class="vrec__sum">' + esc(v.note) + '</p>' : '') +
+              (v.visit.note ? '<p class="vrec__note"><b>What the floor plan does not tell you.</b> ' +
+                esc(v.visit.note) + '</p>' : '') +
+              '<a class="vidx-enq vrec__enq" href="submit-a-brief.html?dest=' + encodeURIComponent(city) +
+                '&venue=' + encodeURIComponent(v.n) + '">Ask us about this room' +
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+                'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
+            '</div>' +
+            '<div class="vrec__specs">' +
+              '<div class="vrec__speccol"><h4>' + esc(v.sp || 'Largest space') + '</h4><dl>' + setups + '</dl></div>' +
+              '<div class="vrec__speccol"><h4>The room itself</h4><dl>' + room + '</dl></div>' +
+            '</div>' +
+            '<ul class="vrec__photos">' +
+              v.visit.photos.map(function (q, i) {
+                var qc = q.c || '';
+                return '<li class="vidx-visit__item">' +
+                  '<button type="button" class="vidx-visit__btn" data-vlb="1"' +
+                    ' data-l="' + esc(q.l || q.s) + '" data-c="' + esc(qc) + '"' +
+                    ' data-a="' + esc(v.n + (v.sp ? ', ' + v.sp : '') + '. Photographed by ' + visitAttr(v) + '.') + '"' +
+                    ' aria-label="Enlarge photograph ' + pad2(i) + ' of ' + esc(v.n) + '">' +
+                    '<img src="' + esc(q.s) + '" alt="' + esc(qc || v.n) + '" loading="lazy" decoding="async"' +
+                      (q.w ? ' width="' + q.w + '"' : '') + (q.h ? ' height="' + q.h + '"' : '') + '>' +
+                  '</button>' +
+                  (qc ? '<p class="vidx-visit__cap"><span class="vidx-visit__num">' + pad2(i) + '</span>' +
+                    esc(qc) + '</p>' : '') +
+                '</li>';
+              }).join('') +
+            '</ul>' +
+          '</li>';
+        }).join('') +
+      '</ul>' +
+      '<p class="vidx-recent__foot">Every capacity above is the venue’s own published figure for the ' +
+        'space named. The photograph and the note beside it are ours.</p>';
+    box.hidden = false;
+
+    /* The page is authored for its normal state, which is this section hidden,
+       because most venues have no site visit logged. Revealing it inserts a
+       band between two that already alternate, so every band after it flips to
+       keep the stone and white rhythm. Doing it on reveal rather than on hide
+       means the common case needs no JavaScript and cannot flash. */
+    var sec = box.closest('section[data-visit-section]');
+    if (sec && sec.hidden) {
+      sec.hidden = false;
+      var n = sec.nextElementSibling;
+      while (n) {
+        if (n.classList.contains('s-stone')) n.classList.replace('s-stone', 's-white');
+        else if (n.classList.contains('s-white')) n.classList.replace('s-white', 's-stone');
+        n = n.nextElementSibling;
+      }
+    }
+  })();
+
+  /* Lightbox. Built once, on first use, and shared by both blocks. */
+  (function lightbox() {
+    var el = null, imgEl, capEl, attrEl, prevBtn, nextBtn, closeBtn;
+    var group = [], at = 0, lastFocus = null;
+
+    function build() {
+      el = doc.createElement('div');
+      el.className = 'vlb';
+      el.setAttribute('role', 'dialog');
+      el.setAttribute('aria-modal', 'true');
+      el.setAttribute('aria-label', 'Site visit photograph');
+      el.innerHTML =
+        '<button type="button" class="vlb__close" aria-label="Close">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+          'stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+        '<button type="button" class="vlb__nav vlb__prev" aria-label="Previous photograph">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>' +
+        '<button type="button" class="vlb__nav vlb__next" aria-label="Next photograph">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" ' +
+          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>' +
+        '<div class="vlb__box">' +
+          '<img class="vlb__img" src="" alt="">' +
+          '<div class="vlb__meta"><p class="vlb__cap"></p><p class="vlb__attr"></p></div>' +
+        '</div>';
+      doc.body.appendChild(el);
+      imgEl = el.querySelector('.vlb__img');
+      capEl = el.querySelector('.vlb__cap');
+      attrEl = el.querySelector('.vlb__attr');
+      prevBtn = el.querySelector('.vlb__prev');
+      nextBtn = el.querySelector('.vlb__next');
+      closeBtn = el.querySelector('.vlb__close');
+      closeBtn.addEventListener('click', close);
+      prevBtn.addEventListener('click', function () { go(-1); });
+      nextBtn.addEventListener('click', function () { go(1); });
+      el.addEventListener('click', function (e) { if (e.target === el) close(); });
+      doc.addEventListener('keydown', function (e) {
+        if (!el || !el.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') go(-1);
+        else if (e.key === 'ArrowRight') go(1);
+      });
+    }
+
+    function paint() {
+      var b = group[at];
+      if (!b) return;
+      imgEl.src = b.getAttribute('data-l');
+      imgEl.alt = b.getAttribute('data-c') || '';
+      capEl.textContent = b.getAttribute('data-c') || '';
+      attrEl.textContent = b.getAttribute('data-a') || '';
+      var many = group.length > 1;
+      prevBtn.hidden = !many;
+      nextBtn.hidden = !many;
+    }
+    function go(d) {
+      if (group.length < 2) return;
+      at = (at + d + group.length) % group.length;
+      paint();
+    }
+    function close() {
+      el.classList.remove('is-open');
+      doc.documentElement.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    function open(btn) {
+      if (!el) build();
+      var strip = btn.closest('.vrec') || btn.closest('.vidx-visit__strip') || btn.closest('.vidx-recent__grid');
+      group = strip ? Array.prototype.slice.call(strip.querySelectorAll('[data-vlb]')) : [btn];
+      at = Math.max(0, group.indexOf(btn));
+      lastFocus = btn;
+      paint();
+      el.classList.add('is-open');
+      doc.documentElement.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    doc.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('[data-vlb]') : null;
+      if (btn) { e.preventDefault(); open(btn); }
+    });
   })();
 
   function render() {
@@ -486,7 +752,7 @@
           '<div class="vidx-space">' + v.sp + '</div>' +
           (v.worked ? '<span class="vidx-tag vidx-tag--worked">' +
             '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Worked with</span> ' : '') +
-          (v.seen ? '<div class="vidx-seen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Walked by ' + v.seen + '</div>' : '') +
+          (v.seen ? '<div class="vidx-seen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg>Walked by ' + v.seen + visitCount(v) + '</div>' : '') +
           (t ? '<span class="vidx-tag vidx-tag--' + v.ty + '">' + t + '</span>' : '') +
         '</td>' +
         '<td data-l="Precinct">' + v.pr + '</td>' +
@@ -508,7 +774,10 @@
       '<tr class="vidx-specrow" id="' + pid + '" hidden><td colspan="8">' +
         '<div class="vidx-spec">' +
           '<div class="vidx-spec__col vidx-spec__col--wide"><p class="vidx-spec__full">' + v.note + '</p>' +
-            (v.seen ? '<p class="vidx-spec__seen"><b>We have been in this room.</b> Walked by ' + v.seen +
+            /* Where there is a full visit record below, this line would say the
+               same thing twice and answer its own invitation. Only shown where
+               a visit is logged without photographs. */
+            (v.seen && !hasPhotos(v) ? '<p class="vidx-spec__seen"><b>We have been in this room.</b> Walked by ' + v.seen +
               '. Ask us what the floor plan does not tell you.</p>' : '') + '</div>' +
           '<div class="vidx-spec__col"><h4>' + v.sp + '</h4><dl>' + setupRows + '</dl></div>' +
           '<div class="vidx-spec__col"><h4>The room itself</h4><dl>' +
@@ -527,6 +796,7 @@
                   fmt(v.s_th + v.th) + '</b> between them, which is the ceiling on a plenary plus one concurrent stream.</p>' : '')
               : '<p class="vidx-spec__note">This venue does not publish a second space.</p>') +
           '</div>' +
+          visitBlock(v) +
         '</div>' +
       '</td></tr>';
     }).join('');
@@ -623,5 +893,5 @@
     });
   }
 
-  render();
+  if (hasTable) render();
 })();
