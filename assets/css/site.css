@@ -1502,6 +1502,8 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .vwalk__card a:hover{transform:translateY(-3px);border-color:var(--teal)}
 .vwalk__img{display:block;line-height:0;background:var(--stone)}
 .vwalk__img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.vwalk__img--none{aspect-ratio:4/3;display:grid;place-items:center;line-height:1.4;background:repeating-linear-gradient(135deg,var(--stone),var(--stone) 10px,#EFF3F5 10px,#EFF3F5 20px)}
+.vwalk__img--none span{font-size:.78rem;font-weight:600;color:#8a99a4;letter-spacing:.02em}
 .vwalk__body{display:block;padding:1.1rem 1.2rem 1.2rem}
 .vwalk__body b{display:block;color:var(--navy);font-size:1.06rem;margin-bottom:.28rem}
 .vwalk__meta{display:block;font-size:.85rem;font-weight:600;color:var(--teal-deep);margin-bottom:.5rem}
