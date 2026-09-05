@@ -86,6 +86,23 @@
 .vg-foot{margin:.75rem 0 0;font-size:.82rem;line-height:1.6;color:var(--muted)}
 .vg-foot a{color:var(--teal-deep)}
 
+/* collapsed source note. Summary carries the point so nothing is lost shut. */
+.vg-src{margin:.85rem 0 0;border-top:1px solid var(--line);padding-top:.7rem}
+.vg-src>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.45rem;
+  font-size:.82rem;font-weight:600;color:var(--teal-deep);padding:.15rem 0;
+  -webkit-tap-highlight-color:transparent}
+.vg-src>summary::-webkit-details-marker{display:none}
+.vg-src>summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;transform:rotate(45deg);margin-left:.1rem;
+  transition:transform .2s var(--ease);flex:none;position:relative;top:-2px}
+.vg-src[open]>summary::after{transform:rotate(-135deg);top:1px}
+.vg-src>summary:hover{color:var(--navy)}
+.vg-src>summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:3px}
+.vg-src__body{margin:.6rem 0 0;font-size:.82rem;line-height:1.65;color:var(--muted)}
+.vg-src__body p{margin:0 0 .6rem}
+.vg-src__body p:last-child{margin:0}
+.vg-src__body a{color:var(--teal-deep)}
+
 /* fact rows */
 .vg-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0 2.2rem}
 .vg-fact{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;
@@ -256,13 +273,22 @@
 
 <section class="s-white pad">
   <div class="wrap">
+    <div class="section-head"><h2 class="h2 vh-city">Sydney</h2></div>
+    <ul class="vh-grid" style="margin-bottom:2.8rem">
+<li class="vh-card"><a href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · 390 theatre · 349 rooms</span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a href="pullman-quay-grand-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-sydney/1-w900.jpg" alt="Pullman Quay Grand Sydney Harbour, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Quay Grand Sydney Harbour</b><span class="vh-card__meta">Hotel · 70 theatre · All suite</span><span class="vh-card__line">An all suite hotel on East Circular Quay. Three bookable spaces, the largest seating 70. A meeting and dining hotel, not a conference hotel.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+    </ul>
+    <div class="section-head"><h2 class="h2 vh-city">Melbourne</h2></div>
+    <ul class="vh-grid" style="margin-bottom:2.8rem">
+<li class="vh-card"><a href="hotel-indigo-melbourne-little-collins/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hotel-indigo-melbourne-little-collins/0-w900.jpg" alt="Hotel Indigo Melbourne Little Collins, Melbourne" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hotel Indigo Melbourne Little Collins</b><span class="vh-card__meta">Hotel · 12 boardroom · 179 rooms</span><span class="vh-card__line">179 rooms over ten floors in the CBD with one boardroom for twelve. Indexed as an accommodation property, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+    </ul>
     <div class="section-head"><h2 class="h2 vh-city">Brisbane</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, Brisbane" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · 400 theatre · 298 rooms</span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
     </ul>
-    <div class="section-head"><h2 class="h2 vh-city">Sydney</h2></div>
+    <div class="section-head"><h2 class="h2 vh-city">Perth</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · 390 theatre · 349 rooms</span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a href="pullman-bunker-bay/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-bunker-bay/12-w900.jpg" alt="Pullman Bunker Bay Resort, Perth" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Bunker Bay Resort</b><span class="vh-card__meta">Resort · 140 theatre · 150 villas</span><span class="vh-card__line">A 150 villa resort in the Margaret River region with a 144 sqm pillar free room. Built for the residential program where nobody leaves site.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
     </ul>
   </div>
 </section>
