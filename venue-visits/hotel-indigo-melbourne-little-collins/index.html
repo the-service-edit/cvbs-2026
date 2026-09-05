@@ -203,6 +203,20 @@
 
 
 
+.vg-sub{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;font-size:.9rem;color:var(--muted)}
+.vg-sub .kind{color:var(--teal-deep);font-weight:650}
+.vg-sub .dot{width:3px;height:3px;border-radius:50%;background:#B9C6CC;flex:none}
+.vg-stats{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1rem 0 0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.vg-stats li{flex:1 1 0;min-width:96px;padding:.7rem .85rem;border-right:1px solid var(--line)}
+.vg-stats li:last-child{border-right:0}
+.vg-stats b{display:block;font-size:1.45rem;line-height:1.1;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+.vg-stats span{display:block;margin-top:.15rem;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+@media(max-width:520px){.vg-stats li{min-width:50%;border-bottom:1px solid var(--line)}}
+.vg-person{display:flex;align-items:center;gap:.7rem;margin:0 0 .9rem;padding:0 0 .9rem;border-bottom:1px solid var(--line)}
+.vg-person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.vg-person b{display:block;font-size:.95rem;color:var(--navy);line-height:1.25}
+.vg-person span{display:block;font-size:.8rem;color:var(--muted);margin-top:.15rem;line-height:1.4}
+
 .vg-big{margin:1rem 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .vg-big table{width:100%;border-collapse:collapse;font-size:.92rem}
 .vg-big th,.vg-big td{padding:.6rem .85rem;text-align:left;border-bottom:1px solid var(--line);font-weight:500}
@@ -211,6 +225,19 @@
 .vg-big td{color:#5c6a75;white-space:nowrap}
 .vg-big a{color:inherit}
 .vg-h3{margin:1.8rem 0 .6rem;font-size:1rem;color:var(--navy);font-weight:650}
+.vg-person{display:flex;align-items:center;gap:.7rem;margin:0 0 .9rem;padding:0 0 .9rem;border-bottom:1px solid var(--line)}
+.vg-person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.vg-person b{display:block;font-size:.95rem;color:var(--navy);line-height:1.25}
+.vg-person span{display:block;font-size:.8rem;color:var(--muted);margin-top:.15rem;line-height:1.4}
+.vg-sub{margin:.5rem 0 0;font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.vg-sub .kind{color:var(--teal-deep);font-weight:650}
+.vg-sub .dot{width:3px;height:3px;border-radius:50%;background:#B9C6CC;flex:none}
+.vg-stats{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1rem 0 0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.vg-stats li{flex:1 1 0;min-width:96px;padding:.7rem .85rem;border-right:1px solid var(--line)}
+.vg-stats li:last-child{border-right:0}
+.vg-stats b{display:block;font-size:1.45rem;line-height:1.1;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+.vg-stats span{display:block;margin-top:.15rem;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+@media(max-width:520px){.vg-stats li{min-width:50%;border-bottom:1px solid var(--line)}}
 .vg-shots{gap:10px}
 .vg-shots img{aspect-ratio:4/5}
 .vg-note{margin:1.2rem 0 0;padding:1rem 1.2rem;border-left:3px solid var(--teal);background:var(--stone);border-radius:0 8px 8px 0}
@@ -257,15 +284,17 @@
   <div>
 
     <h1 class="vg-h1">Hotel Indigo Melbourne Little Collins</h1>
-    <div class="vg-meta">
-      <span class="kind">Hotel</span><span class="dot"></span><span>179 rooms</span><span class="dot"></span><span>12 boardroom</span><span class="dot"></span><span>CBD</span>
-    </div>
-    <p class="vg-addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> 288 Little Collins Street, Melbourne VIC 3000</p>
+    <p class="vg-sub"><span class="kind">Hotel</span><span class="dot"></span>288 Little Collins Street, Melbourne VIC 3000</p>
+    <ul class="vg-stats">
+      <li><b>12</b><span>Boardroom</span></li>
+      <li><b>6</b><span>Private dining</span></li>
+      <li><b>179</b><span>Rooms</span></li>
+      <li><b>10</b><span>Floors</span></li>
+    </ul>
     <p class="vg-insp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg> Inspected by CVBS</p>
 
     <div class="vg-intro">
-      <p>A 179 room lifestyle hotel over ten floors on Little Collins Street, opened in 2025 as IHG&rsquo;s first dual branded property in Australia and sharing its building with Holiday Inn Melbourne Bourke Street Mall. Rooms run 24 to 40 square metres, with a suite collection above that and a restaurant, Fern Bar &amp; Dining, on level two.</p>
-      <p>Meeting space is a single boardroom on level two, published at twelve guests, alongside a private dining conservatory seating four to six. <b>This is a hotel built for delegates to sleep in rather than to meet in.</b> It sits mid block between Swanston and Elizabeth, inside a ten minute walk of most of the CBD venues a Melbourne program would use.</p>
+      <p>A 179 room lifestyle hotel over ten floors on Little Collins Street, opened in 2025 and sharing its building with a Holiday Inn. <b>One boardroom for twelve, and no conference space.</b> Rooms run 24 to 40 square metres.</p>
     </div>
 
 
@@ -418,8 +447,15 @@
   <aside class="vg-aside">
     <div class="vg-card">
       <div class="vg-card__top">
+        <div class="vg-person">
+          <img src="../../assets/img/team/karen.jpg" alt="Karen Jepson, Director, CVBS" width="56" height="56" loading="lazy" decoding="async">
+          <div>
+            <b>Karen Jepson</b>
+            <span>Director. Finding venues since 1989.</span>
+          </div>
+        </div>
         <h2>Take this off your desk</h2>
-        <p>Tell us your dates and numbers once. We come back with what is available here, what it costs, and two other options worth looking at.</p>
+        <p>Tell us your dates and numbers once. You get a person, not a chatbot, and a shortlist inside 48 hours.</p>
       </div>
       <div class="vg-card__body">
         <a class="btn btn--teal" href="../../submit-a-brief.html?dest=Melbourne&amp;venue=Hotel%20Indigo%20Melbourne%20Little%20Collins">Start your brief <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -436,7 +472,7 @@
         <div class="vg-fact"><dt>Bookable spaces</dt><dd>3</dd></div>
         <div class="vg-fact"><dt>Guest rooms</dt><dd>349</dd></div>
       </div>
-      <p class="vg-card__note">We do not publish rates. What Crown will do on a day delegate package depends on your dates, your numbers and your room nights.</p>
+      <p class="vg-card__note">Or call Karen directly on <a href="tel:+61414784999">0414 784 999</a>. We do not publish rates, because what a venue will do on a day delegate package depends on your dates, your numbers and your room nights.</p>
     </div>
   </aside>
 

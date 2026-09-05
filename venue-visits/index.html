@@ -203,23 +203,49 @@
 
 
 
+.vg-sub{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;font-size:.9rem;color:var(--muted)}
+.vg-sub .kind{color:var(--teal-deep);font-weight:650}
+.vg-sub .dot{width:3px;height:3px;border-radius:50%;background:#B9C6CC;flex:none}
+.vg-stats{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1rem 0 0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.vg-stats li{flex:1 1 0;min-width:96px;padding:.7rem .85rem;border-right:1px solid var(--line)}
+.vg-stats li:last-child{border-right:0}
+.vg-stats b{display:block;font-size:1.45rem;line-height:1.1;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+.vg-stats span{display:block;margin-top:.15rem;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+@media(max-width:520px){.vg-stats li{min-width:50%;border-bottom:1px solid var(--line)}}
+.vg-person{display:flex;align-items:center;gap:.7rem;margin:0 0 .9rem;padding:0 0 .9rem;border-bottom:1px solid var(--line)}
+.vg-person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.vg-person b{display:block;font-size:.95rem;color:var(--navy);line-height:1.25}
+.vg-person span{display:block;font-size:.8rem;color:var(--muted);margin-top:.15rem;line-height:1.4}
+
 .vh-grid{list-style:none;margin:0;padding:0;display:grid;
   grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem}
-.vh-card a{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--line);
-  border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:var(--shadow-sm);
-  transition:.25s var(--ease)}
-.vh-card a:hover{transform:translateY(-3px);border-color:var(--teal)}
+.vh-card{display:flex;flex-direction:column}
+.vh-card__hit{display:flex;flex-direction:column;flex:1 1 auto;background:#fff;
+  border:1px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;overflow:hidden;
+  text-decoration:none;transition:.25s var(--ease)}
+.vh-card:hover .vh-card__hit{border-color:var(--teal)}
 .vh-card__img{display:block;line-height:0;background:var(--stone)}
 .vh-card__img img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 .vh-card__img--none{aspect-ratio:4/3;display:grid;place-items:center;line-height:1.4;
   background:repeating-linear-gradient(135deg,var(--stone),var(--stone) 10px,#EFF3F5 10px,#EFF3F5 20px)}
 .vh-card__img--none span{font-size:.78rem;font-weight:600;color:#8a99a4;letter-spacing:.02em}
-.vh-card__body{display:block;padding:1.1rem 1.2rem 1.2rem}
+.vh-card__body{display:block;padding:1.1rem 1.2rem .9rem}
 .vh-card__body b{display:block;color:var(--navy);font-size:1.06rem;margin-bottom:.3rem}
-.vh-card__meta{display:block;font-size:.85rem;font-weight:600;color:var(--teal-deep);margin-bottom:.55rem}
-.vh-card__line{display:block;font-size:.92rem;line-height:1.55;color:#5c6a75;margin-bottom:.7rem}
-.vh-card__seen{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;
+.vh-card__meta{display:block;font-size:.82rem;font-weight:600;color:var(--teal-deep);margin-bottom:.7rem}
+.vh-card__stats{display:flex;gap:1.1rem;margin:0 0 .7rem}
+.vh-card__stats span{display:block;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);font-weight:600}
+.vh-card__stats b{display:block;font-size:1.15rem;letter-spacing:-.01em;color:var(--navy);
+  text-transform:none;font-weight:700;line-height:1.15;margin:0}
+.vh-card__line{display:block;font-size:.9rem;line-height:1.55;color:#5c6a75;margin-bottom:.7rem}
+.vh-card__seen{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:600;
   color:var(--navy);border-left:3px solid var(--teal);padding-left:.55rem}
+.vh-card__act{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.2rem 1.1rem;background:#fff;
+  border:1px solid var(--line);border-top:0;border-radius:0 0 12px 12px}
+.vh-card:hover .vh-card__act{border-color:var(--teal)}
+.vh-card__more{font-size:.84rem;font-weight:600;color:var(--teal-deep);text-decoration:none}
+.vh-card__more:hover{text-decoration:underline}
+.btn--sm{padding:.5rem .95rem;font-size:.85rem}
 .vh-city{font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-.01em;margin:0}
 .vh-lede{max-width:66ch}
 .vh-lede p{font-size:clamp(1rem,1.8vw,1.1rem);line-height:1.68;color:#37444f;margin:0 0 1rem}
@@ -275,20 +301,20 @@
   <div class="wrap">
     <div class="section-head"><h2 class="h2 vh-city">Sydney</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · 390 theatre · 349 rooms</span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
-<li class="vh-card"><a href="pullman-quay-grand-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-sydney/1-w900.jpg" alt="Pullman Quay Grand Sydney Harbour, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Quay Grand Sydney Harbour</b><span class="vh-card__meta">Hotel · 70 theatre · All suite</span><span class="vh-card__line">An all suite hotel on East Circular Quay. Three bookable spaces, the largest seating 70. A meeting and dining hotel, not a conference hotel.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a class="vh-card__hit" href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · Barangaroo</span><span class="vh-card__stats"><span><b>390</b>theatre</span><span><b>340</b>banquet</span><span><b>349</b>rooms</span></span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">We have been inside</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Sydney&amp;venue=Crown%20Towers%20Sydney">Start your brief</a><a class="vh-card__more" href="crown-towers-sydney/">See the record</a></span></li>
+<li class="vh-card"><a class="vh-card__hit" href="pullman-quay-grand-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-sydney/1-w900.jpg" alt="Pullman Quay Grand Sydney Harbour, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Quay Grand Sydney Harbour</b><span class="vh-card__meta">Hotel · East Circular Quay</span><span class="vh-card__stats"><span><b>70</b>theatre</span><span><b>50</b>banquet</span><span><b>All</b>suites</span></span><span class="vh-card__line">An all suite hotel on East Circular Quay. Three bookable spaces, the largest seating 70. A meeting and dining hotel, not a conference hotel.</span><span class="vh-card__seen">We have been inside</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Sydney&amp;venue=Pullman%20Quay%20Grand%20Sydney%20Harbour">Start your brief</a><a class="vh-card__more" href="pullman-quay-grand-sydney/">See the record</a></span></li>
     </ul>
     <div class="section-head"><h2 class="h2 vh-city">Melbourne</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a href="hotel-indigo-melbourne-little-collins/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hotel-indigo-melbourne-little-collins/0-w900.jpg" alt="Hotel Indigo Melbourne Little Collins, Melbourne" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hotel Indigo Melbourne Little Collins</b><span class="vh-card__meta">Hotel · 12 boardroom · 179 rooms</span><span class="vh-card__line">179 rooms over ten floors in the CBD with one boardroom for twelve. Indexed as an accommodation property, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a class="vh-card__hit" href="hotel-indigo-melbourne-little-collins/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hotel-indigo-melbourne-little-collins/0-w900.jpg" alt="Hotel Indigo Melbourne Little Collins, Melbourne" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hotel Indigo Melbourne Little Collins</b><span class="vh-card__meta">Hotel · Melbourne CBD</span><span class="vh-card__stats"><span><b>12</b>boardroom</span><span><b>179</b>rooms</span><span><b>10</b>floors</span></span><span class="vh-card__line">179 rooms over ten floors in the CBD with one boardroom for twelve. Indexed as an accommodation property, not a conference venue.</span><span class="vh-card__seen">We have been inside</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Melbourne&amp;venue=Hotel%20Indigo%20Melbourne%20Little%20Collins">Start your brief</a><a class="vh-card__more" href="hotel-indigo-melbourne-little-collins/">See the record</a></span></li>
     </ul>
     <div class="section-head"><h2 class="h2 vh-city">Brisbane</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, Brisbane" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · 400 theatre · 298 rooms</span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a class="vh-card__hit" href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, Brisbane" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · Brisbane CBD</span><span class="vh-card__stats"><span><b>400</b>theatre</span><span><b>280</b>banquet</span><span><b>298</b>rooms</span></span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">We have been inside</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Brisbane&amp;venue=The%20Westin%20Brisbane">Start your brief</a><a class="vh-card__more" href="the-westin-brisbane/">See the record</a></span></li>
     </ul>
     <div class="section-head"><h2 class="h2 vh-city">Perth</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a href="pullman-bunker-bay/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-bunker-bay/12-w900.jpg" alt="Pullman Bunker Bay Resort, Perth" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Bunker Bay Resort</b><span class="vh-card__meta">Resort · 140 theatre · 150 villas</span><span class="vh-card__line">A 150 villa resort in the Margaret River region with a 144 sqm pillar free room. Built for the residential program where nobody leaves site.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
+<li class="vh-card"><a class="vh-card__hit" href="pullman-bunker-bay/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-bunker-bay/12-w900.jpg" alt="Pullman Bunker Bay Resort, Perth" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Bunker Bay Resort</b><span class="vh-card__meta">Resort · Margaret River region</span><span class="vh-card__stats"><span><b>140</b>theatre</span><span><b>100</b>banquet</span><span><b>150</b>villas</span></span><span class="vh-card__line">A 150 villa resort in the Margaret River region with a 144 sqm pillar free room. Built for the residential program where nobody leaves site.</span><span class="vh-card__seen">We have been inside</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Perth&amp;venue=Pullman%20Bunker%20Bay%20Resort">Start your brief</a><a class="vh-card__more" href="pullman-bunker-bay/">See the record</a></span></li>
     </ul>
   </div>
 </section>

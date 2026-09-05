@@ -202,6 +202,20 @@
 }
 
 
+
+.vg-sub{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 0;font-size:.9rem;color:var(--muted)}
+.vg-sub .kind{color:var(--teal-deep);font-weight:650}
+.vg-sub .dot{width:3px;height:3px;border-radius:50%;background:#B9C6CC;flex:none}
+.vg-stats{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1rem 0 0;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.vg-stats li{flex:1 1 0;min-width:96px;padding:.7rem .85rem;border-right:1px solid var(--line)}
+.vg-stats li:last-child{border-right:0}
+.vg-stats b{display:block;font-size:1.45rem;line-height:1.1;color:var(--navy);font-weight:700;letter-spacing:-.01em}
+.vg-stats span{display:block;margin-top:.15rem;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+@media(max-width:520px){.vg-stats li{min-width:50%;border-bottom:1px solid var(--line)}}
+.vg-person{display:flex;align-items:center;gap:.7rem;margin:0 0 .9rem;padding:0 0 .9rem;border-bottom:1px solid var(--line)}
+.vg-person img{width:56px;height:56px;border-radius:50%;object-fit:cover;flex:none}
+.vg-person b{display:block;font-size:.95rem;color:var(--navy);line-height:1.25}
+.vg-person span{display:block;font-size:.8rem;color:var(--muted);margin-top:.15rem;line-height:1.4}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Venue visits", "item": "https://the-service-edit.github.io/cvbs-2026/venue-visits/"}, {"@type": "ListItem", "position": 3, "name": "Brisbane", "item": "https://the-service-edit.github.io/cvbs-2026/venue-finder-brisbane.html"}, {"@type": "ListItem", "position": 4, "name": "The Westin Brisbane", "item": "https://the-service-edit.github.io/cvbs-2026/venue-visits/the-westin-brisbane/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "publisher": {"@id": "https://conferencevenues.com.au/#organization"}, "mainEntity": [{"@type": "Question", "name": "What size conference can The Westin Brisbane hold?", "acceptedAnswer": {"@type": "Answer", "text": "The Westin Ballroom seats 400 theatre style, 280 for a banquet, 240 classroom and 400 for a cocktail reception, across 450 square metres. It divides into two rooms of 300 and 150 square metres."}}, {"@type": "Question", "name": "Does The Westin Brisbane have accommodation on site?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, 298 rooms and suites above the event floor."}}, {"@type": "Question", "name": "How many meeting rooms does The Westin Brisbane have?", "acceptedAnswer": {"@type": "Answer", "text": "Six event rooms. The published chart lists thirteen named spaces, but several are outdoor terraces, the pool deck or the pre-function area."}}, {"@type": "Question", "name": "What is the ceiling height at The Westin Brisbane?", "acceptedAnswer": {"@type": "Answer", "text": "The hotel publishes 4 metres for the Elevate rooms, Thrive and the pre-function area. It publishes no ceiling height for the Westin Ballroom."}}, {"@type": "Question", "name": "Is The Westin Brisbane big enough for a large conference?", "acceptedAnswer": {"@type": "Answer", "text": "Not above 400 in one room. Brisbane Convention and Exhibition Centre's Great Hall takes 3,900 theatre, The Star Brisbane's Event Centre 1,800, Sofitel Brisbane Central 1,056 and Hilton Brisbane 800."}}]}</script>
@@ -243,14 +257,13 @@
   <div>
 
     <h1 class="vg-h1">The Westin Brisbane</h1>
-    <div class="vg-meta">
-      <span class="kind">Hotel</span><span class="dot"></span>
-      <span>400 theatre</span><span class="dot"></span>
-      <span>280 banquet</span><span class="dot"></span>
-      <span>400 cocktail</span><span class="dot"></span>
-      <span>298 rooms</span>
-    </div>
-    <p class="vg-addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> 111 Mary Street, Brisbane City QLD 4000</p>
+    <p class="vg-sub"><span class="kind">Hotel</span><span class="dot"></span>111 Mary Street, Brisbane City QLD 4000</p>
+    <ul class="vg-stats">
+      <li><b>400</b><span>Theatre</span></li>
+      <li><b>280</b><span>Banquet</span></li>
+      <li><b>400</b><span>Cocktail</span></li>
+      <li><b>298</b><span>Rooms</span></li>
+    </ul>
     <p class="vg-insp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg> Inspected by CVBS</p>
 
     <div class="vg-intro">
@@ -383,15 +396,23 @@
   <aside class="vg-aside">
     <div class="vg-card">
       <div class="vg-card__top">
-        <h2>Ask us about The Westin Brisbane</h2>
-        <p>Tell us your dates and numbers and we will come back with availability and a rate.</p>
+        <div class="vg-person">
+          <img src="../../assets/img/team/karen.jpg" alt="Karen Jepson, Director, CVBS" width="56" height="56" loading="lazy" decoding="async">
+          <div>
+            <b>Karen Jepson</b>
+            <span>Director. Finding venues since 1989.</span>
+          </div>
+        </div>
+        <h2>Take this off your desk</h2>
+        <p>Tell us your dates and numbers once. You get a person, not a chatbot, and a shortlist inside 48 hours.</p>
       </div>
       <div class="vg-card__body">
         <a class="btn btn--teal" href="../../submit-a-brief.html?dest=Brisbane&amp;venue=The%20Westin%20Brisbane">Start your brief <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <ul class="vg-card__pts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>One brief, not eight phone calls.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>Back to you within 48 hours.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>Free to you, and independent of every venue.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>Shortlist within 48 hours.</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>We will tell you if another venue fits better.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.4 12.4l2.4 2.4 4.5-5"/></svg><span>We will say so if this is the wrong room for you.</span></li>
         </ul>
       </div>
       <div class="vg-card__stats">
@@ -400,7 +421,7 @@
         <div class="vg-fact"><dt>Event rooms</dt><dd>6</dd></div>
         <div class="vg-fact"><dt>Guest rooms</dt><dd>298</dd></div>
       </div>
-      <p class="vg-card__note">We do not publish rates. What The Westin will do on a day delegate package depends on your dates, your numbers and your room nights.</p>
+      <p class="vg-card__note">Or call Karen directly on <a href="tel:+61414784999">0414 784 999</a>. We do not publish rates, because what a venue will do on a day delegate package depends on your dates, your numbers and your room nights.</p>
     </div>
   </aside>
 
