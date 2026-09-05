@@ -12,14 +12,14 @@
 <meta property="og:title" content="Government Conference &amp; Event Venue Sourcing | CVBS">
 <meta property="og:description" content="Procurement, accessibility and value for money. We source government conference and meeting venues that meet the brief and the process.">
 <meta property="og:url" content="https://the-service-edit.github.io/cvbs-2026/government-conference-venues.html">
-<meta property="og:image" content="https://the-service-edit.github.io/cvbs-2026/assets/img/venue-hero-1000.jpg?v=202608131600">
+<meta property="og:image" content="https://the-service-edit.github.io/cvbs-2026/assets/img/venue-hero-1000.jpg?v=202609051700">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.png?v=202608131600" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=202608131600">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/img/venue-hero-1600.webp?v=202608131600">
+<link rel="preload" as="image" href="assets/img/venue-hero-1600.webp?v=202609051700">
 <link rel="stylesheet" href="assets/css/site.css?v=202608261415">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://the-service-edit.github.io/cvbs-2026/services.html"}, {"@type": "ListItem", "position": 3, "name": "Government conference and event venues", "item": "https://the-service-edit.github.io/cvbs-2026/government-conference-venues.html"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is your service free for government departments?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our sourcing is free to you, because the venue pays our commission. That also makes the value-for-money case simpler, since you receive negotiated rates and a clear comparison at no cost to the department. Our how we're paid page explains the model."}},{"@type":"Question","name":"Can you source accessible venues?","acceptedAnswer":{"@type":"Answer","text":"Yes. Accessibility is part of every brief we run for government clients. We check step-free access, hearing assistance, accessible amenities and wayfinding, and we flag anything that falls short before you commit."}}],"publisher":{"@id":"https://conferencevenues.com.au/#organization"},"about":{"@id":"https://conferencevenues.com.au/#organization"}}</script>
@@ -53,8 +53,15 @@
     <span class="eyebrow" style="margin-top:1.2rem">Industry expertise</span>
     <h1>Government conference and event venues</h1>
     <p class="lead">Procurement, accessibility and value for money. We source government conference and meeting venues that meet the brief and the process.</p>
-    <a class="link-arrow mt-2" href="submit-a-brief.html" style="color:var(--teal-deep)">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
+        <form class="ph-brief" action="submit-a-brief.html" method="get">
+      <input type="hidden" name="type" value="Conference">
+      <label class="vis-hidden" for="ph-dest">Destination</label>
+      <select id="ph-dest" name="dest"><option value="">Destination</option><option value="Sydney">Sydney</option><option value="Melbourne">Melbourne</option><option value="Brisbane">Brisbane</option><option value="Perth">Perth</option><option value="Adelaide">Adelaide</option><option value="Canberra">Canberra</option><option value="Gold Coast">Gold Coast</option><option value="Hobart">Hobart</option><option value="Darwin">Darwin</option><option value="Cairns">Cairns</option><option value="Hunter Valley">Hunter Valley</option><option value="Blue Mountains">Blue Mountains</option><option value="Byron Bay">Byron Bay</option><option value="Sunshine Coast">Sunshine Coast</option><option value="Yarra Valley">Yarra Valley</option><option value="Mornington Peninsula">Mornington Peninsula</option><option value="Somewhere else">Somewhere else</option></select>
+      <label class="vis-hidden" for="ph-guests">How many people</label>
+      <input id="ph-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="People">
+      <button class="btn btn--teal" type="submit">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+</div>
 </section>
 <section class="s-white pad"><div class="wrap hero-grid" style="align-items:start">
   <div class="prose reveal"><p class="lead" style="color:#37444f">Government events come with requirements that go beyond the room: procurement and probity expectations, accessibility for every attendee, privacy and security considerations, and a clear value-for-money case. We source venues that meet those standards and document the options so your approval process is straightforward.</p>

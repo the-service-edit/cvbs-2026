@@ -77,3 +77,7 @@ _superseded-*.html
 _original-backup/
 _preview-site-visits/
 _DROP PHOTOS HERE/
+
+# Hero crop tests and screenshot scratch from the 5 Sep usability pass
+_hero-review/
+Claude outputs/

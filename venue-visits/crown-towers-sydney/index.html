@@ -32,8 +32,17 @@
 .vg-gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .vg-gal button:hover img{transform:scale(1.04)}
 .vg-gal button:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
-.vg-more{position:absolute;inset:0;display:grid;place-items:center;background:rgba(10,44,82,.55);
-  color:#fff;font:600 .9rem/1 Inter,system-ui,sans-serif;letter-spacing:.02em}
+.vg-more{position:absolute;inset:0;display:grid;place-items:center;color:#fff;
+  background:linear-gradient(180deg,rgba(10,44,82,.18) 0%,rgba(10,44,82,.62) 100%);
+  transition:background .25s var(--ease)}
+.vg-more i{display:inline-flex;align-items:center;gap:.45rem;font-style:normal;
+  padding:.52rem .9rem .52rem .78rem;border-radius:999px;background:rgba(10,44,82,.72);
+  border:1px solid rgba(255,255,255,.55);box-shadow:0 6px 18px rgba(10,44,82,.3);
+  font:700 1rem/1 Inter,system-ui,sans-serif;letter-spacing:.01em;
+  transition:background .25s var(--ease),transform .25s var(--ease)}
+.vg-more svg{display:block;flex:none}
+.vg-gal button:hover .vg-more{background:linear-gradient(180deg,rgba(10,44,82,.26) 0%,rgba(10,44,82,.7) 100%)}
+.vg-gal button:hover .vg-more i{background:var(--teal,#0f8a8a);transform:translateY(-1px)}
 @media(max-width:640px){.vg-gal{grid-template-columns:1fr 1fr;height:300px}
   .vg-gal button:first-child{grid-row:1/2;grid-column:1/3}}
 
@@ -278,7 +287,7 @@
 
   <nav class="vg-crumbs" aria-label="Breadcrumb"><a href="../../index.html">Home</a><span>/</span><a href="../">Venue visits</a><span>/</span><a href="../../venue-finder-sydney.html">Sydney</a><span>/</span>Crown Towers Sydney</nav>
 
-  <div class="vg-gal"><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" loading="eager" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, Pre-Function Foyer" loading="lazy" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"><span class="vg-more">All 13 photographs</span></button></div>
+  <div class="vg-gal"><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" loading="eager" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, Pre-Function Foyer" loading="lazy" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" aria-label="Open the gallery, 13 photographs"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"><span class="vg-more"><i><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.6A1.6 1.6 0 0 1 4.6 7h2.1a1 1 0 0 0 .83-.45l.93-1.4A1 1 0 0 1 9.3 4.7h5.4a1 1 0 0 1 .84.45l.93 1.4A1 1 0 0 0 17.3 7h2.1A1.6 1.6 0 0 1 21 8.6v8.8A1.6 1.6 0 0 1 19.4 19H4.6A1.6 1.6 0 0 1 3 17.4z"/><circle cx="12" cy="12.7" r="3.5"/></svg>13</i></span></button></div>
 
   <div class="vg-body">
   <div>

@@ -236,8 +236,10 @@
             <select id="location" name="Preferred location" required>
               <option value="">Select a location...</option>
               <option>Sydney, NSW</option><option>Melbourne, VIC</option><option>Brisbane, QLD</option><option>Gold Coast, QLD</option>
-              <option>Canberra, ACT</option><option>Perth, WA</option><option>Adelaide, SA</option><option>Hunter Valley, NSW</option>
-              <option>Blue Mountains, NSW</option><option>Yarra Valley, VIC</option><option>International</option>
+              <option>Canberra, ACT</option><option>Perth, WA</option><option>Adelaide, SA</option><option>Hobart, TAS</option>
+              <option>Darwin, NT</option><option>Cairns, QLD</option><option>Sunshine Coast, QLD</option><option>Byron Bay, NSW</option>
+              <option>Hunter Valley, NSW</option><option>Blue Mountains, NSW</option><option>Yarra Valley, VIC</option>
+              <option>Mornington Peninsula, VIC</option><option>International</option>
               <option>Flexible / open to suggestions</option><option value="Other">Other (specify)</option>
             </select>
             <div class="err">Please choose a location.</div>
@@ -690,8 +692,7 @@
     'Gala or awards night':'Product launch / event',
     'Group accommodation':'Group accommodation',
     'Corporate retreat':'Corporate retreat',
-    'Retreat or offsite':'Corporate retreat',
-    'Something else':'Conference venue finding'
+    'Retreat or offsite':'Corporate retreat'
   };
   if(type&&serviceMap[type]){
     [].slice.call(document.querySelectorAll('input[name="Service"]')).forEach(function(box){

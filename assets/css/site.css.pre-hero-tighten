@@ -1250,20 +1250,6 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .page-hero--img .ph-bg{object-position:52% 62%}
 }
 
-/* Heroes were eating a whole phone screen before anything could be done.
-   711px of a 844px viewport on the Sydney page. Tightened 5 Sep 2026 so the
-   page's actual content starts inside the first screen. */
-@media (max-width:760px){
-  .page-hero .wrap,
-  .page-hero--img .wrap{padding-block:1.9rem 2.1rem}
-  .page-hero h1,
-  .page-hero--img h1{font-size:clamp(1.75rem,6.4vw,2.3rem);line-height:1.12;margin:.6rem 0 .7rem;max-width:22ch}
-  .page-hero .lead{font-size:.98rem;line-height:1.55;max-width:46ch}
-  .page-hero .crumbs{font-size:.78rem}
-  .page-hero .btn-row{margin-top:1rem;gap:.6rem}
-  .page-hero .btn{padding:.7rem 1.1rem;font-size:.92rem}
-}
-
 /* ============================================================
    MOBILE HERO + BRIEF CARD  ·  26 Aug 2026
    Fixes: hero scrim failed WCAG on phones (white text hit CR 1.0
@@ -1529,40 +1515,3 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .vwalk__seen{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;
   color:var(--navy);border-left:3px solid var(--teal);padding-left:.55rem}
 .vwalk__seen svg{width:14px;height:14px;color:var(--teal-deep)}
-
-
-/* ============================================================
-   HERO BRIEF STARTER  ·  5 Sep 2026
-   Competitor audit (VenueNow, Tagvenue) showed marketplaces put a working
-   form in the hero and reach content in 0.1 screens on 24-33 words. Agency
-   competitors put a statement and bury the form 2,400px down. This is the
-   agency version of the marketplace pattern: the hero form starts a real
-   brief rather than searching a database.
-   ============================================================ */
-.ph-brief{margin:1.15rem 0 0;max-width:620px;background:rgba(255,255,255,.96);
-  border-radius:14px;padding:.7rem;display:grid;grid-template-columns:1fr 1fr auto;
-  gap:.5rem;align-items:center;box-shadow:0 14px 34px rgba(6,30,59,.28)}
-.ph-brief .vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.ph-brief select,.ph-brief input{width:100%;border:1px solid var(--line);border-radius:9px;
-  padding:.75rem .85rem;font:inherit;font-size:.95rem;color:var(--navy);background:#fff;
-  appearance:none;-webkit-appearance:none;min-height:46px}
-.ph-brief select{background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A2C52' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right .65rem center;background-size:16px;padding-right:2.1rem}
-.ph-brief select:focus,.ph-brief input:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal)}
-.ph-brief .btn{width:100%;justify-content:center;white-space:nowrap;min-height:46px}
-.page-hero--img .hero-proofs{margin-top:.9rem}
-@media(max-width:700px){
-  .ph-brief{grid-template-columns:1fr 1fr;padding:.6rem;gap:.45rem;margin-top:1rem}
-  .ph-brief .btn{grid-column:1 / -1}
-  .ph-brief select,.ph-brief input{font-size:16px}
-}
-
-/* Guides are articles, so the prose stays. But a reader should be able to hand
-   the job over without scrolling the whole piece. 5 Sep 2026 */
-.guide-act{background:var(--navy);color:#EAF1F4}
-.guide-act .wrap{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap;
-  padding-block:.9rem}
-.guide-act p{margin:0;flex:1 1 320px;font-size:.94rem;line-height:1.5;color:rgba(255,255,255,.9)}
-.guide-act .btn{flex:0 0 auto}
-@media(max-width:600px){.guide-act .wrap{padding-block:.85rem}.guide-act p{font-size:.9rem}
-  .guide-act .btn{width:100%;justify-content:center}}
