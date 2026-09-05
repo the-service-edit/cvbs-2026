@@ -86,6 +86,23 @@
 .vg-foot{margin:.75rem 0 0;font-size:.82rem;line-height:1.6;color:var(--muted)}
 .vg-foot a{color:var(--teal-deep)}
 
+/* collapsed source note. Summary carries the point so nothing is lost shut. */
+.vg-src{margin:.85rem 0 0;border-top:1px solid var(--line);padding-top:.7rem}
+.vg-src>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.45rem;
+  font-size:.82rem;font-weight:600;color:var(--teal-deep);padding:.15rem 0;
+  -webkit-tap-highlight-color:transparent}
+.vg-src>summary::-webkit-details-marker{display:none}
+.vg-src>summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;transform:rotate(45deg);margin-left:.1rem;
+  transition:transform .2s var(--ease);flex:none;position:relative;top:-2px}
+.vg-src[open]>summary::after{transform:rotate(-135deg);top:1px}
+.vg-src>summary:hover{color:var(--navy)}
+.vg-src>summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:3px}
+.vg-src__body{margin:.6rem 0 0;font-size:.82rem;line-height:1.65;color:var(--muted)}
+.vg-src__body p{margin:0 0 .6rem}
+.vg-src__body p:last-child{margin:0}
+.vg-src__body a{color:var(--teal-deep)}
+
 /* fact rows */
 .vg-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0 2.2rem}
 .vg-fact{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;
@@ -269,7 +286,14 @@
           </tbody>
         </table>
       </div></div>
-      <p class="vg-foot">A dash means the hotel publishes no figure for that setup. Every number is read from <a href="https://www.marriott.com/en-us/hotels/bnewi-the-westin-brisbane/events/stylish-spaces/" rel="nofollow noopener" target="_blank">The Westin Brisbane's own capacity chart</a>, checked 5 September 2026, never estimated and never taken from a directory. Areas are omitted for the pool deck and podium because the hotel's chart prints an impossible figure for both. Marriott also hosts a fact sheet PDF dated 2017 that gives 405 theatre and 930 sqm of event space. It predates the hotel opening and we do not use it.</p>
+      <details class="vg-src">
+        <summary>Where these figures come from, and why a dash is not a zero</summary>
+        <div class="vg-src__body">
+          <p>A dash means the hotel publishes no figure for that setup. It does not mean the room cannot be set that way, only that we will not print a number the hotel has not published.</p>
+          <p>Every figure is read from <a href="https://www.marriott.com/en-us/hotels/bnewi-the-westin-brisbane/events/stylish-spaces/" rel="nofollow noopener" target="_blank">The Westin Brisbane's own capacity chart</a>, checked 5 September 2026. Never estimated, never taken from a directory. Areas are omitted for the pool deck and podium because the hotel's chart prints an impossible figure for both.</p>
+          <p><b>There is an older document that disagrees.</b> Marriott hosts a fact sheet PDF dated 2017 giving 405 theatre and 930 sqm of event space. It predates the hotel opening and we do not use it.</p>
+        </div>
+      </details>
     </section>
 
     <section class="vg-sec">
@@ -300,9 +324,8 @@
     </section>
 
     <section class="vg-sec" id="visit">
-      <h2>Our inspection</h2>
-      <p>Somebody from CVBS was in this building and took every photograph below. <b>We do not see every room on every visit, and we only write about the ones we stood in.</b></p>
-      <p><b>What we saw here was the accommodation.</b> Five photographs, all of a king room and its bathroom. We have not stood in the Westin Ballroom or the Elevate rooms, so every event figure on this page comes from the hotel's own published chart rather than from us. For a residential conference that is still the half most briefs turn on, because the ballroom capacity is published and what the room is actually like at 6am is not.</p>
+      <h2>Accommodation</h2>
+      <p>298 rooms and suites sit directly above the event floor, so a residential conference and its room block share one lift core. The photographs below are of a king room and its bathroom.</p>
       <ul class="vg-shots">
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane" loading="lazy" decoding="async" width="900" height="1200"></button></li>
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/the-westin-brisbane/3-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/the-westin-brisbane/3-w900.jpg" alt="The Westin Brisbane" loading="lazy" decoding="async" width="900" height="1200"></button></li>
@@ -359,7 +382,14 @@
         <li><a href="../../conference-venue-finding.html"><b>Conference venue finding</b><span>How we source and negotiate, free to you.</span></a></li>
         <li><a href="../"><b>All venue visits</b><span>Every venue we have personally walked.</span></a></li>
       </ul>
-      <p class="vg-foot" style="margin-top:1.2rem">Capacities read from the hotel's own published chart on 5 September 2026. Photographs are ours and are not supplied by the venue. We do not rate or score venues and we do not publish rates. CVBS is paid a commission by the venue when you book, from its existing budget and at the same rate whether you book through us or direct, which is why our service is free to you.</p>
+      <details class="vg-src" style="margin-top:1.4rem">
+        <summary>Sources, photography and how we are paid</summary>
+        <div class="vg-src__body">
+          <p>Capacities read from the hotel's own published chart on 5 September 2026.</p>
+          <p>Photographs are ours and are not supplied by the venue. We do not see every room on every visit. Where we were not in a room, its figures come from the hotel's own chart rather than from us. We do not rate or score venues and we do not publish rates.</p>
+          <p>CVBS is paid a commission by the venue when you book, from its existing budget and at the same rate whether you book through us or direct, which is why our service is free to you.</p>
+        </div>
+      </details>
     </section>
 
   </div>

@@ -86,6 +86,23 @@
 .vg-foot{margin:.75rem 0 0;font-size:.82rem;line-height:1.6;color:var(--muted)}
 .vg-foot a{color:var(--teal-deep)}
 
+/* collapsed source note. Summary carries the point so nothing is lost shut. */
+.vg-src{margin:.85rem 0 0;border-top:1px solid var(--line);padding-top:.7rem}
+.vg-src>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:.45rem;
+  font-size:.82rem;font-weight:600;color:var(--teal-deep);padding:.15rem 0;
+  -webkit-tap-highlight-color:transparent}
+.vg-src>summary::-webkit-details-marker{display:none}
+.vg-src>summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;transform:rotate(45deg);margin-left:.1rem;
+  transition:transform .2s var(--ease);flex:none;position:relative;top:-2px}
+.vg-src[open]>summary::after{transform:rotate(-135deg);top:1px}
+.vg-src>summary:hover{color:var(--navy)}
+.vg-src>summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:3px}
+.vg-src__body{margin:.6rem 0 0;font-size:.82rem;line-height:1.65;color:var(--muted)}
+.vg-src__body p{margin:0 0 .6rem}
+.vg-src__body p:last-child{margin:0}
+.vg-src__body a{color:var(--teal-deep)}
+
 /* fact rows */
 .vg-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0 2.2rem}
 .vg-fact{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;
@@ -275,7 +292,14 @@
           </tbody>
         </table>
       </div></div>
-      <p class="vg-foot">A dash means Crown publishes no figure for that setup. Every number is read from <a href="https://www.crownhotels.com.au/sydney/events-conferences/event-venues/pearl-ballroom" rel="nofollow noopener" target="_blank">Crown's own Pearl Ballroom capacity panel</a>, checked 5 September 2026, never estimated and never taken from a directory. Crown publishes no floor area for any Sydney space, so the area column is empty throughout. For the Opal Suite it publishes &ldquo;meetings 20&rdquo; without naming a setup, and for both small rooms it publishes &ldquo;seated events&rdquo;, which we have read as banquet. <b>Note the two Crown websites disagree.</b> crownhotels.com.au carries the full table above and a 2026 copyright. crownsydney.com.au still says the ballroom holds 350, under a 2019 to 2022 copyright. We use 390.</p>
+      <details class="vg-src">
+        <summary>Where these figures come from, and why a dash is not a zero</summary>
+        <div class="vg-src__body">
+          <p>A dash means Crown publishes no figure for that setup. It does not mean the room cannot be set that way, only that we will not print a number the venue has not published.</p>
+          <p>Every figure is read from <a href="https://www.crownhotels.com.au/sydney/events-conferences/event-venues/pearl-ballroom" rel="nofollow noopener" target="_blank">Crown's own Pearl Ballroom capacity panel</a>, checked 5 September 2026. Never estimated, never taken from a directory. Crown publishes no floor area for any of its Sydney spaces, which is why the area column is empty throughout. For the Opal Suite it publishes &ldquo;meetings 20&rdquo; without naming a setup, and for both small rooms it publishes &ldquo;seated events&rdquo;, which we have read as banquet.</p>
+          <p><b>The two Crown websites disagree.</b> crownhotels.com.au carries the full table above under a 2026 copyright. crownsydney.com.au still says the ballroom holds 350, under a 2019 to 2022 copyright. We use 390.</p>
+        </div>
+      </details>
     </section>
 
     <section class="vg-sec">
@@ -292,30 +316,9 @@
       </div>
     </section>
 
-    <section class="vg-sec">
-      <h2>What Crown does not publish</h2>
-      <p>These are the questions we put to the venue, and the answers go on this page once we have them. On a building of this profile the list is unusually long.</p>
-      <ul class="vg-list vg-list--ask">
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Pearl Ballroom floor area in square metres, and its length by width</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Clear ceiling height in the ballroom, under any beam or rig</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Whether the ballroom is pillarless, and where any columns fall</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>The names and individual capacities of the three Pearl divisions</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Pre-Function Foyer capacity, which Crown publishes for no setup at all</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>U-shape, boardroom and hollow square figures, which are published nowhere</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Rigging points, floor load and the loading dock run to the ballroom</span></li>
-<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>A real floor plan. The asset labelled "Floorplan of Pearl Ballroom" on Crown’s own venue page is a map of Barangaroo, not a plan of the room.</span></li>
-      </ul>
-    </section>
-
-    <section class="vg-sec" id="visit">
-      <h2>Our inspection</h2>
-      <p>Somebody from CVBS was in this building and took every photograph on this page. <b>We do not see every room on every visit, and we only write about the ones we stood in.</b> Everything else here is read off the venue's own published material and checked on the date in the footnote. Where the venue publishes nothing, we say so rather than filling the gap.</p>
-      
-    </section>
-
     <section class="vg-sec" id="event-floor">
       <h2>The event floor</h2>
-      <p><b>We have stood in the Pearl Ballroom and the Pre-Function Foyer.</b> We have not been inside the Opal Suite or The Pavilion, and we have not seen the ballroom split into its three divisions, so their figures below come from Crown's own chart rather than from us.</p>
+      <p>The Pearl Ballroom is the only room in the building that takes more than forty people, so every conference, gala and awards night here happens in it. An expansive Pre-Function Foyer runs alongside it, and the ballroom divides into three for smaller events.</p>
       <ul class="vg-shots">
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" loading="lazy" decoding="async"></button></li>
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, Pre-Function Foyer" loading="lazy" decoding="async"></button></li>
@@ -325,7 +328,7 @@
 
     <section class="vg-sec" id="accommodation">
       <h2>Accommodation</h2>
-      <p>Group accommodation is half of what we do at a building like this, and it is the half a floor plan tells you nothing about. Crown Towers Sydney has <b>349 rooms, suites and villas above the event floor</b>, which means a conference and its room block can sit in one lift core. We have been inside the rooms below.</p>
+      <p>Group accommodation is half of what we do at a building like this, and it is the half a floor plan tells you nothing about. Crown Towers Sydney has <b>349 rooms, suites and villas above the event floor</b>, which means a conference and its room block can sit in one lift core.</p>
       <div class="vg-facts">
 <div class="vg-fact"><dt>Rooms, suites and villas</dt><dd>349</dd></div>
 <div class="vg-fact"><dt>Published room types</dt><dd>Crown publishes its room and suite range on its own site</dd></div>
@@ -353,7 +356,7 @@
 
     <section class="vg-sec" id="the-building">
       <h2>The rest of the building</h2>
-      <p>Restaurants, bars and public areas we walked through on the same visit.</p>
+      <p>Restaurants, bars and public areas.</p>
       <ul class="vg-shots">
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
@@ -361,6 +364,21 @@
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
 <li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+      </ul>
+    </section>
+
+    <section class="vg-sec">
+      <h2>What Crown does not publish</h2>
+      <p>These are the questions we put to the venue, and the answers go on this page once we have them. On a building of this profile the list is unusually long.</p>
+      <ul class="vg-list vg-list--ask">
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Pearl Ballroom floor area in square metres, and its length by width</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Clear ceiling height in the ballroom, under any beam or rig</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Whether the ballroom is pillarless, and where any columns fall</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>The names and individual capacities of the three Pearl divisions</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Pre-Function Foyer capacity, which Crown publishes for no setup at all</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>U-shape, boardroom and hollow square figures, which are published nowhere</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>Rigging points, floor load and the loading dock run to the ballroom</span></li>
+<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.4v.5"/><path d="M12 17h.01"/></svg><span>A real floor plan. The asset labelled "Floorplan of Pearl Ballroom" on Crown’s own venue page is a map of Barangaroo, not a plan of the room.</span></li>
       </ul>
     </section>
 
@@ -432,7 +450,14 @@
         <li><a href="../../conference-venue-finding.html"><b>Conference venue finding</b><span>How we source and negotiate, free to you.</span></a></li>
         <li><a href="../"><b>All venue visits</b><span>Every venue we have personally walked.</span></a></li>
       </ul>
-      <p class="vg-foot" style="margin-top:1.2rem">Capacities read from Crown&rsquo;s own published capacity panel on 5 September 2026. Comparison figures read from each named venue&rsquo;s own published material on the same date. Photographs are ours, taken on our own inspection, and are not supplied by the venue. We do not rate or score venues and we do not publish rates. CVBS is paid a commission by the venue when you book, from its existing budget and at the same rate whether you book through us or direct, which is why our service is free to you.</p>
+      <details class="vg-src" style="margin-top:1.4rem">
+        <summary>Sources, photography and how we are paid</summary>
+        <div class="vg-src__body">
+          <p>Capacities read from Crown&rsquo;s own published capacity panel on 5 September 2026. Comparison figures read from each named venue&rsquo;s own published material on the same date.</p>
+          <p>Photographs are ours, taken on our own inspection, and are not supplied by the venue. We do not see every room on every visit. Where we were not in a room, its figures come from the venue's own chart rather than from us. We do not rate or score venues and we do not publish rates.</p>
+          <p>CVBS is paid a commission by the venue when you book, from its existing budget and at the same rate whether you book through us or direct, which is why our service is free to you.</p>
+        </div>
+      </details>
     </section>
 
   </div>
