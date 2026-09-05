@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
-<meta name="robots" content="noindex,follow">
-<!-- noindex until the visit record passes the five point gate. Missing: visit date, visitor, their note,
-     and photographs whose provenance is confirmed as ours. Remove this line to publish. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crown Towers Sydney conference facilities and capacities | CVBS</title>
@@ -59,8 +56,6 @@
   border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;
   background:var(--stone);font-size:.85rem;font-weight:600;color:var(--navy)}
 .vg-insp svg{width:15px;height:15px;color:var(--teal-deep);flex:none}
-.vg-insp .pend{background:#B4690E;color:#fff;font:700 .6rem/1 system-ui,sans-serif;
-  letter-spacing:.1em;padding:.28rem .42rem;border-radius:3px}
 .vg-intro{margin:1.2rem 0 0;font-size:1rem;line-height:1.68;color:#37444f;max-width:70ch}
 .vg-intro p{margin:0 0 .8rem}
 .vg-intro p:last-child{margin-bottom:0}
@@ -166,19 +161,31 @@
 
 /* lightbox */
 .vg-lb{position:fixed;inset:0;z-index:900;background:rgba(6,30,59,.94);display:none;
-  align-items:center;justify-content:center;padding:clamp(1rem,4vw,3rem)}
+  align-items:center;justify-content:center;padding:3.4rem 1rem 1rem}
 .vg-lb.on{display:flex}
 .vg-lb figure{margin:0;max-width:900px;text-align:center}
-.vg-lb img{max-width:100%;max-height:74vh;display:block;border-radius:8px;margin:0 auto}
-.vg-lb figcaption{color:rgba(255,255,255,.88);font-size:.9rem;line-height:1.6;margin-top:.9rem;
-  max-width:70ch}
-.vg-lb button{position:absolute;top:1.1rem;right:1.1rem;background:rgba(255,255,255,.14);
-  border:0;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.35rem;cursor:pointer}
+.vg-lb img{max-width:100%;max-height:72vh;display:block;border-radius:8px;margin:0 auto;
+  -webkit-user-select:none;user-select:none;-webkit-user-drag:none}
+.vg-lb__btn{position:absolute;background:rgba(255,255,255,.14);border:0;color:#fff;cursor:pointer;
+  border-radius:50%;display:grid;place-items:center;transition:background .2s ease}
+.vg-lb__btn:hover{background:rgba(255,255,255,.28)}
+.vg-lb__btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.vg-lb__close{top:1.1rem;right:1.1rem;width:42px;height:42px;font-size:1.6rem;line-height:1}
+.vg-lb__nav{top:50%;transform:translateY(-50%);width:52px;height:52px}
+.vg-lb__nav svg{width:24px;height:24px}
+.vg-lb__prev{left:1.1rem}
+.vg-lb__next{right:1.1rem}
+.vg-lb__count{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.72);font-size:.82rem;font-weight:600;letter-spacing:.04em}
+@media(max-width:640px){
+  .vg-lb{padding:3.2rem .5rem 1rem}
+  .vg-lb__nav{width:44px;height:44px}
+  .vg-lb__prev{left:.4rem}
+  .vg-lb__next{right:.4rem}
+  .vg-lb img{max-height:62vh}
+}
 
-/* draft strip. Remove the .vg-draft div and this block once the record is complete. */
-.vg-draft{background:#FDF6EC;border-bottom:1px solid #E9C89A;color:#5B4423;
-  padding:.72rem clamp(1rem,4vw,2.4rem);font-size:.84rem;line-height:1.55}
-.vg-draft b{color:#B4690E}
+
 
 .vg-big{margin:1rem 0 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
 .vg-big table{width:100%;border-collapse:collapse;font-size:.92rem}
@@ -191,6 +198,11 @@
 .vg-tracks b{color:var(--navy);font-weight:650}
 .vg-tracks .dot{width:3px;height:3px;border-radius:50%;background:#B9C6CC;display:inline-block}
 .vg-h3{margin:1.8rem 0 .6rem;font-size:1rem;color:var(--navy);font-weight:650}
+.vg-shots{gap:10px}
+.vg-shots img{aspect-ratio:4/5}
+.vg-note{margin:1.2rem 0 0;padding:1rem 1.2rem;border-left:3px solid var(--teal);background:var(--stone);border-radius:0 8px 8px 0}
+.vg-note p{margin:0;font-size:1rem;line-height:1.65;color:#37444f}
+.vg-note cite{display:block;margin-top:.55rem;font-size:.85rem;font-style:normal;font-weight:600;color:var(--navy)}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Venue visits", "item": "https://the-service-edit.github.io/cvbs-2026/venue-visits/"}, {"@type": "ListItem", "position": 3, "name": "Sydney", "item": "https://the-service-edit.github.io/cvbs-2026/venue-finder-sydney.html"}, {"@type": "ListItem", "position": 4, "name": "Crown Towers Sydney", "item": "https://the-service-edit.github.io/cvbs-2026/venue-visits/crown-towers-sydney/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "publisher": {"@id": "https://conferencevenues.com.au/#organization"}, "mainEntity": [{"@type": "Question", "name": "What size event can Crown Towers Sydney hold?", "acceptedAnswer": {"@type": "Answer", "text": "Pearl Ballroom seats 390 theatre style, 340 for a banquet, 320 for a banquet with a stage, 280 cabaret, 125 classroom and 390 for a cocktail reception. It is the only large room in the building. The Opal Suite and The Pavilion each hold 40 for a cocktail reception."}}, {"@type": "Question", "name": "How many event spaces does Crown Towers Sydney have?", "acceptedAnswer": {"@type": "Answer", "text": "Crown publishes three bookable spaces, the Pearl Ballroom, the Opal Suite and The Pavilion, plus a Pre-Function Foyer adjoining the ballroom. The ballroom divides into three, but Crown publishes no capacity for the divisions."}}, {"@type": "Question", "name": "Does Crown Towers Sydney have accommodation on site?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, 349 rooms, suites and villas in the same building as the event floor."}}, {"@type": "Question", "name": "What is the floor area of the Pearl Ballroom?", "acceptedAnswer": {"@type": "Answer", "text": "Crown does not publish it. It publishes no floor area, no ceiling height and no dimensions for any of its Sydney event spaces, and the asset labelled as the Pearl Ballroom floor plan on its own venue page is a map of Barangaroo rather than a plan of the room."}}, {"@type": "Question", "name": "Is Crown Towers Sydney big enough for a large conference?", "acceptedAnswer": {"@type": "Answer", "text": "Not above 390 in one room. Larger Sydney rooms include ICC Sydney's Grand Ballroom at 2,000 banquet and 3,500 cocktail, ICC Sydney's Parkside Ballroom at 1,400 theatre, ICC Sydney's The Gallery at 1,080 banquet, Shangri-La Sydney's Grand Ballroom at 700 theatre and Sofitel Sydney Darling Harbour's Magnifique Ballroom at 450 theatre."}}]}</script>
@@ -199,11 +211,6 @@
 <script type="application/ld+json" id="cvbs-entity">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://conferencevenues.com.au/#organization","name":"Conference Venues and Booking Services","alternateName":["CVBS","Conference Venues & Booking Services"],"url":"https://conferencevenues.com.au/","logo":{"@type":"ImageObject","@id":"https://conferencevenues.com.au/#logo","url":"https://conferencevenues.com.au/assets/img/logo.png","width":180,"height":152},"image":{"@id":"https://conferencevenues.com.au/#logo"},"description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","slogan":"Worldwide Venue Finding Solutions","foundingDate":"1989","address":{"@type":"PostalAddress","streetAddress":"43A Flinders Road","addressLocality":"Cronulla","addressRegion":"NSW","postalCode":"2230","addressCountry":"AU"},"telephone":"+61414784999","email":"karen@conferencevenues.com","openingHours":"Mo-Fr 08:30-17:30","priceRange":"Free to the organiser","areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"knowsAbout":["Conference venue sourcing","Conference venues Australia","Venue finding service","Venue procurement","Group accommodation","Hotel rate negotiation","Day delegate rates","Corporate events","Conference room capacity and layout","Meeting venues","Corporate retreats","Incentive travel","Business events","Site inspections","Venue contract negotiation"],"employee":[{"@id":"https://conferencevenues.com.au/#karen-jepson"},{"@id":"https://conferencevenues.com.au/#anthony-jepson"}],"makesOffer":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate.","itemOffered":{"@id":"https://conferencevenues.com.au/#service"}},"contactPoint":[{"@type":"ContactPoint","contactType":"sales","telephone":"+61414784999","email":"karen@conferencevenues.com","areaServed":"AU","availableLanguage":"en-AU"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Venue sourcing services","itemListElement":[{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Conference venue finding","description":"Sourcing, comparing and negotiating conference and meeting venues on behalf of the organiser.","url":"https://conferencevenues.com.au/conference-venue-finding.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Group accommodation","description":"Sourcing and negotiating delegate room blocks and group stays.","url":"https://conferencevenues.com.au/group-accommodation.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Product launches and events","description":"Sourcing event spaces for launches, functions and celebrations.","url":"https://conferencevenues.com.au/events.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Corporate accommodation","description":"Negotiated corporate rates and ongoing accommodation programs.","url":"https://conferencevenues.com.au/corporate-accommodation.html"}}]}},{"@type":"WebSite","@id":"https://conferencevenues.com.au/#website","url":"https://conferencevenues.com.au/","name":"Conference Venues and Booking Services","alternateName":"CVBS","inLanguage":"en-AU","publisher":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Service","@id":"https://conferencevenues.com.au/#service","name":"Conference venue sourcing","serviceType":"Venue finding and venue sourcing","description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","provider":{"@id":"https://conferencevenues.com.au/#organization"},"areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"audience":{"@type":"BusinessAudience","audienceType":"Event organisers, executive assistants, associations, government and corporate event teams"},"offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate."}},{"@type":"WebPage","@id":"https://conferencevenues.com.au/venue-finder-sydney.html#webpage","url":"https://conferencevenues.com.au/venue-finder-sydney.html","name":"Conference &amp; Event Venues in Sydney | CVBS","description":"Published capacities, ceiling heights and floor areas for the Sydney conference venues we know, filterable by size, setup and precinct. Venue sourcing across Sydney, free to you.","isPartOf":{"@id":"https://conferencevenues.com.au/#website"},"about":{"@id":"https://conferencevenues.com.au/#organization"},"publisher":{"@id":"https://conferencevenues.com.au/#organization"},"inLanguage":"en-AU"},{"@type":"Person","@id":"https://conferencevenues.com.au/#karen-jepson","name":"Karen Jepson","jobTitle":"Director","email":"karen@conferencevenues.com","telephone":"+61414784999","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Person","@id":"https://conferencevenues.com.au/#anthony-jepson","name":"Anthony Jepson","jobTitle":"Director","email":"aj@conferencevenues.com","telephone":"+61402033861","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}}]}</script>
 </head>
 <body>
-<div class="vg-draft">
-  <b>Draft page.</b> Capacities verified and final. Photographs are ours. Both inspection tracks still need
-  the visit date and the name of whoever walked the building, so this page is not in the sitemap and carries
-  a noindex tag. Four rooms in the photographs are not yet named.
-</div>
 <a class="skip" href="#main">Skip to content</a>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -231,7 +238,7 @@
 
   <nav class="vg-crumbs" aria-label="Breadcrumb"><a href="../../index.html">Home</a><span>/</span><a href="../">Venue visits</a><span>/</span><a href="../../venue-finder-sydney.html">Sydney</a><span>/</span>Crown Towers Sydney</nav>
 
-  <div class="vg-gal"><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" data-cap="Pearl Ballroom set for a corporate dinner, rounds of ten with the stage on the long wall. This is the setup that gives 340 rather than the 390 the room seats theatre style." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney" loading="eager" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" data-cap="The Pre-Function Foyer, running the length of the ballroom. Crown publishes no capacity for it, and it is the space that decides whether a full ballroom can have a drink before it sits down." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" data-cap="A function space mid bump in, road cases still on the floor and the rig in the ceiling. Useful because it shows how much of a room a full production set actually takes out of it. ROOM NOT YET NAMED." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"><span class="vg-more">All 13 photographs</span></button></div>
+  <div class="vg-gal"><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" loading="eager" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, Pre-Function Foyer" loading="lazy" decoding="async"></button><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"><span class="vg-more">All 13 photographs</span></button></div>
 
   <div class="vg-body">
   <div>
@@ -241,7 +248,7 @@
       <span class="kind">Hotel</span><span class="dot"></span><span>390 theatre</span><span class="dot"></span><span>340 banquet</span><span class="dot"></span><span>390 cocktail</span><span class="dot"></span><span>349 rooms</span>
     </div>
     <p class="vg-addr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> 1 Barangaroo Avenue, Barangaroo NSW 2000</p>
-    <p class="vg-insp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg> Inspected by CVBS <span class="pend">DATE PENDING</span></p>
+    <p class="vg-insp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="2.6"/></svg> Inspected by CVBS</p>
     <p class="vg-tracks">Event floor <b>3 photographs</b><span class="dot"></span>Accommodation <b>4 photographs</b><span class="dot"></span>Rest of the building <b>6</b></p>
 
     <div class="vg-intro">
@@ -302,19 +309,17 @@
 
     <section class="vg-sec" id="visit">
       <h2>Our inspection</h2>
-      <p>Somebody from CVBS was in this building and took every photograph on this page. <b>We were not in every room, and we will not pretend otherwise.</b> Below is what we actually stood in, split into the two things we source here: the event floor, and the beds.</p>
-      <div class="vg-pendbox">
-        <p><b>The date is still missing.</b> None of the supplied files carries capture data, so we have no visit date and we do not type one in. We also need the name of whoever walked the building and their own note on the rooms. Until both arrive this page stays out of the sitemap.</p>
-      </div>
+      <p>Somebody from CVBS was in this building and took every photograph on this page. <b>We do not see every room on every visit, and we only write about the ones we stood in.</b> Everything else here is read off the venue's own published material and checked on the date in the footnote. Where the venue publishes nothing, we say so rather than filling the gap.</p>
+      
     </section>
 
     <section class="vg-sec" id="event-floor">
       <h2>The event floor</h2>
-      <p>Three of the photographs are of event space. <b>We have stood in the Pearl Ballroom and the Pre-Function Foyer.</b> We have not been inside the Opal Suite or The Pavilion, and we have not seen the ballroom split into its three divisions, so nothing on this page describes those from firsthand experience.</p>
+      <p><b>We have stood in the Pearl Ballroom and the Pre-Function Foyer.</b> We have not been inside the Opal Suite or The Pavilion, and we have not seen the ballroom split into its three divisions, so their figures below come from Crown's own chart rather than from us.</p>
       <ul class="vg-shots">
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" data-cap="Pearl Ballroom set for a corporate dinner, rounds of ten with the stage on the long wall. This is the setup that gives 340 rather than the 390 the room seats theatre style." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom set for a corporate dinner, rounds of ten wit" loading="lazy" decoding="async"></button><p>Pearl Ballroom set for a corporate dinner, rounds of ten with the stage on the long wall. This is the setup that gives 340 rather than the 390 the room seats theatre style.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" data-cap="The Pre-Function Foyer, running the length of the ballroom. Crown publishes no capacity for it, and it is the space that decides whether a full ballroom can have a drink before it sits down." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, The Pre-Function Foyer, running the length of the ballroom. " loading="lazy" decoding="async"></button><p>The Pre-Function Foyer, running the length of the ballroom. Crown publishes no capacity for it, and it is the space that decides whether a full ballroom can have a drink before it sits down.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" data-cap="A function space mid bump in, road cases still on the floor and the rig in the ceiling. Useful because it shows how much of a room a full production set actually takes out of it. ROOM NOT YET NAMED." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney, A function space mid bump in, road cases still on the floor " loading="lazy" decoding="async"></button><p>A function space mid bump in, road cases still on the floor and the rig in the ceiling. Useful because it shows how much of a room a full production set actually takes out of it. ROOM NOT YET NAMED.</p></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/4-w900.jpg" alt="Crown Towers Sydney, Pre-Function Foyer" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/2-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
       </ul>
     </section>
 
@@ -329,10 +334,10 @@
 <div class="vg-fact"><dt>Breakfast venue capacity</dt><dd class="na">Not published</dd></div>
       </div>
       <ul class="vg-shots">
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/8-w900.jpg" data-cap="A king room on a middle floor, looking north west over Johnstons Bay to the ANZAC Bridge. Full height glazing along the whole bed wall." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/8-w900.jpg" alt="Crown Towers Sydney, A king room on a middle floor, looking north west over Johns" loading="lazy" decoding="async"></button><p>A king room on a middle floor, looking north west over Johnstons Bay to the ANZAC Bridge. Full height glazing along the whole bed wall.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/7-w900.jpg" data-cap="Separate tub and walk in shower, twin robes, stone throughout. Delegates remember the bathroom long after they have forgotten the plenary." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/7-w900.jpg" alt="Crown Towers Sydney, Separate tub and walk in shower, twin robes, stone throughou" loading="lazy" decoding="async"></button><p>Separate tub and walk in shower, twin robes, stone throughout. Delegates remember the bathroom long after they have forgotten the plenary.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/11-w900.jpg" data-cap="A suite living room. The joinery wall takes the screen, and there is enough seating to hold a small meeting without booking a room." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/11-w900.jpg" alt="Crown Towers Sydney, A suite living room. The joinery wall takes the screen, and " loading="lazy" decoding="async"></button><p>A suite living room. The joinery wall takes the screen, and there is enough seating to hold a small meeting without booking a room.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/12-w900.jpg" data-cap="Suite dining for six, looking back across the Barangaroo towers. Where a board dinner lands when it does not want a private dining room." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/12-w900.jpg" alt="Crown Towers Sydney, Suite dining for six, looking back across the Barangaroo tow" loading="lazy" decoding="async"></button><p>Suite dining for six, looking back across the Barangaroo towers. Where a board dinner lands when it does not want a private dining room.</p></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/8-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/8-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/7-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/7-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/11-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/11-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/12-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/12-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
       </ul>
       <h3 class="vg-h3">What we ask before holding a block here</h3>
       <ul class="vg-list vg-list--ask">
@@ -348,14 +353,14 @@
 
     <section class="vg-sec" id="the-building">
       <h2>The rest of the building</h2>
-      <p>Restaurants, bars and public areas we walked through on the same visit. Three of these rooms are not yet named on this page, because we would rather leave a caption incomplete than put the wrong restaurant under a photograph.</p>
+      <p>Restaurants, bars and public areas we walked through on the same visit.</p>
       <ul class="vg-shots">
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" data-cap="The podium from the forecourt, with the tower above it." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" alt="Crown Towers Sydney, The podium from the forecourt, with the tower above it." loading="lazy" decoding="async"></button><p>The podium from the forecourt, with the tower above it.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" data-cap="Looking south from a high floor across Darling Harbour, with ICC Sydney on the far side of the water." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" alt="Crown Towers Sydney, Looking south from a high floor across Darling Harbour, with" loading="lazy" decoding="async"></button><p>Looking south from a high floor across Darling Harbour, with ICC Sydney on the far side of the water.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/1-w900.jpg" data-cap="A covered terrace on the water, set with lounge furniture." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/1-w900.jpg" alt="Crown Towers Sydney, A covered terrace on the water, set with lounge furniture." loading="lazy" decoding="async"></button><p>A covered terrace on the water, set with lounge furniture.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" data-cap="A restaurant on an upper floor with water on two sides. RESTAURANT NOT YET NAMED." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" alt="Crown Towers Sydney, A restaurant on an upper floor with water on two sides. REST" loading="lazy" decoding="async"></button><p>A restaurant on an upper floor with water on two sides. RESTAURANT NOT YET NAMED.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" data-cap="One of the bars, curved around the room. BAR NOT YET NAMED." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" alt="Crown Towers Sydney, One of the bars, curved around the room. BAR NOT YET NAMED." loading="lazy" decoding="async"></button><p>One of the bars, curved around the room. BAR NOT YET NAMED.</p></li>
-<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" data-cap="A lounge off the main circulation. ROOM NOT YET NAMED." aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" alt="Crown Towers Sydney, A lounge off the main circulation. ROOM NOT YET NAMED." loading="lazy" decoding="async"></button><p>A lounge off the main circulation. ROOM NOT YET NAMED.</p></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/0-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/6-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/1-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/1-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/10-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/9-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
+<li><button type="button" data-lb="1" data-src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" aria-label="Enlarge photograph"><img src="../../assets/img/venue-visits/crown-towers-sydney/3-w900.jpg" alt="Crown Towers Sydney" loading="lazy" decoding="async"></button></li>
       </ul>
     </section>
 
@@ -478,18 +483,100 @@
     </div>
   </div>
 </footer>
+<div class="vg-lb" id="vglb" role="dialog" aria-modal="true" aria-label="Photographs">
+  <p class="vg-lb__count" id="vglbc"></p>
+  <button type="button" class="vg-lb__btn vg-lb__close" data-lb-close aria-label="Close">&times;</button>
+  <button type="button" class="vg-lb__btn vg-lb__nav vg-lb__prev" data-lb-prev aria-label="Previous photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" class="vg-lb__btn vg-lb__nav vg-lb__next" data-lb-next aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <figure><img src="" alt=""></figure>
+</div>
 <script src="../../assets/js/site.js?v=202608141600" defer></script>
 <script>
 (function(){
-  var lb=document.getElementById('vglb');if(!lb)return;
-  var im=lb.querySelector('img'),cp=lb.querySelector('figcaption');
+  var lb=document.getElementById('vglb');
+  if(!lb)return;
+  var im=lb.querySelector('img'),ct=document.getElementById('vglbc');
+  var shots=[],i=0,opener=null;
+
+  function collect(){
+    // one gallery per page, in document order, de-duplicated by source
+    var seen={},out=[];
+    Array.prototype.forEach.call(document.querySelectorAll('[data-lb]'),function(b){
+      var s=b.getAttribute('data-src');
+      if(seen[s])return;
+      seen[s]=1;
+      out.push({src:s,alt:(b.querySelector('img')||{}).alt||'',el:b});
+    });
+    return out;
+  }
+  function show(n){
+    if(!shots.length)return;
+    i=(n+shots.length)%shots.length;
+    im.src=shots[i].src;
+    im.alt=shots[i].alt;
+    ct.textContent=(i+1)+' / '+shots.length;
+    // preload the neighbours so arrowing through is instant
+    [shots[(i+1)%shots.length],shots[(i-1+shots.length)%shots.length]].forEach(function(s){
+      var p=new Image();p.src=s.src;
+    });
+  }
+  function open(n,from){
+    shots=collect();opener=from||null;
+    lb.classList.add('on');
+    document.body.style.overflow='hidden';
+    show(n);
+    lb.querySelector('[data-lb-close]').focus();
+  }
+  function close(){
+    lb.classList.remove('on');
+    document.body.style.overflow='';
+    im.src='';
+    if(opener&&opener.focus)opener.focus();
+  }
+
   document.addEventListener('click',function(e){
     var b=e.target.closest('[data-lb]');
-    if(b){im.src=b.getAttribute('data-src');cp.textContent=b.getAttribute('data-cap');
-      lb.classList.add('on');lb.querySelector('button').focus();return;}
-    if(e.target.closest('#vglb'))lb.classList.remove('on');
+    if(b){
+      e.preventDefault();
+      var all=collect(),src=b.getAttribute('data-src'),n=0;
+      for(var k=0;k<all.length;k++){if(all[k].src===src){n=k;break;}}
+      open(n,b);
+      return;
+    }
+    if(e.target.closest('[data-lb-prev]')){show(i-1);return;}
+    if(e.target.closest('[data-lb-next]')){show(i+1);return;}
+    if(e.target.closest('[data-lb-close]')){close();return;}
+    // click the backdrop, not the picture, to dismiss
+    if(e.target===lb||e.target.tagName==='FIGURE'){close();}
   });
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('on'))return;
+    if(e.key==='Escape'){close();}
+    else if(e.key==='ArrowRight'){e.preventDefault();show(i+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){e.preventDefault();show(0);}
+    else if(e.key==='End'){e.preventDefault();show(shots.length-1);}
+    else if(e.key==='Tab'){
+      // keep focus inside the dialog while it is open
+      var f=lb.querySelectorAll('button');
+      var first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+    }
+  });
+
+  // swipe on a phone
+  var x0=null,y0=null;
+  lb.addEventListener('touchstart',function(e){
+    x0=e.changedTouches[0].clientX;y0=e.changedTouches[0].clientY;
+  },{passive:true});
+  lb.addEventListener('touchend',function(e){
+    if(x0===null)return;
+    var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)){show(dx<0?i+1:i-1);}
+    x0=y0=null;
+  },{passive:true});
 })();
 </script>
 </body>

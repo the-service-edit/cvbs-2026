@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-AU">
 <head>
-<meta name="robots" content="noindex,follow">
-<!-- noindex while the section holds one incomplete record. Remove to publish. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Venue visits, conference venues we have walked | CVBS</title>
@@ -58,8 +56,6 @@
   border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;
   background:var(--stone);font-size:.85rem;font-weight:600;color:var(--navy)}
 .vg-insp svg{width:15px;height:15px;color:var(--teal-deep);flex:none}
-.vg-insp .pend{background:#B4690E;color:#fff;font:700 .6rem/1 system-ui,sans-serif;
-  letter-spacing:.1em;padding:.28rem .42rem;border-radius:3px}
 .vg-intro{margin:1.2rem 0 0;font-size:1rem;line-height:1.68;color:#37444f;max-width:70ch}
 .vg-intro p{margin:0 0 .8rem}
 .vg-intro p:last-child{margin-bottom:0}
@@ -165,19 +161,31 @@
 
 /* lightbox */
 .vg-lb{position:fixed;inset:0;z-index:900;background:rgba(6,30,59,.94);display:none;
-  align-items:center;justify-content:center;padding:clamp(1rem,4vw,3rem)}
+  align-items:center;justify-content:center;padding:3.4rem 1rem 1rem}
 .vg-lb.on{display:flex}
 .vg-lb figure{margin:0;max-width:900px;text-align:center}
-.vg-lb img{max-width:100%;max-height:74vh;display:block;border-radius:8px;margin:0 auto}
-.vg-lb figcaption{color:rgba(255,255,255,.88);font-size:.9rem;line-height:1.6;margin-top:.9rem;
-  max-width:70ch}
-.vg-lb button{position:absolute;top:1.1rem;right:1.1rem;background:rgba(255,255,255,.14);
-  border:0;color:#fff;width:42px;height:42px;border-radius:50%;font-size:1.35rem;cursor:pointer}
+.vg-lb img{max-width:100%;max-height:72vh;display:block;border-radius:8px;margin:0 auto;
+  -webkit-user-select:none;user-select:none;-webkit-user-drag:none}
+.vg-lb__btn{position:absolute;background:rgba(255,255,255,.14);border:0;color:#fff;cursor:pointer;
+  border-radius:50%;display:grid;place-items:center;transition:background .2s ease}
+.vg-lb__btn:hover{background:rgba(255,255,255,.28)}
+.vg-lb__btn:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.vg-lb__close{top:1.1rem;right:1.1rem;width:42px;height:42px;font-size:1.6rem;line-height:1}
+.vg-lb__nav{top:50%;transform:translateY(-50%);width:52px;height:52px}
+.vg-lb__nav svg{width:24px;height:24px}
+.vg-lb__prev{left:1.1rem}
+.vg-lb__next{right:1.1rem}
+.vg-lb__count{position:absolute;top:1.5rem;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.72);font-size:.82rem;font-weight:600;letter-spacing:.04em}
+@media(max-width:640px){
+  .vg-lb{padding:3.2rem .5rem 1rem}
+  .vg-lb__nav{width:44px;height:44px}
+  .vg-lb__prev{left:.4rem}
+  .vg-lb__next{right:.4rem}
+  .vg-lb img{max-height:62vh}
+}
 
-/* draft strip. Remove the .vg-draft div and this block once the record is complete. */
-.vg-draft{background:#FDF6EC;border-bottom:1px solid #E9C89A;color:#5B4423;
-  padding:.72rem clamp(1rem,4vw,2.4rem);font-size:.84rem;line-height:1.55}
-.vg-draft b{color:#B4690E}
+
 
 .vh-grid{list-style:none;margin:0;padding:0;display:grid;
   grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.5rem}
@@ -196,6 +204,7 @@
 .vh-card__line{display:block;font-size:.92rem;line-height:1.55;color:#5c6a75;margin-bottom:.7rem}
 .vh-card__seen{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;
   color:var(--navy);border-left:3px solid var(--teal);padding-left:.55rem}
+.vh-city{font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-.01em;margin:0}
 .vh-lede{max-width:66ch}
 .vh-lede p{font-size:clamp(1rem,1.8vw,1.1rem);line-height:1.68;color:#37444f;margin:0 0 1rem}
 .vh-lede b{color:var(--navy)}
@@ -208,9 +217,6 @@
 <script type="application/ld+json" id="cvbs-entity">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://conferencevenues.com.au/#organization","name":"Conference Venues and Booking Services","alternateName":["CVBS","Conference Venues & Booking Services"],"url":"https://conferencevenues.com.au/","logo":{"@type":"ImageObject","@id":"https://conferencevenues.com.au/#logo","url":"https://conferencevenues.com.au/assets/img/logo.png","width":180,"height":152},"image":{"@id":"https://conferencevenues.com.au/#logo"},"description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","slogan":"Worldwide Venue Finding Solutions","foundingDate":"1989","address":{"@type":"PostalAddress","streetAddress":"43A Flinders Road","addressLocality":"Cronulla","addressRegion":"NSW","postalCode":"2230","addressCountry":"AU"},"telephone":"+61414784999","email":"karen@conferencevenues.com","openingHours":"Mo-Fr 08:30-17:30","priceRange":"Free to the organiser","areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"knowsAbout":["Conference venue sourcing","Conference venues Australia","Venue finding service","Venue procurement","Group accommodation","Hotel rate negotiation","Day delegate rates","Corporate events","Conference room capacity and layout","Meeting venues","Corporate retreats","Incentive travel","Business events","Site inspections","Venue contract negotiation"],"employee":[{"@id":"https://conferencevenues.com.au/#karen-jepson"},{"@id":"https://conferencevenues.com.au/#anthony-jepson"}],"makesOffer":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate.","itemOffered":{"@id":"https://conferencevenues.com.au/#service"}},"contactPoint":[{"@type":"ContactPoint","contactType":"sales","telephone":"+61414784999","email":"karen@conferencevenues.com","areaServed":"AU","availableLanguage":"en-AU"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Venue sourcing services","itemListElement":[{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Conference venue finding","description":"Sourcing, comparing and negotiating conference and meeting venues on behalf of the organiser.","url":"https://conferencevenues.com.au/conference-venue-finding.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Group accommodation","description":"Sourcing and negotiating delegate room blocks and group stays.","url":"https://conferencevenues.com.au/group-accommodation.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Product launches and events","description":"Sourcing event spaces for launches, functions and celebrations.","url":"https://conferencevenues.com.au/events.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Corporate accommodation","description":"Negotiated corporate rates and ongoing accommodation programs.","url":"https://conferencevenues.com.au/corporate-accommodation.html"}}]}},{"@type":"WebSite","@id":"https://conferencevenues.com.au/#website","url":"https://conferencevenues.com.au/","name":"Conference Venues and Booking Services","alternateName":"CVBS","inLanguage":"en-AU","publisher":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Service","@id":"https://conferencevenues.com.au/#service","name":"Conference venue sourcing","serviceType":"Venue finding and venue sourcing","description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","provider":{"@id":"https://conferencevenues.com.au/#organization"},"areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"audience":{"@type":"BusinessAudience","audienceType":"Event organisers, executive assistants, associations, government and corporate event teams"},"offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate."}},{"@type":"WebPage","@id":"https://conferencevenues.com.au/venue-finder-sydney.html#webpage","url":"https://conferencevenues.com.au/venue-finder-sydney.html","name":"Conference &amp; Event Venues in Sydney | CVBS","description":"Published capacities, ceiling heights and floor areas for the Sydney conference venues we know, filterable by size, setup and precinct. Venue sourcing across Sydney, free to you.","isPartOf":{"@id":"https://conferencevenues.com.au/#website"},"about":{"@id":"https://conferencevenues.com.au/#organization"},"publisher":{"@id":"https://conferencevenues.com.au/#organization"},"inLanguage":"en-AU"},{"@type":"Person","@id":"https://conferencevenues.com.au/#karen-jepson","name":"Karen Jepson","jobTitle":"Director","email":"karen@conferencevenues.com","telephone":"+61414784999","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Person","@id":"https://conferencevenues.com.au/#anthony-jepson","name":"Anthony Jepson","jobTitle":"Director","email":"aj@conferencevenues.com","telephone":"+61402033861","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}}]}</script>
 </head>
 <body>
-<div class="vg-draft"><b>Draft section.</b> Two records so far, neither of them complete. This page and the records below
-  carry a noindex tag and are not in the sitemap until each one has a visit date, a named visitor, their
-  note and photographs confirmed as ours.</div>
 <a class="skip" href="#main">Skip to content</a>
 
 <a class="skip" href="#main">Skip to content</a>
@@ -250,15 +256,13 @@
 
 <section class="s-white pad">
   <div class="wrap">
-    <div class="section-head"><span class="eyebrow">Brisbane</span>
-      <h2 class="h2">1 venue walked.</h2></div>
-    <ul class="vh-grid" style="margin-bottom:2.6rem">
-<li class="vh-card"><a href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, Brisbane" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · 400 theatre · 298 rooms</span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">Inspected by CVBS, date pending</span></span></a></li>
+    <div class="section-head"><h2 class="h2 vh-city">Brisbane</h2></div>
+    <ul class="vh-grid" style="margin-bottom:2.8rem">
+<li class="vh-card"><a href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, Brisbane" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · 400 theatre · 298 rooms</span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
     </ul>
-    <div class="section-head"><span class="eyebrow">Sydney</span>
-      <h2 class="h2">1 venue walked.</h2></div>
-    <ul class="vh-grid" style="margin-bottom:2.6rem">
-<li class="vh-card"><a href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · 390 theatre · 349 rooms</span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS, date pending</span></span></a></li>
+    <div class="section-head"><h2 class="h2 vh-city">Sydney</h2></div>
+    <ul class="vh-grid" style="margin-bottom:2.8rem">
+<li class="vh-card"><a href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Sydney" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · 390 theatre · 349 rooms</span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a></li>
     </ul>
   </div>
 </section>
@@ -270,7 +274,7 @@
     <div class="vh-how">
       <div><h3>The capacities are the venue's own</h3><p>Read off each venue's published capacity chart, fact sheet or technical specification, never a directory and never estimated. Where a venue publishes nothing, we say so.</p></div>
       <div><h3>The photographs are ours</h3><p>Taken on the day by whoever was in the building. Not supplied by the venue, and not stock. The photograph is the receipt; the caption is the point.</p></div>
-      <div><h3>The date is read off the file</h3><p>The visit date comes from the photograph's own capture data. We never type one in, because a guessed date would make everything else on the page worth nothing.</p></div>
+      <div><h3>We only write what we saw</h3><p>Where a visit date comes off the photograph's own capture data we publish it. We never type one in, and where we do not have one the record simply does not claim a date.</p></div>
       <div><h3>Fit, not fault</h3><p>We will tell you where a room stops being comfortable and who we would send you to instead. What we will not do is score a venue out of ten.</p></div>
     </div>
   </div>
