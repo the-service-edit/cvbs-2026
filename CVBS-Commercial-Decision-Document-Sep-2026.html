@@ -1,0 +1,922 @@
+<meta charset="utf-8">
+<title>CVBS Commercial Decision Document, September 2026</title>
+<style>
+:root{
+  --navy:#0A2C52; --teal:#1F818C; --ink:#0D1F2D; --muted:#5C636B;
+  --tint:#E8F5F6; --stone:#F6F5F2; --line:#DFE3E6; --white:#fff;
+  --warn:#8A3324; --warntint:#FBEFEC;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#EDEEEC;color:var(--ink);
+  font:16px/1.62 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.doc{max-width:1080px;margin:0 auto;background:var(--white);padding:0 0 96px}
+.cover{background:var(--navy);color:#fff;padding:64px 64px 56px}
+.cover .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8FD3DA;font-weight:600}
+.cover h1{font-size:40px;line-height:1.12;margin:14px 0 10px;font-weight:700;letter-spacing:-.02em}
+.cover .sub{font-size:18px;color:#C6D6E4;max-width:62ch;margin:0}
+.cover .meta{display:flex;flex-wrap:wrap;gap:44px;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,.18)}
+.cover .meta div{font-size:13px}
+.cover .meta span{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#8FD3DA;margin-bottom:5px;font-weight:600}
+.wrap{padding:0 64px}
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+.kick{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+.kick .num{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--teal)}
+.kick .lbl{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+h2{font-size:27px;line-height:1.2;margin:0 0 14px;color:var(--navy);font-weight:700;letter-spacing:-.015em}
+h3{font-size:17px;margin:32px 0 10px;color:var(--navy);font-weight:700}
+h4{font-size:14px;margin:22px 0 6px;color:var(--ink);font-weight:700}
+p{margin:0 0 14px;max-width:80ch}
+ul,ol{margin:0 0 16px;padding-left:22px;max-width:80ch}
+li{margin-bottom:7px}
+strong{font-weight:650}
+table{border-collapse:collapse;width:100%;margin:18px 0 22px;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:600;vertical-align:bottom}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:#FAFBFB}
+tr.hi td{background:var(--tint);font-weight:600}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.box{background:var(--tint);border-left:3px solid var(--teal);padding:18px 22px;margin:22px 0;border-radius:0 4px 4px 0}
+.box p:last-child{margin-bottom:0}
+.box h4{margin-top:0}
+.warn{background:var(--warntint);border-left-color:var(--warn)}
+.warn h4{color:var(--warn)}
+.stone{background:var(--stone);padding:18px 22px;margin:22px 0;border-radius:4px}
+.stone p:last-child{margin-bottom:0}
+.big{font-size:34px;font-weight:700;color:var(--navy);letter-spacing:-.02em;line-height:1.1}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}
+.card{border:1px solid var(--line);border-radius:5px;padding:20px;min-width:0}
+.card.rec{border-color:var(--teal);border-width:2px;background:var(--tint)}
+.card .tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
+.card .fig{font-size:28px;font-weight:700;color:var(--navy);margin:8px 0 2px;letter-spacing:-.02em}
+.card .fig small{font-size:13px;font-weight:600;color:var(--muted);letter-spacing:0}
+.card p{font-size:13.5px;color:var(--muted);margin:8px 0 0;line-height:1.5}
+.src{font-size:12.5px;color:var(--muted)}
+.src a{color:var(--teal)}
+a{color:var(--teal)}
+.toc{background:var(--stone);padding:26px 32px;margin:0}
+.toc ol{columns:2;column-gap:44px;margin:0;padding-left:20px;font-size:13.5px}
+.toc li{margin-bottom:5px;break-inside:avoid}
+.lead{font-size:18px;color:#31404E;max-width:76ch}
+.pill{display:inline-block;background:var(--navy);color:#fff;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;padding:3px 9px;border-radius:20px;font-weight:600;vertical-align:middle}
+.pill.t{background:var(--teal)}
+.pill.g{background:#5C636B}
+hr.rule{border:0;border-top:2px solid var(--teal);width:44px;margin:0 0 20px}
+@media (max-width:860px){
+  .cover,.wrap{padding-left:26px;padding-right:26px}
+  .cards{grid-template-columns:1fr}
+  .toc ol{columns:1}
+  .cover h1{font-size:30px}
+}
+@media print{
+  body{background:#fff}
+  .doc{max-width:none}
+  section{page-break-inside:auto}
+  table{page-break-inside:avoid}
+}
+</style>
+
+<div class="doc">
+
+<div class="cover">
+  <div class="eyebrow">Internal, not for CVBS</div>
+  <h1>Commercial decision document</h1>
+  <p class="sub">What to charge CVBS for the website project, what to charge for the ongoing digital role, and the evidence behind both numbers.</p>
+  <div class="meta">
+    <div><span>Prepared for</span>Mel, The Service Edit</div>
+    <div><span>Date</span>3 September 2026</div>
+    <div><span>Currency</span>All figures AUD, excluding GST</div>
+    <div><span>Status</span>Decision input. Do not send to CVBS.</div>
+  </div>
+</div>
+
+<div class="toc">
+  <ol>
+    <li>The recommendation in one page</li>
+    <li>What the CVBS website really is</li>
+    <li>How to classify it, and why that sets the price</li>
+    <li>Australian market pricing, website projects</li>
+    <li>Project hours, low, realistic and high</li>
+    <li>Valuing the work already done</li>
+    <li>The website fee, three levels</li>
+    <li>Payment structure and scope change</li>
+    <li>Ongoing website management, what it really means</li>
+    <li>Email marketing as a proper service</li>
+    <li>Email volume, and how to hold the line</li>
+    <li>The existing social arrangement, folded in without loss</li>
+    <li>The role and the title</li>
+    <li>Quiet, normal, busy and campaign weeks</li>
+    <li>Australian market pricing, ongoing retainers</li>
+    <li>Three retainer structures compared</li>
+    <li>The recommended retainer and billing cadence</li>
+    <li>Precise inclusions</li>
+    <li>What triggers a separate quote</li>
+    <li>The monthly rhythm and the reporting model</li>
+    <li>The review mechanism</li>
+    <li>Risks, and an honest critique of this proposal</li>
+    <li>Sources</li>
+  </ol>
+</div>
+
+<div class="wrap">
+
+<section>
+<div class="kick"><span class="num">01</span><span class="lbl">The recommendation in one page</span></div>
+<h2>Two numbers, and the reasoning in a paragraph each</h2>
+
+<div class="cards">
+  <div class="card rec">
+    <div class="tag">Phase one, one off</div>
+    <div class="fig">$48,000 <small>+ GST</small></div>
+    <p>The complete CVBS website. Strategy, information architecture, design system, twelve templates, fifty two published pages, the venue capacity index, content, SEO and entity foundations, migration, testing and launch.</p>
+  </div>
+  <div class="card rec">
+    <div class="tag">Phase two, ongoing</div>
+    <div class="fig">$8,650 <small>per month + GST</small></div>
+    <p>Head of Digital. Website, three social channels, two email campaigns a month, campaign coordination, strategy and reporting. Steps up from $6,900 a month, which runs from signing until the site is live.</p>
+  </div>
+  <div class="card">
+    <div class="tag">Where the retainer sits</div>
+    <div class="fig">$3,992 <small>per fortnight</small></div>
+    <p>Shown only because you asked. My recommendation is to bill monthly. The reasoning is in section 17 and it matters more than it looks.</p>
+  </div>
+</div>
+
+<h3>Why $48,000 for the website</h3>
+<p>Three independent methods land in the same place. The published Australian tier that matches this build by page count and scope is Butterfly's <strong>$25,000 to $50,000</strong> band, described as "15 to 50 pages, custom design and UX, standard integrations, WCAG compliance". This site is 52 published pages with a bespoke structured data product on top, which pushes it against the ceiling of that tier and into the edge of the next one ($50,000 to $100,000). Airtasker's aggregated Australian data puts agency custom design for larger and more complex sites at <strong>$40,000 to $75,000</strong>. And a disciplined market delivery of this scope is roughly 460 hours, which at $48,000 works out at $104 an hour, almost exactly Cemoh's published 2026 Australian average of <strong>$107 an hour for a web developer</strong> and <strong>$108 for a digital marketing strategist</strong>. You would be charging one average discipline rate for four disciplines delivered.</p>
+
+<h3>Why $8,650 a month for the ongoing role</h3>
+<p>Bought as separate services at published Australian rates, this scope costs CVBS between <strong>$6,500 and $12,000 a month</strong>, with the honest midpoint near $9,000. As a fraction of a salary, a Sydney Digital Marketing Manager sits at $115,000 to $135,000 market (Big Wave Digital, 4 August 2026); at half time, plus 12 per cent super and the standard contractor loading for leave, insurance, tools and downtime, that is $8,500 to $9,450 a month. As a day rate, $8,650 across 10.8 reserved days is $801 a day against Cemoh's Australian averages of $863 for a developer and $867 for a strategist. Three methods, three answers, all within a few hundred dollars of each other. The number you already had is correct and I am not moving it.</p>
+
+<div class="box warn">
+  <h4>The one thing that could sink this, and it is not either number</h4>
+  <p>Year one lands at roughly $145,000 against the $26,000 CVBS pays you today. Neither figure is wrong. The total is the problem, and it only becomes a problem if the document lets them add it up. <strong>Do not print an annual total, do not print a year one total, and do not put the build fee and the monthly fee in the same visual block.</strong> Phase one is a project with a start and an end. Phase two is what the business costs to run. They are different purchases and the document has to make them feel that way. Section 22 covers the rest of the risk.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">02</span><span class="lbl">Actual scope</span></div>
+<h2>What the CVBS website really is</h2>
+<hr class="rule">
+<p class="lead">You listed seven pages. The build in the folder is fifty two. That gap is the single biggest reason you have been struggling to price this: you have been valuing it against the shape of a proposal rather than the shape of the thing you made.</p>
+
+<p>Every figure below is counted from the files, not estimated.</p>
+
+<table>
+<thead><tr><th>Dimension</th><th class="num">Measured</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Published pages</td><td class="num">52</td><td>49 URLs in <code>sitemap.xml</code> plus three offer detail pages</td></tr>
+<tr><td>Distinct page templates</td><td class="num">12</td><td>Home, service, city index, destination hub, audience segment, guide, listing, FAQ, company, offers, offer detail, contact</td></tr>
+<tr><td>Bespoke one off builds</td><td class="num">4</td><td>Sydney flagship index page, budget calculator, multi step brief form, venue capacity index module</td></tr>
+<tr><td>Rendered words on the published site</td><td class="num">66,254</td><td>Roughly 38,000 of that is unique body copy once shared navigation and footer are stripped</td></tr>
+<tr><td>Design system</td><td class="num">1,491</td><td>Lines of hand written CSS, carrying 543 custom property declarations</td></tr>
+<tr><td>Front end behaviour</td><td class="num">972</td><td>Lines of hand written JavaScript across 24 functions. No framework, no build step</td></tr>
+<tr><td>Verified venue records</td><td class="num">54</td><td>Each capacity figure read off the venue's own capacity chart, fact sheet or floor plan. No directory data</td></tr>
+<tr><td>Structured data nodes</td><td class="num">1,300+</td><td>Across 25 schema.org types, with one entity graph injected into all 49 pages</td></tr>
+<tr><td>Pages carrying an enquiry pathway</td><td class="num">47</td><td>Of 49 sitemap pages</td></tr>
+<tr><td>Image library</td><td class="num">131</td><td>16MB of imagery plus 4.2MB of video, organised across nine directories</td></tr>
+<tr><td>Generators and tooling</td><td class="num">5</td><td>Venue index generator, entity graph generator, data sync, site visit intake, public build script</td></tr>
+<tr><td>Third party dependencies</td><td class="num">0</td><td>No CMS, no framework, no plugin stack, nothing to patch or renew</td></tr>
+</tbody>
+</table>
+
+<h3>Scope by workstream</h3>
+
+<table>
+<thead><tr><th>Workstream</th><th>What exists</th></tr></thead>
+<tbody>
+<tr><td><strong>Destination content</strong></td><td>16 city and region pages, each rewritten with its own argument rather than a shared template, plus a destinations hub with precinct treatments. Nine bespoke hero treatments built after an image audit found eight cities sharing one photograph and one file that was a blank gradient.</td></tr>
+<tr><td><strong>Venue content</strong></td><td>54 source verified venue records with capacity, ceiling height, floor area, setup matrix, second space and a firsthand "seen" field. A published research method, an adversarial refute pass on every superlative, and rebrand and operator change checking.</td></tr>
+<tr><td><strong>Venue finder functionality</strong></td><td>A JSON data island per city, a renderer, an at a glance rail, an answer block, a site visit record layer with its own intake script, and a sync tool that refuses to run if it would orphan a published record. City agnostic, so a new city is a data swap.</td></tr>
+<tr><td><strong>Enquiry pathways</strong></td><td>A brief bar on the homepage, a form on 47 pages, per venue and per offer deep links, and a dedicated multi step brief page that prefills from query parameters (<code>?offer=</code>, <code>?dest=</code>, <code>?venue=</code>) with an offers map that has to be maintained.</td></tr>
+<tr><td><strong>Offers</strong></td><td>An offers hub plus individual offer pages, wired into the brief form and into the email templates.</td></tr>
+<tr><td><strong>Results and proof</strong></td><td>Named client quotes at named organisations, a logo wall with prose naming the clients underneath it, and a stated position against anonymous testimonials.</td></tr>
+<tr><td><strong>About and How it works</strong></td><td>Team, beliefs, the 37 year history, the process, and a separate page setting out how CVBS is paid.</td></tr>
+<tr><td><strong>Editorial and resources</strong></td><td>Nine guides, a blog index, a resources page, a 4,400 word FAQ, a downloadable checklist and an interactive budget calculator.</td></tr>
+<tr><td><strong>Audience segments</strong></td><td>Six segment pages: association, government, medical, corporate retreat, sales conference, executive meeting.</td></tr>
+<tr><td><strong>SEO and entity foundations</strong></td><td>Sitemap, robots, canonicals, per page metadata, an answer first block pattern, and a single entity graph replacing three conflicting Organization stubs. Built for citation and recommendation, not only ranking.</td></tr>
+<tr><td><strong>Responsive</strong></td><td>Verified at 390, 768, 1024 and 1440. Includes a mobile hero rebuild after a scrim failed WCAG contrast and card cropping failed at laptop widths.</td></tr>
+<tr><td><strong>Still to do before launch</strong></td><td>Migration and cutover from the WordPress and Divi site, redirects for 12 orphaned URLs, privacy and terms pages, live form key, analytics install, canonical switch to the real domain, the P1 image and copy fixes, venue lists on 14 of 16 destination pages, and post launch QA.</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+  <h4>A correction you need before you write a word to CVBS</h4>
+  <p>This is not "designing and building a new website from scratch". CVBS has seen the mockup. The concept is built and they approved it. If the proposal says "from scratch" they will either think you are starting over, or they will notice the mismatch. <strong>The accurate framing is stronger anyway:</strong> the concept is proven, the risk is gone, and the project is what turns an approved concept into a live, migrated, tested website that CVBS owns outright. Buyers pay more for certainty than they do for potential.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">03</span><span class="lbl">Classification</span></div>
+<h2>How to classify it, and why that sets the price</h2>
+<hr class="rule">
+
+<p>Of the categories you listed, the accurate one is <strong>a custom lead generation website with a structured data product and a content publishing layer</strong>. In market terms that reads as a custom marketing website with a light web application on top.</p>
+
+<table>
+<thead><tr><th>Category</th><th>Verdict</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Small business website</td><td><span class="pill g">No</span></td><td>52 pages, 38,000 words, a data layer and five generators. Not the same product.</td></tr>
+<tr><td>Custom marketing website</td><td><span class="pill t">Yes, the base</span></td><td>Bespoke design system, 12 templates, no theme, no builder.</td></tr>
+<tr><td>Lead generation website</td><td><span class="pill t">Yes, the purpose</span></td><td>47 of 49 pages carry an enquiry pathway. Every page is measured on whether it produces a brief.</td></tr>
+<tr><td>Custom corporate website</td><td><span class="pill g">Partly</span></td><td>Right scale, wrong emphasis. Corporate sites are built to inform. This one is built to convert.</td></tr>
+<tr><td>Tourism or events platform</td><td><span class="pill g">Adjacent</span></td><td>Same industry, wrong shape. It sells a sourcing service, not inventory.</td></tr>
+<tr><td>Directory style website</td><td><span class="pill t">Partly, and this is the premium</span></td><td>The venue capacity index is directory infrastructure: structured records, filtering, generated markup, a maintenance pipeline. It is deliberately not comprehensive, which is the position, not a shortfall.</td></tr>
+<tr><td>Custom digital sales platform</td><td><span class="pill g">No</span></td><td>No accounts, no payments, no bookings, no server side database. Claiming this would be an overclaim and it would invite a scope argument you cannot win.</td></tr>
+</tbody>
+</table>
+
+<p>The classification matters for one reason. <strong>Brochure site pricing runs $5,000 to $25,000. Custom marketing site pricing runs $25,000 to $50,000. Custom plus bespoke functionality runs $50,000 to $100,000.</strong> Those are Butterfly's published Australian tiers, last modified 10 June 2026. Getting the classification right is worth more than any negotiating tactic, because it moves the whole conversation into a different band before price is discussed.</p>
+
+<div class="box">
+  <h4>Say this in the room</h4>
+  <p>"The site is fifty two pages across twelve templates, with a venue index that has its own data model and its own maintenance tooling. The published Australian band for a custom site of fifteen to fifty pages is twenty five to fifty thousand. Anything with bespoke functionality on top of that sits in the fifty to one hundred thousand band. This build straddles the two."</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">04</span><span class="lbl">Market research, projects</span></div>
+<h2>Australian market pricing for a website project of this scope</h2>
+<hr class="rule">
+<p class="lead">Everything in this section is a figure published on an Australian company's own website. Where a number is my arithmetic rather than theirs, it is labelled.</p>
+
+<h3>Directly published Australian tiers</h3>
+
+<table>
+<thead><tr><th>Source</th><th>Published figure</th><th>Scope it covers</th><th>Date</th></tr></thead>
+<tbody>
+<tr class="hi"><td>Butterfly (Sydney agency)</td><td class="num">$25,000 to $50,000</td><td>15 to 50 pages, custom design and UX, standard integrations, WCAG compliance</td><td>Modified 10 Jun 2026</td></tr>
+<tr class="hi"><td>Butterfly</td><td class="num">$50,000 to $100,000</td><td>Bespoke UI and UX, multiple integrations, accessibility compliance, project management</td><td>Modified 10 Jun 2026</td></tr>
+<tr><td>Butterfly</td><td class="num">$5,000 to $25,000</td><td>Simple brochure site, 5 to 15 pages, CMS, basic integrations</td><td>Modified 10 Jun 2026</td></tr>
+<tr class="hi"><td>Airtasker Australia</td><td class="num">$40,000 to $75,000+</td><td>Agency custom design, larger or complex sites (their simple custom band is $15,000 to $20,000)</td><td>Data last updated Dec 2023</td></tr>
+<tr><td>Velacore</td><td class="num">$18,000 to $45,000</td><td>Custom website. Their enterprise band is $40,000 to $120,000+</td><td>29 Jul 2026</td></tr>
+<tr><td>23 Digital</td><td class="num">$15,000 to $40,000</td><td>Custom corporate or services website. Named case study: $28,500 ex GST for 40 pages with a HubSpot integration</td><td>Updated 9 Jul 2026</td></tr>
+<tr><td>Grove Foundry</td><td class="num">$15,000 to $50,000+</td><td>Custom hand coded, no CMS. The only Australian source pricing this delivery model directly</td><td>Updated 14 Jul 2026</td></tr>
+<tr><td>Strong Digital (Brisbane)</td><td class="num">$25,000 to $100,000+</td><td>Large agency or custom development. Their small to mid agency band is $8,000 to $25,000+</td><td>Updated 5 Jan 2026</td></tr>
+<tr><td>WP Creative</td><td class="num">$25,000 to $100,000+</td><td>Premium tier. Their own hourly rate is published at $150, or $125 on a twelve month commitment</td><td>Updated 1 Sep 2026</td></tr>
+<tr><td>GoDaddy Australia</td><td class="num">Above $30,000</td><td>Large bespoke website</td><td>1 May 2026</td></tr>
+<tr><td>Keen to Design (Sydney)</td><td class="num">$20,000 to $100,000+</td><td>Web application or custom platform. Custom WordPress is $7,000 to $15,000</td><td>Updated 12 Apr 2026</td></tr>
+<tr><td>Luminary (via Clutch AU)</td><td class="num">$50,000+</td><td>Published minimum project size for a large Melbourne agency</td><td>Clutch AU, 2026</td></tr>
+</tbody>
+</table>
+
+<h3>Published Australian rates</h3>
+
+<table>
+<thead><tr><th>Source</th><th>Published rate</th><th>What it covers</th></tr></thead>
+<tbody>
+<tr class="hi"><td>Cemoh, web developer</td><td class="num">$107/hr, $863/day</td><td>2026 Australian average from their active consultant network. Min $529/day, max $1,110/day. A day is up to 7.6 hours. Excludes GST</td></tr>
+<tr class="hi"><td>Cemoh, digital marketing strategist</td><td class="num">$108/hr, $867/day</td><td>2026 Australian average. Max $1,830/day</td></tr>
+<tr><td>Cemoh, designer</td><td class="num">$83/hr, $668/day</td><td>2026 Australian average</td></tr>
+<tr><td>Conduct, small to medium agencies</td><td class="num">$123 to $330/hr</td><td>Their published Australian development rate card by firm size. Large businesses $330 to $495. Enterprise $577 to $1,402</td></tr>
+<tr><td>Clutch Australia, modal agency band</td><td class="num">$150 to $199/hr</td><td>Self declared by the majority of listed Australian web design agencies. Premium studios declare $200 to $300</td></tr>
+<tr><td>Spark Interact</td><td class="num">Freelance $50 to $150, agency $80 to $200</td><td>Published Australian rate guidance</td></tr>
+<tr><td>Impressive</td><td class="num">$200 to $300/hr</td><td>SEO consulting. One off SEO projects $2,000 to $10,000+, migrations $3,000 to $10,000+</td></tr>
+<tr><td>Digital Nomads HQ</td><td class="num">$150 to $300 per page</td><td>SEO foundations, the only per page unit rate published in Australia. Content creation $150 to $250/hr</td></tr>
+</tbody>
+</table>
+
+<h3>Realistic ranges by provider type</h3>
+
+<table>
+<thead><tr><th>Provider</th><th>This project would cost</th><th>Basis</th></tr></thead>
+<tbody>
+<tr><td><strong>Freelancer</strong></td><td class="num">$18,000 to $30,000</td><td><span class="pill g">Estimated</span> Published freelance bands top out around $8,000 for brochure work. A freelancer at $75 to $110 an hour who could deliver this would be at 250 to 300 hours because they would cut the content and the data layer. What CVBS would get is a smaller site.</td></tr>
+<tr><td><strong>Boutique studio</strong></td><td class="num">$40,000 to $65,000</td><td><span class="pill g">Estimated</span> from Butterfly's $25,000 to $50,000 tier plus the bespoke data module, and cross checked at 420 to 500 hours against Clutch's modal $150 to $199 band</td></tr>
+<tr><td><strong>Small agency</strong></td><td class="num">$55,000 to $85,000</td><td><span class="pill g">Estimated</span> from Strong Digital $25,000 to $100,000+, Airtasker $40,000 to $75,000+, Conduct's $123 to $330 SME rate band</td></tr>
+<tr><td><strong>Larger digital agency</strong></td><td class="num">$90,000 to $160,000</td><td><span class="pill g">Estimated</span> from Butterfly $50,000 to $100,000, Luminary's published $50,000 minimum, and Conduct's $330 to $495 large business rate band</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+  <h4>What the research does not contain, said plainly</h4>
+  <p>There is <strong>no published Australian price</strong> for a venue directory, a listings index, custom search and filter functionality, a multi step qualification form, or a conference and events industry website. Nobody publishes it. The two tourism figures that do exist (Grove Foundry $8,500 to $20,000, Webapex $8,500) are for a restaurant or a tour operator with a ten page site, and if anyone puts them in front of you they are comparing the wrong product. Say so directly. The defensible move is to price those components against a published Australian rate card, which is what the hours model in the next section does.</p>
+</div>
+
+<p class="src">Bait pricing to be ready for: every "from $2,000" and "from $1,290" package in this market buys a theme, stock imagery, client supplied copy, no discovery, no design system and one round of revisions. Digital Nomads HQ audited 140 Australian agencies in June 2026 and found 78 per cent publish no prices at all and only 8 per cent publish a genuine rate card. If CVBS produces a cheap quote, ask what tier it is and how many pages it covers, because the answer is almost always five.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">05</span><span class="lbl">Hours</span></div>
+<h2>Project hours, low, realistic and high</h2>
+<hr class="rule">
+<p class="lead">These are for you, not for CVBS. Nothing in this table goes into the proposal.</p>
+
+<table>
+<thead><tr><th>Phase</th><th>What is delivered</th><th class="num">Low</th><th class="num">Realistic</th><th class="num">High</th></tr></thead>
+<tbody>
+<tr><td><strong>01 Discovery and strategy</strong></td><td>Audit of the existing site, competitor audit across marketplaces and bureaux, the positioning work, the citation and recommendation research, the venue index concept, the commercial argument</td><td class="num">40</td><td class="num">55</td><td class="num">70</td></tr>
+<tr><td><strong>02 Information architecture</strong></td><td>52 page structure, URL scheme, navigation model, internal linking, sitemap, redirect map from the 12 orphaned URLs</td><td class="num">18</td><td class="num">25</td><td class="num">32</td></tr>
+<tr><td><strong>03 UX and conversion planning</strong></td><td>Enquiry pathway design, brief form logic and prefill model, CTA hierarchy, the answer first block pattern, index interaction model</td><td class="num">22</td><td class="num">32</td><td class="num">42</td></tr>
+<tr><td><strong>04 Design</strong></td><td>Design system, colour, typography, 543 design tokens, 12 templates, hero library, component set, revision rounds</td><td class="num">60</td><td class="num">85</td><td class="num">110</td></tr>
+<tr><td><strong>05 Development</strong></td><td>52 hand coded pages, 1,491 lines of CSS, 972 lines of JavaScript, the index renderer and filters, the calculator, the brief form, five generators and maintenance scripts</td><td class="num">95</td><td class="num">130</td><td class="num">170</td></tr>
+<tr><td><strong>06 Content implementation</strong></td><td>38,000 words written, edited and placed, 16 destination rewrites, 54 source verified venue records, offers, results, FAQ, guides, image preparation</td><td class="num">80</td><td class="num">115</td><td class="num">150</td></tr>
+<tr><td><strong>07 Responsive optimisation</strong></td><td>390, 768, 1024 and 1440 passes across every template, mobile hero rebuild, contrast fixes, overflow sweeps</td><td class="num">22</td><td class="num">32</td><td class="num">42</td></tr>
+<tr><td><strong>08 SEO foundations</strong></td><td>Metadata for 52 pages, canonicals, robots, sitemap, 1,300+ structured data nodes across 25 types, the single entity graph, answer blocks</td><td class="num">32</td><td class="num">45</td><td class="num">58</td></tr>
+<tr><td><strong>09 Analytics and tracking</strong></td><td>GA4, Search Console, enquiry and form event tracking, offer link attribution, the reporting view</td><td class="num">8</td><td class="num">12</td><td class="num">16</td></tr>
+<tr><td><strong>10 Testing and QA</strong></td><td>Cross browser, automated multi page sweeps, link checking, form submission testing, image and asset audits</td><td class="num">26</td><td class="num">38</td><td class="num">50</td></tr>
+<tr><td><strong>11 Launch</strong></td><td>Domain and DNS coordination, hosting, form keys, canonical and schema switch to the live domain, 12 redirects, privacy and terms, go live checks</td><td class="num">14</td><td class="num">22</td><td class="num">30</td></tr>
+<tr><td><strong>12 Post launch support</strong></td><td>30 days of monitoring and fixes, handover documentation, training on publishing and the index tooling</td><td class="num">12</td><td class="num">18</td><td class="num">26</td></tr>
+<tr><td><strong>Hidden labour</strong></td><td>Meetings, calls, email, revision handling, troubleshooting, content chasing, client feedback loops, project management, version control, the work of holding it all in your head</td><td class="num">45</td><td class="num">65</td><td class="num">90</td></tr>
+<tr class="hi"><td><strong>Total</strong></td><td></td><td class="num">474</td><td class="num">674</td><td class="num">886</td></tr>
+</tbody>
+</table>
+
+<div class="box warn">
+  <h4>The finding you will not enjoy, and it is the most useful one here</h4>
+  <p>At 674 realistic hours, $48,000 is <strong>$71 an hour</strong>. That is below the Australian freelance average and well below the rate CVBS already pays you through the social retainer. Your hours are real. The problem is that they exceed what this asset is worth on the open market, because a large amount of the work was done before anyone committed to buying it. The August audit already recorded this: roughly $61,000 of sum of parts value produced unpaid for a client who was already paying you.</p>
+  <p><strong>Do not try to recover the overbuild in the price.</strong> CVBS will not pay for your process. Price the asset at market, take the cash, and change the process. A disciplined delivery of this same site is 420 to 500 hours, and at $48,000 that is $96 to $114 an hour, which is where this should sit. The gap between 674 and 460 is the tuition on doing it this way once.</p>
+</div>
+
+<h3>The rule that stops this happening again</h3>
+<p>Before any future client approves a direction: build the design system, the homepage, two templates and one flagship page. Nothing else. Password or robots block the preview, never hand over a root URL, and charge a concept fee of $2,500 to $4,500 credited against the build on approval. You would have $4,500 in hand right now and 300 fewer unpaid hours behind you.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">06</span><span class="lbl">Work already done</span></div>
+<h2>Valuing the work already completed</h2>
+<hr class="rule">
+
+<p>You asked me not to value the website on the remaining development hours. That is right, and here is how to make the argument without ever saying "I have already done a lot of work", which invites the reply "so it should cost less".</p>
+
+<h3>Three arguments, in order of strength</h3>
+
+<h4>1. The fee buys the asset, not the calendar</h4>
+<p>CVBS is not buying twelve weeks of your time. They are buying a fifty two page website with a verified venue data product, an entity layer and a conversion architecture, that they will own outright and that has no dependencies to renew. A quote is a price for a finished thing. Nobody itemises a builder's hours after the house is standing. <strong>Never present the fee as a rate multiplied by a duration, because the moment you do, the negotiation becomes about duration.</strong></p>
+
+<h4>2. The risk has already been taken, and that has value</h4>
+<p>An agency quoting this project today would price in discovery risk, direction risk, revision risk and the possibility that the client rejects the concept. Those contingencies are real money and they are usually 15 to 25 per cent of a fee. CVBS is not paying them, because the concept exists, they have seen it, and they approved it. <strong>They are buying a de risked project at the price of a risky one.</strong> That is the single best value line available to you and it is entirely true.</p>
+
+<h4>3. Continuity is a discount they are already receiving</h4>
+<p>Any other supplier starts with discovery: learning the business, the audience, the commission model, the venue relationships, the 37 year history, the reason CVBS will not publish rates. Butterfly, Luminary and every agency in the research price that as its own phase. You have done it over twelve months of running their social. That is 40 to 55 hours of discovery CVBS does not have to fund, plus the months of elapsed time it would take.</p>
+
+<h3>What this means for the fee</h3>
+<p>The strategy, competitor work, information architecture, conversion planning, visual direction, page concepts, UX decisions, design development and revisions are <strong>phases 01 to 04 of the project</strong>, worth 145 to 195 hours in the model above, roughly 28 per cent of the total. They are delivered work, not sunk cost. They belong in the scope of work, priced, with the rest of the phases, and the fee is invoiced against milestones that include them.</p>
+
+<div class="box">
+  <h4>The practical mechanism</h4>
+  <p>Make the first milestone <strong>40 per cent on acceptance</strong> rather than a deposit. A deposit is money against work not yet done. Forty per cent on acceptance is payment for four phases that are already delivered and that CVBS is approving by signing. That single word change is worth $19,200 in your bank account in the first fortnight, and it is honest.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">07</span><span class="lbl">The website fee</span></div>
+<h2>Three positions, and the one I would quote</h2>
+<hr class="rule">
+
+<div class="cards">
+  <div class="card">
+    <div class="tag">Conservative</div>
+    <div class="fig">$36,000</div>
+    <p>Sits at the top of 23 Digital's custom corporate band and just above the middle of Butterfly's $25,000 to $50,000 tier. Represents the site priced as a large custom marketing website with the venue index treated as an included feature rather than its own product. Effective rate on a disciplined 460 hours: $78.</p>
+  </div>
+  <div class="card rec">
+    <div class="tag">Recommended</div>
+    <div class="fig">$48,000</div>
+    <p>The site priced as what it is: a custom marketing website plus a bespoke data product plus a full content build. Top of Butterfly's mid tier, lower half of Airtasker's $40,000 to $75,000 agency custom band. Effective rate on 460 hours: $104, which is the published Australian average for a single discipline.</p>
+  </div>
+  <div class="card">
+    <div class="tag">Premium, justifiable</div>
+    <div class="fig">$64,000</div>
+    <p>Every workstream priced separately: the site, the index as a product, the 16 city pages, the content production, the entity layer. Sits inside Butterfly's $50,000 to $100,000 tier and Airtasker's agency band. Defensible on the evidence, but it needs a buyer who already thinks in those numbers. CVBS does not, yet.</p>
+  </div>
+</div>
+
+<h3>I would quote $48,000 plus GST</h3>
+<p>Four reasons, in order.</p>
+<ol>
+<li><strong>It is the number the evidence supports.</strong> Three independent methods converge on it: the published tier, the aggregated agency band, and the rate cross check. $36,000 requires me to pretend the venue index, the entity layer and 38,000 words of content are not there.</li>
+<li><strong>It survives comparison.</strong> If CVBS gets a second quote from a boutique studio, that quote will land between $40,000 and $65,000. Yours sits inside that band, which makes you competitive rather than cheap. A $36,000 quote sitting under everyone else's invites the question of what is missing.</li>
+<li><strong>You cannot discount later from $36,000.</strong> There is no room. At $48,000 you have a fallback that does not cost you credibility, described below.</li>
+<li><strong>The premium number is right and the timing is wrong.</strong> $64,000 is defensible on the research. It is not defensible in the same conversation as a retainer that is quadrupling. Take the money that is winnable now.</li>
+</ol>
+
+<h3>Against a boutique agency, directly</h3>
+<table>
+<thead><tr><th>Delivered by</th><th class="num">Likely fee</th><th>What CVBS gets</th></tr></thead>
+<tbody>
+<tr><td>Larger digital agency</td><td class="num">$90,000 to $160,000</td><td>Account manager, delivery pod, formal process, and a team learning the business from zero</td></tr>
+<tr><td>Small agency</td><td class="num">$55,000 to $85,000</td><td>Two to four people, a discovery phase they pay for, a strategist who leaves after the build</td></tr>
+<tr><td>Boutique studio</td><td class="num">$40,000 to $65,000</td><td>One or two senior people, good work, no knowledge of CVBS, and no continuity after launch</td></tr>
+<tr class="hi"><td>You, at the recommended fee</td><td class="num">$48,000</td><td>The same asset, already designed and approved, from the person who already runs their social and will run the site afterwards</td></tr>
+</tbody>
+</table>
+<p>You sit at roughly <strong>55 to 75 per cent of a boutique studio</strong> and <strong>30 to 50 per cent of a larger agency</strong>, for a build that is further advanced and carries no discovery risk. That is strong value without being cheap, which is exactly where you want to be. It is also the honest answer to your question: you are not underpricing at $48,000, and you would be underpricing at $32,000.</p>
+
+<div class="box">
+  <h4>If Karen flinches, cut scope, never price</h4>
+  <p>The fallback is <strong>$38,000</strong> with visible reductions: the venue index limited to Sydney plus two cities instead of a national rollout, eight destination pages instead of sixteen, and CVBS supplying the copy for the nine guides. Say the number and the cut in the same sentence. A discount teaches them that your first number was decoration; a scope cut teaches them that the price is the scope. That distinction is worth more than the $10,000.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">08</span><span class="lbl">Payment</span></div>
+<h2>Payment structure and scope change</h2>
+<hr class="rule">
+
+<h3>Recommended: 40, 30, 30 against milestones</h3>
+<table>
+<thead><tr><th>Milestone</th><th class="num">%</th><th class="num">Amount</th><th>Trigger</th></tr></thead>
+<tbody>
+<tr><td>Acceptance of scope</td><td class="num">40</td><td class="num">$19,200</td><td>On signing. Covers strategy, information architecture, conversion planning and design, which are delivered and which CVBS is approving by signing</td></tr>
+<tr><td>Build and content complete</td><td class="num">30</td><td class="num">$14,400</td><td>All pages built and populated on a staging URL, reviewed and signed off by CVBS</td></tr>
+<tr><td>Launch</td><td class="num">30</td><td class="num">$14,400</td><td>Site live on conferencevenues.com.au, redirects in place, analytics recording, forms tested</td></tr>
+</tbody>
+</table>
+
+<h3>Why not the two structures you named</h3>
+<p><strong>50 on commencement, 50 before launch</strong> leaves half the fee riding on a launch date CVBS controls. They owe you photography, the confirmed commission rate, Chantelle and Rychelle's titles, the decision on publishing venue pricing and approvals within three days. If any of those slip, and one of them will, half the fee sits unpaid while you wait. Never let a payment milestone depend on a client obligation.</p>
+<p><strong>40 commencement, 30 design approval, 30 before launch</strong> has a milestone that has already happened. The design is approved; that is why you are writing this document. Billing for a milestone in the past looks like padding.</p>
+
+<h3>The clauses that do the work</h3>
+<ul>
+<li><strong>Revisions.</strong> Two rounds per template at design stage, one round per page at content stage. Beyond that, quoted before it starts. Say "rounds", not "changes", so a batch of notes is one round rather than eleven.</li>
+<li><strong>Definition of scope change.</strong> Anything that adds a page type, adds a function the site cannot currently perform, changes an approved template after sign off, or requires a third party system. New content in an existing template is not a scope change; a new kind of page is.</li>
+<li><strong>How extra work is charged.</strong> Fixed price, quoted and agreed in writing before it starts. No hourly rate anywhere in the client facing document, including here. If they push for an hourly figure for small jobs, the answer is a minimum half day priced as a fixed fee.</li>
+<li><strong>Hosting until final payment.</strong> The site stays on your hosting until the final invoice clears, then transfers. Standard, and it is the only real leverage in a project like this.</li>
+<li><strong>Client obligations with dates.</strong> Photography, the commission rate, approvals within three business days, account access at owner level in CVBS's name. Write them into the project scope with dates, not just the retainer.</li>
+<li><strong>A defined end.</strong> The project ends 30 days after launch. That date is what turns everything after it into retainer work rather than a build that never closes.</li>
+</ul>
+
+<div class="box">
+  <h4>If cash flow is raised</h4>
+  <p>Split the 40 per cent into two monthly instalments of $9,600. Do not move to twelve equal monthly payments, because a project invoiced like a subscription starts to feel like one, and it will make Phase two harder to price.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">09</span><span class="lbl">Website management</span></div>
+<h2>What ongoing weekly website management means</h2>
+<hr class="rule">
+<p class="lead">The published Australian market splits cleanly at about $1,000 a month. Below it you are buying backups, security patches and uptime. Above it you are buying someone who changes what is on the site. CVBS is asking for the second thing.</p>
+
+<h3>Routine website management, included</h3>
+<table>
+<thead><tr><th>Cadence</th><th>Work</th></tr></thead>
+<tbody>
+<tr><td><strong>Weekly</strong></td><td>One scheduled publishing and maintenance pass. New offers loaded, expired offers removed, venue and destination content published, index rows added, homepage and CTA updates, campaign content placed, broken link and form check, error and speed check.</td></tr>
+<tr><td><strong>Fortnightly</strong></td><td>Conversion pathway walk through: brief form on desktop and mobile, prefill links from every live offer, enquiry arrival confirmed, thank you states.</td></tr>
+<tr><td><strong>Monthly</strong></td><td>Analytics and Search Console review, an outdated content sweep, one venue or destination feature published, metadata and internal linking improvements, the assistant check, mobile QA pass, one page report.</td></tr>
+<tr><td><strong>Quarterly</strong></td><td>A new city added to the venue index, a listings and citations pass, an enquiry outcome review with Karen and Anthony, and a conversion recommendation with a reason attached.</td></tr>
+</tbody>
+</table>
+
+<h3>Not included, quoted separately</h3>
+<p>Major new sections, new functionality of any kind, custom applications, third party integrations and APIs, booking payment or e-commerce, member logins or portals, a redesign or rebuild, substantial new page builds beyond routine content, platform or host migration, and large scale data work. This is the in and out table that already exists in the scope document, and it is the clause that stops a monthly fee being asked to carry a second build. Keep it exactly as it is.</p>
+
+<h3>Realistic effort</h3>
+<p>Four to five hours in a normal week, three in a quiet one, six or seven when a campaign lands or a city goes into the index. Call it <strong>18 to 22 hours a month</strong>. For comparison, WP Creative's published Care plan is "from $2,500 a month" for "from 20 development hours", and their Scale plan at "from $5,000" is the first tier that includes conversion optimisation, GA4 and attribution hygiene, and technical SEO and AI search visibility, which is the work described above.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">10</span><span class="lbl">Email</span></div>
+<h2>Email marketing as a proper service</h2>
+<hr class="rule">
+
+<table>
+<thead><tr><th>Layer</th><th>What is delivered</th></tr></thead>
+<tbody>
+<tr><td><strong>Strategy</strong></td><td>A rolling campaign calendar, identifying which offer, venue, destination or piece of judgement is worth a send, and aligning each send to what CVBS actually wants to sell that month. The eleven email program and the twelve month rhythm already exist as the framework.</td></tr>
+<tr><td><strong>Copy</strong></td><td>Subject line, preview text, body copy, one call to action per send. Written in the CVBS voice, signed by the right person, with the offer above the description rather than behind a hundred words of brochure copy.</td></tr>
+<tr><td><strong>Design</strong></td><td>Wave header template management, image selection and preparation, cache busted asset URLs, mobile rendering, and the Outlook variants for one to one sends where the mailbox is Microsoft and the platform is Mailchimp.</td></tr>
+<tr><td><strong>Build</strong></td><td>Campaign built in Mailchimp, every link landing on a CVBS page rather than the hotel's, merge tags, reply to set to a real person, from name held as Conference Venues, inbox testing, scheduling and send.</td></tr>
+<tr><td><strong>Database</strong></td><td>List hygiene, bounce and unsubscribe handling, suppression, growth from site enquiries, and reader led segmentation by asking for a reply rather than guessing. Act! stays the record; Mailchimp stays the sender.</td></tr>
+<tr><td><strong>Optimisation</strong></td><td>Post send reporting on opens with the usual caveats, clicks, click to open, the pages those clicks landed on, and what came back as an enquiry. Subject line testing where the list is large enough to mean anything.</td></tr>
+<tr><td><strong>Integration</strong></td><td>The part that is worth paying for. CVBS spots an opportunity, the landing page or offer page is updated first, the email is built to point at it, social carries the same message in the same week, and the traffic arrives on a page that was written for it.</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+  <h4>The one number that would make this section undeniable to CVBS</h4>
+  <p>There is no list size, open rate or revenue per send anywhere in the strategy document. Get one real number about the CVBS list before you present. "Two thousand contacts, and the last send got nine replies" beats every paragraph above it.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">11</span><span class="lbl">Email volume</span></div>
+<h2>How many campaigns, and how to hold the line</h2>
+<hr class="rule">
+
+<h3>Effort per campaign</h3>
+<table>
+<thead><tr><th>Step</th><th class="num">Hours</th></tr></thead>
+<tbody>
+<tr><td>Planning, angle, offer selection, calendar slot</td><td class="num">0.75</td></tr>
+<tr><td>Copy: subject, preview, body, call to action</td><td class="num">1.50</td></tr>
+<tr><td>Design and asset preparation</td><td class="num">1.50</td></tr>
+<tr><td>Build in Mailchimp, links, merge tags</td><td class="num">1.25</td></tr>
+<tr><td>Audience selection and list hygiene</td><td class="num">0.50</td></tr>
+<tr><td>Inbox testing, QA, scheduling, send</td><td class="num">0.75</td></tr>
+<tr><td>Reporting and what it means for next time</td><td class="num">0.50</td></tr>
+<tr class="hi"><td><strong>Per campaign</strong></td><td class="num">6.75</td></tr>
+<tr><td>Plus the matching website page update, where the campaign needs one</td><td class="num">1 to 2</td></tr>
+</tbody>
+</table>
+
+<table>
+<thead><tr><th>Volume</th><th class="num">Monthly hours</th><th>What actually happens</th></tr></thead>
+<tbody>
+<tr><td>2 per month</td><td class="num">14 to 17</td><td>Sustainable. Each send has a reason. Matches your existing position of two sends a month to the whole list with one call to action.</td></tr>
+<tr class="hi"><td>4 per month</td><td class="num">27 to 34</td><td>Doubles the workload and hits a supply problem before it hits a time problem. CVBS does not have four new offers a month. Sends two and three become filler, and filler trains a list to stop opening.</td></tr>
+<tr><td>6 per month</td><td class="num">40 to 50</td><td>Half a working week, every week, on email alone. At this frequency the constraint is not you, it is unsubscribes.</td></tr>
+</tbody>
+</table>
+
+<h3>Recommendation: two planned campaigns a month</h3>
+<p>It is the right number for the list, it matches the position already documented, and it is what the recommended fee is built on. It is also what the eleven email program was designed around. Twenty four sends a year is a real email program for a business this size.</p>
+
+<h3>Urgent and ad hoc sends</h3>
+<p>The wording that protects you without sounding defensive:</p>
+<div class="stone">
+<p>"Two planned campaigns a month, agreed in the calendar. If something comes up that has to go out at short notice, we will swap it for one of that month's planned sends. If both are already out the door, I will quote it before I start."</p>
+</div>
+<p><strong>Swap, do not stack.</strong> That single mechanic is what stops a two a month program becoming a five a month one over six months without anybody deciding to.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">12</span><span class="lbl">Social</span></div>
+<h2>The existing social work, folded in without losing anything</h2>
+<hr class="rule">
+
+<p>What you do today, which continues unchanged: Instagram and Facebook, running for over a year with an audience CVBS built. Offers and EDM support, site visits, destinations, education, client results and positioning. Six post types, each a full carousel at 1080 by 1350. Real venue photography. Volume that flexes with travel, events, site visits and campaign activity.</p>
+<p>What is new inside the social function, and what makes it three channels rather than two: Karen's LinkedIn, ghost written from what she already knows and published in her name, and the CVBS company page, which exists and is empty and is the first thing a procurement team sees.</p>
+
+<div class="box warn">
+  <h4>The framing rule, and it is the one thing that could cost you the room</h4>
+  <p>Never write a line that implies CVBS's current social is absent, inconsistent, underperforming or in need of rescue. You are the person who has been running it for the last year at $26,000. Any criticism of it is criticism of your own paid work, in front of the client who paid for it. Instagram and Facebook are <strong>already running, already have an audience, and are now being brought onto the same design language as the site.</strong> An alignment and an upgrade. The website and email were rebuilt, so "rebuilt from the ground up" is fair there and is the useful contrast.</p>
+</div>
+
+<h3>What the coordination is worth</h3>
+<p>This is the part to make concrete, because "cross channel coordination" on its own is agency language and it does not sell.</p>
+<ul>
+<li><strong>No brief written twice.</strong> The offer is written once and adapted into a page, a send and a carousel by the person who wrote it. A separate email agency would need a brief, a call, two rounds and a week.</li>
+<li><strong>No handover gap.</strong> The email lands on a page that was updated before it went out, not after, because the same person does both in the same week.</li>
+<li><strong>One message.</strong> The site, the send and the post say the same thing in the same words, which is what makes a position stick rather than a campaign happen.</li>
+<li><strong>Speed.</strong> An offer can be live on the site, in an email and on social within two days. Three suppliers cannot do that at any price.</li>
+<li><strong>No relearning.</strong> Every new supplier has to be taught the commission model, the venue relationships, why CVBS will not publish rates and what Karen will and will not say. That cost is real and CVBS pays it once per supplier, per year.</li>
+</ul>
+</section>
+
+<section>
+<div class="kick"><span class="num">13</span><span class="lbl">Title</span></div>
+<h2>The role and what to call it</h2>
+<hr class="rule">
+
+<p><strong>Recommendation: Head of Digital, described as a fractional engagement.</strong> It is already what the scope document says and I would not change it.</p>
+
+<table>
+<thead><tr><th>Option</th><th>Verdict</th></tr></thead>
+<tbody>
+<tr class="hi"><td><strong>Head of Digital</strong></td><td>States responsibility for a function, which is the entire commercial argument. It is the title CVBS would advertise if they hired for this, so it makes the salary comparison do its work by itself. "Fractional" explains the two and a half days without apologising for them.</td></tr>
+<tr><td>Digital Partner</td><td>Ambiguous in the wrong direction. In Australia "partner" reads as equity, or as agency speak. It also sounds like a relationship rather than a job, and relationships do not have scope boundaries.</td></tr>
+<tr><td>Digital Marketing Partner</td><td>Same problem, and it narrows the role to marketing when you are also responsible for the website as a piece of infrastructure.</td></tr>
+<tr><td>Digital and Content Partner</td><td>Content is the smallest and most replaceable word in the list. Putting it in the title invites the comparison you least want.</td></tr>
+<tr><td>Fractional Digital Marketing Manager</td><td>Accurate but a rung too low. Manager implies executing someone else's plan, and you are writing the plan.</td></tr>
+<tr><td>Digital Growth Partner</td><td>Inflated. It also implies accountability for growth you do not control, since CVBS handles every enquiry after you deliver it.</td></tr>
+</tbody>
+</table>
+
+<p>One drafting note that matters more than the title. The scope document says <strong>"Accountable to: the Directors"</strong>, not "Reports to". Keep it. A reporting line is one of the indicia that points at deemed employment, and a contractor delivers to a client rather than reporting to a manager.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">14</span><span class="lbl">Workload</span></div>
+<h2>What you are signing up for</h2>
+<hr class="rule">
+<p class="lead">For you only. None of this goes anywhere near CVBS.</p>
+
+<table>
+<thead><tr><th>Activity</th><th class="num">Quiet</th><th class="num">Normal</th><th class="num">Busy or travel</th><th class="num">Campaign</th></tr></thead>
+<tbody>
+<tr><td>Social: planning, writing, carousels, scheduling, three channels</td><td class="num">4.0</td><td class="num">5.5</td><td class="num">9.0</td><td class="num">6.0</td></tr>
+<tr><td>Website: weekly pass, content, offers, index, technical</td><td class="num">3.0</td><td class="num">4.0</td><td class="num">4.0</td><td class="num">5.0</td></tr>
+<tr><td>Email: strategy, copy, design, build, test, send</td><td class="num">1.0</td><td class="num">4.0</td><td class="num">2.0</td><td class="num">8.0</td></tr>
+<tr><td>Strategy and campaign coordination</td><td class="num">1.0</td><td class="num">1.5</td><td class="num">1.0</td><td class="num">2.0</td></tr>
+<tr><td>Analytics and reading the numbers</td><td class="num">0.5</td><td class="num">1.0</td><td class="num">0.5</td><td class="num">1.0</td></tr>
+<tr><td>Meetings, calls, client communication, approvals chasing</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">2.0</td><td class="num">2.0</td></tr>
+<tr><td>Revisions, admin, file and asset management</td><td class="num">0.5</td><td class="num">1.0</td><td class="num">2.0</td><td class="num">1.0</td></tr>
+<tr class="hi"><td><strong>Week total</strong></td><td class="num">11.0</td><td class="num">19.0</td><td class="num">20.5</td><td class="num">25.0</td></tr>
+</tbody>
+</table>
+
+<h3>The month</h3>
+<p>A representative month is one quiet week, one normal, one busy and one campaign week: <strong>75.5 hours.</strong> Add the monthly items that do not sit inside a single week, being the report, the assistant check run and the quarterly work amortised, at about <strong>6 hours</strong>. Add roughly <strong>10 per cent for context switching</strong>, which is real and which nobody budgets for.</p>
+
+<div class="cards">
+  <div class="card"><div class="tag">Modelled</div><div class="fig">~90 <small>hours a month</small></div><p>Typical mix, including hidden labour and switching cost.</p></div>
+  <div class="card"><div class="tag">Reserved</div><div class="fig">82 <small>hours a month</small></div><p>Two and a half days a week at 7.6 hours, across 4.33 weeks.</p></div>
+  <div class="card rec"><div class="tag">Effective value</div><div class="fig">$96 <small>an hour</small></div><p>$8,650 across 90 hours. Against Cemoh's 2026 Australian averages of $107 for a developer and $108 for a strategist.</p></div>
+</div>
+
+<div class="box warn">
+  <h4>Is it sustainable? Yes, but with no slack, and you need to know that going in</h4>
+  <p>The model runs about eight hours a month over the capacity you are reserving. That is fine as an average, because quiet months and heavy months even out, and it is exactly what the "capacity, not hours" clause exists to absorb. What it means practically is that <strong>there is no room in this retainer for anything that is not on the list.</strong> Every boundary clause in section 19 is load bearing. If you let two of them go, this becomes a hundred hour month at the same price and the effective rate drops under $87.</p>
+  <p>The other thing to watch: at 90 hours a month CVBS is roughly half of a full time workload. Combined with the build, they become somewhere between 50 and 70 per cent of your revenue. That is a concentration risk, not a reason to say no, but it is a reason to keep the 60 day notice period and to not let the other client work go quiet.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">15</span><span class="lbl">Market research, retainers</span></div>
+<h2>Australian market pricing for ongoing digital services</h2>
+<hr class="rule">
+
+<h3>Published Australian monthly pricing</h3>
+<table>
+<thead><tr><th>Service</th><th>Source</th><th class="num">Published price</th><th>What it buys</th></tr></thead>
+<tbody>
+<tr><td rowspan="4"><strong>Social media management</strong></td><td>SOUP Agency</td><td class="num">$2,000 / $4,800 / $7,500+</td><td>Essentials: 8 static posts, 2 platforms, strategy, design, monthly report. Growth: 15 posts including 5 reels. Enterprise: 20 posts plus stories and a quarterly shoot. Excludes GST</td></tr>
+<tr><td>Quantum Web</td><td class="num">$2,450 / $5,370</td><td>3 posts a week on 2 platforms, up to 5 a week on 3 platforms. Plus GST. Add ons at $199 an hour</td></tr>
+<tr><td>BeKonstructive</td><td class="num">$960 / $1,800 / $3,120</td><td>1, 2 and 3 platforms; 8 to 10, 12 to 16 and 20+ posts a month with community management</td></tr>
+<tr><td>Digital Nomads HQ</td><td class="num">$950 to $2,500</td><td>Their audit band for organic social, 12 to 20 posts a month, community management rarely included</td></tr>
+<tr><td rowspan="3"><strong>Email marketing</strong></td><td>ShoutItOut</td><td class="num">$699 / $849 / $1,249</td><td>1, 2 and 4 emails a month. Mailchimp setup to 2,000 contacts, template design, split testing. <strong>Copywriting is a $200 extra</strong></td></tr>
+<tr><td>Code and Visual</td><td class="num">$700 / $1,200 / $1,800 per EDM</td><td>Design and build only, small, medium and large. Not strategy, not send management. Excludes GST</td></tr>
+<tr><td>Get Digital Marketing Help</td><td class="num">$1,000 to $2,500</td><td><span class="pill g">Guidance</span> Their published band for 2 to 4 campaigns a month. Per campaign $500 to $1,200 simple, $1,200 to $2,000 rich creative</td></tr>
+<tr><td rowspan="3"><strong>Website management</strong></td><td>WP Creative</td><td class="num">$2,500 / $5,000 / $10,000</td><td>"From 20", "from 40" and "from 80" development hours. The $5,000 Scale tier is the first that includes conversion and UX optimisation, GA4 and attribution, and technical SEO and AI search visibility</td></tr>
+<tr><td>Butterfly</td><td class="num">$500 to $1,500 / $1,500 to $5,000+</td><td><span class="pill g">Indicative</span> Standard includes 2 to 4 content update hours a month. Comprehensive adds accessibility audits and quarterly strategic reviews</td></tr>
+<tr><td>Keen to Design</td><td class="num">$100 / $550 / $1,100 / $2,800</td><td>Their own care plans, for sites they built</td></tr>
+<tr><td rowspan="3"><strong>Combined retainers</strong></td><td>Bang Media</td><td class="num">$2,290 / $4,380 / $6,270</td><td>"Virtual marketing manager", 10, 20 and 30 hours. Growth adds monthly email campaigns and a quarterly strategy session. Excludes GST</td></tr>
+<tr><td>Boost Social</td><td class="num">$1,499 to $2,999</td><td>10 to 30 pooled hours across social, ads, web design and maintenance, SEO, newsletter and blog. Plus GST</td></tr>
+<tr><td>WME Group</td><td class="num">$3,500 to $10,000</td><td><span class="pill g">Market estimate</span> Their "Growth" band, multi channel with an account manager, described as the sweet spot for Australian SMBs</td></tr>
+<tr><td rowspan="2"><strong>Fractional marketing</strong></td><td>Cemoh</td><td class="num">$12,000 to $14,500</td><td>Their "Silver" tier at one day a week. Day rates $1,500 to $2,200 mid, $2,200 to $3,000 senior</td></tr>
+<tr><td>Z10 Consulting</td><td class="num">$5,000 to $12,000</td><td><span class="pill g">Aggregated</span> Their read of the Australian fractional CMO market. $8,000 is roughly one day a week, $12,000 roughly two</td></tr>
+</tbody>
+</table>
+
+<h3>Australian salary benchmarks, 2026</h3>
+<table>
+<thead><tr><th>Role</th><th>Source</th><th class="num">Published</th></tr></thead>
+<tbody>
+<tr class="hi"><td>Digital Marketing Manager, Sydney</td><td>Big Wave Digital, 4 Aug 2026</td><td class="num">$115,000 to $135,000 market, $150,000 high</td></tr>
+<tr><td>Head of Digital, Sydney</td><td>Big Wave Digital, 4 Aug 2026</td><td class="num">$185,000 to $225,000 market</td></tr>
+<tr><td>Digital Marketing Manager</td><td>Robert Half AU 2026</td><td class="num">$110,000 / $140,000 / $150,000 at the 25th, 50th and 75th</td></tr>
+<tr><td>Content Manager</td><td>Robert Half AU 2026</td><td class="num">$100,000 / $120,000 / $130,000</td></tr>
+<tr><td>Digital Marketing Manager</td><td>Michael Page AU</td><td class="num">$130,000 national average</td></tr>
+<tr><td>Web Content Manager, mid</td><td>Clicks IT Recruitment</td><td class="num">$140,000 salary, or $885 a day on contract</td></tr>
+</tbody>
+</table>
+<p class="src">Robert Half figures are stated as gross yearly salary excluding bonuses, benefits and superannuation. Superannuation guarantee is 12 per cent of ordinary time earnings from 1 July 2025 (ATO). Hays, Robert Walters and Aquent's 2026 guides are all behind registration walls and I could not retrieve their marketing tables.</p>
+
+<h3>Two cross checks that both land on the same answer</h3>
+<div class="stone">
+<p><strong>Sum of parts.</strong> Social at the level you deliver, three channels with original carousels, $1,800 to $3,500. Email at two full campaigns a month with copy, $1,200 to $2,500. Website management at the tier that includes conversion and technical work, $2,000 to $4,000. A strategy and coordination layer, even a modest one, $1,500 to $2,000. <strong>Total $6,500 to $12,000 a month, midpoint about $9,000.</strong></p>
+<p><strong>Employment equivalent.</strong> A Sydney Digital Marketing Manager at $135,000 plus 12 per cent super is $151,200. At half time that is $75,600, or $6,300 a month for an employee who comes with no tools, no insurance, no software, paid leave and no flexibility. The standard contractor loading of 1.35 to 1.5 puts the equivalent contract cost at <strong>$8,500 to $9,450 a month.</strong></p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">16</span><span class="lbl">Options</span></div>
+<h2>Three retainer structures compared</h2>
+<hr class="rule">
+
+<table>
+<thead><tr><th></th><th>Option A<br>Website and email only</th><th>Option B<br>Digital Partner, recommended</th><th>Option C<br>Higher touch</th></tr></thead>
+<tbody>
+<tr><td><strong>Monthly</strong></td><td class="num">$4,800 plus $2,167 social<br>= $6,967</td><td class="num">$8,650</td><td class="num">$10,400</td></tr>
+<tr><td><strong>Fortnightly equivalent</strong></td><td class="num">$3,215</td><td class="num">$3,992</td><td class="num">$4,800</td></tr>
+<tr><td><strong>Annual</strong></td><td class="num">$83,600</td><td class="num">$103,800</td><td class="num">$124,800</td></tr>
+<tr><td><strong>Estimated monthly hours</strong></td><td class="num">~58</td><td class="num">~90</td><td class="num">~108</td></tr>
+<tr><td><strong>Effective hourly value</strong></td><td class="num">$120</td><td class="num">$96</td><td class="num">$96</td></tr>
+<tr><td><strong>Deliverables</strong></td><td>Weekly website management, two email campaigns, monthly report. Social continues under the existing separate arrangement.</td><td>Everything in A, plus three social channels, campaign coordination across all three, digital strategy owned, quarterly enquiry review, assistant check, annual plan. One feature published a month, four index cities a year.</td><td>Everything in B, plus capacity to open a new channel or market each year, two index cities a quarter, three to four email campaigns a month, and standalone campaign work.</td></tr>
+<tr><td><strong>Limits</strong></td><td>Strategy sits with CVBS. Social and website are coordinated informally, if at all.</td><td>Two email campaigns a month. One weekly website pass. New capability quoted separately.</td><td>Four campaigns a month is above what the CVBS list can currently support with real content.</td></tr>
+<tr><td><strong>Advantages</strong></td><td>Smallest ask. The existing social arrangement stays untouched and uncontroversial.</td><td>One accountable owner. One invoice. The commercial story writes itself and the boundary is defensible.</td><td>Room to grow without a renegotiation. Best margin protection if CVBS becomes more active.</td></tr>
+<tr><td><strong>Risks</strong></td><td class="warn"><strong>The serious one.</strong> Two invoices keeps the $500 a week alive as a live anchor that anyone can divide. The coordination value, which is the whole argument, is not being paid for, so you deliver it free. And a separate social line is the easiest thing in the world to cut in a tight quarter.</td><td>It is a four times increase on the current invoice. Needs the scope story told before the number is shown.</td><td>Hardest to justify with no budget signal. Risks CVBS choosing A as a reaction to the top of the range.</td></tr>
+</tbody>
+</table>
+
+<h3>Recommendation: Option B</h3>
+<p>Option A looks safest and is the most dangerous of the three. It leaves the $500 a week visible and divisible, it hands over the coordination for nothing, and it splits your income into a defended part and a cuttable part. Option C is correctly priced for what it contains but you have no budget signal and no reason to reach.</p>
+<p>Option B is the number that all three market cross checks land on independently, and it is the only one of the three where the commercial story and the price are the same story: one person is now responsible for the whole digital function, and it is invoiced as one thing.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">17</span><span class="lbl">Cadence</span></div>
+<h2>The recommended retainer, and how to bill it</h2>
+<hr class="rule">
+
+<div class="cards">
+  <div class="card"><div class="tag">While the site is built</div><div class="fig">$6,900 <small>per month</small></div><p>From signing. Social across three channels, email, strategy and coordination begin immediately. The build is invoiced separately against its own milestones.</p></div>
+  <div class="card rec"><div class="tag">From launch day</div><div class="fig">$8,650 <small>per month</small></div><p>The full Head of Digital scope, including weekly management of the new site.</p></div>
+  <div class="card"><div class="tag">If they ask</div><div class="fig">$3,992 <small>per fortnight</small></div><p>Arithmetically identical. I would not offer it.</p></div>
+</div>
+
+<h3>Bill monthly. This is not a small decision.</h3>
+<p>You currently invoice $500 a week. The instinct is that fortnightly keeps continuity and softens the number. It does the opposite.</p>
+<ul>
+<li><strong>A weekly or fortnightly figure is divisible and a monthly one is not.</strong> $2,000 a week is four times $500 a week, and everyone in the room can do that in their head in a second. $8,650 a month is a role, and a role has to be compared to other roles, which is a comparison you win.</li>
+<li><strong>Frequency signals size.</strong> Things billed weekly are services. Things billed monthly are functions. You are asking to be treated as a function.</li>
+<li><strong>Cash flow is better, not worse.</strong> Monthly in advance with fourteen day terms means you hold a month of money. Fortnightly in arrears means you are always half a month behind.</li>
+<li><strong>Fewer invoices, fewer approval events.</strong> Twelve moments a year where somebody looks at the number, rather than twenty six.</li>
+</ul>
+<p>The transition line to use, once: "the social invoicing moves from weekly to monthly, in line with how the whole engagement is now structured". Say it once, in the terms, and never again.</p>
+
+<h3>Separate the cadence from the scope in the document</h3>
+<p>The scope is a monthly retainer covering the six functions. The billing is monthly in advance, fourteen days, plus GST. Those are two different sentences in two different places, and keeping them apart is what stops the conversation becoming about the invoice instead of the job.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">18</span><span class="lbl">Inclusions</span></div>
+<h2>What is included, written precisely</h2>
+<hr class="rule">
+<p class="lead">Precise about the shape, silent about the hours. Every line below is written as a responsibility with a boundary, and none of them contains a number you can divide.</p>
+
+<table>
+<thead><tr><th>Function</th><th>Wording for the document</th></tr></thead>
+<tbody>
+<tr><td><strong>Website</strong></td><td>A scheduled weekly publishing and maintenance pass. Offers loaded and expired ones removed, venue and destination content published, index rows added, campaign and landing page updates, homepage and call to action changes, images prepared and placed, internal links and metadata maintained, forms and enquiry pathways checked, and the technical health of the site kept in order.</td></tr>
+<tr><td><strong>Email</strong></td><td>Two planned campaigns a month, including the calendar, the angle, subject and preview lines, copy, design, image preparation, audience selection, build in Mailchimp, inbox testing, scheduling, sending and a read on how it performed. List hygiene and growth throughout. Act! retained as the source database.</td></tr>
+<tr><td><strong>Social</strong></td><td>Ongoing management of Instagram and Facebook at the level currently provided, flexing with business activity, travel, events and campaigns. Karen's LinkedIn written from what she already knows and published under her name. The company page carrying clients, results, the team and each new city added to the index.</td></tr>
+<tr><td><strong>Coordination</strong></td><td>Every campaign runs across the website, email and social in the same period, pointing at the same page and saying the same thing.</td></tr>
+<tr><td><strong>Strategy</strong></td><td>Where the enquiries are going to come from over the next twelve months and what gets built to get them. Opportunities identified and recommended, the annual digital plan, and the quarterly enquiry review with the Directors.</td></tr>
+<tr><td><strong>Measurement</strong></td><td>Analytics and Search Console, a one page monthly report, the monthly assistant check on whether CVBS gets named, and a conversion recommendation each quarter with the reasoning attached.</td></tr>
+</tbody>
+</table>
+
+<h3>The clause that makes flexibility safe</h3>
+<p>You asked how to give CVBS the feeling that nothing is being counted, while stopping the scope from drifting. It is one paragraph, and the existing document already has most of it:</p>
+<div class="stone">
+<p>"Two and a half days a week are held for CVBS. I do not count hours, keep a timesheet or invoice against one. A quiet week is not credited and a heavy one is not surcharged. Some weeks will be mostly social, some mostly website, some built around an email campaign, and that is how it is meant to work. What changes the arrangement is not a busy month, it is a permanent addition to what I am responsible for."</p>
+</div>
+<p>That last sentence is the whole mechanism. Fluctuation is included. <strong>Permanent addition is not.</strong> It gives you a clean, non defensive way to say no, because the test is not "how long will this take", it is "is this a new thing I am now responsible for every month".</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">19</span><span class="lbl">Boundaries</span></div>
+<h2>What sits outside the retainer</h2>
+<hr class="rule">
+<p>Friendly in tone, absolute in substance. The framing is "so you always know what a thing costs before it starts", not "so you cannot ask me for things".</p>
+
+<table>
+<thead><tr><th>Category</th><th>Items</th><th>How it is handled</th></tr></thead>
+<tbody>
+<tr><td><strong>New website capability</strong></td><td>Major new sections, new functionality of any kind, third party integrations and APIs, booking, payment or e-commerce, member logins or portals, a redesign or rebuild, moving platform or host, large scale data work</td><td>Fixed price quoted before it starts</td></tr>
+<tr><td><strong>Major initiatives</strong></td><td>Paid advertising on any platform, large automation builds, a significant event specific digital project, a new market or channel launch, extensive new creative production</td><td>Separate project, or a retainer review if it becomes ongoing</td></tr>
+<tr><td><strong>Production</strong></td><td>Professional photography, video production, brand identity work</td><td>Separate quote. Photographer and production fees are CVBS's, at cost</td></tr>
+<tr><td><strong>At cost, approved first</strong></td><td>Ad spend, Mailchimp, hosting, domains, software, stock images, travel to events or site visits</td><td>Passed through at cost with approval before it is committed</td></tr>
+<tr><td><strong>Specialist third parties</strong></td><td>Anything requiring a developer, photographer, videographer or legal input outside the scope</td><td>Sourced and managed on quote, or CVBS engages directly</td></tr>
+<tr><td><strong>Not mine to do</strong></td><td>Answering venue enquiries, quoting, negotiating with venues, handling bookings</td><td>The enquiry comes to CVBS and CVBS takes it from there</td></tr>
+</tbody>
+</table>
+
+<div class="box">
+  <h4>Suggested wording</h4>
+  <p>"Some things sit outside the monthly fee, and it is worth naming them now so nobody is surprised later. Anything that makes the website do something it could not do before, anything involving media spend or professional production, and any substantial new initiative gets its own fixed price before it starts. Nothing gets invoiced that you have not agreed to."</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">20</span><span class="lbl">Rhythm and reporting</span></div>
+<h2>The monthly rhythm, and what gets reported</h2>
+<hr class="rule">
+
+<table>
+<thead><tr><th>Week</th><th>What happens</th></tr></thead>
+<tbody>
+<tr><td><strong>Week 1</strong></td><td>Last month's numbers read and the report written. Assistant check run and the wrong or missing claims turned into this month's content plan. The month's website priorities set. Campaign one planned: the offer, the venue or the destination, and the page it will point at. Social planned and scheduled.</td></tr>
+<tr><td><strong>Week 2</strong></td><td>Campaign one built. The landing or offer page updated first, then the email built against it, then the supporting social. Weekly website pass. Site visit material from Karen or Anthony processed into index records and carousels.</td></tr>
+<tr><td><strong>Week 3</strong></td><td>Campaign one reviewed and campaign two planned off what the clicks showed. One venue or destination feature published. Weekly website pass. Index work: new records, corrections, rebrand and operator changes checked.</td></tr>
+<tr><td><strong>Week 4</strong></td><td>Campaign two built and sent. List hygiene and growth. Weekly website pass and mobile QA. Next month drafted. In quarter end months: the enquiry review with the Directors, a new city added to the index, and the listings and citations pass.</td></tr>
+</tbody>
+</table>
+
+<h3>Reporting, one page a month</h3>
+<table>
+<thead><tr><th>Channel</th><th>What is reported</th><th>What is deliberately not</th></tr></thead>
+<tbody>
+<tr><td><strong>Website</strong></td><td>Enquiries submitted and where they came from, brief form starts against completions, the pages that produced enquiries, traffic by source with organic and AI referral called out separately, the pages people read</td><td>Total pageviews as a headline, bounce rate, time on page, keyword rankings</td></tr>
+<tr><td><strong>Email</strong></td><td>Click through rate, which links were clicked, what happened on the site afterwards, enquiries attributable to the send, list size and net growth, this campaign against the last three</td><td>Open rate as a success measure. Apple and Gmail privacy proxies inflate it and it means very little now</td></tr>
+<tr><td><strong>Social</strong></td><td>Traffic sent to the website, campaign engagement, saves and shares and replies, follower growth only where something changed</td><td>Impressions, reach, likes, follower count as a headline</td></tr>
+<tr><td><strong>Being named</strong></td><td>The Tier 1 named rate and the reason held rate from the assistant check, plus what was wrong or missing</td><td>Any promise about citation share. These systems are not deterministic and one month is weather, not a trend</td></tr>
+<tr><td><strong>The last line</strong></td><td>What I would do differently next month, and what I need from you</td><td></td></tr>
+</tbody>
+</table>
+<p>A rising named rate with a falling accuracy rate is a worse month, not a better one. Report both, always, and chase the wrong reason count to zero before chasing reach.</p>
+</section>
+
+<section>
+<div class="kick"><span class="num">21</span><span class="lbl">Review</span></div>
+<h2>The review mechanism</h2>
+<hr class="rule">
+
+<p><strong>Recommendation: a scope calibration at three months and a commercial review at six.</strong> Two different things, and separating them is what stops the three month point becoming a price negotiation.</p>
+
+<table>
+<thead><tr><th>When</th><th>What it is</th><th>What it is not</th></tr></thead>
+<tbody>
+<tr><td><strong>Month 3</strong></td><td>A short conversation about whether the scope held. What came up that was not on the list, what got squeezed, whether two campaigns a month is the right number, whether the weekly website pass is landing in the right place.</td><td>Not a price review, and not a performance review. Say so explicitly, because otherwise it will be treated as both.</td></tr>
+<tr><td><strong>Month 6</strong></td><td>The commercial review. The initial term ends here. Either party can adjust, and the fee is revisited against what the scope turned out to be.</td><td>Not automatic. It needs to be diarised or it will not happen.</td></tr>
+<tr><td><strong>Each July</strong></td><td>Annual review with CPI as a floor.</td><td></td></tr>
+</tbody>
+</table>
+
+<h3>Wording</h3>
+<div class="stone">
+<p>"The fee is set against the scope in this document. We will look at the scope after three months to check it still matches what is happening, and again at the end of the initial six month term. If the volume or complexity of the work changes materially, whether that is more channels, more campaigns, a bigger site or a new market, we will agree an adjustment before the extra work starts rather than after."</p>
+</div>
+<p>"Before rather than after" is the operative phrase. It is polite, it is reasonable, and it means the conversation happens while you still have the leverage of not having done the work yet.</p>
+
+<div class="box warn">
+  <h4>Your actual concern, addressed directly</h4>
+  <p>You said you do not want to accidentally become CVBS's entire marketing department under a fixed small retainer. Three things prevent that, and none of them is the review clause. They are: <strong>the website in and out table</strong>, which stops the fee carrying a second build; <strong>the two campaign email cadence with the swap rather than stack rule</strong>, which stops the highest effort item from multiplying; and <strong>the list of what sits outside</strong>, particularly paid advertising, which is the single most likely thing to be asked for casually and the single most expensive thing to absorb. The review is the backstop. Those three are the fence.</p>
+</div>
+</section>
+
+<section>
+<div class="kick"><span class="num">22</span><span class="lbl">Critique</span></div>
+<h2>Risks, and an honest critique of this proposal</h2>
+<hr class="rule">
+
+<h3>The weakest part</h3>
+<p><strong>There is no evidence in this proposal that the last twelve months of social produced anything.</strong> CVBS has paid $26,000 for it. You are about to ask them to roughly quadruple that and add a $48,000 project on top. The first question a sensible director asks is what the existing spend has returned, and right now the answer is not written down anywhere. Before you present, put one page together showing what the social has done: audience growth, the site visits and venue content it produced, enquiries or conversations it can be linked to, anything at all with a number on it. If you cannot produce that page, the retainer increase is being argued entirely on scope and inputs, and inputs are the weakest thing to sell on.</p>
+
+<h3>What feels generic</h3>
+<p>"Cross channel coordination" and "digital strategy" are the two weakest lines in the whole structure. Every agency in the research says both. Section 12 has the concrete version and it should replace the abstract one everywhere it appears: one brief written once, the page updated before the email goes out, an offer live across three channels in two days, and nobody relearning the commission model. Specifics survive scrutiny; category names do not.</p>
+
+<h3>What a competitor would do</h3>
+<p>A boutique studio pitching against you would do three things. They would quote the build lower and the retainer lower, and make it up in scope creep, because they can afford a loss leader on a first project. They would offer a CMS so CVBS can "make their own changes", which sounds like independence and is really a way of making the site cheaper to build and the client feel in control. And they would offer paid advertising, because it is the easiest place to add margin and it makes the reporting look busy. You should have an answer ready to all three, and the answers are: the price is the scope; the site has zero dependencies and nothing to renew, which is worth more to a business that kept the last one fourteen years; and paid advertising is available but it is not what is broken, so it is quoted separately when it is the right move.</p>
+
+<h3>What would make this impossible to ignore</h3>
+<p>One thing, and it is not in the document yet. <strong>Translate the fee into bookings using CVBS's own budget calculator.</strong> It returns $44,800 to $72,100 for a 120 delegate two day capital city conference. The commissionable portion is $39,600 to $62,400, and at the standard published rate that is $4,000 to $6,200 of commission per conference. So the entire website is eight to twelve mid size conferences, once, and the monthly retainer is roughly one and a half conferences a month. That converts an expense into a volume target, in their unit, using their calculator. Confirm the actual commission rate with Karen first, because the whole argument fails if the rate is wrong.</p>
+
+<h3>The four risks, ranked</h3>
+<ol>
+<li><strong>Cannibalisation, not rejection.</strong> The likely bad outcome is not "no". It is "let's pause the social spend for a year to fund the website". Name it before they do: the site is what makes the existing content spend pay, so switching one off to fund the other leaves them with a new website nobody is driving traffic to.</li>
+<li><strong>The total.</strong> Roughly $145,000 in year one against $26,000 today. Never show an annual figure, never sum the two phases, and keep them in visually separate parts of the document.</li>
+<li><strong>Concentration.</strong> CVBS becomes 50 to 70 per cent of your revenue. Keep the 60 day notice, keep the IP split, keep the hosting clause, and do not let the rest of your client base go quiet while this is happening.</li>
+<li><strong>The precedent.</strong> Roughly 674 hours have gone into this before a fee was agreed. CVBS's reasonable expectation, formed over a year, is that work appears. The scope boundaries in sections 18 and 19 are not administrative detail, they are the correction to that expectation, and they only work if you enforce them in the first month.</li>
+</ol>
+
+<h3>Two things to confirm before you present</h3>
+<ul>
+<li><strong>The commission rate, as CVBS actually charges it.</strong> The bookings argument depends on it entirely and it is still unverified.</li>
+<li><strong>How many hours a week the social actually takes you.</strong> Not for the document, for you. If $500 a week has been buying twelve or fifteen hours, the whole engagement has been underpriced for a year and the new number is a correction rather than an increase, which changes how you feel walking into the room.</li>
+</ul>
+</section>
+
+<section>
+<div class="kick"><span class="num">23</span><span class="lbl">Sources</span></div>
+<h2>Sources</h2>
+<hr class="rule">
+<p class="src">All figures were retrieved in September 2026. Where a page carries a publication or modification date it is noted in the tables above. Figures marked as estimated or guidance are not the publisher's own prices for their own services. Three of the most load bearing sources, Butterfly, Cemoh and WP Creative, were verified directly against the live pages rather than taken from search results.</p>
+
+<h4>Website project pricing</h4>
+<p class="src">
+Butterfly, <a href="https://butterfly.com.au/blog/cost-of-developing-a-website/">cost of developing a website</a> ·
+Velacore, <a href="https://velacore.au/website-cost-calculator/">website cost calculator</a> ·
+23 Digital, <a href="https://www.23digital.com.au/how-much-does-a-website-cost-australia/">how much does a website cost</a> ·
+Grove Foundry, <a href="https://www.grovefoundry.com.au/blog/how-much-does-a-website-cost-in-australia/">website cost in Australia</a> ·
+Strong Digital, <a href="https://strong.digital/how-much-should-a-website-cost-in-2026/">what a website should cost in 2026</a> ·
+WP Creative, <a href="https://wpcreative.com.au/how-much-does-a-website-cost-in-australia/">website cost in Australia</a> ·
+Digital Nomads HQ, <a href="https://digitalnomadshq.com.au/blog/website-design-cost-in-australia/">website design cost</a> ·
+Keen to Design, <a href="https://www.keentodesign.com.au/web-design-cost/">web design cost</a> ·
+Spark Interact, <a href="https://www.sparkinteract.com.au/web/website-designers-cost/">website designer cost</a> ·
+GoDaddy Australia, <a href="https://www.godaddy.com/resources/au/general-au/how-much-does-it-cost-to-build-a-website-in-australia">cost to build a website in Australia</a> ·
+Airtasker, <a href="https://www.airtasker.com/web/web-design/price/website-design-cost/">website design cost</a> ·
+Luminary, <a href="https://www.luminary.com/blog/how-to-budget-for-a-large-website">budgeting for a large website</a> ·
+Impressive, <a href="https://impressive.com.au/seo-pricing-australia/">SEO pricing Australia</a> ·
+Confetti Design, <a href="https://confettidesign.com.au/website-redesign-cost-australia/">website redesign cost</a>
+</p>
+
+<h4>Rates and day rates</h4>
+<p class="src">
+Cemoh, <a href="https://cemoh.com/tools/web-developer-rate-guide/">web developer rate guide</a> ·
+Cemoh, <a href="https://cemoh.com/tools/digital-marketing-strategist-rate-guide/">digital marketing strategist rate guide</a> ·
+Cemoh, <a href="https://cemoh.com/tools/graphic-designer-rate-guide/">graphic designer rate guide</a> ·
+Conduct, <a href="https://www.conducthq.com/journal/how-much-does-software-development-cost-in-australia/">software development cost in Australia</a> ·
+Clutch, <a href="https://clutch.co/au/web-designers">Australian web designers</a>
+</p>
+
+<h4>Retainers and ongoing services</h4>
+<p class="src">
+WP Creative, <a href="https://wpcreative.com.au/website-maintenance-services/">website maintenance services</a> ·
+Butterfly, <a href="https://butterfly.com.au/blog/how-much-does-it-cost-to-maintain-a-website/">website maintenance cost</a> ·
+Keen to Design, <a href="https://keentodesign.com.au/how-much-does-wordpress-maintenance-cost/">WordPress maintenance cost</a> ·
+SOUP Agency, <a href="https://soupagency.com.au/social-media/social-media-packages/">social media packages</a> ·
+Quantum Web, <a href="https://quantumweb.com.au/social-media-packages">social media packages</a> ·
+BeKonstructive, <a href="https://bekonstructivemarketing.com.au/social-media-packages-and-pricing/">social media pricing</a> ·
+ShoutItOut, <a href="https://shoutitout.com.au/digital-marketing-pricing-packages/">digital marketing pricing</a> ·
+Code and Visual, <a href="https://codeandvisual.com.au/package/edm-and-html-email-design/">EDM and HTML email design</a> ·
+Bang Media, <a href="https://bangmedia.com.au/plus">marketing retainers</a> ·
+Boost Social, <a href="https://boostsocialmedia.com.au/marketing-retainer-packages/">retainer packages</a> ·
+WME Group, <a href="https://wmegroup.com.au/blog/digital-marketing-agency-cost-australia/">agency cost in Australia</a> ·
+Digital Nomads HQ, <a href="https://digitalnomadshq.com.au/blog/digital-marketing-cost/">digital marketing cost, 140 agency audit</a> ·
+Cemoh, <a href="https://cemoh.com/blog/setting-your-rates-as-a-fractional-marketing-consultant-in-2025/">fractional consultant rates</a> ·
+Z10 Consulting, <a href="https://z10consulting.com.au/blog/fractional-cmo-cost-australia/">fractional CMO cost</a>
+</p>
+
+<h4>Salary and contractor conversion</h4>
+<p class="src">
+Big Wave Digital, <a href="https://bigwavedigital.com.au/digital-marketing-salary-guide-sydney/">Sydney digital marketing salary guide, 4 Aug 2026</a> ·
+Robert Half Australia, <a href="https://www.roberthalf.com/au/en/insights/salary-guide/marketing">2026 marketing salary guide</a> ·
+Michael Page, <a href="https://www.michaelpage.com.au/salary-comparison-tool">salary comparison tool</a> ·
+Clicks IT Recruitment, <a href="https://www.clicks.com.au/job-salary/web-content-manager/">web content manager salary and day rate</a> ·
+Tandem Partners, <a href="https://www.tandempartners.com.au/contracting-interim-salary-rates">contracting and interim rates</a> ·
+Payly, <a href="https://payly.com.au/blog/how-to-calculate-hourly-rate">calculating an hourly rate</a> ·
+ATO, superannuation guarantee 12 per cent from 1 July 2025
+</p>
+</section>
+
+</div>
+</div>

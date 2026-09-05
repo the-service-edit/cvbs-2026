@@ -56,3 +56,13 @@ _skills/
 
 # Safety copies written by the venue and site visit scripts
 *.bak
+
+# Venue visits working files. The generator source and the review documents stay
+# local; the generated pages under venue-visits/ are the site.
+_venue-visits-source/
+_backup-pre-venue-visits-05sep/
+CVBS-Venue-Visit-Mockup-Westin-Brisbane.html
+CVBS-Venue-Visit-Mockup-ICC-Sydney.html
+CVBS-Venue-Visits-Architecture-Sep-2026.html
+_vvcheck/
+site-visits/
