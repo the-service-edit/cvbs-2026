@@ -24,7 +24,7 @@ HOW IT IS USED
     Add --dry-run to see what it would do without writing anything.
 
 THE ONE RULE FOR CAPTIONS
-    Write fit, not fault. Venues pay our commission. "Comfortable at 200, tight
+    Write fit, not fault. We work with these venues. "Comfortable at 200, tight
     at 400" reads as expertise and a venue would happily forward it. "The room
     is too small" reads as a review. Say what the room suits and who it does not
     suit, never what is wrong with it.
@@ -160,7 +160,7 @@ def read_notes(folder):
 
 NOTES_HEADER = """# Site visit notes. One line per photograph.
 #
-# THE ONE RULE: write fit, not fault. Venues pay our commission.
+# THE ONE RULE: write fit, not fault. We work with these venues.
 #   Good:  "Comfortable at 200 theatre. 400 is a squeeze and the back row loses the screen."
 #   Bad:   "The room is too small and the sightlines are poor."
 # Say what the room suits, and who it does not suit. Never what is wrong with it.
