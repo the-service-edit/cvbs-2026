@@ -1250,6 +1250,20 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .page-hero--img .ph-bg{object-position:52% 62%}
 }
 
+/* Heroes were eating a whole phone screen before anything could be done.
+   711px of a 844px viewport on the Sydney page. Tightened 5 Sep 2026 so the
+   page's actual content starts inside the first screen. */
+@media (max-width:760px){
+  .page-hero .wrap,
+  .page-hero--img .wrap{padding-block:1.9rem 2.1rem}
+  .page-hero h1,
+  .page-hero--img h1{font-size:clamp(1.75rem,6.4vw,2.3rem);line-height:1.12;margin:.6rem 0 .7rem;max-width:22ch}
+  .page-hero .lead{font-size:.98rem;line-height:1.55;max-width:46ch}
+  .page-hero .crumbs{font-size:.78rem}
+  .page-hero .btn-row{margin-top:1rem;gap:.6rem}
+  .page-hero .btn{padding:.7rem 1.1rem;font-size:.92rem}
+}
+
 /* ============================================================
    MOBILE HERO + BRIEF CARD  ·  26 Aug 2026
    Fixes: hero scrim failed WCAG on phones (white text hit CR 1.0
