@@ -69,3 +69,11 @@ site-visits/
 
 # Social assets stay local
 instagram-carousels/
+
+# Backups and superseded drafts stay local
+_backup-*/
+_backup-*.html
+_superseded-*.html
+_original-backup/
+_preview-site-visits/
+_DROP PHOTOS HERE/
