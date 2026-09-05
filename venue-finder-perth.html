@@ -53,9 +53,16 @@
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="destinations.html">Destinations</a><span>/</span><b style="color:inherit;font-weight:500">Perth</b></nav>
     <span class="eyebrow" style="margin-top:1.2rem">Perth · Venue finding</span>
     <h1>Conference & Event Venues in Perth</h1>
-    <p class="lead">Conference venues, group accommodation and event spaces across Perth, the CBD, riverfront and Swan Valley. Negotiated rates, free to you.</p>
-    <a class="link-arrow mt-2" href="submit-a-brief.html">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
+    <p class="lead">Tell us what you need in Perth. Shortlist within 48 hours, free to you.</p>
+        <form class="ph-brief" action="submit-a-brief.html" method="get">
+      <input type="hidden" name="dest" value="Perth">
+      <label class="vis-hidden" for="ph-guests">How many people</label>
+      <input id="ph-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="People">
+      <label class="vis-hidden" for="ph-type">Event type</label>
+      <select id="ph-type" name="type"><option value="">Event type</option><option value="Conference">Conference</option><option value="Meeting">Meeting</option><option value="Gala or awards night">Gala or awards night</option><option value="Product launch">Product launch</option><option value="Corporate retreat">Corporate retreat</option><option value="Group accommodation">Group accommodation</option><option value="Something else">Something else</option></select>
+      <button class="btn btn--teal" type="submit">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+</div>
 </section>
 <section class="s-white"><div class="wrap hero-grid" style="align-items:start">
   <div class="prose reveal"><p class="lead" style="color:#37444f">Perth is compact and walkable, with the river at the edge of the CBD and the Swan Valley a short drive away, so there is somewhere to take delegates once the sessions finish. The Perth Convention and Exhibition Centre handles the large programs, while the Burswood precinct and the city's hotels cover conferences, functions and incentives. We source across the city and negotiate rates that account for Perth's distance and its seasons.</p>

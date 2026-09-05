@@ -90,8 +90,15 @@
     <span class="eyebrow" style="margin-top:1.2rem">Conference venue finding</span>
     <h1>One brief. A conference venue you can defend, inside 48 hours.</h1>
     <p class="lead">You have been handed an event on top of your actual job. Send us one brief and it leaves your desk: we check what is genuinely available, negotiate the rate and the inclusions, and come back inside 48 hours with a shortlist you can compare properly and put in front of whoever signs it. At no cost to you.</p>
-    <a class="link-arrow mt-2" href="submit-a-brief.html">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-  </div>
+        <form class="ph-brief" action="submit-a-brief.html" method="get">
+      <input type="hidden" name="type" value="Conference">
+      <label class="vis-hidden" for="ph-dest">Where</label>
+      <select id="ph-dest" name="dest"><option value="">Destination</option><option value="Sydney">Sydney</option><option value="Melbourne">Melbourne</option><option value="Brisbane">Brisbane</option><option value="Perth">Perth</option><option value="Adelaide">Adelaide</option><option value="Canberra">Canberra</option><option value="Gold Coast">Gold Coast</option><option value="Hobart">Hobart</option><option value="Darwin">Darwin</option><option value="Cairns">Cairns</option><option value="Hunter Valley">Hunter Valley</option><option value="Blue Mountains">Blue Mountains</option><option value="Byron Bay">Byron Bay</option><option value="Sunshine Coast">Sunshine Coast</option><option value="Yarra Valley">Yarra Valley</option><option value="Mornington Peninsula">Mornington Peninsula</option><option value="Somewhere else">Somewhere else</option></select>
+      <label class="vis-hidden" for="ph-guests">How many people</label>
+      <input id="ph-guests" name="guests" type="number" min="1" inputmode="numeric" placeholder="People">
+      <button class="btn btn--teal" type="submit">Start your brief <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+</div>
 </section>
 
 <!-- 2. TRUST STRIP -->

@@ -673,13 +673,25 @@
     if(!hit){var oth=document.getElementById('locationOther'); if(oth&&!/suggest/i.test(dest)){oth.value=dest;}}
     loc.dispatchEvent(new Event('change'));
   }
-  var del=document.getElementById('delegates'); if(del&&guests) del.value=guests;
+  /* guests arrives as a number from the hero form; Delegates is a range select. */
+  var del=document.getElementById('delegates');
+  if(del&&guests){
+    var n=parseInt(String(guests).replace(/[^0-9]/g,''),10);
+    if(!isNaN(n)){
+      var band=n<20?'Under 20':n<=50?'20\u201350':n<=100?'50\u2013100':n<=200?'100\u2013200':n<=300?'200\u2013300':'300+';
+      for(var i=0;i<del.options.length;i++){ if(del.options[i].text===band){ del.selectedIndex=i; break; } }
+    }
+  }
   var serviceMap={
     'Conference':'Conference venue finding',
+    'Meeting':'Meeting space',
     'Corporate function':'Product launch / event',
     'Product launch':'Product launch / event',
+    'Gala or awards night':'Product launch / event',
     'Group accommodation':'Group accommodation',
-    'Retreat or offsite':'Corporate retreat'
+    'Corporate retreat':'Corporate retreat',
+    'Retreat or offsite':'Corporate retreat',
+    'Something else':'Conference venue finding'
   };
   if(type&&serviceMap[type]){
     [].slice.call(document.querySelectorAll('input[name="Service"]')).forEach(function(box){
