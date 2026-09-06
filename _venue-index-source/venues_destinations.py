@@ -159,7 +159,7 @@ VENUES_DESTINATIONS = [
    th=3176, bq=2080, cl=None, ck=3213, cab=1664, ush=None, bd=None,
    br=None, gr=0, area=None, ceil=None, ceilq=None,
    s_name="Hall C", s_th=1080,
-   note="A pillarless three hall conference and exhibition floor a kilometre and a half from the city, with a Rydges hotel on the same site. It is the practical alternative when BCEC is held, and the only large Brisbane conference venue with accommodation attached. It is unavailable around the Ekka each August.",
+   note="A pillarless three hall conference and exhibition floor a kilometre and a half from the city, with a Rydges hotel on the same site. It is the practical alternative when BCEC is held, and the only large Brisbane conference venue with accommodation attached. Its diary is normally taken around the Ekka each August, so bring those dates to us early.",
    src="https://www.brisbaneshowgrounds.com.au/event-type/spaces/halls-a-b-c-combined/",
    src2="https://www.brisbaneshowgrounds.com.au/event-type/spaces/hall-c/"),
 
@@ -992,7 +992,7 @@ VENUES_DESTINATIONS = [
    th=5000, bq=910, cl=792, ck=1180, cab=728, ush=None, bd=None,
    br=None, gr=0, area=1470, ceil=17.0, ceilq="to the roof structure",
    s_name="Auditorium", s_th=2360,
-   note="The only building in Tropical North Queensland that holds a plenary of more than about 650, and it carries two tiered rooms rather than one. The 5,000 theatre figure needs the retractable tiered seating deployed; on the flat floor in exhibition mode the same room seats 1,584 and takes 98 booths.",
+   note="The only building in the region that holds a plenary above about 1,000, and it carries two tiered rooms rather than one. Cairns Performing Arts Centre reaches 941 and the Sheraton Grand Mirage at Port Douglas 850, so between 650 and 1,000 you do have a choice. The 5,000 theatre figure needs the retractable tiered seating deployed; on the flat floor in exhibition mode the same room seats 1,584 and takes 98 booths.",
    src="https://www.cairnsconvention.com.au/wp-content/uploads/2025/06/Cairns-Convention-Centre-Capacity-Chart-2025-Dance-Floor-Updated-Measurements.pdf",
    src2="https://www.cairnsconvention.com.au/plan/rooms-and-spaces/arena/"),
 

@@ -23,7 +23,7 @@ body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .wrap{width:100%;max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4vw,2.5rem)}
-.eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:var(--white);border:1px solid var(--line);color:var(--teal-deep);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.5rem .95rem;border-radius:999px}
+.eyebrow{display:inline-flex;align-items:center;gap:.55rem;background:var(--white);border:1px solid var(--line);color:var(--teal-ink);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.5rem .95rem;border-radius:999px}
 .eyebrow.on-dark{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#9fe1eb}
 h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)}
 .h-xl{font-size:clamp(2.6rem,1.6rem + 4.6vw,5rem)}
@@ -58,7 +58,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 .nav__logo{height:34px}
 .nav__links{display:none;align-items:center;gap:1.9rem}
 .nav__links a{font-size:.95rem;font-weight:500;color:#33424d;transition:color .25s}
-.nav__links a:hover{color:var(--teal-deep)}
+.nav__links a:hover{color:var(--teal-ink)}
 .nav__cta{display:flex;align-items:center;gap:.7rem}
 .nav__toggle{display:inline-flex;width:44px;height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
 .nav__toggle span{width:20px;height:2px;background:var(--navy);border-radius:2px}
@@ -69,14 +69,14 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 .hero__grid{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
 @media(min-width:940px){.hero__grid{grid-template-columns:1.02fr .98fr}}
 .hero h1{margin:1.2rem 0 0}
-.hero h1 em{font-style:normal;color:var(--teal-deep)}
+.hero h1 em{font-style:normal;color:var(--teal-ink)}
 .hero .lead{margin-top:1.3rem;max-width:46ch}
 .hero__cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-top:2rem}
 .hero__media{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:5/6;box-shadow:0 40px 90px -50px rgba(13,34,51,.6)}
 .hero__media img{width:100%;height:100%;object-fit:cover}
 .hero__badge{position:absolute;left:1rem;bottom:1rem;right:1rem;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-radius:16px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.8rem}
 .hero__badge b{font-size:.95rem}.hero__badge span{font-size:.82rem;color:var(--muted)}
-.hero__badge .dot{width:38px;height:38px;border-radius:50%;background:var(--stone);display:grid;place-items:center;color:var(--teal-deep);font-weight:700;font-size:.9rem;flex:none}
+.hero__badge .dot{width:38px;height:38px;border-radius:50%;background:var(--stone);display:grid;place-items:center;color:var(--teal-ink);font-weight:700;font-size:.9rem;flex:none}
 
 /* marquee */
 .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
@@ -98,7 +98,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 .road__steps{display:grid;gap:1rem}
 .step{background:var(--stone);border-radius:var(--r);padding:clamp(1.4rem,3vw,2rem);display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
 .step:hover{transform:translateY(-4px);box-shadow:0 24px 50px -34px rgba(13,34,51,.4)}
-.step__n{font-size:1.7rem;font-weight:700;color:var(--teal-deep);line-height:1}
+.step__n{font-size:1.7rem;font-weight:700;color:var(--teal-ink);line-height:1}
 .step h3{font-size:1.2rem;margin-bottom:.4rem}
 .step p{color:var(--muted);font-size:.97rem}
 
@@ -109,17 +109,17 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 @media(min-width:980px){.g-3{grid-template-columns:repeat(3,1fr)}.g-4{grid-template-columns:repeat(4,1fr)}}
 .card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.4rem,2.6vw,1.9rem);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
 .card:hover{transform:translateY(-5px);box-shadow:0 30px 60px -38px rgba(13,34,51,.45)}
-.card .ic{width:48px;height:48px;border-radius:14px;background:var(--stone);display:grid;place-items:center;color:var(--teal-deep);margin-bottom:1rem}
+.card .ic{width:48px;height:48px;border-radius:14px;background:var(--stone);display:grid;place-items:center;color:var(--teal-ink);margin-bottom:1rem}
 .card .ic svg{width:24px;height:24px}
 .card h3{font-size:1.25rem;margin-bottom:.5rem}
 .card p{color:var(--muted);font-size:.97rem}
-.card .arrow{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--teal-deep);font-weight:600;font-size:.92rem}
+.card .arrow{margin-top:1rem;display:inline-flex;align-items:center;gap:.4rem;color:var(--teal-ink);font-weight:600;font-size:.92rem}
 
 /* testimonials */
 .quotes{display:grid;gap:clamp(1rem,2vw,1.5rem)}
 @media(min-width:820px){.quotes{grid-template-columns:1fr 1fr}}
 .quote{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:clamp(1.6rem,3vw,2.4rem)}
-.quote .stars{color:var(--teal-deep);letter-spacing:2px;margin-bottom:1rem}
+.quote .stars{color:var(--teal-ink);letter-spacing:2px;margin-bottom:1rem}
 .quote blockquote{font-size:1.12rem;line-height:1.55;font-weight:500;letter-spacing:-.01em}
 .quote .by{margin-top:1.4rem;display:flex;align-items:center;gap:.8rem}
 .quote .by img{height:26px;width:auto}
@@ -177,7 +177,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 <body>
 
 <nav class="nav" id="nav"><div class="wrap nav__in">
-  <a href="index-everlab.html" aria-label="CVBS home"><img class="nav__logo" src="assets/img/logo.png" alt="CVBS"></a>
+  <a href="index-everlab.html" aria-label="CVBS home"><img class="nav__logo" src="assets/img/logo.png" alt="CVBS" width="165" height="140"></a>
   <div class="nav__links">
     <a href="how-it-works.html">How it works</a>
     <a href="services.html">Services</a>
@@ -202,7 +202,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
     </div>
   </div>
   <div class="hero__media reveal d1">
-    <img src="assets/img/venue-hero-1000.jpg" alt="A harbour-view conference venue set for an event in Sydney">
+    <img src="assets/img/venue-hero-1000.jpg" alt="A harbour-view conference venue set for an event in Sydney" width="1000" height="667">
     <div class="hero__badge"><span class="dot">48h</span><div><b>A shortlist in 48 hours</b><br><span>Negotiated, and free to you</span></div></div>
   </div>
 </div></header>
@@ -248,8 +248,8 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 <section class="section s-stone"><div class="wrap">
   <div class="sec-head reveal"><span class="eyebrow">In their words</span><h2 class="h-lg">The relationships that say it best.</h2></div>
   <div class="quotes" style="margin-top:clamp(2rem,4vw,3rem)">
-    <figure class="quote reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;CVBS can do everything for you. Don't waste hours trying to do it yourself, they are the experts. They take a brief, recommend multiple options, source quotes, book venues and arrange the contracts.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/randstad.png" alt="Randstad"><span><span class="nm">Sherida Bolling</span><br><span class="rl">Executive Assistant to CEO, Randstad</span></span></figcaption></figure>
-    <figure class="quote reveal d1"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;At first I couldn't believe this service was free to us. I've price-checked them over nine years and each time could not have got a cheaper rate going directly to the venue. A cost-effective, quality service.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/energex.png" alt="Energex"><span><span class="nm">Angela Moffett</span><br><span class="rl">Energex</span></span></figcaption></figure>
+    <figure class="quote reveal"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;CVBS can do everything for you. Don't waste hours trying to do it yourself, they are the experts. They take a brief, recommend multiple options, source quotes, book venues and arrange the contracts.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/randstad.png" alt="Randstad" width="228" height="228"><span><span class="nm">Sherida Bolling</span><br><span class="rl">Executive Assistant to CEO, Randstad</span></span></figcaption></figure>
+    <figure class="quote reveal d1"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>&ldquo;At first I couldn't believe this service was free to us. I've price-checked them over nine years and each time could not have got a cheaper rate going directly to the venue. A cost-effective, quality service.&rdquo;</blockquote><figcaption class="by"><img src="assets/img/logos/energex.png" alt="Energex" width="272" height="120"><span><span class="nm">Angela Moffett</span><br><span class="rl">Energex</span></span></figcaption></figure>
   </div>
 </div></section>
 
@@ -261,18 +261,18 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
     <a class="btn btn--ghost" style="margin-top:1.6rem" href="about.html">More about CVBS &rarr;</a>
   </div>
   <div class="team__faces reveal d1">
-    <div class="tm"><img src="assets/img/team/karen.jpg" alt="Karen Jepson"><div class="nm">Karen Jepson</div><div class="rl">Director</div></div>
-    <div class="tm"><img src="assets/img/team/anthony.jpg" alt="Anthony Jepson"><div class="nm">Anthony Jepson</div><div class="rl">Director</div></div>
+    <div class="tm"><img src="assets/img/team/karen.jpg" alt="Karen Jepson" width="750" height="1000"><div class="nm">Karen Jepson</div><div class="rl">Director</div></div>
+    <div class="tm"><img src="assets/img/team/anthony.jpg" alt="Anthony Jepson" width="750" height="1000"><div class="nm">Anthony Jepson</div><div class="rl">Director</div></div>
   </div>
 </div></section>
 
 <section class="section s-stone"><div class="wrap">
   <div class="sec-head reveal"><span class="eyebrow">Where we work</span><h2 class="h-lg">Australia-wide, and beyond.</h2><p class="lead">From capital-city conference hotels to wine-country offsites and island incentives, we source wherever your event needs to be.</p></div>
   <div class="dests reveal" style="margin-top:clamp(2rem,4vw,3rem)">
-    <a class="dcard" href="venue-finder-sydney.html"><img src="assets/img/dest/dest-sydney.jpg" alt="Sydney" loading="lazy" onerror="this.remove()"><span>Sydney</span></a>
-    <a class="dcard" href="venue-finder-melbourne.html"><img src="assets/img/dest/dest-melbourne.jpg" alt="Melbourne" loading="lazy" onerror="this.remove()"><span>Melbourne</span></a>
-    <a class="dcard" href="venue-finder-brisbane.html"><img src="assets/img/dest/dest-brisbane.jpg" alt="Brisbane" loading="lazy" onerror="this.remove()"><span>Brisbane</span></a>
-    <a class="dcard" href="venue-finder-gold-coast.html"><img src="assets/img/dest/dest-gold-coast.jpg" alt="Gold Coast" loading="lazy" onerror="this.remove()"><span>Gold Coast</span></a>
+    <a class="dcard" href="venue-finder-sydney.html"><img src="assets/img/dest/dest-sydney.jpg" alt="Sydney" loading="lazy" onerror="this.remove()" width="1536" height="1024"><span>Sydney</span></a>
+    <a class="dcard" href="venue-finder-melbourne.html"><img src="assets/img/dest/dest-melbourne.jpg" alt="Melbourne" loading="lazy" onerror="this.remove()" width="640" height="640"><span>Melbourne</span></a>
+    <a class="dcard" href="venue-finder-brisbane.html"><img src="assets/img/dest/dest-brisbane.jpg" alt="Brisbane" loading="lazy" onerror="this.remove()" width="640" height="640"><span>Brisbane</span></a>
+    <a class="dcard" href="venue-finder-gold-coast.html"><img src="assets/img/dest/dest-gold-coast.jpg" alt="Gold Coast" loading="lazy" onerror="this.remove()" width="640" height="640"><span>Gold Coast</span></a>
   </div>
   <div style="margin-top:1.6rem"><a class="btn btn--ghost" href="destinations.html">See all destinations &rarr;</a></div>
 </div></section>
@@ -297,7 +297,7 @@ h1,h2,h3{font-weight:600;letter-spacing:-.03em;line-height:1.04;color:var(--ink)
 <footer class="foot"><div class="wrap">
   <div class="foot__grid">
     <div>
-      <img src="assets/img/logo-white.png" alt="CVBS" style="height:36px" onerror="this.style.display='none'">
+      <img src="assets/img/logo-white.png" alt="CVBS" style="height:36px" onerror="this.style.display='none'" width="165" height="140">
       <p style="margin-top:1rem;max-width:38ch;font-size:.92rem">A free, independent venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
       <p style="margin-top:1.2rem"><a href="tel:0414784999">Karen Jepson &middot; 0414 784 999</a><a href="mailto:karen@conferencevenues.com">karen@conferencevenues.com</a></p>
     </div>

@@ -46,7 +46,8 @@ BUILT = "5 September 2026"
 
 KEYS = ['id', 'n', 'city', 'pr', 'ty', 'sp', 'th', 'bq', 'cl', 'ck', 'cab',
         'ush', 'bd', 'br', 'gr', 'area', 'ceil', 'ceilq', 's_name', 's_th',
-        'note', 'worked', 'seen', 'visit', 'offer', 'src', 'src2', 'checked']
+        'note', 'worked', 'seen', 'visit', 'offer', 'src', 'src2', 'checked',
+        'acc', 'accq']
 
 SETUPS = ['th', 'bq', 'cl', 'ck', 'cab', 'ush', 'bd']
 
@@ -90,6 +91,28 @@ def normalise(v, city, checked):
     # is what an organiser sorts on before they know their room layout.
     caps = [r[k] for k in SETUPS if r.get(k)]
     r['maxcap'] = max(caps) if caps else None
+
+    # ---- accommodation: existence is not the same thing as inventory.
+    #
+    # Until 6 September 2026 the accommodation filter tested the guest-room
+    # COUNT. 88 of 190 venues have no published count, so a venue with rooms
+    # but no number vanished from a search for venues with accommodation.
+    # Crown Melbourne and Hyatt Hotel Canberra were among them.
+    #
+    # 'acc' answers "are there rooms here", 'gr' answers "how many". A hotel
+    # or a resort has guest rooms: that is what those words mean, and the
+    # type is read off the venue's own material like every other field, so
+    # this infers nothing that is not already published. Anything else with
+    # no count stays 'unknown', which is not 'no'.
+    #
+    # 'accq' records how we know, so the card can say so rather than implying
+    # a number we do not have.
+    if r.get('gr'):
+        r['acc'], r['accq'] = 'yes', 'counted'
+    elif r.get('ty') in ('hotel', 'resort'):
+        r['acc'], r['accq'] = 'yes', 'category'
+    else:
+        r['acc'] = 'unknown'
     # Drop the empty keys. On 58 venues this takes the shipped file down by
     # about a third, and the renderer treats missing and null identically.
     return dict((k, val) for k, val in r.items() if val not in (None, '', False))

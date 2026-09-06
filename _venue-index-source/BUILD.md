@@ -33,7 +33,20 @@ python3 _entity-source/gen_entity.py               (always last: it owns the
                                                     Organization, WebSite, Service
                                                     and WebPage nodes on every page
                                                     in sitemap.xml)
+python3 scripts/add-image-dimensions.py             (generators do not write
+                                                    width/height; this reads the
+                                                    real pixel size off each file)
+python3 scripts/fix-teal-ink.py                    (teal used as ink, not as fill)
 python3 scripts/check-site.py                      (must print 0 failures)
+```
+
+Two more, not part of the build, run before a launch:
+
+```
+python3 scripts/check-claims.py                    (every absolute claim, with the
+                                                    dataset beside it to check against)
+./scripts/build-public.sh /tmp/cvbs-check          (fails if the artifact and the
+                                                    sitemap disagree)
 ```
 
 `build_destination.py` MUST run after `build_city_index.py`. It lifts the block

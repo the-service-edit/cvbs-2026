@@ -176,7 +176,7 @@ VENUES = [
    th=820, bq=560, cl=None, ck=None, cab=None, ush=None, bd=None,
    br=25, gr=0, area=None, ceil=None, ceilq=None,
    s_name="Captains Bar", s_th=200,
-   note="Purpose built dining and conference room in the Noble Bradman Messenger stand. This is a function room, not the seating bowl. Unavailable on cricket and AFL match days.",
+   note="Purpose built dining and conference room in the Noble Bradman Messenger stand. This is a function room, not the seating bowl. Not released on cricket and AFL match days.",
    src="https://www.scgevents.com.au/function-rooms/noble-dining-room",
    src2="https://www.scgevents.com.au/function-rooms/captains-bar"),
 

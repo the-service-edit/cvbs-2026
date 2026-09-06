@@ -27,7 +27,7 @@ body{margin:0; font-family:'Inter',system-ui,-apple-system,sans-serif; color:var
 h1,h2,h3{margin:0; font-weight:600; letter-spacing:-.03em; line-height:1.1;}
 p{margin:0 0 1.05em;}
 strong{font-weight:600;}
-em{font-style:normal; color:var(--teal-deep); font-weight:600;}
+em{font-style:normal; color:var(--teal-ink); font-weight:600;}
 
 /* progress + bar */
 .progress{position:fixed; top:0; left:0; height:4px; width:0%; z-index:60;
@@ -52,7 +52,7 @@ section{padding:104px 0; position:relative; overflow:hidden; border-bottom:1px s
 .kick .num{width:42px; height:42px; flex:0 0 auto; border-radius:12px; display:grid; place-items:center;
   font-size:16px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--teal),var(--teal-deep));
   box-shadow:0 8px 20px -8px rgba(40,168,182,.8);}
-.kick .lbl{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--teal-deep);}
+.kick .lbl{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--teal-ink);}
 h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-spacing:-.035em;}
 .intro{font-size:clamp(19px,2.4vw,24px); color:var(--ink); max-width:32ch; margin-top:18px; font-weight:500;}
 
@@ -89,7 +89,7 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .points li:last-child{border-bottom:1px solid var(--line);}
 .dark .points li,.darker .points li{border-color:var(--line-d);}
 .points .tick{flex:0 0 auto; width:30px; height:30px; border-radius:9px; margin-top:2px; display:grid; place-items:center;
-  background:rgba(59,201,217,.16); color:var(--teal-deep); font-weight:700; font-size:14px;}
+  background:rgba(59,201,217,.16); color:var(--teal-ink); font-weight:700; font-size:14px;}
 .dark .points .tick,.darker .points .tick{background:rgba(59,201,217,.2); color:var(--teal);}
 .points .t{font-weight:600; display:block; margin-bottom:3px;}
 .points .d{color:var(--muted); font-size:17px; line-height:1.55;}
@@ -99,7 +99,7 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 /* takeaway */
 .takeaway{margin-top:36px; background:rgba(59,201,217,.10); border:1px solid rgba(59,201,217,.22); border-radius:16px; padding:22px 24px;}
 .dark .takeaway,.darker .takeaway{background:rgba(59,201,217,.14); border-color:rgba(59,201,217,.3);}
-.takeaway b{display:block; font-size:12.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:6px;}
+.takeaway b{display:block; font-size:12.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); margin-bottom:6px;}
 .dark .takeaway b,.darker .takeaway b{color:var(--teal);}
 .takeaway p{margin:0; font-size:18px; font-weight:500;}
 
@@ -116,13 +116,13 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .live .bar i{width:10px; height:10px; border-radius:50%; background:#cdc6b8; flex:0 0 auto;}
 .live .bar .url{flex:1; min-width:0; margin:0 8px; height:26px; border-radius:8px; background:#fff; border:1px solid var(--line);
   display:flex; align-items:center; padding:0 12px; font-size:12.5px; color:var(--muted); overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
-.live .bar .open{flex:0 0 auto; font-size:12.5px; font-weight:700; color:var(--teal-deep); text-decoration:none; white-space:nowrap;}
+.live .bar .open{flex:0 0 auto; font-size:12.5px; font-weight:700; color:var(--teal-ink); text-decoration:none; white-space:nowrap;}
 .live .view{position:relative; width:100%; height:460px; overflow:hidden; background:#f3f0e9;}
 @media(max-width:600px){ .live .view{height:340px} }
 .live .view iframe{position:absolute; top:0; left:0; border:0; transform-origin:top left; pointer-events:none; background:#fff;}
 .live .view.noembed{display:grid; place-items:center; background:linear-gradient(160deg,#f4f1ea,#e7e1d3); text-align:center; padding:20px;}
 .live .view.noembed span{display:block; font-size:11.5px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.08em; font-weight:700;}
-.live .view.noembed a{font-size:15px; font-weight:700; color:var(--teal-deep); text-decoration:none;}
+.live .view.noembed a{font-size:15px; font-weight:700; color:var(--teal-ink); text-decoration:none;}
 .live .view .openover{position:absolute; inset:0; display:block; z-index:2;}
 .live .badge{position:absolute; left:14px; bottom:14px; z-index:3; background:rgba(13,34,51,.82); color:#fff;
   font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:7px 12px; border-radius:999px;
@@ -148,7 +148,7 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .calc .field{margin-bottom:18px;}
 .calc .field:last-of-type{margin-bottom:10px;}
 .calc .field label{display:flex; justify-content:space-between; align-items:baseline; font-size:14.5px; font-weight:600; margin-bottom:9px; gap:12px;}
-.calc .field label b{color:var(--teal-deep); font-variant-numeric:tabular-nums; font-size:15px;}
+.calc .field label b{color:var(--teal-ink); font-variant-numeric:tabular-nums; font-size:15px;}
 .calc input[type=range]{width:100%; accent-color:var(--teal-deep); height:22px; cursor:pointer;}
 .calc .result{display:flex; flex-direction:column; justify-content:center; text-align:center; color:#fff; background:linear-gradient(160deg,var(--navy),var(--navy2)); border:none; box-shadow:0 26px 60px -34px rgba(0,0,0,.7);}
 .calc .result .rlabel{font-size:12.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal); font-weight:700;}
@@ -161,22 +161,22 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .logoab{display:flex; align-items:center; justify-content:center; gap:22px; flex-wrap:wrap; margin:42px auto 0; max-width:780px;}
 .logoab .lg{flex:1 1 300px; max-width:360px; text-align:center;}
 .logoab .lgtag{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--muted); margin-bottom:12px;}
-.logoab .lg.next .lgtag{color:var(--teal-deep);}
+.logoab .lg.next .lgtag{color:var(--teal-ink);}
 .logoab .panel{background:#fff; border:1px solid var(--line); border-radius:16px; padding:24px 22px; display:grid; place-items:center; min-height:132px; box-shadow:0 20px 50px -34px rgba(13,34,51,.5);}
 .logoab .panel img{max-width:150px; height:auto; display:block;}
 .logoab .panel img.oldpng{max-width:320px; width:100%;}
-.logoab .lgarrow{font-size:24px; color:var(--teal-deep); flex:0 0 auto;}
+.logoab .lgarrow{font-size:24px; color:var(--teal-ink); flex:0 0 auto;}
 @media(max-width:640px){ .logoab .lgarrow{transform:rotate(90deg)} }
 .oldlogo{display:flex; align-items:center; gap:12px; width:100%; border-top:1px solid rgba(13,31,45,.25); padding-top:12px;}
-.oldlogo .tag{flex:1; text-align:right; font-size:12px; font-weight:400; letter-spacing:.01em; color:var(--teal-deep); line-height:1.15;}
+.oldlogo .tag{flex:1; text-align:right; font-size:12px; font-weight:400; letter-spacing:.01em; color:var(--teal-ink); line-height:1.15;}
 .oldlogo .wm{flex:0 0 auto; font-size:34px; font-weight:800; letter-spacing:-.01em; line-height:1; background:linear-gradient(120deg,#8ad7e8,var(--teal-deep)); -webkit-background-clip:text; background-clip:text; color:transparent;}
 .feed{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:40px;}
 @media(max-width:820px){ .feed{grid-template-columns:repeat(2,1fr)} }
 @media(max-width:460px){ .feed{grid-template-columns:1fr; max-width:320px; margin-left:auto; margin-right:auto} }
 .feed figure{margin:0;}
 .feed img{display:block; width:100%; height:auto; border-radius:14px; border:1px solid var(--line); box-shadow:0 22px 55px -34px rgba(13,34,51,.55);}
-.feed figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep); text-align:center; margin-top:10px;}
-.chanlabel{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); text-align:center; margin:46px 0 16px;}
+.feed figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-ink); text-align:center; margin-top:10px;}
+.chanlabel{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); text-align:center; margin:46px 0 16px;}
 .li-banner{display:block; width:100%; height:auto; border-radius:14px; border:1px solid var(--line); box-shadow:0 22px 55px -34px rgba(13,34,51,.55);}
 .compgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:38px;}
 @media(max-width:820px){ .compgrid{grid-template-columns:repeat(2,1fr)} }
@@ -187,8 +187,8 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .threat{align-self:flex-start; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; padding:5px 11px; border-radius:999px;}
 .threat.vhigh{background:rgba(229,72,77,.14); color:#c0343a;}
 .threat.high{background:rgba(242,163,60,.18); color:#a86410;}
-.threat.med{background:rgba(59,201,217,.16); color:var(--teal-deep);}
-.compgrid .clink{font-size:12px; font-weight:600; color:var(--teal-deep); text-decoration:none;}
+.threat.med{background:rgba(59,201,217,.16); color:var(--teal-ink);}
+.compgrid .clink{font-size:12px; font-weight:600; color:var(--teal-ink); text-decoration:none;}
 /* touchpoint flow */
 .touchflow{margin-top:42px; text-align:center;}
 .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; max-width:720px; margin:0 auto;}
@@ -200,7 +200,7 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .exlist{display:grid; grid-template-columns:repeat(2,1fr); gap:2px 30px; margin-top:24px;}
 @media(max-width:600px){ .exlist{grid-template-columns:1fr} }
 .exlist span{display:flex; gap:11px; align-items:flex-start; font-size:15px; color:var(--ink); padding:10px 0; border-top:1px solid var(--line); line-height:1.4;}
-.exlist span::before{content:"\203A"; color:var(--teal-deep); font-weight:800;}
+.exlist span::before{content:"\203A"; color:var(--teal-ink); font-weight:800;}
 .dark .exlist span,.darker .exlist span{color:rgba(255,255,255,.82); border-color:var(--line-d);}
 .dark .exlist span::before,.darker .exlist span::before{color:var(--teal);}
 /* big brand position */
@@ -268,21 +268,21 @@ h2{font-size:clamp(28px,5.6vw,46px); max-width:17ch; margin-bottom:10px; letter-
 .tlnode .dotline{display:flex; align-items:center; gap:10px; margin-bottom:16px;}
 .tlnode .dotline i{width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,var(--teal),var(--teal-deep)); flex:0 0 auto; box-shadow:0 0 0 5px rgba(59,201,217,.16);}
 .tlnode .dotline span{height:2px; flex:1; background:linear-gradient(90deg,rgba(59,201,217,.5),rgba(59,201,217,0));}
-.tlnode .yr{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--teal-deep); margin-bottom:6px;}
+.tlnode .yr{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--teal-ink); margin-bottom:6px;}
 .tlnode h3{font-size:21px; margin-bottom:8px;}
 .tlnode p{font-size:16px; color:var(--muted); margin:0;}
 
 /* divider sections two-up */
 .twoup{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:38px;}
 @media(max-width:720px){ .twoup{grid-template-columns:1fr} }
-.twoup h3{font-size:13px; text-transform:uppercase; letter-spacing:.15em; color:var(--teal-deep); margin-bottom:14px;}
+.twoup h3{font-size:13px; text-transform:uppercase; letter-spacing:.15em; color:var(--teal-ink); margin-bottom:14px;}
 .twoup .card h4{font-size:19px; margin:0 0 8px;}
 .twoup .card p{font-size:16px; color:var(--muted); margin:0;}
 
 /* channel mockups */
 .channels{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start; margin-top:42px;}
 @media(max-width:780px){ .channels{grid-template-columns:1fr; gap:38px} }
-.devlabel{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:14px; text-align:center;}
+.devlabel{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); margin-bottom:14px; text-align:center;}
 .ig{max-width:340px; margin:0 auto; border-radius:26px; border:1px solid var(--line); background:#fff; padding:16px; box-shadow:0 30px 70px -38px rgba(13,34,51,.5);}
 .ig .prof{display:flex; align-items:center; gap:11px; margin-bottom:14px;}
 .ig .av{width:42px; height:42px; border-radius:50%; flex:0 0 auto; background:linear-gradient(135deg,var(--teal),var(--teal-deep)); display:grid; place-items:center; color:#fff; font-weight:800; font-size:13px;}
@@ -349,7 +349,7 @@ footer a{color:var(--teal); text-decoration:none;}
   overflow:hidden; box-shadow:0 40px 90px -30px rgba(0,0,0,.7);}
 .lbx .mhead{flex:0 0 auto;}
 .lbx .sub{white-space:normal;}
-.lbx .livelink{font-size:12.5px; font-weight:700; color:var(--teal-deep); text-decoration:none; white-space:nowrap; flex:0 0 auto;}
+.lbx .livelink{font-size:12.5px; font-weight:700; color:var(--teal-ink); text-decoration:none; white-space:nowrap; flex:0 0 auto;}
 .lbx .close{flex:0 0 auto; border:0; cursor:pointer; width:32px; height:32px; border-radius:50%; font-size:19px; line-height:1;
   color:var(--ink); background:rgba(13,31,45,.07);}
 .lbx .close:hover{background:rgba(13,31,45,.13);}
@@ -361,24 +361,24 @@ footer a{color:var(--teal); text-decoration:none;}
 .mails3 .mbody{height:430px;}
 .mails3 .mhead .when{display:none;}
 .mailfig{margin:0; min-width:0;}
-.mailfig figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep); text-align:center; margin-top:12px;}
+.mailfig figcaption{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-ink); text-align:center; margin-top:12px;}
 .prog3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:26px; align-items:start;}
 @media(max-width:900px){ .prog3{grid-template-columns:1fr} }
-.prog3 .lab{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:9px;}
+.prog3 .lab{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); margin-bottom:9px;}
 .prog3 h4{font-size:19px; margin:0 0 10px; font-weight:600; letter-spacing:-.02em;}
 .prog3 ul{list-style:none; margin:0; padding:0;}
 .prog3 li{font-size:14.5px; color:var(--muted); line-height:1.5; padding:10px 0; border-top:1px solid var(--line);}
 .prog3 li b{color:var(--ink); font-weight:600;}
 .lifeline{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin-top:36px;}
 .lifeline span{font-size:13.5px; font-weight:600; padding:9px 14px; border-radius:999px; background:#fff; border:1px solid var(--line); color:var(--ink);}
-.lifeline span.hi{background:rgba(59,201,217,.14); border-color:rgba(59,201,217,.42); color:var(--teal-deep);}
-.lifeline i{font-style:normal; color:var(--teal-deep); font-weight:700; font-size:15px;}
+.lifeline span.hi{background:rgba(59,201,217,.14); border-color:rgba(59,201,217,.42); color:var(--teal-ink);}
+.lifeline i{font-style:normal; color:var(--teal-ink); font-weight:700; font-size:15px;}
 </style>
 </head>
 <body>
 <div class="progress" id="prog"></div>
 <div class="topbar">
-  <div class="brand"><img class="blogo" src="assets/img/logo.png" alt="CVBS"> <small>Digital Strategy</small></div>
+  <div class="brand"><img class="blogo" src="assets/img/logo.png" alt="CVBS" width="165" height="140"> <small>Digital Strategy</small></div>
   <div class="steps">Part <b id="cur">1</b> of 13</div>
 </div>
 
@@ -581,11 +581,11 @@ footer a{color:var(--teal); text-decoration:none;}
     <p style="max-width:52ch; margin:22px auto 0; color:var(--muted); font-size:18px">One idea that every page, post and proposal reinforces. In five seconds online, someone should feel: "These are clearly the experts. I can stop worrying about this."</p>
     <p class="note" style="text-align:center; margin-top:22px">Alternatives to weigh:</p>
     <div class="altpos" style="justify-content:center"><span>The people behind Australia's best business events</span><span>Australia's venue experts</span></div>
-    <p class="note" style="text-align:center; margin-top:46px; font-weight:600; color:var(--teal-deep)">This is not changing your logo. It is modernising how the brand is expressed.</p>
+    <p class="note" style="text-align:center; margin-top:46px; font-weight:600; color:var(--teal-ink)">This is not changing your logo. It is modernising how the brand is expressed.</p>
     <div class="logoab">
       <div class="lg"><span class="lgtag">Now</span><div class="panel"><img class="oldpng" src="https://www.conferencevenues.com.au/data/uploads/CVBS_logo_header-1080x82.png" alt="CVBS current logo"></div></div>
       <div class="lgarrow">→</div>
-      <div class="lg next"><span class="lgtag">Next</span><div class="panel"><img src="assets/img/logo.png" alt="CVBS logo"></div></div>
+      <div class="lg next"><span class="lgtag">Next</span><div class="panel"><img src="assets/img/logo.png" alt="CVBS logo" width="165" height="140"></div></div>
     </div>
     <p class="note" style="text-align:center; margin-top:16px">Same name. Same navy and teal. 37 years of equity kept, the mark simply polished for a digital world.</p>
     
@@ -605,20 +605,20 @@ footer a{color:var(--teal); text-decoration:none;}
     </div>
     <p class="note" style="text-align:center; margin-top:24px">Evidence that CVBS is active in the industry every single week. Here is what that looks like:</p>
     <div class="feed">
-      <figure><img src="instagram-carousels/deck/education.png" alt="Education post: 5 mistakes that inflate your event budget" loading="lazy"><figcaption>Education</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/positioning.png" alt="Positioning post: the right venue isn't searched, it's sourced" loading="lazy"><figcaption>Positioning</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/client-result.png" alt="Client result: 140 delegates, 48 hours, one call" loading="lazy"><figcaption>Client result</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/offer.png" alt="Venue offer: Winter at Kimpton Margot" loading="lazy"><figcaption>Venue offer</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/site-visit.png" alt="Site visit: Venue Files, Hyatt Place Essendon Fields" loading="lazy"><figcaption>Site visit</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/destination.png" alt="Destination: conferences, sorted in Sydney" loading="lazy"><figcaption>Destination</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/education.png" alt="Education post: 5 mistakes that inflate your event budget" loading="lazy" width="2160" height="2700"><figcaption>Education</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/positioning.png" alt="Positioning post: the right venue isn't searched, it's sourced" loading="lazy" width="2160" height="2700"><figcaption>Positioning</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/client-result.png" alt="Client result: 140 delegates, 48 hours, one call" loading="lazy" width="2160" height="2700"><figcaption>Client result</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/offer.png" alt="Venue offer: Winter at Kimpton Margot" loading="lazy" width="2160" height="2700"><figcaption>Venue offer</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/site-visit.png" alt="Site visit: Venue Files, Hyatt Place Essendon Fields" loading="lazy" width="2160" height="2700"><figcaption>Site visit</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/destination.png" alt="Destination: conferences, sorted in Sydney" loading="lazy" width="2160" height="2700"><figcaption>Destination</figcaption></figure>
     </div>
     <p class="note" style="text-align:center; margin-top:16px">Real CVBS carousels, in the same navy, teal and type as the website.</p>
     <div class="chanlabel">LinkedIn carries the authority</div>
-    <img class="li-banner" src="instagram-carousels/deck/li-banner.png" alt="LinkedIn: 140 delegates, 48 hours, one call" loading="lazy">
+    <img class="li-banner" src="instagram-carousels/deck/li-banner.png" alt="LinkedIn: 140 delegates, 48 hours, one call" loading="lazy" width="2400" height="1256">
     <div class="feed" style="margin-top:16px">
-      <figure><img src="instagram-carousels/deck/li-1.png" alt="LinkedIn post 1" loading="lazy"><figcaption>Industry event</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/li-2.png" alt="LinkedIn post 2" loading="lazy"><figcaption>Insight</figcaption></figure>
-      <figure><img src="instagram-carousels/deck/li-3.png" alt="LinkedIn post 3" loading="lazy"><figcaption>Venue spotlight</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/li-1.png" alt="LinkedIn post 1" loading="lazy" width="2160" height="2160"><figcaption>Industry event</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/li-2.png" alt="LinkedIn post 2" loading="lazy" width="2160" height="2160"><figcaption>Insight</figcaption></figure>
+      <figure><img src="instagram-carousels/deck/li-3.png" alt="LinkedIn post 3" loading="lazy" width="2160" height="2160"><figcaption>Venue spotlight</figcaption></figure>
     </div>
     <ul class="points">
       <li><span class="tick">✓</span><div><span class="t">Proof, not promotion</span><span class="d">Every post is evidence you're in venues, with the GMs, at the industry events, week in and week out. That is what turns "I heard about them" into "I trust them."</span></div></li>
@@ -646,7 +646,7 @@ footer a{color:var(--teal); text-decoration:none;}
         <span class="when">Thursday</span>
       </div>
       <div class="mbody">
-        <img src="presentation/assets/edm/cvbs-edm-before.jpg" alt="The current CVBS offer email for The Westin Singapore" loading="lazy">
+        <img src="presentation/assets/edm/cvbs-edm-before.jpg" alt="The current CVBS offer email for The Westin Singapore" loading="lazy" width="760" height="2483">
         <span class="badge">The EDM you send today</span>
       </div>
     </div>
@@ -668,7 +668,7 @@ footer a{color:var(--teal); text-decoration:none;}
         <div class="mailframe" data-full="presentation/assets/edm/cvbs-edm-intro-full.jpg" data-av="CV" data-sub="A free pair of hands for your next event" data-frm="Conference Venues" data-live="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-intro-edm.html">
           <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">A free pair of hands for your next event</span><span class="frm">Conference Venues</span></span></div>
           <div class="mbody">
-            <img src="presentation/assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email" loading="lazy">
+            <img src="presentation/assets/edm/cvbs-edm-intro-full.jpg" alt="The CVBS introduction email" loading="lazy" width="1000" height="3410">
           </div>
         </div>
         <figcaption>Introduction</figcaption>
@@ -677,7 +677,7 @@ footer a{color:var(--teal); text-decoration:none;}
         <div class="mailframe" data-full="presentation/assets/edm/cvbs-edm-full.jpg" data-av="CV" data-sub="Three venues, three offers, and the dates they cover" data-frm="Conference Venues" data-live="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-offers-edm.html">
           <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">Three venues, three offers, and the dates they cover</span><span class="frm">Conference Venues</span></span></div>
           <div class="mbody">
-            <img src="presentation/assets/edm/cvbs-edm-full.jpg" alt="The CVBS monthly offers email" loading="lazy">
+            <img src="presentation/assets/edm/cvbs-edm-full.jpg" alt="The CVBS monthly offers email" loading="lazy" width="1000" height="4113">
           </div>
         </div>
         <figcaption>Monthly roundup</figcaption>
@@ -686,7 +686,7 @@ footer a{color:var(--teal); text-decoration:none;}
         <div class="mailframe" data-full="presentation/assets/edm/cvbs-edm-single-full.jpg" data-av="CV" data-sub="Marina Bay from level 32, and what the Westin is offering on it" data-frm="Conference Venues" data-live="https://the-service-edit.github.io/cvbs-2026/presentation/assets/edm/cvbs-single-offer-edm.html">
           <div class="mhead"><span class="av">CV</span><span class="mw"><span class="sub">Marina Bay from level 32, and what the Westin is offering on it</span><span class="frm">Conference Venues</span></span></div>
           <div class="mbody">
-            <img src="presentation/assets/edm/cvbs-edm-single-full.jpg" alt="The CVBS single venue email" loading="lazy">
+            <img src="presentation/assets/edm/cvbs-edm-single-full.jpg" alt="The CVBS single venue email" loading="lazy" width="1000" height="4983">
           </div>
         </div>
         <figcaption>One venue, one message</figcaption>

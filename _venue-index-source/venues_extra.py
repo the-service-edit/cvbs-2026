@@ -90,8 +90,10 @@ VISIT_SLUGS = {
 
 # A venue name mapped to its live offer page in the site root. Update whenever
 # offers change, alongside the OFFERS map in submit-a-brief.html.
+# Empty on 6 September 2026. Kimpton Margot Sydney carried a "Current offer"
+# badge pointing at a stub that redirected to offers.html#kimpton-margot, an
+# anchor that does not exist. A badge must resolve to a published offer.
 OFFER_PAGES = {
-  "Kimpton Margot Sydney": "offer-kimpton-margot-sydney.html",
 }
 
 # Cities that have a destination page but no venue data yet. Listed so the

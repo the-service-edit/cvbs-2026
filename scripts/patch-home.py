@@ -84,7 +84,7 @@ def main():
             m = re.search(r'(<p class="lead">.*?</p>)', d, re.S)
             if m:
                 link = ('\n    <p style="margin-top:1.2rem"><a class="link-arrow" '
-                        'href="venue-results.html" style="color:var(--teal-deep)">'
+                        'href="venue-results.html" style="color:var(--teal-ink)">'
                         'Search the %d venues we publish by destination, numbers and layout %s</a></p>'
                         % (N, ARROW))
                 d = d[:m.end(1)] + link + d[m.end(1):]

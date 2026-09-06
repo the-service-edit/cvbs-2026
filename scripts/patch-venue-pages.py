@@ -60,7 +60,7 @@ def main():
                           '<link rel="stylesheet" href="../../assets/css/site.css', 1)
         if 'assets/js/finder.js' not in s:
             s = re.sub(r'(<script src="\.\./\.\./assets/js/site\.js[^"]*"[^>]*></script>)',
-                       r'\1\n<script src="../../assets/js/finder.js?v=202609060900" defer></script>',
+                       r'\1\n<script src="../../assets/js/finder.js?v=202609061800" defer></script>',
                        s, 1)
 
         cap = v.get('maxcap')

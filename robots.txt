@@ -1,3 +1,9 @@
+# This file is for the branch deploy, where the whole repository is public and
+# the working documents sit alongside the site. The production artifact built
+# by scripts/build-public.sh contains only the pages in sitemap.xml, so it gets
+# a much shorter robots file generated at build time. Do not copy this one to
+# the production domain: it names internal files that will not exist there.
+
 User-agent: *
 Allow: /
 
@@ -15,6 +21,7 @@ Disallow: /CVBS-Digital-Strategy.html
 Disallow: /CVBS-Copy-Rewrite-Audit.html
 Disallow: /CVBS-Concept-Audit-and-Pricing-Aug-2026.html
 Disallow: /CVBS-Rebuild-Assessment-Aug-2026.html
+Disallow: /CVBS-Platform-Audit-and-Rebuild-Sep-2026.html
 Disallow: /CVBS-Sameness-Response-Aug-2026.html
 Disallow: /CVBS-Being-Chosen-Supply-List.html
 Disallow: /CVBS-What-Karen-Must-Supply.html
@@ -31,5 +38,10 @@ Disallow: /index-pro.html
 Disallow: /index-video.html
 Disallow: /index-strip.html
 Disallow: /index-everlab.html
+
+# venue-results.html is deliberately NOT disallowed here. It carries
+# <meta name="robots" content="noindex, follow">, and a crawler has to be
+# able to fetch the page to read that. Blocking it in robots.txt would
+# leave the URL indexable-by-reference with no way to see the noindex.
 
 Sitemap: https://the-service-edit.github.io/cvbs-2026/sitemap.xml

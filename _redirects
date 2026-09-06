@@ -1,0 +1,15 @@
+# Netlify and Cloudflare Pages format. Ignored by GitHub Pages, which has
+# no server redirects, so the meta-refresh stubs in the folders of the same
+# names cover that case. Keep the two in step.
+/bestvenue        /venue-results.html                         301
+/groups           /group-accommodation.html                   301
+/relocation       /corporate-accommodation.html               301
+/venuereviews     /venue-visits/                              301
+/get-a-quote      /submit-a-brief.html                        301
+/about            /about.html                                 301
+/about/reviews    /results.html                               301
+/contact-us       /contact.html                               301
+/privacy          /privacy.html                               301
+/booking-terms    /terms.html                                 301
+/terms            /terms.html                                 301
+/feed             /blog-index.html                            301

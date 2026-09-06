@@ -188,7 +188,7 @@ def build(city):
     <span class="eyebrow">By delegate numbers</span>
     <h2 class="h2">Every {city} venue we publish, and what each one is for.</h2>
     <p class="lead" style="max-width:66ch">Grouped by the only question you can answer on day one, which is how many people are coming. Every figure is the one the venue publishes for itself, read off its own capacity chart, fact sheet or floor plan. The sentence under each name is ours.</p>
-    <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?dest={city_q}" style="color:var(--teal-deep)">Narrow these by your numbers and your layout {arrow}</a></p>
+    <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?dest={city_q}" style="color:var(--teal-ink)">Narrow these by your numbers and your layout {arrow}</a></p>
     <div class="vcx">
 {blocks}
     </div>
@@ -298,7 +298,7 @@ def build(city):
                       '<link rel="stylesheet" href="assets/css/site.css', 1)
     if 'assets/js/finder.js' not in s:
         s = re.sub(r'(<script src="assets/js/site\.js[^"]*"[^>]*></script>)',
-                   r'\1\n<script src="assets/js/finder.js?v=202609060900" defer></script>', s, 1)
+                   r'\1\n<script src="assets/js/finder.js?v=202609061800" defer></script>', s, 1)
 
     io.open(p, 'w', encoding='utf-8').write(s)
     print('%s: published %d venues in %d bands, ItemList now %d items'

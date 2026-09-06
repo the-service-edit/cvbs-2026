@@ -9,6 +9,7 @@ Removes the old standalone Organization / WebSite / Service blocks, because
 three unlinked nodes describing the same business is worse than one linked
 one. Leaves BreadcrumbList, FAQPage and the venue ItemList alone.
 """
+import html as _html
 import json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -74,7 +75,7 @@ def org_node():
         "name": E.NAME,
         "alternateName": E.ALT_NAMES,
         "legalName": E.LEGAL_NAME,
-        "url": E.SITE + "/",
+        "url": E.SERVE + "/",
         "logo": {"@type": "ImageObject", "@id": E.LOGO_ID, "url": E.LOGO["url"],
                  "width": E.LOGO["width"], "height": E.LOGO["height"]},
         "image": {"@id": E.LOGO_ID},
@@ -107,7 +108,7 @@ def org_node():
             "itemListElement": [
                 {"@type": "Offer", "price": E.OFFER["price"], "priceCurrency": E.OFFER["currency"],
                  "itemOffered": {"@type": "Service", "name": n, "description": d,
-                                 "url": E.SITE + "/" + u}}
+                                 "url": E.SERVE + "/" + u}}
                 for n, u, d in E.SERVICES]},
     }
 
@@ -130,13 +131,28 @@ def service_node():
 
 
 def website_node():
-    return {"@type": "WebSite", "@id": E.WEBSITE_ID, "url": E.SITE + "/",
+    return {"@type": "WebSite", "@id": E.WEBSITE_ID, "url": E.SERVE + "/",
             "name": E.NAME, "alternateName": "CVBS", "inLanguage": "en-AU",
             "publisher": {"@id": E.ORG_ID}}
 
 
+def page_url(rel):
+    """Canonical-shaped URL for a page path relative to the site root.
+
+    A page at venue-visits/<slug>/index.html is served at venue-visits/<slug>/,
+    so its WebPage node has to say so. Before this, every venue page carried the
+    Sydney destination page's WebPage node, lifted with the chrome at build
+    time, which told a parser that five different pages were the same page.
+    """
+    if rel == "index.html":
+        return E.SERVE + "/"
+    if rel.endswith("/index.html"):
+        return E.SERVE + "/" + rel[:-len("index.html")]
+    return E.SERVE + "/" + rel
+
+
 def page_node(fname, title, desc):
-    url = E.SITE + "/" + ("" if fname == "index.html" else fname)
+    url = page_url(fname)
     return {"@type": "WebPage", "@id": url + "#webpage", "url": url,
             "name": title, "description": desc,
             "isPartOf": {"@id": E.WEBSITE_ID},
@@ -178,7 +194,10 @@ def strip_owned(src):
 # node. Three stubs with the same name are three entities to a parser, not
 # one. Every one of them now points at the single @id.
 # ---------------------------------------------------------------------------
-OLD_HOST = "https://the-service-edit.github.io/cvbs-2026/"
+# Any address written by another generator is normalised onto SERVE, so a
+# breadcrumb, an ItemList and a canonical can never disagree about the host.
+KNOWN_HOSTS = ("https://the-service-edit.github.io/cvbs-2026/",
+               "https://the-service-edit.github.io/cvbs-2026/")
 CVBS_NAMES = {E.NAME, "CVBS", "Conference Venues & Booking Services"}
 
 
@@ -186,8 +205,10 @@ def rewire(node):
     if isinstance(node, list):
         return [rewire(n) for n in node]
     if not isinstance(node, dict):
-        if isinstance(node, str) and node.startswith(OLD_HOST):
-            return E.SITE + "/" + node[len(OLD_HOST):]
+        if isinstance(node, str):
+            for h in KNOWN_HOSTS:
+                if node.startswith(h) and not node.startswith(E.SERVE + "/"):
+                    return E.SERVE + "/" + node[len(h):]
         return node
     t = node.get("@type")
     t = t if isinstance(t, list) else [t]
@@ -223,17 +244,30 @@ def rewire_others(src):
 
 def main():
     pages = re.findall(r"<loc>(.*?)</loc>", open(os.path.join(ROOT, "sitemap.xml")).read())
-    names = [p.rsplit("/", 1)[-1] or "index.html" for p in pages]
+    # A loc may be a directory (venue-visits/<slug>/). Taking the basename of
+    # that gives "", which used to fall back to index.html, so the homepage was
+    # rewritten six times and the venue pages never at all.
+    names = []
+    for u in pages:
+        r = u.split("://", 1)[-1].split("/", 1)[-1]
+        r = r[len("cvbs-2026/"):] if r.startswith("cvbs-2026/") else r
+        if r == "" or r.endswith("/"):
+            r += "index.html"
+        if r not in names:
+            names.append(r)
     done, skipped = 0, []
     for n in names:
-        path = os.path.join(ROOT, n)
+        path = os.path.join(ROOT, *n.split("/"))
         if not os.path.exists(path):
             skipped.append(n); continue
         src = open(path, encoding="utf-8").read()
         title = re.search(r"<title>(.*?)</title>", src, re.S)
         desc = re.search(r'<meta name="description" content="(.*?)"', src, re.S)
-        title = title.group(1).strip() if title else E.NAME
-        desc = desc.group(1).strip() if desc else E.DESCRIPTION
+        # <title> and the meta description are HTML, so they carry entities.
+        # A script element is raw text, so an entity left in the JSON is read
+        # literally and a parser sees "Launches &amp; Events". Decode first.
+        title = _html.unescape(title.group(1).strip()) if title else E.NAME
+        desc = _html.unescape(desc.group(1).strip()) if desc else E.DESCRIPTION
         src = strip_owned(src)
         src = rewire_others(src)
         block = ('<script type="application/ld+json" id="%s">%s</script>\n'

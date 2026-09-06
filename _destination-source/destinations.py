@@ -394,8 +394,8 @@ DEST['Adelaide'] = dict(
     ('Adelaide Hills', 'A group that should leave the city but stay inside forty minutes. Hahndorf carries a purpose built conference building with accommodation adjacent, and the estates around it suit board offsites.'),
     ('Barossa and McLaren Vale', 'Where wine is the point and the group sleeps on site. Novotel Barossa is the only property in the valley with enough rooms to hold a whole conference, at a stated maximum of 250.')],
   tradeoffs=[
-    ('February and March are effectively blocked',
-     'Adelaide Fringe, the Adelaide Festival and WOMADelaide overlap across late February and March, and accommodation and venue availability tighten sharply across the whole city. January carries the Tour Down Under and March also carries LIV Golf. It is the most festival dense capital in the country and the calendar is the first thing we check.'),
+    ('February and March are the hardest dates to hold',
+     'Adelaide Fringe, the Adelaide Festival and WOMADelaide overlap across late February and March, and both rates and availability tighten sharply across the city. January carries the Tour Down Under and March also carries LIV Golf. Events do run in those windows, but they are booked earlier and they cost more, so bring us the dates first and we will tell you what is still open rather than guessing from a calendar.'),
     ('Scale and walkability are not available in the same place',
      'Everything above about 3,000 in one room sits at Wayville, outside the walkable Riverbank hotel cluster. Below that threshold Adelaide is unusually compact. Above it, it stops being a walk everywhere city and becomes a coaching exercise.'),
     ('A true single hotel residential conference caps at about 400',
@@ -584,7 +584,7 @@ DEST['Hobart'] = dict(
     ('Dark Mofo prices mid June like summer',
      'Winter is otherwise the value season here, but the Dark Mofo fortnight in June draws tens of thousands of interstate and overseas visitors and fills the city. Either build the program around it deliberately or avoid it.'),
     ('Air capacity sets the delegate number, not the venue',
-     'There is no rail link anywhere in Tasmania and every mainland delegate flies. On most Hobart bids the practical ceiling on delegate numbers is seat availability into the city rather than the size of the room, so we look at the flight schedule before we look at floor plans.')],
+     'There is no rail link anywhere in Tasmania and almost every mainland delegate flies. On most Hobart bids the practical ceiling on delegate numbers is seat availability into the city rather than the size of the room, so we look at the flight schedule before we look at floor plans.')],
   why_h2='Hobart is small, and that is exactly why it works for the right program.',
   why_lead='A walkable city, food and drink that carry a program on their own, and research institutions on the doorstep make Hobart unusually strong for high value events under about 300. The honest limit is that above roughly 1,200 in one seated plenary the destination stops working, and we will tell you that before you commit.',
   faqs=[
@@ -823,7 +823,7 @@ DEST['Sunshine Coast'] = dict(
     '<a href="#sunshine-coast-featured">See the venues we would start with</a>.'],
   featured=[
     ('sunshine-coast-convention-centre',
-     'The only regional option above 400 seated, with the accommodation on the same site.'),
+     'The only regional option above 400 seated that also has the accommodation on the same site.'),
     ('the-events-centre-caloundra',
      'Flat floor plenaries and gala dinners with theatre infrastructure already in place.'),
     ('peppers-noosa-resort-villas',
@@ -860,8 +860,8 @@ DEST['Sunshine Coast'] = dict(
      'Noosa to Caloundra is a real drive, and Twin Waters sits between them. Any program that uses two centres needs coach transfers written into the budget on day one, and a delegate arriving at Noosa from Brisbane Airport is on a road transfer of well over an hour.'),
     ('There is no exhibition hall',
      'No venue in the region publishes an exhibition floor area or a booth count. If your program needs a serious trade floor alongside the plenary, it belongs in Brisbane or on the Gold Coast, and we would say so rather than make it fit.'),
-    ('Above about 400 seated it is one property or nothing',
-     'The Sunshine Coast Convention Centre is the only venue that holds it. That is a fine answer when the dates work, and no answer at all when they do not, so a large program here needs a long lead time and a second destination in reserve.')],
+    ('Above about 400 seated and residential, it is one property',
+     'The Sunshine Coast Convention Centre at Twin Waters is the only site we publish that seats more than 400 and sleeps them on the same grounds. The Events Centre at Caloundra takes 820 on a flat floor and the University of the Sunshine Coast 500, but both need a room block negotiated separately across nearby hotels. So a large residential program here has a single answer, which means a long lead time and a second destination held in reserve.')],
   why_h2='The Sunshine Coast is a residential conference destination, and it rewards a single site.',
   why_lead='Almost everything that goes wrong here is a transfer nobody costed. We start with which centre the program belongs in, because Noosa, Mooloolaba, Twin Waters and Caloundra are separate towns with separate accommodation, and choosing one of them well is worth more than shortlisting across all four.',
   faqs=[
@@ -905,7 +905,7 @@ DEST['Cairns'] = dict(
     '<b>Hotel ballrooms top out around 650, which is where the market actually sits.</b> The '
     'largest is Pullman Cairns International’s Grand Ballroom at 650 theatre in 500 square metres, '
     'with 324 rooms above it. Below about 600 delegates you have a genuine competitive set of hotels; '
-    'between about 650 and 2,500 the convention centre is effectively the only room, so there is no '
+    'between about 1,000 and 2,500 the convention centre is effectively the only room, so there is no '
     'competitive tension in that band and lead times are long.',
     '<b>Accommodation is concentrated in the walkable Esplanade and wharf strip, and the reef and '
     'rainforest are the reason to be here.</b> Eight city hotels publish about 2,160 rooms between '
@@ -1133,9 +1133,9 @@ DEST['Blue Mountains'] = dict(
      'This is a mountain region at about a thousand metres. Bureau of Meteorology averages for Katoomba put July at a mean maximum of 9.5 degrees and a mean minimum of 2.6, and even January averages a maximum of 23.4. Fog also takes the views away without warning. It is the single most under briefed thing about the destination.'),
     ('It is a national park, and closures happen',
      'NSW National Parks states plainly that the park may close at times due to poor weather or fire danger. Any outdoor or offsite element needs a wet weather and a fire danger fallback written into the run sheet rather than assumed.'),
-    ('Above 620 theatre the region has no answer',
-     'There is no exhibition hall, no convention centre and no pillarless floor plate at exhibition scale anywhere in the mountains. Anything with a trade floor, more than about three concurrent streams or more than 600 delegates belongs in Sydney, and a same day fly in meeting should not come here at all.')],
-  why_h2='The Blue Mountains works because nobody can go home at six.',
+    ('Above 620 theatre we have not found a room here',
+     'Among the Blue Mountains venues we have verified there is no exhibition hall, no convention centre and no pillarless floor plate at exhibition scale. Anything with a trade floor, more than about three concurrent streams or more than 600 delegates is better placed in Sydney, and a same day fly in meeting should not come here at all. If you know of a room up here that changes that, tell us and we will go and look at it.')],
+  why_h2='The Blue Mountains works because the group stays together after six.',
   why_lead='Ninety minutes from Sydney, on one road corridor, with almost nothing to do after dark except the program you designed. That is the entire argument for the region, and it is why the retreat and the residential conference are the two things it does properly.',
   faqs=[
     ('How much does it cost to use CVBS to find a venue in the Blue Mountains?', 'FREE'),
@@ -1314,8 +1314,8 @@ DEST['Yarra Valley'] = dict(
      'The venues with the best rooms for a dinner are not the venues with the rooms for the night. That is fine when it is planned and expensive when it is not, so we settle the accommodation contract and the transfers before we get excited about a cellar door.'),
     ('It is a dispersed region with no useful public transport',
      'Healesville, Coldstream, Yering, Yarra Glen and Chirnside Park are separate towns. A delegate cannot get between them without a car or a coach, and neither the tourism authority nor the properties publish reliable town to town drive times, so we cost the transfers explicitly rather than estimating them.'),
-    ('Above 325 in plenary the region has no answer',
-     'There is no exhibition hall, the largest verified floor plate is 400 square metres and the largest accommodation base at one address is 102 rooms. Anything above about 325 in plenary or requiring a trade floor belongs in the Melbourne CBD, and we would say so.')],
+    ('Above 325 in plenary we have not verified a room here',
+     'Across the Yarra Valley venues we have verified there is no exhibition hall, the largest floor plate is 400 square metres and the largest accommodation base at one address is 102 rooms. Anything above about 325 in plenary or requiring a trade floor is better placed in the Melbourne CBD, and we would say so.')],
   why_h2='The Yarra Valley is where a Melbourne leadership program actually belongs.',
   why_lead='An hour from the city, with exclusive use properties, real breakout depth and a cellar door program on the doorstep. What it is not is a conference destination at scale, and knowing exactly where that line sits is the most useful thing we bring to a Yarra Valley brief.',
   faqs=[

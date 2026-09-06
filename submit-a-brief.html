@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --teal:#3BC9D9;--teal-deep:#28A8B6;--navy:#0D2233;--navy-deep:#071520;
+    --teal:#3BC9D9;--teal-deep:#28A8B6;--teal-btn:#197683;--teal-btn-hover:#15646F;--teal-ink:#197683;--navy:#0D2233;--navy-deep:#071520;
     --stone:#F4F1EA;--stone-deep:#ECE7DC;--white:#fff;
     --text:#0D1F2D;--muted:#6E747B;--line:#E3DED2;--field-line:#D8D2C4;
     --container:1400px;--gutter:clamp(1.5rem,5vw,5rem);--r-btn:12px;--r-card:14px;
@@ -30,16 +30,16 @@
   .logo{height:32px;width:auto;display:block}
   .site-nav__links{display:flex;align-items:center;gap:1.9rem}
   .site-nav__links a{color:var(--text);text-decoration:none;font-size:.84rem;transition:color .3s var(--ease)}
-  .site-nav__links a:hover{color:var(--teal-deep)}
-  .nav-cta{background:var(--teal-deep);color:#fff!important;border:1px solid transparent;font-weight:600;font-size:.9rem;padding:.7rem 1.25rem;border-radius:var(--r-btn);box-shadow:0 12px 30px -16px rgba(10,44,82,.5);transition:transform .35s var(--ease),background .35s var(--ease),box-shadow .35s var(--ease)}
-  .nav-cta:hover{background:#1f8b97;color:#fff!important;transform:translateY(-3px)}
+  .site-nav__links a:hover{color:var(--teal-ink)}
+  .nav-cta{background:var(--teal-btn);color:#fff!important;border:1px solid transparent;font-weight:600;font-size:.9rem;padding:.7rem 1.25rem;border-radius:var(--r-btn);box-shadow:0 12px 30px -16px rgba(10,44,82,.5);transition:transform .35s var(--ease),background .35s var(--ease),box-shadow .35s var(--ease)}
+  .nav-cta:hover{background:#15646F;color:#fff!important;transform:translateY(-3px)}
   .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;padding:0;background:none;border:none;cursor:pointer}
   .nav-toggle span{display:block;height:2px;width:24px;border-radius:2px;background:var(--text);transition:transform .35s var(--ease),opacity .25s}
   .mobile-menu{position:fixed;inset:0;z-index:65;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
   .mobile-menu.open{opacity:1;visibility:visible}
   .mobile-menu__links{display:flex;flex-direction:column;gap:1.3rem;text-align:center;padding:3rem 2rem}
   .mobile-menu__links a{color:rgba(244,241,234,.9);text-decoration:none;font-size:1.5rem;font-weight:500}
-  .mobile-menu__cta{margin-top:1rem;align-self:center;background:var(--teal-deep);color:#fff!important;padding:.9rem 2rem;border-radius:var(--r-btn);font-weight:600}
+  .mobile-menu__cta{margin-top:1rem;align-self:center;background:var(--teal-btn);color:#fff!important;padding:.9rem 2rem;border-radius:var(--r-btn);font-weight:600}
   body.menu-open{overflow:hidden}
 
   /* header */
@@ -79,7 +79,7 @@
   .field{margin-bottom:1.3rem}
   .field>label{display:block;font-size:.8rem;font-weight:600;letter-spacing:.01em;margin-bottom:.55rem}
   .field .hint{color:var(--muted);font-weight:400}
-  .req{color:var(--teal-deep)}
+  .req{color:var(--teal-ink)}
   .field input[type=text],.field input[type=email],.field input[type=tel],.field input[type=date],.field input[type=number],.field select,.field textarea{
     width:100%;background:var(--stone);border:1px solid var(--field-line);border-radius:10px;padding:.8rem .9rem;color:var(--text);font-family:inherit;font-size:.95rem;transition:border-color .25s var(--ease),background .25s var(--ease)}
   .field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236E747B' d='M6 8 0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.2rem}
@@ -101,7 +101,7 @@
 
   /* toggle checkbox row */
   .check{display:flex;align-items:center;gap:.6rem;cursor:pointer;font-size:.92rem;color:var(--text);margin-top:.4rem}
-  .check input{width:18px;height:18px;accent-color:var(--teal-deep);cursor:pointer}
+  .check input{width:18px;height:18px;accent-color:var(--teal-ink);cursor:pointer}
 
   /* nav buttons */
   .actions{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line)}
@@ -127,7 +127,7 @@
   .success{display:none;text-align:center;padding:clamp(2rem,5vw,3.5rem)}
   .success.show{display:block;animation:fade .5s var(--ease)}
   .success__ico{width:64px;height:64px;border-radius:50%;background:rgba(59,201,217,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem}
-  .success__ico svg{width:30px;height:30px;color:var(--teal-deep)}
+  .success__ico svg{width:30px;height:30px;color:var(--teal-ink)}
   .success h2{font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.7rem}
   .success p{color:var(--muted);font-size:1.02rem;line-height:1.6;font-weight:300;max-width:42ch;margin:0 auto 1.6rem}
   .draft-note,.privacy-note{color:var(--muted);font-size:.79rem;line-height:1.55}
@@ -156,19 +156,19 @@
     .aside{flex-direction:column}
   }
 </style>
-<script type="application/ld+json" id="cvbs-entity">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://conferencevenues.com.au/#organization","name":"Conference Venues and Booking Services","alternateName":["CVBS","Conference Venues & Booking Services"],"url":"https://conferencevenues.com.au/","logo":{"@type":"ImageObject","@id":"https://conferencevenues.com.au/#logo","url":"https://conferencevenues.com.au/assets/img/logo.png","width":180,"height":152},"image":{"@id":"https://conferencevenues.com.au/#logo"},"description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","slogan":"Worldwide Venue Finding Solutions","foundingDate":"1989","address":{"@type":"PostalAddress","streetAddress":"43A Flinders Road","addressLocality":"Cronulla","addressRegion":"NSW","postalCode":"2230","addressCountry":"AU"},"telephone":"+61414784999","email":"karen@conferencevenues.com","openingHours":"Mo-Fr 08:30-17:30","priceRange":"Free to the organiser","areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"knowsAbout":["Conference venue sourcing","Conference venues Australia","Venue finding service","Venue procurement","Group accommodation","Hotel rate negotiation","Day delegate rates","Corporate events","Conference room capacity and layout","Meeting venues","Corporate retreats","Incentive travel","Business events","Site inspections","Venue contract negotiation"],"employee":[{"@id":"https://conferencevenues.com.au/#karen-jepson"},{"@id":"https://conferencevenues.com.au/#anthony-jepson"}],"makesOffer":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate.","itemOffered":{"@id":"https://conferencevenues.com.au/#service"}},"contactPoint":[{"@type":"ContactPoint","contactType":"sales","telephone":"+61414784999","email":"karen@conferencevenues.com","areaServed":"AU","availableLanguage":"en-AU"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Venue sourcing services","itemListElement":[{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Conference venue finding","description":"Sourcing, comparing and negotiating conference and meeting venues on behalf of the organiser.","url":"https://conferencevenues.com.au/conference-venue-finding.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Group accommodation","description":"Sourcing and negotiating delegate room blocks and group stays.","url":"https://conferencevenues.com.au/group-accommodation.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Product launches and events","description":"Sourcing event spaces for launches, functions and celebrations.","url":"https://conferencevenues.com.au/events.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Corporate accommodation","description":"Negotiated corporate rates and ongoing accommodation programs.","url":"https://conferencevenues.com.au/corporate-accommodation.html"}}]}},{"@type":"WebSite","@id":"https://conferencevenues.com.au/#website","url":"https://conferencevenues.com.au/","name":"Conference Venues and Booking Services","alternateName":"CVBS","inLanguage":"en-AU","publisher":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Service","@id":"https://conferencevenues.com.au/#service","name":"Conference venue sourcing","serviceType":"Venue finding and venue sourcing","description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","provider":{"@id":"https://conferencevenues.com.au/#organization"},"areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"audience":{"@type":"BusinessAudience","audienceType":"Event organisers, executive assistants, associations, government and corporate event teams"},"offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate."}},{"@type":"WebPage","@id":"https://conferencevenues.com.au/submit-a-brief.html#webpage","url":"https://conferencevenues.com.au/submit-a-brief.html","name":"Start your brief | CVBS","description":"Tell CVBS what you need and we'll source, negotiate and shortlist the right venues, free to you, within 48 hours.","isPartOf":{"@id":"https://conferencevenues.com.au/#website"},"about":{"@id":"https://conferencevenues.com.au/#organization"},"publisher":{"@id":"https://conferencevenues.com.au/#organization"},"inLanguage":"en-AU"},{"@type":"Person","@id":"https://conferencevenues.com.au/#karen-jepson","name":"Karen Jepson","jobTitle":"Director","email":"karen@conferencevenues.com","telephone":"+61414784999","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}},{"@type":"Person","@id":"https://conferencevenues.com.au/#anthony-jepson","name":"Anthony Jepson","jobTitle":"Director","email":"aj@conferencevenues.com","telephone":"+61402033861","worksFor":{"@id":"https://conferencevenues.com.au/#organization"}}]}</script>
+<script type="application/ld+json" id="cvbs-entity">{"@context":"https://schema.org","@graph":[{"@type":["Organization","ProfessionalService"],"@id":"https://the-service-edit.github.io/cvbs-2026/#organization","name":"Conference Venues and Booking Services","alternateName":["CVBS","Conference Venues & Booking Services"],"url":"https://the-service-edit.github.io/cvbs-2026/","logo":{"@type":"ImageObject","@id":"https://the-service-edit.github.io/cvbs-2026/#logo","url":"https://the-service-edit.github.io/cvbs-2026/assets/img/logo.png","width":180,"height":152},"image":{"@id":"https://the-service-edit.github.io/cvbs-2026/#logo"},"description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","slogan":"Worldwide Venue Finding Solutions","foundingDate":"1989","address":{"@type":"PostalAddress","streetAddress":"43A Flinders Road","addressLocality":"Cronulla","addressRegion":"NSW","postalCode":"2230","addressCountry":"AU"},"telephone":"+61414784999","email":"karen@conferencevenues.com","openingHours":"Mo-Fr 08:30-17:30","priceRange":"Free to the organiser","areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"knowsAbout":["Conference venue sourcing","Conference venues Australia","Venue finding service","Venue procurement","Group accommodation","Hotel rate negotiation","Day delegate rates","Corporate events","Conference room capacity and layout","Meeting venues","Corporate retreats","Incentive travel","Business events","Site inspections","Venue contract negotiation"],"employee":[{"@id":"https://the-service-edit.github.io/cvbs-2026/#karen-jepson"},{"@id":"https://the-service-edit.github.io/cvbs-2026/#anthony-jepson"}],"makesOffer":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate.","itemOffered":{"@id":"https://the-service-edit.github.io/cvbs-2026/#service"}},"contactPoint":[{"@type":"ContactPoint","contactType":"sales","telephone":"+61414784999","email":"karen@conferencevenues.com","areaServed":"AU","availableLanguage":"en-AU"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Venue sourcing services","itemListElement":[{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Conference venue finding","description":"Sourcing, comparing and negotiating conference and meeting venues on behalf of the organiser.","url":"https://the-service-edit.github.io/cvbs-2026/conference-venue-finding.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Group accommodation","description":"Sourcing and negotiating delegate room blocks and group stays.","url":"https://the-service-edit.github.io/cvbs-2026/group-accommodation.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Product launches and events","description":"Sourcing event spaces for launches, functions and celebrations.","url":"https://the-service-edit.github.io/cvbs-2026/events.html"}},{"@type":"Offer","price":"0","priceCurrency":"AUD","itemOffered":{"@type":"Service","name":"Corporate accommodation","description":"Negotiated corporate rates and ongoing accommodation programs.","url":"https://the-service-edit.github.io/cvbs-2026/corporate-accommodation.html"}}]}},{"@type":"WebSite","@id":"https://the-service-edit.github.io/cvbs-2026/#website","url":"https://the-service-edit.github.io/cvbs-2026/","name":"Conference Venues and Booking Services","alternateName":"CVBS","inLanguage":"en-AU","publisher":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"}},{"@type":"Service","@id":"https://the-service-edit.github.io/cvbs-2026/#service","name":"Conference venue sourcing","serviceType":"Venue finding and venue sourcing","description":"Conference Venues and Booking Services (CVBS) is an independent venue finding service that has sourced conference venues, event spaces and group accommodation for Australian organisations since 1989. The service is free to the organiser, because the venue pays the commission from its existing budget at the same rate whether a booking comes through an agent or direct.","provider":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"},"areaServed":["Australia","New South Wales","Victoria","Queensland","Western Australia","South Australia","Australian Capital Territory","Tasmania","Northern Territory","New Zealand","Fiji","Singapore","Indonesia","Worldwide"],"audience":{"@type":"BusinessAudience","audienceType":"Event organisers, executive assistants, associations, government and corporate event teams"},"offers":{"@type":"Offer","price":"0","priceCurrency":"AUD","description":"Free to the organiser. CVBS is paid a commission by the venue from its existing budget, at the same rate whether the booking is made through an agent or direct, so using CVBS does not increase the rate."}},{"@type":"WebPage","@id":"https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html#webpage","url":"https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html","name":"Start your brief | CVBS","description":"Tell CVBS what you need and we'll source, negotiate and shortlist the right venues, free to you, within 48 hours.","isPartOf":{"@id":"https://the-service-edit.github.io/cvbs-2026/#website"},"about":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"},"publisher":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"},"inLanguage":"en-AU"},{"@type":"Person","@id":"https://the-service-edit.github.io/cvbs-2026/#karen-jepson","name":"Karen Jepson","jobTitle":"Director","email":"karen@conferencevenues.com","telephone":"+61414784999","worksFor":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"}},{"@type":"Person","@id":"https://the-service-edit.github.io/cvbs-2026/#anthony-jepson","name":"Anthony Jepson","jobTitle":"Director","email":"aj@conferencevenues.com","telephone":"+61402033861","worksFor":{"@id":"https://the-service-edit.github.io/cvbs-2026/#organization"}}]}</script>
 </head>
 <body>
 
 <nav class="site-nav" id="nav">
   <div class="wrap site-nav__inner">
-    <a href="index.html" aria-label="CVBS home"><img class="logo" src="assets/img/logo.png" alt="CVBS"></a>
+    <a href="index.html" aria-label="CVBS home"><img class="logo" src="assets/img/logo.png" alt="CVBS" width="165" height="140"></a>
     <div class="site-nav__links">
       <a href="how-it-works.html">How it works</a>
       <a href="services.html">Services</a>
       <a href="destinations.html">Destinations</a>
       <a href="about.html">About</a>
-      <a href="results.html">Results</a>
+      <a href="results.html">Client stories</a>
       <a href="offers.html">Offers</a>
       <a href="contact.html">Contact</a>
       <a href="submit-a-brief.html" class="nav-cta">Start your brief</a>
@@ -178,7 +178,7 @@
 </nav>
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-menu__links">
   <a href="how-it-works.html">How it works</a><a href="services.html">Services</a><a href="destinations.html">Destinations</a>
-  <a href="about.html">About</a><a href="results.html">Results</a><a href="offers.html">Offers</a><a href="contact.html">Contact</a>
+  <a href="about.html">About</a><a href="results.html">Client stories</a><a href="offers.html">Offers</a><a href="contact.html">Contact</a>
   <a href="submit-a-brief.html" class="mobile-menu__cta">Start your brief</a>
 </div></div>
 
@@ -227,7 +227,7 @@
               <label class="chip"><input type="checkbox" name="Service" value="Product launch / event"><span>Product launch / event</span></label>
               <label class="chip"><input type="checkbox" name="Service" value="Corporate retreat"><span>Corporate retreat</span></label>
               <label class="chip"><input type="checkbox" name="Service" value="Meeting space"><span>Meeting space</span></label>
-              <label class="chip"><input type="checkbox" name="Service" value="Corporate relocation"><span>Corporate relocation</span></label>
+              <label class="chip"><input type="checkbox" name="Service" value="Corporate accommodation"><span>Corporate accommodation</span></label>
             </div>
             <div class="err">Please choose at least one.</div>
           </div>
@@ -351,18 +351,18 @@
           <p class="sub">So we know where to send your shortlist.</p>
 
           <div class="row">
-            <div class="field" id="f-first"><label for="first">First name <span class="req">*</span></label><input type="text" id="first" name="First name" placeholder="Jane" required><div class="err">Required.</div></div>
-            <div class="field" id="f-last"><label for="last">Last name <span class="req">*</span></label><input type="text" id="last" name="Last name" placeholder="Smith" required><div class="err">Required.</div></div>
+            <div class="field" id="f-first"><label for="first">First name <span class="req">*</span></label><input type="text" id="first" name="First name" placeholder="Jane" required autocomplete="given-name"><div class="err">Required.</div></div>
+            <div class="field" id="f-last"><label for="last">Last name <span class="req">*</span></label><input type="text" id="last" name="Last name" placeholder="Smith" required autocomplete="family-name"><div class="err">Required.</div></div>
           </div>
-          <div class="field" id="f-email"><label for="email">Work email <span class="req">*</span></label><input type="email" id="email" name="Email" placeholder="jane.smith@company.com.au" required><div class="err">Please enter a valid email.</div></div>
+          <div class="field" id="f-email"><label for="email">Work email <span class="req">*</span></label><input type="email" id="email" name="Email" placeholder="jane.smith@company.com.au" required autocomplete="email"><div class="err">Please enter a valid email.</div></div>
           <div class="row">
-            <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="Phone" placeholder="+61 4__ ___ ___"></div>
-            <div class="field" id="f-company"><label for="company">Company / organisation <span class="req">*</span></label><input type="text" id="company" name="Company" placeholder="Acme Corporation" required><div class="err">Required.</div></div>
+            <div class="field"><label for="phone">Phone number</label><input type="tel" id="phone" name="Phone" placeholder="+61 4__ ___ ___" autocomplete="tel"></div>
+            <div class="field" id="f-company"><label for="company">Company / organisation <span class="req">*</span></label><input type="text" id="company" name="Company" placeholder="Acme Corporation" required autocomplete="organization"><div class="err">Required.</div></div>
           </div>
           <div class="row">
             <div class="field">
               <label for="role">Your role</label>
-              <select id="role" name="Role">
+              <select id="role" name="Role" autocomplete="organization-title">
                 <option value="">Select your role...</option>
                 <option>Executive assistant / PA</option><option>Events coordinator</option><option>Office manager</option>
                 <option>Marketing manager</option><option>HR / People &amp; culture</option><option>Business owner</option>
@@ -379,7 +379,13 @@
             </div>
           </div>
 
-          <p class="privacy-note">By submitting, you agree that CVBS may use these details to respond to your brief and share relevant event requirements with venues when sourcing options. <a href="faq.html#confidentiality">How we handle your information</a>.</p>
+          <div class="brief-summary" id="briefSummary" hidden>
+            <h3>Before you send it</h3>
+            <p class="brief-summary__lead">This is what lands in our inbox. Go back and change anything that is not right.</p>
+            <dl id="briefSummaryList"></dl>
+          </div>
+
+          <p class="privacy-note">By submitting, you agree that CVBS may use these details to respond to your brief and share relevant event requirements with venues when sourcing options. <a href="privacy.html">How we handle your information</a>.</p>
           <div class="form-error" id="formError" role="alert" hidden>Online submission is temporarily unavailable. Your details are still on this page. Please use the <a href="contact.html">contact page</a> to reach the CVBS team directly.</div>
 
           <div class="actions">
@@ -416,13 +422,13 @@
   <div class="wrap">
     <div class="footer__top">
       <div class="footer__brand">
-        <img src="assets/img/logo.png" alt="CVBS">
+        <img src="assets/img/logo.png" alt="CVBS" width="165" height="140">
         <p>A free, worldwide venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
       </div>
       <div class="footer__col"><h5>Services</h5>
-        <a href="services.html">Conference venue finding</a><a href="services.html">Group accommodation</a><a href="services.html">Product launches &amp; events</a><a href="services.html">Corporate relocation</a></div>
+        <a href="services.html">Conference venue finding</a><a href="services.html">Group accommodation</a><a href="services.html">Product launches &amp; events</a><a href="services.html">Corporate accommodation</a></div>
       <div class="footer__col"><h5>Company</h5>
-        <a href="how-it-works.html">How it works</a><a href="destinations.html">Destinations</a><a href="about.html">About</a><a href="results.html">Results</a><a href="how-we-are-paid.html">How we&rsquo;re paid</a></div>
+        <a href="how-it-works.html">How it works</a><a href="destinations.html">Destinations</a><a href="about.html">About</a><a href="results.html">Client stories</a><a href="how-we-are-paid.html">How we&rsquo;re paid</a></div>
       <div class="footer__col"><h5>More</h5>
         <a href="offers.html">Offers</a><a href="blog-index.html">Blog</a><a href="contact.html">Contact</a><a href="submit-a-brief.html">Start your brief</a></div>
     </div>
@@ -478,6 +484,37 @@
     flex.addEventListener('change',function(){ var d=flex.checked; sd.disabled=d; ed.disabled=d; sd.style.opacity=ed.style.opacity=d?.5:1; });
     sd.addEventListener('change',function(){ed.min=sd.value||'';});
 
+    /* ------------------------------------------------------------------
+       Draft state, rebuilt 6 September 2026.
+
+       The old version restored every saved field the moment the page
+       loaded, then let the context scripts below fill only what was still
+       empty. So a half-finished Bunker Bay enquiry survived into a
+       Melbourne shortlist: the notes were already populated, the location
+       was already set, and every guard said "not empty, leave it". A
+       client's brief went out describing the wrong venue in the wrong city.
+
+       A draft now records the context it belongs to. Arriving with a
+       different context does not silently restore anything. The visitor is
+       told a draft exists and chooses. Nothing is ever erased without
+       being asked.
+       ------------------------------------------------------------------ */
+    var CTX_KEYS=['offer','venue','venues','dest','guests','type','accom','filters','calcnote','estimate'];
+    function contextOf(){
+      var p=new URLSearchParams(location.search),out=[];
+      CTX_KEYS.forEach(function(k){var v=p.get(k); if(v) out.push(k+'='+v.slice(0,80));});
+      return out.join('&');
+    }
+    var ctxNow=contextOf();
+
+    /* Notes written by the site are replaceable. Notes typed by a person
+       are not, ever. */
+    window.CVBS_NOTES_GENERATED=false;
+    var notesEl=document.getElementById('notes');
+    if(notesEl){
+      notesEl.addEventListener('input',function(){window.CVBS_NOTES_GENERATED=false;});
+    }
+
     function saveDraft(){
       try{
         var data={};
@@ -488,32 +525,111 @@
             data[key].push(value);
           }else data[key]=value;
         });
-        sessionStorage.setItem(draftKey,JSON.stringify(data));
+        sessionStorage.setItem(draftKey,JSON.stringify(
+          {v:2,ctx:ctxNow,gen:!!window.CVBS_NOTES_GENERATED,saved:Date.now(),data:data}));
       }catch(ignore){}
     }
     function queueDraft(){clearTimeout(saveTimer);saveTimer=setTimeout(saveDraft,150);}
-    function restoreDraft(){
+
+    function readDraft(){
       try{
-        var raw=sessionStorage.getItem(draftKey);if(!raw)return;
-        var data=JSON.parse(raw);
-        [].forEach.call(form.elements,function(el){
-          if(!el.name||!Object.prototype.hasOwnProperty.call(data,el.name))return;
-          var saved=Array.isArray(data[el.name])?data[el.name]:[data[el.name]];
-          if(el.type==='checkbox'||el.type==='radio')el.checked=saved.indexOf(el.value)>-1;
-          else el.value=saved[0];
-        });
-        locSel.dispatchEvent(new Event('change'));
-        flex.dispatchEvent(new Event('change'));
-        ed.min=sd.value||'';
-      }catch(ignore){}
+        var raw=sessionStorage.getItem(draftKey);if(!raw)return null;
+        var d=JSON.parse(raw);
+        if(d&&d.v===2&&d.data)return d;
+        return {v:2,ctx:'',gen:false,data:d};   /* a draft from the old format */
+      }catch(ignore){return null;}
     }
+    function applyDraft(d){
+      if(!d||!d.data)return;
+      [].forEach.call(form.elements,function(el){
+        if(!el.name||!Object.prototype.hasOwnProperty.call(d.data,el.name))return;
+        var saved=Array.isArray(d.data[el.name])?d.data[el.name]:[d.data[el.name]];
+        if(el.type==='checkbox'||el.type==='radio')el.checked=saved.indexOf(el.value)>-1;
+        else el.value=saved[0];
+      });
+      window.CVBS_NOTES_GENERATED=!!d.gen;
+      locSel.dispatchEvent(new Event('change'));
+      flex.dispatchEvent(new Event('change'));
+      ed.min=sd.value||'';
+    }
+    function clearDraft(){try{sessionStorage.removeItem(draftKey);}catch(ignore){}}
+
+    function describe(ctx){
+      if(!ctx)return 'an earlier event';
+      var p=new URLSearchParams(ctx);
+      var bits=[];
+      if(p.get('venue'))bits.push(p.get('venue'));
+      if(p.get('offer'))bits.push('the '+p.get('offer')+' offer');
+      if(p.get('venues'))bits.push(p.get('venues').split(',').length+' shortlisted venues');
+      if(p.get('dest'))bits.push('in '+p.get('dest'));
+      return bits.length?bits.join(' '):'an earlier event';
+    }
+
+    function offerChoice(d){
+      var box=document.createElement('div');
+      box.className='draft-choice';
+      box.setAttribute('role','status');
+      box.innerHTML='<p><b>You have an unfinished brief</b> for '+
+        describe(d.ctx).replace(/[<>]/g,'')+
+        '. This page opened with different details, so we have not mixed the two.</p>'+
+        '<div class="draft-choice__acts">'+
+        '<button type="button" class="btn btn--teal btn--sm" data-draft="new">Start a new brief</button>'+
+        '<button type="button" class="btn btn--ghost btn--sm" data-draft="resume">Pick up the old one</button>'+
+        '</div>';
+      form.insertBefore(box,form.firstChild);
+      box.addEventListener('click',function(e){
+        var b=e.target.closest('[data-draft]'); if(!b)return;
+        if(b.getAttribute('data-draft')==='resume'){
+          [].slice.call(document.querySelectorAll('#offerBanner')).forEach(function(el){el.hidden=true;});
+          applyDraft(d);
+        }else{
+          clearDraft();
+        }
+        box.remove();
+        saveDraft();
+      });
+    }
+
+    var existing=readDraft();
+    if(existing){
+      if(!ctxNow || existing.ctx===ctxNow){
+        applyDraft(existing);                    /* same event, carry on */
+      }else{
+        offerChoice(existing);                   /* different event, ask */
+      }
+    }
+
     form.addEventListener('input',queueDraft);
     form.addEventListener('change',queueDraft);
-    restoreDraft();
+
+    /* A brief goes to real venues under the client's name, so the last thing
+       they see is what we are actually sending, not a Submit button on its
+       own. This is also the backstop for context carried in from a shortlist
+       or an offer: if anything wrong survived, it is visible here. */
+    function renderSummary(){
+      var box=document.getElementById('briefSummary'),
+          list=document.getElementById('briefSummaryList');
+      if(!box||!list)return;
+      var rows=[],seen={};
+      new FormData(form).forEach(function(value,key){
+        if(/^(access_key|subject|from_name|botcheck)$/i.test(key))return;
+        if(!String(value).trim())return;
+        if(seen[key]){seen[key].push(value);}else{seen[key]=[value];rows.push(key);}
+      });
+      if(!rows.length){box.hidden=true;return;}
+      list.textContent='';
+      rows.forEach(function(k){
+        var dt=document.createElement('dt');dt.textContent=k;
+        var dd=document.createElement('dd');dd.textContent=seen[k].join(', ');
+        list.appendChild(dt);list.appendChild(dd);
+      });
+      box.hidden=false;
+    }
 
     function show(i){
       cur=i; reached=Math.max(reached,i);
       panels.forEach(function(p,k){p.classList.toggle('active',k===i);});
+      if(i===panels.length-1){renderSummary();}
       stepBtns.forEach(function(b,k){b.classList.toggle('active',k===i);});
       stepsEl.className='steps s'+(i+1);
       window.scrollTo({top:document.querySelector('.head').offsetHeight-40,behavior:'smooth'});
@@ -572,23 +688,12 @@
   raw=raw.replace(/[<>]/g,'').slice(0,120);
 
   /* One record per live offer. Keys are matched loosely, so both
-     ?offer=Ace%20Hotel%20Sydney and ?offer=ace-hotel-sydney work. */
+     ?offer=Hamilton%20Island and ?offer=hamilton-island work.
+     Remove a record the day its offer expires: an old link must not write an
+     expired offer into a client's brief. Ace Hotel Sydney and Hyatt Place
+     Melbourne Caribbean Park were removed on 6 September 2026, both having
+     ended 31 August 2026. */
   var OFFERS={
-    'acehotelsydney':{
-      label:'Ace Hotel Sydney',
-      location:'Sydney, NSW',
-      venueType:'Boutique / unique space',
-      services:['Conference venue finding'],
-      requirements:['AV / technology'],
-      note:'I saw the Ace Hotel Sydney offer: complimentary AV package and barista coffee for events arriving by 31 August 2026. Please check Brick, Clay or Tyne against my dates.'
-    },
-    'hyattplacemelbournecaribbeanpark':{
-      label:'Hyatt Place Melbourne, Caribbean Park',
-      location:'Melbourne, VIC',
-      venueType:'Hotel',
-      services:['Conference venue finding'],
-      note:'I saw the Hyatt Place Melbourne, Caribbean Park offer: 5,000 World of Hyatt points plus a free extra on new bookings held to 31 August 2026. Please check availability on my dates.'
-    },
     'hamiltonisland':{
       label:'Hamilton Island',
       location:'Other',
@@ -644,9 +749,11 @@
   }
 
   var notes=el('notes');
-  if(notes&&!notes.value){
+  if(notes&&(!notes.value||window.CVBS_NOTES_GENERATED)){
     notes.value=data?data.note:'I would like to enquire about the '+label+' offer.';
+    window.CVBS_NOTES_GENERATED=true;
     notes.dispatchEvent(new Event('input',{bubbles:true}));
+    window.CVBS_NOTES_GENERATED=true;
   }
 
   var hint=el('offerFilled');
@@ -707,8 +814,58 @@
   }
   if(accom==='1'){var a=document.getElementById('accom'); if(a){a.value='Yes, some delegates'; a.dispatchEvent(new Event('change',{bubbles:true}));}}
   var n=document.getElementById('notes');
-  if(n&&!n.value&&!p.get('venue')&&!p.get('venues')&&!p.get('filters')){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
+  if(n&&(!n.value||window.CVBS_NOTES_GENERATED)&&!p.get('venue')&&!p.get('venues')&&!p.get('filters')){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';window.CVBS_NOTES_GENERATED=true;}
 })();
+</script>
+<script>
+/* Carry the budget calculator's work through. The visitor did the sums on the
+   calculator page; arriving at a blank brief and being asked to type it all
+   again is how that work gets lost. Numbers here are the site's own estimate,
+   never presented as a CVBS quote. */
+(function(){
+  var p=new URLSearchParams(location.search);
+  var note=p.get('calcnote'); if(!note) return;
+  var clean=function(v,n){return v?v.replace(/[<>]/g,'').slice(0,n||1200):'';};
+  var el=function(id){return document.getElementById(id);};
+
+  var n=el('notes');
+  if(n&&(!n.value||window.CVBS_NOTES_GENERATED)){
+    n.value=clean(note);
+    window.CVBS_NOTES_GENERATED=true;
+    n.dispatchEvent(new Event('input',{bubbles:true}));
+    window.CVBS_NOTES_GENERATED=true;
+  }
+
+  var band=clean(p.get('delegates'),20), del=el('delegates');
+  if(del&&band&&!del.value){
+    for(var i=0;i<del.options.length;i++){
+      if(del.options[i].text===band){del.selectedIndex=i;del.dispatchEvent(new Event('change',{bubbles:true}));break;}
+    }
+  }
+  var dur=el('duration'), days=parseInt(clean(p.get('days'),4),10);
+  if(dur&&!dur.value&&days){
+    var want=days===1?'1':(days===2?'2':(days>=3?'3':''));
+    [].slice.call(dur.options).some(function(o){
+      if(want&&o.text.indexOf(want)===0){dur.value=o.value;dur.dispatchEvent(new Event('change',{bubbles:true}));return true;}
+      return false;});
+  }
+  if(p.get('accom')==='1'){var a=el('accom'); if(a&&!a.value){a.value='Yes, some delegates';a.dispatchEvent(new Event('change',{bubbles:true}));}}
+
+  var est=clean(p.get('estimate'),40), tb=el('budgetTotal');
+  if(tb&&!tb.value&&est){tb.value=est;tb.dispatchEvent(new Event('input',{bubbles:true}));}
+
+  var subj=document.querySelector('input[name="subject"]');
+  if(subj&&!subj.value) subj.value='Brief from the budget calculator';
+
+  var b=el('offerBanner');
+  if(b&&b.hidden){
+    var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost');
+    if(pre) pre.textContent='You worked this out on our ';
+    if(nm) nm.textContent='budget calculator';
+    if(post) post.textContent=est?': '+est+'. We will come back with real numbers against it.':'. We will come back with real numbers against it.';
+    b.hidden=false; b.style.display='flex';
+  }
+}());
 </script>
 <script id="cvbs-shortlist-intake">
 /* Carry a saved shortlist through from the venue finder.
@@ -729,12 +886,14 @@
   if(subj) subj.value='Shortlist enquiry: '+list.length+' venue'+(list.length===1?'':'s');
 
   var n=el('notes');
-  if(n&&!n.value){
+  if(n&&(!n.value||window.CVBS_NOTES_GENERATED)){
     n.value='These are the venues we have shortlisted'+(dest?' in '+dest:'')+
       (guests?' for about '+guests+' people':'')+':\n\n'+
       list.map(function(v){return '\u2022 '+v;}).join('\n')+
       '\n\nCould you come back with availability, day delegate rates and what is included at each one?';
+    window.CVBS_NOTES_GENERATED=true;
     n.dispatchEvent(new Event('input',{bubbles:true}));
+    window.CVBS_NOTES_GENERATED=true;
   }
 
   var b=el('offerBanner');
@@ -784,10 +943,12 @@
   }
 
   var n=el('notes');
-  if(n&&!n.value){
+  if(n&&(!n.value||window.CVBS_NOTES_GENERATED)){
     n.value='I would like availability and a rate for '+venue+
       (dest?', plus any comparable options in '+dest:'')+'.';
+    window.CVBS_NOTES_GENERATED=true;
     n.dispatchEvent(new Event('input',{bubbles:true}));
+    window.CVBS_NOTES_GENERATED=true;
   }
 
   var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost'),hint=el('offerFilled');
@@ -816,11 +977,13 @@
   var subj=document.querySelector('input[name="subject"]');
   if(subj) subj.value='Venue finder enquiry'+(dest?': '+dest:'');
   var n=el('notes');
-  if(n&&!n.value){
+  if(n&&(!n.value||window.CVBS_NOTES_GENERATED)){
     n.value='From the '+(dest?dest+' ':'')+'venue finder. I filtered for: '+f+'.'+
       (matched?' That returned: '+matched+'.':'')+
       ' Please check availability on my dates and come back with rates.';
+    window.CVBS_NOTES_GENERATED=true;
     n.dispatchEvent(new Event('input',{bubbles:true}));
+    window.CVBS_NOTES_GENERATED=true;
   }
 
   var loc=el('location');

@@ -97,7 +97,7 @@ def head(title, desc, path, robots=None, extra=''):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=202609060900">
+<link rel="stylesheet" href="assets/css/site.css?v=202609061800">
 <link rel="stylesheet" href="assets/css/finder.css?v=202609060900">
 {entity}
 {extra}</head>
@@ -254,7 +254,7 @@ def build_find():
     <h2 class="h2">Where is it happening?</h2>
     <p class="lead" style="max-width:62ch">Each of these opens the venues we publish in that destination, largest room first, with the layout figures the venue itself puts out.</p>
     <div class="vf-cities">{cards}</div>
-    <p style="margin-top:1.6rem"><a class="link-arrow" href="destinations.html" style="color:var(--teal-deep)">All the destinations we source in {arrow}</a></p>
+    <p style="margin-top:1.6rem"><a class="link-arrow" href="destinations.html" style="color:var(--teal-ink)">All the destinations we source in {arrow}</a></p>
   </div>
 </section>
 
@@ -266,17 +266,17 @@ def build_find():
       <article class="card">
         <h3 class="h4">Does the room hold them?</h3>
         <p>A gala dinner for 300 and a plenary for 300 are two different buildings. Tell us which one you are running and we will show you the layout figure that matters, not the biggest number the venue publishes.</p>
-        <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?type=Gala%20dinner%20or%20awards%20night" style="color:var(--teal-deep)">Venues by room layout {arrow}</a></p>
+        <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?type=Gala%20dinner%20or%20awards%20night" style="color:var(--teal-ink)">Venues by room layout {arrow}</a></p>
       </article>
       <article class="card">
         <h3 class="h4">Do they sleep there too?</h3>
         <p>{na} of the venues here have guest rooms in the same building. For a two day program that is usually the whole decision, because the alternative is a coach at 7.30 in the morning.</p>
-        <p style="margin-top:1rem"><a class="link-arrow" href="conference-venues-with-accommodation.html" style="color:var(--teal-deep)">Venues with rooms on site {arrow}</a></p>
+        <p style="margin-top:1rem"><a class="link-arrow" href="conference-venues-with-accommodation.html" style="color:var(--teal-ink)">Venues with rooms on site {arrow}</a></p>
       </article>
       <article class="card">
         <h3 class="h4">Has anyone actually been?</h3>
         <p>{nv} of these we have walked through ourselves, with our own photographs and a straight answer about what the building is good for and where it stops working.</p>
-        <p style="margin-top:1rem"><a class="link-arrow" href="venue-visits/" style="color:var(--teal-deep)">Venues we have walked through {arrow}</a></p>
+        <p style="margin-top:1rem"><a class="link-arrow" href="venue-visits/" style="color:var(--teal-ink)">Venues we have walked through {arrow}</a></p>
       </article>
     </div>
   </div>
@@ -315,7 +315,7 @@ def build_find():
                  extra=ld(crumb_ld) + ld(faq_ld)) +
             chrome + body + footer +
             '\n<script src="assets/js/site.js?v=202609060900" defer></script>'
-            '\n<script src="assets/js/finder.js?v=202609060900" defer></script>'
+            '\n<script src="assets/js/finder.js?v=202609061800" defer></script>'
             '\n</body>\n</html>\n')
     io.open(os.path.join(ROOT, path), 'w', encoding='utf-8').write(html)
     return path, len(html)
@@ -350,8 +350,12 @@ def build_results():
       <button class="vf-refine__toggle" type="button" id="vf-refine-toggle" aria-expanded="false" aria-controls="vf-refine-panel">Refine these {chev}</button>
       <div class="vf-refine__panel" id="vf-refine-panel" hidden>
         <div class="vf-f">
+          <label for="vf-q">Venue name</label>
+          <input id="vf-q" type="search" placeholder="e.g. Sofitel, Crown, ICC" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="vf-f">
           <label for="vf-accom">Accommodation</label>
-          <select id="vf-accom"><option value="">Either way</option><option value="yes">Guest rooms in the building</option><option value="no">No rooms needed</option></select>
+          <select id="vf-accom"><option value="">Either way</option><option value="yes">Needs guest rooms on site</option><option value="no">Bedrooms not needed</option></select>
         </div>
         <div class="vf-f">
           <label for="vf-prec">Part of the destination</label>
@@ -406,6 +410,7 @@ def build_results():
     <div class="vf-tray__acts">
       <a class="btn btn--light" data-tray-review href="venue-results.html?view=saved">Review shortlist</a>
       <button class="btn btn--light" type="button" data-tray-compare hidden>Compare</button>
+      <button class="btn btn--light" type="button" data-share>Copy shareable link</button>
       <a class="btn btn--teal" data-tray-send href="submit-a-brief.html">Ask CVBS about these {arrow}</a>
       <button class="btn btn--ghost-light" type="button" data-tray-clear>Clear</button>
     </div>
@@ -434,7 +439,7 @@ def build_results():
     html = (head(title, desc, path, robots='noindex, follow') +
             chrome.replace('<body>', '<body class="vf-page">', 1) + body + footer +
             '\n<script src="assets/js/site.js?v=202609060900" defer></script>'
-            '\n<script src="assets/js/finder.js?v=202609060900" defer></script>'
+            '\n<script src="assets/js/finder.js?v=202609061800" defer></script>'
             '\n</body>\n</html>\n')
     io.open(os.path.join(ROOT, path), 'w', encoding='utf-8').write(html)
     return path, len(html)

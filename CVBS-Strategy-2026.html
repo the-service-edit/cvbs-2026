@@ -63,14 +63,14 @@ em{font-style:italic;}
 section{padding:96px 0; position:relative; overflow:hidden;}
 @media(max-width:680px){ section{padding:66px 0} }
 .eyebrow{display:inline-flex; align-items:center; gap:10px; font-size:11.5px; font-weight:600;
-  text-transform:uppercase; letter-spacing:.24em; color:var(--teal-deep); margin-bottom:22px;}
+  text-transform:uppercase; letter-spacing:.24em; color:var(--teal-ink); margin-bottom:22px;}
 .eyebrow::before{content:""; width:26px; height:2px; background:var(--teal); border-radius:2px;}
 .dark .eyebrow{color:var(--teal);} .dark .eyebrow::before{background:var(--teal);}
 .snum{font-size:12px; font-weight:700; letter-spacing:.18em; color:var(--muted); opacity:.7;}
 h2.big{font-size:clamp(30px,5vw,52px); max-width:18ch;}
 .lede{font-size:clamp(17px,2.1vw,21px); color:var(--muted); max-width:60ch; margin-top:22px; line-height:1.55;}
 .dark .lede{color:rgba(255,255,255,.72);}
-.tealword{color:var(--teal-deep);} .dark .tealword{color:var(--teal);}
+.tealword{color:var(--teal-ink);} .dark .tealword{color:var(--teal);}
 
 /* section colour modes */
 .dark{background:var(--navy); color:#fff;}
@@ -94,7 +94,7 @@ h2.big{font-size:clamp(30px,5vw,52px); max-width:18ch;}
 .card p{font-size:14.5px; color:var(--muted); margin-bottom:0;}
 .dark .card p,.darker .card p{color:rgba(255,255,255,.7);}
 .card .ic{width:38px; height:38px; border-radius:11px; display:grid; place-items:center; margin-bottom:16px;
-  background:linear-gradient(135deg,rgba(59,201,217,.22),rgba(40,168,182,.12)); color:var(--teal-deep);
+  background:linear-gradient(135deg,rgba(59,201,217,.22),rgba(40,168,182,.12)); color:var(--teal-ink);
   font-weight:700; font-size:16px;}
 .dark .card .ic,.darker .card .ic{color:var(--teal);}
 
@@ -113,7 +113,7 @@ h2.big{font-size:clamp(30px,5vw,52px); max-width:18ch;}
 .pill b{font-weight:700;}
 .dot{width:8px; height:8px; border-radius:50%;}
 .d-hi{background:#E5484D;} .d-med{background:#F2A33C;} .d-lo{background:#3BC9D9;}
-.tag{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-deep);}
+.tag{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--teal-ink);}
 
 /* compare table */
 .tablewrap{overflow-x:auto; border-radius:var(--r); border:1px solid var(--line); margin-top:8px;}
@@ -130,26 +130,26 @@ td.old{color:var(--muted);}
 .dark td.old,.darker td.old{color:rgba(255,255,255,.55);}
 td.new{color:var(--ink); font-weight:500;}
 .dark td.new,.darker td.new{color:#fff;}
-.win{font-size:11px; font-weight:700; color:var(--teal-deep);}
+.win{font-size:11px; font-weight:700; color:var(--teal-ink);}
 .dark .win,.darker .win{color:var(--teal);}
 
 /* speaker notes */
 .notes{margin-top:30px; border-left:3px solid var(--teal); padding:18px 22px; border-radius:0 14px 14px 0;
   background:rgba(59,201,217,.07); font-size:14.5px;}
 .dark .notes,.darker .notes{background:rgba(59,201,217,.10);}
-.notes .lbl{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); display:block; margin-bottom:8px;}
+.notes .lbl{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); display:block; margin-bottom:8px;}
 .dark .notes .lbl,.darker .notes .lbl{color:var(--teal);}
 .notes p{font-style:italic; color:var(--ink); margin:0;}
 .dark .notes p,.darker .notes p{color:rgba(255,255,255,.85);}
 
 /* visual suggestion */
 .viz{margin-top:14px; font-size:12.5px; color:var(--muted); display:flex; gap:9px; align-items:flex-start;}
-.viz b{color:var(--teal-deep); font-weight:700; text-transform:uppercase; letter-spacing:.1em; font-size:11px; white-space:nowrap; padding-top:1px;}
+.viz b{color:var(--teal-ink); font-weight:700; text-transform:uppercase; letter-spacing:.1em; font-size:11px; white-space:nowrap; padding-top:1px;}
 .dark .viz,.darker .viz{color:rgba(255,255,255,.6);} .dark .viz b,.darker .viz b{color:var(--teal);}
 
 /* labelled block */
 .block{margin-top:34px;}
-.block>h3{font-size:13px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-deep); margin-bottom:18px; font-weight:700;}
+.block>h3{font-size:13px; text-transform:uppercase; letter-spacing:.16em; color:var(--teal-ink); margin-bottom:18px; font-weight:700;}
 .dark .block>h3,.darker .block>h3{color:var(--teal);}
 .subhead{font-size:clamp(20px,2.6vw,26px); margin:38px 0 16px; letter-spacing:-.025em;}
 
@@ -162,7 +162,7 @@ td.new{color:var(--ink); font-weight:500;}
 .prob .row.head>div{font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; background:rgba(13,31,45,.03);}
 .prob .ttl{font-weight:600; font-size:14.5px; margin-bottom:5px;}
 .prob .txt{font-size:13.5px; color:var(--muted); margin:0;}
-.prob .out{font-size:13.5px; color:var(--teal-deep); font-weight:600;}
+.prob .out{font-size:13.5px; color:var(--teal-ink); font-weight:600;}
 @media(max-width:760px){ .prob .row{grid-template-columns:1fr} .prob .row>div{border-right:none;} }
 
 .kicker{font-size:clamp(19px,2.4vw,23px); line-height:1.5; max-width:40ch; font-weight:500; letter-spacing:-.02em;}
@@ -280,7 +280,7 @@ footer a{color:var(--teal); text-decoration:none;}
     <div class="block fadeup">
       <h3>Biggest opportunities vs. biggest risks</h3>
       <div class="grid g2">
-        <div class="card"><h4 style="color:var(--teal-deep)">Opportunities</h4><p style="margin-bottom:10px">· Premium repositioning unlocks higher-value clients and larger events.</p><p style="margin-bottom:10px">· A converting website turns existing traffic into measurably more enquiries at near-zero marginal cost.</p><p style="margin-bottom:10px">· AI and automation expand capacity without expanding headcount.</p><p>· Proprietary data creates a service no booking platform can replicate.</p></div>
+        <div class="card"><h4 style="color:var(--teal-ink)">Opportunities</h4><p style="margin-bottom:10px">· Premium repositioning unlocks higher-value clients and larger events.</p><p style="margin-bottom:10px">· A converting website turns existing traffic into measurably more enquiries at near-zero marginal cost.</p><p style="margin-bottom:10px">· AI and automation expand capacity without expanding headcount.</p><p>· Proprietary data creates a service no booking platform can replicate.</p></div>
         <div class="card"><h4 style="color:#E5648A">Risks of standing still</h4><p style="margin-bottom:10px">· The current site actively discredits a premium service and loses trust before contact.</p><p style="margin-bottom:10px">· Knowledge concentrated in two founders is an existential continuity risk.</p><p style="margin-bottom:10px">· AI booking tools and venue marketplaces are commoditising "search" exactly where CVBS still competes on it.</p><p>· Every month of delay is enquiries, margin and capacity left on the table.</p></div>
       </div>
     </div>

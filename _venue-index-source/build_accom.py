@@ -140,12 +140,16 @@ def main():
 
     # Every venue that clears the bar is named. A count in the sentence and a
     # shorter list under it would be a quiet lie the moment the data grows.
+    # Rooms on site but no published count: real accommodation the page
+    # cannot list, and the reason the headline number is not the whole story.
+    uncounted = sum(1 for v in payload['venues']
+                    if v.get('acc') == 'yes' and not v.get('gr'))
     both_line = ', '.join('%s (%s theatre, %s rooms)' % (v['n'], n(v['th']), n(v['gr']))
                           for v in both)
 
     faqs = [
         ('What is a residential conference venue?',
-         'A venue that holds your sessions and your delegates in the same building, so nobody '
+         'A venue that holds your sessions and your delegates on the same site, so nobody '
          'has to be moved between a conference centre and a hotel. In practice that means a '
          'hotel or resort with a function floor, rather than a convention centre.'),
         ('How many Australian venues does CVBS publish with rooms on site?',
@@ -173,7 +177,7 @@ def main():
                        % (q, a) for q, a in faqs)
 
     title = 'Conference Venues With Accommodation On Site, Australia | CVBS'
-    desc = ('%d Australian conference and event venues with guest rooms in the same building, '
+    desc = ('%d Australian conference and event venues that publish a guest-room count on site, '
             'with the largest room capacity and the room count each venue publishes. '
             'For residential conferences and multi day programs.' % len(ROWS))
 
@@ -202,7 +206,7 @@ def main():
     schema = ld({"@context": "https://schema.org", "@type": "ItemList",
                  "name": "Australian conference venues with accommodation on site",
                  "description": ("The %d Australian conference and event venues listed on this "
-                                 "page that publish guest rooms in the same building, with the "
+                                 "page that publish a guest-room count on site, with the "
                                  "largest published room capacity and the guest room count for "
                                  "each. Every figure is read from the venue's own published "
                                  "material." % len(items)),
@@ -241,7 +245,7 @@ def main():
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/finder.css?v=202609060900">
-<link rel="stylesheet" href="assets/css/site.css?v=202609060900">
+<link rel="stylesheet" href="assets/css/site.css?v=202609061800">
 {entity}
 {schema}</head>
 '''.format(title=title, desc=desc, base=BASE, path=PATH, entity=entity, schema=schema)
@@ -252,7 +256,7 @@ def main():
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><b style="color:inherit;font-weight:500">With accommodation</b></nav>
     <span class="eyebrow" style="margin-top:1.2rem">Residential conferences</span>
-    <h1>Venues where your delegates sleep in the same building.</h1>
+    <h1>Venues where your delegates sleep on site.</h1>
     <p class="lead">Two numbers decide a residential program: how many people the main room holds, and how many beds are upstairs. Here they are side by side, for the {k} venues we publish that have both.</p>
   </div>
 </section>
@@ -261,7 +265,7 @@ def main():
   <div class="wrap">
     <div class="vidx-answer answer-solo">
       <span class="vidx-answer__tag">In short</span>
-      <p><b>{k} of the {tot} Australian venues we publish have guest rooms in the same building as their event space.</b> The largest of them for a plenary is {big} at {bigcap} theatre, and the largest for accommodation is {mr} at {mrrooms} rooms. Where a program needs both at scale the field narrows sharply: {both_n} venues we publish seat 500 or more in one room and hold 500 or more guest rooms, and they are {both_line}.</p>
+      <p><b>{k} of the {tot} Australian venues we publish put a number on their guest rooms on site.</b> Another {uncounted} have rooms on site without publishing a count, so they are not listed here and are not excluded from a search. The largest of them for a plenary is {big} at {bigcap} theatre, and the largest for accommodation is {mr} at {mrrooms} rooms. Where a program needs both at scale the field narrows sharply: {both_n} venues we publish seat 500 or more in one room and hold 500 or more guest rooms, and they are {both_line}.</p>
       <p><b>A published room count is inventory, not availability.</b> A hotel with 500 rooms might release 80 for your March dates and 300 for your July ones, and no website can tell you which. That is the first thing we find out, along with what the venue will do on the day delegate rate when the room nights come with it. <a href="submit-a-brief.html">Tell us your dates</a> and we will come back with both.</p>
     </div>
   </div>
@@ -272,7 +276,7 @@ def main():
     <span class="eyebrow">The venues</span>
     <h2 class="h2">Largest room, and the rooms above it.</h2>
     <p class="lead" style="max-width:64ch">Grouped by city, largest plenary first. Every figure is the one the venue publishes for itself.</p>
-    <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?accom=yes" style="color:var(--teal-deep)">Narrow these by your own numbers and layout {arrow}</a></p>
+    <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?accom=yes" style="color:var(--teal-ink)">Narrow these by your own numbers and layout {arrow}</a></p>
     <div class="vcx" style="margin-top:2rem">
 {blocks}
     </div>
@@ -316,11 +320,12 @@ def main():
 '''.format(k=len(ROWS), tot=payload['meta']['count'], blocks=blocks, faqs=faq_html,
            arrow=ARROW, big=biggest['n'], bigcap=n(biggest['th']),
            mr=most_rooms['n'], mrrooms=n(most_rooms['gr']),
+           uncounted=uncounted,
            both_n=len(both), both_line=both_line)
 
     html = (head + chrome + body + footer +
             '\n<script src="assets/js/site.js?v=202609060900" defer></script>'
-            '\n<script src="assets/js/finder.js?v=202609060900" defer></script>'
+            '\n<script src="assets/js/finder.js?v=202609061800" defer></script>'
             '\n</body>\n</html>\n')
     io.open(os.path.join(ROOT, PATH), 'w', encoding='utf-8').write(html)
     print('wrote %s  %d venues across %d cities  %d bytes'

@@ -1,0 +1,15 @@
+# Apache. Only used if the production host runs Apache. GitHub Pages
+# ignores this file; the meta-refresh stubs cover that case.
+RewriteEngine On
+RewriteRule ^bestvenue/?$ /venue-results.html [R=301,L]
+RewriteRule ^groups/?$ /group-accommodation.html [R=301,L]
+RewriteRule ^relocation/?$ /corporate-accommodation.html [R=301,L]
+RewriteRule ^venuereviews/?$ /venue-visits/ [R=301,L]
+RewriteRule ^get-a-quote/?$ /submit-a-brief.html [R=301,L]
+RewriteRule ^about/?$ /about.html [R=301,L]
+RewriteRule ^about/reviews/?$ /results.html [R=301,L]
+RewriteRule ^contact-us/?$ /contact.html [R=301,L]
+RewriteRule ^privacy/?$ /privacy.html [R=301,L]
+RewriteRule ^booking-terms/?$ /terms.html [R=301,L]
+RewriteRule ^terms/?$ /terms.html [R=301,L]
+RewriteRule ^feed/?$ /blog-index.html [R=301,L]

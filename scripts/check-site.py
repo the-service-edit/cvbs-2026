@@ -15,7 +15,20 @@ import io, json, os, re, sys, glob
 from collections import defaultdict
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = 'https://the-service-edit.github.io/cvbs-2026/'
+# The base is owned by _entity-source/entity.py. Reading it here means this
+# check follows a cutover automatically instead of quietly validating the old
+# host after scripts/set-base-url.py has moved the site.
+sys.path.insert(0, os.path.join(ROOT, '_entity-source'))
+import entity as _E                                            # noqa: E402
+BASE = _E.SERVE.rstrip('/') + '/'
+IDENTITY = _E.SITE.rstrip('/')
+
+# Hosts this site has been served from. Any of them still appearing in a
+# fetchable address after a cutover is a failure, not a warning: it means a
+# page is telling Google it lives somewhere it does not.
+FOREIGN_HOSTS = [h for h in ('https://the-service-edit.github.io/cvbs-2026',
+                             'https://conferencevenues.com.au')
+                 if not BASE.startswith(h)]
 
 SKIP_PREFIX = ('_backup', '_original', '_preview', '_vv', '_hero', '_superseded',
                'CVBS-', 'cvbs-strategy', 'cvbs-landing', 'cvbs-services',
@@ -74,6 +87,18 @@ def main():
             FAIL['title'].append(rel)
         if len(re.findall(r'rel="canonical"', s)) != 1:
             FAIL['canonical count'].append(rel)
+
+        # --- one address for the whole site
+        can = re.search(r'rel="canonical" href="([^"]+)"', s)
+        if can and not can.group(1).startswith(BASE):
+            FAIL['canonical on the wrong host'].append('%s -> %s' % (rel, can.group(1)))
+        og = re.search(r'property="og:url" content="([^"]+)"', s)
+        if og and not og.group(1).startswith(BASE):
+            FAIL['og:url on the wrong host'].append('%s -> %s' % (rel, og.group(1)))
+        for host in FOREIGN_HOSTS:
+            for m in set(re.findall(r'"url":\s*"(%s[^"]*)"' % re.escape(host), s)):
+                if not m.startswith(IDENTITY + '/#'):
+                    FAIL['structured data on the wrong host'].append('%s -> %s' % (rel, m))
         if not re.search(r'<meta name="description" content="[^"]{40,}"', s):
             FAIL['meta description'].append(rel)
         if len(re.findall(r'<h1[ >]', s)) != 1:

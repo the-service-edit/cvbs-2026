@@ -154,6 +154,7 @@
   var showAll = false;
 
   var f = {
+    q: document.getElementById('vf-q'),
     dest: document.getElementById('vf-dest'),
     guests: document.getElementById('vf-guests'),
     type: document.getElementById('vf-type'),
@@ -169,19 +170,25 @@
   var refinePanel = document.getElementById('vf-refine-panel');
 
   /* --------------------------------------------------- populate selects */
+  /* The destination list is rebuilt from the dataset, never appended to the
+     options already in the HTML. Appending was listing every city twice, once
+     bare from the markup and once with its count from here. One source. */
   (function fillDest() {
     if (!f.dest || !VENUES.length) { return; }
+    var keep = f.dest.value;
     var cities = {};
     for (var i = 0; i < VENUES.length; i++) {
       cities[VENUES[i].city] = (cities[VENUES[i].city] || 0) + 1;
     }
     var names = Object.keys(cities).sort();
+    f.dest.innerHTML = '<option value="">Any destination</option>';
     for (var j = 0; j < names.length; j++) {
       var o = document.createElement('option');
       o.value = names[j];
       o.textContent = names[j] + ' (' + cities[names[j]] + ')';
       f.dest.appendChild(o);
     }
+    if (keep) { f.dest.value = keep; }
   }());
 
   function fillPrecincts() {
@@ -212,8 +219,28 @@
      an empty extra URL in the sitemap helps nobody. */
   var VIEW = qs('view');
 
+  /* A shortlist that only exists in one person's browser cannot be approved by
+     anybody. An EA has to be able to send three options to a manager, and the
+     manager has to see the same three. So the ids travel in the URL.
+
+     SHARED is deliberately not written to localStorage. Opening a colleague's
+     link must not overwrite the list you were building yourself. There is a
+     button to adopt it if you want it, and nothing happens if you do not.
+
+     Nothing personal goes in the link: venue ids and the event assumptions
+     already visible on the page, no name, no email, no phone number. */
+  var SHARED = (function () {
+    var raw = qs('ids');
+    if (!raw) { return null; }
+    var out = String(raw).split(',').map(function (x) {
+      return x.trim().replace(/[^a-z0-9-]/gi, '').slice(0, 80);
+    }).filter(Boolean).slice(0, 24);
+    return out.length ? out : null;
+  }());
+
   /* ------------------------------------------------ state from the URL */
   function preset() {
+    if (f.q && qs('q')) { f.q.value = qs('q'); }
     if (f.dest && qs('dest')) { f.dest.value = qs('dest'); }
     fillPrecincts();
     if (f.guests && qs('guests')) { f.guests.value = qs('guests'); }
@@ -228,6 +255,7 @@
   function stateUrl() {
     var p = [];
     function add(k, v) { if (v) { p.push(k + '=' + encodeURIComponent(v)); } }
+    add('q', f.q && f.q.value);
     add('dest', f.dest && f.dest.value);
     add('guests', f.guests && f.guests.value);
     add('type', f.type && f.type.value);
@@ -237,6 +265,20 @@
     add('seen', f.seen && f.seen.value);
     add('sort', f.sort && f.sort.value);
     return window.location.pathname + (p.length ? '?' + p.join('&') : '');
+  }
+
+  /* --------------------------------------------------- name matching */
+  function norm(v) {
+    return String(v || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+
+  function matchesName(v, q) {
+    var hay = norm([v.n, v.pr, v.city, v.sp, v.s_name].filter(Boolean).join(' '));
+    var terms = q.split(' ');
+    for (var i = 0; i < terms.length; i++) {
+      if (terms[i] && hay.indexOf(terms[i]) === -1) { return false; }
+    }
+    return true;
   }
 
   /* ------------------------------------------------------------ the fit */
@@ -281,20 +323,37 @@
     var matched = [], unpublished = [], tooSmall = 0;
 
     if (VIEW === 'saved') {
-      for (var si = 0; si < SL.length; si++) {
-        if (BY[SL[si]]) { matched.push(BY[SL[si]]); }
+      var source = SHARED || SL;
+      for (var si = 0; si < source.length; si++) {
+        if (BY[source[si]]) { matched.push(BY[source[si]]); }
       }
       renderSaved(matched, n, setup);
       return;
     }
 
+    /* A planner who already knows the venue name had no way in: the finder
+       could be asked for a city and a headcount and nothing else, so
+       "Sofitel" was a dead end. Matching is loose on purpose. It ignores
+       case and punctuation, requires every term to appear, and looks at the
+       locality and the room names too, because people search for
+       "Barangaroo" and "Pearl Ballroom". */
+    var qNorm = f.q ? norm(f.q.value) : '';
+
     for (var i = 0; i < VENUES.length; i++) {
       var v = VENUES[i];
+      if (qNorm && !matchesName(v, qNorm)) { continue; }
       if (city && v.city !== city) { continue; }
       if (prec && v.pr !== prec) { continue; }
       if (vt && v.ty !== vt) { continue; }
-      if (accom === 'yes' && !v.gr) { continue; }
-      if (accom === 'no' && v.gr) { continue; }
+      /* Accommodation is a yes/no/unknown question, not a room count. Asking
+         for rooms used to test v.gr, so 14 hotels and resorts with no
+         published count, Crown Melbourne and Hyatt Hotel Canberra among them,
+         disappeared from a search for venues with accommodation.
+
+         "No rooms needed" now excludes nothing. It says bedrooms are not part
+         of this brief, not that the venue must not have any, and treating it
+         as an exclusion was throwing away most of the usable inventory. */
+      if (accom === 'yes' && v.acc !== 'yes') { continue; }
       if (seenF === 'seen' && !v.visit) { continue; }
       if (seenF === 'worked' && !v.worked) { continue; }
       var c = capOf(v, setup);
@@ -339,11 +398,12 @@
     if (chipsEl) {
       chipsEl.innerHTML = '';
       var chips = [];
+      if (qNorm) { chips.push(['q', '\u201c' + f.q.value + '\u201d']); }
       if (city) { chips.push(['dest', city]); }
       if (n) { chips.push(['guests', num(n) + ' people']); }
       if (typeVal) { chips.push(['type', typeVal]); }
       if (accom === 'yes') { chips.push(['accom', 'With accommodation']); }
-      if (accom === 'no') { chips.push(['accom', 'No accommodation needed']); }
+      if (accom === 'no') { chips.push(['accom', 'Bedrooms not needed']); }
       if (prec) { chips.push(['prec', prec]); }
       if (vt) { chips.push(['vt', TYPE_LABEL[vt] || vt]); }
       if (seenF === 'seen') { chips.push(['seen', 'We have walked through it']); }
@@ -368,10 +428,34 @@
         ? ' ' + tooSmall + ' ' + (tooSmall === 1 ? 'venue is' : 'venues are') +
           ' too small for that number.'
         : '';
+      /* An empty result used to offer one thing: send us a brief. That is
+         the right destination eventually, but not before the visitor has
+         been shown the filter that is actually costing them the results.
+         Each of these drops exactly one condition, using the same handler
+         as the filter chips. */
+      var relax = [];
+      if (qNorm) { relax.push(['q', 'Search all venues, not just “' + esc(f.q.value) + '”']); }
+      if (accom === 'yes') { relax.push(['accom', 'Include venues without rooms on site']); }
+      if (seenF) { relax.push(['seen', 'Include venues we have not walked through']); }
+      if (vt) { relax.push(['vt', 'Any kind of building']); }
+      if (prec) { relax.push(['prec', 'Anywhere in ' + esc(city || 'the destination')]); }
+      if (typeVal) { relax.push(['type', 'Any kind of event']); }
+      if (city) { relax.push(['dest', 'Look across every destination']); }
+      if (n) { relax.push(['guests', 'Drop the headcount for a moment']); }
+
+      var relaxHtml = relax.length
+        ? '<p class="vf-empty__try">Try widening one thing:</p><div class="vf-empty__acts">' +
+          relax.slice(0, 4).map(function (r) {
+            return '<button type="button" class="btn btn--ghost btn--sm" data-clear="' +
+              r[0] + '">' + r[1] + '</button>';
+          }).join('') + '</div>'
+        : '';
+
       root.appendChild(el('div', 'vf-empty',
         '<h3>We haven’t published one that fits.</h3><p>' + why + extra +
         ' What we publish is a fraction of what we book, so this is a good moment ' +
         'to tell us what you’re planning and let us go looking.</p>' +
+        relaxHtml +
         '<a class="btn btn--teal" href="' + briefHref([]) +
         '">Tell us about your event</a>'));
     } else {
@@ -416,12 +500,32 @@
   function renderSaved(list, n, setup) {
     if (chipsEl) { chipsEl.innerHTML = ''; }
     if (countEl) {
-      countEl.innerHTML = list.length
+      countEl.innerHTML = SHARED
         ? '<b>' + list.length + '</b> ' + (list.length === 1 ? 'venue' : 'venues') +
-          ' on your shortlist. Send them to us together and we will come back on all of them at once.'
-        : 'Nothing on your shortlist yet.';
+          ' someone has shortlisted for this event.'
+        : (list.length
+          ? '<b>' + list.length + '</b> ' + (list.length === 1 ? 'venue' : 'venues') +
+            ' on your shortlist. Send them to us together and we will come back on all of them at once.'
+          : 'Nothing on your shortlist yet.');
     }
     root.innerHTML = '';
+
+    /* Someone opened a colleague's link. Say so, and offer to adopt the list
+       rather than quietly merging it into whatever they had. */
+    if (SHARED && list.length) {
+      var b = el('div', 'vf-shared',
+        '<p><b>This shortlist was shared with you.</b> ' + list.length + ' ' +
+        (list.length === 1 ? 'venue' : 'venues') +
+        (f.guests && f.guests.value ? ', for about ' + esc(f.guests.value) + ' people' : '') +
+        '. Every capacity below is the one the venue publishes for itself.</p>' +
+        '<div class="vf-shared__acts">' +
+        '<a class="btn btn--teal btn--sm" href="' + briefHref(SHARED) +
+        '">Ask CVBS about these</a>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-adopt>Add them to my own shortlist</button>' +
+        '<button type="button" class="btn btn--ghost btn--sm" data-print>Print this page</button>' +
+        '</div>');
+      root.appendChild(b);
+    }
     if (!list.length) {
       root.appendChild(el('div', 'vf-empty',
         '<h3>Nothing saved yet.</h3><p>Save a venue anywhere on the site and it will be waiting ' +
@@ -461,7 +565,11 @@
     if (v.visit) { tags.push('<span class="vf-tag vf-tag--seen">Inspected by CVBS</span>'); }
     if (v.worked) { tags.push('<span class="vf-tag vf-tag--worked">We have booked it</span>'); }
     if (v.offer) { tags.push('<span class="vf-tag vf-tag--offer">Current offer</span>'); }
-    if (v.gr) { tags.push('<span class="vf-tag vf-tag--accom">Rooms on site</span>'); }
+    if (v.acc === 'yes') {
+      tags.push('<span class="vf-tag vf-tag--accom">' +
+        (v.accq === 'counted' ? 'Rooms on site' : 'Rooms on site, count not published') +
+        '</span>');
+    }
 
     var name = v.visit
       ? '<a href="venue-visits/' + esc(v.visit) + '/">' + esc(v.n) + '</a>'
@@ -524,6 +632,20 @@
     }
     if (names.length) { p.push('venues=' + encodeURIComponent(names.join(', '))); }
     return 'submit-a-brief.html' + (p.length ? '?' + p.join('&') : '');
+  }
+
+  /* The link a person actually sends. Same page, saved view, ids in the URL,
+     plus the event assumptions so the capacities on the page are read against
+     the right headcount and layout. */
+  function shareUrl(ids) {
+    var src = (ids && ids.length) ? ids : SL;
+    if (!src.length) { return ''; }
+    var p = ['view=saved', 'ids=' + encodeURIComponent(src.join(','))];
+    if (f.guests && f.guests.value) { p.push('guests=' + encodeURIComponent(f.guests.value)); }
+    if (f.type && f.type.value) { p.push('type=' + encodeURIComponent(f.type.value)); }
+    if (f.dest && f.dest.value) { p.push('dest=' + encodeURIComponent(f.dest.value)); }
+    var base = window.location.href.split('?')[0].split('#')[0];
+    return base + '?' + p.join('&');
   }
 
   var tray = document.getElementById('vf-tray');
@@ -705,6 +827,40 @@
       return;
     }
 
+    /* Copy the link, adopt a shared list, print. All shortlist state, so they
+       sit above the LIVE guard with the clear button. */
+    if (t.closest('[data-share]')) {
+      var btn = t.closest('[data-share]');
+      var url = shareUrl(null);
+      if (!url) { return; }
+      var done = function (ok) {
+        var was = btn.getAttribute('data-label') || btn.textContent;
+        btn.setAttribute('data-label', was);
+        btn.textContent = ok ? 'Link copied' : 'Press Ctrl C to copy';
+        window.setTimeout(function () { btn.textContent = was; }, 2600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () { done(true); },
+                                                function () { window.prompt('Copy this link', url); });
+      } else {
+        window.prompt('Copy this link', url);
+      }
+      return;
+    }
+
+    if (t.closest('[data-print]')) { window.print(); return; }
+
+    if (t.closest('[data-adopt]') && SHARED) {
+      for (var ai = 0; ai < SHARED.length; ai++) {
+        if (SL.indexOf(SHARED[ai]) === -1) { SL.push(SHARED[ai]); }
+      }
+      writeList(SL);
+      paintPips();
+      paintTray();
+      t.closest('[data-adopt]').textContent = 'Added to your shortlist';
+      return;
+    }
+
     /* Clearing the shortlist is shortlist state, not results state, so it has
        to work on the accommodation page and the venue pages too. */
     if (t.closest('[data-tray-clear]')) {
@@ -784,6 +940,17 @@
       window.clearTimeout(tmr);
       tmr = window.setTimeout(function () { showAll = false; render(true); }, 350);
     });
+  }
+
+  if (f.q && LIVE) {
+    var qtmr;
+    f.q.addEventListener('input', function () {
+      window.clearTimeout(qtmr);
+      qtmr = window.setTimeout(function () { showAll = false; render(true); }, 250);
+    });
+    /* A search field offers a native clear button, and it fires 'search'
+       rather than 'input' in some browsers. */
+    f.q.addEventListener('search', function () { showAll = false; render(true); });
   }
 
   if (refineBtn && refinePanel) {

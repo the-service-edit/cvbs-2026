@@ -81,3 +81,33 @@ _DROP PHOTOS HERE/
 # Hero crop tests and screenshot scratch from the 5 Sep usability pass
 _hero-review/
 Claude outputs/
+
+# Python build caches. Never part of the site.
+__pycache__/
+*.pyc
+
+# 6 Sep 2026. Working proof folder from the scope build.
+_scope-source/_to_delete_proof/
+
+# The rate bands lifted off the cost guide on 6 Sep 2026. They are unverified
+# figures and the repository is public, so they stay local until Karen confirms
+# them. See CVBS-Decisions-Before-Launch-Sep-2026.docx, question 5.
+_pricing-source/
+
+# The client decision sheet is a commercial document, not part of the site.
+_decisions-source/
+CVBS-Decisions-Before-Launch-Sep-2026.docx
+CVBS-Decisions-Before-Launch-Sep-2026.pdf
+CVBS-Platform-Audit-and-Rebuild-Sep-2026.html
+
+# Commercial documents. The repository is public, so scopes, proposals and
+# audit decks stay on Mel's machine and never reach GitHub. 6 Sep 2026.
+CVBS-Fractional-Head-of-Digital-Scope-Sep-2026.docx
+CVBS-Fractional-Head-of-Digital-Scope-Sep-2026.pdf
+CVBS-Head-of-Digital-Scope-Aug-2026.docx
+CVBS-Head-of-Digital-Scope-Aug-2026.pdf
+CVBS-Scope-of-Engagement-Sep-2026.docx
+CVBS-Scope-of-Engagement-Sep-2026.pdf
+CVBS-Presentation-Audit-Aug-2026.html
+CVBS-competitor-usability-audit.md
+_scope-source/
