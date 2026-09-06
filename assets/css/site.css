@@ -606,15 +606,25 @@ body.menu-open{overflow:hidden}
 .page-hero--img .link-arrow{color:#fff}
 
 /* destinations hub — image-backed city cards */
-.city-card{position:relative;display:flex;align-items:flex-end;min-height:330px;border-radius:var(--r-card);overflow:hidden;isolation:isolate;background:var(--navy);box-shadow:var(--shadow-sm);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
-.city-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .6s var(--ease)}
-.city-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,30,59,.08) 35%,rgba(6,30,59,.84))}
-.city-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
-.city-card:hover img{transform:scale(1.06)}
-.city-card__body{padding:clamp(1.2rem,2.4vw,1.6rem);color:#fff}
-.city-card__body h3{color:#fff}
-.city-card__body p{color:rgba(255,255,255,.85);font-size:.92rem;margin-top:.35rem;line-height:1.45}
-.city-card__body .link-arrow{color:#fff;margin-top:.8rem}
+/* Destination cards. Rebuilt 6 Sep 2026. The overlay version put white body
+   copy on the bright half of a photograph, so Sydney, Melbourne and Brisbane
+   were close to unreadable, and the nine cities with no photograph were a
+   different species of card. Media block on top, solid body underneath, one
+   structure whether the media is a photograph or the precinct panel. */
+.city-card{position:relative;display:flex;flex-direction:column;border-radius:var(--r-card);
+  overflow:hidden;isolation:isolate;background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
+.city-card__media{position:relative;aspect-ratio:16/10;background:var(--navy);overflow:hidden;flex:none}
+.city-card__media img{display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .6s var(--ease)}
+.city-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--teal-deep)}
+.city-card:hover .city-card__media img{transform:scale(1.06)}
+.city-card__body{flex:1;display:flex;flex-direction:column;
+  padding:clamp(1.15rem,2.2vw,1.45rem);color:var(--text)}
+.city-card__body h3{color:var(--navy);font-size:1.22rem;line-height:1.2;letter-spacing:-.015em}
+.city-card__body p{color:#4a5762;font-size:.92rem;margin-top:.4rem;line-height:1.5}
+.city-card__body .link-arrow{color:var(--teal-deep);margin-top:auto;padding-top:1rem;
+  font-weight:600;font-size:.92rem}
 .city-card__body .link-arrow svg{transition:transform .3s var(--ease)}
 .city-card:hover .link-arrow svg{transform:translateX(4px)}
 
@@ -1151,12 +1161,21 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 /* Below 900px the hero text fills the width, so the rail would sit under the
    headline and the call to action. Hidden rather than crowded. */
 @media(max-width:900px){.page-hero--prec .ph-prec{display:none}}
-.city-card--prec .city-card__prec{position:absolute;inset:0;z-index:-2;display:flex;
-  flex-direction:column;gap:.1em;padding:clamp(1.2rem,2.4vw,1.6rem);overflow:hidden;
-  pointer-events:none;user-select:none}
-.city-card--prec .city-card__prec span{font-size:1.02rem;font-weight:600;letter-spacing:-.01em;
-  line-height:1.3;color:rgba(255,255,255,.15);white-space:nowrap}
-.city-card--prec::after{background:linear-gradient(180deg,rgba(6,30,59,.3) 18%,rgba(6,30,59,.92))}
+/* Nine destinations have no photograph. Rather than a navy tile with ghost
+   text, the precincts we cover become the media: legible, and it is the thing
+   a planner actually wants to know about a city. */
+.city-card--prec .city-card__prec{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;gap:.42rem;padding:clamp(1.15rem,2.2vw,1.45rem);
+  background:linear-gradient(150deg,var(--navy) 0%,var(--navy-deep) 100%);
+  overflow:hidden;pointer-events:none;user-select:none}
+.city-card--prec .city-card__prec::before{content:"Areas we cover";display:block;
+  margin-bottom:.55rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--teal)}
+.city-card--prec .city-card__prec span{position:relative;padding-left:.85rem;font-size:.88rem;
+  font-weight:600;letter-spacing:-.005em;line-height:1.3;color:rgba(255,255,255,.82);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.city-card--prec .city-card__prec span::before{content:"";position:absolute;left:0;top:.52em;
+  width:4px;height:4px;border-radius:50%;background:var(--teal);opacity:.85}
 
 /* The firsthand record. Prints only where a site visit is logged in the data,
    so an empty field shows nothing rather than implying a visit. */
@@ -1566,3 +1585,12 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .guide-act .btn{flex:0 0 auto}
 @media(max-width:600px){.guide-act .wrap{padding-block:.85rem}.guide-act p{font-size:.9rem}
   .guide-act .btn{width:100%;justify-content:center}}
+
+/* One quiet second door under the hero brief form. It has to read clearly on
+   the scrim without competing with the primary action beside it. */
+.hero-alt{margin:1.1rem 0 0;font-size:.95rem;line-height:1.5;color:rgba(255,255,255,.78)}
+.hero-alt a{color:#fff;font-weight:600;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px}
+.hero-alt a:hover{border-color:var(--teal)}
+.hero-alt svg{vertical-align:-3px;margin-left:.15rem}
+@media(max-width:700px){.hero-alt{font-size:.88rem}}
