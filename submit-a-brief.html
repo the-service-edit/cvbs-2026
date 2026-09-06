@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Start your brief | CVBS</title>
+<link rel="canonical" href="https://the-service-edit.github.io/cvbs-2026/submit-a-brief.html">
 <meta name="description" content="Tell CVBS what you need and we'll source, negotiate and shortlist the right venues, free to you, within 48 hours.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,7 +164,7 @@
   <div class="wrap site-nav__inner">
     <a href="index.html" aria-label="CVBS home"><img class="logo" src="assets/img/logo.png" alt="CVBS"></a>
     <div class="site-nav__links">
-      <a href="how-it-works.html">How it works</a>
+      <a href="find-a-venue.html">Find a venue</a><a href="how-it-works.html">How it works</a>
       <a href="services.html">Services</a>
       <a href="destinations.html">Destinations</a>
       <a href="about.html">About</a>
@@ -692,7 +693,12 @@
     'Gala or awards night':'Product launch / event',
     'Group accommodation':'Group accommodation',
     'Corporate retreat':'Corporate retreat',
-    'Retreat or offsite':'Corporate retreat'
+    'Retreat or offsite':'Corporate retreat',
+    'Conference or seminar':'Conference venue finding',
+    'Meeting or board session':'Meeting space',
+    'Gala dinner or awards night':'Product launch / event',
+    'Cocktail function or launch':'Product launch / event',
+    'Training or workshop':'Meeting space',
   };
   if(type&&serviceMap[type]){
     [].slice.call(document.querySelectorAll('input[name="Service"]')).forEach(function(box){
@@ -701,8 +707,45 @@
   }
   if(accom==='1'){var a=document.getElementById('accom'); if(a){a.value='Yes, some delegates'; a.dispatchEvent(new Event('change',{bubbles:true}));}}
   var n=document.getElementById('notes');
-  if(n&&!n.value&&!p.get('venue')&&!p.get('filters')){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
+  if(n&&!n.value&&!p.get('venue')&&!p.get('venues')&&!p.get('filters')){n.value='From the website: '+(type||'event')+(guests?' for about '+guests+' guests':'')+(dest?' in '+dest:'')+(accom==='1'?', accommodation required':'')+'.';}
 })();
+</script>
+<script id="cvbs-shortlist-intake">
+/* Carry a saved shortlist through from the venue finder.
+   ?venues=Name one, Name two, Name three
+   The names are already CVBS's own, so they are trusted as data but still
+   stripped of angle brackets and length capped before they reach the DOM. */
+(function(){
+  var p=new URLSearchParams(location.search);
+  var raw=p.get('venues'); if(!raw) return;
+  var clean=function(v,n){return v?v.replace(/[<>]/g,'').slice(0,n||600):'';};
+  var list=clean(raw).split(',').map(function(s){return s.trim();}).filter(Boolean).slice(0,12);
+  if(!list.length) return;
+  var el=function(id){return document.getElementById(id);};
+  var dest=clean(p.get('dest'),80), guests=clean(p.get('guests'),8);
+
+  var vf=el('venueField'); if(vf) vf.value=list.join(', ');
+  var subj=document.querySelector('input[name="subject"]');
+  if(subj) subj.value='Shortlist enquiry: '+list.length+' venue'+(list.length===1?'':'s');
+
+  var n=el('notes');
+  if(n&&!n.value){
+    n.value='These are the venues we have shortlisted'+(dest?' in '+dest:'')+
+      (guests?' for about '+guests+' people':'')+':\n\n'+
+      list.map(function(v){return '\u2022 '+v;}).join('\n')+
+      '\n\nCould you come back with availability, day delegate rates and what is included at each one?';
+    n.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+
+  var b=el('offerBanner');
+  if(b){
+    var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost');
+    if(pre) pre.textContent='You have shortlisted ';
+    if(nm) nm.textContent=list.length+' venue'+(list.length===1?'':'s');
+    if(post) post.textContent=': '+list.join(', ')+'. We will take your brief to each of them.';
+    b.hidden=false; b.style.display='flex';
+  }
+}());
 </script>
 <script>
 /* Carry a named venue through from a featured card or a venue index row */
