@@ -292,7 +292,7 @@
 })();
 
 /* ==========================================================================
-   Venue index. Shared across every destination page.
+   Venue finder. Shared across every destination page.
    Each city page carries a <script type="application/json" id="vidx-data">
    island and an empty .vidx shell. This renders, filters and sorts it.
    Adding a new city means adding data, not code.
@@ -808,7 +808,7 @@
     }
 
     if (!rows.length) {
-      tbody.innerHTML = '<tr><td colspan="8"><div class="vidx-empty">Nothing in the index matches that brief. ' +
+      tbody.innerHTML = '<tr><td colspan="8"><div class="vidx-empty">Nothing we publish matches that brief. ' +
         'That does not mean nothing in ' + city + ' does. ' +
         '<a href="submit-a-brief.html">Send us the brief</a> and we will go looking.</div></td></tr>';
       return;

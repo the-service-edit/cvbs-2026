@@ -185,7 +185,7 @@ def build(city):
     checked = sorted(set(v.get('checked') for v in rows if v.get('checked')))
     section = '''<section class="s-stone pad" id="{slug}-index">
   <div class="wrap">
-    <span class="eyebrow">The index</span>
+    <span class="eyebrow">By delegate numbers</span>
     <h2 class="h2">Every {city} venue we publish, and what each one is for.</h2>
     <p class="lead" style="max-width:66ch">Grouped by the only question you can answer on day one, which is how many people are coming. Every figure is the one the venue publishes for itself, read off its own capacity chart, fact sheet or floor plan. The sentence under each name is ours.</p>
     <p style="margin-top:1rem"><a class="link-arrow" href="venue-results.html?dest={city_q}" style="color:var(--teal-deep)">Narrow these by your numbers and your layout {arrow}</a></p>

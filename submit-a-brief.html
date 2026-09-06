@@ -164,7 +164,7 @@
   <div class="wrap site-nav__inner">
     <a href="index.html" aria-label="CVBS home"><img class="logo" src="assets/img/logo.png" alt="CVBS"></a>
     <div class="site-nav__links">
-      <a href="find-a-venue.html">Find a venue</a><a href="how-it-works.html">How it works</a>
+      <a href="how-it-works.html">How it works</a>
       <a href="services.html">Services</a>
       <a href="destinations.html">Destinations</a>
       <a href="about.html">About</a>
@@ -814,10 +814,10 @@
   var el=function(id){return document.getElementById(id);};
 
   var subj=document.querySelector('input[name="subject"]');
-  if(subj) subj.value='Venue index enquiry'+(dest?': '+dest:'');
+  if(subj) subj.value='Venue finder enquiry'+(dest?': '+dest:'');
   var n=el('notes');
   if(n&&!n.value){
-    n.value='From the '+(dest?dest+' ':'')+'venue index. I filtered for: '+f+'.'+
+    n.value='From the '+(dest?dest+' ':'')+'venue finder. I filtered for: '+f+'.'+
       (matched?' That returned: '+matched+'.':'')+
       ' Please check availability on my dates and come back with rates.';
     n.dispatchEvent(new Event('input',{bubbles:true}));
@@ -826,7 +826,7 @@
   var loc=el('location');
   var pre=el('offerPre'),nm=el('offerName'),post=el('offerPost'),hint=el('offerFilled');
   if(pre) pre.textContent='You have sent us your ';
-  if(nm) nm.textContent=(dest?dest+' ':'')+'venue index filters';
+  if(nm) nm.textContent=(dest?dest+' ':'')+'venue finder filters';
   if(post) post.textContent='. We will include them with your brief.';
   if(hint&&loc&&loc.value&&loc.selectedIndex>-1){
     hint.textContent=' We have pre-filled '+loc.options[loc.selectedIndex].text+'. Change anything that is not right.';
