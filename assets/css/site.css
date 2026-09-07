@@ -1333,7 +1333,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 }
 
 @media(max-width:640px){
-  .hero__inner{padding-top:5.5rem;padding-bottom:2rem}
+  .hero__inner{padding-top:5.5rem;padding-bottom:4.75rem}
 
   .hero .eyebrow{font-size:.62rem;letter-spacing:.14em}
   .hero .eyebrow::before{width:22px}
@@ -1365,9 +1365,12 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .hero-proofs .pf{font-size:clamp(.78rem,3.4vw,.9rem);gap:.5rem;align-items:flex-start;line-height:1.35}
   .hero-proofs .pf svg{width:19px;height:19px;margin-top:1px}
 
-  /* 5. The card lifts off the hero on desktop. On a phone the hero is
-        already full height, so the same lift cropped live copy. */
-  .brief-bar{margin-top:0}
+  /* 5. The card lifts into the photo on phones as well as desktop.
+        The flat join read as a hard seam under the hero. The lift is
+        shorter here (44px, not 56px) and the hero carries it as extra
+        bottom padding, so the last proof line still clears the card
+        instead of being sliced by it. */
+  .brief-bar{margin-top:-2.75rem}
 }
 
 /* 6. Two columns inside a 311px card gave 145px cells and four-line
