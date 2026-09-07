@@ -18,6 +18,14 @@ SERVICE = ["conference-venues-with-accommodation.html", "conference-venue-findin
 ORDER = ["Core pages", "Service pages", "Destination pages",
          "Venue visits", "Guides and resources", "Legal"]
 
+# Pages deliberately kept OUT of sitemap.xml that are still in the nav and
+# still in front of clients, so they have to be reviewable. venue-results
+# carries <meta robots="noindex, follow"> on purpose. That is an SEO
+# decision, not a reason to hide the page from the people signing the site
+# off. It sits in the header as "Browse all venues".
+EXTRA = [("venue-results.html", "Core pages", "destinations.html",
+          "Browse All Venues")]   # 4th item overrides the <title>
+
 
 def rel_of(loc):
     rel = loc.split("/cvbs-2026/", 1)[1] if "/cvbs-2026/" in loc else loc
@@ -61,6 +69,22 @@ def main():
         pages.append({"id": rel, "path": "../" + rel, "title": title, "group": group_of(rel)})
 
     pages.sort(key=lambda r: (ORDER.index(r["group"]), [rel_of(l) for l in locs].index(r["id"])))
+
+    for extra_rel, extra_group, after_id, extra_title in EXTRA:
+        extra_path = os.path.join(ROOT, extra_rel)
+        if not os.path.isfile(extra_path):
+            print("extra page missing from the source tree: " + extra_rel)
+            continue
+        if any(p["id"] == extra_rel for p in pages):
+            continue
+        esrc = open(extra_path, encoding="utf-8", errors="replace").read(20000)
+        em = re.search(r"<title>(.*?)</title>", esrc, re.S)
+        etitle = html.unescape(re.sub(r"\s+", " ", em.group(1))).strip() if em else extra_rel
+        etitle = re.split(r"\s*\|\s*", etitle)[0].strip() or extra_rel
+        at = next((i for i, p in enumerate(pages) if p["id"] == after_id), len(pages) - 1)
+        pages.insert(at + 1, {"id": extra_rel, "path": "../" + extra_rel,
+                              "title": extra_title or etitle, "group": extra_group})
+
     out = os.path.join(ROOT, "review", "pages.json")
     with open(out, "w", encoding="utf-8") as fh:
         json.dump({"generated": __import__("datetime").date.today().isoformat(),

@@ -20,6 +20,12 @@
    "group": "Core pages"
   },
   {
+   "id": "venue-results.html",
+   "path": "../venue-results.html",
+   "title": "Browse All Venues",
+   "group": "Core pages"
+  },
+  {
    "id": "how-it-works.html",
    "path": "../how-it-works.html",
    "title": "How It Works",

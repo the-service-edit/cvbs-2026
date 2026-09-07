@@ -619,7 +619,9 @@ function selectPage(id, push) {
   frameDoc = null; markerBox = null;
   $("#frame").src = p.path;
   if (push !== false) {
-    try { history.replaceState(null, "", "#" + p.id); } catch (e) {}
+    try {
+      if (location.hash.slice(1) !== p.id) history.pushState(null, "", "#" + p.id);
+    } catch (e) {}
   }
   $("#rail").classList.remove("open");
   renderAll();
@@ -835,6 +837,19 @@ function wire() {
     if (e.key === "]") nextPage();
   });
 
+  window.addEventListener("popstate", function () {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (id && BY_ID[id] && (!current || id !== current.id)) selectPage(id, false);
+  });
+
+  window.addEventListener("hashchange", function () {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (id && BY_ID[id] && (!current || id !== current.id)) {
+      tab = "page";
+      selectPage(id, false);
+    }
+  });
+
   $("#frame").addEventListener("load", function () {
     $("#frame-load").classList.add("gone");
     if (prepFrame()) {
@@ -952,7 +967,7 @@ function boot() {
       if (who) { $("#who-name").textContent = who; $("#gate").classList.add("off"); }
       backfill();
       seedAsks();
-      var start = location.hash.slice(1);
+      var start = decodeURIComponent(location.hash.slice(1));
       selectPage(BY_ID[start] ? start : PAGES[0].id, false);
       setSync(CFG.endpoint ? "ok" : "local");
       if (CFG.endpoint) {
