@@ -59,15 +59,10 @@ def main():
         s = s.replace(anchor, '        </form>' + HERO_LINE + '\n<div class="hero-proofs reveal"', 1)
         changed.append('hero line')
 
-    # Destinations band on the homepage gets a route into the finder.
-    if 'venue-results.html' not in s.split('id="destinations"')[-1][:4000]:
-        m = re.search(r'(<section class="s-navy pad" id="destinations".{0,6000}?)(</section>)', s, re.S)
-        if m:
-            link = ('    <p style="margin-top:2rem"><a class="link-arrow" href="venue-results.html" '
-                    'style="color:var(--teal)">Or search every venue we publish by your numbers '
-                    'and your layout %s</a></p>\n  ' % ARROW)
-            s = s[:m.end(1)] + link + s[m.end(1):]
-            changed.append('destinations band link')
+    # 7 Sep: the "Or search every venue we publish..." link under the homepage
+    # destinations band was removed at Mel's request. Do not reinstate it.
+    # The band keeps its "See all destinations" link, and venue-results.html is
+    # still reachable from the nav as "Browse all venues".
 
     io.open(PAGE, 'w', encoding='utf-8').write(s)
 
