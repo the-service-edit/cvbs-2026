@@ -90,6 +90,10 @@
       var v=att.value.replace(/[^0-9]/g,'');
       if(v!==att.value) att.value=v;
     });
+    [].forEach.call(document.querySelectorAll('.brief-bar .bf select'),function(sel){
+      var sync=function(){sel.classList.toggle('is-empty',sel.selectedIndex<=0);};
+      sel.addEventListener('change',sync); sync();
+    });
     go.addEventListener('click',function(e){
       e.preventDefault();
       var p=new URLSearchParams(),
