@@ -965,6 +965,9 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
   .hero--center .cta-row{margin-top:1.15rem;gap:.6rem;width:100%;flex-direction:column}
   .hero--center .cta-row .btn{width:100%}
   .hero-proofs{margin-top:1.2rem;gap:.7rem}
+  /* homepage hero: one CTA is enough on a phone (header + brief card + sticky bar already carry it) */
+  .hero--center .cta-row--m-hide{display:none}
+  .hero--center .cta-row--m-hide + .hero-proofs{margin-top:1.6rem}
 }
 
 .mbar{display:none}
