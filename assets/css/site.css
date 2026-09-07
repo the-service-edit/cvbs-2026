@@ -1345,16 +1345,16 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
    full-width CTAs; the value grid wrapped 4 lines a cell at 2-up.
    ============================================================ */
 
-/* 1. Scrim. The directional gradient was drawn for a left-aligned
-      desktop hero. On a phone the text spans the full width, so the
-      right-hand side sat on unscrimmed photo. Vertical wash instead,
-      alpha set so even a pure-white pixel behind white text clears
-      4.5:1 (worst case measured 5.4:1). */
-@media(max-width:820px){
-  .hero__scrim{background:
-    linear-gradient(180deg,rgba(9,32,56,.66) 0%,rgba(9,32,56,.74) 42%,rgba(9,32,56,.88) 100%),
-    radial-gradient(120% 80% at 10% 92%,rgba(40,168,182,.26),transparent 60%)}
-}
+/* 1. Scrim. REMOVED 7 Sep 2026. This used to be a separate navy vertical
+      wash for phones, added 26 Aug because the old desktop gradient was
+      directional and left the right-hand side of the photo unscrimmed.
+      The base .hero__scrim is now a flat var(--scrim), which has no
+      direction to get wrong, so phones and desktop can share one rule.
+      Measured before removing, worst case behind each element:
+        navy vertical, iPhone 15 : eyebrow 6.06  h1 6.80  sourced 3.79  proofs 8.08
+        flat var(--scrim),   same : eyebrow 6.43  h1 7.02  sourced 3.64  proofs 6.79
+      Both pass, so this was a look decision, not a fix. Do not add a
+      phone-only scrim back: retune --scrim in :root instead. */
 
 @media(max-width:640px){
   .hero__inner{padding-top:5.5rem;padding-bottom:4.75rem}
