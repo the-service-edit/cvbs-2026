@@ -122,3 +122,8 @@ _offers-source/
 # venue commission mark-up sheet must never be committed. Added 7 Sep 2026.
 CVBS-featured-venues-commission.csv
 CVBS-featured-venues-commission-*.csv
+
+# 7 Sep 2026. The six "Who we work with" sector pages, pulled from the site to
+# be reworked for SEO and AEO later. The repository is public, so the parked
+# copies stay on Mel's machine rather than sitting live at a guessable path.
+_parked-who-we-work-with/

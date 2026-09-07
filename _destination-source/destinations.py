@@ -328,8 +328,8 @@ DEST['Perth'] = dict(
   related=[
     ('venue-visits/pullman-bunker-bay/', 'Pullman Bunker Bay',
      'A resort in the Margaret River region we have walked through, with our own photographs.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a retreat property when the city is the wrong answer.'),
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Whether Burswood, the city or a South West resort is the right base for the program.'),
     ('conference-venues-with-accommodation.html', 'Venues with accommodation',
      'The venues that hold the plenary and the delegates in the same building.')],
 )
@@ -419,10 +419,10 @@ DEST['Adelaide'] = dict(
   related=[
     ('venue-finder-melbourne.html', 'Melbourne',
      'The nearest capital when the numbers outgrow what Adelaide can hold in one room.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist the Hills, the Barossa and McLaren Vale for a leadership program.'),
-    ('executive-meeting-venues.html', 'Executive meeting venues',
-     'Board rooms and small high value spaces, wherever the meeting needs to be.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'When the Hills, the Barossa or McLaren Vale beat a city hotel, and when they do not.'),
+    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
+     'The Adelaide properties that hold the plenary and the delegates in one building.')],
 )
 
 # ------------------------------------------------------------------- CANBERRA
@@ -513,10 +513,10 @@ DEST['Canberra'] = dict(
   related=[
     ('venue-finder-sydney.html', 'Sydney',
      'Three hours by road, and the alternative when the exhibition floor outgrows Canberra.'),
-    ('government-conference-venues.html', 'Government conference venues',
-     'How we source and brief venues for government and public sector programs.'),
-    ('association-conference-venues.html', 'Association conference venues',
-     'Multi year rotations, delegate forecasting and the questions boards ask.')],
+    ('conference-venue-finding.html', 'Conference venue finding',
+     'How we source, negotiate and hold a conference venue from brief through to contract.'),
+    ('how-to-brief-a-venue-finder.html', 'How to brief a venue finder',
+     'What to send us so the first Canberra shortlist is worth reading.')],
 )
 
 # --------------------------------------------------------------------- HOBART
@@ -606,8 +606,8 @@ DEST['Hobart'] = dict(
   related=[
     ('venue-finder-melbourne.html', 'Melbourne',
      'The nearest mainland capital, and the alternative when the numbers outgrow Hobart.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a lodge or an east coast property for a leadership program.'),
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Whether the waterfront, the city or a property outside Hobart suits the program.'),
     ('group-accommodation.html', 'Group accommodation',
      'Where room supply is the constraint, this is the part of the job that decides the event.')],
 )
@@ -699,8 +699,8 @@ DEST['Darwin'] = dict(
      'The other tropical conference city, with the reef and rainforest instead of the Top End.'),
     ('conference-venues-with-accommodation.html', 'Venues with accommodation',
      'The venues that hold the plenary and the delegates in the same building.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'What we look for when a program needs genuine separation from the office.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Darwin is a small city with resort stock attached, so the choice matters more here.')],
 )
 
 # ----------------------------------------------------------------- GOLD COAST
@@ -791,8 +791,8 @@ DEST['Gold Coast'] = dict(
      'An hour north, and the better answer when the program needs a city and one airport.'),
     ('venue-finder-sunshine-coast.html', 'Sunshine Coast',
      'The quieter coast, with a hinterland and lower density.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a closed campus when a program cannot afford to leak.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Broadbeach, Surfers or a hinterland property, and what each one costs you in transfer time.')],
 )
 
 # ------------------------------------------------------------- SUNSHINE COAST
@@ -883,8 +883,8 @@ DEST['Sunshine Coast'] = dict(
      'Ninety minutes south, and where a program with a trade floor belongs.'),
     ('venue-finder-gold-coast.html', 'Gold Coast',
      'The other Queensland coast, with a convention centre and far more room supply.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a hinterland property for a small, high value program.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'What a program gives up moving out of Brisbane, and what it gets back.')],
 )
 
 # --------------------------------------------------------------------- CAIRNS
@@ -1066,8 +1066,8 @@ DEST['Hunter Valley'] = dict(
      'Two hours south, and where a program with a trade floor or air access belongs.'),
     ('venue-finder-blue-mountains.html', 'Blue Mountains',
      'The other Sydney offsite region, higher, cooler and more compact.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a retreat property, and the questions we ask before we do.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'The case for a wine country residential over a Sydney hotel, and where it falls down.')],
 )
 
 # ------------------------------------------------------------- BLUE MOUNTAINS
@@ -1156,8 +1156,8 @@ DEST['Blue Mountains'] = dict(
      'Ninety minutes east, and where a program with a trade floor belongs.'),
     ('venue-finder-hunter-valley.html', 'Hunter Valley',
      'The other Sydney offsite region, with more resort scale room supply.'),
-    ('executive-meeting-venues.html', 'Executive meeting venues',
-     'Board rooms and small high value spaces, wherever the meeting needs to be.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'When a mountains property earns the drive, and when Sydney wins on logistics alone.')],
 )
 
 # ------------------------------------------------------------------ BYRON BAY
@@ -1246,8 +1246,8 @@ DEST['Byron Bay'] = dict(
   related=[
     ('venue-finder-gold-coast.html', 'Gold Coast',
      'Under two hours north, with a convention centre and real room supply.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist an exclusive use property for a leadership program.'),
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Byron is a resort market with no city fallback, so the trade-offs are sharper.'),
     ('events.html', 'Product launches and events',
      'How we source a space when the setting is doing half the work.')],
 )
@@ -1337,8 +1337,8 @@ DEST['Yarra Valley'] = dict(
      'An hour west, and where a program with a trade floor or air access belongs.'),
     ('venue-finder-mornington-peninsula.html', 'Mornington Peninsula',
      'The other Melbourne offsite region, with coast as well as vineyards.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist a retreat property, and the questions we ask before we do.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'Whether an hour out of Melbourne buys enough to be worth the coach transfers.')],
 )
 
 # --------------------------------------------------------- MORNINGTON PENINSULA
@@ -1429,8 +1429,8 @@ DEST['Mornington Peninsula'] = dict(
      'An hour north, and where a program with a trade floor or air access belongs.'),
     ('venue-finder-yarra-valley.html', 'Yarra Valley',
      'The other Melbourne offsite region, closer to the city and more compact.'),
-    ('corporate-retreat-venues.html', 'Corporate retreat venues',
-     'How we shortlist an exclusive use property for a leadership program.')],
+    ('cbd-vs-resort-conference-venues.html', 'City or resort',
+     'What a peninsula property gives a program that a Melbourne hotel cannot.')],
 )
 
 # --------------------------------------------------------------------- SYDNEY

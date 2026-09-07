@@ -15,10 +15,7 @@ CORE = ["index.html", "services.html", "how-it-works.html", "about.html",
         "submit-a-brief.html", "destinations.html"]
 SERVICE = ["conference-venues-with-accommodation.html", "conference-venue-finding.html",
            "group-accommodation.html", "events.html", "corporate-accommodation.html"]
-AUDIENCE = ["association-conference-venues.html", "government-conference-venues.html",
-            "medical-conference-venues.html", "corporate-retreat-venues.html",
-            "sales-conference-venues.html", "executive-meeting-venues.html"]
-ORDER = ["Core pages", "Service pages", "Who we work with", "Destination pages",
+ORDER = ["Core pages", "Service pages", "Destination pages",
          "Venue visits", "Guides and resources", "Legal"]
 
 
@@ -42,8 +39,6 @@ def group_of(rel):
         return "Core pages"
     if rel in SERVICE:
         return "Service pages"
-    if rel in AUDIENCE:
-        return "Who we work with"
     return "Guides and resources"
 
 
