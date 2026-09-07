@@ -1,0 +1,353 @@
+{
+ "generated": "2026-09-07",
+ "pages": [
+  {
+   "id": "index.html",
+   "path": "../index.html",
+   "title": "Conference Venue Sourcing Across Australia",
+   "group": "Core pages"
+  },
+  {
+   "id": "services.html",
+   "path": "../services.html",
+   "title": "Services",
+   "group": "Core pages"
+  },
+  {
+   "id": "destinations.html",
+   "path": "../destinations.html",
+   "title": "Destinations",
+   "group": "Core pages"
+  },
+  {
+   "id": "how-it-works.html",
+   "path": "../how-it-works.html",
+   "title": "How It Works",
+   "group": "Core pages"
+  },
+  {
+   "id": "about.html",
+   "path": "../about.html",
+   "title": "About CVBS",
+   "group": "Core pages"
+  },
+  {
+   "id": "how-we-are-paid.html",
+   "path": "../how-we-are-paid.html",
+   "title": "How We're Paid",
+   "group": "Core pages"
+  },
+  {
+   "id": "results.html",
+   "path": "../results.html",
+   "title": "Client Results & Stories",
+   "group": "Core pages"
+  },
+  {
+   "id": "offers.html",
+   "path": "../offers.html",
+   "title": "Current Venue Offers",
+   "group": "Core pages"
+  },
+  {
+   "id": "contact.html",
+   "path": "../contact.html",
+   "title": "Contact CVBS",
+   "group": "Core pages"
+  },
+  {
+   "id": "submit-a-brief.html",
+   "path": "../submit-a-brief.html",
+   "title": "Start your brief",
+   "group": "Core pages"
+  },
+  {
+   "id": "conference-venues-with-accommodation.html",
+   "path": "../conference-venues-with-accommodation.html",
+   "title": "Conference Venues With Accommodation On Site, Australia",
+   "group": "Service pages"
+  },
+  {
+   "id": "conference-venue-finding.html",
+   "path": "../conference-venue-finding.html",
+   "title": "Conference Venue Finding Across Australia & Internationally",
+   "group": "Service pages"
+  },
+  {
+   "id": "group-accommodation.html",
+   "path": "../group-accommodation.html",
+   "title": "Group Accommodation & Room Blocks, Negotiated",
+   "group": "Service pages"
+  },
+  {
+   "id": "events.html",
+   "path": "../events.html",
+   "title": "Venues for Launches, Galas & Celebrations",
+   "group": "Service pages"
+  },
+  {
+   "id": "corporate-accommodation.html",
+   "path": "../corporate-accommodation.html",
+   "title": "Corporate Accommodation, Relocations & Project Teams",
+   "group": "Service pages"
+  },
+  {
+   "id": "association-conference-venues.html",
+   "path": "../association-conference-venues.html",
+   "title": "Association Conference Venues & Sourcing in Australia",
+   "group": "Who we work with"
+  },
+  {
+   "id": "government-conference-venues.html",
+   "path": "../government-conference-venues.html",
+   "title": "Government Conference & Event Venue Sourcing",
+   "group": "Who we work with"
+  },
+  {
+   "id": "medical-conference-venues.html",
+   "path": "../medical-conference-venues.html",
+   "title": "Medical & Healthcare Conference Venue Sourcing",
+   "group": "Who we work with"
+  },
+  {
+   "id": "corporate-retreat-venues.html",
+   "path": "../corporate-retreat-venues.html",
+   "title": "Corporate Retreat Venues Australia",
+   "group": "Who we work with"
+  },
+  {
+   "id": "sales-conference-venues.html",
+   "path": "../sales-conference-venues.html",
+   "title": "Sales Conference & Kick-off Venue Sourcing",
+   "group": "Who we work with"
+  },
+  {
+   "id": "executive-meeting-venues.html",
+   "path": "../executive-meeting-venues.html",
+   "title": "Executive Meeting & Board Retreat Venues",
+   "group": "Who we work with"
+  },
+  {
+   "id": "venue-finder-sydney.html",
+   "path": "../venue-finder-sydney.html",
+   "title": "Conference & Event Venues in Sydney",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-melbourne.html",
+   "path": "../venue-finder-melbourne.html",
+   "title": "Conference & Event Venues in Melbourne",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-brisbane.html",
+   "path": "../venue-finder-brisbane.html",
+   "title": "Conference & Event Venues in Brisbane",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-perth.html",
+   "path": "../venue-finder-perth.html",
+   "title": "Conference & Event Venues in Perth",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-adelaide.html",
+   "path": "../venue-finder-adelaide.html",
+   "title": "Conference & Event Venues in Adelaide",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-canberra.html",
+   "path": "../venue-finder-canberra.html",
+   "title": "Conference & Event Venues in Canberra",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-hobart.html",
+   "path": "../venue-finder-hobart.html",
+   "title": "Conference & Event Venues in Hobart",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-darwin.html",
+   "path": "../venue-finder-darwin.html",
+   "title": "Conference & Event Venues in Darwin",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-gold-coast.html",
+   "path": "../venue-finder-gold-coast.html",
+   "title": "Conference & Event Venues on the Gold Coast",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-sunshine-coast.html",
+   "path": "../venue-finder-sunshine-coast.html",
+   "title": "Conference & Event Venues on the Sunshine Coast",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-cairns.html",
+   "path": "../venue-finder-cairns.html",
+   "title": "Conference & Event Venues in Cairns",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-hunter-valley.html",
+   "path": "../venue-finder-hunter-valley.html",
+   "title": "Conference, Retreat & Offsite Venues in the Hunter Valley",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-blue-mountains.html",
+   "path": "../venue-finder-blue-mountains.html",
+   "title": "Conference, Retreat & Offsite Venues in the Blue Mountains",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-byron-bay.html",
+   "path": "../venue-finder-byron-bay.html",
+   "title": "Retreat, Incentive & Event Venues in Byron Bay",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-yarra-valley.html",
+   "path": "../venue-finder-yarra-valley.html",
+   "title": "Conference, Retreat & Winery Venues in the Yarra Valley",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-finder-mornington-peninsula.html",
+   "path": "../venue-finder-mornington-peninsula.html",
+   "title": "Retreat, Offsite & Conference Venues on the Mornington Peninsula",
+   "group": "Destination pages"
+  },
+  {
+   "id": "venue-visits/index.html",
+   "path": "../venue-visits/index.html",
+   "title": "Venue visits, conference venues we have walked",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/crown-towers-sydney/index.html",
+   "path": "../venue-visits/crown-towers-sydney/index.html",
+   "title": "Crown Towers Sydney conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/the-westin-brisbane/index.html",
+   "path": "../venue-visits/the-westin-brisbane/index.html",
+   "title": "The Westin Brisbane conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/pullman-quay-grand-sydney/index.html",
+   "path": "../venue-visits/pullman-quay-grand-sydney/index.html",
+   "title": "Pullman Quay Grand Sydney Harbour conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/pullman-bunker-bay/index.html",
+   "path": "../venue-visits/pullman-bunker-bay/index.html",
+   "title": "Pullman Bunker Bay Resort conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/hotel-indigo-melbourne-little-collins/index.html",
+   "path": "../venue-visits/hotel-indigo-melbourne-little-collins/index.html",
+   "title": "Hotel Indigo Melbourne Little Collins rooms and meeting facilities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "conference-budget-guide.html",
+   "path": "../conference-budget-guide.html",
+   "title": "Conference Budget Guide: What to Plan For in Australia",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "conference-venue-checklist.html",
+   "path": "../conference-venue-checklist.html",
+   "title": "The Conference Venue Selection Checklist (Free PDF)",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "what-is-conference-venue-sourcing.html",
+   "path": "../what-is-conference-venue-sourcing.html",
+   "title": "What Is Conference Venue Sourcing? A Guide for Australian Organisers",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "venue-sourcing-company-vs-booking-direct.html",
+   "path": "../venue-sourcing-company-vs-booking-direct.html",
+   "title": "Venue Sourcing Company vs Booking Direct: Which Is Better?",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "cbd-vs-resort-conference-venues.html",
+   "path": "../cbd-vs-resort-conference-venues.html",
+   "title": "CBD vs Resort Conference Venues: How to Choose",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "how-to-choose-a-conference-venue.html",
+   "path": "../how-to-choose-a-conference-venue.html",
+   "title": "How to Choose a Conference Venue in Australia: A 2026 Checklist",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "how-much-does-a-conference-venue-cost.html",
+   "path": "../how-much-does-a-conference-venue-cost.html",
+   "title": "How Much Does It Cost to Hire a Conference Venue in Australia?",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "how-to-brief-a-venue-finder.html",
+   "path": "../how-to-brief-a-venue-finder.html",
+   "title": "How to Brief a Venue Finder (and Get a Better Shortlist)",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "how-to-choose-a-venue-finder.html",
+   "path": "../how-to-choose-a-venue-finder.html",
+   "title": "How to Choose a Venue Finder in Australia: The Questions to Ask",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "blog-index.html",
+   "path": "../blog-index.html",
+   "title": "Conference & Event Planning Guides",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "faq.html",
+   "path": "../faq.html",
+   "title": "Venue Sourcing FAQ",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "conference-budget-calculator.html",
+   "path": "../conference-budget-calculator.html",
+   "title": "Conference Budget Calculator",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "resources.html",
+   "path": "../resources.html",
+   "title": "Free Conference Planning Resources & Tools",
+   "group": "Guides and resources"
+  },
+  {
+   "id": "privacy.html",
+   "path": "../privacy.html",
+   "title": "Privacy Policy",
+   "group": "Legal"
+  },
+  {
+   "id": "terms.html",
+   "path": "../terms.html",
+   "title": "Terms of Service",
+   "group": "Legal"
+  }
+ ]
+}

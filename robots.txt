@@ -8,6 +8,7 @@ User-agent: *
 Allow: /
 
 # Working files. Not part of the site.
+Disallow: /review/
 Disallow: /presentation/
 Disallow: /hub/
 Disallow: /Quote-Generator/
