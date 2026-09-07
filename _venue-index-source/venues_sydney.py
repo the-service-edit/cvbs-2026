@@ -123,8 +123,8 @@ VENUES = [
  dict(
    worked=False, seen=None,
    n="Hilton Sydney", sp="Grand Ballroom", pr="Sydney CBD", ty="hotel",
-   th=1100, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
-   br=28, gr=None, area=920, ceil=6.0, ceilq=None,
+   th=1100, bq=500, cl=None, ck=700, cab=600, ush=None, bd=None,
+   br=28, gr=None, area=806, ceil=6.0, ceilq=None,
    s_name=None, s_th=None,
    note="An 806 sqm ballroom with six metre ceilings and 28 event spaces across the hotel. One of only three Sydney hotels seating more than 1,000 in a single room.",
    src="https://www.hiltonsydney.com.au/meetings-events/facilities-services/level-3",

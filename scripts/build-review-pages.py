@@ -15,7 +15,7 @@ CORE = ["index.html", "services.html", "how-it-works.html", "about.html",
         "submit-a-brief.html", "destinations.html"]
 SERVICE = ["conference-venues-with-accommodation.html", "conference-venue-finding.html",
            "group-accommodation.html", "events.html", "corporate-accommodation.html"]
-ORDER = ["Core pages", "Service pages", "Destination pages",
+ORDER = ["Core pages", "Current offers", "Service pages", "Destination pages",
          "Venue visits", "Guides and resources", "Legal"]
 
 # Pages deliberately kept OUT of sitemap.xml that are still in the nav and
@@ -37,6 +37,8 @@ def rel_of(loc):
 
 
 def group_of(rel):
+    if rel.startswith("offer-"):
+        return "Current offers"
     if rel.startswith("venue-visits/"):
         return "Venue visits"
     if rel.startswith("venue-finder-"):

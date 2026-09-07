@@ -68,6 +68,24 @@
    "group": "Core pages"
   },
   {
+   "id": "offer-hamilton-island.html",
+   "path": "../offer-hamilton-island.html",
+   "title": "Hamilton Island Conference Offer",
+   "group": "Current offers"
+  },
+  {
+   "id": "offer-westin-singapore.html",
+   "path": "../offer-westin-singapore.html",
+   "title": "The Westin Singapore Conference Offer",
+   "group": "Current offers"
+  },
+  {
+   "id": "offer-voco-darwin-suites.html",
+   "path": "../offer-voco-darwin-suites.html",
+   "title": "voco Darwin Suites Conference Offer",
+   "group": "Current offers"
+  },
+  {
    "id": "conference-venues-with-accommodation.html",
    "path": "../conference-venues-with-accommodation.html",
    "title": "Conference Venues With Accommodation On Site, Australia",

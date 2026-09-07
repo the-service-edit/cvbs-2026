@@ -1902,3 +1902,14 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{
 @media(max-width:640px){
   .hero{min-height:66svh}
 }
+
+/* Image save deterrent. Pairs with the contextmenu/dragstart handler in site.js.
+   Images only, so text selection everywhere else is untouched. */
+img, picture {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+}

@@ -1038,3 +1038,24 @@
 
   if (hasTable) render();
 })();
+
+/* ---------------------------------------------------------------------------
+   Image save deterrent.
+   Blocks the right-click menu and the drag-to-desktop gesture on images only,
+   so right-click still works normally on text, links and the page itself.
+   This is a speed bump, not protection: devtools, view-source, the network tab
+   and a screenshot all still get the file. Kept deliberately narrow so it does
+   not fight the browser anywhere it does not need to.
+--------------------------------------------------------------------------- */
+(function () {
+  var isImage = function (el) {
+    if (!el || !el.closest) return false;
+    return el.tagName === 'IMG' || el.tagName === 'PICTURE' || !!el.closest('picture');
+  };
+  document.addEventListener('contextmenu', function (e) {
+    if (isImage(e.target)) e.preventDefault();
+  }, false);
+  document.addEventListener('dragstart', function (e) {
+    if (isImage(e.target)) e.preventDefault();
+  }, false);
+})();
