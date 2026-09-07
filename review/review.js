@@ -13,6 +13,7 @@ var CFG = window.REVIEW_CONFIG || {};
 var LS_RECORDS = "cvbs-review-records-v1";
 var LS_QUEUE   = "cvbs-review-queue-v1";
 var LS_WHO     = "cvbs-review-who-v1";
+var LS_ENDPOINT = "cvbs-review-endpoint-v1";
 
 var PAGES = [];
 var BY_ID = {};
@@ -124,9 +125,9 @@ function put(rec, push) {
 
 /* ------------------------------------------------------------------ sync  */
 function enqueue(id) {
-  if (!CFG.endpoint) { setSync("local"); return; }
   if (queue.indexOf(id) === -1) queue.push(id);
   save(LS_QUEUE, queue);
+  if (!CFG.endpoint) { setSync("local"); return; }
   flush();
 }
 
@@ -920,6 +921,22 @@ function seedAsks() {
     .catch(function () {});
 }
 
+/* The shared store can be switched on after people have already used the
+   tool. When the endpoint changes, everything in this browser is queued
+   again so nothing written earlier is stranded. Re-sending a record is
+   harmless, the sheet keys on id. */
+function backfill() {
+  if (!CFG.endpoint) return;
+  var seen = "";
+  try { seen = localStorage.getItem(LS_ENDPOINT) || ""; } catch (e) {}
+  if (seen === CFG.endpoint) return;
+  var ids = Object.keys(records);
+  ids.forEach(function (id) { if (queue.indexOf(id) === -1) queue.push(id); });
+  save(LS_QUEUE, queue);
+  try { localStorage.setItem(LS_ENDPOINT, CFG.endpoint); } catch (e) {}
+  if (ids.length) { setSync("saving"); flush(); }
+}
+
 function boot() {
   records = load(LS_RECORDS, {});
   queue = load(LS_QUEUE, []);
@@ -933,6 +950,7 @@ function boot() {
       wire();
       showGate();
       if (who) { $("#who-name").textContent = who; $("#gate").classList.add("off"); }
+      backfill();
       seedAsks();
       var start = location.hash.slice(1);
       selectPage(BY_ID[start] ? start : PAGES[0].id, false);

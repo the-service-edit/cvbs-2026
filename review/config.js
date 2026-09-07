@@ -17,7 +17,7 @@ window.REVIEW_CONFIG = {
   project: "cvbs-2026",
 
   /* The names offered on the opening screen. */
-  reviewers: ["Karen Jepson", "Anthony Jepson", "Mel Cox"],
+  reviewers: ["Karen Jepson", "Anthony Jepson", "Chantelle Pourhag", "Rychelle Fowler", "Mel Cox"],
 
   /* Names that can add and delete requests in the "What we need from you"
      block. Everyone else can only answer them. */
