@@ -251,6 +251,18 @@
             <div class="err">Please tell us which location you have in mind.</div>
           </div>
 
+          <div class="field" id="f-radius" style="display:none">
+            <label id="radiusLabel">How far from <span id="radiusOrigin">the city</span> can the venue be? <span class="req">*</span></label>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="Travel radius" value="In the city itself"><span>In the city itself</span></label>
+              <label class="chip"><input type="radio" name="Travel radius" value="Within about an hour"><span>Within about an hour</span></label>
+              <label class="chip"><input type="radio" name="Travel radius" value="Within 2 to 3 hours drive"><span>Within 2 to 3 hours drive</span></label>
+              <label class="chip"><input type="radio" name="Travel radius" value="Further is fine"><span>Further is fine</span></label>
+            </div>
+            <p class="privacy-note" style="margin:.65rem 0 0">An hour or two out of the city usually buys more room in the budget. Tell us the limit and we will work inside it.</p>
+            <div class="err">Please tell us how far out you can go.</div>
+          </div>
+
           <div class="field" id="f-delegates">
             <label for="delegates">Number of delegates <span class="req">*</span> <span class="hint">An estimate is fine</span></label>
             <input type="text" id="delegates" name="Delegates" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="e.g. 120" required>
@@ -467,6 +479,32 @@
     var cur=0, reached=0, draftKey='cvbs-brief-draft-v1', saveTimer;
 
     var locSel=document.getElementById('location'), locOther=document.getElementById('f-location-other');
+    /* 7 Sep 2026: a brief is rarely a point on a map. "Somewhere within two
+       hours of Brisbane" is the shape most of them arrive in, and the old form
+       had nowhere to put it, so the catchment was either lost or typed into
+       the notes where nobody sourced against it. The city is the origin, the
+       radius is the brief. */
+    var radiusField=document.getElementById('f-radius'), radiusOrigin=document.getElementById('radiusOrigin');
+    function radiusApplies(){
+      var v=locSel.value;
+      return !!v && v!=='International' && v!=='Flexible / open to suggestions';
+    }
+    function syncRadius(){
+      var on=radiusApplies();
+      radiusField.style.display=on?'block':'none';
+      if(!on){
+        [].forEach.call(document.querySelectorAll('input[name="Travel radius"]'),function(r){r.checked=false;});
+        return;
+      }
+      var name;
+      if(locSel.value==='Other'){
+        var typed=(document.getElementById('locationOther').value||'').trim();
+        name=typed?typed.split(',')[0].trim():'the location you have given';
+      }else{
+        name=locSel.value.split(',')[0].trim();
+      }
+      radiusOrigin.textContent=name;
+    }
     locSel.addEventListener('change',function(){
       var v=locSel.value, show=(v==='Other'||v==='International');
       locOther.style.display=show?'block':'none';
@@ -476,7 +514,10 @@
         document.getElementById('locationOtherLabel').textContent=intl?'Which city or country?':'Please specify location';
         document.getElementById('locationOther').placeholder=intl?'e.g. Singapore, Bali, Fiji, Queenstown':'e.g. Darwin, NT or Regional Victoria';
       }
+      syncRadius();
     });
+    document.getElementById('locationOther').addEventListener('input',syncRadius);
+    syncRadius();
     /* 7 Sep 2026: delegates is a typed number, not a range. A brief that says
        "100-200" is not a brief we can source against, and every one of them
        cost an email back to ask. Digits only, so the field cannot hold prose. */
@@ -648,6 +689,8 @@
         var loc=document.getElementById('location'); mark(document.getElementById('f-location'),!loc.value); if(!loc.value)ok=false;
         var detail=document.getElementById('locationOther'),needsDetail=(loc.value==='Other'||loc.value==='International'),missingDetail=needsDetail&&!detail.value.trim();
         mark(document.getElementById('f-location-other'),missingDetail);if(missingDetail)ok=false;
+        var needsRadius=radiusApplies(),missingRadius=needsRadius&&!form.querySelector('input[name="Travel radius"]:checked');
+        mark(document.getElementById('f-radius'),missingRadius);if(missingRadius)ok=false;
         var del=document.getElementById('delegates');
         var delN=parseInt(String(del.value).replace(/[^0-9]/g,''),10);
         var badDel=!(delN>0);
@@ -819,7 +862,7 @@
       if(!o.value) return false;
       if(o.value===dest||o.text===dest||norm(o.value)===norm(dest)){loc.value=o.value;return true;}
       return false;});
-    if(!hit){var oth=document.getElementById('locationOther'); if(oth&&!/suggest/i.test(dest)){oth.value=dest;}}
+    if(!hit){var oth=document.getElementById('locationOther'); if(oth&&!/suggest/i.test(dest)){loc.value='Other';oth.value=dest;}}
     loc.dispatchEvent(new Event('change'));
   }
   /* guests arrives as a number from the hero form and Delegates now takes one. */
