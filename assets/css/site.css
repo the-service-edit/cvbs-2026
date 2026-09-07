@@ -345,8 +345,10 @@ body.menu-open{overflow:hidden}
 .site-header--overlay{position:fixed;left:0;right:0;top:0}
 .brand .logo-light{display:none}
 .site-header--overlay:not(.scrolled){background:transparent;border-color:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
-.site-header--overlay:not(.scrolled) .brand .logo-dark{display:none}
-.site-header--overlay:not(.scrolled) .brand .logo-light{display:block}
+/* Colour brand mark in the transparent hero header (client request, 7 Sep 2026).
+   Previously the overlay header swapped to logo-white.png before scroll. The colour
+   mark carries its own light outer glow, which separates it from the navy hero scrim.
+   Revert = restore the two display-swap rules that were here. */
 .site-header--overlay:not(.scrolled) .nav-links a{color:rgba(238,246,247,.92)}
 .site-header--overlay:not(.scrolled) .nav-toggle{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.34)}
 .site-header--overlay:not(.scrolled) .nav-toggle span{background:#fff}
@@ -738,6 +740,12 @@ body.menu-open{overflow:hidden}
 .brief-bar__row{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:.85rem;align-items:end}
 .brief-bar .bf label{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.4rem}
 .brief-bar .bf select,.brief-bar .bf input{width:100%;border:1px solid var(--line);border-radius:10px;padding:.72rem .8rem;font:inherit;font-size:.92rem;background:var(--stone);color:var(--text);appearance:none}
+/* 7 Sep 2026: attendees is typed, so the row now mixes a placeholder with two
+   selects. Unchosen selects carry .is-empty so all three read as empty at the
+   same weight, instead of two looking already answered. */
+.brief-bar .bf input::placeholder{color:#8E8D85;opacity:1}
+.brief-bar .bf select.is-empty{color:#8E8D85}
+.brief-bar .bf select:focus,.brief-bar .bf input:focus{outline:none;border-color:var(--teal-deep);background:#fff;box-shadow:0 0 0 3px rgba(40,168,182,.28)}
 .brief-bar__go{white-space:nowrap;align-self:end}
 .value-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;border-top:1px solid var(--line);margin-top:1.1rem;padding-top:1.1rem}
 .vi{display:flex;gap:.7rem;align-items:flex-start}
