@@ -20,6 +20,15 @@ Usage: python3 scripts/add-image-dimensions.py [--dry-run]
 """
 import io, os, re, sys
 
+# An <img> tag is NOT `<img[^>]*>`. Several tags on this site carry an onerror
+# fallback whose value contains a literal '>', e.g.
+#   onerror="this.outerHTML='<div class=&quot;vrow__ph&quot;>ICC Sydney</div>'"
+# A naive [^>]* match stops at that inner '>' and the dimensions get written
+# INSIDE the attribute value with raw quotes, which closes the img tag early,
+# leaks the fallback markup as visible text and emits a stray closing tag.
+# That is what broke the Sydney destination page. Match quote-aware instead.
+IMG_TAG = re.compile(r'''<img\b(?:[^>"']|"[^"]*"|'[^']*')*>''')
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DRY = '--dry-run' in sys.argv
 SKIP = ('_backup', '_to_delete', '_hero-review', '_original-backup', '_preview',
@@ -69,7 +78,7 @@ for path in pages():
     last = 0
     n_here = 0
 
-    for m in re.finditer(r'<img\b[^>]*>', s):
+    for m in IMG_TAG.finditer(s):
         tag = m.group(0)
         if re.search(r'\bwidth=', tag) and re.search(r'\bheight=', tag):
             continue
@@ -88,6 +97,10 @@ for path in pages():
         if new.endswith('/'):
             new = new[:-1].rstrip()
         new += ' width="%d" height="%d">' % wh
+        if new.count('"') % 2:
+            # unbalanced quotes means the tag was mis-parsed; never write it
+            unresolved.append((os.path.relpath(path, ROOT), ref + '  [unbalanced quotes, skipped]'))
+            continue
         out.append(s[last:m.start()])
         out.append(new)
         last = m.end()
