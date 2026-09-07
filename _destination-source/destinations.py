@@ -327,7 +327,7 @@ DEST['Perth'] = dict(
      'The Crown Ballroom at Burswood, which publishes 1,510 banquet in a 2,000 square metre pillarless room with eight metre ceilings. In the city itself the largest hotel ballroom that publishes a capacity chart is Hyatt Regency Perth at 870 square metres.')],
   related=[
     ('venue-visits/pullman-bunker-bay/', 'Pullman Bunker Bay',
-     'A resort in the Margaret River region we have walked through, with our own photographs.'),
+     'A resort in the Margaret River region we have walked through ourselves.'),
     ('cbd-vs-resort-conference-venues.html', 'City or resort',
      'Whether Burswood, the city or a South West resort is the right base for the program.'),
     ('conference-venues-with-accommodation.html', 'Venues with accommodation',

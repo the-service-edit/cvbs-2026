@@ -234,7 +234,7 @@ def build_find():
     <div class="vidx-lede">
       <div class="vidx-answer">
         <span class="vidx-answer__tag">What is on this page</span>
-        <p><b>CVBS publishes the capacity figures for {n} conference and event venues across {cities}</b>, each one read from the venue&rsquo;s own capacity chart, fact sheet or floor plan rather than from a directory. {nv} of them we have walked through ourselves, and those carry our own photographs. {na} have guest rooms in the same building, which is usually the question that decides a residential program.</p>
+        <p><b>CVBS publishes the capacity figures for {n} conference and event venues across {cities}</b>, each one read from the venue&rsquo;s own capacity chart, fact sheet or floor plan rather than from a directory. {nv} of them we have walked through ourselves. {na} have guest rooms in the same building, which is usually the question that decides a residential program.</p>
         <p><b>This is not every venue in Australia, and it is not trying to be.</b> Karen and Anthony have been sourcing venues since 1989 and book rooms every week that are not on this page. What is published here is the part we can put a source against, and it is enough to get you from &ldquo;somewhere in Sydney for 250&rdquo; to three or four buildings worth a real conversation. <a href="venue-results.html">Start with all {n}</a>.</p>
       </div>
       <aside class="vidx-stats" aria-label="What CVBS publishes">
@@ -275,7 +275,7 @@ def build_find():
       </article>
       <article class="card">
         <h3 class="h4">Has anyone actually been?</h3>
-        <p>{nv} of these we have walked through ourselves, with our own photographs and a straight answer about what the building is good for and where it stops working.</p>
+        <p>{nv} of these we have walked through ourselves, with a straight answer about what the building is good for and where it stops working.</p>
         <p style="margin-top:1rem"><a class="link-arrow" href="venue-visits/" style="color:var(--teal-ink)">Venues we have walked through {arrow}</a></p>
       </article>
     </div>

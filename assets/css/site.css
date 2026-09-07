@@ -869,7 +869,7 @@ body.menu-open{overflow:hidden}
 .qcard__by .rl{font-size:.85rem;color:var(--muted)}
 
 .venue-marquee{position:relative;overflow:hidden;margin-top:clamp(2rem,4vw,3rem);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.venue-track{display:flex;width:max-content;animation:venueMarquee 60s linear infinite;will-change:transform}
+.venue-track{display:flex;width:max-content;animation:venueMarquee 125s linear infinite;will-change:transform}
 .venue-marquee:hover .venue-track{animation-play-state:paused}
 /* Fixed height, natural width. Every frame keeps its own ratio: the visit library
    is mostly portrait and a 4/3 tile was cropping half of it away. 7 Sep 2026. */
