@@ -428,11 +428,22 @@ body.menu-open{overflow:hidden}
 .hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(160deg,#cfc6b6 0%,#54707d 45%,var(--navy) 100%)}
 .hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp?v=202609051700');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate3d(0,0,0) scale(1.02)}to{transform:translate3d(-26px,-13px,0) scale(1.08)}}
-/* Top band added 5 Sep 2026: the hero photograph is now a real ballroom whose
-   ceiling is the brightest part of the frame, and the nav sits transparent over it.
-   Without this the nav links fell to 2.4:1. Measured after: worst link 5.05:1.
-   Phones already get a full wash at the 820px breakpoint. */
-.hero__scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,44,82,.82) 0%,rgba(10,44,82,.66) 8%,rgba(10,44,82,.28) 15%,rgba(10,44,82,0) 24%),linear-gradient(100deg,rgba(10,44,82,.93) 0%,rgba(10,44,82,.64) 35%,rgba(10,44,82,.22) 60%,rgba(10,44,82,.04) 84%,rgba(10,44,82,0) 100%),linear-gradient(0deg,rgba(10,44,82,.7) 0%,rgba(10,44,82,.12) 44%,rgba(10,44,82,0) 66%)}
+/* Hero scrim, rebuilt 7 Sep 2026. The old three-gradient navy wash was
+   directional: darkest top-left, clearing to nothing on the right. Once the
+   hero was shortened the copy moved UP onto the ballroom ceiling, which is the
+   brightest part of the frame, and the gradients no longer covered where the
+   words land. Measured worst-case at 1300px wide, against the brightest pixel
+   behind each element:
+       eyebrow 1.53:1, headline 1.29:1, "sourced" 1.07:1, proofs 2.92:1
+   All four failed. The nav links were failing too, at 3.56:1.
+   A flat black wash at 65% clears every threshold:
+       eyebrow 6.66, headline 7.18, "sourced" 3.63, proofs 7.33, nav 5.67
+   The binding constraint is the teal <em>sourced</em>: it is the lightest ink
+   on the brightest ground, and it needs 3:1 as large text. 62% is the floor
+   (3.24) and 65% is the same wash with headroom for a future photograph.
+   Do not go back to a directional gradient while the copy sits centred.
+   To revert: _backup-pre-hero-overlay-07sep/. */
+.hero__scrim{position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.65)}
 .hero__inner{flex:1;width:100%;max-width:var(--container);margin:0 auto;padding:clamp(7rem,14vh,9rem) var(--gutter) clamp(2.5rem,5vh,4rem);display:grid;grid-template-columns:1fr;align-items:center;gap:clamp(2rem,4vw,3rem)}
 @media(min-width:980px){.hero__inner{grid-template-columns:1.15fr .85fr}}
 .lede{color:var(--white);max-width:760px}
