@@ -32,7 +32,9 @@ def public_pages():
     return [(r, os.path.join(ROOT, r)) for r in rels if os.path.exists(os.path.join(ROOT, r))]
 
 
-ADD = ('--teal-btn:#197683;--teal-btn-hover:#15646F;--teal-ink:#197683;')
+# 7 Sep 2026: button fills reverted to the original brand teal at Mel's
+# request. --teal-ink stays dark, it is text and has to stay readable.
+ADD = ('--teal-btn:#28A8B6;--teal-btn-hover:#1f8b97;--teal-ink:#197683;')
 
 fixed = []
 for rel, path in public_pages():

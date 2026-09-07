@@ -5,10 +5,11 @@
 
 :root{
   --teal:#3BC9D9; --teal-deep:#28A8B6;
-  /* Fills that carry white text. --teal-deep measures 2.85:1 with white,
-     below the 4.5:1 needed at the button's 14px/600. These two clear it:
-     5.30:1 and 6.81:1. Do not put white text on --teal or --teal-deep. */
-  --teal-btn:#197683; --teal-btn-hover:#15646F;
+  /* Button fills. Reverted 7 Sep 2026 at Mel's request to the original
+     brand teal. NOTE: white text on #28A8B6 measures 2.85:1, below the
+     4.5:1 WCAG AA needs at 14px/600. Navy text on this fill measures
+     4.93:1 and passes, if we ever want the colour AND the compliance. */
+  --teal-btn:#28A8B6; --teal-btn-hover:#1f8b97;
   /* Teal as a FOREGROUND: text, icons, numbers. --teal-deep measures
      2.85:1 on white and 2.60:1 on stone, which fails 4.5:1 for body text
      and 3:1 for icons and large text alike, so it was failing everywhere
