@@ -19,6 +19,13 @@
      gradients and tints, where nothing has to be read off them.
      To revert the accent colour, change this one line. */
   --teal-ink:#197683;
+  /* 7 Sep 2026: every scrim that sits over a PHOTOGRAPH uses this one value.
+     The navy washes were failing contrast wherever the photo was bright, and
+     navy tinted at low alpha is lighter than neutral black at the same alpha.
+     Solid navy backgrounds (footer, .s-navy, cards) are NOT scrims and keep
+     the brand navy. Change this line to retune every photo overlay at once. */
+  --scrim:rgba(0,0,0,.65);
+  --scrim-soft:rgba(0,0,0,.55);
   --navy:#0A2C52; --navy-deep:#061E3B; --brand:#0366C6;
   --stone:#EEF6F7; --stone-deep:#DFEFF1;
   --white:#FFFFFF;
@@ -248,7 +255,9 @@ body.menu-open{overflow:hidden}
 .s-teal .stat .n{color:#fff}
 .s-teal .stat .l{color:rgba(255,255,255,.9)}
 /* keep the hero overlay dark for legibility, add a teal glow */
-.hero__scrim{background:linear-gradient(100deg,rgba(8,26,40,.94) 0%,rgba(8,26,40,.66) 30%,rgba(8,26,40,.3) 55%,rgba(8,26,40,.06) 82%,rgba(8,26,40,0) 100%),radial-gradient(120% 95% at 12% 90%,rgba(40,168,182,.45),transparent 55%)}
+/* superseded 7 Sep 2026 by the flat var(--scrim) rule further down. Kept as a
+   marker so nobody re-adds a directional navy wash here. */
+.hero__scrim{background:var(--scrim)}
 .logos-label{text-align:center;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1.75rem;font-weight:600}
 
 /* Testimonials ------------------------------------------------------------ */
@@ -384,8 +393,8 @@ body.menu-open{overflow:hidden}
 /* ==========================================================================
    OFFERS (teaser cards + dedicated offer landing pages)
    ========================================================================== */
-.offer .media .venue-name{position:absolute;left:1.1rem;bottom:1rem;right:1.1rem;z-index:2;color:#fff;font-weight:600;font-size:1.15rem;line-height:1.2;text-shadow:0 2px 14px rgba(6,30,59,.6)}
-.offer .media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,30,59,.6),rgba(6,30,59,0) 60%)}
+.offer .media .venue-name{position:absolute;left:1.1rem;bottom:1rem;right:1.1rem;z-index:2;color:#fff;font-weight:600;font-size:1.15rem;line-height:1.2;text-shadow:0 2px 14px rgba(0,0,0,.62)}
+.offer .media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.66),rgba(0,0,0,0) 60%)}
 .offer .deal-line{color:var(--teal-ink);font-weight:600;margin:.5rem 0 .2rem;font-size:.95rem}
 /* deal box (the hook) */
 .deal-box{background:var(--navy);color:#EAF1F4;border-radius:calc(var(--r-card) + 4px);padding:clamp(1.6rem,3vw,2.6rem);box-shadow:var(--shadow-card);position:relative;overflow:hidden}
@@ -417,7 +426,7 @@ body.menu-open{overflow:hidden}
 /* offer banner (top of each offer block) */
 .offer-banner{position:relative;border-radius:var(--r-card);overflow:hidden;aspect-ratio:16/7;box-shadow:var(--shadow-sm)}
 .offer-banner img{width:100%;height:100%;object-fit:cover}
-.offer-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,30,59,.86),rgba(6,30,59,.12) 62%)}
+.offer-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.88),rgba(0,0,0,.14) 62%)}
 .offer-banner__txt{position:absolute;left:clamp(1.2rem,3vw,2.4rem);right:1.2rem;bottom:clamp(1.1rem,3vw,1.8rem);z-index:2;color:#fff}
 .offer-banner__txt .tag{position:static;display:inline-block;margin-bottom:.6rem}
 .offer-banner__txt h2{color:#fff;font-size:clamp(1.6rem,1.2rem + 2vw,2.6rem);line-height:1.05;margin:0;letter-spacing:-.02em}
@@ -443,7 +452,7 @@ body.menu-open{overflow:hidden}
    (3.24) and 65% is the same wash with headroom for a future photograph.
    Do not go back to a directional gradient while the copy sits centred.
    To revert: _backup-pre-hero-overlay-07sep/. */
-.hero__scrim{position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.65)}
+.hero__scrim{position:absolute;inset:0;z-index:-1;background:var(--scrim)}
 .hero__inner{flex:1;width:100%;max-width:var(--container);margin:0 auto;padding:clamp(7rem,14vh,9rem) var(--gutter) clamp(2.5rem,5vh,4rem);display:grid;grid-template-columns:1fr;align-items:center;gap:clamp(2rem,4vw,3rem)}
 @media(min-width:980px){.hero__inner{grid-template-columns:1.15fr .85fr}}
 .lede{color:var(--white);max-width:760px}
@@ -491,7 +500,7 @@ body.menu-open{overflow:hidden}
 .dcard:nth-child(3n){background:linear-gradient(150deg,#46606f,#0b2a3a)}
 .dcard:nth-child(5n){background:linear-gradient(150deg,#3b5566,#0a2330)}
 .dcard img{width:100%;height:100%;object-fit:cover}
-.dcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,30,59,.82) 0%,rgba(6,30,59,.1) 55%,rgba(6,30,59,0) 100%)}
+.dcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.84) 0%,rgba(0,0,0,.12) 55%,rgba(0,0,0,0) 100%)}
 .dcard__txt{position:absolute;left:1.1rem;bottom:1.1rem;z-index:2;color:#fff}
 .dcard__city{display:block;font-size:1.3rem;font-weight:600;letter-spacing:-.01em}
 .dcard__count{display:block;font-size:.78rem;color:rgba(238,246,247,.82);margin-top:.2rem}
@@ -629,11 +638,11 @@ body.menu-open{overflow:hidden}
 /* photographic interior header (opt-in via page_hero img=...) */
 .page-hero--img{background:var(--navy);color:#EAF1F4;border-bottom:0;position:relative;overflow:hidden}
 .page-hero--img .ph-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% center;z-index:0}
-.page-hero--img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,30,59,.93),rgba(6,30,59,.62) 52%,rgba(6,30,59,.28))}
+.page-hero--img::after{content:"";position:absolute;inset:0;z-index:1;background:var(--scrim)}
 .page-hero--img .wrap{position:relative;z-index:2;padding-block:clamp(4rem,9vw,7rem)}
 .page-hero--img h1{color:#fff;font-size:clamp(2.3rem,5.2vw,3.7rem);line-height:1.06;letter-spacing:-.02em;max-width:18ch}
 .page-hero--img .lead{color:rgba(255,255,255,.86)}
-.page-hero--img .eyebrow{color:var(--teal)}
+.page-hero--img .eyebrow{color:rgba(238,246,247,.92)}
 .page-hero--img .crumbs,.page-hero--img .crumbs a{color:rgba(255,255,255,.72)}
 .page-hero--img .link-arrow{color:#fff}
 
@@ -810,7 +819,7 @@ body.menu-open{overflow:hidden}
 
 .offer__media{position:relative;aspect-ratio:16/10;overflow:hidden}
 .offer__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.offer__pin{position:absolute;left:.85rem;top:.8rem;z-index:1;font-size:.74rem;font-weight:600;color:#fff;background:rgba(10,44,82,.55);backdrop-filter:blur(6px);padding:.3rem .65rem;border-radius:999px}
+.offer__pin{position:absolute;left:.85rem;top:.8rem;z-index:1;font-size:.74rem;font-weight:600;color:#fff;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);padding:.3rem .65rem;border-radius:999px}
 .offer__pad{display:flex;flex-direction:column;flex:1;padding:clamp(1.4rem,2.4vw,1.9rem)}
 .offer__pad .offer__tag{align-self:flex-start;margin-bottom:.85rem}
 
@@ -865,7 +874,7 @@ body.menu-open{overflow:hidden}
 .vshow{position:relative;flex:none;width:clamp(260px,30vw,360px);margin-right:clamp(1rem,2vw,1.5rem);border-radius:16px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 22px 44px -30px rgba(10,44,82,.5)}
 .vshow img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,.61,.36,1)}
 .vshow:hover img{transform:scale(1.07)}
-.vshow figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .95rem .85rem;color:#fff;font-weight:600;font-size:.95rem;background:linear-gradient(to top,rgba(6,30,59,.85),rgba(6,30,59,0))}
+.vshow figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .95rem .85rem;color:#fff;font-weight:600;font-size:.95rem;background:linear-gradient(to top,rgba(0,0,0,.86),rgba(0,0,0,0))}
 @keyframes venueMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.venue-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center;gap:1rem}}
 @media(max-width:680px){.vshow{width:78vw}}
@@ -969,7 +978,7 @@ body.menu-open{overflow:hidden}
 
 .stmt-video{position:relative;overflow:hidden;background:var(--navy-deep);isolation:isolate}
 .stmt-video__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.stmt-video::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,30,59,.94),rgba(6,30,59,.7) 58%,rgba(6,30,59,.46))}
+.stmt-video::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.72) 58%,rgba(0,0,0,.5))}
 .stmt-video .wrap{position:relative;z-index:2}
 .stmt-video .h2{color:#fff}
 .stmt-video .lead{color:rgba(238,246,247,.86)}
@@ -1310,7 +1319,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 /* image heroes: on narrow screens the 90deg wash hid the photo entirely.
    Vertical scrim + art-directed portrait crop so the room reads. 26 Aug 2026 */
 @media (max-width:760px){
-  .page-hero--img::after{background:linear-gradient(180deg,rgba(6,30,59,.42) 0%,rgba(6,30,59,.72) 42%,rgba(6,30,59,.93) 100%)}
+  .page-hero--img::after{background:var(--scrim)}
   .page-hero--img .ph-bg{object-position:52% 62%}
 }
 
@@ -1545,7 +1554,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 
 /* --- lightbox --- */
 .vlb{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;
-  padding:clamp(1rem,4vw,3rem);background:rgba(6,30,59,.93)}
+  padding:clamp(1rem,4vw,3rem);background:rgba(0,0,0,.93)}
 .vlb.is-open{display:flex}
 .vlb__box{max-width:min(1100px,100%);max-height:100%;display:flex;flex-direction:column;gap:.9rem}
 .vlb__img{max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;display:block;
@@ -1875,4 +1884,21 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{
   .hero-proofs{gap:clamp(1rem,2.4vw,1.8rem)}
   .hero-proofs .pf{font-size:.88rem}
   .hero-proofs .pf svg{width:23px;height:23px}
+}
+
+/* ==========================================================================
+   PHONES: THE BRIEF CARD AT THE FOLD                        7 Sep 2026
+   The phone hero was min-height:100svh, which put "Start your brief" 41px
+   BELOW the fold on a 393x700 screen: the card head was never seen without
+   a scroll, so the conversion widget was invisible on open. The hero is now
+   content-height with a 66svh floor. Measured after the change at 393x700:
+   card top 458, eyebrow 480, heading bottom 531, lead paragraph fully in
+   view at 650, button edge showing. At 375x590 the eyebrow and heading are
+   in view. The floor stops the hero collapsing on short landscape screens.
+   The 44px lift of the card into the photo (item 5 above) is unchanged, and
+   so is the 100svh default everywhere else.
+   Do not restore min-height:100svh on phones.
+   ========================================================================== */
+@media(max-width:640px){
+  .hero{min-height:66svh}
 }
