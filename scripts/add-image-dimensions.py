@@ -80,7 +80,11 @@ for path in pages():
 
     for m in IMG_TAG.finditer(s):
         tag = m.group(0)
-        if re.search(r'\bwidth=', tag) and re.search(r'\bheight=', tag):
+        # Skip if EITHER dimension is already present. Appending to a tag that
+        # already carries height="38" (the logo walls) produced a duplicate
+        # attribute pair; the browser kept the first height and the last width,
+        # giving a 33:1 aspect ratio and blowing the logos out. 7 Sep 2026.
+        if re.search(r'\bwidth=', tag) or re.search(r'\bheight=', tag):
             continue
         src = re.search(r'\bsrc="([^"]+)"', tag)
         if not src:
