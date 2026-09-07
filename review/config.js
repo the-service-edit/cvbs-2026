@@ -23,6 +23,27 @@ window.REVIEW_CONFIG = {
      block. Everyone else can only answer them. */
   team: ["Mel Cox"],
 
+  /* Pages to keep OUT of the review list. They stay on the website and
+     nothing is deleted, they just do not appear here, so the client cannot
+     open them or comment on them. Delete a line to hand a page over.
+     Notes and requests already attached to a hidden page are kept and come
+     straight back if you unhide it. */
+  hidden: [
+    "conference-budget-guide.html",
+    "conference-venue-checklist.html",
+    "what-is-conference-venue-sourcing.html",
+    "venue-sourcing-company-vs-booking-direct.html",
+    "cbd-vs-resort-conference-venues.html",
+    "how-to-choose-a-conference-venue.html",
+    "how-much-does-a-conference-venue-cost.html",
+    "how-to-brief-a-venue-finder.html",
+    "how-to-choose-a-venue-finder.html",
+    "blog-index.html",
+    "faq.html",
+    "conference-budget-calculator.html",
+    "resources.html"
+  ],
+
   /* How often to pull in other people's notes, in seconds. */
   pollSeconds: 25
 };

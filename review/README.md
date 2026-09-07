@@ -62,6 +62,21 @@ python3 scripts/build-review-pages.py
 Existing notes stay attached to their pages, because they key off the file
 path, not the position in the list.
 
+## Hiding a page from the client
+
+`config.js` has a `hidden` list. Anything in it stays on the website but does not
+appear in the review tool at all: not in the page list, not in the count, not in
+**To do**, not in **All feedback**, not in the CSV, and a direct link to it will not
+open it. Nothing is deleted, so notes and requests already attached to a hidden page
+come straight back the moment you take the line out.
+
+Currently hidden: the thirteen guides and resources pages (budget guide, checklist,
+the how-to articles, blog index, FAQ, calculator, resources). Karen and Anthony see
+40 pages, not 53.
+
+To hand a page over, delete its line, bump the `?v=` stamp in `index.html` so the
+change is not held in a cache, and push.
+
 ## The requests, "What we need from you"
 
 Each page can carry requests: the pieces only CVBS holds. They show at the top

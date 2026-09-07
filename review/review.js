@@ -69,7 +69,7 @@ function relOf(pathname) {
 /* --------------------------------------------------------------- records  */
 function list() {
   return Object.keys(records).map(function (k) { return records[k]; })
-    .filter(function (r) { return !r.deleted; })
+    .filter(function (r) { return !r.deleted && (!r.page || !!BY_ID[r.page]); })
     .sort(function (a, b) { return a.created < b.created ? -1 : 1; });
 }
 function notesFor(pageId) {
@@ -363,7 +363,7 @@ function onFrameClick(e) {
     var rel = relOf(url.pathname);
     e.preventDefault();
     if (BY_ID[rel]) { selectPage(rel); }
-    else { window.open(url.href, "_blank"); toast("That one is not part of the review list, so it opened in a new tab"); }
+    else { window.open(url.href, "_blank"); toast("That page is not part of this review, so it opened in a new tab"); }
     return;
   }
   if (e.target.classList && e.target.classList.contains("cvbsr-pin")) return;
@@ -960,7 +960,8 @@ function boot() {
   fetch("pages.json?t=" + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      PAGES = data.pages;
+      var hide = CFG.hidden || [];
+      PAGES = data.pages.filter(function (p) { return hide.indexOf(p.id) === -1; });
       PAGES.forEach(function (p) { BY_ID[p.id] = p; });
       wire();
       showGate();
