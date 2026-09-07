@@ -18,13 +18,22 @@ same venue could carry two different largest-room figures on two pages with
 nothing to catch it. `build_dataset.py` now merges them and refuses to build on a
 duplicate id or a duplicate name.
 
+## The venue index is parked
+
+PARKED, 7 September 2026. The "By delegate numbers" block is off the sixteen
+destination pages, to be picked up later. Do not run build_city_index.py in a
+routine rebuild: it republishes the block. build_destination.py now builds the
+pages with or without it, so the rest of the order runs unchanged. To bring the
+block back for one city, run build_city_index.py "<City>" then
+build_destination.py, in that order, as before.
+
 ## The build order
 
 Run these in order. Each one prints what it did and what is still missing.
 
 ```
 python3 _venue-index-source/build_dataset.py       -> assets/data/venues.json
-python3 _venue-index-source/build_city_index.py "<City>"   (all sixteen)
+python3 _venue-index-source/build_city_index.py "<City>"   (PARKED, see below)
 python3 _destination-source/build_destination.py   -> the sixteen destination pages
 python3 _destination-source/build_hub.py           -> destinations.html card copy
 python3 _venue-index-source/build_finder.py        -> find-a-venue.html, venue-results.html

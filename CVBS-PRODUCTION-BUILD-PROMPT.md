@@ -64,8 +64,8 @@ Build order, always in this order:
 
 ```
 python3 _venue-index-source/build_dataset.py
-python3 _venue-index-source/build_city_index.py "<City>"    (all sixteen)
-python3 _destination-source/build_destination.py            (MUST follow build_city_index)
+python3 _venue-index-source/build_city_index.py "<City>"    (PARKED 7 Sep, skip it)
+python3 _destination-source/build_destination.py            (runs with or without the index)
 python3 _destination-source/build_hub.py
 python3 _venue-index-source/build_finder.py
 python3 _venue-index-source/build_accom.py
