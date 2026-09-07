@@ -70,6 +70,118 @@
    "title": "Confirm the business address",
    "text": "We have found 43A Flinders Road, Cronulla NSW 2230 in the email templates, and a PO Box 303 elsewhere. Which is the correct one to publish, and are you happy for it to be public?",
    "who": "Karen"
+  },
+  {
+   "id": "ask-featured-sydney",
+   "page": "venue-finder-sydney.html",
+   "title": "Featured venues for Sydney",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: ICC Sydney; Hyatt Regency Sydney; Shangri-La Sydney; The Fullerton Hotel Sydney; W Sydney; Doltone House. We publish 55 Sydney venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-melbourne",
+   "page": "venue-finder-melbourne.html",
+   "title": "Featured venues for Melbourne",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Melbourne Convention and Exhibition Centre; Crown Melbourne; Sofitel Melbourne on Collins; Pullman East Melbourne; Marvel Stadium; Melbourne Town Hall. We publish 9 Melbourne venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-brisbane",
+   "page": "venue-finder-brisbane.html",
+   "title": "Featured venues for Brisbane",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Brisbane Convention & Exhibition Centre; Sofitel Brisbane Central; The Star Brisbane Event Centre; Royal International Convention Centre; Brisbane City Hall; Howard Smith Wharves. We publish 11 Brisbane venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-perth",
+   "page": "venue-finder-perth.html",
+   "title": "Featured venues for Perth",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Perth Convention and Exhibition Centre; Crown Perth; Hyatt Regency Perth; Optus Stadium; The Ritz-Carlton, Perth; Esplanade Hotel Fremantle by Rydges. We publish 11 Perth venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-adelaide",
+   "page": "venue-finder-adelaide.html",
+   "title": "Featured venues for Adelaide",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Adelaide Convention Centre; Amora Hotel Adelaide; Adelaide Oval; Adelaide Showground; National Wine Centre of Australia; Novotel Barossa Valley Resort. We publish 10 Adelaide venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-canberra",
+   "page": "venue-finder-canberra.html",
+   "title": "Featured venues for Canberra",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: National Convention Centre Canberra; QT Canberra; Hotel Realm; National Museum of Australia; National Gallery of Australia; Exhibition Park in Canberra. We publish 10 Canberra venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-hobart",
+   "page": "venue-finder-hobart.html",
+   "title": "Featured venues for Hobart",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Hotel Grand Chancellor Hobart; Wrest Point; Crowne Plaza Hobart; The Tasman, a Luxury Collection Hotel; Princes Wharf 1; Mona. We publish 10 Hobart venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-darwin",
+   "page": "venue-finder-darwin.html",
+   "title": "Featured venues for Darwin",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Darwin Convention Centre; DoubleTree by Hilton Hotel Esplanade Darwin; Hilton Darwin; Mindil Beach Casino Resort; Vibe Hotel Darwin Waterfront; Museum and Art Gallery of the Northern Territory. We publish 7 Darwin venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-gold-coast",
+   "page": "venue-finder-gold-coast.html",
+   "title": "Featured venues for Gold Coast",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Gold Coast Convention and Exhibition Centre; The Star Gold Coast; RACV Royal Pines Resort; Sheraton Grand Mirage Resort, Gold Coast; InterContinental Sanctuary Cove Resort; HOTA, Home of the Arts. We publish 10 Gold Coast venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-sunshine-coast",
+   "page": "venue-finder-sunshine-coast.html",
+   "title": "Featured venues for Sunshine Coast",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Sunshine Coast Convention Centre; The Events Centre, Caloundra; Peppers Noosa Resort & Villas; Elysium Noosa; Spicers Clovelly Estate; Australia Zoo. We publish 9 Sunshine Coast venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-cairns",
+   "page": "venue-finder-cairns.html",
+   "title": "Featured venues for Cairns",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Cairns Convention Centre; Pullman Cairns International; Pullman Reef Hotel Casino; Shangri-La The Marina, Cairns; Sheraton Grand Mirage Resort, Port Douglas; Cairns Performing Arts Centre. We publish 10 Cairns venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-hunter-valley",
+   "page": "venue-finder-hunter-valley.html",
+   "title": "Featured venues for Hunter Valley",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Rydges Resort Hunter Valley; Oaks Cypress Lakes Resort; Chateau Elan at The Vintage; Hope Estate; Bimbadgen; Spicers Vineyards Estate. We publish 6 Hunter Valley venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-blue-mountains",
+   "page": "venue-finder-blue-mountains.html",
+   "title": "Featured venues for Blue Mountains",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Fairmont Resort Blue Mountains MGallery; Hydro Majestic Hotel; Mountain Heritage Hotel; Ardour Lilianfels Blue Mountains; The Carrington Hotel; Blue Mountains Cultural Centre. We publish 8 Blue Mountains venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-byron-bay",
+   "page": "venue-finder-byron-bay.html",
+   "title": "Featured venues for Byron Bay",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: Elements of Byron; Crystalbrook Byron; Byron Theatre, Byron Community Centre; Rae's on Wategos; Byron Bay Surf Life Saving Club; Ramada Hotel Ballina Byron. We publish 6 Byron Bay venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-yarra-valley",
+   "page": "venue-finder-yarra-valley.html",
+   "title": "Featured venues for Yarra Valley",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: RACV Healesville Country Club; Yarra Valley Lodge; Chateau Yering Hotel; Levantine Hill Estate; TarraWarra Museum of Art; Balgownie Estate Vineyard Resort & Spa. We publish 9 Yarra Valley venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-featured-mornington-peninsula",
+   "page": "venue-finder-mornington-peninsula.html",
+   "title": "Featured venues for Mornington Peninsula",
+   "text": "Six venues sit in the featured band on this page, ahead of the full list. Right now they are: RACV Cape Schanck Resort; Mornington Racecourse; The Continental Sorrento; Lancemore Lindenderry Red Hill; Jackalope Hotel; Pt. Leo Estate. We publish 9 Mornington Peninsula venues in total, so the six are a choice, and they are the ones a planner reads first.\n\nTell us which six you want here, in order, and mark each one for commission: TOP for your best rate, STANDARD, or LOW. Where two venues are equally right for the brief, the better rate wins the slot.\n\nOne rule we should hold: only put a venue in this band if you would still recommend it to a client who was paying you nothing. The page says we only put forward what we can speak for, and this band is where that gets tested.\n\nFaster than typing sixteen lists: CVBS-featured-venues-commission.csv is in the project folder with all 190 venues, the six currently featured on each page already ticked, and two blank columns for the commission tier and the order you want. Mark it up once and send it back, then answer here with 'done, in the spreadsheet'.",
+   "who": "Karen"
   }
  ]
 }

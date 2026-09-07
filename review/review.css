@@ -311,7 +311,7 @@ a{color:var(--blue)}
   margin-left:auto;flex:none;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 7px;
 }
-.ask-txt{font-size:.79rem;line-height:1.55;color:var(--muted);margin-bottom:9px}
+.ask-txt{font-size:.79rem;line-height:1.55;color:var(--muted);margin-bottom:9px;white-space:pre-wrap}
 .ask-input{
   width:100%;min-height:64px;border:1px solid var(--line);border-radius:7px;padding:8px 9px;
   font-size:.83rem;line-height:1.5;resize:vertical;

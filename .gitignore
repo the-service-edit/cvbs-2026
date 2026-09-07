@@ -117,3 +117,8 @@ _scope-source/
 # it"). This repository is public, so the source stays on Mel's machine and only
 # the generated pages deploy. Same rule as _pricing-source and _scope-source.
 _offers-source/
+
+# Commission rates. This repository is public on the branch deploy, so the
+# venue commission mark-up sheet must never be committed. Added 7 Sep 2026.
+CVBS-featured-venues-commission.csv
+CVBS-featured-venues-commission-*.csv
