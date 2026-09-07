@@ -46,6 +46,74 @@
     });
   });
 
+  /* Offers used to live as anchor sections on offers.html. Links already sent
+     out in EDMs still carry offers.html#westin-singapore, and that hash now
+     matches nothing on the page. Send those to the page the offer moved to.
+     Only slugs that are still live have a card, so a closed offer quietly
+     leaves the reader on the offers page, which is where they should be. */
+  if (/\/offers\.html$/.test(location.pathname) && location.hash.length > 1) {
+    var oldSlug = location.hash.slice(1);
+    if (/^[a-z0-9-]+$/.test(oldSlug) &&
+        doc.querySelector('a[href="offer-' + oldSlug + '.html"]')) {
+      location.replace('offer-' + oldSlug + '.html');
+    }
+  }
+
+  /* Offer deadlines. The site is static and rebuilt by hand, so a day count
+     written into the HTML would start lying the next morning. The markup
+     carries the date, which is correct with or without this running, and this
+     turns it into the time remaining, which is the part that makes somebody
+     act. Anything with data-bookby gets it: the pill on an offer page and the
+     line on every offer card. */
+  var deadlines = doc.querySelectorAll('[data-bookby]');
+  Array.prototype.forEach.call(deadlines, function (el) {
+    var iso = el.getAttribute('data-bookby') || '';
+    var by = el.getAttribute('data-by') || el.textContent.trim();
+    var parts = iso.split('-');
+    if (parts.length !== 3) return;
+    var end = new Date(+parts[0], +parts[1] - 1, +parts[2], 23, 59, 59);
+    if (isNaN(end.getTime())) return;
+    var now = new Date();
+    var days = Math.ceil((end - now) / 86400000);
+
+    /* A chip carrying data-soononly earns its place only inside that window.
+       The three cards used to show "Spring 2026", "Book by 30 Dec 2026" and
+       "Book by 28 Feb 2027" in the same slot, which is three different kinds
+       of thing wearing one badge. A chip on a photograph now always means the
+       same thing: this one is closing. */
+    var only = parseInt(el.getAttribute('data-soononly'), 10);
+    if (only) {
+      if (days < 0 || days > only) { el.parentNode.removeChild(el); return; }
+      el.textContent = days === 0 ? 'Closes today'
+        : days === 1 ? 'Closes tomorrow' : 'Closes in ' + days + ' days';
+      el.hidden = false;
+      return;
+    }
+    var icon = el.querySelector('svg');
+    var soon = el.classList.contains('odead') ? 'odead--soon' : 'ocard-days--soon';
+    var label;
+    if (days < 0) {
+      label = 'This offer has closed';
+      by = '';
+      el.classList.add(el.classList.contains('odead') ? 'odead--past' : 'ocard-days--past');
+    } else if (days === 0) {
+      label = 'Closes today';
+      el.classList.add(soon);
+    } else if (days === 1) {
+      label = '1 day left';
+      el.classList.add(soon);
+    } else {
+      label = days + ' days left';
+      if (days <= 30) el.classList.add(soon);
+    }
+    var b = doc.createElement('b');
+    b.textContent = label;
+    el.textContent = '';
+    if (icon) el.appendChild(icon);
+    el.appendChild(b);
+    if (by) el.appendChild(doc.createTextNode(' \u00b7 ' + by));
+  });
+
   /* Scroll reveal */
   var reveals = doc.querySelectorAll('.reveal');
   if (reveals.length && 'IntersectionObserver' in window) {

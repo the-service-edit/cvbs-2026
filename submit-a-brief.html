@@ -252,12 +252,9 @@
           </div>
 
           <div class="field" id="f-delegates">
-            <label for="delegates">Number of delegates <span class="req">*</span></label>
-            <select id="delegates" name="Delegates" required>
-              <option value="">Select range...</option>
-              <option>Under 20</option><option>20–50</option><option>50–100</option><option>100–200</option><option>200–300</option><option>300+</option>
-            </select>
-            <div class="err">Please choose a range.</div>
+            <label for="delegates">Number of delegates <span class="req">*</span> <span class="hint">An estimate is fine</span></label>
+            <input type="text" id="delegates" name="Delegates" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="e.g. 120" required>
+            <div class="err">Please tell us roughly how many people.</div>
           </div>
 
           <div class="field" id="f-dates">
@@ -480,6 +477,14 @@
         document.getElementById('locationOther').placeholder=intl?'e.g. Singapore, Bali, Fiji, Queenstown':'e.g. Darwin, NT or Regional Victoria';
       }
     });
+    /* 7 Sep 2026: delegates is a typed number, not a range. A brief that says
+       "100-200" is not a brief we can source against, and every one of them
+       cost an email back to ask. Digits only, so the field cannot hold prose. */
+    var delEl=document.getElementById('delegates');
+    if(delEl) delEl.addEventListener('input',function(){
+      var v=delEl.value.replace(/[^0-9]/g,'');
+      if(v!==delEl.value) delEl.value=v;
+    });
     var flex=document.getElementById('flexDates'), sd=document.getElementById('startDate'), ed=document.getElementById('endDate');
     flex.addEventListener('change',function(){ var d=flex.checked; sd.disabled=d; ed.disabled=d; sd.style.opacity=ed.style.opacity=d?.5:1; });
     sd.addEventListener('change',function(){ed.min=sd.value||'';});
@@ -643,7 +648,10 @@
         var loc=document.getElementById('location'); mark(document.getElementById('f-location'),!loc.value); if(!loc.value)ok=false;
         var detail=document.getElementById('locationOther'),needsDetail=(loc.value==='Other'||loc.value==='International'),missingDetail=needsDetail&&!detail.value.trim();
         mark(document.getElementById('f-location-other'),missingDetail);if(missingDetail)ok=false;
-        var del=document.getElementById('delegates'); mark(document.getElementById('f-delegates'),!del.value); if(!del.value)ok=false;
+        var del=document.getElementById('delegates');
+        var delN=parseInt(String(del.value).replace(/[^0-9]/g,''),10);
+        var badDel=!(delN>0);
+        mark(document.getElementById('f-delegates'),badDel); if(badDel)ok=false;
         var badDates=!flex.checked&&sd.value&&ed.value&&ed.value<sd.value;
         mark(document.getElementById('f-dates'),badDates);if(badDates)ok=false;
       }
@@ -814,14 +822,11 @@
     if(!hit){var oth=document.getElementById('locationOther'); if(oth&&!/suggest/i.test(dest)){oth.value=dest;}}
     loc.dispatchEvent(new Event('change'));
   }
-  /* guests arrives as a number from the hero form; Delegates is a range select. */
+  /* guests arrives as a number from the hero form and Delegates now takes one. */
   var del=document.getElementById('delegates');
-  if(del&&guests){
+  if(del&&guests&&!del.value){
     var n=parseInt(String(guests).replace(/[^0-9]/g,''),10);
-    if(!isNaN(n)){
-      var band=n<20?'Under 20':n<=50?'20\u201350':n<=100?'50\u2013100':n<=200?'100\u2013200':n<=300?'200\u2013300':'300+';
-      for(var i=0;i<del.options.length;i++){ if(del.options[i].text===band){ del.selectedIndex=i; break; } }
-    }
+    if(n>0){ del.value=String(n); del.dispatchEvent(new Event('input',{bubbles:true})); }
   }
   var serviceMap={
     'Conference':'Conference venue finding',
@@ -867,12 +872,8 @@
     window.CVBS_NOTES_GENERATED=true;
   }
 
-  var band=clean(p.get('delegates'),20), del=el('delegates');
-  if(del&&band&&!del.value){
-    for(var i=0;i<del.options.length;i++){
-      if(del.options[i].text===band){del.selectedIndex=i;del.dispatchEvent(new Event('change',{bubbles:true}));break;}
-    }
-  }
+  var delN=parseInt(clean(p.get('delegates'),8).replace(/[^0-9]/g,''),10), del=el('delegates');
+  if(del&&delN>0&&!del.value){del.value=String(delN);del.dispatchEvent(new Event('input',{bubbles:true}));}
   var dur=el('duration'), days=parseInt(clean(p.get('days'),4),10);
   if(dur&&!dur.value&&days){
     var want=days===1?'1':(days===2?'2':(days>=3?'3':''));

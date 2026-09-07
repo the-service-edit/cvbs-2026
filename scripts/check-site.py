@@ -32,11 +32,7 @@ FOREIGN_HOSTS = [h for h in ('https://the-service-edit.github.io/cvbs-2026',
 
 SKIP_PREFIX = ('_backup', '_original', '_preview', '_vv', '_hero', '_superseded',
                'CVBS-', 'cvbs-strategy', 'cvbs-landing', 'cvbs-services',
-               'index-pro', 'index-video', 'index-strip', 'index-everlab',
-               # offer-*.html are meta refresh stubs kept so old offer links
-               # still land somewhere. They carry noindex and no content, and
-               # holding them to page rules produces noise, not findings.
-               'offer-')
+               'index-pro', 'index-video', 'index-strip', 'index-everlab')
 SKIP_DIR = ('presentation', 'hub', 'Quote-Generator', 'Post-Designer', 'EDM-Designer',
             'email-templates', 'instagram-carousels', '_venue-index-source',
             '_venue-visits-source', '_entity-source', '_edm-source', '_scope-source',
@@ -53,6 +49,14 @@ def site_pages():
         b = os.path.basename(p)
         if any(b.startswith(s) for s in SKIP_PREFIX):
             continue
+        # Meta refresh stubs (a closed offer, a moved page) carry noindex and no
+        # content, so holding them to the page rules produces noise, not
+        # findings. Detected by content rather than by filename since 7 Sep 2026,
+        # when offer-*.html went back to being real pages and only the closed
+        # ones stayed stubs.
+        with io.open(p, encoding='utf-8') as fh:
+            if 'http-equiv="refresh"' in fh.read(1500):
+                continue
         out.append(p)
     out += sorted(glob.glob(os.path.join(ROOT, 'venue-visits', '*.html')))
     out += sorted(glob.glob(os.path.join(ROOT, 'venue-visits', '*', 'index.html')))
