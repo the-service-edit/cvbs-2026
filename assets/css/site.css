@@ -1700,3 +1700,21 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{
     transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1!important;transform:none!important}
 }
+
+/* ===== Homepage hero simplified, 7 Sep 2026 =====
+   Mel: the hero was too chaotic. Removed the long subhead, the inline
+   destination/people brief form and the "not ready to hand it over yet"
+   venue-results line. What remains is eyebrow, headline, one CTA and the
+   proof strip. The brief form still sits in the brief-bar section directly
+   below the fold, so nothing is lost.
+   Desktop (>=980px) puts that block hard left, where the hero scrim is
+   darkest (the 100deg gradient runs dark on the left), so contrast improves
+   as a side effect. Below 980px the hero stays centred exactly as before. */
+@media(min-width:980px){
+  .hero--lhs .hero__inner{grid-template-columns:1fr;justify-items:start;text-align:left}
+  .hero--lhs .lede{max-width:min(760px,54ch);margin-inline:0}
+  .hero--lhs .eyebrow,
+  .hero--lhs .cta-row,
+  .hero--lhs .hero-proofs{justify-content:flex-start}
+  .hero--lhs .hero-proofs{max-width:620px;row-gap:1rem}
+}
