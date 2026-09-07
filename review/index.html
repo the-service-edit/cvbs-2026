@@ -19,7 +19,8 @@
     <p>Every note is signed with your name, so we know who asked for what. Yours, Karen's and Anthony's all land in the same place.</p>
     <ol class="gate-steps">
       <li>Work down the page list on the left. The real site loads beside it.</li>
-      <li>Hit <b>Point at something</b>, then click the headline, photo or button you want changed and type what you want instead.</li>
+      <li>Hit <b>Point at something</b>, then click the headline, photo or button you want changed. Or <b>Add a note</b> if it is about the page as a whole.</li>
+      <li>Answer anything under <b>What we need from you</b>. Those are the pieces only CVBS holds.</li>
       <li><b>Approve page</b> when you are happy with it. We are done when all 58 are green.</li>
     </ol>
     <div class="gate-who" id="gate-who"></div>
@@ -47,6 +48,10 @@
     <span><b id="prog-done">0</b> of <b id="prog-total">0</b> pages reviewed</span>
     <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
   </div>
+
+  <button class="tb-btn todo-chip" id="todo-chip" style="display:none">
+    <span id="todo-count">0</span> needed from you
+  </button>
 
   <div class="sync" id="sync"><span class="dot"></span><span id="sync-txt">Saving locally</span></div>
 
@@ -87,6 +92,7 @@
         <button data-w="mobile">Mobile</button>
       </div>
       <button class="sb-btn pin" id="btn-pin">&#9679; Point at something</button>
+      <button class="sb-btn" id="btn-note">&#9998; Add a note</button>
       <a class="sb-btn" id="btn-tab" href="#" target="_blank" rel="noopener">Open page &#8599;</a>
       <button class="sb-btn" id="btn-panel">Notes</button>
     </div>
@@ -108,6 +114,7 @@
     </div>
     <div class="pn-tabs">
       <button class="pn-tab on" data-tab="page">Notes</button>
+      <button class="pn-tab" data-tab="todo">To do</button>
       <button class="pn-tab" data-tab="all">Everything</button>
     </div>
     <div class="pn-body" id="pn-body"></div>

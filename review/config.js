@@ -19,6 +19,10 @@ window.REVIEW_CONFIG = {
   /* The names offered on the opening screen. */
   reviewers: ["Karen Jepson", "Anthony Jepson", "Mel Cox"],
 
+  /* Names that can add and delete requests in the "What we need from you"
+     block. Everyone else can only answer them. */
+  team: ["Mel Cox"],
+
   /* How often to pull in other people's notes, in seconds. */
   pollSeconds: 25
 };

@@ -1,0 +1,75 @@
+{
+ "note": "Seed requests. Loaded once, then they live in the shared sheet like any other record. Mel can add more from inside the tool, and can delete any of these that are already done. Editing a line here after it has loaded does nothing, change it in the tool instead.",
+ "asks": [
+  {
+   "id": "ask-index-logos",
+   "page": "index.html",
+   "title": "The client logo wall needs a decision",
+   "text": "Three of the ten logos are brands that no longer trade under that name. Australand became Frasers Property Australia in 2015. BT Financial Group was wound down into Westpac. Heritage Bank merged in 2023 and trades as People First Bank. Keep them as they are, update to the current brand, or drop them? And can you confirm in writing that we can name all ten.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-index-headshots",
+   "page": "index.html",
+   "title": "Headshots for Chantelle and Rychelle",
+   "text": "They currently show as initials beside photographs of Karen and Anthony, on the homepage and the about page. Two phone photographs against a plain wall, in the same light, is all it takes.",
+   "who": "Either"
+  },
+  {
+   "id": "ask-about-team",
+   "page": "about.html",
+   "title": "Chantelle and Rychelle in full",
+   "text": "Surnames, confirmed job titles, and direct email addresses if they should be listed. Four named people is one of the few things a venue marketplace cannot copy, and it is worth having complete.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-about-promises",
+   "page": "about.html",
+   "title": "Approve or strike the two promises",
+   "text": "Two sentences on the site commit CVBS to something. 1. We only put forward what we can speak for. 2. You will hear the drawbacks too. Both appear on the about page and on all sixteen destination pages. The second is the sharper one and no competitor makes it, but it does mean saying something unflattering about venues that pay you commission. Yours to accept or strike out.",
+   "who": "Both"
+  },
+  {
+   "id": "ask-about-abn",
+   "page": "about.html",
+   "title": "The ABN and the exact registered name",
+   "text": "The eleven digit ABN, and the legal entity name exactly as registered, which may not be the trading name. The site says since 1989 sixteen times and nothing anywhere backs it up. The business register turns that claim into a checkable fact.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-about-memberships",
+   "page": "about.html",
+   "title": "Memberships, accreditations and insurance",
+   "text": "Anything CVBS belongs to or holds. Meetings and Events Australia, a chamber, a bureau partnership, professional indemnity, anything with a certificate. The body, the membership number if there is one, and the year joined.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-about-known-for",
+   "page": "about.html",
+   "title": "One line each, written separately, no conferring",
+   "text": "What do we want CVBS to be known for? One line each from Karen, Anthony, Chantelle and Rychelle. Written down before you discuss it. Whether the four answers match is the most useful thing we could know about the business right now.",
+   "who": "Both"
+  },
+  {
+   "id": "ask-results-testimonials",
+   "page": "results.html",
+   "title": "Two or three more named testimonials",
+   "text": "The page carries the two real ones from Sherida Bolling at Randstad and Angela Moffett at Energex, under a heading saying CVBS does not publish anonymous testimonials. That heading is worth keeping and it needs more behind it. Name, role, organisation, the quote, and their written OK.",
+   "who": "Karen"
+  },
+  {
+   "id": "ask-contact-links",
+   "page": "contact.html",
+   "title": "The links that prove CVBS exists",
+   "text": "The LinkedIn company page, the Google business listing that appears in Maps, and Facebook and Instagram if they are business accounts rather than personal. Copy each address out of your browser bar. Nothing on the site connects CVBS to a single record anywhere else, and this one gap does more damage than everything else combined. Two minutes.",
+   "who": "Either"
+  },
+  {
+   "id": "ask-contact-address",
+   "page": "contact.html",
+   "title": "Confirm the business address",
+   "text": "We have found 43A Flinders Road, Cronulla NSW 2230 in the email templates, and a PO Box 303 elsewhere. Which is the correct one to publish, and are you happy for it to be public?",
+   "who": "Karen"
+  }
+ ]
+}

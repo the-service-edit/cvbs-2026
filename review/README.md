@@ -21,6 +21,7 @@ listed in `sitemap.xml`, so this folder never reaches the production domain.
 | `review.js` | all the logic: pinning, notes, sync, export |
 | `config.js` | **the only file you edit.** Endpoint, key, reviewer names |
 | `pages.json` | the 58 pages, generated from `sitemap.xml` |
+| `asks.json` | the starter list of things we need from CVBS, one per page |
 | `apps-script.gs` | the Google Sheet backend, paste-and-deploy |
 
 ## Turning on the shared sheet (about five minutes, once)
@@ -65,6 +66,29 @@ python3 scripts/build-review-pages.py
 Existing notes stay attached to their pages, because they key off the file
 path, not the position in the list.
 
+## The requests, "What we need from you"
+
+Each page can carry requests: the pieces only CVBS holds. They show at the top
+of the notes panel on the page they belong to, and every one of them is listed
+together under the **To do** tab and in **All feedback**. Karen or Anthony types
+the answer in the box and hits **Mark supplied**, or **Save for now** if they
+are part way through. The count in the top bar is how many are still open.
+
+`asks.json` seeds ten of them, taken from the two supply documents written
+on 19 August: `CVBS-What-Karen-Must-Supply.html` and
+`CVBS-Being-Chosen-Supply-List.html`. Some may already be closed, so delete the
+stale ones the first time you open the tool.
+
+**Seeding happens once.** Each request is written into the shared store under a
+fixed id, then it lives there like any other record. Editing `asks.json` after
+that does nothing, and deleting a request in the tool sticks. Add new ones from
+inside the tool instead: sign in as a name listed in `team` in `config.js` and
+use **+ Add a request for this page**.
+
+An open request does not stop a page being approved. They are two separate
+questions: is the page right, and what are we still waiting on. The rail shows
+both, a gold badge for open notes and a teal one for open requests.
+
 ## What the client sees
 
 - **Left**: all 58 pages, grouped, with a dot each. Grey not looked at,
@@ -72,7 +96,11 @@ path, not the position in the list.
 - **Middle**: the real page in a frame, at desktop, tablet or phone width.
 - **Point at something**: turns on pin mode. Hover highlights whatever is
   under the cursor, click drops a numbered pin, they type the change.
-- **Right**: the notes on this page, and every open note across the site.
+- **Add a note**: for anything about the page as a whole, with nothing to point
+  at. Those show a square marker in the list and no pin on the page.
+- **Right**: the requests for this page, the notes on it, everything still
+  needed across the site under **To do**, and every open note under
+  **Everything**.
 - **Approve page** moves them to the next unreviewed page automatically.
 - **All feedback**: the running total, plus **Copy for Mel** and a CSV.
 

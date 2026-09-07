@@ -74,6 +74,31 @@ function list() {
 function notesFor(pageId) {
   return list().filter(function (r) { return r.kind === "note" && r.page === pageId; });
 }
+/* Notes that sit on an element. Page level notes have no selector and get
+   no pin, they just live in the list. */
+function pinnedFor(pageId) {
+  return notesFor(pageId).filter(function (r) { return !!r.selector; });
+}
+function asksFor(pageId) {
+  return list().filter(function (r) { return r.kind === "ask" && r.page === pageId; });
+}
+function answerFor(askId) {
+  var a = records["ans-" + askId];
+  return a && !a.deleted ? a : null;
+}
+function askDone(askId) {
+  var a = answerFor(askId);
+  return !!(a && a.status === "done");
+}
+function openAsksFor(pageId) {
+  return asksFor(pageId).filter(function (r) { return !askDone(r.id); });
+}
+function allOpenAsks() {
+  return list().filter(function (r) { return r.kind === "ask" && !askDone(r.id); });
+}
+function isTeam() {
+  return (CFG.team || ["Mel Cox"]).indexOf(who) !== -1;
+}
 function openNotesFor(pageId) {
   return notesFor(pageId).filter(function (r) { return r.status !== "resolved"; });
 }
@@ -266,7 +291,7 @@ function drawMarkers() {
   if (!frameDoc || !markerBox) return;
   markerBox.innerHTML = "";
   var o = docOrigin();
-  notesFor(current.id).forEach(function (rec, i) {
+  pinnedFor(current.id).forEach(function (rec, i) {
     var p = pointOf(rec);
     var pin = frameDoc.createElement("div");
     pin.className = "cvbsr-pin" + (rec.status === "resolved" ? " done" : "");
@@ -284,11 +309,12 @@ function drawMarkers() {
 
 function scrollToNote(rec) {
   if (!frameDoc) return;
+  if (!rec.selector) { toast("That one is about the whole page, not a spot on it"); return; }
   var p = pointOf(rec);
   var w = $("#frame").contentWindow;
   w.scrollTo({ top: Math.max(0, p.y - w.innerHeight / 2), behavior: "smooth" });
   var pins = markerBox.querySelectorAll(".cvbsr-pin");
-  var idx = notesFor(current.id).findIndex(function (r) { return r.id === rec.id; });
+  var idx = pinnedFor(current.id).findIndex(function (r) { return r.id === rec.id; });
   if (pins[idx]) {
     pins[idx].classList.add("on");
     setTimeout(function () { pins[idx].classList.remove("on"); }, 2200);
@@ -356,6 +382,14 @@ function onFrameClick(e) {
   openComposer(rec);
 }
 
+function newPageNote() {
+  openComposer({
+    id: uid(), kind: "note", project: CFG.project, page: current.id,
+    pageTitle: current.title, author: who, text: "",
+    selector: "", label: "", status: "open", created: now(), updated: now()
+  });
+}
+
 /* ------------------------------------------------------------- composer   */
 var draft = null;
 function openComposer(rec) {
@@ -364,7 +398,7 @@ function openComposer(rec) {
   tab = "page";
   renderPanel();
   var ta = $("#composer-text");
-  if (ta) { ta.focus(); }
+  if (ta) { ta.focus(); ta.scrollIntoView({ block: "center", behavior: "smooth" }); }
 }
 
 function commitDraft() {
@@ -388,6 +422,10 @@ function renderProgress() {
   $("#prog-done").textContent = done;
   $("#prog-total").textContent = PAGES.length;
   $("#prog-fill").style.width = (PAGES.length ? (done / PAGES.length * 100) : 0) + "%";
+  var open = allOpenAsks().length;
+  var chip = $("#todo-chip");
+  chip.style.display = open ? "" : "none";
+  $("#todo-count").textContent = open;
 }
 
 function renderRail() {
@@ -407,29 +445,86 @@ function renderRail() {
       lastGroup = p.group;
       html += '<div class="grp">' + esc(p.group) + '<span class="g-count">' + counts[p.group] + "</span></div>";
     }
-    var n = openNotesFor(p.id).length;
+    var n = openNotesFor(p.id).length, a = openAsksFor(p.id).length;
     html += '<div class="pitem' + (current && current.id === p.id ? " on" : "") +
       '" data-id="' + esc(p.id) + '" data-st="' + pageState(p.id) + '">' +
       '<span class="st"></span><div class="nm">' + esc(p.title) +
       '<div class="url">/' + esc(p.id) + "</div></div>" +
-      (n ? '<span class="badge">' + n + "</span>" : "") + "</div>";
+      '<span class="badges">' +
+      (a ? '<span class="badge ask" title="things we need from you">' + a + "</span>" : "") +
+      (n ? '<span class="badge">' + n + "</span>" : "") + "</span></div>";
   });
   box.innerHTML = html || '<div class="empty">Nothing matches.</div>';
 }
 
 function noteHtml(rec, showPage, idx) {
-  return '<div class="note' + (rec.status === "resolved" ? " resolved" : "") + '" data-id="' + rec.id + '">' +
+  var mark = rec.selector ? (idx === undefined ? "•" : idx) : "□";
+  return '<div class="note' + (rec.status === "resolved" ? " resolved" : "") +
+    (rec.selector ? "" : " whole") + '" data-id="' + rec.id + '">' +
     (showPage ? '<div class="note-page" data-goto="' + esc(rec.page) + '">' + esc(rec.pageTitle || rec.page) + "</div>" : "") +
-    '<div class="note-top"><span class="note-pin">' + (showPage ? "•" : (idx + 1)) + "</span>" +
+    '<div class="note-top"><span class="note-pin">' + mark + "</span>" +
     '<span class="note-who">' + esc(rec.author) + "</span>" +
     '<span class="note-when">' + when(rec.created) + "</span></div>" +
-    (rec.label ? '<div class="note-el">' + esc(rec.label) + "</div>" : "") +
+    (rec.label ? '<div class="note-el">' + esc(rec.label) + "</div>"
+               : '<div class="note-el">about the page as a whole</div>') +
     '<div class="note-txt">' + esc(rec.text) + "</div>" +
     '<div class="note-acts">' +
-      '<button data-act="find">Show me</button>' +
+      (rec.selector ? '<button data-act="find">Show me</button>' : "") +
       '<button data-act="toggle">' + (rec.status === "resolved" ? "Reopen" : "Mark done") + "</button>" +
       (rec.author === who ? '<button data-act="del">Delete</button>' : "") +
     "</div></div>";
+}
+
+function askHtml(rec) {
+  var ans = answerFor(rec.id), done = askDone(rec.id);
+  return '<div class="ask' + (done ? " done" : "") + '" data-ask="' + rec.id + '">' +
+    '<div class="ask-top"><span class="ask-tick">' + (done ? "&#10003;" : "") + "</span>" +
+    '<div class="ask-title">' + esc(rec.title) + "</div>" +
+    (rec.who ? '<span class="ask-who">' + esc(rec.who) + "</span>" : "") + "</div>" +
+    '<div class="ask-txt">' + esc(rec.text) + "</div>" +
+    (done
+      ? '<div class="ask-answer"><b>' + esc(ans.author) + "</b> " + when(ans.updated || ans.created) +
+        (ans.text ? '<div class="ask-answer-txt">' + esc(ans.text) + "</div>" : "") +
+        '<div class="note-acts"><button data-askact="reopen">Not done after all</button></div></div>'
+      : '<textarea class="ask-input" placeholder="Answer here, or say where you have sent it">' +
+        esc(ans ? ans.text : "") + "</textarea>" +
+        '<div class="note-acts"><button class="ask-go" data-askact="done">Mark supplied</button>' +
+        '<button data-askact="save">Save for now</button>' +
+        (isTeam() ? '<button data-askact="del">Delete request</button>' : "") + "</div>") +
+    "</div>";
+}
+
+function askBlock(pageId) {
+  var a = asksFor(pageId);
+  if (!a.length && !isTeam()) return "";
+  var open = openAsksFor(pageId).length;
+  return '<div class="asks">' +
+    '<div class="asks-head">What we need from you' +
+      (a.length
+        ? (open ? '<span class="asks-count">' + open + "</span>"
+                : '<span class="asks-count ok">all done</span>')
+        : "") +
+    "</div>" +
+    (a.length ? a.map(askHtml).join("") : '<div class="asks-none">Nothing needed on this page.</div>') +
+    (isTeam() ? '<button class="btn ghost full" id="btn-add-ask">+ Add a request for this page</button>' : "") +
+    "</div>";
+}
+
+function saveAnswer(askId, done) {
+  var box = document.querySelector('.ask[data-ask="' + askId + '"] .ask-input');
+  var ask = records[askId];
+  var txt = box ? box.value.trim() : "";
+  if (done && !txt) {
+    /* some requests are a decision or a file sent by email, so an empty
+       answer is allowed, but say so rather than leaving it blank */
+    txt = "Done. Sent to Mel outside the tool.";
+  }
+  put({
+    id: "ans-" + askId, kind: "answer", project: CFG.project, askId: askId,
+    page: ask.page, pageTitle: ask.pageTitle, author: who, text: txt,
+    status: done ? "done" : "open", created: now(), updated: now()
+  });
+  toast(done ? "Marked supplied" : "Saved");
 }
 
 function renderPanel() {
@@ -438,6 +533,7 @@ function renderPanel() {
   $$(".pn-tab").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === tab); });
   var body = $("#pn-body"), foot = $("#pn-foot"), html = "";
 
+  /* ---- everything on the site ---- */
   if (tab === "all") {
     var all = list().filter(function (r) { return r.kind === "note"; });
     var open = all.filter(function (r) { return r.status !== "resolved"; });
@@ -446,7 +542,7 @@ function renderPanel() {
       : '<div class="empty"><div class="big">&#10003;</div>No open notes anywhere on the site.</div>';
     var done = all.filter(function (r) { return r.status === "resolved"; });
     if (done.length) {
-      html += '<div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#6E747B;margin:18px 0 8px">Done ' + done.length + "</div>";
+      html += '<div class="listsep">Done ' + done.length + "</div>";
       html += done.map(function (r) { return noteHtml(r, true); }).join("");
     }
     body.innerHTML = html;
@@ -454,24 +550,58 @@ function renderPanel() {
     return;
   }
 
-  var mine = notesFor(current.id);
+  /* ---- every outstanding request, across the site ---- */
+  if (tab === "todo") {
+    var asks = list().filter(function (r) { return r.kind === "ask"; });
+    var byPage = {};
+    asks.forEach(function (r) { (byPage[r.page] = byPage[r.page] || []).push(r); });
+    var pages = Object.keys(byPage).sort(function (a, b) {
+      return PAGES.findIndex(function (p) { return p.id === a; }) -
+             PAGES.findIndex(function (p) { return p.id === b; });
+    });
+    if (!pages.length) {
+      html = '<div class="empty">No requests yet.</div>';
+    } else {
+      pages.forEach(function (pid) {
+        var openN = byPage[pid].filter(function (r) { return !askDone(r.id); }).length;
+        html += '<div class="todo-page" data-goto="' + esc(pid) + '">' +
+          esc((BY_ID[pid] || {}).title || pid) +
+          '<span class="todo-count' + (openN ? "" : " ok") + '">' + (openN ? openN + " to do" : "done") + "</span></div>";
+        byPage[pid].forEach(function (r) {
+          html += '<div class="todo-item' + (askDone(r.id) ? " done" : "") + '" data-goto="' + esc(pid) + '">' +
+            '<span class="ask-tick">' + (askDone(r.id) ? "&#10003;" : "") + "</span>" + esc(r.title) + "</div>";
+        });
+      });
+    }
+    body.innerHTML = html;
+    foot.innerHTML = '<button class="btn full" id="btn-overview2">Open the full list</button>';
+    return;
+  }
+
+  /* ---- this page ---- */
+  html += askBlock(current.id);
+
   if (draft) {
     html += '<div class="composer">' +
-      (draft.label ? '<div class="cm-el">Note on ' + esc(draft.label) + "</div>" : "") +
+      '<div class="cm-el">' + (draft.label ? "Note on " + esc(draft.label) : "A note about this page") + "</div>" +
       '<textarea id="composer-text" placeholder="What needs changing here? Plain English is perfect."></textarea>' +
       '<div class="cm-acts"><button class="btn go" id="cm-save">Save note</button>' +
       '<button class="btn ghost" id="cm-cancel">Cancel</button></div></div>';
   }
+
+  var mine = notesFor(current.id), n = 0;
   html += mine.length
-    ? mine.map(function (r, i) { return noteHtml(r, false, i); }).join("")
-    : (draft ? "" : '<div class="empty"><div class="big">&#9679;</div>No notes on this page yet.<br>Hit <b>Point at something</b> and click anything you want changed.</div>');
+    ? mine.map(function (r) { if (r.selector) n++; return noteHtml(r, false, r.selector ? n : undefined); }).join("")
+    : (draft ? "" : '<div class="empty">No notes on this page yet.<br>Use <b>Point at something</b> for a specific bit, or <b>Add a note</b> for the page as a whole.</div>');
   body.innerHTML = html;
 
-  var st = pageState(current.id), v = verdictFor(current.id);
+  var st = pageState(current.id), v = verdictFor(current.id), stuck = openAsksFor(current.id).length;
   foot.innerHTML =
     '<div class="verdict"><h4>' + (st === "approved" ? "Approved" : st === "changes" ? "Changes requested" : "How is this page?") + "</h4>" +
-    "<p>" + (v ? esc(v.author) + " marked it " + (v.verdict === "approved" ? "approved" : "for changes") + " " + when(v.created) + "." :
-      "Approve it, or leave notes above and mark it for changes.") + "</p>" +
+    "<p>" + (stuck
+      ? "There " + (stuck === 1 ? "is 1 request" : "are " + stuck + " requests") + " on this page still open. You can still approve the page, we just need those to finish it."
+      : v ? esc(v.author) + " marked it " + (v.verdict === "approved" ? "approved" : "for changes") + " " + when(v.created) + "."
+          : "Approve it, or leave notes above and mark it for changes.") + "</p>" +
     '<div class="row"><button class="btn go" data-verdict="approved">Approve page</button>' +
     '<button class="btn" data-verdict="changes">Needs changes</button></div></div>';
 }
@@ -517,7 +647,19 @@ function renderOverview() {
     '<div class="sum open"><div class="n">' + changes + '</div><div class="l">Changes</div></div>' +
     '<div class="sum left"><div class="n">' + todo + '</div><div class="l">Not reviewed</div></div>' +
     '<div class="sum"><div class="n">' + open.length + '</div><div class="l">Open notes</div></div>' +
+    '<div class="sum ask"><div class="n">' + allOpenAsks().length + '</div><div class="l">We need from you</div></div>' +
     "</div>";
+
+  var oa = allOpenAsks();
+  if (oa.length) {
+    html += "<h3>Still needed from CVBS</h3>";
+    oa.forEach(function (r) {
+      html += '<div class="ov-ask"><b>' + esc(r.title) + "</b>" +
+        '<span class="ov-ask-page" data-goto="' + esc(r.page) + '">' +
+        esc((BY_ID[r.page] || {}).title || r.page) + "</span>" +
+        '<div class="ask-txt">' + esc(r.text) + "</div></div>";
+    });
+  }
 
   var groups = {};
   open.forEach(function (r) { (groups[r.page] = groups[r.page] || []).push(r); });
@@ -535,14 +677,27 @@ function renderOverview() {
 
 function asText() {
   var out = ["CVBS website review", "Exported " + new Date().toLocaleString("en-AU"), ""];
+  var oa0 = allOpenAsks();
+  if (oa0.length) {
+    out.push("STILL NEEDED FROM CVBS");
+    oa0.forEach(function (r) {
+      out.push("  - " + r.title + "  (" + ((BY_ID[r.page] || {}).title || r.page) + ")");
+    });
+    out.push("");
+  }
   PAGES.forEach(function (p) {
-    var ns = notesFor(p.id), st = pageState(p.id);
-    if (!ns.length && st === "todo") return;
+    var ns = notesFor(p.id), st = pageState(p.id), as = asksFor(p.id);
+    if (!ns.length && st === "todo" && !as.length) return;
     out.push(p.title + "  (/" + p.id + ")");
     out.push("  Status: " + (st === "approved" ? "Approved" : st === "changes" ? "Changes requested" : "Not reviewed"));
     ns.forEach(function (r) {
       out.push("  - [" + (r.status === "resolved" ? "done" : "open") + "] " + r.author + ": " + r.text);
-      if (r.label) out.push("      on " + r.label);
+      out.push("      on " + (r.label || "the page as a whole"));
+    });
+    as.forEach(function (r) {
+      var ans = answerFor(r.id);
+      out.push("  * REQUEST [" + (askDone(r.id) ? "supplied" : "open") + "] " + r.title);
+      if (ans && ans.text) out.push("      " + ans.author + ": " + ans.text);
     });
     out.push("");
   });
@@ -550,11 +705,18 @@ function asText() {
 }
 
 function asCsv() {
-  var rows = [["Page", "URL", "Status", "Element", "Reviewer", "Note", "Note status", "Date"]];
+  var rows = [["Page", "URL", "Page status", "Type", "Element or request", "Reviewer", "Note or answer", "Item status", "Date"]];
   PAGES.forEach(function (p) {
     notesFor(p.id).forEach(function (r) {
-      rows.push([p.title, "/" + p.id, pageState(p.id), r.label || "", r.author, r.text,
+      rows.push([p.title, "/" + p.id, pageState(p.id), "Note", r.label || "whole page", r.author, r.text,
         r.status === "resolved" ? "done" : "open", new Date(r.created).toLocaleString("en-AU")]);
+    });
+    asksFor(p.id).forEach(function (r) {
+      var ans = answerFor(r.id);
+      rows.push([p.title, "/" + p.id, pageState(p.id), "Request", r.title,
+        ans ? ans.author : "", ans ? ans.text : "",
+        askDone(r.id) ? "supplied" : "open",
+        ans ? new Date(ans.updated || ans.created).toLocaleString("en-AU") : ""]);
     });
   });
   return rows.map(function (r) {
@@ -578,6 +740,8 @@ function wire() {
   $("#rail-toggle").addEventListener("click", function () { $("#rail").classList.toggle("open"); });
   $("#btn-panel").addEventListener("click", function () { $("#panel").classList.toggle("hide"); });
   $("#btn-pin").addEventListener("click", function () { setPinning(!pinning); });
+  $("#btn-note").addEventListener("click", function () { setPinning(false); newPageNote(); });
+  $("#todo-chip").addEventListener("click", function () { tab = "todo"; $("#panel").classList.remove("hide"); renderPanel(); });
   $("#btn-next").addEventListener("click", nextPage);
 
   $$("#widths button").forEach(function (b) {
@@ -606,7 +770,27 @@ function wire() {
       if (t.dataset.verdict === "approved") setTimeout(nextPage, 450);
       return;
     }
-    if (t.dataset && t.dataset.goto) { selectPage(t.dataset.goto); tab = "page"; renderPanel(); return; }
+    if (t.id === "btn-add-ask") return addAsk();
+    var askAct = t.dataset && t.dataset.askact;
+    if (askAct) {
+      var askId = t.closest(".ask").dataset.ask;
+      if (askAct === "done") saveAnswer(askId, true);
+      if (askAct === "save") saveAnswer(askId, false);
+      if (askAct === "reopen") {
+        var a = records["ans-" + askId];
+        if (a) { a.status = "open"; put(a); }
+      }
+      if (askAct === "del") {
+        var ask = records[askId];
+        if (ask) { ask.deleted = true; put(ask); toast("Request removed"); }
+      }
+      return;
+    }
+    var goto = (t.dataset && t.dataset.goto) || (t.closest("[data-goto]") && t.closest("[data-goto]").dataset.goto);
+    if (goto) {
+      $("#modal").classList.remove("on");
+      selectPage(goto); tab = "page"; renderPanel(); return;
+    }
     var act = t.dataset && t.dataset.act;
     if (act) {
       var wrap = t.closest(".note"), rec = records[wrap.dataset.id];
@@ -669,6 +853,18 @@ function wire() {
   });
 }
 
+function addAsk() {
+  var title = prompt("What do you need from them? Keep it to one line.");
+  if (!title) return;
+  var text = prompt("Any detail? What exactly, and why it matters.") || "";
+  put({
+    id: uid(), kind: "ask", project: CFG.project, page: current.id,
+    pageTitle: current.title, title: title.trim(), text: text.trim(),
+    who: "Either", author: who, created: now(), updated: now()
+  });
+  toast("Request added to this page");
+}
+
 /* ------------------------------------------------------------------ gate  */
 function showGate() {
   var box = $("#gate-who");
@@ -697,6 +893,33 @@ function setWho(name) {
 }
 
 /* ------------------------------------------------------------------ boot  */
+/* asks.json is a starter list. A seeded request is written once and then
+   lives in the shared store like anything else, so editing asks.json later
+   changes nothing. Deleting a request in the tool sticks, because the
+   deleted record is still in the map. */
+function seedAsks() {
+  fetch("asks.json?t=" + Date.now())
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var added = 0;
+      (data.asks || []).forEach(function (a) {
+        if (records[a.id]) return;
+        var page = BY_ID[a.page];
+        if (!page) return;
+        records[a.id] = {
+          id: a.id, kind: "ask", project: CFG.project, page: a.page,
+          pageTitle: page.title, title: a.title, text: a.text,
+          who: a.who || "Either", author: "Mel Cox",
+          created: now(), updated: now()
+        };
+        enqueue(a.id);
+        added++;
+      });
+      if (added) { save(LS_RECORDS, records); renderAll(); }
+    })
+    .catch(function () {});
+}
+
 function boot() {
   records = load(LS_RECORDS, {});
   queue = load(LS_QUEUE, []);
@@ -710,6 +933,7 @@ function boot() {
       wire();
       showGate();
       if (who) { $("#who-name").textContent = who; $("#gate").classList.add("off"); }
+      seedAsks();
       var start = location.hash.slice(1);
       selectPage(BY_ID[start] ? start : PAGES[0].id, false);
       setSync(CFG.endpoint ? "ok" : "local");

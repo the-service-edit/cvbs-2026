@@ -8,9 +8,9 @@
 var SHEET_NAME = "feedback";
 var SHARED_KEY = "cvbs-2026-review";   // must match key in config.js
 
-var COLS = ["id","project","kind","page","pageTitle","author","text","label",
-            "selector","relX","relY","absX","absY","verdict","status",
-            "created","updated","deleted"];
+var COLS = ["id","project","kind","page","pageTitle","author","text","title",
+            "askId","who","label","selector","relX","relY","absX","absY",
+            "verdict","status","created","updated","deleted"];
 
 function sheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
