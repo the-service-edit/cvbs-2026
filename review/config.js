@@ -8,7 +8,7 @@ window.REVIEW_CONFIG = {
      See README.md in this folder for the 5 minute setup.
      Leave it empty and the tool still works, but notes stay on the
      reviewer's own computer instead of being shared. */
-  endpoint: "",
+  endpoint: "https://script.google.com/macros/s/AKfycbxVTVodwNznrFVKtIqIM7s_OYPd2QjoRdWt4JaKk_ysjUGoKVmISWqbTa4RUJysnY7N/exec",
 
   /* Must match SHARED_KEY in the Apps Script. Change both together. */
   key: "cvbs-2026-review",

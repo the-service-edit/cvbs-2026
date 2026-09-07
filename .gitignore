@@ -111,3 +111,9 @@ CVBS-Scope-of-Engagement-Sep-2026.pdf
 CVBS-Presentation-Audit-Aug-2026.html
 CVBS-competitor-usability-audit.md
 _scope-source/
+
+# The offer build source. offers.json carries the parked expired offers, their
+# unpublished copy and internal notes ("ask Karen whether the venue extended
+# it"). This repository is public, so the source stays on Mel's machine and only
+# the generated pages deploy. Same rule as _pricing-source and _scope-source.
+_offers-source/

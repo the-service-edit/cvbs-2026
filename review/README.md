@@ -24,30 +24,26 @@ listed in `sitemap.xml`, so this folder never reaches the production domain.
 | `asks.json` | the starter list of things we need from CVBS, one per page |
 | `apps-script.gs` | the Google Sheet backend, paste-and-deploy |
 
-## Turning on the shared sheet (about five minutes, once)
+## The shared sheet is already on
 
-Until you do this the tool still works, but each person's notes stay in their
-own browser and they have to use **Copy for Mel** to send them. Do the setup
-and everyone sees the same live list, including you.
+Set up 7 Sep 2026. Nothing to do here unless something breaks.
 
-1. Go to <https://sheets.new> and name the sheet **CVBS Website Review**.
-2. **Extensions → Apps Script**. Delete the sample code.
-3. Open `apps-script.gs` from this folder, copy the lot, paste it in, save.
-4. **Deploy → New deployment → Type: Web app**.
-   - Description: `CVBS review`
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-   - Deploy, then authorise when Google asks. The "unverified app" warning is
-     your own script, click **Advanced → Go to project**.
-5. Copy the web app URL. It ends in `/exec`.
-6. Open `config.js` and paste it in:
+- **Sheet:** CVBS Website Review, in hello@theserviceedit.com's Drive.
+  https://docs.google.com/spreadsheets/d/1-7NTF0ey1EFwmB9Rq151Viw_VTIZeAh8_iQNWWy6TIM/edit
+- **Script:** CVBS review store, bound to that sheet. Extensions, Apps Script.
+- **Deployment:** web app, Version 1, executing as hello@theserviceedit.com,
+  access set to Anyone. The URL is already in `config.js`.
 
-   ```js
-   endpoint: "https://script.google.com/macros/s/AKfy.../exec",
-   ```
+Verified end to end from the live site's own origin: a note posts, reads back,
+and a wrong key is refused.
 
-7. Commit and push. The top bar should say **Shared and saved** instead of
-   **Saved on this computer**.
+**If you ever edit `apps-script.gs`,** paste it into the script and then
+**Deploy, Manage deployments, edit the pencil, Version: New version, Deploy.**
+A plain save does not change what the web app serves.
+
+**If the tool starts saying "Offline, will retry",** open the sheet, check the
+script still exists, and confirm the deployment is still on Version 1 with
+access set to Anyone.
 
 The sheet fills a row per note. You can read it, sort it, and tick things off
 there if you prefer that to the tool.
