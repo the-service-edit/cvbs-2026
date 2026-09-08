@@ -14,21 +14,24 @@ var TZ          = "Australia/Sydney";
 var NL          = String.fromCharCode(10);
 
 /* Who receives the internal brief.
-   Set LIVE to true and redeploy to hand this over to CVBS. That is the only
-   change needed. Everything CVBS is on conferencevenues.com.AU. */
-var LIVE        = false;
+   HANDED OVER 8 Sep 2026. Address confirmed by Mel: aj@conferencevenues.com.au.
+   Everything CVBS is on conferencevenues.com.AU, not .com. Karen is not on this
+   list; add her to CC if that changes. */
+var LIVE        = true;
 var TO          = LIVE ? ["aj@conferencevenues.com.au"]
                        : ["hello@theserviceedit.com"];
 var CC          = [];
 var FAIL_ALERT  = "hello@theserviceedit.com";   // told when a send fails but the brief was saved
 
 /* The enquirer also gets their own brief back as a PDF.
-   While CLIENT_LIVE is false that copy goes to FAIL_ALERT instead, so Mel sees
-   exactly what a client would receive before a client ever receives it.
-   Setting it true is NOT enough on its own: the copy is refused unless a Resend
-   key is present, because a client who enquired at conferencevenues.com.au must
-   never receive mail from theserviceedit.com. See sendClientCopy_. */
-var CLIENT_LIVE = false;
+   ON since 8 Sep 2026, but it is GATED: the copy is refused unless a Resend key
+   is present, because a client who enquired at conferencevenues.com.au must
+   never receive mail from theserviceedit.com. Until RESEND_API_KEY is set in
+   Script Properties, every brief sends Mel a failure notice plus a
+   [CLIENT PREVIEW] copy, and the enquirer receives nothing. The moment the key
+   lands, client copies start sending with no further code change and no
+   redeploy. See sendClientCopy_ and README.md. */
+var CLIENT_LIVE = true;
 
 /* From address. Only used when a Resend API key is present in Script
    Properties. Without one the script falls back to MailApp, which sends from

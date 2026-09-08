@@ -57,7 +57,7 @@ LOGO = {"url": SITE + "/assets/img/logo.png", "width": 180, "height": 152}
 # 2. CONTACT  (all verified from the current site)
 # ---------------------------------------------------------------------------
 TELEPHONE = "+61414784999"
-EMAIL = "karen@conferencevenues.com"
+EMAIL = "karen@conferencevenues.com.au"
 OPENING_HOURS = "Mo-Fr 08:30-17:30"
 
 # CONFIRM: found in the EDM footer source, currently commented out in the build.
@@ -109,8 +109,8 @@ AWARDS = []
 # 5. PEOPLE  (named humans are a recommendation signal, anonymous ones are not)
 # ---------------------------------------------------------------------------
 PEOPLE = [
-    {"name": "Karen Jepson",   "job": "Director", "email": "karen@conferencevenues.com", "tel": "+61414784999"},
-    {"name": "Anthony Jepson", "job": "Director", "email": "aj@conferencevenues.com",    "tel": "+61402033861"},
+    {"name": "Karen Jepson",   "job": "Director", "email": "karen@conferencevenues.com.au", "tel": "+61414784999"},
+    {"name": "Anthony Jepson", "job": "Director", "email": "aj@conferencevenues.com.au",    "tel": "+61402033861"},
     # SUPPLY surnames and confirmed titles for Chantelle and Rychelle, then add them here.
 ]
 

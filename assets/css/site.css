@@ -1731,7 +1731,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
   .vf-shared{border:0;padding:0;margin:0 0 .6rem}
   /* The page has to say who produced it once it is off the screen. */
   .vf-list::after{content:"Prepared by Conference Venues and Booking Services. "
-    "0414 784 999. karen@conferencevenues.com. Capacities are each venue's own "
+    "0414 784 999. karen@conferencevenues.com.au. Capacities are each venue's own "
     "published figures. Inventory is not availability: ask us to check your dates.";
     display:block;margin-top:1rem;padding-top:.5rem;border-top:1px solid #999;
     font-size:9pt;line-height:1.35}

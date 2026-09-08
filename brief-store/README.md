@@ -34,29 +34,22 @@ both landed in the sheet, both emailed with the PDF attached.
 2. **The enquirer's copy**, their own brief back as a PDF, with the same
    reference. Reply-to is CVBS.
 
-## Handing it to CVBS
+## Handed over, 8 September 2026
 
-Two flags, then a redeploy. In `Code.gs`:
+`LIVE = true` and `CLIENT_LIVE = true` in the repository mirror of `Code.gs`.
+**Neither takes effect until the same change is made in the Apps Script editor
+and the project is redeployed.** The file in this folder is a mirror, not the
+running code.
 
-```
-var LIVE        = false;
-var CLIENT_LIVE = false;
-```
-
-`LIVE = true` switches the internal copy from `hello@theserviceedit.com` to
-`aj@conferencevenues.com.au`. Everything CVBS is on the **.com.au**.
-
-`CLIENT_LIVE = true` sends the second email to the enquirer instead of to Mel.
-Until then it still goes out on every brief, prefixed `[CLIENT PREVIEW]` and
-addressed to Mel, so the wording is reviewed before a client ever sees it.
-
-**`CLIENT_LIVE` alone is not enough.** The client copy refuses to reach a real
-enquirer unless `RESEND_API_KEY` is set, because someone who enquired at
-conferencevenues.com.au must never receive mail from theserviceedit.com. If the
-flag is on without the key, the copy stays with Mel and she is emailed to say
-why. Do the Resend section below first.
-
-Then redeploy. See the trap below.
+- **Internal brief goes to `aj@conferencevenues.com.au`.** Address confirmed by
+  Mel on 8 September 2026. It is `.com.au`, not `.com`. An earlier version of
+  this README said the opposite and was wrong.
+- **Karen is not a recipient.** `TO` carries AJ only and `CC` is empty. If she
+  should receive briefs, add her to `CC` in the same editor session.
+- **Client copies are on but gated.** They will not send until
+  `RESEND_API_KEY` is set in Script Properties. See "The right from address"
+  below. Until then every brief sends Mel a failure notice and a
+  `[CLIENT PREVIEW]` copy, and the enquirer receives nothing.
 
 ## The redeploy trap
 
@@ -103,17 +96,18 @@ triage document.
 
 ## Still to do: the right from address
 
-Right now the email arrives from Mel's Google account. Fine while it is internal
-only, but a notification from an unrelated Google address into a Microsoft 365
-tenant is a strong junk-folder candidate, and a brief in junk is a lost brief.
+**This is now the only thing standing between a submitted brief and the client
+receiving their copy.** It is also what stops AJ's notification landing in junk:
+a mail from an unrelated Google account into a Microsoft 365 tenant is a strong
+junk-folder candidate, and a brief in junk is a lost brief.
 
 1. Sign up at resend.com. Free covers 3,000 emails a month.
-2. Add the domain as a **subdomain**: `mail.conferencevenues.com`. Use the
+2. Add the domain as a **subdomain**: `mail.conferencevenues.com.au`. Use the
    subdomain, never the root. CVBS already has SPF and DKIM on
-   `conferencevenues.com` pointing at Microsoft, and a second SPF record on the
+   `conferencevenues.com.au` pointing at Microsoft, and a second SPF record on the
    root would break their normal email. A subdomain leaves their mail untouched.
 3. Ask whoever manages that DNS for the three records Resend shows. They look
-   like this and all go on `conferencevenues.com`:
+   like this and all go on `conferencevenues.com.au`:
 
 | Type | Name | Value |
 |---|---|---|

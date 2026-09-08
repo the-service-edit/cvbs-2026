@@ -151,3 +151,6 @@ index-pro.html
 index-strip.html
 index-video.html
 CVBS-Market-Assessment-Sep-2026.pdf
+
+# FUSE mount artefacts (created when files are rewritten in place on the mounted folder)
+.fuse_hidden*
