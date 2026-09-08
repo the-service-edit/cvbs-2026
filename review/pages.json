@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07",
+ "generated": "2026-09-08",
  "pages": [
   {
    "id": "index.html",
@@ -248,6 +248,60 @@
    "group": "Venue visits"
   },
   {
+   "id": "venue-visits/capella-sydney/index.html",
+   "path": "../venue-visits/capella-sydney/index.html",
+   "title": "Capella Sydney conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/qt-perth/index.html",
+   "path": "../venue-visits/qt-perth/index.html",
+   "title": "QT Perth conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/hilton-sydney/index.html",
+   "path": "../venue-visits/hilton-sydney/index.html",
+   "title": "Hilton Sydney conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/sofitel-sydney-wentworth/index.html",
+   "path": "../venue-visits/sofitel-sydney-wentworth/index.html",
+   "title": "Sofitel Sydney Wentworth conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/royal-randwick/index.html",
+   "path": "../venue-visits/royal-randwick/index.html",
+   "title": "Royal Randwick Racecourse conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/the-star-gold-coast/index.html",
+   "path": "../venue-visits/the-star-gold-coast/index.html",
+   "title": "The Star Gold Coast conference facilities and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/hannah-st-hotel-melbourne/index.html",
+   "path": "../venue-visits/hannah-st-hotel-melbourne/index.html",
+   "title": "Hannah St Hotel Melbourne meeting spaces and rooms",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/intercontinental-brisbane/index.html",
+   "path": "../venue-visits/intercontinental-brisbane/index.html",
+   "title": "InterContinental Brisbane event spaces and floor areas",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/the-eve-hotel-sydney/index.html",
+   "path": "../venue-visits/the-eve-hotel-sydney/index.html",
+   "title": "The EVE Hotel Sydney meeting space and rooms",
+   "group": "Venue visits"
+  },
+  {
    "id": "conference-budget-guide.html",
    "path": "../conference-budget-guide.html",
    "title": "Conference Budget Guide: What to Plan For in Australia",
@@ -317,12 +371,6 @@
    "id": "conference-budget-calculator.html",
    "path": "../conference-budget-calculator.html",
    "title": "Conference Budget Calculator",
-   "group": "Guides and resources"
-  },
-  {
-   "id": "resources.html",
-   "path": "../resources.html",
-   "title": "Free Conference Planning Resources & Tools",
    "group": "Guides and resources"
   },
   {
