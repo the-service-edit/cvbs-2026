@@ -1,119 +1,46 @@
 # CVBS brief store
 
 When someone submits the brief on `submit-a-brief.html`, this records it in a
-Google Sheet and emails Karen and Anthony a CVBS branded PDF of that brief.
+Google Sheet and emails a CVBS branded PDF of that brief.
 
 **The order matters and it is deliberate.** The sheet write happens first, the
 email second. If the PDF fails to render or the mail fails to send, the brief is
 already banked and Mel gets told. A lead is never lost because of an email
 problem.
 
-Files:
+## It is live
 
-| File | What it is |
-|---|---|
-| `Code.gs` | The whole backend. Paste into Apps Script. |
-| `BriefPdf.html` | The PDF layout. Paste into Apps Script as a second file. |
-| `_render_sample.py` | Local preview only. Writes `_sample.html` so the layout can be checked in a browser without deploying. Never runs in production. |
+Built and deployed 8 September 2026 in Mel's Google account,
+hello@theserviceedit.com.
 
----
+- **Script project:** "CVBS brief store" (standalone, not bound to the sheet)
+  `https://script.google.com/u/0/home/projects/165IjLqzxz_vmlvbKKw7UquM1nZiqB4XfwMWpDPmQhalmNmt3_m-Z2H_F/edit`
+- **Sheet:** "CVBS Briefs", created by the script on first run, id held in Script
+  Properties as `SHEET_ID`
+  `https://docs.google.com/spreadsheets/d/1jXUa_hgk7VOxVWGUrCq3Wl9U5s5DOnstPHHAFzLuvz8/edit`
+- **Web app:** Version 2, executes as hello@theserviceedit.com, access **Anyone**
+  `https://script.google.com/macros/s/AKfycbxnRCSlKD_vom6CI6_yJnEAPeoehRM-UD4mY9EpIJMag_QMUohrKL_2p1m9RAoadOxntg/exec`
+  That URL is already in `BRIEF_ENDPOINT` in `submit-a-brief.html`.
+  Shared key: `cvbs-2026-brief`.
 
-## Part A. Get briefs arriving (about 20 minutes, nothing to wait on)
+**Verified 8 September 2026** by posting two real briefs from the live
+`the-service-edit.github.io` origin: both returned `{"ok":true,"ref":"CVB-..."}`,
+both landed in the sheet, both emailed with the PDF attached.
 
-Do this first and completely. It works on its own. Part B only changes the
-address the email comes from.
+## Handing it to CVBS
 
-**1. Make the sheet.** In Mel's Google account, new Google Sheet, name it
-**CVBS Briefs**.
-
-**2. Open Apps Script.** Extensions, Apps Script. Rename the project
-**CVBS brief store**.
-
-**3. Paste the code.** Replace everything in `Code.gs` with this folder's
-`Code.gs`. Then the **+** next to Files, **HTML**, name it exactly `BriefPdf`
-(Apps Script adds the `.html` itself), and paste this folder's `BriefPdf.html`
-into it. Save.
-
-**4. Check the recipients.** Near the top of `Code.gs`:
+One word, then a redeploy. In `Code.gs`:
 
 ```
-var TO = ["karen@conferencevenues.com", "aj@conferencevenues.com"];
+var LIVE = false;
 ```
 
-Note those are `conferencevenues.com`, not `.com.au`. The website is on
-`.com.au` and the mailboxes are on `.com`. Confirm both addresses with Karen
-before the first real submission.
+Set it to `true`. That switches the recipients from `hello@theserviceedit.com`
+to `karen@conferencevenues.com` and `aj@conferencevenues.com`. Confirm both
+addresses with Karen first. Note they are `conferencevenues.com`, not `.com.au`:
+the website is on the `.com.au`, the mailboxes are on the `.com`.
 
-**5. Authorise, and look at the PDF.** In the editor choose the function
-`testRender` and Run. Grant the permissions, including the "Google hasn't
-verified this app" screen, which is expected for a self-written script. It
-writes `CVBS-brief-sample.pdf` to the root of Google Drive. Open it. That is
-exactly what Karen will receive. Fix the layout in `BriefPdf.html` now, not
-later.
-
-**6. Deploy.** Deploy, New deployment, type **Web app**.
-Execute as **Me**. Who has access **Anyone**. Deploy. Copy the `/exec` URL.
-
-**7. Wire the form.** In `submit-a-brief.html`, near the bottom:
-
-```
-var BRIEF_ENDPOINT = "";
-```
-
-Paste the `/exec` URL between the quotes. Leave `BRIEF_KEY` alone unless the
-value in `Code.gs` is changed to match.
-
-**8. Test it live.** Submit a real brief through the page. Expect: a row in the
-sheet, a reference like `CVB-260908-004` on the thank you screen, and an email
-with the PDF attached. The email reply-to is set to the enquirer, so replying
-goes straight to them.
-
-Until the endpoint is pasted in, the form does not pretend. It shows the
-fallback message and sends the visitor to the contact page.
-
----
-
-## Part B. The right from address (needs CVBS)
-
-Without Part B the email arrives from Mel's Google account. That is fine while
-this is internal only, but a notification from an unrelated Google address into
-a Microsoft 365 tenant is a strong junk-folder candidate, and a brief in junk is
-a lost brief. Part B fixes deliverability, not decoration.
-
-**1. Resend account.** Sign up at resend.com. Free covers 3,000 emails a month,
-far more than CVBS will send.
-
-**2. Add the domain as a subdomain: `mail.conferencevenues.com`.**
-
-Use the subdomain, never the root. CVBS already has SPF and DKIM on
-`conferencevenues.com` pointing at Microsoft. A second SPF record on the root
-would break their normal email. A subdomain leaves their mail untouched.
-
-**3. Ask CVBS for these DNS records.** Resend shows the exact values. They look
-like this, and they all go on `conferencevenues.com`:
-
-| Type | Name | Value |
-|---|---|---|
-| MX | `send.mail` | `feedback-smtp.<region>.amazonses.com` priority 10 |
-| TXT | `send.mail` | `v=spf1 include:amazonses.com ~all` |
-| TXT | `resend._domainkey.mail` | the long DKIM key Resend gives |
-
-Whoever manages `conferencevenues.com` DNS adds them. Verification usually takes
-under an hour.
-
-**4. Store the API key.** In Apps Script: Project Settings, Script Properties,
-Add script property. Name **exactly** `RESEND_API_KEY`, value the key.
-
-The key lives here and only here. It is never in the website, never in the
-repository. The repository is public.
-
-**5. Redeploy.** See the trap below.
-
-The script picks the key up automatically. If Resend ever fails, it falls back
-to sending from the Google account rather than dropping the brief, and emails
-`hello@theserviceedit.com` to say so.
-
----
+Then redeploy. See the trap below.
 
 ## The redeploy trap
 
@@ -125,24 +52,90 @@ Deploy, Manage deployments, the pencil icon, Version **New version**, Deploy.
 The `/exec` URL does not change, so `submit-a-brief.html` never needs touching
 again. This caught the review tool in September and it will catch this one.
 
----
+## The PDF, and the one rule that governs it
+
+`BriefPdf.html` is rendered by `Utilities.newBlob(html).getAs('application/pdf')`,
+which is **not a browser**. Tested on 8 September 2026:
+
+| Works | Does not work |
+|---|---|
+| Text colour | **Every background colour.** CSS `background`, `bgcolor`, both ignored |
+| Borders and rules | flexbox, grid |
+| Tables | CSS variables |
+| Images, including data URIs | Web fonts. Inter will not load, it falls back to Helvetica |
+
+The first build used a navy table cell for the header. It came out white on
+white with an invisible white logo. **The header is now a baked PNG** with the
+navy, the logo and the title already in the pixels, and every other block reads
+through borders and type rather than fills.
+
+Do not add `background-color` to this template. It will render white and nobody
+will notice until Karen forwards it to a venue.
+
+To change the header, edit and run `build-band.js` in a Chrome console, then
+paste the base64 over `__BAND__` in `BriefPdf.html`. The copy in the repo keeps
+the placeholder; the copy in the Apps Script editor has the base64 inlined.
+
+Structure, in this order and for a reason: band, reference and timestamp, then
+four fact cells (delegates, location, dates, budget), then **the client's own
+words pulled up high** rather than buried under "notes", then the brief, then
+contact. Karen triages in ten seconds, so the deciding facts come first.
+
+Dates carries a computed **lead time**, "27 weeks away" or "31 days away,
+tight". It is arithmetic, not a guess, and it is what turns a printout into a
+triage document.
+
+## Still to do: the right from address
+
+Right now the email arrives from Mel's Google account. Fine while it is internal
+only, but a notification from an unrelated Google address into a Microsoft 365
+tenant is a strong junk-folder candidate, and a brief in junk is a lost brief.
+
+1. Sign up at resend.com. Free covers 3,000 emails a month.
+2. Add the domain as a **subdomain**: `mail.conferencevenues.com`. Use the
+   subdomain, never the root. CVBS already has SPF and DKIM on
+   `conferencevenues.com` pointing at Microsoft, and a second SPF record on the
+   root would break their normal email. A subdomain leaves their mail untouched.
+3. Ask whoever manages that DNS for the three records Resend shows. They look
+   like this and all go on `conferencevenues.com`:
+
+| Type | Name | Value |
+|---|---|---|
+| MX | `send.mail` | `feedback-smtp.<region>.amazonses.com` priority 10 |
+| TXT | `send.mail` | `v=spf1 include:amazonses.com ~all` |
+| TXT | `resend._domainkey.mail` | the long DKIM key Resend gives |
+
+4. In Apps Script: Project Settings, Script Properties, Add script property,
+   name exactly `RESEND_API_KEY`, value the key. It lives there and only there.
+   Never in the website, never in the repository. The repository is public.
+5. Redeploy.
+
+The script picks the key up on its own. If Resend ever fails it falls back to
+the Google account rather than dropping the brief, and emails
+`hello@theserviceedit.com` to say so.
+
+## Files
+
+| File | What it is |
+|---|---|
+| `Code.gs` | The backend. Mirror of what is in the editor. |
+| `BriefPdf.html` | The PDF layout, with `__BAND__` where the header image goes. |
+| `build-band.js` | Regenerates the header PNG. Run in a Chrome console. |
+| `_render_sample.py` | Local preview of the ORIGINAL fills-based layout. Superseded, kept only as a reference for the content order. |
 
 ## When something goes wrong
 
-**Nothing arrives and the page shows the fallback.** The endpoint is wrong,
-missing, or the deployment is not set to "Anyone". Open the `/exec` URL in a
-browser: it should return `{"ok":true,"service":"cvbs-brief-store"}`.
+**Nothing arrives and the page shows the fallback.** Open the `/exec` URL in a
+browser. It should return `{"ok":true,"service":"cvbs-brief-store"}`. If it asks
+for a login, the deployment is not set to "Anyone".
 
 **A row appears but no email.** Look at the `sent` column in the sheet. `resend`
 means it went via the domain. `mailapp` means the Google fallback. `FAILED`
-means check the inbox at `hello@theserviceedit.com` for the reason.
+means check `hello@theserviceedit.com` for the reason.
 
-**The email arrives without the PDF.** The renderer choked on something in the
-brief. Every field is still in the sheet and the plain text body carries the
-essentials. `BriefPdf.html` is rendered by the Apps Script converter, not by a
-browser: it understands tables and simple CSS only. No flexbox, no grid, no CSS
-variables, no web fonts. Adding a `<div style="display:flex">` will quietly
-collapse the layout.
+**The email arrives without the PDF.** The renderer choked. Every field is still
+in the sheet and the plain text body carries the essentials. Read the table
+above before changing anything in `BriefPdf.html`.
 
-**Testing from a terminal does not work.** The container cannot reach
-`script.google.com`. Test from a real browser tab on the live site.
+**Testing from a terminal does not work.** The cloud container cannot reach
+`script.google.com`. Test from a browser tab on the live site's own origin.

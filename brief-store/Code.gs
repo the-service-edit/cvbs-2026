@@ -12,8 +12,12 @@ var SHEET_NAME  = "briefs";
 var SHARED_KEY  = "cvbs-2026-brief";              // must match BRIEF_ENDPOINT_KEY in submit-a-brief.html
 var TZ          = "Australia/Sydney";
 
-/* Who receives the brief. */
-var TO          = ["karen@conferencevenues.com", "aj@conferencevenues.com"];
+/* Who receives the brief.
+   TESTING. Set LIVE to true and redeploy to hand this over to CVBS. That is the
+   only change needed. Do not edit the arrays. */
+var LIVE        = false;
+var TO          = LIVE ? ["karen@conferencevenues.com", "aj@conferencevenues.com"]
+                       : ["hello@theserviceedit.com"];
 var CC          = [];
 var FAIL_ALERT  = "hello@theserviceedit.com";     // told when the send fails but the brief was saved
 
@@ -40,12 +44,34 @@ var COLS = [
 
 /* ---------------------------------------------------------------- plumbing */
 
+/* The project is standalone, not bound to a sheet, so it holds the sheet id in
+   Script Properties. First run creates the sheet and remembers it. */
+function spreadsheet_() {
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty("SHEET_ID");
+  if (id) {
+    try { return SpreadsheetApp.openById(id); } catch (err) { /* fall through and remake */ }
+  }
+  var ss = SpreadsheetApp.create("CVBS Briefs");
+  props.setProperty("SHEET_ID", ss.getId());
+  return ss;
+}
+
 function sheet_() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = spreadsheet_();
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) { sh = ss.insertSheet(SHEET_NAME); }
   if (sh.getLastRow() === 0) { sh.appendRow(COLS); sh.setFrozenRows(1); }
   return sh;
+}
+
+/* Google Sheets treats a leading = + - or @ as the start of a formula, so
+   "+61 400 000 000" lands in the phone column as #ERROR! and the number is
+   gone. Found on the first live test, 8 Sep 2026. A leading apostrophe forces
+   text; Sheets does not store it, so the value reads back clean. */
+function cell_(v) {
+  var t = (v === null || v === undefined) ? "" : String(v);
+  return /^[=+\-@]/.test(t) ? "'" + t : t;
 }
 
 function out_(obj) {
@@ -147,7 +173,7 @@ function doPost(e) {
       source: str_(p.page), status: "new", sent: ""
     };
 
-    sh.appendRow(COLS.map(function (c) { return rec[c] === undefined ? "" : rec[c]; }));
+    sh.appendRow(COLS.map(function (c) { return cell_(rec[c]); }));
     saved = true;
 
     if (!underHourlyCap_()) return out_({ ok: true, ref: ref });
@@ -205,7 +231,7 @@ function sendBrief_(rec) {
     "Location    " + rec.location + (rec.locationDetail ? " (" + rec.locationDetail + ")" : "") + "\n" +
     "Dates       " + (rec.flexibleDates ? "Flexible. " : "") + niceDate_(rec.startDate) +
       (rec.endDate ? " to " + niceDate_(rec.endDate) : "") + "\n\n" +
-    (rec.notes ? "In their words:\n" + rec.notes + "\n\n" : "") +
+    (rec.notes ? "In their words:\n" + rec.notes + "\n" + "\n" : "") +
     "Reply to this email and it goes straight to " + rec.email + ".\n" +
     (pdf ? "" : "\nThe PDF could not be rendered this time. Every field is in the sheet.\n");
 
@@ -314,10 +340,40 @@ function renderBriefHtml_(rec) {
   return t.evaluate().getContent();
 }
 
-/* Run this once from the editor to authorise the project and to see the PDF
-   before the form is live. It saves nothing to the sheet. */
+/* RUN THIS FIRST, once, from the editor.
+   It authorises the project, creates the CVBS Briefs sheet, writes a sample PDF
+   to Drive and emails it to you, so every moving part is proven before the form
+   is wired. Look in the execution log for the two links. */
+function setup() {
+  var ss = spreadsheet_();
+  sheet_();
+  var pdf = sampleBlob_();
+  DriveApp.createFile(pdf);
+  MailApp.sendEmail({
+    to: TO.join(","),
+    subject: "CVBS brief store is working",
+    body: "This is the sample brief. The real ones will look the same.\n\n" +
+          "Sheet: " + ss.getUrl() + "\n",
+    attachments: [pdf]
+  });
+  Logger.log("Sheet:  " + ss.getUrl());
+  Logger.log("Sample PDF is in the root of your Drive, and emailed to " + TO.join(", "));
+}
+
+function sampleBlob_() {
+  return Utilities.newBlob(renderBriefHtml_(sampleRec_()), "text/html", "x")
+    .getAs("application/pdf").setName("CVBS-brief-sample.pdf");
+}
+
+/* Renders the sample PDF to Drive without emailing. Use it while adjusting the
+   layout in BriefPdf.html. */
 function testRender() {
-  var rec = {
+  var f = DriveApp.createFile(sampleBlob_());
+  Logger.log("PREVIEW " + f.getUrl());
+}
+
+function sampleRec_() {
+  return {
     ref: "CVB-260908-001", received: "8 Sep 2026 10:14",
     first: "Jane", last: "Smith", email: "jane.smith@acme.com.au",
     phone: "+61 400 000 000", company: "Acme Corporation", role: "Executive assistant / PA",
@@ -330,8 +386,4 @@ function testRender() {
     notes: "We ran this in the city last year and it felt flat. Somewhere with space to walk between sessions. Two of the group use a wheelchair so step free access to every room is not negotiable.",
     offer: "", venue: "", referral: "Word of mouth / referral", source: "submit-a-brief.html"
   };
-  var pdf = Utilities.newBlob(renderBriefHtml_(rec), "text/html", "x").getAs("application/pdf")
-              .setName("CVBS-brief-sample.pdf");
-  DriveApp.createFile(pdf);
-  Logger.log("Sample written to the root of your Google Drive.");
 }
