@@ -38,9 +38,10 @@ WHAT IT WRITES
     the markers is untouched. Re-running changes nothing unless the venue data
     changed, so it is safe in a loop and safe to put in front of a publish.
 
-    Existing bands are adopted in place on the first run. A city that has no
-    band yet gets one immediately before its snapshot band, which is where the
-    other four pages carry it.
+    Existing bands are adopted in place on the first run, keeping whatever
+    background they already carry. A city that has no band yet gets one
+    immediately before its featured venues band, on the background that keeps
+    the page alternating.
 """
 import ast, io, os, re, shutil, sys, glob
 
@@ -169,11 +170,11 @@ def card(v, dims):
 '      </span></a></li>' % dict(v, w=w, h=h, eye=EYE))
 
 
-def band(city, vs, dims):
+def band(city, vs, dims, cls='s-white'):
     cards = '\n'.join(card(v, dims[v['slug']]) for v in vs)
     return (
 '%(start)s\n'
-'<section class="s-white pad" id="%(key)s-walked"><div class="wrap">\n'
+'<section class="%(cls)s pad" id="%(key)s-walked"><div class="wrap">\n'
 '  <div class="section-head"><span class="eyebrow">Firsthand</span>\n'
 '    <h2 class="h2">%(city)s venues we have walked through.</h2>\n'
 '    <p class="lead">A few of the %(city)s venues we&rsquo;ve been through ourselves. For each one you&rsquo;ll find the venue&rsquo;s own published capacities, the date we were there, and an honest word about what it suits and what it doesn&rsquo;t.</p></div>\n'
@@ -183,7 +184,7 @@ def band(city, vs, dims):
 '  <div class="btn-row mt-2"><a class="btn btn--ghost" href="venue-visits/">See every venue we have walked %(arrow)s</a></div>\n'
 '</div></section>\n'
 '%(end)s' % dict(start=START, end=END, key=city.lower().replace(' ', '-'),
-                 city=city, cards=cards, arrow=ARROW))
+                 city=city, cards=cards, arrow=ARROW, cls=cls))
 
 
 def dimensions(v):
@@ -193,6 +194,25 @@ def dimensions(v):
     from PIL import Image
     with Image.open(p) as im:
         return im.size
+
+
+def bandclass(html, city):
+    """The background this page's walked band should carry.
+
+    Bands alternate s-white and s-stone down the page. An existing band keeps
+    whatever class it already has, so a deliberate flip is never undone by a
+    re-run. A new band takes the opposite of the section it will sit under.
+    """
+    key = city.lower().replace(' ', '-')
+    m = re.search(r'<section class="(s-\w+) pad" id="%s-walked">' % re.escape(key), html)
+    if m:
+        return m.group(1)
+    anchor = re.search(r'\n<section class="[^"]*" id="%s-(featured|venues|walked)"' % re.escape(key), html)
+    at = anchor.start() if anchor else len(html)
+    prev = None
+    for m in re.finditer(r'<section class="(s-white|s-stone)\b', html[:at]):
+        prev = m.group(1)
+    return 's-stone' if prev == 's-white' else 's-white'
 
 
 def splice(html, city, new):
@@ -206,7 +226,7 @@ def splice(html, city, new):
     if m:
         end = html.index('\n</div></section>', m.start()) + len('\n</div></section>')
         return html[:m.start()] + new + html[end:], 'adopted'
-    anchor = re.search(r'\n<section class="s-\w+ pad" id="%s-(snapshot|venues|at-a-glance)"' % re.escape(key), html)
+    anchor = re.search(r'\n<section class="s-\w+ pad" id="%s-(featured|venues)"' % re.escape(key), html)
     if not anchor:
         anchor = re.search(r'\n<section class="cta-band pad">', html)
     if not anchor:
@@ -232,7 +252,7 @@ def main():
                   % (cityfile, len(vs), ', '.join(v['name'] for v in vs)))
             continue
         html = io.open(path, encoding='utf-8').read()
-        out, how = splice(html, city, band(city, vs, dims))
+        out, how = splice(html, city, band(city, vs, dims, bandclass(html, city)))
         same = out == html
         print('  %-34s %-9s %d card(s)%s' % (cityfile, how, len(vs), '' if same else '  CHANGED'))
         if same:
