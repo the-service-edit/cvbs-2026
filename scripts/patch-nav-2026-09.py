@@ -1,3 +1,9 @@
+"""
+DO NOT RE-RUN. 8 Sep 2026: the venue finder is not shipping at launch.
+It was renamed to venue-finder-preview-4f9c2e.html and every route to it was
+removed from the 62 shipping pages. Running this script re-injects those
+routes and re-exposes the finder to CVBS. See cvbs-launch-scope-truth.
+"""
 # -*- coding: utf-8 -*-
 """One pass over the shared header and footer, 6 September 2026.
 

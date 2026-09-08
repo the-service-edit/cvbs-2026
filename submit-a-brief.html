@@ -133,6 +133,12 @@
   .draft-note,.privacy-note{color:var(--muted);font-size:.79rem;line-height:1.55}
   .draft-note{margin:-.7rem 0 1.5rem}
   .privacy-note{margin-top:1.1rem}
+    /* One quiet line above the CTA confirming the only field whose mistake
+       loses the lead. Replaced the full "Before you send it" replay of every
+       answer, 8 Sep 2026. Styles live HERE, inline: this page does not load
+       site.css, which is why the old block rendered unstyled. */
+    .send-to{margin:1.5rem 0 1.1rem;padding:.15rem 0 .15rem .9rem;border-left:3px solid #197683;font-size:.95rem;line-height:1.5;color:#4A5560}
+    .send-to strong{color:#0A2C52;font-weight:600;overflow-wrap:anywhere}
   .privacy-note a{color:var(--navy);font-weight:600}
   .form-error{background:#fff2f1;border:1px solid #e4a09b;border-radius:10px;color:#8b2923;font-size:.88rem;line-height:1.55;margin-top:1.2rem;padding:.9rem 1rem}
   .form-error a{font-weight:700}
@@ -388,11 +394,7 @@
             </div>
           </div>
 
-          <div class="brief-summary" id="briefSummary" hidden>
-            <h3>Before you send it</h3>
-            <p class="brief-summary__lead">This is what lands in our inbox. Go back and change anything that is not right.</p>
-            <dl id="briefSummaryList"></dl>
-          </div>
+          <p class="send-to" id="sendTo" hidden>We will send your shortlist to <strong id="sendToAddr"></strong>.</p>
 
           <p class="privacy-note">By submitting, you agree that CVBS may use these details to respond to your brief and share relevant event requirements with venues when sourcing options. <a href="privacy.html">How we handle your information</a>.</p>
           <div class="form-error" id="formError" role="alert" hidden>Online submission is temporarily unavailable. Your details are still on this page. Please use the <a href="contact.html">contact page</a> to reach the CVBS team directly.</div>
@@ -648,28 +650,23 @@
 
     form.addEventListener('input',queueDraft);
     form.addEventListener('change',queueDraft);
+    var emailEl=document.getElementById('email');
+    if(emailEl){emailEl.addEventListener('input',renderSummary);emailEl.addEventListener('blur',renderSummary);}
 
-    /* A brief goes to real venues under the client's name, so the last thing
-       they see is what we are actually sending, not a Submit button on its
-       own. This is also the backstop for context carried in from a shortlist
-       or an offer: if anything wrong survived, it is visible here. */
+    /* The only field where a mistake actually loses the lead is the email
+       address, so that is the only thing restated before the button. The old
+       block replayed every answer in raw form (2026-09-17, 50000) directly
+       above the CTA, which bought no data quality and cost attention at the
+       moment of highest intent. Removed 8 Sep 2026. What was prefilled for the
+       visitor is still announced by #offerBanner at the top of the form. */
     function renderSummary(){
-      var box=document.getElementById('briefSummary'),
-          list=document.getElementById('briefSummaryList');
-      if(!box||!list)return;
-      var rows=[],seen={};
-      new FormData(form).forEach(function(value,key){
-        if(/^(access_key|subject|from_name|botcheck)$/i.test(key))return;
-        if(!String(value).trim())return;
-        if(seen[key]){seen[key].push(value);}else{seen[key]=[value];rows.push(key);}
-      });
-      if(!rows.length){box.hidden=true;return;}
-      list.textContent='';
-      rows.forEach(function(k){
-        var dt=document.createElement('dt');dt.textContent=k;
-        var dd=document.createElement('dd');dd.textContent=seen[k].join(', ');
-        list.appendChild(dt);list.appendChild(dd);
-      });
+      var box=document.getElementById('sendTo'),
+          addr=document.getElementById('sendToAddr'),
+          email=document.getElementById('email');
+      if(!box||!addr||!email)return;
+      var v=(email.value||'').trim();
+      if(!v){box.hidden=true;return;}
+      addr.textContent=v;
       box.hidden=false;
     }
 
