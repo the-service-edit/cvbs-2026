@@ -4,19 +4,19 @@
    ========================================================================== */
 
 :root{
-  --teal:#3BC9D9; --teal-deep:#28A8B6;
-  /* Button fills. Reverted 7 Sep 2026 at Mel's request to the original
-     brand teal. NOTE: white text on #28A8B6 measures 2.85:1, below the
-     4.5:1 WCAG AA needs at 14px/600. Navy text on this fill measures
-     4.93:1 and passes, if we ever want the colour AND the compliance. */
-  --teal-btn:#28A8B6; --teal-btn-hover:#1f8b97;
-  /* Teal as a FOREGROUND: text, icons, numbers. --teal-deep measures
-     2.85:1 on white and 2.60:1 on stone, which fails 4.5:1 for body text
-     and 3:1 for icons and large text alike, so it was failing everywhere
-     it was used as ink, not only on the button. This clears 5.30:1 on
-     white and 4.84:1 on stone.
-     --teal and --teal-deep stay exactly as they were for fills,
-     gradients and tints, where nothing has to be read off them.
+  --teal:#3BC9D9; --teal-deep:#32D9F3;
+  /* Button fills. 8 Sep 2026: brand teal moved to #32D9F3 at Mel's request.
+     The new value is much lighter (luminance .568 vs .335), so white text on
+     it measures 1.70:1 and is unreadable. Button labels were flipped from
+     white to NAVY, which measures 8.27:1 and clears AAA. Do not revert the
+     label colour to white without changing the fill back. */
+  --teal-btn:#32D9F3; --teal-btn-hover:#1FC4E0;
+  /* Teal as a FOREGROUND: text, icons, numbers. This is the ONLY teal that
+     may be used as ink on white or stone. It clears 5.30:1 on white and
+     4.84:1 on stone. --teal-deep (#32D9F3) measures 1.70:1 as ink and must
+     never be used for text, icons or 1px borders on a light ground.
+     8 Sep 2026: finder.css had 19 --teal-deep ink uses; all repointed here.
+     --teal and --teal-deep are for FILLS, gradients and tints only.
      To revert the accent colour, change this one line. */
   --teal-ink:#197683;
   /* 7 Sep 2026: every scrim that sits over a PHOTOGRAPH uses this one value.
@@ -105,8 +105,8 @@ h1,h2,h3,h4{font-weight:600;line-height:1.12;letter-spacing:-.02em;color:inherit
 .btn svg{width:17px;height:17px;flex:none}
 .btn--navy{background:var(--navy);color:#fff;box-shadow:var(--shadow-sm)}
 .btn--navy:hover{transform:translateY(-3px);box-shadow:0 18px 40px -16px rgba(10,44,82,.55)}
-.btn--teal{background:var(--teal-btn);color:#fff;box-shadow:0 12px 30px -16px rgba(10,44,82,.5)}
-.btn--teal:hover{transform:translateY(-3px);background:var(--teal-btn-hover);color:#fff}
+.btn--teal{background:var(--teal-btn);color:var(--navy);box-shadow:0 12px 30px -16px rgba(10,44,82,.5)}
+.btn--teal:hover{transform:translateY(-3px);background:var(--teal-btn-hover);color:var(--navy)}
 .btn--teal:focus-visible{outline:3px solid var(--navy);outline-offset:2px;background:var(--teal-btn-hover)}
 .btn--light{background:#fff;color:var(--navy);box-shadow:var(--shadow-sm)}
 .btn--light:hover{transform:translateY(-3px)}
@@ -198,7 +198,7 @@ body.menu-open{overflow:hidden}
 /* Process timeline -------------------------------------------------------- */
 .steps{counter-reset:step;display:grid;gap:1.5rem}
 @media(min-width:900px){.steps{grid-template-columns:repeat(4,1fr);gap:0;position:relative}
-  .steps::before{content:"";position:absolute;top:26px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal-deep))}}
+  .steps::before{content:"";position:absolute;top:26px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--teal-deep),var(--teal))}}
 .step{position:relative;padding:0 1rem}
 .step .num{counter-increment:step;width:54px;height:54px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:600;font-size:1.2rem;position:relative;z-index:1;margin-bottom:1.1rem;box-shadow:0 0 0 6px var(--stone)}
 .s-white .step .num{box-shadow:0 0 0 6px #fff}
@@ -769,7 +769,7 @@ body.menu-open{overflow:hidden}
    same weight, instead of two looking already answered. */
 .brief-bar .bf input::placeholder{color:#8E8D85;opacity:1}
 .brief-bar .bf select.is-empty{color:#8E8D85}
-.brief-bar .bf select:focus,.brief-bar .bf input:focus{outline:none;border-color:var(--teal-deep);background:#fff;box-shadow:0 0 0 3px rgba(40,168,182,.28)}
+.brief-bar .bf select:focus,.brief-bar .bf input:focus{outline:none;border-color:var(--teal-ink);background:#fff;box-shadow:0 0 0 3px rgba(50,217,243,.40)}
 .brief-bar__go{white-space:nowrap;align-self:end}
 .value-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;border-top:1px solid var(--line);margin-top:1.1rem;padding-top:1.1rem}
 .vi{display:flex;gap:.7rem;align-items:flex-start}
@@ -983,17 +983,30 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
 .ticks--x li svg{color:#B0654A}
 .ticks--x li{color:var(--muted)}
 
+/* 8 Sep 2026: comparison ticks on dark sections were unreadable.
+   --muted (#666C73) on the navy card is 2.4:1 and both icon colours,
+   --teal-ink and #B0654A, were under 3:1. On DARK ground the ink is
+   lifted off the white ramp for text and brightened for the icons.
+   Hierarchy is kept by weight, not by making one column illegible:
+   Going direct sits at 82 percent, Through CVBS at full ink.
+   Light sections are untouched, where the original values pass. */
+.s-navy .ticks li,.compare .cvbs .ticks li{color:#EAF1F4}
+.s-navy .ticks li svg,.compare .cvbs .ticks li svg{color:var(--teal)}
+.s-navy .ticks--x li,.compare .cvbs .ticks--x li{color:rgba(234,241,244,.82)}
+.s-navy .ticks--x li svg,.compare .cvbs .ticks--x li svg{color:#E4907A}
+
 .site-header.nav-open .nav-cta .btn{display:none}
 
 .stmt-video{position:relative;overflow:hidden;background:var(--navy-deep);isolation:isolate}
 .stmt-video__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.stmt-video::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.72) 58%,rgba(0,0,0,.5))}
+.stmt-video::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,.90),rgba(0,0,0,.62) 56%,rgba(0,0,0,.30))}
 .stmt-video .wrap{position:relative;z-index:2}
 .stmt-video .h2{color:#fff}
 .stmt-video .lead{color:rgba(238,246,247,.86)}
 .stmt-video .eyebrow{color:var(--teal)}
 .stmt-video .link-arrow{color:#fff}
-@media(prefers-reduced-motion:reduce){.stmt-video__bg{display:none}}
+.stmt-video__bg{object-position:52% 56%}
+@media(max-width:820px){.stmt-video__bg{object-position:30% 62%}.stmt-video::after{background:linear-gradient(180deg,rgba(0,0,0,.86),rgba(0,0,0,.72) 30%,rgba(0,0,0,.62))}}
 
 /* dropdown text stays dark even under the transparent hero header */
 .site-header--overlay:not(.scrolled) .nav-drop a{color:#2b3946}
@@ -1683,7 +1696,7 @@ td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
 .vf-empty__acts .btn{font-size:.85rem}
 
 /* A shared shortlist, opened by someone who was sent the link. */
-.vf-shared{background:rgba(59,201,217,.10);border:1px solid rgba(40,168,182,.45);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem}
+.vf-shared{background:rgba(59,201,217,.10);border:1px solid rgba(25,118,131,.45);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem}
 .vf-shared p{margin:0 0 .8rem;font-size:.95rem;line-height:1.5;color:var(--navy)}
 .vf-shared__acts{display:flex;flex-wrap:wrap;gap:.55rem}
 

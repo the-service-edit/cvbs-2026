@@ -34,7 +34,7 @@ def public_pages():
 
 # 7 Sep 2026: button fills reverted to the original brand teal at Mel's
 # request. --teal-ink stays dark, it is text and has to stay readable.
-ADD = ('--teal-btn:#28A8B6;--teal-btn-hover:#1f8b97;--teal-ink:#197683;')
+ADD = ('--teal-btn:#32D9F3;--teal-btn-hover:#1FC4E0;--teal-ink:#197683;')
 
 fixed = []
 for rel, path in public_pages():
@@ -42,8 +42,8 @@ for rel, path in public_pages():
     orig = s
 
     # 1. make the accessible tokens available inside the page's own palette
-    if '--teal-deep:#28A8B6' in s and '--teal-btn:' not in s:
-        s = s.replace('--teal-deep:#28A8B6;', '--teal-deep:#28A8B6;' + ADD, 1)
+    if '--teal-deep:#32D9F3' in s and '--teal-btn:' not in s:
+        s = s.replace('--teal-deep:#32D9F3;', '--teal-deep:#32D9F3;' + ADD, 1)
 
     # 2. any fill that carries white text moves to the readable teal
     s = re.sub(r'background:var\(--teal-deep\)(\s*;\s*(?:border-color:var\(--teal-deep\);\s*)?color:#fff)',
