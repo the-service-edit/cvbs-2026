@@ -201,10 +201,10 @@
       </div>
 
       <form id="briefForm" novalidate>
-        <!-- Web3Forms: replace value with your CVBS access key from web3forms.com -->
-        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
-        <input type="hidden" name="subject" value="New venue brief from CVBS website">
-        <input type="hidden" name="from_name" value="CVBS Website">
+        <!-- The brief posts to the CVBS brief store, an Apps Script web app that
+             records it and emails the team a branded PDF. Setup is in
+             brief-store/README.md. This page carries no secrets: the endpoint is
+             public by design and the key below only keeps drive by bots out. -->
 <input type="hidden" name="Offer" id="offerField">
 <input type="hidden" name="Venue" id="venueField">
 <div id="offerBanner" hidden style="gap:.65rem;align-items:flex-start;background:rgba(59,201,217,.12);border:1px solid #3BC9D9;border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1.5rem;font-size:.95rem;color:#0D2233;line-height:1.45">
@@ -409,6 +409,7 @@
         <div class="success__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
         <h2>Thank you, we have your brief.</h2>
         <p>One of the team will be in touch, and you will have a costed shortlist within 48 hours. It costs you nothing.</p>
+        <p id="successRef" hidden style="color:#6E747B;font-size:.95rem"></p>
         <a href="index.html" class="btn btn--navy" style="display:inline-flex">Back to home</a>
       </div>
     </div>
@@ -711,20 +712,67 @@
     [].forEach.call(document.querySelectorAll('[data-back]'),function(b){b.addEventListener('click',function(){ show(cur-1); });});
     stepBtns.forEach(function(b,k){b.addEventListener('click',function(){ if(k<=reached) show(k); });});
 
+    /* ---- brief store ------------------------------------------------------
+       Paste the Apps Script web app URL here after deploying brief-store.
+       BRIEF_KEY must match SHARED_KEY in brief-store/Code.gs. While the
+       endpoint is empty the form shows its honest fallback and sends the
+       visitor to the contact page rather than pretending a brief was received.
+       --------------------------------------------------------------------- */
+    var BRIEF_ENDPOINT = "";
+    var BRIEF_KEY      = "cvbs-2026-brief";
+
+    var FIELD_MAP = {
+      'Service':'services', 'Preferred location':'location', 'Location detail':'locationDetail',
+      'Travel radius':'radius', 'Delegates':'delegates', 'Start date':'startDate',
+      'End date':'endDate', 'Flexible dates':'flexibleDates', 'Duration':'duration',
+      'Accommodation':'accommodation', 'Venue type':'venueType', 'Requirements':'requirements',
+      'Room setup':'setup', 'Budget per delegate':'budgetPp', 'Total budget':'budgetTotal',
+      'Notes':'notes', 'First name':'first', 'Last name':'last', 'Email':'email',
+      'Phone':'phone', 'Company':'company', 'Role':'role', 'Referral':'referral',
+      'Offer':'offer', 'Venue':'venue'
+    };
+    var MULTI = { 'Service':1, 'Requirements':1 };
+
     form.addEventListener('submit',function(e){
       e.preventDefault();
       if(!validate(0)){show(0);return;}
       if(!validate(2))return;
       var btn=document.getElementById('submitBtn'),btnHtml=btn.innerHTML,error=document.getElementById('formError');
       error.hidden=true;
-      var key=(form.querySelector('[name="access_key"]')||{}).value||'';
-      if(!/^[0-9a-f-]{20,}$/i.test(key)){error.hidden=false;error.scrollIntoView({behavior:'smooth',block:'center'});return;}
+      if(!/^https:\/\/script\.google\.com\/macros\/s\/[\w-]{40,}\/exec$/.test(BRIEF_ENDPOINT)){
+        error.hidden=false;error.scrollIntoView({behavior:'smooth',block:'center'});return;
+      }
       btn.disabled=true; btn.textContent='Sending…';
-      var data=new FormData(form);
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Accept':'application/json'},body:data})
-        .then(function(r){return r.json().catch(function(){return {};}).then(function(j){j._responseOk=r.ok;return j;});})
+
+      var fd=new FormData(form), fields={};
+      Object.keys(FIELD_MAP).forEach(function(name){
+        var key=FIELD_MAP[name];
+        if(MULTI[name]) fields[key]=fd.getAll(name).filter(String);
+        else fields[key]=(fd.get(name)||'').toString().trim();
+      });
+
+      /* text/plain keeps the browser from sending a CORS preflight, which an
+         Apps Script web app cannot answer. Same pattern as the review tool. */
+      fetch(BRIEF_ENDPOINT,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({
+          key:BRIEF_KEY,
+          page:(location.pathname.split('/').pop()||'submit-a-brief.html'),
+          botcheck:(fd.get('botcheck')||'').toString(),
+          fields:fields
+        })
+      })
+        .then(function(r){return r.json();})
         .then(function(j){
-          if(j._responseOk&&j.success){ try{sessionStorage.removeItem(draftKey);}catch(ignore){} form.style.display='none'; stepsEl.style.display='none'; document.getElementById('success').classList.add('show'); window.scrollTo({top:0,behavior:'smooth'}); }
+          if(j&&j.ok===true){
+            try{sessionStorage.removeItem(draftKey);}catch(ignore){}
+            if(j.ref){var rf=document.getElementById('successRef');
+              if(rf){rf.textContent='Your reference is '+j.ref+'. Quote it if you need to add anything.';rf.hidden=false;}}
+            form.style.display='none'; stepsEl.style.display='none';
+            document.getElementById('success').classList.add('show');
+            window.scrollTo({top:0,behavior:'smooth'});
+          }
           else { btn.disabled=false; btn.innerHTML=btnHtml; error.hidden=false; error.scrollIntoView({behavior:'smooth',block:'center'}); }
         })
         .catch(function(){ btn.disabled=false; btn.innerHTML=btnHtml; error.hidden=false; error.scrollIntoView({behavior:'smooth',block:'center'}); });
