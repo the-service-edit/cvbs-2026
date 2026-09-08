@@ -6,7 +6,7 @@ goes.
 
 | Old URL | New destination | Why |
 |---|---|---|
-| `/bestvenue` | `/venue-results.html` | The venue search over all 190 records |
+| `/bestvenue` | `/destinations.html` | The destinations hub. The venue search is not part of the launch. |
 | `/groups` | `/group-accommodation.html` | Same service, current page |
 | `/relocation` | `/corporate-accommodation.html` | The service was renamed |
 | `/venuereviews` | `/venue-visits/` | The inspections we publish |

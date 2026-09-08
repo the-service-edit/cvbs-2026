@@ -1,7 +1,7 @@
 # Apache. Only used if the production host runs Apache. GitHub Pages
 # ignores this file; the meta-refresh stubs cover that case.
 RewriteEngine On
-RewriteRule ^bestvenue/?$ /venue-results.html [R=301,L]
+RewriteRule ^bestvenue/?$ /destinations.html [R=301,L]
 RewriteRule ^groups/?$ /group-accommodation.html [R=301,L]
 RewriteRule ^relocation/?$ /corporate-accommodation.html [R=301,L]
 RewriteRule ^venuereviews/?$ /venue-visits/ [R=301,L]
