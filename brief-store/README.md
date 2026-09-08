@@ -18,7 +18,7 @@ hello@theserviceedit.com.
 - **Sheet:** "CVBS Briefs", created by the script on first run, id held in Script
   Properties as `SHEET_ID`
   `https://docs.google.com/spreadsheets/d/1jXUa_hgk7VOxVWGUrCq3Wl9U5s5DOnstPHHAFzLuvz8/edit`
-- **Web app:** Version 4, executes as hello@theserviceedit.com, access **Anyone**
+- **Web app:** Version 6, executes as hello@theserviceedit.com, access **Anyone**
   `https://script.google.com/macros/s/AKfycbxnRCSlKD_vom6CI6_yJnEAPeoehRM-UD4mY9EpIJMag_QMUohrKL_2p1m9RAoadOxntg/exec`
   That URL is already in `BRIEF_ENDPOINT` in `submit-a-brief.html`.
   Shared key: `cvbs-2026-brief`.
@@ -29,10 +29,34 @@ both landed in the sheet, both emailed with the PDF attached.
 
 ## Two emails go out per brief
 
-1. **The internal copy**, to CVBS. Reply-to is the enquirer, so a reply answers
-   the client directly.
-2. **The enquirer's copy**, their own brief back as a PDF, with the same
-   reference. Reply-to is CVBS.
+1. **The internal copy**, to CVBS. Plain text on purpose: it is a work queue and
+   wants to be scannable, not admired. Sender name **CVBS Website Enquiry**.
+   Reply-to is the enquirer, so a reply answers the client directly.
+2. **The enquirer's copy**, a branded HTML email built on the wave EDM system,
+   with their brief attached as a PDF. Sender name **Conference Venues**,
+   matching the CVBS rule that the inbox row is the business. Reply-to is CVBS.
+
+### The client email
+
+Lives in `ClientEmail.html`. Three rules govern it.
+
+**It is transactional, not marketing.** No Mailchimp merge tags, no
+unsubscribe, no archive link. Merge tags would render literally as `*|UNSUB|*`
+because nothing here goes through Mailchimp, and an unsubscribe on a
+confirmation someone asked for is wrong anyway.
+
+**Image URLs are cached permanently.** Apple Mail Privacy Protection and Gmail
+pre-fetch through a proxy and cache failures forever, so a URL that 404s during
+one test stays broken for that recipient. The template reuses the exact `?v=3`
+URLs already proven by the EDMs. Verified 200 on 8 Sep 2026. Do not invent a new
+version number unless the image itself changed.
+
+**A plain text version is sent alongside the HTML**, and is what a text only
+client sees. Change one and change the other.
+
+`ASSET_BASE` in `Code.gs` points the images and links at
+`the-service-edit.github.io/cvbs-2026`. Flip it to `https://conferencevenues.com.au`
+at cutover.
 
 ## Handed over, 8 September 2026
 
@@ -130,6 +154,7 @@ the Google account rather than dropping the brief, and emails
 |---|---|
 | `Code.gs` | The backend. Mirror of what is in the editor. |
 | `BriefPdf.html` | The PDF layout, with `__BAND__` where the header image goes. |
+| `ClientEmail.html` | The branded HTML email sent to the enquirer. |
 | `build-band.js` | Regenerates the header PNG. Run in a Chrome console. |
 | `_render_sample.py` | Local preview of the ORIGINAL fills-based layout. Superseded, kept only as a reference for the content order. |
 

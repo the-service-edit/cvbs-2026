@@ -33,6 +33,17 @@ var FAIL_ALERT  = "hello@theserviceedit.com";   // told when a send fails but th
    redeploy. See sendClientCopy_ and README.md. */
 var CLIENT_LIVE = true;
 
+/* Where the email images and links point. Flip to https://conferencevenues.com.au
+   at cutover. Matches the EDMs, including the ?v=3 cache stamp, which is
+   deliberate: Apple Mail and Gmail cache image URLs permanently, so a URL that
+   failed once stays broken. Reuse proven URLs, never invent a version. */
+var ASSET_BASE  = "https://the-service-edit.github.io/cvbs-2026";
+
+/* Two sender names on purpose. The internal one is a work queue and wants to be
+   scannable in an inbox. The client one follows the CVBS rule that the inbox row
+   is the business, the same as every Mailchimp send. */
+var FROM_NAME_CLIENT = "Conference Venues";
+
 /* From address. Only used when a Resend API key is present in Script
    Properties. Without one the script falls back to MailApp, which sends from
    the Google account that owns this script. See README.md. */
@@ -124,6 +135,28 @@ function leadTime_(startDate) {
   var weeks = Math.round(days / 7);
   if (weeks < 53) return weeks + " weeks away";
   return Math.round(days / 30.44) + " months away";
+}
+
+/* Compact dates for the email fact row. "Tue 17 Nov 2026 to Thu 19 Nov 2026"
+   wraps to three lines in a 600px column and makes the row ragged.
+   "17 to 19 Nov 2026" says the same thing in one. */
+function shortDates_(rec) {
+  var a = str_(rec.startDate).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!a) return rec.flexibleDates ? "Flexible" : "";
+  var d1 = new Date(Number(a[1]), Number(a[2]) - 1, Number(a[3]));
+  var b = str_(rec.endDate).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  var pre = rec.flexibleDates ? "Flexible, around " : "";
+  if (!b || rec.endDate === rec.startDate) {
+    return pre + Utilities.formatDate(d1, TZ, "d MMM yyyy");
+  }
+  var d2 = new Date(Number(b[1]), Number(b[2]) - 1, Number(b[3]));
+  if (a[1] === b[1] && a[2] === b[2]) {
+    return pre + Utilities.formatDate(d1, TZ, "d") + " to " + Utilities.formatDate(d2, TZ, "d MMM yyyy");
+  }
+  if (a[1] === b[1]) {
+    return pre + Utilities.formatDate(d1, TZ, "d MMM") + " to " + Utilities.formatDate(d2, TZ, "d MMM yyyy");
+  }
+  return pre + Utilities.formatDate(d1, TZ, "d MMM yyyy") + " to " + Utilities.formatDate(d2, TZ, "d MMM yyyy");
 }
 
 function niceDate_(v) {
@@ -237,12 +270,13 @@ function deliver_(m) {
   if (apiKey) {
     try {
       var payload = {
-        from: FROM_NAME + " <" + FROM_EMAIL + ">",
+        from: (m.fromName || FROM_NAME) + " <" + FROM_EMAIL + ">",
         to: m.to,
         reply_to: m.replyTo,
         subject: m.subject,
         text: m.body
       };
+      if (m.html) payload.html = m.html;
       if (m.cc && m.cc.length) payload.cc = m.cc;
       if (m.pdf) {
         payload.attachments = [{
@@ -265,15 +299,17 @@ function deliver_(m) {
   }
 
   try {
-    MailApp.sendEmail({
+    var opts = {
       to: m.to.join(","),
       cc: (m.cc || []).join(","),
       replyTo: m.replyTo,
       subject: m.subject,
       body: m.body,
-      name: FROM_NAME,
+      name: m.fromName || FROM_NAME,
       attachments: m.pdf ? [m.pdf] : []
-    });
+    };
+    if (m.html) opts.htmlBody = m.html;
+    MailApp.sendEmail(opts);
     return apiKey ? "mailapp-fallback" : "mailapp";
   } catch (err) {
     notifyFailure_(m.ref, "MailApp threw: " + String(err));
@@ -366,8 +402,10 @@ function sendClientCopy_(rec, pdf) {
     to: toClient ? [rec.email] : [FAIL_ALERT],
     cc: [],
     replyTo: TO[0],
+    fromName: FROM_NAME_CLIENT,
     subject: (toClient ? "" : "[CLIENT PREVIEW] ") + "Your venue brief, " + rec.ref,
     body: L.join(NL),
+    html: clientHtml_(rec),
     pdf: pdf
   }) + (toClient ? "" : "-preview");
 }
@@ -377,6 +415,25 @@ function notifyFailure_(ref, detail) {
     MailApp.sendEmail(FAIL_ALERT, "CVBS brief " + ref + " needs a look",
       detail + NL + NL + "The brief is " + ref + " in the briefs sheet. Nothing is lost.");
   } catch (ignore) {}
+}
+
+/* The branded HTML body for the client copy, built on the wave EDM system.
+   The plain text version above is still sent alongside it, and is what a text
+   only client sees. */
+function clientHtml_(rec) {
+  var t = HtmlService.createTemplateFromFile("ClientEmail");
+  var dates = shortDates_(rec) || (rec.flexibleDates ? "Flexible" : "");
+
+  t.rec       = rec;
+  t.base      = ASSET_BASE;
+  t.replyTo   = TO[0];
+  t.firstName = esc_(rec.first) || "there";
+  t.facts     = [
+    { label: "Delegates", value: esc_(rec.delegates) || "To confirm" },
+    { label: "Location",  value: esc_(rec.locationDetail || rec.location) || "To confirm" },
+    { label: "Dates",     value: esc_(dates) || "To confirm" }
+  ];
+  return t.evaluate().getContent();
 }
 
 /* ------------------------------------------------------------------ render */
