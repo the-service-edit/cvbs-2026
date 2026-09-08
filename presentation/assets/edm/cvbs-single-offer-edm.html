@@ -7,21 +7,7 @@
   <meta name="x-apple-disable-message-reformatting">
   <meta name="color-scheme" content="light only">
   <meta name="supported-color-schemes" content="light only">
-  <!-- =========================================================
-       CVBS SINGLE OFFER EDM  ·  worked example: The Westin Singapore
-       MAILCHIMP FROM NAME: "Conference Venues". The sender is the business, not a person, so the
-       inbox row reads as the brand. Reply-to and the contact line inside the email are Anthony
-       Jepson, aj@conferencevenues.com.au, +61 414 784 999. Replies are leads: make sure that
-       inbox is watched.
-       Subject (set in Mailchimp):  Marina Bay from level 32, and what the Westin is offering on it
-       Preview text:                Rates from SGD 330, plus three more rewards, on bookings made by 30 December.
-
-       SWAPPING THE VENUE: change the hero image, the eyebrow, the venue name, the
-       deal panel, the four inclusions and the three spaces. Everything else stays.
-       TODO CVBS: the source offer listed the rewards under "GROUP & CATERING / GROUP ONLY",
-       which suggests two tiers. Confirm with the Westin which rewards apply to group-only
-       bookings and which need catering, then split the tick list if needed.
-       ========================================================= -->
+  
   <title>The Westin Singapore, exclusive rewards for CVBS clients</title>
   <style>
     body,table,td,a{ -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
@@ -30,16 +16,19 @@
     table{ border-collapse:collapse !important; }
     body{ margin:0 !important; padding:0 !important; width:100% !important; background:#DFEFF1; }
     a{ color:#28A8B6; }
-    @media screen and (max-width:600px){
+    @media only screen and (max-width:640px){
       .wrap{ width:100% !important; }
-      .px{ padding-left:24px !important; padding-right:24px !important; }
+      .px{ padding-left:20px !important; padding-right:20px !important; }
+      .wrap{ border-radius:0 !important; }
+      td, p, a, span, div{ -webkit-text-size-adjust:100%; }
+      .body-t{ font-size:17.5px !important; line-height:29px !important; }
       .h1{ font-size:26px !important; line-height:33px !important; }
       .hero-img{ width:100% !important; height:auto !important; }
       .deal-n{ font-size:38px !important; }
       .spacecol,.spaceval{ display:block !important; width:100% !important; text-align:left !important; padding:0 !important; }
       .spaceval{ padding-top:3px !important; }
       .twocol{ display:block !important; width:100% !important; padding:0 0 12px 0 !important; }
-      .twocol img{ width:100% !important; height:auto !important; }
+      .twocol img{ width:100% !important; max-width:100% !important; height:auto !important; }
       .btn-a{ display:block !important; }
       .foot-l,.foot-r{ display:block !important; width:100% !important; text-align:left !important; padding-left:0 !important; }
       .foot-r{ padding-top:20px !important; }
@@ -59,13 +48,13 @@
     <tr>
       <td align="center" style="padding:20px 12px 28px 12px;">
 
-        <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden;">
+        <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; background:#FFFFFF; border-radius:18px; overflow:hidden;">
 
           <!-- ============ WAVE HEADER + LOGO BADGE ============ -->
           <tr>
             <td align="center" bgcolor="#0A2C52" style="padding:0; font-size:0; line-height:0;">
               <a href="https://the-service-edit.github.io/cvbs-2026" target="_blank" style="text-decoration:none;">
-                <img class="hero-img" src="img/cvbs-edm-header.png?v=3" width="600" height="210" alt="CVBS, Conference Venues and Booking Services" style="display:block; width:600px; max-width:600px; height:auto;">
+                <img class="hero-img" src="img/cvbs-edm-header.png?v=3" width="600" height="210" alt="CVBS, Conference Venues and Booking Services" style="display:block; width:100%; max-width:600px; height:auto;">
               </a>
             </td>
           </tr>
@@ -96,7 +85,7 @@
           <tr>
             <td class="px" style="padding:0 44px 0 44px; font-size:0; line-height:0;">
               <a href="https://the-service-edit.github.io/cvbs-2026/offers.html" target="_blank" style="text-decoration:none;">
-                <img class="hero-img" src="img/offer-hero-westin-singapore.jpg?v=3" width="512" height="290" alt="The ballroom at The Westin Singapore" style="display:block; width:512px; max-width:512px; height:auto; border-radius:14px;">
+                <img class="hero-img" src="img/offer-hero-westin-singapore.jpg?v=3" width="512" height="290" alt="The ballroom at The Westin Singapore" style="display:block; width:100%; max-width:512px; height:auto; border-radius:14px;">
               </a>
             </td>
           </tr>
@@ -208,11 +197,11 @@
             <td class="px" style="padding:22px 44px 0 44px; font-size:0; line-height:0;">
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                 <tr>
-                  <td class="twocol" width="250" valign="top" style="padding:0 6px 0 0;">
-                    <img src="img/offer-westin-bar.jpg?v=3" width="250" height="170" alt="A bar at The Westin Singapore, looking out over the water" style="display:block; width:250px; max-width:250px; height:auto; border-radius:12px;">
+                  <td class="twocol" width="50%" valign="top" style="width:50%; padding:0 6px 0 0;">
+                    <img src="img/offer-westin-bar.jpg?v=3" width="250" height="170" alt="A bar at The Westin Singapore, looking out over the water" style="display:block; width:100%; max-width:250px; height:auto; border-radius:12px;">
                   </td>
-                  <td class="twocol" width="250" valign="top" style="padding:0 0 0 6px;">
-                    <img src="img/offer-westin-room.jpg?v=3" width="250" height="170" alt="A deluxe room at The Westin Singapore, overlooking Marina Bay" style="display:block; width:250px; max-width:250px; height:auto; border-radius:12px;">
+                  <td class="twocol" width="50%" valign="top" style="width:50%; padding:0 0 0 6px;">
+                    <img src="img/offer-westin-room.jpg?v=3" width="250" height="170" alt="A deluxe room at The Westin Singapore, overlooking Marina Bay" style="display:block; width:100%; max-width:250px; height:auto; border-radius:12px;">
                   </td>
                 </tr>
               </table>
@@ -411,7 +400,7 @@
 
         </table>
 
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px;">
           <tr>
             <td align="center" style="padding:16px 12px 0 12px; font-family:'Inter',Helvetica,Arial,sans-serif; font-size:11px; color:#6E747B;">
               <a href="#" style="color:#6E747B; text-decoration:underline;">View this email in your browser</a>
