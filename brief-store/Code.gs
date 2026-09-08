@@ -11,21 +11,30 @@
 var SHEET_NAME  = "briefs";
 var SHARED_KEY  = "cvbs-2026-brief";              // must match BRIEF_ENDPOINT_KEY in submit-a-brief.html
 var TZ          = "Australia/Sydney";
+var NL          = String.fromCharCode(10);
 
-/* Who receives the brief.
-   TESTING. Set LIVE to true and redeploy to hand this over to CVBS. That is the
-   only change needed. Do not edit the arrays. */
+/* Who receives the internal brief.
+   Set LIVE to true and redeploy to hand this over to CVBS. That is the only
+   change needed. Everything CVBS is on conferencevenues.com.AU. */
 var LIVE        = false;
-var TO          = LIVE ? ["karen@conferencevenues.com", "aj@conferencevenues.com"]
+var TO          = LIVE ? ["aj@conferencevenues.com.au"]
                        : ["hello@theserviceedit.com"];
 var CC          = [];
-var FAIL_ALERT  = "hello@theserviceedit.com";     // told when the send fails but the brief was saved
+var FAIL_ALERT  = "hello@theserviceedit.com";   // told when a send fails but the brief was saved
+
+/* The enquirer also gets their own brief back as a PDF.
+   While CLIENT_LIVE is false that copy goes to FAIL_ALERT instead, so Mel sees
+   exactly what a client would receive before a client ever receives it.
+   Setting it true is NOT enough on its own: the copy is refused unless a Resend
+   key is present, because a client who enquired at conferencevenues.com.au must
+   never receive mail from theserviceedit.com. See sendClientCopy_. */
+var CLIENT_LIVE = false;
 
 /* From address. Only used when a Resend API key is present in Script
    Properties. Without one the script falls back to MailApp, which sends from
    the Google account that owns this script. See README.md. */
-var FROM_NAME   = "Conference Venues website";
-var FROM_EMAIL  = "briefs@mail.conferencevenues.com";
+var FROM_NAME   = "CVBS Website Enquiry";
+var FROM_EMAIL  = "briefs@mail.conferencevenues.com.au";
 
 /* Ceiling on sends per rolling hour. The endpoint is public, so this is the
    difference between a bad afternoon and a mail bomb. Briefs over the ceiling
@@ -192,7 +201,7 @@ function doPost(e) {
     if (!saved) {
       try {
         MailApp.sendEmail(FAIL_ALERT, "CVBS brief endpoint failed",
-          "A brief was submitted and NOT saved.\n\n" + String(err) + "\n\n" +
+          "A brief was submitted and NOT saved." + NL + NL + String(err) + NL + NL +
           ((e && e.postData && e.postData.contents) || ""));
       } catch (ignore) {}
       return out_({ ok: false, error: "server" });
@@ -207,51 +216,35 @@ function doGet() {
 
 /* -------------------------------------------------------------------- send */
 
-function sendBrief_(rec) {
-  var pdf, subject, body;
+function renderPdf_(rec) {
   try {
-    pdf = Utilities.newBlob(renderBriefHtml_(rec), "text/html", "x")
-            .getAs("application/pdf")
-            .setName("CVBS-brief-" + rec.ref + "-" + (rec.company || rec.last).replace(/[^A-Za-z0-9]+/g, "-") + ".pdf");
+    return Utilities.newBlob(renderBriefHtml_(rec), "text/html", "x")
+      .getAs("application/pdf")
+      .setName("CVBS-brief-" + rec.ref + "-" +
+               (rec.company || rec.last).replace(/[^A-Za-z0-9]+/g, "-") + ".pdf");
   } catch (err) {
-    pdf = null;
+    return null;
   }
+}
 
-  subject = "New brief " + rec.ref + ": " + (rec.company || (rec.first + " " + rec.last)) +
-            ", " + (rec.delegates || "?") + " delegates, " + (rec.location || "location TBC");
-
-  body =
-    "A new brief came in through the website. The full brief is attached as a PDF.\n\n" +
-    "Reference   " + rec.ref + "\n" +
-    "Received    " + rec.received + " AEST\n" +
-    "From        " + rec.first + " " + rec.last + ", " + rec.company + "\n" +
-    "Email       " + rec.email + "\n" +
-    (rec.phone ? "Phone       " + rec.phone + "\n" : "") +
-    "Delegates   " + rec.delegates + "\n" +
-    "Location    " + rec.location + (rec.locationDetail ? " (" + rec.locationDetail + ")" : "") + "\n" +
-    "Dates       " + (rec.flexibleDates ? "Flexible. " : "") + niceDate_(rec.startDate) +
-      (rec.endDate ? " to " + niceDate_(rec.endDate) : "") + "\n\n" +
-    (rec.notes ? "In their words:\n" + rec.notes + "\n" + "\n" : "") +
-    "Reply to this email and it goes straight to " + rec.email + ".\n" +
-    (pdf ? "" : "\nThe PDF could not be rendered this time. Every field is in the sheet.\n");
-
-  var attachments = pdf ? [pdf] : [];
-
+/* One way out for every email. Resend when the domain is configured, the
+   owning Google account otherwise. */
+function deliver_(m) {
   var apiKey = PropertiesService.getScriptProperties().getProperty("RESEND_API_KEY");
   if (apiKey) {
     try {
       var payload = {
         from: FROM_NAME + " <" + FROM_EMAIL + ">",
-        to: TO,
-        reply_to: rec.email,
-        subject: subject,
-        text: body
+        to: m.to,
+        reply_to: m.replyTo,
+        subject: m.subject,
+        text: m.body
       };
-      if (CC.length) payload.cc = CC;
-      if (pdf) {
+      if (m.cc && m.cc.length) payload.cc = m.cc;
+      if (m.pdf) {
         payload.attachments = [{
-          filename: pdf.getName(),
-          content: Utilities.base64Encode(pdf.getBytes())
+          filename: m.pdf.getName(),
+          content: Utilities.base64Encode(m.pdf.getBytes())
         }];
       }
       var res = UrlFetchApp.fetch("https://api.resend.com/emails", {
@@ -262,35 +255,124 @@ function sendBrief_(rec) {
         muteHttpExceptions: true
       });
       if (res.getResponseCode() < 300) return "resend";
-      notifyFailure_(rec, "Resend returned " + res.getResponseCode() + ": " + res.getContentText());
+      notifyFailure_(m.ref, "Resend returned " + res.getResponseCode() + ": " + res.getContentText());
     } catch (err) {
-      notifyFailure_(rec, "Resend threw: " + String(err));
+      notifyFailure_(m.ref, "Resend threw: " + String(err));
     }
   }
 
-  /* Fallback. Sends from the Google account that owns this script, which is
-     the wrong from address but a delivered brief beats a tidy one. */
   try {
     MailApp.sendEmail({
-      to: TO.join(","),
-      cc: CC.join(","),
-      replyTo: rec.email,
-      subject: subject,
-      body: body,
+      to: m.to.join(","),
+      cc: (m.cc || []).join(","),
+      replyTo: m.replyTo,
+      subject: m.subject,
+      body: m.body,
       name: FROM_NAME,
-      attachments: attachments
+      attachments: m.pdf ? [m.pdf] : []
     });
     return apiKey ? "mailapp-fallback" : "mailapp";
   } catch (err) {
-    notifyFailure_(rec, "MailApp threw: " + String(err));
+    notifyFailure_(m.ref, "MailApp threw: " + String(err));
     return "FAILED";
   }
 }
 
-function notifyFailure_(rec, detail) {
+function sendBrief_(rec) {
+  var pdf = renderPdf_(rec);
+  var internal = deliver_(internalMail_(rec, pdf));
+  var client = sendClientCopy_(rec, pdf);
+  return internal + " / client:" + client;
+}
+
+/* The internal copy. Reply-to is the enquirer, so a reply answers the client
+   directly instead of bouncing around. */
+function internalMail_(rec, pdf) {
+  var L = [
+    "A new brief came in through the website. The full brief is attached as a PDF.",
+    "",
+    "Reference   " + rec.ref,
+    "Received    " + rec.received + " AEST",
+    "From        " + rec.first + " " + rec.last + ", " + rec.company,
+    "Email       " + rec.email
+  ];
+  if (rec.phone) L.push("Phone       " + rec.phone);
+  L.push("Delegates   " + rec.delegates);
+  L.push("Location    " + rec.location + (rec.locationDetail ? " (" + rec.locationDetail + ")" : ""));
+  L.push("Dates       " + (rec.flexibleDates ? "Flexible. " : "") + niceDate_(rec.startDate) +
+         (rec.endDate ? " to " + niceDate_(rec.endDate) : ""));
+  L.push("");
+  if (rec.notes) { L.push("In their words:"); L.push(rec.notes); L.push(""); }
+  L.push("Reply to this email and it goes straight to " + rec.email + ".");
+  if (!pdf) L.push("", "The PDF could not be rendered this time. Every field is in the sheet.");
+
+  return {
+    ref: rec.ref,
+    to: TO,
+    cc: CC,
+    replyTo: rec.email,
+    subject: "New brief " + rec.ref + ": " + (rec.company || (rec.first + " " + rec.last)) +
+             ", " + (rec.delegates || "?") + " delegates, " + (rec.location || "location TBC"),
+    body: L.join(NL),
+    pdf: pdf
+  };
+}
+
+/* The enquirer's own copy. Deliberately harder to send than the internal one.
+   A client who enquired at conferencevenues.com.au receiving mail from
+   theserviceedit.com is a trust break and reads like phishing, so this refuses
+   to reach a real client until the CVBS domain is configured in Resend. Until
+   then it lands with Mel, clearly marked, so the wording can be approved. */
+function sendClientCopy_(rec, pdf) {
+  var hasDomain = !!PropertiesService.getScriptProperties().getProperty("RESEND_API_KEY");
+  var toClient  = CLIENT_LIVE && hasDomain;
+
+  if (CLIENT_LIVE && !hasDomain) {
+    notifyFailure_(rec.ref, "CLIENT_LIVE is on but no RESEND_API_KEY is set, so the client copy " +
+      "was NOT sent to the enquirer. It would have come from the wrong domain. " +
+      "Finish the Resend setup in brief-store/README.md.");
+  }
+
+  var L = [
+    "Hi " + (rec.first || "there") + ",",
+    "",
+    "Thank you, we have your brief.",
+    "",
+    "One of the team will be in touch, and you will have a costed shortlist " +
+      "within 48 hours. It costs you nothing.",
+    "",
+    "Your brief is attached as a PDF, so you have a copy to keep or to forward.",
+    "",
+    "Reference   " + rec.ref,
+    "",
+    "If anything changes, reply to this email and we will update it before we " +
+      "go looking.",
+    "",
+    "Conference Venues and Booking Services",
+    "Sourcing conference venues and group accommodation since 1989"
+  ];
+
+  if (!toClient) {
+    L = ["[PREVIEW ONLY. Not sent to the client.",
+         " This is what " + rec.email + " would have received.]",
+         ""].concat(L);
+  }
+
+  return deliver_({
+    ref: rec.ref,
+    to: toClient ? [rec.email] : [FAIL_ALERT],
+    cc: [],
+    replyTo: TO[0],
+    subject: (toClient ? "" : "[CLIENT PREVIEW] ") + "Your venue brief, " + rec.ref,
+    body: L.join(NL),
+    pdf: pdf
+  }) + (toClient ? "" : "-preview");
+}
+
+function notifyFailure_(ref, detail) {
   try {
-    MailApp.sendEmail(FAIL_ALERT, "CVBS brief " + rec.ref + " saved but not emailed",
-      detail + "\n\nThe brief is row " + rec.ref + " in the briefs sheet. Nothing is lost.");
+    MailApp.sendEmail(FAIL_ALERT, "CVBS brief " + ref + " needs a look",
+      detail + NL + NL + "The brief is " + ref + " in the briefs sheet. Nothing is lost.");
   } catch (ignore) {}
 }
 
@@ -352,8 +434,8 @@ function setup() {
   MailApp.sendEmail({
     to: TO.join(","),
     subject: "CVBS brief store is working",
-    body: "This is the sample brief. The real ones will look the same.\n\n" +
-          "Sheet: " + ss.getUrl() + "\n",
+    body: ["This is the sample brief. The real ones will look the same.",
+           "", "Sheet: " + ss.getUrl()].join(NL),
     attachments: [pdf]
   });
   Logger.log("Sheet:  " + ss.getUrl());

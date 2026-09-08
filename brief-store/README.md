@@ -18,7 +18,7 @@ hello@theserviceedit.com.
 - **Sheet:** "CVBS Briefs", created by the script on first run, id held in Script
   Properties as `SHEET_ID`
   `https://docs.google.com/spreadsheets/d/1jXUa_hgk7VOxVWGUrCq3Wl9U5s5DOnstPHHAFzLuvz8/edit`
-- **Web app:** Version 2, executes as hello@theserviceedit.com, access **Anyone**
+- **Web app:** Version 4, executes as hello@theserviceedit.com, access **Anyone**
   `https://script.google.com/macros/s/AKfycbxnRCSlKD_vom6CI6_yJnEAPeoehRM-UD4mY9EpIJMag_QMUohrKL_2p1m9RAoadOxntg/exec`
   That URL is already in `BRIEF_ENDPOINT` in `submit-a-brief.html`.
   Shared key: `cvbs-2026-brief`.
@@ -27,18 +27,34 @@ hello@theserviceedit.com.
 `the-service-edit.github.io` origin: both returned `{"ok":true,"ref":"CVB-..."}`,
 both landed in the sheet, both emailed with the PDF attached.
 
+## Two emails go out per brief
+
+1. **The internal copy**, to CVBS. Reply-to is the enquirer, so a reply answers
+   the client directly.
+2. **The enquirer's copy**, their own brief back as a PDF, with the same
+   reference. Reply-to is CVBS.
+
 ## Handing it to CVBS
 
-One word, then a redeploy. In `Code.gs`:
+Two flags, then a redeploy. In `Code.gs`:
 
 ```
-var LIVE = false;
+var LIVE        = false;
+var CLIENT_LIVE = false;
 ```
 
-Set it to `true`. That switches the recipients from `hello@theserviceedit.com`
-to `karen@conferencevenues.com` and `aj@conferencevenues.com`. Confirm both
-addresses with Karen first. Note they are `conferencevenues.com`, not `.com.au`:
-the website is on the `.com.au`, the mailboxes are on the `.com`.
+`LIVE = true` switches the internal copy from `hello@theserviceedit.com` to
+`aj@conferencevenues.com.au`. Everything CVBS is on the **.com.au**.
+
+`CLIENT_LIVE = true` sends the second email to the enquirer instead of to Mel.
+Until then it still goes out on every brief, prefixed `[CLIENT PREVIEW]` and
+addressed to Mel, so the wording is reviewed before a client ever sees it.
+
+**`CLIENT_LIVE` alone is not enough.** The client copy refuses to reach a real
+enquirer unless `RESEND_API_KEY` is set, because someone who enquired at
+conferencevenues.com.au must never receive mail from theserviceedit.com. If the
+flag is on without the key, the copy stays with Mel and she is emailed to say
+why. Do the Resend section below first.
 
 Then redeploy. See the trap below.
 
