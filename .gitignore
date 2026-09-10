@@ -154,3 +154,6 @@ CVBS-Market-Assessment-Sep-2026.pdf
 
 # FUSE mount artefacts (created when files are rewritten in place on the mounted folder)
 .fuse_hidden*
+
+# Original supplied client logo files, kept locally for re-cutting only
+assets/img/logos/_source/

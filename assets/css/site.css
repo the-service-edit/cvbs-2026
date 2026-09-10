@@ -241,10 +241,7 @@ body.menu-open{overflow:hidden}
 .logos img:hover{opacity:1;transform:translateY(-2px)}
 .logos--wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-items:center;align-items:center;gap:clamp(1.6rem,3vw,2.2rem) clamp(1.5rem,4vw,3rem);max-width:1120px;margin-inline:auto}
 @media(min-width:720px){.logos--wall{grid-template-columns:repeat(5,minmax(0,1fr))}}
-.logos--wall img{height:auto;width:auto;max-height:40px;max-width:min(150px,100%);object-fit:contain}
-.logos--wall img[src*="heritage"],.logos--wall img[src*="kimberly"],.logos--wall img[src*="medtronic"]{max-height:30px;max-width:min(185px,100%)}
-.logos--wall img[src*="randstad"],.logos--wall img[src*="australand"]{max-height:52px;max-width:min(100px,100%)}
-.logos--wall img[src*="elders"]{max-height:34px}
+.logos--wall img{height:auto;width:auto;max-height:34px;max-width:min(140px,100%);object-fit:contain}
 
 /* ==========================================================================
    REBRAND: teal-forward accents + signature teal section
@@ -917,10 +914,43 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
 
 .mock-shot{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;box-shadow:0 22px 44px -30px rgba(10,44,82,.5)}
 
-.logos--trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.6rem,4vw,3.4rem);margin-top:1.6rem;max-width:1000px;margin-inline:auto}
-.logos--trust img{height:34px;width:auto;opacity:1;transition:transform .3s var(--ease)}
+.logos--trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.5rem,3.4vw,2.9rem);margin-top:1.6rem;max-width:880px;margin-inline:auto}
+.logos--trust img{height:auto;width:auto;max-height:34px;max-width:min(140px,100%);object-fit:contain;opacity:1;transition:transform .3s var(--ease)}
 .logos--trust img:hover{transform:translateY(-3px)}
-@media(max-width:680px){.logos--trust{gap:1.4rem 1.8rem}.logos--trust img{height:26px}}
+
+/* Per-brand optical sizing for the client logo walls. Wordmarks and square marks
+   sit at very different widths at a shared height, so each is capped to read at
+   the same visual weight. Updated 10 Sep 2026 with the current client set. */
+.logos--wall img[src*="astrazeneca"],.logos--trust img[src*="astrazeneca"]{max-height:30px}
+.logos--wall img[src*="merck"],.logos--trust img[src*="merck"]{max-height:23px}
+.logos--wall img[src*="sandvik"],.logos--trust img[src*="sandvik"]{max-height:27px}
+.logos--wall img[src*="abbvie"],.logos--trust img[src*="abbvie"]{max-height:26px}
+.logos--wall img[src*="abundium"],.logos--trust img[src*="abundium"]{max-height:26px;max-width:min(150px,100%)}
+.logos--wall img[src*="aspen"],.logos--trust img[src*="aspen"]{max-height:32px}
+.logos--wall img[src*="bdo"],.logos--trust img[src*="bdo"]{max-height:30px}
+.logos--wall img[src*="lend-lease"],.logos--trust img[src*="lend-lease"]{max-height:30px}
+.logos--wall img[src*="randstad"],.logos--trust img[src*="randstad"]{max-height:40px;max-width:54px}
+.logos--wall img[src*="edwards"],.logos--trust img[src*="edwards"]{max-height:36px;max-width:36px}
+.logos--wall img[src*="bausch"],.logos--trust img[src*="bausch"]{max-height:27px;max-width:min(165px,100%)}
+
+/* Venue and hotel groups band - suppliers, not clients, so it sits quieter. */
+.logos--venues{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.6rem,4vw,3.2rem);margin-top:1.6rem;max-width:900px;margin-inline:auto}
+.logos--venues img{height:auto;width:auto;max-height:30px;max-width:min(130px,100%);object-fit:contain}
+.logos--venues img[src*="peppers"]{max-height:40px}
+.logos--venues img[src*="qt"]{max-height:36px}
+.logos--venues img[src*="ihg"]{max-height:36px}
+
+@media(max-width:680px){
+  .logos--trust{gap:1.4rem 1.8rem}
+  .logos--trust img,.logos--wall img{max-height:26px;max-width:min(120px,100%)}
+  .logos--trust img[src*="randstad"],.logos--wall img[src*="randstad"]{max-height:32px;max-width:44px}
+  .logos--trust img[src*="edwards"],.logos--wall img[src*="edwards"]{max-height:28px;max-width:28px}
+  .logos--trust img[src*="merck"],.logos--wall img[src*="merck"]{max-height:19px}
+  .logos--venues img{max-height:24px}
+  .logos--venues img[src*="peppers"]{max-height:32px}
+  .logos--venues img[src*="qt"]{max-height:29px}
+  .logos--venues img[src*="ihg"]{max-height:29px}
+}
 
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .sub-band{background:var(--navy-deep);color:#fff;padding:clamp(2.4rem,5vw,3.6rem) 0;border-top:1px solid rgba(255,255,255,.08)}
