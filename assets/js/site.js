@@ -252,12 +252,45 @@
     show(0);
   });
 
-  /* Newsletter / venue-offers signup */
+  /* Newsletter / venue-offers signup, delivered to the CVBS Mailchimp audience.
+     u and id are the public embed identifiers, safe in client-side code. */
+  var MAILCHIMP = {
+    endpoint: 'https://conferencevenues.us8.list-manage.com/subscribe/post',
+    u: 'cbdec96862600286c6b1444dd',
+    id: 'fd4e158c05'
+  };
+  function mailchimpSubscribe(email) {
+    return new Promise(function (resolve, reject) {
+      var cb = 'mcjsonp' + Date.now() + Math.floor(Math.random() * 100000);
+      var script = doc.createElement('script');
+      var timer = null;
+      var cleanup = function () {
+        if (timer) clearTimeout(timer);
+        try { delete window[cb]; } catch (err) { window[cb] = undefined; }
+        if (script.parentNode) script.parentNode.removeChild(script);
+      };
+      window[cb] = function (data) {
+        cleanup();
+        var payload = data || {};
+        var msg = String(payload.msg || '');
+        /* An address already on the list is a success from the visitor's point of view. */
+        if (payload.result === 'success' || /already subscribed/i.test(msg)) resolve(payload);
+        else reject(new Error(msg || 'Subscription failed'));
+      };
+      script.onerror = function () { cleanup(); reject(new Error('Network error')); };
+      timer = setTimeout(function () { cleanup(); reject(new Error('Timed out')); }, 12000);
+      script.src = MAILCHIMP.endpoint + '?u=' + MAILCHIMP.u + '&id=' + MAILCHIMP.id +
+        '&EMAIL=' + encodeURIComponent(email) + '&c=' + cb;
+      doc.head.appendChild(script);
+    });
+  }
   doc.querySelectorAll('[data-subscribe]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = form.querySelector('input[type="email"]');
       if (email && !email.checkValidity()) { email.reportValidity(); return; }
+      var honeypot = form.querySelector('input[name^="b_"]');
+      if (honeypot && honeypot.value) return;
       var ok = form.querySelector('[data-form-success]');
       var done = function () {
         var row = form.querySelector('.sub-row'), fine = form.querySelector('.sub-fine');
@@ -268,13 +301,12 @@
       var button = form.querySelector('button[type="submit"]');
       var buttonHtml = button ? button.innerHTML : '';
       clearSubmissionError(form);
-      if (!hasWeb3FormsKey(form)) {
-        showSubmissionError(form, 'Email signup is temporarily unavailable. We have not added your address.');
-        return;
-      }
-      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
-      submitToWeb3Forms(form).then(done).catch(function () {
-        showSubmissionError(form, 'We could not add your email. Please try again.');
+      if (button) { button.disabled = true; button.textContent = 'Sending\u2026'; }
+      mailchimpSubscribe(email ? email.value : '').then(done).catch(function (err) {
+        var msg = String((err && err.message) || '');
+        showSubmissionError(form, /too many/i.test(msg)
+          ? 'That address has been submitted several times already. Please wait a few minutes and try again.'
+          : 'We could not add your email. Please try again.');
       }).then(function () {
         if (button) { button.disabled = false; button.innerHTML = buttonHtml; }
       });
