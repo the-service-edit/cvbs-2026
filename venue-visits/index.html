@@ -283,6 +283,41 @@
 .vh-how{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.4rem}
 .vh-how h3{margin:0 0 .4rem;font-size:1rem;color:var(--navy);font-weight:650}
 .vh-how p{margin:0;font-size:.93rem;line-height:1.6;color:#5c6a75}
+/* ---------- hotel groups band. 10 Sep 2026. Scoped .vgrp-* only. ----------
+   A band, NOT a filter. CVBS-Venue-Visits-Architecture-Sep-2026 rules out a
+   filter interface on this hub. This is a second, static way through the same
+   records, grouped by hotel group instead of by city.
+   THE RULE: a group appears here only when a record below it has been walked.
+   Never add a group with an empty room list.
+   Logos fail SAFE: the wordmark shows by default and the image replaces it
+   only on a successful load, so a missing or broken file degrades to legible
+   text instead of a hole. Do not switch this to onerror.
+   NEVER put loading="lazy" back on these images. The image starts at
+   display:none, so a lazy image is never considered in-viewport, never loads,
+   and its onload never fires. Every logo silently stays as text. */
+.vgrp-intro{max-width:60ch;margin:.9rem 0 0;font-size:1rem;line-height:1.65;color:#37444f}
+.vgrp-list{list-style:none;margin:2.4rem 0 0;padding:0;
+  columns:4 232px;column-gap:2.6rem}
+.vgrp{display:flex;flex-direction:column;gap:.85rem;border-top:1px solid var(--line);
+  padding-top:1.05rem;margin-bottom:2rem;break-inside:avoid;-webkit-column-break-inside:avoid}
+.vgrp__mark{margin:0;display:flex;align-items:center;min-height:72px}
+.vgrp__mark img{display:none;height:var(--mh,26px);width:auto;max-width:100%;object-fit:contain}
+.vgrp__mark.is-loaded img{display:block}
+.vgrp__mark.is-loaded .vgrp__word{display:none}
+.vgrp__word{font-size:1.02rem;font-weight:650;letter-spacing:-.005em;color:var(--navy);line-height:1.25}
+.vgrp__rooms{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.vgrp__rooms li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .55rem;
+  font-size:.93rem;line-height:1.45}
+.vgrp__rooms a{color:var(--navy);font-weight:600;text-decoration:underline;
+  text-decoration-color:var(--line);text-decoration-thickness:1px;text-underline-offset:3px;
+  transition:text-decoration-color .2s var(--ease),color .2s var(--ease)}
+.vgrp__rooms a:hover{color:var(--teal-ink);text-decoration-color:var(--teal-ink)}
+.vgrp__rooms a:focus-visible{outline:2px solid var(--teal-ink);outline-offset:3px;border-radius:2px}
+.vgrp__rooms span{font-size:.8rem;color:var(--muted)}
+.vgrp-note{margin:2.6rem 0 0;padding-top:1.15rem;border-top:1px solid var(--line);
+  max-width:74ch;font-size:.88rem;line-height:1.6;color:var(--muted)}
+.vgrp-note b{color:var(--navy);font-weight:600}
+@media(max-width:560px){.vgrp-list{columns:1}.vgrp{margin-bottom:1.7rem}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://the-service-edit.github.io/cvbs-2026/index.html"}, {"@type": "ListItem", "position": 2, "name": "Venue visits", "item": "https://the-service-edit.github.io/cvbs-2026/venue-visits/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "@id": "https://the-service-edit.github.io/cvbs-2026/venue-visits/#webpage", "url": "https://the-service-edit.github.io/cvbs-2026/venue-visits/", "name": "Venues we have been inside", "isPartOf": {"@id": "https://conferencevenues.com.au/#website"}, "publisher": {"@id": "https://conferencevenues.com.au/#organization"}, "inLanguage": "en-AU"}</script>
@@ -358,6 +393,103 @@
 <li class="vh-card"><a class="vh-card__hit" href="pullman-bunker-bay/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-bunker-bay/12-w900.jpg" alt="Pullman Bunker Bay Resort" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Bunker Bay Resort</b><span class="vh-card__meta">Resort · Margaret River region</span><span class="vh-card__stats"><span><b>140</b>theatre</span><span><b>100</b>banquet</span><span><b>150</b>villas</span></span><span class="vh-card__line">A 150 villa resort in the Margaret River region with a 144 sqm pillar free room. Built for the residential program where nobody leaves site.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Perth&amp;venue=Pullman%20Bunker%20Bay%20Resort">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="qt-perth/"><span class="vh-card__img"><img src="../assets/img/venue-visits/qt-perth/4-w900.jpg" alt="QT Perth, a meeting room set in a hollow square" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>QT Perth</b><span class="vh-card__meta">Hotel · Perth CBD</span><span class="vh-card__stats"><span><b>170</b>theatre</span><span><b>120</b>banquet</span><span><b>184</b>rooms</span></span><span class="vh-card__line">A 184 room hotel on Murray Street with six conference rooms of its own. The Murray Room takes 170 theatre and divides into four.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Perth&amp;venue=QT%20Perth">Ask About This Venue</a></span></li>
     </ul>
+  </div>
+</section>
+
+
+<section class="s-white pad">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">Across the network</span>
+      <h2 class="h2">Hotel groups represented across our venue network, and the rooms we have walked inside them.</h2></div>
+    <p class="vgrp-intro">A group appears here once someone from CVBS has been inside one of its rooms, and the list grows the same way. Every hotel below links to what we found in it.</p>
+    <ul class="vgrp-list">
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:66px">
+          <img src="../assets/img/logos/groups/accor.png" alt="Accor" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">Accor</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="sofitel-sydney-wentworth/">Sofitel Sydney Wentworth</a><span>Sydney</span></li>
+        <li><a href="pullman-quay-grand-sydney/">Pullman Quay Grand Sydney Harbour</a><span>Sydney</span></li>
+        <li><a href="pullman-bunker-bay/">Pullman Bunker Bay Resort</a><span>Perth</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:52px">
+          <img src="../assets/img/logos/groups/ihg.png" alt="IHG Hotels & Resorts" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">IHG Hotels &amp; Resorts</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="intercontinental-brisbane/">InterContinental Brisbane</a><span>Brisbane</span></li>
+        <li><a href="hotel-indigo-melbourne-little-collins/">Hotel Indigo Melbourne Little Collins</a><span>Melbourne</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:62px">
+          <img src="../assets/img/logos/groups/tfe-hotels.png" alt="TFE Hotels" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">TFE Hotels</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="the-eve-hotel-sydney/">The EVE Hotel Sydney</a><span>Sydney</span></li>
+        <li><a href="hannah-st-hotel-melbourne/">Hannah St Hotel Melbourne</a><span>Melbourne</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:64px">
+          <img src="../assets/img/logos/groups/capella.png" alt="Capella Hotel Group" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">Capella Hotel Group</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="capella-sydney/">Capella Sydney</a><span>Sydney</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:64px">
+          <img src="../assets/img/logos/groups/crown.png" alt="Crown Resorts" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">Crown Resorts</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="crown-towers-sydney/">Crown Towers Sydney</a><span>Sydney</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:26px">
+          <img src="../assets/img/logos/groups/evt.png" alt="EVT Hotels & Resorts" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">EVT Hotels &amp; Resorts</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="qt-perth/">QT Perth</a><span>Perth</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:30px">
+          <img src="../assets/img/logos/groups/hilton.png" alt="Hilton" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">Hilton</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="hilton-sydney/">Hilton Sydney</a><span>Sydney</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:62px">
+          <img src="../assets/img/logos/groups/marriott.png" alt="Marriott International" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">Marriott International</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="the-westin-brisbane/">The Westin Brisbane</a><span>Brisbane</span></li>
+        </ul>
+      </li>
+      <li class="vgrp">
+        <h3 class="vgrp__mark" style="--mh:66px">
+          <img src="../assets/img/logos/groups/the-star.png" alt="The Star Entertainment Group" decoding="async" onload="this.parentNode.classList.add('is-loaded')">
+          <span class="vgrp__word">The Star Entertainment Group</span>
+        </h3>
+        <ul class="vgrp__rooms">
+        <li><a href="the-star-gold-coast/">The Star Gold Coast</a><span>Gold Coast</span></li>
+        </ul>
+      </li>
+    </ul>
+    <p class="vgrp-note"><b>We are independent of every group listed here.</b> CVBS is not a partner, agent or preferred supplier of any hotel group, and no group is favoured on a shortlist. These are simply the groups whose rooms we have been inside.</p>
   </div>
 </section>
 
