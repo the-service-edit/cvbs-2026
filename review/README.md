@@ -1,7 +1,7 @@
 # CVBS Website Review
 
 A review shell for the whole cvbs-2026 site. Karen and Anthony open one link,
-walk the 64 live pages one at a time, click anything they want changed, and
+walk the 63 live pages one at a time, click anything they want changed, and
 type what they want instead. Every note is pinned to the exact element, signed
 with their name, and lands in one place.
 
@@ -20,7 +20,7 @@ listed in `sitemap.xml`, so this folder never reaches the production domain.
 | `review.css` | styling, CVBS brand tokens |
 | `review.js` | all the logic: pinning, notes, sync, export |
 | `config.js` | **the only file you edit.** Endpoint, key, reviewer names |
-| `pages.json` | the 64 pages, generated from `sitemap.xml` |
+| `pages.json` | the 63 pages, generated from `sitemap.xml` |
 | `asks.json` | the starter list of things we need from CVBS, one per page |
 | `apps-script.gs` | the Google Sheet backend, paste-and-deploy |
 
@@ -72,7 +72,7 @@ come straight back the moment you take the line out.
 
 Currently hidden: the twelve guides and resources pages (budget guide, checklist,
 the how-to articles, blog index, FAQ, calculator, resources). Karen and Anthony see
-52 pages, not 64.
+51 pages, not 63.
 
 To hand a page over, delete its line, bump the `?v=` stamp in `index.html` so the
 change is not held in a cache, and push.
@@ -102,7 +102,7 @@ both, a gold badge for open notes and a teal one for open requests.
 
 ## What the client sees
 
-- **Left**: all 64 pages, grouped, with a dot each. Grey not looked at,
+- **Left**: all 63 pages, grouped, with a dot each. Grey not looked at,
   gold changes wanted, green approved. A badge counts open notes.
 - **Middle**: the real page in a frame, at desktop, tablet or phone width.
 - **Point at something**: turns on pin mode. Hover highlights whatever is

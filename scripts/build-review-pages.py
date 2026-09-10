@@ -18,13 +18,11 @@ SERVICE = ["conference-venues-with-accommodation.html", "conference-venue-findin
 ORDER = ["Core pages", "Current offers", "Service pages", "Destination pages",
          "Venue visits", "Guides and resources", "Legal"]
 
-# Pages deliberately kept OUT of sitemap.xml that are still in the nav and
-# still in front of clients, so they have to be reviewable. venue-results
-# carries <meta robots="noindex, follow"> on purpose. That is an SEO
-# decision, not a reason to hide the page from the people signing the site
-# off. It sits in the header as "Browse all venues".
-EXTRA = [("venue-results.html", "Core pages", "destinations.html",
-          "Browse All Venues")]   # 4th item overrides the <title>
+# Nothing is kept out of sitemap.xml and still shown here any more.
+# venue-results.html used to sit in this list. It was deleted from the site
+# on 10 Sep with the venue finder, so the review tool must not list it or
+# the client clicks a 404 inside the frame.
+EXTRA = []
 
 
 def rel_of(loc):
