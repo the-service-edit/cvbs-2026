@@ -40,6 +40,9 @@ GATE
 import io, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import sys as _sys
+_sys.path.insert(0, os.path.join(ROOT, '_site'))
+from siteconf import BASE, ORG_ID, WEBSITE_ID  # site.config.json, never hardcode a host
 DATA = os.path.join(ROOT, 'assets', 'data', 'venues.json')
 MIN_VENUES = 6
 
@@ -239,7 +242,7 @@ def build(city):
         if v.get('note'):
             ev["description"] = v['note']
         if v.get('visit'):
-            ev["url"] = ('https://the-service-edit.github.io/cvbs-2026/venue-visits/%s/'
+            ev["url"] = (BASE + 'venue-visits/%s/'
                          % v['visit'])
         if props:
             ev["additionalProperty"] = props

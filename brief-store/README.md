@@ -174,3 +174,37 @@ above before changing anything in `BriefPdf.html`.
 
 **Testing from a terminal does not work.** The cloud container cannot reach
 `script.google.com`. Test from a browser tab on the live site's own origin.
+
+## Release of 11 September 2026 (not yet deployed)
+
+`Code.gs` and `ClientEmail.html` in this folder were hardened on 11 Sep 2026.
+**The live endpoint is unchanged until you do the steps below.**
+
+What changed:
+
+- Every field is checked server-side: unknown fields dropped, each field cut to a
+  length ceiling, email format checked, dates must be `YYYY-MM-DD`, and the fields
+  echoed back to the enquirer (first name, location detail, delegates) cannot carry
+  links, so the form cannot be used to send CVBS-branded mail with someone else's words.
+- Malformed or unkeyed requests are answered and never emailed. Real failures alert at
+  most once per 15 minutes, with the brief's fields, never the raw request body.
+- The PDF escapes every typed value (the budget used to go in unescaped).
+- The Sheet formula guard also covers leading tab and carriage return.
+- `ASSET_BASE` can be set as a Script Property, so cutover needs no code release.
+- The client email links to `/client-stories/` (the old `results.html` no longer
+  exists on the rebuilt site).
+
+To deploy, in the Apps Script editor for the brief store:
+
+1. Paste this folder's `Code.gs` over the editor's `Code.gs`, and `ClientEmail.html`
+   over `ClientEmail`. Save.
+2. **Deploy > Manage deployments > the existing web app > pencil (Edit) > Version:
+   New version > Deploy.** Do NOT use "New deployment": that makes a new `/exec`
+   URL and the website form silently stops working.
+3. Confirm the `/exec` URL shown is still the one in `submit-a-brief.html`
+   (`AKfycbxnRCSl...`).
+4. Send one test brief from the site using your own address and check: a new Sheet row,
+   the internal email and PDF, and the client copy or preview.
+
+At cutover, add Script Property `ASSET_BASE` = `https://www.conferencevenues.com.au`
+only after the new site is live there and its `/assets/img/email/` images load.

@@ -54,8 +54,9 @@ Two more, not part of the build, run before a launch:
 ```
 python3 scripts/check-claims.py                    (every absolute claim, with the
                                                     dataset beside it to check against)
-./scripts/build-public.sh /tmp/cvbs-check          (fails if the artifact and the
-                                                    sitemap disagree)
+python3 scripts/build.py --env production --out /tmp/cvbs-check
+                                                   (fails on anything the artifact
+                                                    verifier finds; see _site/README.md)
 ```
 
 `build_destination.py` MUST run after `build_city_index.py`. It lifts the block

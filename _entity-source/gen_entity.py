@@ -196,8 +196,7 @@ def strip_owned(src):
 # ---------------------------------------------------------------------------
 # Any address written by another generator is normalised onto SERVE, so a
 # breadcrumb, an ItemList and a canonical can never disagree about the host.
-KNOWN_HOSTS = ("https://the-service-edit.github.io/cvbs-2026/",
-               "https://the-service-edit.github.io/cvbs-2026/")
+KNOWN_HOSTS = tuple(h.rstrip("/") + "/" for h in E._CFG.get("legacyHosts", []))
 CVBS_NAMES = {E.NAME, "CVBS", "Conference Venues & Booking Services"}
 
 

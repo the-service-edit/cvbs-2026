@@ -31,6 +31,9 @@ WHAT IT WILL NOT DO
 import io, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import sys as _sys
+_sys.path.insert(0, os.path.join(ROOT, '_site'))
+from siteconf import BASE, ORG_ID, WEBSITE_ID  # site.config.json, never hardcode a host
 sys.path.insert(0, os.path.join(ROOT, '_destination-source'))
 from destinations import DEST, FREE_A, FAST_A, GROUP_A, WHY_CARD_2, WHY_CARD_3
 
@@ -291,8 +294,8 @@ def patch_head(s, city, d):
            "mainEntity": [{"@type": "Question", "name": question,
                            "acceptedAnswer": {"@type": "Answer", "text": strip_tags(answer)}}
                           for question, answer in faq_pairs(city, d)],
-           "publisher": {"@id": "https://conferencevenues.com.au/#organization"},
-           "about": {"@id": "https://conferencevenues.com.au/#organization"}}
+           "publisher": {"@id": ORG_ID},
+           "about": {"@id": ORG_ID}}
     blob = ('<script type="application/ld+json">' + json.dumps(faq, ensure_ascii=False)
             + '</script>')
     old = re.search(r'<script type="application/ld\+json">\{"@context":"https://schema\.org",'

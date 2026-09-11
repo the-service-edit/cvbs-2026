@@ -31,7 +31,9 @@ import io, json, os, re, sys, collections
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'faq.html')
-BASE = 'https://the-service-edit.github.io/cvbs-2026/'
+import sys as _sys
+_sys.path.insert(0, os.path.join(ROOT, '_site'))
+from siteconf import BASE, ORG_ID, WEBSITE_ID  # site.config.json, never hardcode a host
 DATA = os.path.join(ROOT, 'assets', 'data', 'venues.json')
 
 sys.path.insert(0, os.path.join(ROOT, '_venue-index-source'))

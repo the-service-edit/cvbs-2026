@@ -6,7 +6,9 @@ how-we-are-paid.html at build time, exactly as build_venue.py does, so these
 two pages cannot drift from the rest of the site when the nav changes.
 
 Nothing on these pages is invented. Every statement describes something the
-build actually does: the form posts to Web3Forms, the fonts come from Google,
+build actually does: the brief posts to the CVBS brief store (Google Apps
+Script and a Google Sheet, with emails sent by Resend), the offers signup
+goes to Mailchimp, the fonts come from Google,
 the shortlist sits in the visitor's own browser, and there is no analytics or
 advertising code anywhere in the site. Where a fact is genuinely not known
 (the registered entity name, the ABN, who the data controller is on paper),
@@ -23,7 +25,8 @@ sys.path.insert(0, os.path.join(ROOT, '_entity-source'))
 import entity as E                                              # noqa: E402
 
 BASE = E.SERVE.rstrip('/')
-UPDATED = '6 September 2026'
+UPDATED = '6 September 2026'          # terms
+PRIVACY_UPDATED = '11 September 2026'  # privacy: processors corrected, Web3Forms retired
 
 ARROW = ('<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" '
          'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -118,9 +121,10 @@ PRIVACY = [
 
 <h2>What this website does</h2>
 <p>The site has no advertising code, no tracking pixels, no session recording and no analytics account attached to it.</p>
-<p>Three technical things are worth naming because they are the only ways your details leave this page:</p>
+<p>These are the only ways your details leave this page:</p>
 <ul>
-<li><b>Forms.</b> The brief and the newsletter form are delivered by Web3Forms, a form relay service, which passes the contents to our inbox. Your submission travels through their servers.</li>
+<li><b>Your brief.</b> When you send a brief it goes to a Google Apps Script service run for us, which records it in a Google Sheet held in a Google account and emails our team a copy as a PDF. The confirmation copy we send back to you is delivered by Resend, an email delivery service. Your brief is stored and processed on Google's and Resend's servers.</li>
+<li><b>Venue offers.</b> The offers signup sends your email address to Mailchimp, the service we send offers through. To do that your browser loads a small script from Mailchimp. Mailchimp holds your address until you unsubscribe.</li>
 <li><b>Fonts.</b> The site loads its typeface from Google Fonts, which means your browser requests a file from Google and Google sees the request.</li>
 <li><b>Your shortlist.</b> When you save a venue, that list is stored in your own browser on your own device. It is not sent to us and we cannot see it. Clearing your browser data clears the list. Your part-finished brief is held the same way, and only until you submit it or close the tab.</li>
 </ul>
@@ -178,11 +182,11 @@ PAGES = [
  dict(slug='privacy.html',
       title='Privacy Policy | CVBS',
       desc=('What Conference Venues and Booking Services collects when you send a brief, '
-            'what we pass to venues, and the three things on this website that send data anywhere.'),
+            'what we pass to venues, and everything on this website that sends data anywhere.'),
       crumb='Privacy', eyebrow='Privacy',
       h1='What we do with your information.',
       lead=('You are handing us the details of your event, so you are entitled to know exactly where '
-            'they go. Last updated %s.' % UPDATED),
+            'they go. Last updated %s.' % PRIVACY_UPDATED),
       blocks=PRIVACY),
  dict(slug='terms.html',
       title='Terms of Service | CVBS',

@@ -1,3 +1,5 @@
+> **Superseded 11 September 2026.** The legacy map now lives in `migration/url-map.csv` and `_redirects` is generated from it by `scripts/build.py --env production`. Directory URLs changed the targets (for example `/about/` is now KEPT, `/bestvenue/` now goes to `/conference-venue-finding/`). Do not follow the cutover steps below; see `_site/README.md`.
+
 # The cutover map
 
 `conferencevenues.com.au` currently runs WordPress with Divi. When it points at

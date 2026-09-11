@@ -51,12 +51,14 @@
      matches nothing on the page. Send those to the page the offer moved to.
      Only slugs that are still live have a card, so a closed offer quietly
      leaves the reader on the offers page, which is where they should be. */
-  if (/\/offers\.html$/.test(location.pathname) && location.hash.length > 1) {
+  if (/\/offers(\.html|\/)$/.test(location.pathname) && location.hash.length > 1) {
     var oldSlug = location.hash.slice(1);
-    if (/^[a-z0-9-]+$/.test(oldSlug) &&
-        doc.querySelector('a[href="offer-' + oldSlug + '.html"]')) {
-      location.replace('offer-' + oldSlug + '.html');
-    }
+    /* The card link is read off the page rather than built here, so this works
+       both in the source tree (offer-<slug>.html) and on the built site
+       (/offers/<slug>/), where scripts/build.py has rewritten every link. */
+    var card = /^[a-z0-9-]+$/.test(oldSlug) &&
+      doc.querySelector('a[href$="offer-' + oldSlug + '.html"], a[href$="/offers/' + oldSlug + '/"]');
+    if (card) location.replace(card.href);
   }
 
   /* Offer deadlines. The site is static and rebuilt by hand, so a day count
@@ -163,11 +165,8 @@
     update();
   })();
 
-  /* Shared form delivery helpers. Never report success unless Web3Forms confirms it. */
-  function hasWeb3FormsKey(form) {
-    var key = (form.querySelector('[name="access_key"]') || {}).value || '';
-    return /^[0-9a-f-]{20,}$/i.test(key);
-  }
+  /* Shared form error helpers. The Web3Forms relay was retired 11 Sep 2026:
+     the brief posts to the CVBS brief store and the signup to Mailchimp. */
   function showSubmissionError(form, message) {
     var error = form.querySelector('[data-form-error]');
     if (!error) {
@@ -188,70 +187,6 @@
     var error = form.querySelector('[data-form-error]');
     if (error) error.hidden = true;
   }
-  function submitToWeb3Forms(form) {
-    return fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    }).then(function (response) {
-      return response.json().catch(function () { return {}; }).then(function (data) {
-        if (!response.ok || !data.success) throw new Error(data.message || 'Submission failed');
-        return data;
-      });
-    });
-  }
-
-  /* Multi-step brief wizard + Web3Forms submit */
-  doc.querySelectorAll('[data-wizard]').forEach(function (form) {
-    var steps = [].slice.call(form.querySelectorAll('.wiz-step'));
-    var dots = [].slice.call(form.querySelectorAll('.wiz-progress .dot'));
-    var i = 0;
-    function show(n) {
-      i = Math.max(0, Math.min(steps.length - 1, n));
-      steps.forEach(function (s, k) { s.classList.toggle('active', k === i); });
-      dots.forEach(function (d, k) { d.classList.toggle('active', k <= i); });
-      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    function valid(step) {
-      var ok = true;
-      step.querySelectorAll('[required]').forEach(function (el) {
-        if (!el.value) { el.style.borderColor = '#c0532a'; ok = false; } else { el.style.borderColor = ''; }
-      });
-      var need = step.querySelector('[data-need-one]');
-      if (need) {
-        var any = need.querySelectorAll('input:checked').length > 0;
-        var msg = need.querySelector('[data-need-msg]');
-        if (msg) msg.hidden = any;
-        if (!any) ok = false;
-      }
-      return ok;
-    }
-    form.querySelectorAll('[data-next]').forEach(function (b) {
-      b.addEventListener('click', function () { if (valid(steps[i])) show(i + 1); });
-    });
-    form.querySelectorAll('[data-back]').forEach(function (b) {
-      b.addEventListener('click', function () { show(i - 1); });
-    });
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!valid(steps[i])) return;
-      var ok = form.querySelector('[data-form-success]');
-      var done = function () {
-        form.querySelectorAll('.wiz-step,.wiz-nav,.wiz-progress').forEach(function (el) { el.style.display = 'none'; });
-        if (ok) { ok.hidden = false; ok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-      };
-      clearSubmissionError(form);
-      if (!hasWeb3FormsKey(form)) {
-        showSubmissionError(form, 'Online submission is temporarily unavailable. Your answers are still on this page.');
-        return;
-      }
-      submitToWeb3Forms(form).then(done).catch(function () {
-        showSubmissionError(form, 'We could not send your brief. Your answers are still on this page, so please try again.');
-      });
-    });
-    show(0);
-  });
-
   /* Newsletter / venue-offers signup, delivered to the CVBS Mailchimp audience.
      u and id are the public embed identifiers, safe in client-side code. */
   var MAILCHIMP = {

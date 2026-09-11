@@ -157,3 +157,23 @@ CVBS-Market-Assessment-Sep-2026.pdf
 
 # Original supplied client logo files, kept locally for re-cutting only
 assets/img/logos/_source/
+
+# 11 Sep 2026. Working notes and drafts that were tracked, and therefore public
+# on the branch deploy (ACT-DATABASE-EXPORT.md was fetched live). The site now
+# deploys from scripts/build.py only, but the repository itself is public too.
+ACT-DATABASE-EXPORT.md
+CVBS-PRODUCTION-BUILD-PROMPT.md
+CVBS-site-visit-log-Sydney.csv
+CVBS-Assistant-Check.xlsx
+*-DRAFT-ENTRY.md
+PULLMAN-QUAY-GRAND-SOCIAL-PACK.md
+PRESENTATION-CHECKLIST.md
+CVBS-event-photo-shotlist.md
+CVBS-venue-prompt-v2.md
+CVBS-Growth-Section-Copy.md
+CVBS-How-The-Week-Runs.*
+CVBS-Weekly-Run-Sheet.*
+CVBS-Search-Footprint-Study-Sep-2026.html
+CVBS-Preview-*-STANDALONE.html
+covering-email.md
+*.bak-*

@@ -1,4 +1,12 @@
-name: Deploy public CVBS website
+name: Deploy CVBS staging
+
+# Builds the STAGING site from an allowlist and publishes only that artifact.
+# The repository root is never published. Production is built with
+# scripts/build.py --env production and deployed to the production host,
+# which is a separate, manual, approved step. See _site/README.md.
+#
+# One-time setting (Mel): Settings > Pages > Build and deployment > Source:
+# "GitHub Actions". Until that is set, GitHub keeps publishing the branch.
 
 on:
   push:
@@ -19,34 +27,24 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Validate form delivery configuration
-        env:
-          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
-        run: |
-          if [[ -z "$WEB3FORMS_ACCESS_KEY" ]]; then
-            echo "::error::Add the WEB3FORMS_ACCESS_KEY repository secret before publishing."
-            exit 1
-          fi
+      - name: Build and verify the staging artifact
+        run: python3 scripts/build.py --env staging --out "$RUNNER_TEMP/cvbs-staging"
 
-      - name: Build public-only artifact
-        env:
-          WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
-        run: ./scripts/build-public.sh "$RUNNER_TEMP/cvbs-public"
-
-      - name: Verify form configuration was injected
-        run: |
-          if grep -R "YOUR_WEB3FORMS_ACCESS_KEY" "$RUNNER_TEMP/cvbs-public" --include='*.html'; then
-            echo "::error::A placeholder form key remains in the public artifact."
-            exit 1
-          fi
+      - name: Prove the production build still passes
+        run: python3 scripts/build.py --env production --out "$RUNNER_TEMP/cvbs-production"
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ${{ runner.temp }}/cvbs-public
+          path: ${{ runner.temp }}/cvbs-staging
 
   deploy:
     needs: build

@@ -1,0 +1,26 @@
+{
+  "_readme": "The one place the site's addresses live. Generators, entity.py, check-site.py and scripts/build.py all read this file. Source files always carry PRODUCTION addresses; staging is produced by scripts/build.py --env staging and never written back into source. See _site/README.md.",
+  "identity": "https://www.conferencevenues.com.au",
+  "environments": {
+    "production": {
+      "origin": "https://www.conferencevenues.com.au",
+      "basePath": "/",
+      "indexable": true,
+      "briefEndpoint": null,
+      "securityHeaders": true
+    },
+    "staging": {
+      "origin": "https://the-service-edit.github.io",
+      "basePath": "/cvbs-2026/",
+      "indexable": false,
+      "briefEndpoint": null,
+      "securityHeaders": false
+    }
+  },
+  "legacyHosts": [
+    "https://the-service-edit.github.io/cvbs-2026",
+    "https://conferencevenues.com.au",
+    "http://conferencevenues.com.au",
+    "http://www.conferencevenues.com.au"
+  ]
+}

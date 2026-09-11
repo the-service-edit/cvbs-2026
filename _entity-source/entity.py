@@ -15,25 +15,25 @@ To update: edit this file, then run  python3 _entity-source/gen_entity.py
 # ---------------------------------------------------------------------------
 # 1. IDENTITY  (the real trading domain, not the mockup host)
 # ---------------------------------------------------------------------------
-SITE = "https://the-service-edit.github.io/cvbs-2026"          # entity home
+# SITE is the permanent identity: every @id hangs off it and it never moves.
+# SERVE is the production address that source files are written on. Both come
+# from site.config.json at the repository root, which is the only place an
+# address is set. Staging is produced by scripts/build.py --env staging and is
+# never written back into source, so there is nothing to switch at cutover.
+#
+# 11 Sep 2026: SITE had been rewritten to the GitHub host by
+# scripts/set-base-url.py, which split the business into two Organizations.
+# That script is retired. Do not hand-edit these two lines.
+import json as _json, os as _os
+with open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
+                        "site.config.json"), encoding="utf-8") as _fh:
+    _CFG = _json.load(_fh)
+SITE = _CFG["identity"].rstrip("/")                          # entity home, never changes
 ORG_ID = SITE + "/#organization"                  # stable identifier, never change
 WEBSITE_ID = SITE + "/#website"
 SERVICE_ID = SITE + "/#service"
 LOGO_ID = SITE + "/#logo"
-
-# Where the site is actually served from today. SITE above is an identifier and
-# never moves. SERVE is a fetchable address and does move, so every url field,
-# every canonical and every og:url is built from this one instead.
-#
-# Before 6 September 2026 the two were mixed: canonicals said the GitHub host
-# while all the structured data said conferencevenues.com.au, so the same page
-# claimed two different addresses. One of them was always wrong.
-#
-# THE CUTOVER IS ONE COMMAND:
-#     python3 scripts/set-base-url.py https://the-service-edit.github.io/cvbs-2026
-# Run it, rebuild, and check-site.py will refuse to pass if anything is left
-# pointing at the old host.
-SERVE = "https://the-service-edit.github.io/cvbs-2026"
+SERVE = _CFG["environments"]["production"]["origin"].rstrip("/")
 
 NAME = "Conference Venues and Booking Services"
 ALT_NAMES = ["CVBS", "Conference Venues & Booking Services"]

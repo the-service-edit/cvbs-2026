@@ -39,6 +39,18 @@ var CLIENT_LIVE = true;
    failed once stays broken. Reuse proven URLs, never invent a version. */
 var ASSET_BASE  = "https://the-service-edit.github.io/cvbs-2026";
 
+/* 11 Sep 2026: the cutover flip is a Script Property now, so it needs no code
+   release. Project Settings > Script Properties > ASSET_BASE =
+   https://www.conferencevenues.com.au once the new site is live there. Until
+   the property exists, the constant above is used. */
+function assetBase_() {
+  try {
+    var v = PropertiesService.getScriptProperties().getProperty("ASSET_BASE");
+    if (v && /^https:\/\/[a-z0-9.-]+(\/[A-Za-z0-9._~\/-]*)?$/.test(v)) return v.replace(/\/+$/, "");
+  } catch (ignore) {}
+  return ASSET_BASE;
+}
+
 /* Two sender names on purpose. The internal one is a work queue and wants to be
    scannable in an inbox. The client one follows the CVBS rule that the inbox row
    is the business, the same as every Mailchimp send. */
@@ -94,7 +106,7 @@ function sheet_() {
    text; Sheets does not store it, so the value reads back clean. */
 function cell_(v) {
   var t = (v === null || v === undefined) ? "" : String(v);
-  return /^[=+\-@]/.test(t) ? "'" + t : t;
+  return /^[=+\-@\t\r]/.test(t) ? "'" + t : t;
 }
 
 function out_(obj) {
@@ -178,23 +190,81 @@ function underHourlyCap_() {
   } catch (err) { return true; }
 }
 
+/* -------------------------------------------------------------- validation */
+
+/* 11 Sep 2026. Everything the browser sends is checked here, because the page,
+   its key and this endpoint are all public. Unknown fields are dropped, every
+   field is cut to a length ceiling, and the fields that are echoed back to the
+   enquirer in the client copy cannot carry links, so the form cannot be used
+   to send CVBS-branded mail with someone else's content in it. */
+var LIMITS = {
+  first: 60, last: 60, email: 120, phone: 40, company: 120, role: 80,
+  location: 80, locationDetail: 120, radius: 60, delegates: 12,
+  startDate: 10, endDate: 10, flexibleDates: 10, duration: 60, accommodation: 60,
+  venueType: 120, setup: 60, budgetPp: 40, budgetTotal: 40, notes: 6000,
+  offer: 120, venue: 160, referral: 120, services: 400, requirements: 600
+};
+var ECHOED = ["first", "locationDetail", "delegates"];
+
+function clean_(f) {
+  var out = {}, bad = [];
+  Object.keys(LIMITS).forEach(function (k) {
+    var v = str_(f[k]).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "");
+    out[k] = v.slice(0, LIMITS[k]);
+  });
+  if (!/^[^@\s<>"']{1,64}@[^@\s<>"']+\.[A-Za-z]{2,}$/.test(out.email)) bad.push("email");
+  if (!out.first) bad.push("first");
+  if (out.delegates && !/\d/.test(out.delegates)) bad.push("delegates");
+  ["startDate", "endDate"].forEach(function (k) {
+    if (out[k] && !/^\d{4}-\d{2}-\d{2}$/.test(out[k])) bad.push(k);
+  });
+  ECHOED.forEach(function (k) {
+    if (/(https?:|www\.|<|>|\/\/)/i.test(out[k])) bad.push(k);
+  });
+  return { rec: out, bad: bad };
+}
+
+/* One alert per 15 minutes at most, and never the raw request body. Before
+   this, every unparseable POST emailed its whole body to the alert address, so
+   a bot could fill an inbox with its own content. A real failure still alerts,
+   with the validated fields, because that alert may be the only copy of a lead. */
+function alertOnce_(subject, body) {
+  try {
+    var cache = CacheService.getScriptCache();
+    if (cache.get("cvbs-alert-lock")) {
+      console.error("Alert suppressed (throttled): " + subject + NL + body);
+      return;
+    }
+    cache.put("cvbs-alert-lock", "1", 900);
+  } catch (ignore) {}
+  try { MailApp.sendEmail(FAIL_ALERT, subject, body); } catch (ignore) {}
+}
+
 /* ------------------------------------------------------------------ intake */
 
 function doPost(e) {
-  var saved = false, ref = "";
+  var saved = false, ref = "", f = {};
+  var raw = (e && e.postData && e.postData.contents) || "";
+  if (raw.length > 20000) return out_({ ok: false, error: "too large" });
+
+  /* Malformed or unkeyed requests are answered and forgotten. No alert: they
+     are not briefs, and alerting on them is how the inbox got flooded. */
+  var p;
+  try { p = JSON.parse(raw || "{}"); } catch (err) { return out_({ ok: false, error: "bad request" }); }
+  if (!p || typeof p !== "object" || p.key !== SHARED_KEY) return out_({ ok: false, error: "bad key" });
+
+  /* Honeypot. A real visitor never fills this. Answer ok so the bot learns
+     nothing and moves on. */
+  if (str_(p.botcheck)) return out_({ ok: true, ref: "" });
+
+  var checked = clean_(p.fields || {});
+  if (checked.bad.length) {
+    console.warn("Brief refused, invalid fields: " + checked.bad.join(", "));
+    return out_({ ok: false, error: "invalid", fields: checked.bad });
+  }
+  f = checked.rec;
+
   try {
-    var raw = (e && e.postData && e.postData.contents) || "";
-    if (raw.length > 20000) return out_({ ok: false, error: "too large" });
-
-    var p = JSON.parse(raw || "{}");
-    if (p.key !== SHARED_KEY) return out_({ ok: false, error: "bad key" });
-
-    /* Honeypot. A real visitor never fills this. Answer ok so the bot learns
-       nothing and moves on. */
-    if (str_(p.botcheck)) return out_({ ok: true, ref: "" });
-
-    var f = p.fields || {};
-    if (!str_(f.email) || !str_(f.first)) return out_({ ok: false, error: "incomplete" });
 
     var now = new Date();
     var sh  = sheet_();
@@ -215,7 +285,7 @@ function doPost(e) {
       setup: str_(f.setup), budgetPp: str_(f.budgetPp),
       budgetTotal: str_(f.budgetTotal), notes: str_(f.notes),
       offer: str_(f.offer), venue: str_(f.venue), referral: str_(f.referral),
-      source: str_(p.page), status: "new", sent: ""
+      source: str_(p.page).slice(0, 80), status: "new", sent: ""
     };
 
     sh.appendRow(COLS.map(function (c) { return cell_(rec[c]); }));
@@ -235,11 +305,11 @@ function doPost(e) {
        and the team can be prompted by hand. If it is not, the page shows its
        fallback and the visitor is sent to the contact page. */
     if (!saved) {
-      try {
-        MailApp.sendEmail(FAIL_ALERT, "CVBS brief endpoint failed",
-          "A brief was submitted and NOT saved." + NL + NL + String(err) + NL + NL +
-          ((e && e.postData && e.postData.contents) || ""));
-      } catch (ignore) {}
+      alertOnce_("CVBS brief endpoint failed",
+        "A valid brief was submitted and NOT saved. Its fields are below so the lead is not lost." +
+        NL + NL + String(err) + NL + NL +
+        Object.keys(f).filter(function (k) { return f[k]; })
+          .map(function (k) { return k + ": " + f[k]; }).join(NL));
       return out_({ ok: false, error: "server" });
     }
     return out_({ ok: true, ref: ref });
@@ -425,7 +495,7 @@ function clientHtml_(rec) {
   var dates = shortDates_(rec) || (rec.flexibleDates ? "Flexible" : "");
 
   t.rec       = rec;
-  t.base      = ASSET_BASE;
+  t.base      = assetBase_();
   t.replyTo   = TO[0];
   t.firstName = esc_(rec.first) || "there";
   t.facts     = [
@@ -445,10 +515,15 @@ function renderBriefHtml_(rec) {
     ? (rec.startDate ? "Flexible, around " + niceDate_(rec.startDate) : "Flexible, not yet set")
     : (niceDate_(rec.startDate) + (rec.endDate && rec.endDate !== rec.startDate ? " to " + niceDate_(rec.endDate) : ""));
   if (!str_(dates)) dates = "Not stated";
+  /* 11 Sep 2026: escape each typed value first, then add markup. The budget
+     used to go into the PDF unescaped, and the dates line escaped the markup
+     this function had just built, so the lead time printed as raw tags. */
   var lead = leadTime_(rec.startDate);
-  if (lead) dates = dates + '<br><span style="font-weight:normal;font-size:9pt;color:#197683">' + lead + "</span>";
+  var datesHtml = esc_(dates) +
+    (lead ? '<br><span style="font-weight:normal;font-size:9pt;color:#197683">' + esc_(lead) + "</span>" : "");
 
-  var budget = [rec.budgetPp ? rec.budgetPp + " per delegate per day" : "", rec.budgetTotal ? rec.budgetTotal + " total" : ""]
+  var budget = [rec.budgetPp ? esc_(rec.budgetPp) + " per delegate per day" : "",
+                rec.budgetTotal ? esc_(rec.budgetTotal) + " total" : ""]
     .filter(String).join("<br>");
 
   t.rec       = rec;
@@ -457,7 +532,7 @@ function renderBriefHtml_(rec) {
   t.headline  = [
     { label: "Delegates",  value: esc_(rec.delegates) || "Not stated" },
     { label: "Location",   value: esc_(rec.locationDetail || rec.location) || "Not stated" },
-    { label: "Dates",      value: esc_(dates) || "Not stated" },
+    { label: "Dates",      value: datesHtml },
     { label: "Budget",     value: budget || "Not stated" }
   ];
   t.brief = [
