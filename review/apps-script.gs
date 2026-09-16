@@ -8,6 +8,14 @@
 var SHEET_NAME = "feedback";
 var SHARED_KEY = "cvbs-2026-review";   // must match key in config.js
 
+/* The CVBS events calendar, read by the weekly hub.
+   Karen or Anthony shares their calendar with hello@theserviceedit.com, then
+   its id goes here AND in weekly/config.js as calendarId.
+   A browser cannot fetch a Google Calendar feed directly because the feed
+   sends no CORS headers. This script can, because it runs as the account the
+   calendar is shared with. Leave it empty and the hub simply shows nothing. */
+var CALENDAR_ID = "";
+
 var COLS = ["id","project","kind","page","pageTitle","author","text","title",
             "askId","who","label","selector","relX","relY","absX","absY",
             "verdict","status","created","updated","deleted"];
@@ -43,10 +51,36 @@ function recToRow_(rec) {
   return COLS.map(function (c) { return rec[c] === undefined ? "" : rec[c]; });
 }
 
+function calendar_(days) {
+  if (!CALENDAR_ID) return { ok: true, configured: false, events: [] };
+  var cal = CalendarApp.getCalendarById(CALENDAR_ID);
+  if (!cal) return { ok: false, error: "calendar not found or not shared with this account" };
+  var from = new Date();
+  var to = new Date(from.getTime() + (days || 60) * 864e5);
+  var events = cal.getEvents(from, to).map(function (ev) {
+    return {
+      title: ev.getTitle(),
+      start: ev.getStartTime().toISOString(),
+      end: ev.getEndTime().toISOString(),
+      allDay: ev.isAllDayEvent(),
+      where: ev.getLocation() || "",
+      notes: (ev.getDescription() || "").slice(0, 500)
+    };
+  });
+  return { ok: true, configured: true, count: events.length, events: events };
+}
+
 function doGet(e) {
   try {
     var p = e.parameter || {};
     if (p.key !== SHARED_KEY) return out_({ ok: false, error: "bad key" });
+
+    /* Added Sep 2026 for the weekly hub. Everything below this branch is
+       exactly as it was, so the review tool is unaffected. */
+    if (p.action === "calendar") {
+      return out_(calendar_(parseInt(p.days, 10) || 60));
+    }
+
     var sh = sheet_();
     var last = sh.getLastRow();
     var recs = [];

@@ -177,3 +177,6 @@ CVBS-Search-Footprint-Study-Sep-2026.html
 CVBS-Preview-*-STANDALONE.html
 covering-email.md
 *.bak-*
+
+# Search visibility agent: internal reports, logs and baselines (16 Sep 2026)
+_search-visibility/

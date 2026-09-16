@@ -151,19 +151,46 @@ def page_url(rel):
     return E.SERVE + "/" + rel
 
 
-def page_node(fname, title, desc):
+def page_node(fname, title, desc, modified=None):
     url = page_url(fname)
-    return {"@type": "WebPage", "@id": url + "#webpage", "url": url,
+    node = {"@type": "WebPage", "@id": url + "#webpage", "url": url,
             "name": title, "description": desc,
             "isPartOf": {"@id": E.WEBSITE_ID},
             "about": {"@id": E.ORG_ID},
             "publisher": {"@id": E.ORG_ID},
             "inLanguage": "en-AU"}
+    if modified:
+        node["dateModified"] = modified
+    return node
 
 
-def graph_for(fname, title, desc):
-    g = [org_node(), website_node(), service_node(), page_node(fname, title, desc)] + people_nodes()
+def graph_for(fname, title, desc, modified=None):
+    g = [org_node(), website_node(), service_node(), page_node(fname, title, desc, modified)] + people_nodes()
     return clean({"@context": "https://schema.org", "@graph": g})
+
+
+def find_modified(src):
+    """dateModified from a generator's own WebPage block, else from our previous graph.
+
+    16 Sep 2026: strip_owned() removes a generator's WebPage block, and with it
+    the dateModified the generator wrote. Carry that date into the graph.
+    """
+    found = None
+    for m in LD.finditer(src):
+        try:
+            d = json.loads(m.group(1))
+        except Exception:
+            continue
+        nodes = d.get("@graph", [d])
+        for n in nodes:
+            t = n.get("@type")
+            t = t if isinstance(t, list) else [t]
+            if "WebPage" in t and n.get("dateModified"):
+                own = 'id="%s"' % TAG_ID not in m.group(0)
+                if own:
+                    return n["dateModified"]
+                found = found or n["dateModified"]
+    return found
 
 
 LD = re.compile(r'[ \t]*<script type="application/ld\+json"[^>]*>(.*?)</script>\n?', re.S)
@@ -267,10 +294,11 @@ def main():
         # literally and a parser sees "Launches &amp; Events". Decode first.
         title = _html.unescape(title.group(1).strip()) if title else E.NAME
         desc = _html.unescape(desc.group(1).strip()) if desc else E.DESCRIPTION
+        modified = find_modified(src)
         src = strip_owned(src)
         src = rewire_others(src)
         block = ('<script type="application/ld+json" id="%s">%s</script>\n'
-                 % (TAG_ID, json.dumps(graph_for(n, title, desc), ensure_ascii=False,
+                 % (TAG_ID, json.dumps(graph_for(n, title, desc, modified), ensure_ascii=False,
                                        separators=(",", ":"))))
         src = src.replace("</head>", block + "</head>", 1)
         open(path, "w", encoding="utf-8").write(src)

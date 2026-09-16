@@ -49,7 +49,7 @@ ASSET_ALLOW_FILES = ('assets/img/favicon.png', 'assets/img/apple-touch-icon.png'
 # Never published, whatever references them.
 DENY = re.compile(r'(^|/)(\.[^/]+|_[^/]*|README[^/]*|[^/]*\.(bak|md|py|pyc|gs|sh|csv|xlsx|docx|zip|txt|orig)'
                   r'|[^/]*\.pre-[^/]*|[^/]*\.fuse_hidden[^/]*)$|(^|/)_source/|(^|/)mock/', re.I)
-DENY_OK = {'robots.txt', '_redirects', '_headers', '.nojekyll', '.cvbs-artifact'}
+DENY_OK = {'robots.txt', '_redirects', '_headers', '.htaccess', '.nojekyll', '.cvbs-artifact'}
 INTERNAL_DIRS = ('review/', 'weekly/', 'hub/', 'presentation/', 'Quote-Generator/',
                  'Post-Designer/', 'EDM-Designer/', 'brief-store/', 'email-templates/')
 
@@ -92,6 +92,54 @@ def sitemap_sources():
             continue
         src = rel if rel and not rel.endswith('/') else rel + 'index.html'
         out[src] = lm.group(1).strip() if lm else ''
+    return out
+
+
+LASTMOD_FILE = os.path.join(ROOT, '_site', 'lastmod.json')
+
+
+def content_lastmods(rows, seed):
+    """Sitemap lastmod from real content changes, not from hand-typed dates.
+
+    Added 16 Sep 2026. The hash covers the visible <main> text plus title and
+    description, so cache-buster sweeps and script changes do not move the date.
+    A changed hash takes today's date. Local builds save the ledger; CI (the
+    CI environment variable) only reads it.
+    """
+    import datetime, hashlib
+    try:
+        ledger = json.load(io.open(LASTMOD_FILE, encoding='utf-8'))
+    except Exception:
+        ledger = {}
+    today = datetime.date.today().isoformat()
+    out = {}
+    for r in rows:
+        src = r['source']
+        path = os.path.join(ROOT, src)
+        if r['status'] != 'live' or not os.path.isfile(path):
+            continue
+        t = io.open(path, encoding='utf-8').read()
+        m = re.search(r'<main\b.*?</main>', t, re.S | re.I)
+        body = m.group(0) if m else t
+        body = re.sub(r'<(script|style)\b.*?</\1>', ' ', body, flags=re.S | re.I)
+        body = re.sub(r'\?v=\d+', '', body)
+        text = ' '.join(re.sub(r'<[^>]+>', ' ', body).split())
+        head = ' '.join(re.findall(r'<title>(.*?)</title>|<meta name="description" content="([^"]*)"', t)[0]) \
+            if re.search(r'<title>', t) else ''
+        h = hashlib.sha1((head + '|' + text).encode('utf-8')).hexdigest()[:16]
+        prev = ledger.get(src)
+        if prev and prev.get('hash') == h:
+            out[src] = prev['date']
+        elif prev:
+            out[src] = today
+        else:
+            # first sighting: the later of the hand-typed sitemap date and the file's own date
+            fdate = datetime.date.fromtimestamp(os.path.getmtime(path)).isoformat()
+            out[src] = max(seed.get(src, ''), fdate)
+        ledger[src] = {'hash': h, 'date': out[src]}
+    if not os.environ.get('CI'):
+        with io.open(LASTMOD_FILE, 'w', encoding='utf-8') as fh:
+            fh.write(json.dumps(ledger, indent=1, sort_keys=True) + '\n')
     return out
 
 
@@ -244,6 +292,25 @@ def rewrite_js(js, mp, page_src):
     return JS_ASSET.sub(asset, JS_PAGE.sub(page, js))
 
 
+def head_tags(env):
+    """Analytics and search-engine verification tags, production only, from site.config.json."""
+    tags = []
+    ver = env.get('verification') or {}
+    if ver.get('google'):
+        tags.append('<meta name="google-site-verification" content="%s">' % html.escape(ver['google']))
+    if ver.get('bing'):
+        tags.append('<meta name="msvalidate.01" content="%s">' % html.escape(ver['bing']))
+    ga = (env.get('analytics') or {}).get('ga4')
+    if ga:
+        if not re.match(r'^G-[A-Z0-9]{4,}$', ga):
+            FAIL['analytics.ga4 is not a GA4 measurement ID'].append(ga)
+        else:
+            tags.append('<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>\n'
+                        '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}'
+                        'gtag("js",new Date());gtag("config","%s");</script>' % (ga, ga))
+    return '\n'.join(tags)
+
+
 def transform(s, page_src, prod, mp, row):
     s = LD_BLOCK.sub(lambda m: m.group(1) + rewrite_ld(m.group(2), mp, page_src) + m.group(3), s)
     s = SCRIPT_BLOCK.sub(lambda m: m.group(1) + rewrite_js(m.group(2), mp, page_src) + m.group(3), s)
@@ -286,6 +353,11 @@ def transform(s, page_src, prod, mp, row):
     # canonical and og:url always name this page at its production path
     s = re.sub(r'(<link\s+rel=["\']canonical["\']\s+href=["\'])[^"\']*', lambda m: m.group(1) + mp.address(prod), s)
     s = re.sub(r'(<meta\s+property=["\']og:url["\']\s+content=["\'])[^"\']*', lambda m: m.group(1) + mp.address(prod), s)
+
+    # analytics and verification, production only (site.config.json)
+    tags = head_tags(mp.env) if mp.env_name == 'production' else ''
+    if tags and row.get('index') != 'no':
+        s = s.replace('</head>', tags + '\n</head>', 1)
 
     # robots
     want_noindex = (not mp.env['indexable']) or row.get('index') == 'no'
@@ -339,12 +411,15 @@ def page_404(mp):
 def headers_file(env):
     if not env.get('securityHeaders'):
         return '/*\n  X-Robots-Tag: noindex\n'
+    ga = bool((env.get('analytics') or {}).get('ga4'))
+    gtm = ' https://www.googletagmanager.com' if ga else ''
+    gac = ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com' if ga else ''
     csp = ("default-src 'self'; "
-           "script-src 'self' 'unsafe-inline' https://conferencevenues.us8.list-manage.com; "
+           "script-src 'self' 'unsafe-inline' https://conferencevenues.us8.list-manage.com" + gtm + "; "
            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
            "font-src 'self' https://fonts.gstatic.com; "
            "img-src 'self' data: https:; "
-           "connect-src 'self' https://script.google.com https://script.googleusercontent.com; "
+           "connect-src 'self' https://script.google.com https://script.googleusercontent.com" + gac + "; "
            "form-action 'self' https://conferencevenues.us8.list-manage.com; "
            "frame-ancestors 'none'; base-uri 'self'; object-src 'none'")
     return ('# Generated by scripts/build.py. The CSP is REPORT-ONLY until the inline\n'
@@ -389,30 +464,97 @@ def sitemaps(out, rows, mp, lastmods):
     return sum(len(v) for v in fam.values())
 
 
-def redirects_file(rows, legacy, strict):
-    lines = ['# Generated by scripts/build.py from _site/pages.csv and migration/url-map.csv.',
-             '# Host-level rules (http to https, bare domain to www) belong in the host settings.']
-    gone = []
+def redirect_rules(rows, legacy, strict, report=True):
+    """(old, new) 301 pairs and 410 paths, shared by _redirects and .htaccess."""
+    pairs, gone = [], []
     for r in rows:
         if r['status'] == 'retired':
-            lines.append('%-48s %-40s 301' % (r['path'], r['redirect_to'] or '/'))
-    lines.append('%-48s %-40s 301' % ('/venues/', '/venue-visits/'))
+            pairs.append((r['path'], r['redirect_to'] or '/'))
+    pairs.append(('/venues/', '/venue-visits/'))
     for r in legacy:
         old, new, act = r.get('old_url', ''), r.get('new_path', ''), r.get('action', '').upper()
+        if act == '410' and old.startswith('/') and old.endswith('/*') and ',' not in old:
+            gone.append(old[:-1] + '*')    # a whole folder, e.g. /wordpress/*
+            continue
         if not old.startswith('/') or '*' in old or ',' in old:
             continue
         if act == '301' and new:
-            lines.append('%-48s %-40s 301' % (old, new))
-            if old.endswith('/') and old != '/':
-                lines.append('%-48s %-40s 301' % (old.rstrip('/'), new))
+            pairs.append((old, new))
         elif act == '410':
             gone.append(old)
-        elif act == 'REVIEW':
+        elif act == 'REVIEW' and report:
             (FAIL if strict else WARN)['legacy URL still marked REVIEW'].append(old)
+    return pairs, gone
+
+
+def redirects_file(rows, legacy, strict):
+    """Cloudflare Pages / Netlify format. Ignored by Apache, see htaccess_file."""
+    pairs, gone = redirect_rules(rows, legacy, strict)
+    lines = ['# Generated by scripts/build.py from _site/pages.csv and migration/url-map.csv.',
+             '# Host-level rules (http to https, bare domain to www) belong in the host settings.',
+             '# Apache/cPanel/LiteSpeed hosts ignore this file and use .htaccess instead.']
+    for old, new in pairs:
+        lines.append('%-48s %-40s 301' % (old, new))
+        if old.endswith('/') and old != '/':
+            lines.append('%-48s %-40s 301' % (old.rstrip('/'), new))
     if gone:
         lines.append('# 410 Gone, to be served by a host rule (not expressible in _redirects):')
         lines += ['#   %s' % g for g in gone]
     return '\n'.join(lines) + '\n'
+
+
+def _rx(path):
+    """A site path as an anchored mod_rewrite pattern, trailing slash optional."""
+    p = path.lstrip('/')
+    if p.endswith('/'):
+        return '^' + re.escape(p[:-1]).replace('\\/', '/') + '/?$'
+    return '^' + re.escape(p).replace('\\/', '/') + '$'
+
+
+def htaccess_file(rows, legacy, env):
+    """Apache / LiteSpeed (cPanel) equivalent of _redirects and _headers.
+
+    Added 16 Sep 2026: Mel chose to host the static site on the existing
+    WordPress host, which reads .htaccess and ignores _redirects/_headers.
+    """
+    pairs, gone = redirect_rules(rows, legacy, False, report=False)
+    host = re.sub(r'^https?://', '', env['origin']).split('/')[0]
+    L = ['# Generated by scripts/build.py. Do not edit on the server; rebuild instead.',
+         '# Apache / LiteSpeed (cPanel). Mirrors _redirects and _headers.',
+         'Options -Indexes',
+         'DirectoryIndex index.html',
+         'ErrorDocument 404 /404.html',
+         '',
+         '<IfModule mod_rewrite.c>',
+         'RewriteEngine On',
+         '# One hop to https://%s for http and for the bare domain.' % host,
+         '# If the host terminates TLS at a proxy and loops, swap the HTTPS test for',
+         '# RewriteCond %{HTTP:X-Forwarded-Proto} !https',
+         'RewriteCond %{HTTPS} off [OR]',
+         'RewriteCond %%{HTTP_HOST} !^%s$ [NC]' % re.escape(host),
+         'RewriteRule ^(.*)$ https://%s/$1 [R=301,L]' % host,
+         '',
+         '# Legacy and retired addresses, from _site/pages.csv and migration/url-map.csv']
+    for old, new in pairs:
+        L.append('RewriteRule %s %s [R=301,L]' % (_rx(old), new))
+    if gone:
+        L.append('')
+        L.append('# Gone for good')
+        for g in gone:
+            pat = ('^' + re.escape(g.lstrip('/')[:-1]).replace('\\/', '/')) if g.endswith('*') else _rx(g)
+            L.append('RewriteRule %s - [G,L]' % pat)
+    L.append('</IfModule>')
+    if env.get('securityHeaders'):
+        L += ['', '<IfModule mod_headers.c>']
+        for line in headers_file(env).splitlines():
+            m = re.match(r'^\s+([A-Za-z-]+):\s*(.*)$', line)
+            if m and m.group(1) != 'Cache-Control':
+                L.append('Header always set %s "%s"' % (m.group(1), m.group(2).replace('"', '\\"')))
+        L += ['<FilesMatch "\\.(css|js|jpe?g|png|webp|avif|svg|gif|ico|woff2?)$">',
+              'Header set Cache-Control "public, max-age=604800"',
+              '</FilesMatch>',
+              '</IfModule>']
+    return '\n'.join(L) + '\n'
 
 
 # ---------------------------------------------------------------------- util
@@ -481,7 +623,7 @@ def verify(out, mp, env_name, expected_pages):
         if f not in fileset:
             FAIL['missing generated file'].append(f)
     if env_name == 'production':
-        for f in ('sitemap.xml', '_redirects', '_headers', '404.html'):
+        for f in ('sitemap.xml', '_redirects', '_headers', '.htaccess', '404.html'):
             if f not in fileset:
                 FAIL['missing generated file'].append(f)
         red = io.open(os.path.join(out, '_redirects'), encoding='utf-8').read()
@@ -529,6 +671,11 @@ def main():
     for src in live_sources:
         if src not in lastmods:
             WARN['live in the manifest but missing from sitemap.xml'].append(src)
+
+    if a.env == 'production' and (env.get('analytics') or {}).get('ga4'):
+        priv = io.open(os.path.join(ROOT, 'privacy.html'), encoding='utf-8').read()
+        if 'Google Analytics' not in priv:
+            WARN['analytics is on but privacy.html does not name Google Analytics'].append('privacy.html')
 
     mp = Mapper(rows, a.env, env)
     ship = []
@@ -609,7 +756,7 @@ def main():
 
     # generated files
     if env['indexable']:
-        n_sm = sitemaps(out, rows, mp, lastmods)
+        n_sm = sitemaps(out, rows, mp, content_lastmods(rows, lastmods))
         write(out, 'robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: %s\n' % mp.address('/sitemap.xml'))
     else:
         n_sm = 0
@@ -617,6 +764,7 @@ def main():
                                  'User-agent: *\nAllow: /\n')
     if a.env == 'production':
         write(out, '_redirects', redirects_file(rows, load_legacy(), a.strict))
+        write(out, '.htaccess', htaccess_file(rows, load_legacy(), env))
     write(out, '_headers', headers_file(env))
     write(out, '.nojekyll', '')
 

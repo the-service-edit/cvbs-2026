@@ -240,6 +240,7 @@ def main():
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{base}{path}">
+<meta property="og:image" content="{base}assets/img/venue-hero-1000.jpg?v=202609051700">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.png?v=202608131600" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=202608131600">

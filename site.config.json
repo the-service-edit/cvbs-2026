@@ -7,7 +7,16 @@
       "basePath": "/",
       "indexable": true,
       "briefEndpoint": null,
-      "securityHeaders": true
+      "securityHeaders": true,
+      "analytics": {
+        "ga4": null,
+        "_note": "GA4 measurement ID, e.g. G-DH86WNW6FE (the live WordPress site's). Null = no tag. Setting it also needs the privacy page to name Google Analytics, or the build warns."
+      },
+      "verification": {
+        "google": null,
+        "bing": null,
+        "_note": "Content values of the google-site-verification and msvalidate.01 meta tags. Null = no tag. DNS verification needs neither."
+      }
     },
     "staging": {
       "origin": "https://the-service-edit.github.io",

@@ -1026,3 +1026,94 @@
     if (isImage(e.target)) e.preventDefault();
   }, false);
 })();
+
+/* ---------------------------------------------------------------------------
+   Process rail (home page, .prail).
+   Draws the spine with the scroll between the first and last numeral, then
+   pops each numeral and slides its card in, once. No library: one
+   IntersectionObserver for the steps, one for whether the rail is anywhere
+   near the viewport, and a rAF loop that only runs while it is.
+   The scrub mirrors "start when the block reaches 80% of the viewport, finish
+   when its base reaches 60%", with a 0.6s catch-up lag so the line trails the
+   scroll slightly instead of tracking it rigidly.
+   Reduced motion: the line is drawn, the numerals and cards are already in.
+--------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+  var rails = [].slice.call(document.querySelectorAll('.prail'));
+  if (!rails.length) return;
+
+  var items = rails.map(function (el) {
+    return {
+      el: el,
+      track: el.querySelector('.prail__track'),
+      fill: el.querySelector('.prail__fill'),
+      steps: el.querySelector('.prail__steps'),
+      cur: 0
+    };
+  });
+
+  /* The rail starts and ends on the numerals, never in dead space */
+  function pin() {
+    items.forEach(function (r) {
+      var marks = r.el.querySelectorAll('.prail__n');
+      if (!r.track || marks.length < 2) return;
+      var base = r.el.getBoundingClientRect();
+      var a = marks[0].getBoundingClientRect();
+      var z = marks[marks.length - 1].getBoundingClientRect();
+      var top = a.top - base.top + a.height / 2;
+      var end = z.top - base.top + z.height / 2;
+      r.track.style.top = top + 'px';
+      r.track.style.height = Math.max(0, end - top) + 'px';
+    });
+  }
+  pin();
+  window.addEventListener('resize', pin, { passive: true });
+  window.addEventListener('load', pin);
+  if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+    document.fonts.ready.then(pin).catch(function () {});
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var allSteps = [];
+  rails.forEach(function (el) {
+    allSteps = allSteps.concat([].slice.call(el.querySelectorAll('.prail__step')));
+  });
+
+  if (!('IntersectionObserver' in window) || !window.requestAnimationFrame) {
+    allSteps.forEach(function (s) { s.classList.add('in'); });
+    items.forEach(function (r) { if (r.fill) r.fill.style.transform = 'scaleY(1)'; });
+    return;
+  }
+
+  var stepIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); stepIo.unobserve(en.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -25% 0px' });
+  allSteps.forEach(function (s) { stepIo.observe(s); });
+
+  /* The rAF loop sleeps unless a rail is on or near the screen */
+  var live = 0, raf = null, last = 0;
+  function frame(now) {
+    var dt = last ? Math.min((now - last) / 1000, 0.1) : 0.016;
+    last = now;
+    items.forEach(function (r) {
+      if (!r.fill || !r.steps) return;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var box = r.steps.getBoundingClientRect();
+      var target = (0.8 * vh - box.top) / (0.2 * vh + box.height);
+      target = Math.max(0, Math.min(1, target));
+      r.cur += (target - r.cur) * Math.min(1, dt / 0.6);
+      r.fill.style.transform = 'scaleY(' + r.cur.toFixed(4) + ')';
+    });
+    raf = live ? window.requestAnimationFrame(frame) : null;
+  }
+  var nearIo = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { live += en.isIntersecting ? 1 : -1; });
+    if (live < 0) live = 0;
+    if (live && !raf) { last = 0; raf = window.requestAnimationFrame(frame); }
+  }, { rootMargin: '300px 0px 300px 0px' });
+  items.forEach(function (r) { nearIo.observe(r.el); });
+})();

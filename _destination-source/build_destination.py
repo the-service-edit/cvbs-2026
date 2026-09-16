@@ -147,6 +147,14 @@ def sec_sources(city, d, intro):
                            q=q(city), arrow=ARROW)
 
 
+def _checked(d):
+    # 16 Sep 2026: the latest 'checked' date among the featured venues, shown under the list
+    import datetime
+    ds = [datetime.datetime.strptime(BY_ID[v]['checked'], '%d %B %Y')
+          for v, _ in d['featured'] if BY_ID.get(v, {}).get('checked')]
+    return (' Figures checked %s.' % max(ds).strftime('%-d %B %Y')) if ds else ''
+
+
 def sec_featured(city, d):
     cards = []
     for vid, suits in d['featured']:
@@ -167,9 +175,9 @@ def sec_featured(city, d):
     return '''<section class="s-stone pad" id="{slug}-featured"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Where we would start</span>
     <h2 class="h2">A few {city} venues, and what each one is really for.</h2>
-    <p class="lead">A spread rather than a ranking, chosen so you can see the shape of the market. Every figure below is the one the venue publishes for itself. We source right across {city}, so treat this as a starting point.</p></div>
+    <p class="lead">A spread rather than a ranking, chosen so you can see the shape of the market. Every figure below is the one the venue publishes for itself.{checked} We source right across {city}, so treat this as a starting point.</p></div>
   <div class="grid g-3">{cards}</div>
-</div></section>'''.format(slug=slug_of(city), city=esc(city), cards=''.join(cards))
+</div></section>'''.format(slug=slug_of(city), city=esc(city), cards=''.join(cards), checked=_checked(d))
 
 
 def sec_start(city, d):

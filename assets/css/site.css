@@ -823,6 +823,40 @@ body.menu-open{overflow:hidden}
 @media(max-width:680px){.pcard{grid-template-columns:1fr;gap:1.1rem;top:calc(86px + var(--i)*16px);min-height:0}.pcard__n{width:62px;font-size:1.55rem;border-radius:15px}}
 @media(prefers-reduced-motion:reduce){.pcard{position:static}}
 
+/* Process rail (home) ------------------------------------------------------
+   Added 13 Sep 2026. Replaces the sticky .pcard stack on index.html only.
+   A navy spine draws with the scroll between the first and last numeral,
+   each step pops its numeral and slides its card in once. Scroll driven,
+   no library. Behaviour lives in the "Process rail" block of site.js.
+   The .pcard stack is still in use on the four service pages, leave it.
+-------------------------------------------------------------------------- */
+.prail{position:relative;max-width:1020px;margin-top:clamp(2rem,5vw,3.4rem)}
+.prail__track{position:absolute;left:26px;top:0;height:100%;width:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.prail__fill{position:absolute;inset:0;border-radius:2px;transform:scaleY(0);transform-origin:top center;will-change:transform;background:linear-gradient(180deg,var(--navy) 0%,var(--navy) 88%,var(--teal-btn) 100%)}
+.prail__steps{position:relative;display:flex;flex-direction:column;gap:clamp(2.4rem,5vw,4rem)}
+.prail__step{position:relative;display:grid;grid-template-columns:54px 1fr;gap:clamp(1.2rem,3vw,2.2rem);align-items:start}
+.prail__n{grid-column:1;width:54px;height:54px;margin-top:.35rem;border-radius:16px;display:grid;place-items:center;z-index:1;background:#fff;border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums;transform:scale(.6);transition:transform .4s cubic-bezier(.34,2.1,.64,1),background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease),box-shadow .4s var(--ease)}
+@supports (transition-timing-function:linear(0,1)){.prail__n{transition-timing-function:linear(0,.4735 10%,.808 20%,1.0245 30%,1.144 40%,1.1875 50%,1.176 60%,1.1305 70%,1.072 80%,1.0215 90%,1)}}
+.prail__card{grid-column:2;justify-self:start;max-width:44rem;opacity:0;transform:translateX(32px);will-change:transform,opacity;background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(1.5rem,3vw,2.1rem) clamp(1.5rem,3vw,2.4rem);box-shadow:0 1px 2px rgba(10,44,82,.07),0 14px 28px -14px rgba(10,44,82,.18);transition:transform .65s cubic-bezier(.25,1,.5,1) .05s,opacity .65s cubic-bezier(.25,1,.5,1) .05s}
+.prail__when{display:block;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--teal-ink)}
+.prail__card h3{font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.15;color:var(--navy);margin:.55rem 0 .6rem}
+.prail__card p{font-size:clamp(1rem,1.4vw,1.08rem);line-height:1.6;color:var(--muted);margin:0;max-width:56ch}
+.prail__step.in .prail__n{transform:scale(1);background:var(--navy);border-color:var(--navy);color:var(--teal-btn);box-shadow:0 10px 22px -12px rgba(10,44,82,.55)}
+.prail__step.in .prail__card{opacity:1;transform:translateX(0)}
+@media(max-width:680px){
+  .prail__track{left:19px}
+  .prail__steps{gap:2rem}
+  .prail__step{grid-template-columns:40px 1fr;gap:1rem}
+  .prail__n{width:40px;height:40px;margin-top:.2rem;border-radius:12px;font-size:.95rem}
+  .prail__card{padding:1.3rem 1.4rem;border-radius:18px;transform:translateX(24px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .prail__fill{transform:scaleY(1)}
+  .prail__n,.prail__card{transition:none}
+  .prail__card{opacity:1;transform:none}
+  .prail__n{transform:scale(1);background:var(--navy);border-color:var(--navy);color:var(--teal-btn)}
+}
+
 .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.2rem,2.4vw,1.8rem);margin-top:clamp(2rem,4vw,3rem)}
 .offer{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 24px 50px -40px rgba(10,44,82,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
 .offer:hover{transform:translateY(-5px);box-shadow:0 34px 64px -42px rgba(10,44,82,.5)}
