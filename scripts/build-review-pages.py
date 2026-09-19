@@ -26,7 +26,10 @@ EXTRA = []
 
 
 def rel_of(loc):
-    rel = loc.split("/cvbs-2026/", 1)[1] if "/cvbs-2026/" in loc else loc
+    # sitemap.xml now carries production addresses (www.conferencevenues.com.au)
+    rel = re.sub(r"^https?://[^/]+/", "", loc)
+    if rel.startswith("cvbs-2026/"):
+        rel = rel[len("cvbs-2026/"):]
     if rel == "":
         rel = "index.html"
     if rel.endswith("/"):

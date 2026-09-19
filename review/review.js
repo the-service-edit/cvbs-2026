@@ -63,8 +63,11 @@ var SITE_ROOT = location.pathname.replace(/review\/[^\/]*$/, "");
 function relOf(pathname) {
   var rel = pathname.indexOf(SITE_ROOT) === 0 ? pathname.slice(SITE_ROOT.length) : pathname.replace(/^\//, "");
   if (rel === "" || rel.slice(-1) === "/") rel += "index.html";
-  return rel;
+  return ROUTE[rel] || rel;
 }
+/* Staging serves about.html at /about/. pages.json carries each page's served
+   address as "route" there, so a click inside the frame still finds its page. */
+var ROUTE = {};
 
 /* --------------------------------------------------------------- records  */
 function list() {
@@ -962,7 +965,7 @@ function boot() {
     .then(function (data) {
       var hide = CFG.hidden || [];
       PAGES = data.pages.filter(function (p) { return hide.indexOf(p.id) === -1; });
-      PAGES.forEach(function (p) { BY_ID[p.id] = p; });
+      PAGES.forEach(function (p) { BY_ID[p.id] = p; if (p.route) ROUTE[p.route] = p.id; });
       wire();
       showGate();
       if (who) { $("#who-name").textContent = who; $("#gate").classList.add("off"); }

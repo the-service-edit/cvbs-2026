@@ -38,6 +38,9 @@ jobs:
       - name: Build and verify the staging artifact
         run: python3 scripts/build.py --env staging --out "$RUNNER_TEMP/cvbs-staging"
 
+      - name: Add the client review tools to staging only
+        run: python3 scripts/add-review-tools.py --out "$RUNNER_TEMP/cvbs-staging"
+
       - name: Prove the production build still passes
         run: python3 scripts/build.py --env production --out "$RUNNER_TEMP/cvbs-production"
 
