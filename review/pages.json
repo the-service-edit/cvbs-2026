@@ -308,6 +308,12 @@
    "group": "Venue visits"
   },
   {
+   "id": "venue-visits/pier-one-sydney-harbour/index.html",
+   "path": "../venue-visits/pier-one-sydney-harbour/index.html",
+   "title": "Pier One Sydney Harbour event spaces and capacities",
+   "group": "Venue visits"
+  },
+  {
    "id": "venue-visits/intercontinental-lyon-hotel-dieu/index.html",
    "path": "../venue-visits/intercontinental-lyon-hotel-dieu/index.html",
    "title": "InterContinental Lyon Hotel Dieu rooms and meeting facilities",
@@ -323,6 +329,12 @@
    "id": "venue-visits/the-st-regis-singapore/index.html",
    "path": "../venue-visits/the-st-regis-singapore/index.html",
    "title": "The St. Regis Singapore ballroom and event spaces",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/fairmont-singapore/index.html",
+   "path": "../venue-visits/fairmont-singapore/index.html",
+   "title": "Fairmont Singapore ballrooms and event spaces",
    "group": "Venue visits"
   },
   {
