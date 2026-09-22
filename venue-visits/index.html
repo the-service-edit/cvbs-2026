@@ -319,6 +319,26 @@
   max-width:74ch;font-size:.88rem;line-height:1.6;color:var(--muted)}
 .vgrp-note b{color:var(--navy);font-weight:600}
 @media(max-width:560px){.vgrp-list{columns:1}.vgrp{margin-bottom:1.7rem}}
+
+/* 22 Sep 2026 jump-to-city bar. Sticks under the 74px header for the length of the
+   city listings only, then releases before the hotel groups band. */
+html{scroll-padding-top:150px}
+.vh-jump{position:sticky;top:74px;z-index:40;margin:calc(-1 * var(--section-y)) 0 2.6rem;
+  background:rgba(255,255,255,.94);-webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid var(--line)}
+.vh-jump__row{display:flex;align-items:center;gap:1.4rem;overflow-x:auto;padding:.8rem 0;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.vh-jump__row::-webkit-scrollbar{display:none}
+.vh-jump__grp{display:flex;align-items:center;gap:.45rem;flex:0 0 auto}
+.vh-jump__reg{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-right:.2rem}
+.vh-jump__chip{display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap;text-decoration:none;
+  font-size:.88rem;font-weight:600;color:var(--navy);background:#fff;border:1px solid var(--line);
+  border-radius:999px;padding:.42rem .85rem;transition:background .2s,border-color .2s}
+.vh-jump__chip span{font-size:.74rem;font-weight:700;color:var(--muted)}
+.vh-jump__chip:hover{border-color:var(--teal)}
+.vh-jump__chip.is-on{background:var(--teal);border-color:var(--teal)}
+.vh-jump__chip.is-on span{color:var(--navy)}
+.vh-jump__chip:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.conferencevenues.com.au/index.html"}, {"@type": "ListItem", "position": 2, "name": "Venue visits", "item": "https://www.conferencevenues.com.au/venue-visits/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "@id": "https://www.conferencevenues.com.au/venue-visits/#webpage", "url": "https://www.conferencevenues.com.au/venue-visits/", "name": "Venues we have been inside", "isPartOf": {"@id": "https://www.conferencevenues.com.au/#website"}, "publisher": {"@id": "https://www.conferencevenues.com.au/#organization"}, "inLanguage": "en-AU"}</script>
@@ -364,8 +384,12 @@
   </div>
 </section>
 
-<section class="s-white pad">
+<section class="s-white pad vh-cities">
+  <nav class="vh-jump" aria-label="Jump to a city">
+    <div class="wrap"><div class="vh-jump__row"><span class="vh-jump__grp"><span class="vh-jump__reg">Australia</span><a class="vh-jump__chip" href="#sydney">Sydney <span>7</span></a><a class="vh-jump__chip" href="#melbourne">Melbourne <span>2</span></a><a class="vh-jump__chip" href="#brisbane">Brisbane <span>2</span></a><a class="vh-jump__chip" href="#gold-coast">Gold Coast <span>1</span></a><a class="vh-jump__chip" href="#perth">Perth <span>2</span></a></span><span class="vh-jump__grp"><span class="vh-jump__reg">Asia</span><a class="vh-jump__chip" href="#singapore">Singapore <span>2</span></a></span><span class="vh-jump__grp"><span class="vh-jump__reg">Europe</span><a class="vh-jump__chip" href="#lyon">Lyon <span>1</span></a></span></div></div>
+  </nav>
   <div class="wrap">
+    <div class="vh-cityblock" id="sydney">
     <div class="section-head"><h2 class="h2 vh-city">Sydney</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="crown-towers-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/crown-towers-sydney/5-w900.jpg" alt="Crown Towers Sydney, Pearl Ballroom" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Crown Towers Sydney</b><span class="vh-card__meta">Hotel · Barangaroo</span><span class="vh-card__stats"><span><b>390</b>theatre</span><span><b>340</b>banquet</span><span><b>349</b>rooms</span></span><span class="vh-card__line">One ballroom at 390 theatre and two rooms that hold forty. A luxury building for senior audiences, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Sydney&amp;venue=Crown%20Towers%20Sydney">Ask About This Venue</a></span></li>
@@ -376,34 +400,47 @@
 <li class="vh-card"><a class="vh-card__hit" href="royal-randwick/"><span class="vh-card__img"><img src="../assets/img/venue-visits/royal-randwick/1-w900.jpg" alt="Royal Randwick Racecourse, the track and grandstands from above" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Royal Randwick Racecourse</b><span class="vh-card__meta">Event venue · Eastern Suburbs</span><span class="vh-card__stats"><span><b>1,692</b>theatre</span><span><b>1,300</b>banquet</span><span><b>3,000</b>cocktail</span></span><span class="vh-card__line">A 2,222 sqm pavilion with 6.2 metre ceilings six kilometres from the CBD, with a 1,163 theatre ballroom above it. No accommodation on site.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Sydney&amp;venue=Royal%20Randwick%20Racecourse">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="the-eve-hotel-sydney/"><span class="vh-card__img"><img src="../assets/img/venue-visits/eve-hotel/0-w900.jpg" alt="The EVE Hotel Sydney, the lobby lounge" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The EVE Hotel Sydney</b><span class="vh-card__meta">Hotel · Redfern</span><span class="vh-card__stats"><span><b>14</b>boardroom</span><span><b>102</b>rooms</span><span><b>1</b>space</span></span><span class="vh-card__line">A 102 room hotel at Redfern whose only event space is a rooftop boardroom for fourteen. Not a conference venue, and worth knowing before the inspection.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Sydney&amp;venue=The%20EVE%20Hotel%20Sydney">Ask About This Venue</a></span></li>
     </ul>
+    </div>
+    <div class="vh-cityblock" id="melbourne">
     <div class="section-head"><h2 class="h2 vh-city">Melbourne</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="hotel-indigo-melbourne-little-collins/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hotel-indigo-melbourne-little-collins/0-w900.jpg" alt="Hotel Indigo Melbourne Little Collins" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hotel Indigo Melbourne Little Collins</b><span class="vh-card__meta">Hotel · Melbourne CBD</span><span class="vh-card__stats"><span><b>12</b>boardroom</span><span><b>179</b>rooms</span><span><b>10</b>floors</span></span><span class="vh-card__line">179 rooms over ten floors in the CBD with one boardroom for twelve. Indexed as an accommodation property, not a conference venue.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Melbourne&amp;venue=Hotel%20Indigo%20Melbourne%20Little%20Collins">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="hannah-st-hotel-melbourne/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hannah-st-melbourne/1-w900.jpg" alt="Hannah St Hotel Melbourne, a conference room set in a hollow square" width="900" height="1350" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hannah St Hotel Melbourne</b><span class="vh-card__meta">Hotel · Southbank</span><span class="vh-card__stats"><span><b>188</b>rooms</span><span><b>2</b>conference rooms</span><span><b>10</b>levels</span></span><span class="vh-card__line">A 188 room design hotel at Southbank with two conference rooms and a level ten event space, and no published capacity for any of them.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Melbourne&amp;venue=Hannah%20St%20Hotel%20Melbourne">Ask About This Venue</a></span></li>
     </ul>
+    </div>
+    <div class="vh-cityblock" id="brisbane">
     <div class="section-head"><h2 class="h2 vh-city">Brisbane</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="the-westin-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-westin-brisbane/2-w900.jpg" alt="The Westin Brisbane, guest room" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Westin Brisbane</b><span class="vh-card__meta">Hotel · Brisbane CBD</span><span class="vh-card__stats"><span><b>400</b>theatre</span><span><b>280</b>banquet</span><span><b>298</b>rooms</span></span><span class="vh-card__line">A 298 room CBD hotel with one 450 sqm ballroom that divides in two. Built for the residential conference that does not have to move.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Brisbane&amp;venue=The%20Westin%20Brisbane">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="intercontinental-brisbane/"><span class="vh-card__img"><img src="../assets/img/venue-visits/intercontinental-brisbane/0-w900.jpg" alt="InterContinental Brisbane, the pool terrace set for a long lunch" width="900" height="600" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>InterContinental Brisbane</b><span class="vh-card__meta">Hotel · Brisbane CBD</span><span class="vh-card__stats"><span><b>794</b>ballroom sqm</span><span><b>15</b>spaces</span><span><b>224</b>terrace sqm</span></span><span class="vh-card__line">The former Hilton Brisbane, reflagged in July 2025. A 794 sqm ballroom and a level eight pool terrace. IHG publishes areas but no setup capacities.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Brisbane&amp;venue=InterContinental%20Brisbane">Ask About This Venue</a></span></li>
     </ul>
+    </div>
+    <div class="vh-cityblock" id="gold-coast">
     <div class="section-head"><h2 class="h2 vh-city">Gold Coast</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="the-star-gold-coast/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-star-gold-coast/3-w900.jpg" alt="The Star Gold Coast, an event space set with round tables" width="900" height="675" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The Star Gold Coast</b><span class="vh-card__meta">Resort · Broadbeach</span><span class="vh-card__stats"><span><b>2,300</b>theatre</span><span><b>1,200</b>gala</span><span><b>4,000</b>sqm</span></span><span class="vh-card__line">More than 4,000 sqm of event space at Broadbeach with more than 1,000 rooms above it. The Star publishes the totals and no room by room chart.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Gold Coast&amp;venue=The%20Star%20Gold%20Coast">Ask About This Venue</a></span></li>
     </ul>
+    </div>
+    <div class="vh-cityblock" id="perth">
     <div class="section-head"><h2 class="h2 vh-city">Perth</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="pullman-bunker-bay/"><span class="vh-card__img"><img src="../assets/img/venue-visits/pullman-bunker-bay/12-w900.jpg" alt="Pullman Bunker Bay Resort" width="900" height="1350" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Pullman Bunker Bay Resort</b><span class="vh-card__meta">Resort · Margaret River region</span><span class="vh-card__stats"><span><b>140</b>theatre</span><span><b>100</b>banquet</span><span><b>150</b>villas</span></span><span class="vh-card__line">A 150 villa resort in the Margaret River region with a 144 sqm pillar free room. Built for the residential program where nobody leaves site.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Perth&amp;venue=Pullman%20Bunker%20Bay%20Resort">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="qt-perth/"><span class="vh-card__img"><img src="../assets/img/venue-visits/qt-perth/4-w900.jpg" alt="QT Perth, a meeting room set in a hollow square" width="900" height="1350" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>QT Perth</b><span class="vh-card__meta">Hotel · Perth CBD</span><span class="vh-card__stats"><span><b>170</b>theatre</span><span><b>120</b>banquet</span><span><b>184</b>rooms</span></span><span class="vh-card__line">A 184 room hotel on Murray Street with six conference rooms of its own. The Murray Room takes 170 theatre and divides into four.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Perth&amp;venue=QT%20Perth">Ask About This Venue</a></span></li>
     </ul>
-    <div class="section-head"><h2 class="h2 vh-city">Lyon</h2></div>
-    <ul class="vh-grid" style="margin-bottom:2.8rem">
-<li class="vh-card"><a class="vh-card__hit" href="intercontinental-lyon-hotel-dieu/"><span class="vh-card__img"><img src="../assets/img/venue-visits/intercontinental-lyon-hotel-dieu/4-w900.jpg" alt="InterContinental Lyon Hotel Dieu, Le Dôme bar under the Soufflot dome" width="900" height="1125" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>InterContinental Lyon – Hotel Dieu</b><span class="vh-card__meta">Hotel · Presqu’île, Lyon</span><span class="vh-card__stats"><span><b>400</b>theatre</span><span><b>12</b>meeting rooms</span><span><b>144</b>rooms</span></span><span class="vh-card__line">A 144 room InterContinental inside the Grand Hôtel-Dieu on the Rhône. Twelve meeting rooms, and Soufflot seats 400 theatre and divides into three.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Lyon&amp;venue=InterContinental%20Lyon%20%E2%80%93%20Hotel%20Dieu">Ask About This Venue</a></span></li>
-    </ul>
+    </div>
+    <div class="vh-cityblock" id="singapore">
     <div class="section-head"><h2 class="h2 vh-city">Singapore</h2></div>
     <ul class="vh-grid" style="margin-bottom:2.8rem">
 <li class="vh-card"><a class="vh-card__hit" href="hotel-indigo-singapore-katong/"><span class="vh-card__img"><img src="../assets/img/venue-visits/hotel-indigo-singapore-katong/5-w900.jpg" alt="Hotel Indigo Singapore Katong, the lobby lounge under its paper lanterns" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>Hotel Indigo Singapore Katong</b><span class="vh-card__meta">Hotel · Katong, Singapore</span><span class="vh-card__stats"><span><b>110</b>meeting sqm</span><span><b>80</b>restaurant</span><span><b>131</b>rooms</span></span><span class="vh-card__line">A 131 room Hotel Indigo in Singapore&rsquo;s Peranakan east. One meeting room of 110 sqm that divides in two, plus a restaurant for 80 and a rooftop for 50.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Singapore&amp;venue=Hotel%20Indigo%20Singapore%20Katong">Ask About This Venue</a></span></li>
 <li class="vh-card"><a class="vh-card__hit" href="the-st-regis-singapore/"><span class="vh-card__img"><img src="../assets/img/venue-visits/the-st-regis-singapore/1-w900.jpg" alt="The St. Regis Singapore, a ballroom set with round tables in front of its LED wall" width="900" height="1200" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>The St. Regis Singapore</b><span class="vh-card__meta">Hotel · Tanglin Road, Singapore</span><span class="vh-card__stats"><span><b>710</b>ballroom sqm</span><span><b>380</b>banquet</span><span><b>299</b>rooms</span></span><span class="vh-card__line">A 299 room St. Regis at the top of Orchard Road. A pillarless 710 sqm ballroom for 380 at dinner, and a double height second room for 150.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Singapore&amp;venue=The%20St.%20Regis%20Singapore">Ask About This Venue</a></span></li>
     </ul>
+    </div>
+    <div class="vh-cityblock" id="lyon">
+    <div class="section-head"><h2 class="h2 vh-city">Lyon</h2></div>
+    <ul class="vh-grid" style="margin-bottom:2.8rem">
+<li class="vh-card"><a class="vh-card__hit" href="intercontinental-lyon-hotel-dieu/"><span class="vh-card__img"><img src="../assets/img/venue-visits/intercontinental-lyon-hotel-dieu/4-w900.jpg" alt="InterContinental Lyon Hotel Dieu, Le Dôme bar under the Soufflot dome" width="900" height="1125" loading="lazy" decoding="async"></span><span class="vh-card__body"><b>InterContinental Lyon – Hotel Dieu</b><span class="vh-card__meta">Hotel · Presqu’île, Lyon</span><span class="vh-card__stats"><span><b>400</b>theatre</span><span><b>12</b>meeting rooms</span><span><b>144</b>rooms</span></span><span class="vh-card__line">A 144 room InterContinental inside the Grand Hôtel-Dieu on the Rhône. Twelve meeting rooms, and Soufflot seats 400 theatre and divides into three.</span><span class="vh-card__seen">Inspected by CVBS</span></span></a><span class="vh-card__act"><a class="btn btn--teal btn--sm" href="../submit-a-brief.html?dest=Lyon&amp;venue=InterContinental%20Lyon%20%E2%80%93%20Hotel%20Dieu">Ask About This Venue</a></span></li>
+    </ul>
+    </div>
   </div>
 </section>
 
@@ -543,5 +580,17 @@
   </div>
 </footer>
 <script src="../assets/js/site.js?v=202609130033" defer></script>
+<script>
+(function(){var bar=document.querySelector('.vh-jump');if(!bar||!('IntersectionObserver' in window))return;
+var row=bar.querySelector('.vh-jump__row'),chips={};
+bar.querySelectorAll('.vh-jump__chip').forEach(function(a){chips[a.getAttribute('href').slice(1)]=a});
+function on(id){var a=chips[id];if(!a||a.classList.contains('is-on'))return;
+ for(var k in chips){chips[k].classList.remove('is-on');chips[k].removeAttribute('aria-current')}
+ a.classList.add('is-on');a.setAttribute('aria-current','true');
+ row.scrollTo({left:a.offsetLeft-row.offsetLeft-16,behavior:'smooth'})}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)on(e.target.id)})},
+ {rootMargin:'-160px 0px -55% 0px'});
+document.querySelectorAll('.vh-cityblock').forEach(function(b){io.observe(b)});})();
+</script>
 </body>
 </html>
