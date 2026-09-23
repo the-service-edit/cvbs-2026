@@ -288,3 +288,10 @@ def main():
 
 if __name__ == '__main__':
     main()
+    # 23 Sep 2026: the guest room strip on conference-venues-with-accommodation.html
+    # reads the bands written above, so it runs straight after them.
+    import subprocess
+    rc = subprocess.call([sys.executable, os.path.join(ROOT, 'scripts', 'sync-rooms-strip.py')]
+                         + [a for a in sys.argv[1:] if a == '--check'])
+    if rc:
+        sys.exit(rc)

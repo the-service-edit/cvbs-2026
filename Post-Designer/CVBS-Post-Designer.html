@@ -148,6 +148,14 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
 .dot{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.34)}
 .dot.on{background:var(--teal);width:30px;border-radius:6px}
 .bg-stone .dot{background:rgba(10,44,82,.22)}.bg-stone .dot.on{background:var(--teal-deep)}
+/* 19 Sep 2026: no-overlay photo look (Hilton Sydney carousel) */
+.card.bg-photo .foot{background:rgba(0,0,0,.62);border:1.5px solid rgba(255,255,255,.18);border-radius:16px;padding:18px 28px;margin-top:16px}
+.card:not(.bg-stone) .foot .url{color:#32D9F3}
+.capbar .ce{font-size:24px}
+.capbar .ct{font-size:38px}
+.card.t-cta .content.center .sub{max-width:760px;margin-left:auto;margin-right:auto;font-size:32px}
+.card.t-cta .foot .url{font-size:28px}
+.card.t-cta .btn{margin-top:28px}
 </style></head>
 <body>
 <div class="panel">
@@ -170,7 +178,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#0b1622;color:#eef3f6;dis
     <div class="photos" id="photos"></div>
     <label class="up">Upload photo<input type="file" id="upload" accept="image/*" hidden></label>
     <div class="slider" style="margin-top:12px"><label for="posY" style="font-size:11px;color:#8aa0b0">POS</label><input type="range" id="posY" min="0" max="100" value="40"></div>
-    <div class="slider"><label for="scrimRange" style="font-size:11px;color:#8aa0b0">DIM</label><input type="range" id="scrimRange" min="20" max="100" value="82"></div>
+    <div class="slider"><label for="scrimRange" style="font-size:11px;color:#8aa0b0">DIM</label><input type="range" id="scrimRange" min="0" max="100" value="0"></div>
   </div>
 
   <div class="grp"><label>Content</label><div id="fields"></div></div>
@@ -254,7 +262,7 @@ const T={
  quote:{name:"› Quote",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-lg">${rich(F('quote'))}</div><div class="sub">${esc(F('attribution'))}</div><div class="fill"></div>${foot()}`,
    def:{eyebrow:"Client words",quote:"“They held the room\nbefore I'd finished\nthe *brief*.”",attribution:"Events Manager, national association"}},
  cta:{name:"› Call to action",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-lg">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="btn">${esc(F('button'))} ${ARROW}</div><div class="fill"></div>${foot()}`,
-   def:{eyebrow:"Your event next",headline:"Planning something\n*like this?*",body:"Send us the brief. We'll come back with a shortlist worth your time.",button:"Start your brief"}},
+   def:{eyebrow:"Your event next",headline:"Planning something\n*like this?*",body:"Send us the brief. We'll come back with a shortlist worth your time.",button:"Enquire via the link in our bio"}},
  textnavy:{name:"› Text (navy)",bg:"navy",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="fill"></div>${foot()}`,
    def:{eyebrow:"Why it matters",headline:"One clear point,\nstated *simply*.",body:"One idea per slide keeps a carousel readable. Say the thing, then move on."}},
  textlight:{name:"› Text (light)",bg:"stone",render:()=>`<div class="eyebrow">${esc(F('eyebrow'))}</div><div class="fill"></div><div class="hl h-md">${rich(F('headline'))}</div><div class="sub">${rich(F('body'))}</div><div class="fill"></div>${foot()}`,
@@ -280,7 +288,7 @@ const AREA=new Set(["headline","sub","body","quote","items","caption","xa","xb"]
 const PAIRS=[["s1n","s1l"],["s2n","s2l"],["s3n","s3l"],["t1n","t1l"],["t2n","t2l"],["t3n","t3l"]];
 const CENTER_DEFAULT=new Set(["positioning","quote","cta","roundup"]);
 
-function newSlide(tmpl){const t=T[tmpl];return{template:tmpl,align:CENTER_DEFAULT.has(tmpl)?"center":"left",photo:t.photo?PHOTOS[t.photo]:null,posY:40,scrim:82,fields:Object.assign({},t.def)};}
+function newSlide(tmpl){const t=T[tmpl];return{template:tmpl,align:CENTER_DEFAULT.has(tmpl)?"center":"left",photo:t.photo?PHOTOS[t.photo]:null,posY:40,scrim:0,fields:Object.assign({},t.def)};}
 let carousel={format:"ig",linkedin:false,slides:[newSlide("offer")],current:0};
 let fieldSerial=0;
 const cur=()=>carousel.slides[carousel.current];
@@ -340,7 +348,7 @@ function togglePhoto(){document.getElementById('photogrp').style.display=T[cur()
 
 function render(){const s=cur(),t=T[s.template];const card=document.getElementById('card');
  RCTX={i:carousel.current,n:carousel.slides.length};
- card.className="card fmt-"+carousel.format+(t.bg==='stone'?" bg-stone":"");
+ card.className="card fmt-"+carousel.format+(t.bg==='stone'?" bg-stone":"")+(t.bg==='photo'?" bg-photo":"")+" t-"+s.template;
  const bg=document.getElementById('bg'),scr=document.getElementById('scrimLayer');
  if(t.bg==='photo'){bg.style.display=scr.style.display="block";bg.style.backgroundImage=`url(${s.photo})`;
    bg.style.backgroundPosition=`center ${s.posY}%`;
