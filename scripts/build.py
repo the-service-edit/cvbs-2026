@@ -595,6 +595,8 @@ def verify(out, mp, env_name, expected_pages):
                 FAIL['staging page with a production canonical'].append(f)
             if not re.search(r'<meta name="robots" content="noindex', s):
                 FAIL['staging page without noindex'].append(f)
+        if env_name == 'production' and 'data-testimonial-slot' in s:
+            WARN['testimonial placeholder still on the page'].append(f)
         if f != '404.html' and not is_stub and len(re.findall(r'rel=["\']canonical', s)) != 1:
             FAIL['page without exactly one canonical'].append(f)
         for i in re.findall(r'"@id":"([^"]*#organization)"', s):

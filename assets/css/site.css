@@ -2051,3 +2051,13 @@ img, picture {
   user-drag: none;
   -webkit-touch-callout: none;
 }
+
+/* Testimonial slots, 23 Sep 2026. Placeholders while new named quotes come in.
+   Replace the whole element carrying data-testimonial-slot. build.py warns if one reaches production. */
+.testi-slot{display:flex;flex-direction:column;justify-content:center;border:1.5px dashed var(--line);border-radius:var(--r-card);background:transparent;box-shadow:none;padding:clamp(1.5rem,3vw,2.2rem);text-align:center;color:var(--muted)}
+.testi-sub.testi-slot{padding-top:clamp(1.5rem,3vw,2.2rem)}
+.testi-slot__label{margin:0;font-weight:600;font-size:.95rem;color:var(--navy)}
+.testi-slot__note{margin:.35rem 0 0;font-size:.88rem;color:var(--muted)}
+.testi-by img.testi-logo{height:34px;width:auto}
+.logos--wall img[src*="inghams"],.logos--trust img[src*="inghams"]{max-height:40px;max-width:71px}
+@media(max-width:680px){.logos--trust img[src*="inghams"],.logos--wall img[src*="inghams"]{max-height:32px;max-width:57px}}
