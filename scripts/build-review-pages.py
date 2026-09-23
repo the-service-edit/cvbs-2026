@@ -13,7 +13,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CORE = ["index.html", "services.html", "how-it-works.html", "about.html",
         "how-we-are-paid.html", "results.html", "offers.html", "contact.html",
         "submit-a-brief.html", "destinations.html"]
-SERVICE = ["conference-venues-with-accommodation.html", "conference-venue-finding.html",
+SERVICE = ["conference-venue-finding.html",
            "group-accommodation.html", "events.html", "corporate-accommodation.html"]
 ORDER = ["Core pages", "Current offers", "Service pages", "Destination pages",
          "Venue visits", "Guides and resources", "Legal"]

@@ -28,16 +28,16 @@
   "hash": "00ebf842016dd268"
  },
  "conference-venues-with-accommodation.html": {
-  "date": "2026-09-13",
-  "hash": "4488f113aa5f94f4"
+  "date": "2026-09-23",
+  "hash": "61553d8bd9792225"
  },
  "contact.html": {
   "date": "2026-09-13",
   "hash": "99ba2e2fa03dc7c1"
  },
  "corporate-accommodation.html": {
-  "date": "2026-09-13",
-  "hash": "3e217db52d52398e"
+  "date": "2026-09-23",
+  "hash": "a6d99630dbf4d820"
  },
  "destinations.html": {
   "date": "2026-09-13",
@@ -52,8 +52,8 @@
   "hash": "29c4d2172f75eb76"
  },
  "group-accommodation.html": {
-  "date": "2026-09-13",
-  "hash": "1666ba35aed7df3a"
+  "date": "2026-09-23",
+  "hash": "0a489ac3fded0077"
  },
  "how-it-works.html": {
   "date": "2026-09-13",
@@ -120,64 +120,64 @@
   "hash": "b83f602437a4eaf3"
  },
  "venue-finder-adelaide.html": {
-  "date": "2026-09-16",
-  "hash": "1188cc77085886e8"
+  "date": "2026-09-23",
+  "hash": "1d8b331d30e3f1f5"
  },
  "venue-finder-blue-mountains.html": {
   "date": "2026-09-16",
   "hash": "dc39f5f3fc14f169"
  },
  "venue-finder-brisbane.html": {
-  "date": "2026-09-16",
-  "hash": "2b500398d3f6bb84"
+  "date": "2026-09-23",
+  "hash": "8075490e1c42d76d"
  },
  "venue-finder-byron-bay.html": {
   "date": "2026-09-16",
   "hash": "ac0be9be3c67b1ff"
  },
  "venue-finder-cairns.html": {
-  "date": "2026-09-16",
-  "hash": "f71075a3404b651a"
+  "date": "2026-09-23",
+  "hash": "28cfffb97b7acd8b"
  },
  "venue-finder-canberra.html": {
-  "date": "2026-09-16",
-  "hash": "58e23f7d134fc563"
+  "date": "2026-09-23",
+  "hash": "1377bbac011c958e"
  },
  "venue-finder-darwin.html": {
-  "date": "2026-09-16",
-  "hash": "57f41ea2d64d7cd4"
+  "date": "2026-09-23",
+  "hash": "392ba73b7b8476a4"
  },
  "venue-finder-gold-coast.html": {
-  "date": "2026-09-16",
-  "hash": "0dc3f2c56f4cfd6d"
+  "date": "2026-09-23",
+  "hash": "62a5c5bfd819512f"
  },
  "venue-finder-hobart.html": {
-  "date": "2026-09-16",
-  "hash": "83f6c7d107ad09f3"
+  "date": "2026-09-23",
+  "hash": "1d5da1e2352f37e0"
  },
  "venue-finder-hunter-valley.html": {
   "date": "2026-09-16",
   "hash": "722ab87e216ebc81"
  },
  "venue-finder-melbourne.html": {
-  "date": "2026-09-16",
-  "hash": "7bd207db1fc2985e"
+  "date": "2026-09-23",
+  "hash": "d01999f65e8c19f4"
  },
  "venue-finder-mornington-peninsula.html": {
   "date": "2026-09-16",
   "hash": "d142c8d680c1b7ed"
  },
  "venue-finder-perth.html": {
-  "date": "2026-09-16",
-  "hash": "c64fad2e122a933b"
+  "date": "2026-09-23",
+  "hash": "8af0eb02f7a8cfc0"
  },
  "venue-finder-sunshine-coast.html": {
   "date": "2026-09-16",
   "hash": "0089446f38519279"
  },
  "venue-finder-sydney.html": {
-  "date": "2026-09-16",
-  "hash": "4f025f219f88a376"
+  "date": "2026-09-23",
+  "hash": "2c9c05e578c8e7fb"
  },
  "venue-finder-yarra-valley.html": {
   "date": "2026-09-16",
@@ -187,6 +187,10 @@
   "date": "2026-09-13",
   "hash": "e83a23820821f7fc"
  },
+ "venue-visits/25hours-hotel-the-olympia/index.html": {
+  "date": "2026-09-22",
+  "hash": "e97da444fea0491a"
+ },
  "venue-visits/capella-sydney/index.html": {
   "date": "2026-09-16",
   "hash": "e74d0f7166f62c05"
@@ -195,25 +199,69 @@
   "date": "2026-09-16",
   "hash": "3d93213cfd02ec71"
  },
+ "venue-visits/fairmont-singapore/index.html": {
+  "date": "2026-09-22",
+  "hash": "3fe66302881e7dd8"
+ },
+ "venue-visits/four-points-sydney-central-park/index.html": {
+  "date": "2026-09-22",
+  "hash": "18f80f11131ba902"
+ },
+ "venue-visits/halekulani/index.html": {
+  "date": "2026-09-22",
+  "hash": "19d77e16edf40378"
+ },
  "venue-visits/hannah-st-hotel-melbourne/index.html": {
   "date": "2026-09-16",
   "hash": "ba99e01d5284e593"
  },
  "venue-visits/hilton-sydney/index.html": {
-  "date": "2026-09-16",
-  "hash": "1a2ec3adae158d22"
+  "date": "2026-09-22",
+  "hash": "6eb19f2f7ad465b0"
+ },
+ "venue-visits/holiday-inn-melbourne-bourke-street-mall/index.html": {
+  "date": "2026-09-23",
+  "hash": "07ab0d50b363a95b"
  },
  "venue-visits/hotel-indigo-melbourne-little-collins/index.html": {
   "date": "2026-09-16",
   "hash": "0ba29e83287c3f3b"
  },
+ "venue-visits/hotel-indigo-singapore-katong/index.html": {
+  "date": "2026-09-22",
+  "hash": "e10d17396f8b782d"
+ },
  "venue-visits/index.html": {
-  "date": "2026-09-13",
-  "hash": "f7c27bd9ad51d432"
+  "date": "2026-09-23",
+  "hash": "6acac4de461563a1"
  },
  "venue-visits/intercontinental-brisbane/index.html": {
   "date": "2026-09-16",
   "hash": "d36e9765b279daf7"
+ },
+ "venue-visits/intercontinental-lyon-hotel-dieu/index.html": {
+  "date": "2026-09-22",
+  "hash": "330d9a475558d6db"
+ },
+ "venue-visits/intercontinental-sanctuary-cove/index.html": {
+  "date": "2026-09-23",
+  "hash": "4c6138854aabd356"
+ },
+ "venue-visits/intercontinental-sydney-coogee-beach/index.html": {
+  "date": "2026-09-22",
+  "hash": "190beb58b01fea43"
+ },
+ "venue-visits/kimpton-aysla-mallorca/index.html": {
+  "date": "2026-09-23",
+  "hash": "e89d80540e789995"
+ },
+ "venue-visits/moana-surfrider-waikiki/index.html": {
+  "date": "2026-09-22",
+  "hash": "c41378d08d5677dd"
+ },
+ "venue-visits/pier-one-sydney-harbour/index.html": {
+  "date": "2026-09-22",
+  "hash": "903ad4dae1ff37e0"
  },
  "venue-visits/pullman-bunker-bay/index.html": {
   "date": "2026-09-16",
@@ -231,6 +279,10 @@
   "date": "2026-09-16",
   "hash": "2d01a47e264796c1"
  },
+ "venue-visits/sheraton-waikiki-beach-resort/index.html": {
+  "date": "2026-09-22",
+  "hash": "305457a0e04822c9"
+ },
  "venue-visits/sofitel-sydney-wentworth/index.html": {
   "date": "2026-09-16",
   "hash": "5d6a034b8beddafc"
@@ -239,9 +291,13 @@
   "date": "2026-09-16",
   "hash": "ecfe3de7a8ac0bdf"
  },
+ "venue-visits/the-st-regis-singapore/index.html": {
+  "date": "2026-09-22",
+  "hash": "3a199448c6e9c6ff"
+ },
  "venue-visits/the-star-gold-coast/index.html": {
-  "date": "2026-09-16",
-  "hash": "0feb2148b1af8702"
+  "date": "2026-09-23",
+  "hash": "af2fff2452eb690c"
  },
  "venue-visits/the-westin-brisbane/index.html": {
   "date": "2026-09-16",

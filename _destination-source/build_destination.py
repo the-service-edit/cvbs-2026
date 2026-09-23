@@ -272,8 +272,8 @@ def sec_related(city, d):
         for href, label, why in d['related'])
     return '''<section class="s-white pad" id="{slug}-related"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Nearby and next</span><h2 class="h2">Places and pages worth a look before you decide.</h2></div>
-  <div class="grid g-3">{cards}</div>
-</div></section>'''.format(slug=slug_of(city), cards=cards)
+  <div class="grid g-{cols}">{cards}</div>
+</div></section>'''.format(slug=slug_of(city), cards=cards, cols=min(len(d['related']), 3))
 
 
 def sec_cta(city):

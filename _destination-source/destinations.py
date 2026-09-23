@@ -144,9 +144,7 @@ DEST['Melbourne'] = dict(
     ('venue-finder-yarra-valley.html', 'Yarra Valley',
      'An hour from the city, and where a Melbourne leadership program usually belongs.'),
     ('venue-finder-mornington-peninsula.html', 'Mornington Peninsula',
-     'Coast, vineyards and exclusive use properties for an offsite that has to feel separate.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The venues that hold the plenary and the delegates in the same building.')],
+     'Coast, vineyards and exclusive use properties for an offsite that has to feel separate.')],
 )
 
 # ------------------------------------------------------------------- BRISBANE
@@ -238,9 +236,7 @@ DEST['Brisbane'] = dict(
     ('venue-finder-gold-coast.html', 'Gold Coast',
      'An hour south, and the answer when the program wants a resort rather than a city.'),
     ('venue-finder-sunshine-coast.html', 'Sunshine Coast',
-     'Beachfront residential conferences and a genuine hinterland for smaller retreats.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Brisbane venues that hold the plenary and the delegates in one building.')],
+     'Beachfront residential conferences and a genuine hinterland for smaller retreats.')],
 )
 
 # ---------------------------------------------------------------------- PERTH
@@ -329,9 +325,7 @@ DEST['Perth'] = dict(
     ('venue-visits/pullman-bunker-bay/', 'Pullman Bunker Bay',
      'A resort in the Margaret River region we have walked through ourselves.'),
     ('cbd-vs-resort-conference-venues.html', 'City or resort',
-     'Whether Burswood, the city or a South West resort is the right base for the program.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The venues that hold the plenary and the delegates in the same building.')],
+     'Whether Burswood, the city or a South West resort is the right base for the program.')],
 )
 
 # ------------------------------------------------------------------- ADELAIDE
@@ -420,9 +414,7 @@ DEST['Adelaide'] = dict(
     ('venue-finder-melbourne.html', 'Melbourne',
      'The nearest capital when the numbers outgrow what Adelaide can hold in one room.'),
     ('cbd-vs-resort-conference-venues.html', 'City or resort',
-     'When the Hills, the Barossa or McLaren Vale beat a city hotel, and when they do not.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Adelaide properties that hold the plenary and the delegates in one building.')],
+     'When the Hills, the Barossa or McLaren Vale beat a city hotel, and when they do not.')],
 )
 
 # ------------------------------------------------------------------- CANBERRA
@@ -513,8 +505,6 @@ DEST['Canberra'] = dict(
   related=[
     ('venue-finder-sydney.html', 'Sydney',
      'Three hours by road, and the alternative when the exhibition floor outgrows Canberra.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Canberra venues that hold the plenary and the delegates in one building.'),
     ('how-to-brief-a-venue-finder.html', 'How to brief a venue finder',
      'What to send us so the first Canberra shortlist is worth reading.')],
 )
@@ -607,9 +597,7 @@ DEST['Hobart'] = dict(
     ('venue-finder-melbourne.html', 'Melbourne',
      'The nearest mainland capital, and the alternative when the numbers outgrow Hobart.'),
     ('cbd-vs-resort-conference-venues.html', 'City or resort',
-     'Whether the waterfront, the city or a property outside Hobart suits the program.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Hobart venues that hold the plenary and the delegates in one building.')],
+     'Whether the waterfront, the city or a property outside Hobart suits the program.')],
 )
 
 # --------------------------------------------------------------------- DARWIN
@@ -697,8 +685,6 @@ DEST['Darwin'] = dict(
   related=[
     ('venue-finder-cairns.html', 'Cairns',
      'The other tropical conference city, with the reef and rainforest instead of the Top End.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The venues that hold the plenary and the delegates in the same building.'),
     ('cbd-vs-resort-conference-venues.html', 'City or resort',
      'Darwin is a small city with resort stock attached, so the choice matters more here.')],
 )
@@ -790,9 +776,7 @@ DEST['Gold Coast'] = dict(
     ('venue-finder-brisbane.html', 'Brisbane',
      'An hour north, and the better answer when the program needs a city and one airport.'),
     ('venue-finder-sunshine-coast.html', 'Sunshine Coast',
-     'The quieter coast, with a hinterland and lower density.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Gold Coast venues that hold the plenary and the delegates in one building.')],
+     'The quieter coast, with a hinterland and lower density.')],
 )
 
 # ------------------------------------------------------------- SUNSHINE COAST
@@ -975,9 +959,7 @@ DEST['Cairns'] = dict(
     ('venue-finder-darwin.html', 'Darwin',
      'The other tropical conference city, with an Asian front door of its own.'),
     ('venue-finder-brisbane.html', 'Brisbane',
-     'Where a large trade exhibition belongs when Cairns cannot hold it.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Cairns venues that hold the plenary and the delegates in one building.')],
+     'Where a large trade exhibition belongs when Cairns cannot hold it.')],
 )
 
 # -------------------------------------------------------------- HUNTER VALLEY
@@ -1471,7 +1453,5 @@ DEST['Sydney'] = dict(
     ('venue-finder-hunter-valley.html', 'Hunter Valley',
      'Two hours north, with the largest regional residential conference resort in the state.'),
     ('venue-finder-blue-mountains.html', 'Blue Mountains',
-     'Ninety minutes west, where a group cannot go home at six o’clock.'),
-    ('conference-venues-with-accommodation.html', 'Venues with accommodation',
-     'The Sydney venues that hold the plenary and the delegates in one building.')],
+     'Ninety minutes west, where a group cannot go home at six o’clock.')],
 )

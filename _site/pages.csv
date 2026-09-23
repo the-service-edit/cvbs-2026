@@ -1,6 +1,6 @@
 source,path,family,status,index,redirect_to,legacy_url
 index.html,/,home,live,yes,,
-conference-venues-with-accommodation.html,/conference-venues-with-accommodation/,core,live,yes,,
+conference-venues-with-accommodation.html,/conference-venues-with-accommodation/,core,retired,no,/conference-venue-finding/,
 conference-venue-finding.html,/conference-venue-finding/,core,live,yes,,/bestvenue/
 group-accommodation.html,/group-accommodation/,core,live,yes,,/groups/
 events.html,/events/,core,live,yes,,
