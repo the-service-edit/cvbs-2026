@@ -543,6 +543,9 @@ body.menu-open{overflow:hidden}
    ========================================================================== */
 .pad-xl{padding-block:clamp(5rem,11vw,9rem)}
 .pad-sm{padding-block:clamp(1.9rem,4vw,3rem)}
+/* 23 Sep 2026: first band under a service page hero. .pad plus .hero-grid stacked two paddings (~200px). */
+.pad--after-hero{padding-top:clamp(2.5rem,5vw,4rem)}
+.pad--after-hero>.hero-grid{padding-block:0}
 
 /* quiet trust line (left-aligned, understated) */
 .trustline{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(1rem,3.5vw,2.8rem)}
