@@ -437,6 +437,12 @@ body.menu-open{overflow:hidden}
 .hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(160deg,#cfc6b6 0%,#54707d 45%,var(--navy) 100%)}
 .hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp?v=202609051700');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate3d(0,0,0) scale(1.02)}to{transform:translate3d(-26px,-13px,0) scale(1.08)}}
+/* 23 Sep 2026: homepage hero rotates five venue visit photos. Each slide is a <picture>
+   (landscape on desktop, portrait under 700px); only the visible one is opaque. */
+.hero__media.hero__media--rot .kb{background-image:none;opacity:0;transition:opacity 1.6s ease}
+.hero__media.hero__media--rot .kb.is-on{opacity:1}
+.hero__media--rot .kb picture,.hero__media--rot .kb img{display:block;width:100%;height:100%}
+.hero__media--rot .kb img{object-fit:cover;object-position:center}
 /* Hero scrim, rebuilt 7 Sep 2026. The old three-gradient navy wash was
    directional: darkest top-left, clearing to nothing on the right. Once the
    hero was shortened the copy moved UP onto the ballroom ceiling, which is the
