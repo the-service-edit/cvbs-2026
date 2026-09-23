@@ -320,58 +320,78 @@
 .vgrp-note b{color:var(--navy);font-weight:600}
 @media(max-width:560px){.vgrp-list{columns:1}.vgrp{margin-bottom:1.7rem}}
 
-/* 23 Sep 2026 jump-to-city bar v2 (replaces the 22 Sep pill row, which clipped
-   Honolulu at 1200px and gave every city the same weight as its region label).
-   Section-tab pattern: each region label sits ABOVE its cities, a hairline divides
-   regions, counts are badges, and ONE teal indicator slides to the city in view.
-   Active state is carried twice (teal badge fill + indicator), never by colour of
-   text alone. Teal is fill only here, per the teal-ink-vs-fill rule. On phones the
-   row bleeds to the screen edge and fades where there is more to scroll.
-   Sticks under the 74px header for the city listings only. */
-html{scroll-padding-top:150px}
+/* 23 Sep 2026 jump bar v3: region dropdowns. Replaces the v2 scrolling tab row,
+   which ran past 1200px once Europe, Middle East and Pacific arrived and hid
+   Honolulu behind a fade. Mel: nobody should have to scroll the bar sideways.
+   Desktop: one trigger per region (count = venues in that region), click or hover
+   opens its cities. Phones: one "Jump to a city" button opens every region as a
+   sheet. ONE markup serves both. Counts are recounted from the cards by the script
+   below, so adding a venue card never leaves a stale number. New city = add its
+   link to the right region's .vh-jump__pop and wrap its section in
+   div.vh-cityblock#slug. New region = copy a whole .vh-jump__grp.
+   Teal is fill only (badge + indicator), per the teal-ink-vs-fill rule. */
+html{scroll-padding-top:142px}
 .vh-jump{position:sticky;top:74px;z-index:40;margin:calc(-1 * var(--section-y)) 0 2.6rem;
-  background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);
+  background:rgba(255,255,255,.96);-webkit-backdrop-filter:saturate(140%) blur(12px);backdrop-filter:saturate(140%) blur(12px);
   border-bottom:1px solid var(--line)}
-.vh-jump__row{position:relative;display:flex;align-items:stretch;overflow-x:auto;overflow-y:hidden;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.vh-jump__row::-webkit-scrollbar{display:none}
-.vh-jump__grp{flex:0 0 auto;display:flex;flex-direction:column;justify-content:flex-end}
-.vh-jump__reg{display:block;align-self:flex-start;position:sticky;left:0;padding-top:.95rem;font-size:.64rem;font-weight:700;line-height:1;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.vh-jump__links{display:flex;gap:1.1rem}
-.vh-jump__div{flex:0 0 1px;align-self:center;height:2.3rem;margin:.55rem 1.1rem 0;background:var(--line)}
-.vh-jump__link{position:relative;display:inline-flex;align-items:center;gap:.36rem;white-space:nowrap;
-  text-decoration:none;font-size:.93rem;font-weight:600;letter-spacing:-.005em;color:#4A5868;
-  padding:.5rem 0 .85rem;transition:color .2s var(--ease)}
-.vh-jump__link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:3px 3px 0 0;
-  background:var(--line);opacity:0;transition:opacity .2s var(--ease)}
-.vh-jump__link:hover{color:var(--navy)}
-.vh-jump__link:hover::after{opacity:1}
-.vh-jump__link.is-on{color:var(--navy)}
-.vh-jump__link.is-on::after{opacity:0}
-.vh-jump__link:focus-visible{outline:3px solid var(--navy);outline-offset:1px;border-radius:4px}
+.vh-jump__in{display:flex;align-items:center;gap:1.6rem}
+.vh-jump__hd{font-size:.64rem;font-weight:700;line-height:1;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.vh-jump__all{display:none}
+.vh-jump__row{position:relative;display:flex;align-items:stretch;gap:1.9rem;flex-wrap:wrap}
+.vh-jump__grp{position:relative}
+.vh-jump__trig{display:inline-flex;align-items:center;gap:.4rem;border:0;background:none;cursor:pointer;
+  font:inherit;font-size:.93rem;font-weight:600;letter-spacing:-.005em;color:#4A5868;white-space:nowrap;
+  padding:1rem 0 1.05rem;transition:color .2s var(--ease)}
+.vh-jump__trig:hover,.vh-jump__grp.is-open .vh-jump__trig,.vh-jump__grp.is-cur .vh-jump__trig{color:var(--navy)}
+.vh-jump__trig:focus-visible{outline:3px solid var(--navy);outline-offset:2px;border-radius:4px}
+.vh-jump__chev{transition:transform .25s var(--ease);opacity:.7}
+.vh-jump__grp.is-open .vh-jump__chev{transform:rotate(180deg)}
 .vh-jump__n{display:inline-grid;place-items:center;min-width:1.3rem;height:1.3rem;padding:0 .36rem;
   border-radius:999px;background:var(--stone);color:#4A5868;font-size:.68rem;font-weight:700;line-height:1;
   font-variant-numeric:tabular-nums;transition:background .25s var(--ease),color .25s var(--ease)}
-.vh-jump__link:hover .vh-jump__n{background:var(--stone-deep);color:var(--navy)}
+.vh-jump__grp.is-cur .vh-jump__trig .vh-jump__n{background:var(--teal-btn);color:var(--navy)}
+.vh-jump__pop{display:none;position:absolute;top:calc(100% - 4px);left:-.8rem;min-width:220px;z-index:5;
+  padding:.45rem;background:#fff;border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 18px 40px -18px rgba(10,44,82,.35)}
+.vh-jump__pop.is-right{left:auto;right:-.8rem}
+.vh-jump__grp.is-open .vh-jump__pop{display:block}
+.vh-jump__reg{display:none}
+.vh-jump__link{display:flex;align-items:center;justify-content:space-between;gap:1rem;white-space:nowrap;
+  padding:.62rem .75rem;border-radius:8px;text-decoration:none;font-size:.93rem;font-weight:600;color:#4A5868;
+  transition:background .15s var(--ease),color .15s var(--ease)}
+.vh-jump__link:hover{background:var(--stone);color:var(--navy)}
+.vh-jump__link:hover .vh-jump__n{background:#fff}
+.vh-jump__link.is-on{color:var(--navy)}
 .vh-jump__link.is-on .vh-jump__n{background:var(--teal-btn);color:var(--navy)}
+.vh-jump__link:focus-visible{outline:3px solid var(--navy);outline-offset:-3px}
 .vh-jump__bar{position:absolute;left:0;bottom:0;width:0;height:3px;border-radius:3px 3px 0 0;
   background:var(--teal-btn);opacity:0;pointer-events:none;
-  transition:transform .5s var(--ease),width .5s var(--ease),opacity .25s var(--ease)}
+  transition:transform .45s var(--ease),width .45s var(--ease),opacity .25s var(--ease)}
 .vh-jump__bar.is-on{opacity:1}
 .vh-jump.no-anim .vh-jump__bar{transition:none}
-.vh-jump__scroll.fade-l .vh-jump__reg{left:20px}
 @media(max-width:760px){
-  .vh-jump .wrap{padding-inline:0}
-  .vh-jump__row{padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
-  .vh-jump__row::after{content:"";flex:0 0 var(--gutter)}
-  .vh-jump__div{margin-inline:1.1rem}
-  .vh-jump__scroll .vh-jump__reg,.vh-jump__scroll.fade-l .vh-jump__reg{left:var(--gutter)}
+  .vh-jump__in{display:block}
+  .vh-jump__in>.vh-jump__hd{display:none}
+  .vh-jump__all{display:flex;align-items:center;gap:.6rem;width:100%;border:0;background:none;cursor:pointer;
+    font:inherit;padding:.95rem 0;color:var(--navy)}
+  .vh-jump__all .vh-jump__hd{margin-right:auto}
+  .vh-jump__cur{font-size:.95rem;font-weight:650}
+  .vh-jump.is-sheet .vh-jump__all .vh-jump__chev{transform:rotate(180deg)}
+  .vh-jump__all:focus-visible{outline:3px solid var(--navy);outline-offset:-3px;border-radius:4px}
+  .vh-jump__row{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:1.1rem;
+    padding:1rem var(--gutter) 1.3rem;background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 22px 40px -24px rgba(10,44,82,.45);max-height:calc(100svh - 150px);overflow-y:auto}
+  .vh-jump.is-sheet .vh-jump__row{display:flex}
+  .vh-jump__trig,.vh-jump__bar{display:none}
+  .vh-jump__pop,.vh-jump__grp.is-open .vh-jump__pop{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .6rem;position:static;
+    min-width:0;padding:0;border:0;box-shadow:none;background:none}
+  .vh-jump__reg{display:block;grid-column:1/-1;margin-bottom:.2rem;font-size:.64rem;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted)}
+  .vh-jump__link{padding:.6rem .7rem;background:var(--stone)}
+  .vh-jump__link:hover .vh-jump__n,.vh-jump__link .vh-jump__n{background:#fff}
+  .vh-jump__link.is-on .vh-jump__n{background:var(--teal-btn)}
 }
-.vh-jump__scroll.fade-r .vh-jump__row{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 56px),transparent)}
-.vh-jump__scroll.fade-l .vh-jump__row{-webkit-mask-image:linear-gradient(90deg,transparent,#000 20px);mask-image:linear-gradient(90deg,transparent,#000 20px)}
-.vh-jump__scroll.fade-l.fade-r .vh-jump__row{-webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 56px),transparent)}
-@media(prefers-reduced-motion:reduce){.vh-jump__bar,.vh-jump__link,.vh-jump__n{transition:none}}
+@media(prefers-reduced-motion:reduce){.vh-jump__bar,.vh-jump__trig,.vh-jump__n,.vh-jump__chev,.vh-jump__link{transition:none}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.conferencevenues.com.au/index.html"}, {"@type": "ListItem", "position": 2, "name": "Venue visits", "item": "https://www.conferencevenues.com.au/venue-visits/"}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "@id": "https://www.conferencevenues.com.au/venue-visits/#webpage", "url": "https://www.conferencevenues.com.au/venue-visits/", "name": "Venues we have been inside", "isPartOf": {"@id": "https://www.conferencevenues.com.au/#website"}, "publisher": {"@id": "https://www.conferencevenues.com.au/#organization"}, "inLanguage": "en-AU"}</script>
@@ -419,7 +439,7 @@ html{scroll-padding-top:150px}
 
 <section class="s-white pad vh-cities">
   <nav class="vh-jump no-anim" aria-label="Jump to a city">
-    <div class="wrap"><div class="vh-jump__scroll"><div class="vh-jump__row"><div class="vh-jump__grp" role="group" aria-labelledby="vjr-australia"><span class="vh-jump__reg" id="vjr-australia">Australia</span><span class="vh-jump__links"><a class="vh-jump__link" href="#sydney">Sydney<span class="vh-jump__n">11<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#melbourne">Melbourne<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#brisbane">Brisbane<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#gold-coast">Gold Coast<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#perth">Perth<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a></span></div><span class="vh-jump__div" aria-hidden="true"></span><div class="vh-jump__grp" role="group" aria-labelledby="vjr-asia"><span class="vh-jump__reg" id="vjr-asia">Asia</span><span class="vh-jump__links"><a class="vh-jump__link" href="#singapore">Singapore<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a></span></div><span class="vh-jump__div" aria-hidden="true"></span><div class="vh-jump__grp" role="group" aria-labelledby="vjr-europe"><span class="vh-jump__reg" id="vjr-europe">Europe</span><span class="vh-jump__links"><a class="vh-jump__link" href="#lyon">Lyon<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#mallorca">Mallorca<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#marbella">Marbella<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#barcelona">Barcelona<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a></span></div><span class="vh-jump__div" aria-hidden="true"></span><div class="vh-jump__grp" role="group" aria-labelledby="vjr-middle-east"><span class="vh-jump__reg" id="vjr-middle-east">Middle East</span><span class="vh-jump__links"><a class="vh-jump__link" href="#dubai">Dubai<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a></span></div><span class="vh-jump__div" aria-hidden="true"></span><div class="vh-jump__grp" role="group" aria-labelledby="vjr-pacific"><span class="vh-jump__reg" id="vjr-pacific">Pacific</span><span class="vh-jump__links"><a class="vh-jump__link" href="#honolulu">Honolulu<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a></span></div><span class="vh-jump__bar" aria-hidden="true"></span></div></div></div>
+    <div class="wrap vh-jump__in"><span class="vh-jump__hd" aria-hidden="true">Jump to</span><button class="vh-jump__all" type="button" aria-expanded="false" aria-controls="vh-jump-menu"><span class="vh-jump__hd">Jump to a city</span><span class="vh-jump__cur">Sydney</span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__row" id="vh-jump-menu"><div class="vh-jump__grp" data-reg="australia"><button class="vh-jump__trig" type="button" aria-expanded="false" aria-controls="vjp-australia">Australia<span class="vh-jump__n">21<span class="sr-only"> venues</span></span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__pop" id="vjp-australia" role="group" aria-label="Australia"><span class="vh-jump__reg" aria-hidden="true">Australia</span><a class="vh-jump__link" href="#sydney">Sydney<span class="vh-jump__n">12<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#melbourne">Melbourne<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#brisbane">Brisbane<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#gold-coast">Gold Coast<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a><a class="vh-jump__link" href="#perth">Perth<span class="vh-jump__n">2<span class="sr-only"> venues</span></span></a></div></div><div class="vh-jump__grp" data-reg="asia"><button class="vh-jump__trig" type="button" aria-expanded="false" aria-controls="vjp-asia">Asia<span class="vh-jump__n">3<span class="sr-only"> venues</span></span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__pop" id="vjp-asia" role="group" aria-label="Asia"><span class="vh-jump__reg" aria-hidden="true">Asia</span><a class="vh-jump__link" href="#singapore">Singapore<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a></div></div><div class="vh-jump__grp" data-reg="europe"><button class="vh-jump__trig" type="button" aria-expanded="false" aria-controls="vjp-europe">Europe<span class="vh-jump__n">4<span class="sr-only"> venues</span></span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__pop" id="vjp-europe" role="group" aria-label="Europe"><span class="vh-jump__reg" aria-hidden="true">Europe</span><a class="vh-jump__link" href="#lyon">Lyon<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#mallorca">Mallorca<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#marbella">Marbella<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a><a class="vh-jump__link" href="#barcelona">Barcelona<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a></div></div><div class="vh-jump__grp" data-reg="middle-east"><button class="vh-jump__trig" type="button" aria-expanded="false" aria-controls="vjp-middle-east">Middle East<span class="vh-jump__n">1<span class="sr-only"> venue</span></span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__pop" id="vjp-middle-east" role="group" aria-label="Middle East"><span class="vh-jump__reg" aria-hidden="true">Middle East</span><a class="vh-jump__link" href="#dubai">Dubai<span class="vh-jump__n">1<span class="sr-only"> venue</span></span></a></div></div><div class="vh-jump__grp" data-reg="pacific"><button class="vh-jump__trig" type="button" aria-expanded="false" aria-controls="vjp-pacific">Pacific<span class="vh-jump__n">3<span class="sr-only"> venues</span></span><svg class="vh-jump__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vh-jump__pop" id="vjp-pacific" role="group" aria-label="Pacific"><span class="vh-jump__reg" aria-hidden="true">Pacific</span><a class="vh-jump__link" href="#honolulu">Honolulu<span class="vh-jump__n">3<span class="sr-only"> venues</span></span></a></div></div><span class="vh-jump__bar" aria-hidden="true"></span></div></div>
   </nav>
   <div class="wrap">
     <div class="vh-cityblock" id="sydney">
@@ -690,26 +710,47 @@ html{scroll-padding-top:150px}
 </footer>
 <script src="../assets/js/site.js?v=202609230507" defer></script>
 <script>
-/* 23 Sep 2026 jump bar v2: sliding indicator, keep the active city in view, edge fades. */
-(function(){var bar=document.querySelector('.vh-jump');if(!bar)return;
-var sc=bar.querySelector('.vh-jump__scroll'),row=bar.querySelector('.vh-jump__row'),ind=bar.querySelector('.vh-jump__bar'),
- links={},cur=null,lock=0,rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-function place(){if(!cur)return;ind.style.width=cur.offsetWidth+'px';ind.style.transform='translateX('+cur.offsetLeft+'px)';ind.classList.add('is-on')}
-function reveal(a){var l=a.offsetLeft,w=a.offsetWidth,v=row.scrollLeft,vw=row.clientWidth;
- if(row.scrollWidth<=vw+2)return;if(l<v+40||l+w>v+vw-40)row.scrollTo({left:l-(vw-w)/2,behavior:rm?'auto':'smooth'})}
-function on(id){var a=links[id];if(!a||a===cur)return;
+/* 23 Sep 2026 jump bar v3: region dropdowns (desktop), one sheet (phones), live counts. */
+(function(){var nav=document.querySelector('.vh-jump');if(!nav)return;
+var row=nav.querySelector('.vh-jump__row'),ind=nav.querySelector('.vh-jump__bar'),all=nav.querySelector('.vh-jump__all'),
+ curTxt=nav.querySelector('.vh-jump__cur'),grps=[].slice.call(nav.querySelectorAll('.vh-jump__grp')),
+ links={},cur=null,curG=null,lock=0,hov=window.matchMedia?matchMedia('(hover:hover) and (min-width:761px)'):{matches:false},
+ mob=window.matchMedia?matchMedia('(max-width:760px)'):{matches:false};
+function badge(el,k){el.innerHTML=k+'<span class="sr-only"> venue'+(k===1?'':'s')+'</span>'}
+grps.forEach(function(g){var tot=0;g.querySelectorAll('.vh-jump__link').forEach(function(a){var id=a.getAttribute('href').slice(1),
+ blk=document.getElementById(id),k=blk?blk.querySelectorAll('.vh-card').length:0;links[id]={a:a,g:g};
+ if(blk){badge(a.querySelector('.vh-jump__n'),k);tot+=k}});badge(g.querySelector('.vh-jump__trig .vh-jump__n'),tot)});
+function place(){if(!curG||mob.matches)return;var t=curG.querySelector('.vh-jump__trig');
+ ind.style.width=t.offsetWidth+'px';ind.style.transform='translate('+(curG.offsetLeft)+'px,'+(curG.offsetTop+curG.offsetHeight-row.offsetHeight)+'px)';ind.classList.add('is-on')}
+function on(id){var o=links[id];if(!o||o.a===cur)return;
  if(cur){cur.classList.remove('is-on');cur.removeAttribute('aria-current')}
- cur=a;a.classList.add('is-on');a.setAttribute('aria-current','location');place();reveal(a)}
-function fades(){var m=row.scrollWidth-row.clientWidth;sc.classList.toggle('fade-l',row.scrollLeft>4);sc.classList.toggle('fade-r',m>4&&row.scrollLeft<m-4)}
-bar.querySelectorAll('.vh-jump__link').forEach(function(a){var id=a.getAttribute('href').slice(1);links[id]=a;
- a.addEventListener('click',function(){on(id);lock=Date.now()+1100})});
-row.addEventListener('scroll',fades,{passive:true});
-window.addEventListener('resize',function(){bar.classList.add('no-anim');place();fades();requestAnimationFrame(function(){bar.classList.remove('no-anim')})});
-fades();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){place();fades()});
-requestAnimationFrame(function(){requestAnimationFrame(function(){bar.classList.remove('no-anim')})});
+ if(curG&&curG!==o.g)curG.classList.remove('is-cur');
+ cur=o.a;curG=o.g;cur.classList.add('is-on');cur.setAttribute('aria-current','location');curG.classList.add('is-cur');
+ if(curTxt)curTxt.textContent=cur.firstChild.nodeValue;place()}
+function close(g){g.classList.remove('is-open');g.querySelector('.vh-jump__trig').setAttribute('aria-expanded','false')}
+function closeAll(ex){grps.forEach(function(g){if(g!==ex)close(g)})}
+function open(g){closeAll(g);g.classList.add('is-open');g.querySelector('.vh-jump__trig').setAttribute('aria-expanded','true');
+ var p=g.querySelector('.vh-jump__pop');p.classList.remove('is-right');
+ if(p.getBoundingClientRect().right>document.documentElement.clientWidth-12)p.classList.add('is-right')}
+function sheet(s){nav.classList.toggle('is-sheet',s);all.setAttribute('aria-expanded',s?'true':'false')}
+grps.forEach(function(g){var t=g.querySelector('.vh-jump__trig'),tm=0,byHover=0;
+ t.addEventListener('click',function(){if(g.classList.contains('is-open')&&Date.now()>byHover)close(g);else open(g)});
+ g.addEventListener('mouseenter',function(){if(!hov.matches)return;clearTimeout(tm);if(!g.classList.contains('is-open')){open(g);byHover=Date.now()+400}});
+ g.addEventListener('mouseleave',function(){if(!hov.matches)return;tm=setTimeout(function(){close(g)},180)});
+ g.addEventListener('keydown',function(e){if(e.key==='ArrowDown'&&e.target===t){e.preventDefault();open(g);g.querySelector('.vh-jump__link').focus()}});
+});
+Object.keys(links).forEach(function(id){links[id].a.addEventListener('click',function(){on(id);lock=Date.now()+1100;closeAll();sheet(false)})});
+all.addEventListener('click',function(){sheet(!nav.classList.contains('is-sheet'))});
+document.addEventListener('click',function(e){if(!nav.contains(e.target)){closeAll();sheet(false)}});
+document.addEventListener('keydown',function(e){if(e.key!=='Escape')return;var g=grps.filter(function(x){return x.classList.contains('is-open')})[0];
+ if(g){close(g);g.querySelector('.vh-jump__trig').focus()}if(nav.classList.contains('is-sheet')){sheet(false);all.focus()}});
+nav.addEventListener('focusout',function(e){if(e.relatedTarget&&!nav.contains(e.relatedTarget)){closeAll();sheet(false)}});
+window.addEventListener('resize',function(){nav.classList.add('no-anim');place();requestAnimationFrame(function(){nav.classList.remove('no-anim')})});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+requestAnimationFrame(function(){requestAnimationFrame(function(){nav.classList.remove('no-anim')})});
 if(!('IntersectionObserver' in window))return;
 var io=new IntersectionObserver(function(es){if(Date.now()<lock)return;es.forEach(function(e){if(e.isIntersecting)on(e.target.id)})},
- {rootMargin:'-160px 0px -55% 0px'});
+ {rootMargin:'-150px 0px -55% 0px'});
 document.querySelectorAll('.vh-cityblock').forEach(function(b){io.observe(b)});})();
 </script>
 </body>
