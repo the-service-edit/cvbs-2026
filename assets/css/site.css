@@ -32,7 +32,7 @@
   --text:#0D1F2D; --muted:#666C73; --line:#D6E7E9; --line-dark:rgba(255,255,255,.14);
   --container:1400px;
   --gutter:clamp(1.5rem,5vw,5rem);
-  --section-y:clamp(4.5rem,11vh,9rem);
+  --section-y:clamp(3.5rem,8vh,6rem);
   --r-card:14px; --r-btn:12px; --r-pill:999px;
   --ease:cubic-bezier(.16,.84,.44,1);
   --shadow-sm:0 10px 30px -18px rgba(10,44,82,.45);
@@ -541,11 +541,13 @@ body.menu-open{overflow:hidden}
 /* ==========================================================================
    EDITORIAL EVOLUTION  (Inter + existing palette; composition & rhythm only)
    ========================================================================== */
-.pad-xl{padding-block:clamp(5rem,11vw,9rem)}
+.pad-xl{padding-block:clamp(4rem,8vw,6.5rem)}
 .pad-sm{padding-block:clamp(1.9rem,4vw,3rem)}
 /* 23 Sep 2026: first band under a service page hero. .pad plus .hero-grid stacked two paddings (~200px). */
 .pad--after-hero{padding-top:clamp(2.5rem,5vw,4rem)}
 .pad--after-hero>.hero-grid{padding-block:0}
+/* A .hero-grid inside a padded section was stacking a second padding on top. */
+.pad>.hero-grid{padding-block:0}
 
 /* quiet trust line (left-aligned, understated) */
 .trustline{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(1rem,3.5vw,2.8rem)}
