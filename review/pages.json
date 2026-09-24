@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-23",
+ "generated": "2026-09-24",
  "pages": [
   {
    "id": "index.html",
@@ -395,6 +395,12 @@
    "id": "venue-visits/park-hyatt-sydney/index.html",
    "path": "../venue-visits/park-hyatt-sydney/index.html",
    "title": "Park Hyatt Sydney event spaces and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/doubletree-esplanade-darwin/index.html",
+   "path": "../venue-visits/doubletree-esplanade-darwin/index.html",
+   "title": "DoubleTree by Hilton Esplanade Darwin event spaces and capacities",
    "group": "Venue visits"
   },
   {
