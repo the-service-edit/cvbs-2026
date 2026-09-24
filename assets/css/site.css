@@ -828,6 +828,36 @@ body.menu-open{overflow:hidden}
 @media(max-width:680px){.pcard{grid-template-columns:1fr;gap:1.1rem;top:calc(86px + var(--i)*16px);min-height:0}.pcard__n{width:62px;font-size:1.55rem;border-radius:15px}}
 @media(prefers-reduced-motion:reduce){.pcard{position:static}}
 
+/* Process row (service pages) ----------------------------------------------
+   Added 24 Sep 2026 (Mel chose option B). Replaces the sticky .pcard stack on
+   conference-venue-finding, group-accommodation, events, corporate-accommodation.
+   Three steps on one connected line; the middle step (the legwork CVBS carries)
+   sits on a white panel. Phones collapse to a vertical rail like the homepage.
+   .pcard / .proc-stack are kept: index-pro and index-strip still use them. */
+.proc3__row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);position:relative}
+.proc3__row::before{content:"";position:absolute;top:14px;left:14px;right:14px;height:2px;background:linear-gradient(90deg,var(--navy),var(--teal-deep));border-radius:2px}
+.proc3__step{position:relative}
+.proc3__dot{position:relative;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--stone);border:2px solid var(--navy)}
+.proc3__dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--navy)}
+.proc3__who{margin:1.25rem 0 0;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-ink)}
+.proc3__step h3{margin:.5rem 0 .6rem;font-size:clamp(1.2rem,1rem + .6vw,1.4rem);line-height:1.25;letter-spacing:-.02em;color:var(--navy)}
+.proc3__step p:not(.proc3__who){margin:0;color:var(--muted);line-height:1.6}
+.proc3__step--us{background:#fff;border-radius:16px;padding:0 1.25rem 1.4rem;margin:-14px -1.25rem 0;box-shadow:0 1px 2px rgba(10,44,82,.06),0 14px 28px -18px rgba(10,44,82,.22)}
+.proc3__step--us .proc3__dot{margin-top:14px;background:#fff}
+.proc3__step--us .proc3__dot::after{background:var(--teal-btn)}
+.s-white .proc3__dot{background:#fff}
+.s-white .proc3__step--us{background:var(--stone);box-shadow:none}
+.proc3__cta{margin-top:clamp(1.75rem,3.5vw,2.5rem)}
+@media(max-width:760px){
+  .proc3__row{grid-template-columns:1fr;gap:1.75rem}
+  .proc3__row::before{top:14px;bottom:14px;left:13px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--navy),var(--teal-deep))}
+  .proc3__step{padding-left:3rem}
+  .proc3__dot{position:absolute;left:0;top:0}
+  .proc3__who{margin-top:.2rem}
+  .proc3__step--us{margin:0 -1rem 0 -1rem;padding:1rem 1rem 1.2rem 4rem}
+  .proc3__step--us .proc3__dot{left:1rem;top:1rem;margin:0}
+}
+
 /* Process rail (home) ------------------------------------------------------
    Added 13 Sep 2026. Replaces the sticky .pcard stack on index.html only.
    A navy spine draws with the scroll between the first and last numeral,
