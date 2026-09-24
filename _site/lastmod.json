@@ -156,8 +156,8 @@
   "hash": "1d5da1e2352f37e0"
  },
  "venue-finder-hunter-valley.html": {
-  "date": "2026-09-16",
-  "hash": "722ab87e216ebc81"
+  "date": "2026-09-24",
+  "hash": "02c5b36a72722ef1"
  },
  "venue-finder-melbourne.html": {
   "date": "2026-09-23",
@@ -237,7 +237,7 @@
  },
  "venue-visits/index.html": {
   "date": "2026-09-24",
-  "hash": "8e6f6fecd3df4835"
+  "hash": "9689b267ce02176e"
  },
  "venue-visits/intercontinental-brisbane/index.html": {
   "date": "2026-09-16",
@@ -326,6 +326,10 @@
  "venue-visits/the-westin-brisbane/index.html": {
   "date": "2026-09-16",
   "hash": "7e2ad6362875d19c"
+ },
+ "venue-visits/voco-kirkton-park-hunter-valley/index.html": {
+  "date": "2026-09-24",
+  "hash": "9d63c3176e538252"
  },
  "what-is-conference-venue-sourcing.html": {
   "date": "2026-09-13",

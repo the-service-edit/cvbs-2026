@@ -1153,3 +1153,24 @@
   });
   try { apply(new URL(window.location.href).searchParams.get('topic') || 'all', false); } catch (e) {}
 })();
+
+/* Guide article contents: marks the section being read. Added 24 Sep 2026. */
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.art-toc a[href^="#"]'));
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  var map = {}, heads = [];
+  links.forEach(function (a) {
+    var h = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+    if (h) { map[h.id] = a; heads.push(h); }
+  });
+  function set(id) { links.forEach(function (a) { a.setAttribute('aria-current', map[id] === a ? 'true' : 'false'); }); }
+  function pick() {
+    var cur = heads[0];
+    heads.forEach(function (h) { if (h.getBoundingClientRect().top < 140) cur = h; });
+    if (cur) set(cur.id);
+  }
+  var io = new IntersectionObserver(pick, { rootMargin: '-120px 0px -55% 0px' });
+  heads.forEach(function (h) { io.observe(h); });
+  window.addEventListener('scroll', function () { window.requestAnimationFrame(pick); }, { passive: true });
+  pick();
+})();
