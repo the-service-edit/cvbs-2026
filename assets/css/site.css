@@ -858,6 +858,19 @@ body.menu-open{overflow:hidden}
   .proc3__step--us .proc3__dot{left:1rem;top:1rem;margin:0}
 }
 
+/* Four-step variant (homepage, 24 Sep 2026): You / Us / You / Us, both Us steps panelled.
+   Collapses to the vertical rail below 1080px because four columns get too narrow. */
+.proc3__row--4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1080px){
+  .proc3__row--4{grid-template-columns:1fr;gap:1.75rem}
+  .proc3__row--4::before{top:14px;bottom:14px;left:13px;right:auto;width:2px;height:auto;background:linear-gradient(180deg,var(--navy),var(--teal-deep))}
+  .proc3__row--4 .proc3__step{padding-left:3rem;max-width:44rem}
+  .proc3__row--4 .proc3__dot{position:absolute;left:0;top:0}
+  .proc3__row--4 .proc3__who{margin-top:.2rem}
+  .proc3__row--4 .proc3__step--us{margin:0 0 0 -1rem;padding:1rem 1rem 1.2rem 4rem}
+  .proc3__row--4 .proc3__step--us .proc3__dot{left:1rem;top:1rem;margin:0}
+}
+
 /* Process rail (home) ------------------------------------------------------
    Added 13 Sep 2026. Replaces the sticky .pcard stack on index.html only.
    A navy spine draws with the scroll between the first and last numeral,
