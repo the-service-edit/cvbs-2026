@@ -1117,3 +1117,39 @@
   }, { rootMargin: '300px 0px 300px 0px' });
   items.forEach(function (r) { nearIo.observe(r.el); });
 })();
+
+/* Blogroll topic filter (blog-index.html). Added 24 Sep 2026.
+   Buttons carry data-topic; rows carry data-topic. ?topic=<slug> makes a
+   filtered view linkable. No-op on every other page. */
+(function () {
+  var root = document.querySelector('[data-blogroll]');
+  if (!root) return;
+  var btns = [].slice.call(root.querySelectorAll('.broll__filter'));
+  var rows = [].slice.call(root.querySelectorAll('.broll__item'));
+  var status = root.querySelector('[data-blogroll-status]');
+  function apply(topic, push) {
+    if (!btns.some(function (b) { return b.getAttribute('data-topic') === topic; })) topic = 'all';
+    var shown = 0;
+    rows.forEach(function (r) {
+      var on = topic === 'all' || r.getAttribute('data-topic') === topic;
+      r.hidden = !on; if (on) shown++;
+    });
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-topic') === topic ? 'true' : 'false'); });
+    if (status) status.textContent = shown + (shown === 1 ? ' guide' : ' guides') + ' shown';
+    if (push && window.history && history.replaceState) {
+      var u = new URL(window.location.href);
+      if (topic === 'all') u.searchParams.delete('topic'); else u.searchParams.set('topic', topic);
+      history.replaceState(null, '', u.toString());
+    }
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      apply(b.getAttribute('data-topic'), true);
+      if (window.matchMedia('(max-width:991px)').matches) {
+        var list = root.querySelector('.broll__list');
+        if (list && list.getBoundingClientRect().top > window.innerHeight * 0.6) list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+  try { apply(new URL(window.location.href).searchParams.get('topic') || 'all', false); } catch (e) {}
+})();

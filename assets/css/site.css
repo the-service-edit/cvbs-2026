@@ -2104,3 +2104,59 @@ img, picture {
 .testi-by img.testi-logo{height:34px;width:auto}
 .logos--wall img[src*="inghams"],.logos--trust img[src*="inghams"]{max-height:40px;max-width:71px}
 @media(max-width:680px){.logos--trust img[src*="inghams"],.logos--wall img[src*="inghams"]{max-height:32px;max-width:57px}}
+
+/* ==========================================================================
+   Blogroll (blog-index.html only). Added 24 Sep 2026.
+   Sticky left aside (breadcrumb, H1, topic filters, brief CTA) at 1fr, and a
+   2fr list of rows, each a 320px 3:2 thumbnail + text. Replaces the old
+   page-hero + 3-up card grid. Section padding is deliberately tight, per
+   Mel's standing spacing preference. Filter logic lives in site.js under
+   [data-blogroll]; with no JS every row shows and the buttons do nothing.
+   ========================================================================== */
+.broll{padding-block:clamp(2.5rem,6vh,4rem) var(--section-y)}
+.broll__grid{display:grid;grid-template-columns:1fr 2fr;gap:64px;align-items:start}
+.broll__side{position:sticky;top:108px;display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+.broll__side .crumbs{margin-bottom:-8px}
+.broll__eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--brand)}
+.broll__eyebrow::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--teal-deep);flex:none}
+.broll__h1{margin:0;color:var(--navy);font-weight:600;letter-spacing:-.035em;line-height:1.02;font-size:clamp(2.4rem,1.4rem + 2.2vw,3.6rem)}
+.broll__h1 span{color:var(--teal-ink)}
+.broll__lead{margin:0;color:var(--muted);max-width:40ch}
+.broll__filters{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.broll__filter{appearance:none;background:none;border:0;padding:0;cursor:pointer;font:inherit;display:inline-flex;align-items:center;gap:.6rem;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--muted);transition:color .4s cubic-bezier(.22,1,.36,1)}
+.broll__filter::before{content:"";width:8px;height:8px;border-radius:2px;background:transparent;border:1px solid var(--line);flex:none;transition:background .4s cubic-bezier(.22,1,.36,1),border-color .4s cubic-bezier(.22,1,.36,1)}
+.broll__filter span{font-weight:500;letter-spacing:.04em;opacity:.7}
+.broll__filter:hover{color:var(--navy)}
+.broll__filter[aria-pressed="true"]{color:var(--navy)}
+.broll__filter[aria-pressed="true"]::before{background:var(--teal-deep);border-color:var(--teal-deep)}
+.broll__filter:focus-visible{outline:2px solid var(--brand);outline-offset:4px;border-radius:4px}
+.broll__list{display:flex;flex-direction:column;border-bottom:1px solid var(--line)}
+.broll__item{display:grid;grid-template-columns:320px 1fr;gap:40px;align-items:center;padding-block:32px;border-top:1px solid var(--line);color:var(--text);text-decoration:none;transition:opacity .6s cubic-bezier(.22,1,.36,1)}
+.broll__item:first-child{border-top:0;padding-top:0}
+.broll__item[hidden]{display:none}
+.broll__item:hover{opacity:.72}
+.broll__item:focus-visible{outline:2px solid var(--brand);outline-offset:6px;border-radius:6px}
+.broll__thumb{position:relative;width:100%;aspect-ratio:3/2;background:var(--stone-deep);border-radius:10px;overflow:hidden}
+.broll__thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.broll__text{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.broll__meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;line-height:1.2;color:var(--muted)}
+.broll__meta i{width:4px;height:4px;background:var(--line);flex:none}
+.broll__cat{color:var(--teal-ink)}
+.broll__title{margin:0;color:var(--navy);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.broll__body{margin:0;color:var(--muted);max-width:60ch}
+@media (max-width:991px){
+  .broll__grid{grid-template-columns:1fr;gap:40px}
+  .broll__side{position:static}
+  .broll__filters{flex-direction:row;flex-wrap:wrap;gap:12px 22px}
+  .broll__title{font-size:1.375rem}
+}
+@media (max-width:767px){
+  .broll__item{grid-template-columns:140px 1fr;gap:20px}
+  .broll__body{display:none}
+  .broll__cta{display:none}
+}
+@media (max-width:479px){
+  .broll__item{display:flex;flex-direction:column;align-items:stretch}
+  .broll__body{display:block}
+  .broll__title{font-size:1.25rem}
+}
