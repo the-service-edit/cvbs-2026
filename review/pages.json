@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-24",
+ "generated": "2026-09-25",
  "pages": [
   {
    "id": "index.html",
@@ -335,6 +335,12 @@
    "id": "venue-visits/w-sydney/index.html",
    "path": "../venue-visits/w-sydney/index.html",
    "title": "W Sydney event spaces and capacities",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/adina-sydney-darling-harbour/index.html",
+   "path": "../venue-visits/adina-sydney-darling-harbour/index.html",
+   "title": "Adina Sydney Darling Harbour meeting rooms and apartments",
    "group": "Venue visits"
   },
   {
