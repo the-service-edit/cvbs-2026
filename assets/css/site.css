@@ -1065,18 +1065,20 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
 .form-error{color:#ffd1d1;font-size:.84rem;line-height:1.5;margin-top:.75rem}
 .form-error a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
 @media(max-width:760px){.sub-inner{grid-template-columns:1fr;gap:1.3rem}.sub-row{flex-direction:column}.sub-form .btn{width:100%}}
-/* strong variant: light card on the offers page */
-.sub-band--strong{background:var(--stone);color:var(--navy);border-top:0;padding:clamp(2.6rem,5vw,4rem) 0}
-.sub-band--strong .sub-inner{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.8rem,4vw,2.8rem);box-shadow:0 26px 52px -40px rgba(10,44,82,.4)}
-.sub-band--strong .sub-title{color:var(--navy)}
-.sub-band--strong .eyebrow{color:var(--brand)}
-.sub-band--strong .eyebrow::before{background:var(--teal)}
-.sub-band--strong .sub-lead{color:var(--muted)}
-.sub-band--strong .sub-form input[type=email]{border:1px solid var(--line);background:var(--stone);color:var(--text)}
-.sub-band--strong .sub-form input[type=email]::placeholder{color:var(--muted)}
-.sub-band--strong .sub-fine{color:var(--muted)}
-.sub-band--strong .sub-ok{color:var(--teal-ink)}
-.sub-band--strong .form-error{color:#9d2f2f}
+/* 29 Sep 2026: light card is now the DEFAULT sign-up band sitewide, so it never merges with the navy CTA band above or the navy footer below. --strong kept as an alias. */
+.sub-band{background:var(--stone);color:var(--navy);border-top:0;padding:clamp(2.6rem,5vw,4rem) 0}
+.sub-band .sub-inner{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(1.8rem,4vw,2.8rem);box-shadow:0 26px 52px -40px rgba(10,44,82,.4)}
+.sub-band .sub-title{color:var(--navy)}
+.sub-band .eyebrow{color:var(--brand)}
+.sub-band .eyebrow::before{background:var(--teal)}
+.sub-band .sub-lead{color:var(--muted)}
+.sub-band .sub-form input[type=email]{border:1px solid var(--line);background:var(--stone);color:var(--text)}
+.sub-band .sub-form input[type=email]::placeholder{color:var(--muted)}
+.sub-band .sub-fine{color:var(--muted)}
+.sub-band .sub-ok{color:var(--teal-ink)}
+.sub-band .form-error{color:#9d2f2f}
+/* keep the card on the site content rail, not bleeding into the gutters */
+.sub-band .sub-inner{width:calc(100% - 2*var(--gutter));max-width:calc(var(--container) - 2*var(--gutter))}
 
 
 @media(min-width:1000px){
