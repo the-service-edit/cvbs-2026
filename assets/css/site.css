@@ -326,6 +326,7 @@ body.menu-open{overflow:hidden}
 .cta-band h2{font-size:clamp(2rem,1.4rem + 2.6vw,3.2rem);max-width:18ch;margin-inline:auto}
 .cta-band .lead{margin:1.2rem auto 2rem;color:rgba(234,241,244,.82)}
 .cta-band .btn-row{justify-content:center}
+.cta-band .eyebrow{color:var(--teal)} /* 29 Sep: brand blue on navy was unreadable */
 
 /* Prose (content pages) --------------------------------------------------- */
 .prose{max-width:var(--maxread)}
@@ -1079,6 +1080,12 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
 .sub-band .form-error{color:#9d2f2f}
 /* keep the card on the site content rail, not bleeding into the gutters */
 .sub-band .sub-inner{width:calc(100% - 2*var(--gutter));max-width:calc(var(--container) - 2*var(--gutter))}
+/* 29 Sep 2026 section joins: no two bands may read as one.
+   Page ending is always navy CTA -> light sign-up card -> navy footer.
+   Two light sections on the same ground get a hairline; a stone page ending lifts the sign-up ground to white. */
+.s-stone + .s-stone,.s-white + .s-white,
+.s-stone + [hidden] + .s-stone,.s-white + [hidden] + .s-white{border-top:1px solid var(--line)}
+main:has(> section.s-stone:last-child) + .sub-band{background:#fff}
 
 
 @media(min-width:1000px){
