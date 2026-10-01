@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Process motion test | CVBS internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=202610011430">
+<style>
+/* ── Test harness only. Not production CSS. ───────────────────────────── */
+body{background:#fff}
+.tbar{position:fixed;top:0;left:0;right:0;z-index:90;background:var(--navy);color:#fff;
+  display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;padding:.6rem clamp(1rem,4vw,2rem)}
+.tbar b{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-right:.6rem}
+.tbar button{font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;border-radius:999px;
+  padding:.42rem 1rem;border:1px solid rgba(255,255,255,.26);background:transparent;color:#fff;
+  transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+.tbar button:hover{background:rgba(255,255,255,.1)}
+.tbar button[aria-pressed="true"]{background:var(--teal-btn);border-color:var(--teal-btn);color:var(--navy)}
+.variant{display:none}
+.variant.on{display:block}
+.tnote{max-width:1020px;margin:0 auto;padding:1.2rem clamp(1.5rem,5vw,5rem) 0;
+  font-size:.88rem;line-height:1.55;color:var(--muted)}
+.tnote strong{color:var(--navy)}
+.tspacer{height:38vh}
+
+/* ── Shared timeline shell ─────────────────────────────────────────────── */
+.tl{position:relative;max-width:1020px;margin:clamp(2rem,5vw,3.4rem) auto 0}
+.tl-track{position:absolute;width:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.tl-fill{position:absolute;inset:0;transform:scaleY(0);transform-origin:top center;
+  border-radius:2px;will-change:transform}
+.tl-nodes{position:relative;display:flex;flex-direction:column}
+.tl-node{position:relative;display:grid;align-items:center}
+.tl-card{opacity:0;will-change:transform,opacity;background:#fff;border:1px solid var(--line);
+  border-radius:22px;box-shadow:0 1px 2px rgba(10,44,82,.07),0 14px 28px -14px rgba(10,44,82,.18);
+  padding:1.75rem 2rem}
+.tl-card h3{font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.15;color:var(--navy);margin:.1rem 0 .6rem}
+.tl-card p{font-size:1rem;line-height:1.6;color:var(--muted);margin:0;max-width:48ch}
+.tl-step{display:block;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:700;color:var(--teal-ink);font-variant-numeric:tabular-nums}
+
+/* Motion: dot pop sampled from GSAP back.out(2.5); card ease = power3.out */
+.tl-dot,.tl-chip{transform:scale(.6);
+  transition:transform .4s cubic-bezier(.34,2.1,.64,1),background .4s var(--ease),
+             border-color .4s var(--ease),box-shadow .4s var(--ease),color .4s var(--ease)}
+@supports (transition-timing-function:linear(0,1)){
+  .tl-dot,.tl-chip{transition-timing-function:linear(0,.4735 10%,.808 20%,1.0245 30%,1.144 40%,1.1875 50%,1.176 60%,1.1305 70%,1.072 80%,1.0215 90%,1)}
+}
+.tl-card{transition:transform .65s cubic-bezier(.25,1,.5,1) .05s,opacity .65s cubic-bezier(.25,1,.5,1) .05s}
+.tl-node.in .tl-dot,.tl-node.in .tl-chip{transform:scale(1)}
+.tl-node.in .tl-card{opacity:1;transform:translateX(0)}
+
+/* ── B: faithful port. Alternating, glowing teal spine, 14px dots ─────── */
+#v-b .tl-track{left:50%;transform:translateX(-50%);top:0;height:100%}
+#v-b .tl-fill{background:var(--teal-btn);box-shadow:0 0 12px rgba(50,217,243,.55)}
+#v-b .tl-nodes{gap:7rem}
+#v-b .tl-node{grid-template-columns:1fr 3rem 1fr}
+#v-b .tl-dot{grid-column:2;justify-self:center;width:14px;height:14px;border-radius:50%;
+  background:var(--line);border:2px solid #fff;z-index:1;flex-shrink:0}
+#v-b .tl-node.in .tl-dot{background:var(--teal-btn);border-color:var(--teal-btn);
+  box-shadow:0 0 0 4px rgba(50,217,243,.24),0 0 16px rgba(50,217,243,.4)}
+#v-b .tl-card{max-width:22rem}
+#v-b .tl-node[data-side="right"] .tl-card{grid-column:3;justify-self:start;transform:translateX(32px)}
+#v-b .tl-node[data-side="left"] .tl-card{grid-column:1;justify-self:end;transform:translateX(-32px)}
+
+/* ── C: adapted. Single left rail, navy spine, numbered chips ─────────── */
+#v-c .tl-track{left:26px;top:0;height:100%}
+#v-c .tl-fill{background:linear-gradient(180deg,var(--navy) 0%,var(--navy) 88%,var(--teal-btn) 100%)}
+#v-c .tl-nodes{gap:clamp(2.4rem,5vw,4rem)}
+#v-c .tl-node{grid-template-columns:54px 1fr;gap:clamp(1.2rem,3vw,2.2rem);align-items:start}
+#v-c .tl-chip{grid-column:1;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;
+  background:#fff;border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:1.15rem;
+  font-variant-numeric:tabular-nums;z-index:1;margin-top:.35rem}
+#v-c .tl-node.in .tl-chip{background:var(--navy);border-color:var(--navy);color:var(--teal-btn);
+  box-shadow:0 10px 22px -12px rgba(10,44,82,.55)}
+#v-c .tl-card{grid-column:2;justify-self:start;max-width:44rem;transform:translateX(32px);padding:clamp(1.5rem,3vw,2.1rem) clamp(1.5rem,3vw,2.4rem)}
+#v-c .tl-card p{max-width:56ch}
+
+@media(max-width:680px){
+  #v-b .tl-track{left:20px!important;transform:none!important}
+  #v-b .tl-nodes{gap:2.6rem}
+  #v-b .tl-node{grid-template-columns:40px 1fr}
+  #v-b .tl-dot{grid-column:1!important;justify-self:center}
+  #v-b .tl-node[data-side] .tl-card{grid-column:2!important;justify-self:start!important;
+    max-width:100%!important;transform:translateX(24px)}
+  #v-c .tl-track{left:19px}
+  #v-c .tl-node{grid-template-columns:40px 1fr;gap:1rem}
+  #v-c .tl-chip{width:40px;height:40px;border-radius:12px;font-size:.95rem;margin-top:.2rem}
+  .tl-card{padding:1.3rem 1.4rem;border-radius:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tl-fill{transform:scaleY(1)!important}
+  .tl-dot,.tl-chip,.tl-card{transition:none!important;transform:none!important;opacity:1!important}
+  #v-b .tl-node[data-side] .tl-card,#v-c .tl-card{transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="tbar" role="group" aria-label="Variant switcher">
+  <b>Process motion test</b>
+  <button type="button" data-v="a" aria-pressed="true">A. Current sticky stack</button>
+  <button type="button" data-v="b" aria-pressed="false">B. Timeline, alternating</button>
+  <button type="button" data-v="c" aria-pressed="false">C. Timeline, left rail</button>
+</div>
+
+<!-- A ─────────────────────────────────────────────────────────────────── -->
+<section class="variant on" id="v-a">
+  <p class="tnote" style="padding-top:5rem"><strong>A. What is live now.</strong> Sticky stacked cards. Each step pins and the next slides over it. Scroll slowly.</p>
+  <div class="pad" style="padding-top:2rem">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">The process</span>
+        <h2 class="h2">How your event comes together.</h2></div>
+      <div class="proc-stack">
+        <article class="pcard" style="--i:0"><div class="pcard__n">01</div><div class="pcard__body"><h3>You tell us about your event</h3><p>Dates, delegate numbers, where you would like to be and roughly what you have to spend. Use the form or call and talk it through, whichever is easier for you.</p></div></article>
+        <article class="pcard" style="--i:1"><div class="pcard__n">02</div><div class="pcard__body"><h3>We go looking</h3><p>We check what is really available across the venues that suit your brief, including rooms that never show as free online, then negotiate rates and inclusions on your behalf.</p></div></article>
+        <article class="pcard" style="--i:2"><div class="pcard__n">03</div><div class="pcard__body"><h3>You compare real options</h3><p>Within 48 hours you have a shortlist you can compare. Rates, inclusions, capacities and the trade-offs between them, set out side by side.</p></div></article>
+        <article class="pcard" style="--i:3"><div class="pcard__n">04</div><div class="pcard__body"><h3>We confirm and stay with it</h3><p>We lock in the rate, handle the contract detail and coordinate accommodation and suppliers through to the day. The decisions stay yours throughout.</p></div></article>
+      </div>
+    </div>
+  </div>
+  <div class="tspacer"></div>
+</section>
+
+<!-- B ─────────────────────────────────────────────────────────────────── -->
+<section class="variant" id="v-b">
+  <p class="tnote" style="padding-top:5rem"><strong>B. The reference method, ported straight over.</strong> Centre spine draws on scroll, cards alternate left and right, dots pop. Same timings as the original, CVBS colours.</p>
+  <div class="pad" style="padding-top:2rem">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">The process</span>
+        <h2 class="h2">How your event comes together.</h2></div>
+      <div class="tl" data-timeline>
+        <div class="tl-track"><div class="tl-fill" data-fill></div></div>
+        <div class="tl-nodes" data-nodes>
+          <div class="tl-node" data-side="right"><div class="tl-dot"></div><div class="tl-card"><span class="tl-step">Step 01</span><h3>You tell us about your event</h3><p>Dates, delegate numbers, where you would like to be and roughly what you have to spend.</p></div></div>
+          <div class="tl-node" data-side="left"><div class="tl-dot"></div><div class="tl-card"><span class="tl-step">Step 02</span><h3>We go looking</h3><p>We check what is really available, including rooms that never show as free online, then negotiate rates and inclusions on your behalf.</p></div></div>
+          <div class="tl-node" data-side="right"><div class="tl-dot"></div><div class="tl-card"><span class="tl-step">Step 03</span><h3>You compare real options</h3><p>Within 48 hours you have a shortlist. Rates, inclusions, capacities and the trade-offs, side by side.</p></div></div>
+          <div class="tl-node" data-side="left"><div class="tl-dot"></div><div class="tl-card"><span class="tl-step">Step 04</span><h3>We confirm and stay with it</h3><p>We lock in the rate, handle the contract detail and coordinate through to the day. The decisions stay yours.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tspacer"></div>
+</section>
+
+<!-- C ─────────────────────────────────────────────────────────────────── -->
+<section class="variant" id="v-c">
+  <p class="tnote" style="padding-top:5rem"><strong>C. Same motion, single left rail.</strong> The line still draws with the scroll, but nothing zigzags, the numerals stay in one column and the copy holds a single reading line. Navy spine with a teal head.</p>
+  <div class="pad" style="padding-top:2rem">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">The process</span>
+        <h2 class="h2">How your event comes together.</h2></div>
+      <div class="tl" data-timeline>
+        <div class="tl-track"><div class="tl-fill" data-fill></div></div>
+        <div class="tl-nodes" data-nodes>
+          <div class="tl-node"><div class="tl-chip">01</div><div class="tl-card"><h3>You tell us about your event</h3><p>Dates, delegate numbers, where you would like to be and roughly what you have to spend. Use the form or call and talk it through, whichever is easier for you.</p></div></div>
+          <div class="tl-node"><div class="tl-chip">02</div><div class="tl-card"><h3>We go looking</h3><p>We check what is really available across the venues that suit your brief, including rooms that never show as free online, then negotiate rates and inclusions on your behalf.</p></div></div>
+          <div class="tl-node"><div class="tl-chip">03</div><div class="tl-card"><h3>You compare real options</h3><p>Within 48 hours you have a shortlist you can compare. Rates, inclusions, capacities and the trade-offs between them, set out side by side.</p></div></div>
+          <div class="tl-node"><div class="tl-chip">04</div><div class="tl-card"><h3>We confirm and stay with it</h3><p>We lock in the rate, handle the contract detail and coordinate accommodation and suppliers through to the day. The decisions stay yours throughout.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tspacer"></div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Spine scrub. Mirrors ScrollTrigger start "top 80%", end "bottom 60%", scrub 0.6 */
+  var scrubs = [], raf = null, last = 0;
+  function frame(now) {
+    var dt = last ? Math.min((now - last) / 1000, 0.1) : 0.016;
+    last = now;
+    var live = false;
+    scrubs.forEach(function (s) {
+      if (!s.el.offsetParent) return;
+      live = true;
+      var vh = window.innerHeight, r = s.nodes.getBoundingClientRect();
+      var target = (0.8 * vh - r.top) / (0.2 * vh + r.height);
+      target = Math.max(0, Math.min(1, target));
+      s.cur += (target - s.cur) * Math.min(1, dt / 0.6);
+      s.fill.style.transform = 'scaleY(' + s.cur.toFixed(4) + ')';
+    });
+    raf = live || scrubs.length ? window.requestAnimationFrame(frame) : null;
+  }
+
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -25% 0px' }) : null;
+
+  /* Pin the rail so it starts and ends on the markers, not in dead space */
+  var rails = [];
+  function pinRails() {
+    rails.forEach(function (r) {
+      var marks = r.tl.querySelectorAll('.tl-dot,.tl-chip');
+      if (marks.length < 2) return;
+      var base = r.tl.getBoundingClientRect();
+      var a = marks[0].getBoundingClientRect();
+      var z = marks[marks.length - 1].getBoundingClientRect();
+      var top = a.top - base.top + a.height / 2;
+      var bottom = z.top - base.top + z.height / 2;
+      r.track.style.top = top + 'px';
+      r.track.style.height = Math.max(0, bottom - top) + 'px';
+    });
+  }
+  window.addEventListener('resize', pinRails, { passive: true });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-timeline]'), function (tl) {
+    var fill = tl.querySelector('[data-fill]'), nodes = tl.querySelector('[data-nodes]');
+    var items = Array.prototype.slice.call(tl.querySelectorAll('.tl-node'));
+    rails.push({ tl: tl, track: tl.querySelector('.tl-track') });
+    if (reduce) { items.forEach(function (n) { n.classList.add('in'); }); return; }
+    scrubs.push({ el: tl, fill: fill, nodes: nodes, cur: 0 });
+    items.forEach(function (n) { io ? io.observe(n) : n.classList.add('in'); });
+  });
+  pinRails();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(pinRails);
+  if (!reduce && scrubs.length) raf = window.requestAnimationFrame(frame);
+
+  /* Variant switcher. Resets the played-once state so each pass is a fresh look. */
+  var bar = document.querySelector('.tbar');
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-v]');
+    if (!btn) return;
+    Array.prototype.forEach.call(bar.querySelectorAll('button[data-v]'), function (b) {
+      b.setAttribute('aria-pressed', String(b === btn));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.variant'), function (s) {
+      s.classList.toggle('on', s.id === 'v-' + btn.getAttribute('data-v'));
+    });
+    window.scrollTo(0, 0);
+    pinRails();
+    if (reduce) return;
+    scrubs.forEach(function (s) { s.cur = 0; s.fill.style.transform = 'scaleY(0)'; });
+    Array.prototype.forEach.call(document.querySelectorAll('.tl-node'), function (n) {
+      n.classList.remove('in');
+      if (io) { io.unobserve(n); io.observe(n); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
