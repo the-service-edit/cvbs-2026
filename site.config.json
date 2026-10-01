@@ -19,14 +19,15 @@
       }
     },
     "staging": {
-      "origin": "https://the-service-edit.github.io",
-      "basePath": "/cvbs-2026/",
+      "origin": "https://cvbs.theserviceedit.com",
+      "basePath": "/",
       "indexable": false,
       "briefEndpoint": null,
       "securityHeaders": false
     }
   },
   "legacyHosts": [
+    "https://the-service-edit.github.io",
     "https://the-service-edit.github.io/cvbs-2026",
     "https://conferencevenues.com.au",
     "http://conferencevenues.com.au",
