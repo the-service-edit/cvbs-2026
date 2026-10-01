@@ -495,7 +495,7 @@ body.menu-open{overflow:hidden}
 /* ==========================================================================
    3D ROLLING DESTINATIONS STAGE (ported)
    ========================================================================== */
-.dest-stage{--dc:clamp(200px,22vw,280px);position:relative;height:calc(var(--dc) + 90px);margin-top:calc(-1 * clamp(1rem,2vw,1.75rem));perspective:1500px;perspective-origin:50% 50%;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 11%,#000 89%,transparent);mask:linear-gradient(90deg,transparent,#000 11%,#000 89%,transparent)}
+.dest-stage{--dc:clamp(200px,22vw,280px);position:relative;height:calc(var(--dc) + 64px);margin-top:calc(-1 * clamp(1.6rem,3vw,2.6rem));perspective:1500px;perspective-origin:50% 50%;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 11%,#000 89%,transparent);mask:linear-gradient(90deg,transparent,#000 11%,#000 89%,transparent)}
 .dcard{position:absolute;left:50%;top:50%;width:var(--dc,240px);height:var(--dc,240px);border-radius:18px;overflow:hidden;text-decoration:none;backface-visibility:hidden;transform-origin:center center;background:linear-gradient(150deg,#3a5160,var(--navy-deep));box-shadow:0 30px 60px -28px rgba(6,30,59,.75);will-change:transform,opacity}
 .dcard:nth-child(2n){background:linear-gradient(150deg,#2f6e78,var(--navy-deep))}
 .dcard:nth-child(3n){background:linear-gradient(150deg,#46606f,#0b2a3a)}
