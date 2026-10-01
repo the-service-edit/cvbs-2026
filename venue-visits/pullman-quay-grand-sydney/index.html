@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/site.css?v=202609290645">
+<link rel="stylesheet" href="../../assets/css/site.css?v=202610010055">
 <style>/* venue guide page. Scoped .vg-* only. Nothing here touches site.css. */
 .vg-wrap{max-width:1320px;margin:0 auto;padding:0 clamp(1rem,4vw,2.4rem)}
 .vg-crumbs{font-size:.82rem;color:var(--muted);padding:1.1rem 0 .9rem}
@@ -522,6 +522,23 @@
 </main>
 <footer class="site-footer">
   <div class="wrap">
+    <div class="footer-sub">
+      <div class="footer-sub__copy"><span class="eyebrow">Negotiated venue offers</span>
+        <h2 class="footer-sub__title">Hear about the next one first.</h2>
+        <p class="footer-sub__lead">Every so often we negotiate a rate or an inclusion worth knowing about. We send those to the people planning events, and nothing else.</p></div>
+      <form class="sub-form" data-subscribe action="https://conferencevenues.us8.list-manage.com/subscribe/post?u=cbdec96862600286c6b1444dd&amp;id=fd4e158c05" method="POST" target="_blank">
+        <input type="hidden" name="u" value="cbdec96862600286c6b1444dd">
+        <input type="hidden" name="id" value="fd4e158c05">
+        <input type="text" name="b_cbdec96862600286c6b1444dd_fd4e158c05" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+        <label class="sr-only" for="footer-sub-email">Work email</label>
+        <div class="sub-row">
+          <input id="footer-sub-email" type="email" name="EMAIL" required placeholder="Your work email" autocomplete="email">
+          <button type="submit" class="btn btn--teal">Send me offers <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <p class="sub-ok" data-form-success hidden>Thank you, you are on the list. We will be in touch the next time we have something worth sharing.</p>
+        <p class="sub-fine">Occasional emails. Unsubscribe anytime. We use your email only for CVBS updates.</p>
+      </form>
+    </div>
     <div class="footer-grid">
       <div>
         <img src="../../assets/img/logo.png" alt="CVBS" width="42" height="36">
@@ -547,7 +564,7 @@
   <button type="button" class="vg-lb__btn vg-lb__nav vg-lb__next" data-lb-next aria-label="Next photograph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   <figure><img alt=""></figure>
 </div>
-<script src="../../assets/js/site.js?v=202609290645" defer></script>
+<script src="../../assets/js/site.js?v=202610010055" defer></script>
 <script>
 (function(){
   var lb=document.getElementById('vglb');

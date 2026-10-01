@@ -2220,3 +2220,16 @@ img, picture {
   .art-fig{margin:1.6rem 0 2rem;border-radius:10px}
   .art-body{font-size:1rem}
 }
+
+/* 1 Oct 2026: the offers sign-up lives in the footer sitewide (it was a full light-card band above the footer).
+   offers.html and the offer-*.html pages keep the .sub-band and have no footer copy, because that is where intent is highest. */
+.footer-sub{display:grid;grid-template-columns:1fr minmax(0,30rem);gap:clamp(1.4rem,4vw,3.5rem);align-items:center;padding-bottom:clamp(2.2rem,4vw,3rem);margin-bottom:clamp(2.2rem,4vw,3rem);border-bottom:1px solid var(--line-dark)}
+.footer-sub .eyebrow{color:var(--teal)}
+.footer-sub .eyebrow::before{background:var(--teal)}
+.footer-sub__title{color:#fff;font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.2;letter-spacing:-.01em;margin:.45rem 0 .4rem}
+.footer-sub__lead{font-size:.92rem;line-height:1.55;max-width:58ch;color:rgba(234,241,244,.7)}
+.footer-sub .sub-fine{margin-top:.6rem}
+@media(max-width:760px){.footer-sub{grid-template-columns:1fr}.footer-sub .sub-row{flex-direction:column}.footer-sub .btn{width:100%}}
+@media print{.footer-sub{display:none!important}}
+/* CTA band now sits directly on the footer: a hairline keeps the two navy grounds from reading as one. */
+.site-footer{border-top:1px solid rgba(255,255,255,.08)}
