@@ -16,7 +16,18 @@ CORE = ["index.html", "services.html", "how-it-works.html", "about.html",
 SERVICE = ["conference-venue-finding.html",
            "group-accommodation.html", "events.html", "corporate-accommodation.html"]
 ORDER = ["Core pages", "Current offers", "Service pages", "Destination pages",
-         "Venue visits", "Guides and resources", "Legal"]
+         "Venue visits", "Guides and resources", "Legal", "Not in the sitemap"]
+
+# Live pages that are deliberately out of sitemap.xml. They are written to
+# pages.json with "teamOnly": true, so only names in seeAll (config.js) ever
+# see them. The client never does. Redirect stubs are left out on purpose.
+TEAM_ONLY = [
+    "resources.html",
+    "conference-venues-with-accommodation.html",
+    "venue-visits/hilton-singapore-orchard/index.html",
+    "venue-visits/conrad-singapore-orchard/index.html",
+    "venue-visits/conrad-singapore-marina-bay/index.html",
+]
 
 # Nothing is kept out of sitemap.xml and still shown here any more.
 # venue-results.html used to sit in this list. It was deleted from the site
@@ -87,6 +98,20 @@ def main():
         at = next((i for i, p in enumerate(pages) if p["id"] == after_id), len(pages) - 1)
         pages.insert(at + 1, {"id": extra_rel, "path": "../" + extra_rel,
                               "title": extra_title or etitle, "group": extra_group})
+
+    for rel in TEAM_ONLY:
+        if any(p["id"] == rel for p in pages):
+            continue
+        tpath = os.path.join(ROOT, rel)
+        if not os.path.isfile(tpath):
+            print("team-only page missing from the source tree: " + rel)
+            continue
+        tsrc = open(tpath, encoding="utf-8", errors="replace").read(20000)
+        tm = re.search(r"<title>(.*?)</title>", tsrc, re.S)
+        ttitle = html.unescape(re.sub(r"\s+", " ", tm.group(1))).strip() if tm else rel
+        ttitle = re.split(r"\s*\|\s*", ttitle)[0].strip() or rel
+        pages.append({"id": rel, "path": "../" + rel, "title": ttitle,
+                      "group": "Not in the sitemap", "teamOnly": True})
 
     out = os.path.join(ROOT, "review", "pages.json")
     with open(out, "w", encoding="utf-8") as fh:

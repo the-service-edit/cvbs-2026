@@ -16,6 +16,7 @@ var LS_WHO     = "cvbs-review-who-v1";
 var LS_ENDPOINT = "cvbs-review-endpoint-v1";
 
 var PAGES = [];
+var ALL_PAGES = [];         // everything in pages.json, before the client filter
 var BY_ID = {};
 var records = {};          // id -> record
 var queue = [];            // record ids waiting to sync
@@ -99,6 +100,22 @@ function openAsksFor(pageId) {
 }
 function allOpenAsks() {
   return list().filter(function (r) { return r.kind === "ask" && !askDone(r.id); });
+}
+function seesAll() {
+  return (CFG.seeAll || []).indexOf(who) !== -1;
+}
+function isHiddenPage(id) {
+  return (CFG.hidden || []).indexOf(id) !== -1;
+}
+/* The client list drops hidden and team-only pages. Names in seeAll get
+   every page. Rebuilt whenever the reviewer changes. */
+function buildPages() {
+  var all = seesAll();
+  PAGES = ALL_PAGES.filter(function (p) {
+    return all || (!p.teamOnly && !isHiddenPage(p.id));
+  });
+  BY_ID = {}; ROUTE = {};
+  PAGES.forEach(function (p) { BY_ID[p.id] = p; if (p.route) ROUTE[p.route] = p.id; });
 }
 function isTeam() {
   return (CFG.team || ["Mel Cox"]).indexOf(who) !== -1;
@@ -453,6 +470,8 @@ function renderRail() {
     html += '<div class="pitem' + (current && current.id === p.id ? " on" : "") +
       '" data-id="' + esc(p.id) + '" data-st="' + pageState(p.id) + '">' +
       '<span class="st"></span><div class="nm">' + esc(p.title) +
+      (p.teamOnly ? '<span class="hid-tag" title="Not in the sitemap. Only you see this page here.">Off sitemap</span>'
+        : isHiddenPage(p.id) ? '<span class="hid-tag" title="Hidden from the client in config.js">Hidden</span>' : "") +
       '<div class="url">/' + esc(p.id) + "</div></div>" +
       '<span class="badges">' +
       (a ? '<span class="badge ask" title="things we need from you">' + a + "</span>" : "") +
@@ -908,6 +927,8 @@ function setWho(name) {
   save(LS_WHO, name);
   $("#who-name").textContent = name;
   $("#gate").classList.add("off");
+  buildPages();
+  if (!current || !BY_ID[current.id]) selectPage(PAGES[0].id, false);
   renderAll();
 }
 
@@ -963,9 +984,8 @@ function boot() {
   fetch("pages.json?t=" + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      var hide = CFG.hidden || [];
-      PAGES = data.pages.filter(function (p) { return hide.indexOf(p.id) === -1; });
-      PAGES.forEach(function (p) { BY_ID[p.id] = p; if (p.route) ROUTE[p.route] = p.id; });
+      ALL_PAGES = data.pages;
+      buildPages();
       wire();
       showGate();
       if (who) { $("#who-name").textContent = who; $("#gate").classList.add("off"); }

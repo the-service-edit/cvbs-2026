@@ -23,6 +23,12 @@ window.REVIEW_CONFIG = {
      block. Everyone else can only answer them. */
   team: ["Mel Cox"],
 
+  /* Names that see EVERY page: the hidden list below is ignored for them,
+     and they also get the live pages kept out of the sitemap. Hidden pages
+     carry a "Hidden" tag in the rail so you know the client cannot see them.
+     Everyone else sees exactly what they saw before. */
+  seeAll: ["Mel Cox"],
+
   /* Pages to keep OUT of the review list. They stay on the website and
      nothing is deleted, they just do not appear here, so the client cannot
      open them or comment on them. Delete a line to hand a page over.

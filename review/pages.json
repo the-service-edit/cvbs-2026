@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-25",
+ "generated": "2026-10-01",
  "pages": [
   {
    "id": "index.html",
@@ -528,6 +528,41 @@
    "path": "../terms.html",
    "title": "Terms of Service",
    "group": "Legal"
+  },
+  {
+   "id": "resources.html",
+   "path": "../resources.html",
+   "title": "Free Conference Planning Resources & Tools",
+   "group": "Not in the sitemap",
+   "teamOnly": true
+  },
+  {
+   "id": "conference-venues-with-accommodation.html",
+   "path": "../conference-venues-with-accommodation.html",
+   "title": "Conference Venues With Accommodation On Site, Australia",
+   "group": "Not in the sitemap",
+   "teamOnly": true
+  },
+  {
+   "id": "venue-visits/hilton-singapore-orchard/index.html",
+   "path": "../venue-visits/hilton-singapore-orchard/index.html",
+   "title": "Hilton Singapore Orchard rooms and meeting facilities",
+   "group": "Not in the sitemap",
+   "teamOnly": true
+  },
+  {
+   "id": "venue-visits/conrad-singapore-orchard/index.html",
+   "path": "../venue-visits/conrad-singapore-orchard/index.html",
+   "title": "Conrad Singapore Orchard rooms and meeting facilities",
+   "group": "Not in the sitemap",
+   "teamOnly": true
+  },
+  {
+   "id": "venue-visits/conrad-singapore-marina-bay/index.html",
+   "path": "../venue-visits/conrad-singapore-marina-bay/index.html",
+   "title": "Conrad Singapore Marina Bay rooms and meeting facilities",
+   "group": "Not in the sitemap",
+   "teamOnly": true
   }
  ]
 }

@@ -350,3 +350,8 @@ a{color:var(--blue)}
 .ov-ask b{font-size:.86rem}
 .ov-ask-page{font-size:.7rem;color:var(--teal-deep);font-weight:600;margin-left:8px;cursor:pointer}
 @media (max-width:860px){ .sum-grid{grid-template-columns:repeat(2,1fr)} }
+
+/* Mel-only marker on pages the client cannot see (seeAll in config.js) */
+.pitem .hid-tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:99px;
+  font-size:.6rem;font-weight:600;letter-spacing:.02em;vertical-align:1px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.18)}
