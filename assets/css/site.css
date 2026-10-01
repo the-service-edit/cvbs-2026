@@ -1030,11 +1030,15 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
 .logos--wall img[src*="bausch"],.logos--trust img[src*="bausch"]{max-height:27px;max-width:min(165px,100%)}
 
 /* Venue and hotel groups band - suppliers, not clients, so it sits quieter. */
-.logos--venues{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.6rem,4vw,3.2rem);margin-top:1.6rem;max-width:900px;margin-inline:auto}
+.logos--venues{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(1.6rem,4vw,3.2rem);margin-top:1.6rem;max-width:1060px;margin-inline:auto}
 .logos--venues img{height:auto;width:auto;max-height:30px;max-width:min(130px,100%);object-fit:contain}
-.logos--venues img[src*="peppers"]{max-height:40px}
-.logos--venues img[src*="qt"]{max-height:36px}
-.logos--venues img[src*="ihg"]{max-height:36px}
+/* 1 Oct 2026: group marks from /venue-visits/, sized off that band's --mh ratios. Stacked marks run taller. */
+.logos--venues img[src*="groups/accor"],.logos--venues img[src*="groups/the-star"]{max-height:42px}
+.logos--venues img[src*="groups/capella"],.logos--venues img[src*="groups/crown"]{max-height:41px}
+.logos--venues img[src*="groups/marriott"],.logos--venues img[src*="groups/tfe"]{max-height:40px}
+.logos--venues img[src*="groups/ihg"]{max-height:34px}
+.logos--venues img[src*="groups/hilton"]{max-height:25px}
+.logos--venues img[src*="groups/evt"]{max-height:17px;max-width:min(110px,100%)}
 
 @media(max-width:680px){
   .logos--trust{gap:1.4rem 1.8rem}
@@ -1044,9 +1048,13 @@ a.vshow:focus-visible{outline:3px solid var(--teal-deep);outline-offset:3px}
   .logos--trust img[src*="hungry-jacks"],.logos--wall img[src*="hungry-jacks"]{max-height:34px;max-width:34px}
   .logos--trust img[src*="merck"],.logos--wall img[src*="merck"]{max-height:19px}
   .logos--venues img{max-height:24px}
-  .logos--venues img[src*="peppers"]{max-height:32px}
-  .logos--venues img[src*="qt"]{max-height:29px}
-  .logos--venues img[src*="ihg"]{max-height:29px}
+  .logos--venues{gap:1.4rem 1.8rem}
+  .logos--venues img[src*="groups/accor"],.logos--venues img[src*="groups/the-star"]{max-height:34px}
+  .logos--venues img[src*="groups/capella"],.logos--venues img[src*="groups/crown"]{max-height:33px}
+  .logos--venues img[src*="groups/marriott"],.logos--venues img[src*="groups/tfe"]{max-height:32px}
+  .logos--venues img[src*="groups/ihg"]{max-height:27px}
+  .logos--venues img[src*="groups/hilton"]{max-height:20px}
+  .logos--venues img[src*="groups/evt"]{max-height:14px}
 }
 
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
