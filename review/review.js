@@ -117,6 +117,23 @@ function buildPages() {
   BY_ID = {}; ROUTE = {};
   PAGES.forEach(function (p) { BY_ID[p.id] = p; if (p.route) ROUTE[p.route] = p.id; });
 }
+/* Launch sign-off. Private to names in seeAll. One record per page with a
+   fixed id, so closing and reopening just overwrites it in the sheet.
+   Client views only ever read note, ask and verdict, so these never show. */
+function launchFor(pageId) {
+  var r = records["launch-" + pageId];
+  return r && !r.deleted ? r : null;
+}
+function launchClosed(pageId) {
+  var r = launchFor(pageId);
+  return !!(r && r.status === "closed");
+}
+function setLaunch(pageId, closed) {
+  var p = BY_ID[pageId];
+  put({ id: "launch-" + pageId, kind: "launch", project: CFG.project, page: pageId,
+        pageTitle: p ? p.title : pageId, author: who, status: closed ? "closed" : "open",
+        text: "", created: now(), updated: now() });
+}
 function isTeam() {
   return (CFG.team || ["Mel Cox"]).indexOf(who) !== -1;
 }
@@ -439,7 +456,11 @@ function commitDraft() {
 function renderAll() { renderRail(); renderPanel(); renderProgress(); drawMarkers(); }
 
 function renderProgress() {
-  var done = PAGES.filter(function (p) { return pageState(p.id) !== "todo"; }).length;
+  document.body.classList.toggle("see-all", seesAll());
+  var done = seesAll()
+    ? PAGES.filter(function (p) { return launchClosed(p.id); }).length
+    : PAGES.filter(function (p) { return pageState(p.id) !== "todo"; }).length;
+  $("#prog-label").textContent = seesAll() ? "pages closed for launch" : "pages reviewed";
   $("#prog-done").textContent = done;
   $("#prog-total").textContent = PAGES.length;
   $("#prog-fill").style.width = (PAGES.length ? (done / PAGES.length * 100) : 0) + "%";
@@ -456,6 +477,8 @@ function renderRail() {
     if (filter === "todo" && st !== "todo") return false;
     if (filter === "changes" && st !== "changes") return false;
     if (filter === "approved" && st !== "approved") return false;
+    if (filter === "launch-open" && launchClosed(p.id)) return false;
+    if (filter === "launch-closed" && !launchClosed(p.id)) return false;
     if (search && (p.title + " " + p.id).toLowerCase().indexOf(search) === -1) return false;
     return true;
   });
@@ -467,13 +490,15 @@ function renderRail() {
       html += '<div class="grp">' + esc(p.group) + '<span class="g-count">' + counts[p.group] + "</span></div>";
     }
     var n = openNotesFor(p.id).length, a = openAsksFor(p.id).length;
-    html += '<div class="pitem' + (current && current.id === p.id ? " on" : "") +
+    var lc = seesAll() && launchClosed(p.id);
+    html += '<div class="pitem' + (current && current.id === p.id ? " on" : "") + (lc ? " closed" : "") +
       '" data-id="' + esc(p.id) + '" data-st="' + pageState(p.id) + '">' +
       '<span class="st"></span><div class="nm">' + esc(p.title) +
       (p.teamOnly ? '<span class="hid-tag" title="Not in the sitemap. Only you see this page here.">Off sitemap</span>'
         : isHiddenPage(p.id) ? '<span class="hid-tag" title="Hidden from the client in config.js">Hidden</span>' : "") +
       '<div class="url">/' + esc(p.id) + "</div></div>" +
       '<span class="badges">' +
+      (lc ? '<span class="badge lock" title="Closed for launch">&#10003;</span>' : "") +
       (a ? '<span class="badge ask" title="things we need from you">' + a + "</span>" : "") +
       (n ? '<span class="badge">' + n + "</span>" : "") + "</span></div>";
   });
@@ -619,7 +644,20 @@ function renderPanel() {
   body.innerHTML = html;
 
   var st = pageState(current.id), v = verdictFor(current.id), stuck = openAsksFor(current.id).length;
-  foot.innerHTML =
+  var launchBox = "";
+  if (seesAll()) {
+    var lr = launchFor(current.id), closed = launchClosed(current.id);
+    var openNotes = openNotesFor(current.id).length;
+    launchBox = '<div class="launch' + (closed ? " is-closed" : "") + '"><h4>' +
+      (closed ? "Closed for launch" : "Launch check") + "</h4><p>" +
+      (closed ? "You closed this " + when(lr.updated) + ". Only you see this."
+              : "Only you see this. Close the page once it is ready to go live." +
+                (openNotes ? " It still has " + openNotes + " open note" + (openNotes === 1 ? "" : "s") + "." : "")) +
+      "</p>" + (closed
+        ? '<button class="btn full" data-launch="open">Reopen</button>'
+        : '<button class="btn go full" data-launch="closed">Close for launch</button>') + "</div>";
+  }
+  foot.innerHTML = launchBox +
     '<div class="verdict"><h4>' + (st === "approved" ? "Approved" : st === "changes" ? "Changes requested" : "How is this page?") + "</h4>" +
     "<p>" + (stuck
       ? "There " + (stuck === 1 ? "is 1 request" : "are " + stuck + " requests") + " on this page still open. You can still approve the page, we just need those to finish it."
@@ -653,10 +691,10 @@ function nextPage() {
   var i = PAGES.findIndex(function (p) { return p.id === current.id; });
   for (var k = 1; k <= PAGES.length; k++) {
     var p = PAGES[(i + k) % PAGES.length];
-    if (pageState(p.id) === "todo") { selectPage(p.id); return; }
+    if (seesAll() ? !launchClosed(p.id) : pageState(p.id) === "todo") { selectPage(p.id); return; }
   }
   selectPage(PAGES[(i + 1) % PAGES.length].id);
-  toast("That's every page. Nice work.");
+  toast(seesAll() ? "Every page is closed. Good to launch." : "That's every page. Nice work.");
 }
 
 /* -------------------------------------------------------------- overview  */
@@ -793,6 +831,13 @@ function wire() {
             text: "", created: now(), updated: now() });
       toast(t.dataset.verdict === "approved" ? "Page approved" : "Marked for changes");
       if (t.dataset.verdict === "approved") setTimeout(nextPage, 450);
+      return;
+    }
+    if (t.dataset && t.dataset.launch) {
+      var closing = t.dataset.launch === "closed";
+      setLaunch(current.id, closing);
+      toast(closing ? "Closed for launch" : "Reopened");
+      if (closing) setTimeout(nextPage, 450);
       return;
     }
     if (t.id === "btn-add-ask") return addAsk();

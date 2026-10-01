@@ -7,7 +7,7 @@
 <title>Website Review | CVBS &amp; The Service Edit</title>
 <link rel="icon" href="../favicon.ico">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="review.css?v=20261001a">
+<link rel="stylesheet" href="review.css?v=20261001b">
 </head>
 <body>
 
@@ -45,7 +45,7 @@
   <div class="tb-spacer"></div>
 
   <div class="tb-progress">
-    <span><b id="prog-done">0</b> of <b id="prog-total">0</b> pages reviewed</span>
+    <span><b id="prog-done">0</b> of <b id="prog-total">0</b> <span id="prog-label">pages reviewed</span></span>
     <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
   </div>
 
@@ -74,6 +74,8 @@
       <button class="rf" data-filter="todo">Not done</button>
       <button class="rf" data-filter="changes">Changes</button>
       <button class="rf" data-filter="approved">Approved</button>
+      <button class="rf mel-only" data-filter="launch-open">To close</button>
+      <button class="rf mel-only" data-filter="launch-closed">Closed</button>
     </div>
     <div class="rail-list" id="rail-list"></div>
   </aside>
@@ -138,7 +140,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="config.js?v=20261001a"></script>
-<script src="review.js?v=20261001a"></script>
+<script src="config.js?v=20261001b"></script>
+<script src="review.js?v=20261001b"></script>
 </body>
 </html>

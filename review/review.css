@@ -355,3 +355,15 @@ a{color:var(--blue)}
 .pitem .hid-tag{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:99px;
   font-size:.6rem;font-weight:600;letter-spacing:.02em;vertical-align:1px;
   background:rgba(255,255,255,.1);color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.18)}
+
+/* Launch sign-off, seeAll names only */
+.rf.mel-only{display:none}
+body.see-all .rf.mel-only{display:inline-block}
+.pitem .badge.lock{background:var(--green);color:#fff}
+.pitem.closed .nm{opacity:.62}
+.launch{padding:12px;border:1px solid var(--line);border-radius:9px;background:var(--stone);margin-bottom:10px;border-left:3px solid var(--gold)}
+.launch.is-closed{border-left-color:var(--green)}
+.launch h4{margin:0 0 4px;font-size:.8rem;font-weight:600}
+.launch p{margin:0 0 10px;font-size:.76rem;color:var(--muted);line-height:1.5}
+.btn.full{display:block;width:100%;text-align:center}
+body.see-all .rail-filters{flex-wrap:wrap}
