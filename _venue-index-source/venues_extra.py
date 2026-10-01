@@ -78,6 +78,52 @@ VENUES_SYDNEY_EXTRA = [
    note="An all suite hotel on East Circular Quay with three small event spaces. The right building for an executive program or a board dinner on the harbour, not for a conference.",
    src="https://pullman.accor.com/en/hotels/sydney/8779/meetings.html",
    src2="https://pullman.accor.com/en/hotels/sydney/8779/meetings.html"),
+
+ # ---- 1 Oct 2026: AJ's featured venues. Researched to RESEARCH-PROMPT v2,
+ # or carried from the published venue visit page where one exists.
+ dict(
+   city="Sydney", slug="pier-one-sydney-harbour", checked="22 September 2026",
+   worked=False, seen=None, visit="pier-one-sydney-harbour",
+   n="Pier One Sydney Harbour, Autograph Collection", sp="Water Room", pr="Walsh Bay", ty="hotel",
+   th=200, bq=180, cl=127, ck=350, cab=None, ush=None, bd=None,
+   br=9, gr=189, area=315, ceil=7.0, ceilq=None,
+   s_name="Bridge Marquee", s_th=150,
+   note="A heritage finger wharf at Walsh Bay, beside the southern end of the Harbour Bridge, with 189 rooms upstairs and the harbour at the door. The Water Room takes 200 theatre or 180 for dinner under a seven metre ceiling, and the seven Dawes Point rooms carry the breakouts. It is lovely for a dinner, a launch or a residential meeting that can live inside 200 seats, and the whole venue takes 1,500 for a standing reception.",
+   src="https://www.marriott.com/en-us/hotels/sydak-pier-one-sydney-harbour-autograph-collection/events/",
+   src2="https://www.marriott.com/en-us/hotels/sydak-pier-one-sydney-harbour-autograph-collection/events/"),
+
+ dict(
+   city="Sydney", slug="intercontinental-sydney-coogee-beach", checked="22 September 2026",
+   worked=False, seen=None, visit="intercontinental-sydney-coogee-beach",
+   n="InterContinental Sydney Coogee Beach", sp="Grand Ballroom", pr="Coogee", ty="hotel",
+   th=300, bq=260, cl=None, ck=None, cab=None, ush=None, bd=None,
+   br=7, gr=198, area=None, ceil=None, ceilq=None,
+   s_name=None, s_th=None,
+   note="The former Crowne Plaza Coogee Beach, refurbished and reopened as an InterContinental from December 2025, across the road from the sand. The pillar free Grand Ballroom takes 300 theatre or 260 for dinner, with six smaller rooms alongside and 198 rooms upstairs. It suits a board, a sales meeting or an incentive group that would rather have the ocean than the CBD. A plenary above 300 is better placed in the city or at Randwick.",
+   src="https://www.ihg.com/intercontinental/hotels/us/en/sydney/sydcb/hoteldetail/meetings-events",
+   src2="https://www.ihg.com/intercontinental/hotels/us/en/sydney/sydcb/hoteldetail/meetings-events"),
+
+ dict(
+   city="Sydney", slug="the-brighton-hotel-sydney-mgallery", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="The Brighton Hotel Sydney, MGallery Collection", sp="The Brighton Ballroom", pr="Brighton-Le-Sands", ty="hotel",
+   th=600, bq=420, cl=252, ck=550, cab=None, ush=45, bd=None,
+   br=8, gr=307, area=675, ceil=2.9, ceilq=None,
+   s_name="Endeavour Grand Ballroom", s_th=550,
+   note="A beachfront hotel on Botany Bay with two plenary sized ballrooms under one roof, so a main session and a gala dinner can run without turning a room over. The Brighton Ballroom faces the water, and the Endeavour Ballroom on level two divides into three for breakouts. It relaunched in October 2025 after a long renovation and sits about ten minutes from the airport. There is no station at the door, so city delegates usually need transfers.",
+   src="https://mgallery.accor.com/en/hotels/1656/meetings.html",
+   src2="https://thebrightonsydney.com.au/event/brighton-ballroom/"),
+
+ dict(
+   city="Sydney", slug="elysium-manly", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="Elysium Manly", sp="Pacific Ballroom", pr="Manly", ty="hotel",
+   th=500, bq=350, cl=220, ck=500, cab=240, ush=None, bd=None,
+   br=5, gr=213, area=512, ceil=None, ceilq=None,
+   s_name="Fairy Bower", s_th=160,
+   note="The former Manly Pacific, renamed Elysium Manly in August 2026 after a refurbishment of its rooms and restaurant. The Pacific Ballroom looks straight onto the ocean and divides into smaller rooms, with Fairy Bower and the Cove Rooms taking the breakouts. It suits residential conferences and incentive groups who want the beach on the doorstep. Delegates coming from the city usually arrive by ferry from Circular Quay, so allow for that in the run sheet.",
+   src="https://www.elysiumhotels.com/manly/meetings-events/pacific-ballroom",
+   src2="https://www.elysiumhotels.com/manly/meetings-events"),
 ]
 
 # ------------------------------------------------------------------- joins
@@ -86,6 +132,12 @@ VENUES_SYDNEY_EXTRA = [
 # building; the index uses the corporate name and the page uses the hotel name.
 VISIT_SLUGS = {
   "Crown Sydney": "crown-towers-sydney",
+  # 1 Oct 2026: published visit pages the dataset was not pointing at
+  # (cvbs-visit-flag-drift step 3).
+  "Hilton Sydney": "hilton-sydney",
+  "Sofitel Sydney Wentworth": "sofitel-sydney-wentworth",
+  "The EVE Hotel Sydney": "the-eve-hotel-sydney",
+  "The Star Gold Coast": "the-star-gold-coast",
 }
 
 # A venue name mapped to its live offer page in the site root. Update whenever

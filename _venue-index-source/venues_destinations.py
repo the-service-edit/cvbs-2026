@@ -1517,4 +1517,82 @@ VENUES_DESTINATIONS = [
    note="A 65 room golf resort with seven purpose built event spaces including a divisible main room, executive lodges and a marquee, aimed at golf anchored corporate programs. The resort does not publish a capacity chart, so every room number has to be confirmed with the venue before it goes in a proposal.",
    src="https://www.moonahlinks.com.au/cms/conference-and-events/",
    src2="https://www.moonahlinks.com.au/cms/hotel/accommodation-and-packages/"),
+
+# ------------------------------------------------ 1 Oct 2026, AJ's featured venues
+ dict(
+   city="Brisbane", slug="intercontinental-brisbane", checked="7 September 2026",
+   worked=False, seen=None, visit="intercontinental-brisbane",
+   n="InterContinental Brisbane", sp="Grand Ballroom", pr="Brisbane CBD", ty="hotel",
+   th=None, bq=None, cl=None, ck=None, cab=None, ush=None, bd=None,
+   br=15, gr=None, area=794, ceil=None, ceilq=None,
+   s_name=None, s_th=None,
+   note="The former Hilton Brisbane on Elizabeth Street, reopened under the InterContinental flag in July 2025, with an atrium running the height of the building. The Grand Ballroom is 794 square metres and there are fifteen function rooms over three floors, though IHG publishes no setup capacities for any of them, so we confirm numbers with the hotel for every brief. The level eight pool terrace is the room people remember for dinners.",
+   src="https://www.ihg.com/intercontinental/hotels/us/en/brisbane/bnehb/hoteldetail/meetings-events",
+   src2="https://www.ihg.com/intercontinental/hotels/us/en/brisbane/bnehb/hoteldetail/meetings-events"),
+
+ dict(
+   city="Melbourne", slug="intercontinental-melbourne-the-rialto", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="InterContinental Melbourne The Rialto", sp="The Laneway Rooms", pr="Melbourne CBD", ty="hotel",
+   th=None, bq=300, cl=None, ck=None, cab=None, ush=None, bd=None,
+   br=10, gr=253, area=None, ceil=None, ceilq=None,
+   s_name="Wool & Wheat", s_th=156,
+   note="Set behind the 1890s Gothic facade of the Rialto at the William Street end of Collins Street, this hotel suits banquets for up to 300 and mid sized conferences. The Laneway Rooms run the length of the Rialto Wing and divide into three, so one section can carry a breakout while the other two hold the main session, and four heritage meeting rooms sit alongside. It is a characterful fit for a few hundred rather than a large plenary.",
+   src="https://www.ihg.com/intercontinental/hotels/us/en/melbourne/melha/hoteldetail/meetings-events",
+   src2="https://www.melbourne.intercontinental.com/meetings-events/trade-stock-wool-and-wheat/"),
+
+ dict(
+   city="Melbourne", slug="w-melbourne", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="W Melbourne", sp="Great Room", pr="Melbourne CBD", ty="hotel",
+   th=500, bq=320, cl=294, ck=500, cab=None, ush=78, bd=None,
+   br=5, gr=294, area=426, ceil=5.6, ceilq=None,
+   s_name="Studio 1", s_th=102,
+   note="On Flinders Lane at the William Street end of the city, W Melbourne has one Great Room of 426 square metres that seats 500 theatre or 320 banquet and divides into two equal halves. Four Studios sit outside it for breakouts, the largest taking around 100 theatre, so it works best for one strong plenary rather than many concurrent streams. The bold W styling suits launches and brand led events more than a conservative board retreat.",
+   src="https://www.marriott.com/en-us/hotels/melwh-w-melbourne/events/",
+   src2="https://www.marriott.com/en-us/hotels/melwh-w-melbourne/events/"),
+
+ dict(
+   city="Melbourne", slug="the-langham-melbourne", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="The Langham, Melbourne", sp="Clarendon Ballroom", pr="Southbank", ty="hotel",
+   th=300, bq=240, cl=165, ck=400, cab=None, ush=72, bd=None,
+   br=10, gr=None, area=333, ceil=4.1, ceilq=None,
+   s_name="Swanston Room", s_th=150,
+   note="A Southbank hotel on the river, a short walk over the water from Flinders Street Station. The Clarendon Ballroom seats 300 theatre style and divides into three, which suits a plenary that breaks into sections. Ceilings sit lower outside the ballroom, so the Swanston Room and the rooftop Alto work best for dinners, receptions and smaller streams. The hotel has flagged a refurbishment of its event spaces and guest rooms, so we check room status before you lock in dates.",
+   src="https://www.langhamhotels.com/en/the-langham/melbourne/events/meetings/venue-listing/clarendon-ballroom/",
+   src2="https://www.langhamhotels.com/en/the-langham/melbourne/events/meetings/venue-listing/swanston-I/"),
+
+ dict(
+   city="Melbourne", slug="racv-city-club", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="RACV City Club", sp="Level 17 Function Room", pr="Melbourne CBD", ty="hotel",
+   th=500, bq=400, cl=228, ck=500, cab=288, ush=None, bd=None,
+   br=8, gr=134, area=585, ceil=5.0, ceilq=None,
+   s_name="Club Pavilion", s_th=260,
+   note="A members' club on Bourke Street that also takes corporate conferences and events, with no membership needed to book an event on its own conference pages. The Level 17 room seats 500 theatre under a five metre ceiling and opens to an outdoor terrace, with the Club Pavilion taking 260 for a second stream. Accommodation is offered alongside conference bookings rather than sold to the public, so we plan delegate rooms with the events team.",
+   src="https://www.racv.com.au/content/dam/racv-assets/documents/travel-experiences/club/city-club/conferences-events/city-club-conferences-and-events-brochure.pdf",
+   src2="https://www.racv.com.au/content/dam/racv/racv-club/city-club/conferences/CE-Group-Brochure-A4-2024-4-Nov2024.pdf"),
+
+ dict(
+   city="Hobart", slug="racv-hobart-hotel", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="RACV Hobart Hotel", sp="Collins Room", pr="Hobart CBD", ty="hotel",
+   th=200, bq=120, cl=80, ck=220, cab=96, ush=40, bd=60,
+   br=4, gr=125, area=205, ceil=2.7, ceilq=None,
+   s_name="Stables", s_th=120,
+   note="A city hotel on Collins Street with its conference rooms on one floor, where the Collins Room takes 200 theatre or 120 banquet and the Stables sits alongside for a 120 seat breakout. It suits association meetings, board retreats and dinners where delegates sleep in the building, with 125 rooms upstairs. Ceilings sit around 2.7 metres, so plan screens and staging for a lower room rather than a production heavy plenary.",
+   src="https://racv.com.au/content/dam/racv-assets/documents/travel-experiences/resorts/hobart/conferences-events/hobart-conferences-and-events-brochure.pdf",
+   src2="https://racv.com.au/travel-experiences/venue-hire/conferences/hobart/event-spaces.html"),
+
+ dict(
+   city="Sunshine Coast", slug="racv-noosa-resort", checked="1 October 2026",
+   worked=False, seen=None, visit=None,
+   n="RACV Noosa Resort", sp="Noosa Sound", pr="Noosa", ty="resort",
+   th=200, bq=170, cl=None, ck=250, cab=133, ush=None, bd=None,
+   br=7, gr=172, area=253, ceil=2.7, ceilq=None,
+   s_name="Magellan Room", s_th=60,
+   note="A residential conference resort in Noosa Heads built around the Noosa Sound room, which takes 200 theatre or 170 banquet as one space and divides into three. Breakouts sit close by in the Magellan and Weyba rooms, with a terrace opening onto the poolside lawn for long lunches. With 172 rooms on site it suits two and three day programs where the group stays together. At 2.7 metre ceilings it is better for workshops than large staged productions.",
+   src="https://racv.com.au/content/dam/racv-assets/documents/travel-experiences/resorts/noosa/conferences-events/noosa-conferences-and-events-brochure.pdf",
+   src2="https://www.racv.com.au/travel-experiences/conferences-venues-events/noosa/venue-hire.html"),
 ]

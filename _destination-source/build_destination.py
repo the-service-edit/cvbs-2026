@@ -175,9 +175,16 @@ def sec_featured(city, d):
     return '''<section class="s-stone pad" id="{slug}-featured"><div class="wrap">
   <div class="section-head"><span class="eyebrow">Where we would start</span>
     <h2 class="h2">A few {city} venues, and what each one is really for.</h2>
-    <p class="lead">A spread rather than a ranking, chosen so you can see the shape of the market. Every figure below is the one the venue publishes for itself.{checked} We source right across {city}, so treat this as a starting point.</p></div>
-  <div class="grid g-3">{cards}</div>
-</div></section>'''.format(slug=slug_of(city), city=esc(city), cards=''.join(cards), checked=_checked(d))
+    <p class="lead">Every figure below is the one the venue publishes for itself.{checked} We source right across {city}, so treat this as a starting point.</p></div>
+  <div class="grid {grid}">{cards}</div>
+</div></section>'''.format(slug=slug_of(city), city=esc(city), cards=''.join(cards), checked=_checked(d),
+                           grid=_grid(len(cards)))
+
+
+def _grid(n):
+    # 1 Oct 2026: featured lists are no longer always six, so pick the grid that
+    # leaves no single orphan card. Four sits as two by two, seven as four and three.
+    return {4: 'g-2', 7: 'g-4'}.get(n, 'g-3')
 
 
 def sec_start(city, d):
