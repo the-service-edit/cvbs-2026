@@ -54,7 +54,7 @@ for rel, path in public_pages():
     s = s.replace('.nav-cta:hover{background:var(--teal-deep)', '.nav-cta:hover{background:var(--teal-btn-hover)')
 
     # 3. teal as ink inside an inline block
-    s = s.replace('color:var(--teal-deep)', 'color:var(--teal-ink)')
+    s = s.replace('color:var(--teal-ink)', 'color:var(--teal-ink)')
 
     if s != orig:
         io.open(path, 'w', encoding='utf-8').write(s)

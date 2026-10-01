@@ -138,6 +138,10 @@ VISIT_SLUGS = {
   "Sofitel Sydney Wentworth": "sofitel-sydney-wentworth",
   "The EVE Hotel Sydney": "the-eve-hotel-sydney",
   "The Star Gold Coast": "the-star-gold-coast",
+  "InterContinental Sanctuary Cove Resort": "intercontinental-sanctuary-cove",
+  "DoubleTree by Hilton Hotel Esplanade Darwin": "doubletree-esplanade-darwin",
+  "JW Marriott Gold Coast Resort & Spa": "jw-marriott-gold-coast",
+  "Pullman Port Douglas Sea Temple Resort & Spa": "pullman-port-douglas-sea-temple",
 }
 
 # A venue name mapped to its live offer page in the site root. Update whenever

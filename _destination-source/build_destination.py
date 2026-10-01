@@ -155,36 +155,71 @@ def _checked(d):
     return (' Figures checked %s.' % max(ds).strftime('%-d %B %Y')) if ds else ''
 
 
+def _feature_photo(v):
+    """A CVBS site visit photograph for the row, landscape first. Never stock or
+    generated: a venue with no visit page gets the navy name tile instead."""
+    if not v.get('visit'):
+        return None
+    try:
+        from PIL import Image
+    except ImportError:
+        Image = None
+    page = os.path.join(ROOT, 'venue-visits', v['visit'], 'index.html')
+    if not os.path.exists(page):
+        return None
+    srcs = []
+    for m in re.finditer(r'(assets/img/venue-visits/[^"\' ]+?-w900\.jpg)', io.open(page, encoding='utf-8').read()):
+        if m.group(1) not in srcs:
+            srcs.append(m.group(1))
+    best = None
+    for rel in srcs:
+        f = os.path.join(ROOT, rel)
+        if not os.path.exists(f) or Image is None:
+            continue
+        w, h = Image.open(f).size
+        if best is None:
+            best = (rel, w, h)
+        if w > h:
+            return (rel, w, h)
+    return best
+
+
 def sec_featured(city, d):
-    cards = []
-    for vid, suits in d['featured']:
+    # 1 Oct 2026: every destination uses the Sydney editorial row layout (.vfeat / .vrow).
+    rows = []
+    for n_, (vid, suits) in enumerate(d['featured'], 1):
         v = BY_ID.get(vid)
         if not v:
             sys.exit('%s: featured venue id not in the dataset: %s' % (city, vid))
         name = esc(v['n'])
+        title = name
         if v.get('visit'):
-            name = '<a href="venue-visits/%s/">%s</a>' % (esc(v['visit']), name)
-        cards.append(
-            '<div class="card reveal"><h3 class="h4">{name}</h3>'
-            '<p class="muted" style="margin-top:.35rem;font-size:.9rem">{meta}</p>'
-            '<p style="margin-top:.6rem">{suits}</p>'
-            '<a class="link-arrow mt-1" href="submit-a-brief.html?dest={q}&amp;venue={vq}">'
-            'Ask us about it {arrow}</a></div>'.format(
-                name=name, meta=venue_meta(v), suits=esc(suits),
-                q=q(city), vq=q(v['n']), arrow=ARROW))
+            title = '<a href="venue-visits/%s/">%s</a>' % (esc(v['visit']), name)
+        ph = _feature_photo(v)
+        if ph:
+            media = ('<img src="%s" alt="%s, %s" loading="lazy" width="%d" height="%d" '
+                     'onerror="this.outerHTML=\'<div class=&quot;vrow__ph&quot;>%s</div>\'">'
+                     % (ph[0], name, esc(v.get('pr') or city), ph[1], ph[2], name))
+        else:
+            media = '<div class="vrow__ph">%s</div>' % name
+        rows.append(
+            '<article class="vrow reveal{alt}">\n'
+            '      <div class="vrow__media">{media}</div>\n'
+            '      <div class="vrow__body">\n'
+            '        <div class="vrow__num">{num:02d} / Featured venue</div>\n'
+            '        <h3 class="vrow__name">{title}</h3>\n'
+            '        <div class="vrow__meta">{meta}</div>\n'
+            '        <p class="vrow__desc">{suits}</p>\n'
+            '        <a class="link-arrow" href="submit-a-brief.html?dest={q}&amp;venue={vq}">Enquire about {name} {arrow}</a>\n'
+            '      </div></article>'.format(
+                alt=' alt' if n_ % 2 == 0 else '', media=media, num=n_, title=title,
+                meta=venue_meta(v), suits=esc(suits), q=q(city), vq=q(v['n']),
+                name=name, arrow=ARROW))
     return '''<section class="s-stone pad" id="{slug}-featured"><div class="wrap">
-  <div class="section-head"><span class="eyebrow">Where we would start</span>
-    <h2 class="h2">A few {city} venues, and what each one is really for.</h2>
-    <p class="lead">Every figure below is the one the venue publishes for itself.{checked} We source right across {city}, so treat this as a starting point.</p></div>
-  <div class="grid {grid}">{cards}</div>
-</div></section>'''.format(slug=slug_of(city), city=esc(city), cards=''.join(cards), checked=_checked(d),
-                           grid=_grid(len(cards)))
-
-
-def _grid(n):
-    # 1 Oct 2026: featured lists are no longer always six, so pick the grid that
-    # leaves no single orphan card. Four sits as two by two, seven as four and three.
-    return {4: 'g-2', 7: 'g-4'}.get(n, 'g-3')
+  <div class="section-head"><span class="eyebrow">Featured venues</span><h2 class="h2">A closer look at a few {city} venues we know well.</h2>
+    <p class="lead">What each one is really good for, with the figures the venue publishes for itself.{checked} We source right across {city}, so treat this as a starting point rather than a list.</p></div>
+  <div class="vfeat">{rows}</div>
+</div></section>'''.format(slug=slug_of(city), city=esc(city), rows=''.join(rows), checked=_checked(d))
 
 
 def sec_start(city, d):
