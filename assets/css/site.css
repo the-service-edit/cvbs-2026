@@ -2344,3 +2344,8 @@ h1,h2,.h2,.display{text-wrap:balance}
   .testi-split .testi-sub .q-short{display:inline}
   .testi-split > .link-arrow{grid-column:1;grid-row:3;justify-self:start}
 }
+
+/* 2 Oct 2026: international list on destinations.html. Globe sits on a navy tile in button teal, matching .card .icon and .svc-item .si (old --teal-ink read as a second teal). */
+.ticks--globe{gap:1rem}
+.ticks--globe li{padding-left:3rem;min-height:36px;display:flex;align-items:center}
+.ticks--globe li svg{top:50%;transform:translateY(-50%);width:36px;height:36px;padding:8px;border-radius:10px;background:var(--navy);color:var(--teal-btn,#32D9F3);stroke-width:1.6;box-shadow:0 6px 14px -8px rgba(10,44,82,.55);box-sizing:border-box}
