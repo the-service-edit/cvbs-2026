@@ -2275,3 +2275,6 @@ img, picture {
   .hero__media .kb{background-image:url('../img/venue-hero-2560.webp?v=202610021500')}
 }
 
+/* 2 Oct 2026: Mel - no rule line beside eyebrows on services.html */
+.pg-services .eyebrow::before{display:none}
+.pg-services .eyebrow{gap:0}
