@@ -2295,3 +2295,21 @@ img, picture {
 .stat-a__n{display:block;font-size:clamp(2.2rem,4.4vw,3.2rem);font-weight:700;line-height:1;letter-spacing:-.02em;color:var(--teal)}
 .stat-a__l{display:block;margin:.7rem auto 0;max-width:17ch;font-size:.88rem;line-height:1.4;color:rgba(238,246,247,.82)}
 @media(max-width:760px){.stat-a__l{max-width:none}.stat-a__row{grid-template-columns:1fr 1fr;row-gap:2rem}.stat-a__s:nth-child(3){border-left:0}}
+
+/* ===== Arrivals board stats strip (.flap), 2 Oct 2026. Replaces .stat-a on services.html. Tiles flip in once via site.js; static under reduced motion or no JS. ===== */
+.flap-band{background:var(--navy-deep);color:#EAF1F4;padding:clamp(2.5rem,5vw,3.5rem) 0}
+.flap{--fw:58px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.5rem}
+.flap__s{display:flex;flex-direction:column;gap:.9rem;color:inherit;text-decoration:none}
+.flap__l{font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--teal)}
+.flap__row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px}
+.flap__t{position:relative;display:inline-flex;align-items:center;justify-content:center;width:var(--fw);height:calc(var(--fw)*1.38);border-radius:6px;background:linear-gradient(#12365F 0 50%,#0F2F55 50% 100%);font-size:calc(var(--fw)*.93);font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;perspective:300px;overflow:hidden}
+.flap__t::after{content:"";position:absolute;left:0;right:0;top:calc(50% - .5px);height:1px;background:rgba(6,30,59,.85)}
+.flap__c{display:block;transform-origin:50% 50%}
+.flap__c.is-tick{animation:flapTick .12s ease-out}
+@keyframes flapTick{0%{transform:rotateX(75deg);opacity:.35}100%{transform:none;opacity:1}}
+.flap__unit{margin-left:6px;padding-bottom:.45rem;font-size:1.35rem;font-weight:600;color:rgba(238,246,247,.8)}
+.flap__codes{margin-left:6px;padding-bottom:.35rem;font-size:.8rem;line-height:1.5;font-weight:600;letter-spacing:.08em;color:rgba(238,246,247,.8)}
+a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
+@media(max-width:1099px){.flap{--fw:52px;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2.25rem}}
+@media(max-width:599px){.flap{--fw:clamp(28px,8.4vw,40px);gap:1.75rem 1rem}.flap__row{gap:4px}.flap__unit{font-size:1rem;padding-bottom:.3rem}.flap__codes{flex-basis:100%;margin:.35rem 0 0}}
+@media (prefers-reduced-motion:reduce){.flap__c.is-tick{animation:none}}
