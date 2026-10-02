@@ -2315,3 +2315,7 @@ a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
 @media (prefers-reduced-motion:reduce){.flap__c.is-tick{animation:none}}
 .flap__city{margin-left:6px;padding-bottom:.45rem;font-size:1.05rem;font-weight:600;color:rgba(238,246,247,.85);white-space:nowrap}
 @media(max-width:599px){.flap__city{flex-basis:100%;margin:.35rem 0 0;padding:0;font-size:.9rem}}
+
+/* How it works: process row without the connector line (2 Oct 2026) */
+.proc3__row.proc3__row--plain::before{display:none}
+.compare__logo{display:block;height:44px;width:auto}
