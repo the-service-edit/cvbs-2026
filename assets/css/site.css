@@ -2322,3 +2322,11 @@ a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
 .quote.quote--pull{background:none;border:0;box-shadow:none;border-radius:0;padding:0;max-width:46rem;margin:clamp(2.5rem,5vw,3.5rem) auto 0;text-align:center}
 .quote--pull blockquote{font-size:clamp(1.3rem,1.05rem + 1vw,1.75rem);line-height:1.35;letter-spacing:-.02em;color:var(--navy)}
 .quote--pull .who{justify-content:center;text-align:left}
+
+/* 2 Oct 2026 audit fixes (Mel).
+   1. How it works: the "On your own" comparison card sat darker than its stone ground. Cards are lighter than the ground they sit on.
+   2. Headings balance their line breaks so no heading ends on a single word ("be.", "it.").
+   3. Phones: the header "Get My Shortlist" button is hidden. The hero CTA covers the top of the page and the sticky bar takes over once you scroll. */
+.s-stone .compare .diy{background:#fff}
+h1,h2,.h2,.display{text-wrap:balance}
+@media(max-width:820px){.nav-cta > .btn{display:none}}

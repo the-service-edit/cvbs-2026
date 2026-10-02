@@ -102,7 +102,7 @@ def org_node():
                        "itemOffered": {"@id": E.SERVICE_ID}},
         "contactPoint": [{"@type": "ContactPoint", "contactType": "sales",
                           "telephone": E.TELEPHONE, "email": E.EMAIL,
-                          "areaServed": "AU", "availableLanguage": "en-AU"}],
+                          "areaServed": E.AREA_SERVED, "availableLanguage": "en-AU"}],
         "hasOfferCatalog": {
             "@type": "OfferCatalog", "name": "Venue sourcing services",
             "itemListElement": [

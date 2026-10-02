@@ -111,7 +111,9 @@ AWARDS = []
 PEOPLE = [
     {"name": "Karen Jepson",   "job": "Director", "email": "karen@conferencevenues.com.au", "tel": "+61414784999"},
     {"name": "Anthony Jepson", "job": "Director", "email": "aj@conferencevenues.com.au",    "tel": "+61402033861"},
-    # SUPPLY surnames and confirmed titles for Chantelle and Rychelle, then add them here.
+    {"name": "Chantelle Pourhag", "job": "Business Development Director"},
+    {"name": "Rychelle Fowler",   "job": "Business Development Executive"},
+    # 2 Oct 2026: names and titles as published on about.html. Emails and phones not supplied, so omitted.
 ]
 
 # ---------------------------------------------------------------------------
@@ -120,7 +122,10 @@ PEOPLE = [
 AREA_SERVED = ["Australia", "New South Wales", "Victoria", "Queensland",
                "Western Australia", "South Australia", "Australian Capital Territory",
                "Tasmania", "Northern Territory", "New Zealand", "Fiji",
-               "Singapore", "Indonesia", "Worldwide"]
+               "Singapore", "Indonesia", "United Arab Emirates", "France", "Spain",
+               "United States", "Worldwide"]
+# 2 Oct 2026: UAE, France, Spain and the US added because published venue visit
+# records exist there (Dubai, Lyon, Barcelona/Mallorca/Marbella, Waikiki).
 
 KNOWS_ABOUT = [
     "Conference venue sourcing", "Conference venues Australia",
