@@ -590,11 +590,12 @@ body.menu-open{overflow:hidden}
 .svc-list{border-top:1px solid var(--line)}
 .svc-item{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(1rem,2.4vw,1.6rem);align-items:center;padding:clamp(1.25rem,2.8vw,1.95rem) 0;border-bottom:1px solid var(--line);transition:padding-left .35s var(--ease)}
 .svc-item:hover{padding-left:.5rem}
-.svc-item .si{color:var(--teal-ink);display:grid;place-items:center}
-.svc-item .si svg{width:30px;height:30px}
+.svc-item .si{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--navy);color:var(--teal-btn,#32D9F3);box-shadow:0 8px 18px -10px rgba(10,44,82,.55)} /* 2 Oct 2026: matches .card .icon navy tile; old --teal-ink read as a second teal */
+.svc-item .si svg{width:26px;height:26px;stroke-width:1.75}
+@media(max-width:600px){.svc-item .si{width:44px;height:44px;border-radius:12px}.svc-item .si svg{width:22px;height:22px}}
 .svc-item h3{font-size:clamp(1.18rem,1.05rem + .7vw,1.5rem)}
 .svc-item p{color:var(--muted);font-size:.95rem;margin-top:.15rem;max-width:50ch}
-.svc-item .sa{color:var(--teal-ink);transition:transform .35s var(--ease);flex:none}
+.svc-item .sa{color:var(--navy);transition:transform .35s var(--ease);flex:none}
 .svc-item:hover .sa{transform:translateX(5px)}
 
 /* people / team */
