@@ -2260,3 +2260,13 @@ img, picture {
   .hero-groups__row img{height:calc(var(--h,36px) * .68)}
 }
 @media(min-width:1100px){.hero-groups__row img{height:calc(var(--h,36px) * 1.15)}}
+
+/* 2 Oct 2026: homepage testimonials show a verbatim excerpt on phones (index.html .q-short), full quote from 681px.
+   Excerpts are the client's own sentences only; an elided middle is marked with an ellipsis. Never paraphrase a client. */
+.q-short{display:none}
+@media(max-width:680px){
+  .q-full{display:none}.q-short{display:inline}
+  .testi-lead q{font-size:1.3rem;line-height:1.35}
+  .testi-sub q{font-size:1.02rem}
+  .testi-sub{margin-top:2rem;padding-top:1.6rem}
+}

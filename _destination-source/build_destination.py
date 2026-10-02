@@ -266,7 +266,7 @@ def sec_why(city, d):
     <div class="team-copy reveal" data-d="1">
       <h3>One brief. A real person on the other end.</h3>
       <p>Everything above this point is information. It is genuinely useful, and no other venue finder in Australia publishes it. But it is not the thing you are actually buying.</p>
-      <p>What you are buying is someone who has already had the conversation with the person who holds that room, knows what they will move on and when, and will pick up the phone rather than send you a portal login. Whoever takes your {city} brief stays your point of contact from the first call through to the final invoice.</p>
+      <p>What you are buying is someone who has already had the conversation with the person who holds that room, knows what they will move on and when, and will pick up the phone rather than send you a portal login. Whoever takes your {city} brief stays your point of contact from the first call through to the day of your event.</p>
       <p class="who">Karen, Anthony, Chantelle and Rychelle<span>Sourcing Australian conference venues since 1989</span></p>
       <div class="btn-row mt-2"><a class="btn btn--teal" href="submit-a-brief.html?dest={q}">Start your {city} brief {arrow}</a>
       <a class="btn btn--ghost" href="about.html">Meet the team</a></div>
