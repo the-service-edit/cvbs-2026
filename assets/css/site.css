@@ -2330,3 +2330,16 @@ a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
 .s-stone .compare .diy{background:#fff}
 h1,h2,.h2,.display{text-wrap:balance}
 @media(max-width:820px){.nav-cta > .btn{display:none}}
+
+/* 2 Oct 2026: homepage testimonials, layout A (Mel). Desktop only: Amy's full quote large on the left,
+   Sherida's verbatim short excerpt (.q-short) in a card on the right. Phones keep the stacked layout above. */
+@media(min-width:900px){
+  .testi-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);column-gap:clamp(2.5rem,5vw,4.5rem);align-items:start}
+  .testi-split > .eyebrow{grid-column:1/-1}
+  .testi-split .testi-lead{grid-column:1;grid-row:2;max-width:none}
+  .testi-split .testi-lead q{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.2rem)}
+  .testi-split .testi-sub{grid-column:2;grid-row:2;margin:1.4rem 0 0;padding:clamp(1.6rem,2.5vw,2.2rem);border:1px solid var(--line);border-top:3px solid var(--teal);border-radius:var(--r-card);background:#fff;box-shadow:var(--shadow-sm);max-width:none}
+  .testi-split .testi-sub .q-full{display:none}
+  .testi-split .testi-sub .q-short{display:inline}
+  .testi-split > .link-arrow{grid-column:1;grid-row:3;justify-self:start}
+}
