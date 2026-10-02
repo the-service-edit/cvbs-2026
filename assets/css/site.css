@@ -2274,3 +2274,13 @@ img, picture {
 @media (min-width:1000px) and (min-resolution:1.5dppx){
   .hero__media .kb{background-image:url('../img/venue-hero-2560.webp?v=202610021500')}
 }
+
+/* 2 Oct 2026: homepage only (.hero--underlap). On desktop the hero photo runs on under the whole
+   "Start your brief" card, ending 3rem below it. The hero grows by --ul and its bottom padding grows by
+   the same amount, so the headline block does not move; the card is pulled up by the same --ul.
+   --ul = card height (~25rem at 900-1920px) minus the original overlap plus 3rem of photo below the card. */
+@media(min-width:900px){
+  .hero--underlap{--ul:24.5rem;min-height:calc(clamp(560px,72vh,760px) + var(--ul))}
+  .hero--underlap .hero__inner{padding-bottom:calc(clamp(4.5rem,7vh,6rem) + var(--ul))}
+  .hero--underlap + section .brief-bar{margin-top:calc(clamp(-3.5rem,-5vw,-2.5rem) - 24.5rem);margin-bottom:3rem}
+}
