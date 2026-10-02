@@ -2277,7 +2277,7 @@ img, picture {
 }
 
 /* 2 Oct 2026: Mel - no rule line beside eyebrows on services.html and destinations.html */
-.pg-services .eyebrow::before,.pg-destinations .eyebrow::before{display:none}
+.pg-services .eyebrow::before,.pg-destinations .eyebrow::before,.pg-how-it-works .eyebrow::before{display:none}
 .pg-services .eyebrow,.pg-destinations .eyebrow{gap:0}
 
 /* 2 Oct 2026: services.html - photo-led service cards (real venue visit photos only) */
