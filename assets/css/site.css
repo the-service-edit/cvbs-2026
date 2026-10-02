@@ -2242,3 +2242,21 @@ img, picture {
 @media print{.footer-sub{display:none!important}}
 /* CTA band now sits directly on the footer: a hairline keeps the two navy grounds from reading as one. */
 .site-footer{border-top:1px solid rgba(255,255,255,.08)}
+
+/* 2 Oct 2026: hotel group marks in the homepage hero (index.html .hero-groups).
+   White knockouts in assets/img/logos/groups/white/ (TFE knocked out by luminance so its maze survives).
+   Only groups with a walked room qualify, same rule as the venue-visits band. Never label these partners or preferred.
+   Not lazy: the hero is above the fold. Per-mark height is inline --h because stacked marks read smaller. */
+.hero-groups{margin-top:clamp(2rem,5vh,3.2rem);padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.16);max-width:60rem}
+.hero-groups__label{margin:0 0 1.1rem;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(238,246,247,.7)}
+.hero-groups__row{display:flex;flex-wrap:wrap;align-items:center;gap:1.1rem clamp(1.4rem,2.6vw,2.4rem)}
+.hero-groups__row img{display:block;height:var(--h,36px);width:auto;max-width:none;opacity:.88}
+.hero--center .hero-groups{margin-inline:auto}
+.hero--center .hero-groups__row{justify-content:center}
+@media(max-width:680px){
+  .hero-groups{margin-top:1.6rem;padding-top:1rem}
+  .hero-groups__label{margin-bottom:.85rem;font-size:.64rem}
+  .hero-groups__row{gap:.9rem 1.25rem}
+  .hero-groups__row img{height:calc(var(--h,36px) * .68)}
+}
+@media(min-width:1100px){.hero-groups__row img{height:calc(var(--h,36px) * 1.15)}}
