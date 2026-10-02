@@ -436,7 +436,7 @@ body.menu-open{overflow:hidden}
 
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;color:var(--white)}
 .hero__media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:linear-gradient(160deg,#cfc6b6 0%,#54707d 45%,var(--navy) 100%)}
-.hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp?v=202609051700');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
+.hero__media .kb{position:absolute;inset:-3%;background-image:url('../img/venue-hero-1600.webp?v=202610021500');background-size:cover;background-position:30% center;will-change:transform;transform:translate3d(0,0,0) scale(1.02);animation:heroDrift 16s ease-in-out infinite alternate}
 @keyframes heroDrift{from{transform:translate3d(0,0,0) scale(1.02)}to{transform:translate3d(-26px,-13px,0) scale(1.08)}}
 /* Hero scrim, rebuilt 7 Sep 2026. The old three-gradient navy wash was
    directional: darkest top-left, clearing to nothing on the right. Once the
@@ -2266,4 +2266,11 @@ img, picture {
   .testi-lead q{font-size:1.3rem;line-height:1.35}
   .testi-sub q{font-size:1.02rem}
   .testi-sub{margin-top:2rem;padding-top:1.6rem}
+}
+
+/* 2 Oct 2026: homepage hero is the Higgsfield v3 edit (4K) of the Crown Pearl Ballroom frame, people removed.
+   Master: _hero-review/crown-pearl-ballroom-hero-master-4k.jpg. 3:2 crop at ay=0.85 as before.
+   Large high-density screens get the 2560 rendition; everyone else keeps 1600. */
+@media (min-width:1000px) and (min-resolution:1.5dppx){
+  .hero__media .kb{background-image:url('../img/venue-hero-2560.webp?v=202610021500')}
 }
