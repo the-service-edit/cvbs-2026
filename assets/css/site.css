@@ -2319,3 +2319,6 @@ a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
 /* How it works: process row without the connector line (2 Oct 2026) */
 .proc3__row.proc3__row--plain::before{display:none}
 .compare__logo{display:block;height:44px;width:auto}
+.quote.quote--pull{background:none;border:0;box-shadow:none;border-radius:0;padding:0;max-width:46rem;margin:clamp(2.5rem,5vw,3.5rem) auto 0;text-align:center}
+.quote--pull blockquote{font-size:clamp(1.3rem,1.05rem + 1vw,1.75rem);line-height:1.35;letter-spacing:-.02em;color:var(--navy)}
+.quote--pull .who{justify-content:center;text-align:left}
