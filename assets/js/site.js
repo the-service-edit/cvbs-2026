@@ -1205,3 +1205,42 @@
     io.observe(board);
   });
 })();
+
+/* Arrivals board: the worldwide tile set cycles through airport codes of cities the team has walked (2 Oct 2026) */
+(function () {
+  var rows = document.querySelectorAll('[data-flap-cycle]');
+  if (!rows.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var AZ = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  rows.forEach(function (row) {
+    var list; try { list = JSON.parse(row.getAttribute('data-flap-cycle')); } catch (e) { return; }
+    if (!list || list.length < 2) return;
+    var cells = [].slice.call(row.querySelectorAll('.flap__c'));
+    var city = row.querySelector('.flap__city');
+    var idx = 0, visible = false, timer = null, busy = false;
+    function tick(el, ch) { el.textContent = ch; el.classList.remove('is-tick'); void el.offsetWidth; el.classList.add('is-tick'); }
+    function flipTo(entry) {
+      busy = true; var done = 0;
+      if (city) city.style.opacity = '0';
+      cells.forEach(function (c, i) {
+        var n = 0, steps = 4 + i * 2;
+        var t = setInterval(function () {
+          n++;
+          if (n >= steps) {
+            clearInterval(t); tick(c, entry[0].charAt(i) || '');
+            if (++done === cells.length) { if (city) { city.textContent = entry[1]; city.style.opacity = '1'; } busy = false; }
+            return;
+          }
+          tick(c, AZ.charAt(Math.floor(Math.random() * 26)));
+        }, 65);
+      });
+    }
+    function next() { if (!visible || busy || document.hidden) return; idx = (idx + 1) % list.length; flipTo(list[idx]); }
+    if (city) city.style.transition = 'opacity .2s';
+    new IntersectionObserver(function (en) {
+      visible = en[0].isIntersecting;
+      if (visible && !timer) timer = setInterval(next, 3000);
+      if (!visible && timer) { clearInterval(timer); timer = null; }
+    }, { threshold: 0.3 }).observe(row);
+  });
+})();

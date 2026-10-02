@@ -2313,3 +2313,5 @@ a.flap__s:hover .flap__l,a.flap__s:focus-visible .flap__l{color:#fff}
 @media(max-width:1099px){.flap{--fw:52px;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:2.25rem}}
 @media(max-width:599px){.flap{--fw:clamp(28px,8.4vw,40px);gap:1.75rem 1rem}.flap__row{gap:4px}.flap__unit{font-size:1rem;padding-bottom:.3rem}.flap__codes{flex-basis:100%;margin:.35rem 0 0}}
 @media (prefers-reduced-motion:reduce){.flap__c.is-tick{animation:none}}
+.flap__city{margin-left:6px;padding-bottom:.45rem;font-size:1.05rem;font-weight:600;color:rgba(238,246,247,.85);white-space:nowrap}
+@media(max-width:599px){.flap__city{flex-basis:100%;margin:.35rem 0 0;padding:0;font-size:.9rem}}
