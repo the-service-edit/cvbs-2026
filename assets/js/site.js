@@ -1174,3 +1174,34 @@
   window.addEventListener('scroll', function () { window.requestAnimationFrame(pick); }, { passive: true });
   pick();
 })();
+
+/* Arrivals board stats strip: digits flip into place once when the strip scrolls into view (2 Oct 2026) */
+(function () {
+  var boards = document.querySelectorAll('[data-flap]');
+  if (!boards.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function tick(el, ch) {
+    el.textContent = ch;
+    el.classList.remove('is-tick'); void el.offsetWidth; el.classList.add('is-tick');
+  }
+  boards.forEach(function (board) {
+    var cells = [].slice.call(board.querySelectorAll('.flap__c'));
+    var finals = cells.map(function (c) { return c.textContent; });
+    cells.forEach(function (c, i) { if (/\d/.test(finals[i])) c.textContent = '0'; });
+    var io = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      io.disconnect();
+      cells.forEach(function (c, i) {
+        var fin = finals[i];
+        if (!/\d/.test(fin)) return;
+        var target = +fin, n = 0, steps = 6 + i * 2;
+        var t = setInterval(function () {
+          n++;
+          if (n >= steps) { clearInterval(t); tick(c, fin); return; }
+          tick(c, String(Math.floor(Math.random() * 10)));
+        }, 70);
+      });
+    }, { threshold: 0.4 });
+    io.observe(board);
+  });
+})();
