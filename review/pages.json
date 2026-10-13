@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-01",
+ "generated": "2026-10-13",
  "pages": [
   {
    "id": "index.html",
@@ -383,6 +383,12 @@
    "id": "venue-visits/halekulani/index.html",
    "path": "../venue-visits/halekulani/index.html",
    "title": "Halekulani ballroom, event spaces and rooms",
+   "group": "Venue visits"
+  },
+  {
+   "id": "venue-visits/fontainebleau-las-vegas/index.html",
+   "path": "../venue-visits/fontainebleau-las-vegas/index.html",
+   "title": "Fontainebleau Las Vegas ballrooms, event spaces and rooms",
    "group": "Venue visits"
   },
   {
