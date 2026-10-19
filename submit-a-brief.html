@@ -144,7 +144,48 @@
   .form-error{background:#fff2f1;border:1px solid #e4a09b;border-radius:10px;color:#8b2923;font-size:.88rem;line-height:1.55;margin-top:1.2rem;padding:.9rem 1rem}
   .form-error a{font-weight:700}
 
-  /* footer */
+
+  /* footer: 19 Oct 2026, the sitewide site-footer from index.html. This page does not load site.css, so the rules it needs are copied here. */
+  .site-footer{background:#061E3B;color:rgba(234,241,244,.7);font-size:17.2px;line-height:1.6;padding-block:clamp(3.5rem,6vw,5rem) 2rem;border-top:1px solid rgba(255,255,255,.08)}
+  .site-footer h4{line-height:1.12}
+  .site-footer a{color:inherit;text-decoration:none}
+  .site-footer a:hover{color:var(--teal)}
+  .site-footer img{height:36px;width:auto;margin-bottom:1.2rem}
+  .site-footer h4{color:#fff;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 1.1rem;font-weight:600}
+  .site-footer ul{list-style:none;display:grid;gap:.7rem;margin:0;padding:0}
+  .site-footer .fnote{max-width:34ch;font-size:.92rem;line-height:1.6}
+  .site-footer :focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .footer-grid{display:grid;gap:2.5rem}
+  @media(min-width:760px){.footer-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+  .footer-contact{display:grid;gap:.6rem;font-size:.92rem}
+  .footer-contact a{color:#EAF1F4;font-weight:500;display:inline-flex;align-items:center;gap:.55rem}
+  .footer-contact a svg{width:18px;height:18px;flex:none;color:var(--teal)}
+  .footer-bottom{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;font-size:.82rem}
+  .footer-legal{display:flex;gap:1.1rem}
+  .footer-legal a{opacity:.85}
+  .footer-legal a:hover{opacity:1;text-decoration:underline}
+  .footer-credit a{color:var(--teal);font-weight:500}
+  .footer-credit a:hover{text-decoration:underline}
+  .footer-sub{display:grid;grid-template-columns:1fr minmax(0,30rem);gap:clamp(1.4rem,4vw,3.5rem);align-items:center;padding-bottom:clamp(2.2rem,4vw,3rem);margin-bottom:clamp(2.2rem,4vw,3rem);border-bottom:1px solid rgba(255,255,255,.14)}
+  .footer-sub .eyebrow{color:var(--teal)}
+  .footer-sub__title{color:#fff;font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.2;letter-spacing:-.01em;margin:.45rem 0 .4rem}
+  .footer-sub__lead{font-size:.92rem;line-height:1.55;max-width:58ch;color:rgba(234,241,244,.7);margin:0}
+  .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .sub-row{display:flex;gap:.6rem}
+  .sub-form input[type=email]{flex:1;min-width:0;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;border-radius:10px;padding:.9rem 1rem;font:inherit;font-size:1rem;width:auto}
+  .sub-form input[type=email]:focus{outline:none;border-color:var(--teal);background:rgba(255,255,255,.1)}
+  .sub-form input[type=email]::placeholder{color:rgba(255,255,255,.5)}
+  .sub-form .btn{white-space:nowrap;width:auto}
+  .sub-fine{color:rgba(255,255,255,.5);font-size:.78rem;margin-top:.6rem}
+  .sub-ok{color:var(--teal);font-weight:600;font-size:1rem;margin-top:.4rem}
+  .btn--teal{background:var(--teal-btn);color:var(--navy);box-shadow:0 12px 30px -16px rgba(10,44,82,.5)}
+  .btn--teal:hover{transform:translateY(-3px);background:var(--teal-btn-hover);color:var(--navy)}
+  @media(max-width:760px){.footer-sub{grid-template-columns:1fr}.sub-row{flex-direction:column}.sub-form .btn{width:100%}}
+  @media print{.footer-sub{display:none!important}}
+  .site-footer .footer-sub .eyebrow{font-weight:600}
+  .site-footer .footer-sub__title{font-weight:600}
+  .site-footer .sub-form .btn{font-size:15.52px;font-weight:600;color:#0A2C52}
+  /* old .footer rules below are now unused */
   .footer{background:var(--navy-deep);color:rgba(244,241,234,.7);padding-block:clamp(3.5rem,7vh,5rem) 2rem}
   .footer__top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:clamp(1.5rem,3vw,3rem)}
   .footer__brand img{height:42px;width:auto}
@@ -432,26 +473,58 @@
   </div>
 </div>
 
-<footer class="footer">
+<footer class="site-footer">
   <div class="wrap">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <img src="assets/img/logo.png" alt="CVBS" width="165" height="140">
-        <p>A free, worldwide venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
-      </div>
-      <div class="footer__col"><h5>Services</h5>
-        <a href="services.html">Conference venue finding</a><a href="services.html">Group accommodation</a><a href="services.html">Product launches &amp; events</a><a href="services.html">Corporate accommodation</a></div>
-      <div class="footer__col"><h5>Company</h5>
-        <a href="how-it-works.html">How it works</a><a href="destinations.html">Destinations</a><a href="about.html">About</a><a href="results.html">Client stories</a><a href="how-we-are-paid.html">How we&rsquo;re paid</a></div>
-      <div class="footer__col"><h5>More</h5>
-        <a href="offers.html">Offers</a><a href="blog-index.html">Blog</a><a href="contact.html">Contact</a><a href="submit-a-brief.html">Get My Shortlist</a></div>
+    <div class="footer-sub">
+      <div class="footer-sub__copy"><span class="eyebrow">Negotiated venue offers</span>
+        <h2 class="footer-sub__title">Hear about the next one first.</h2>
+        <p class="footer-sub__lead">Every so often we negotiate a rate or an inclusion worth knowing about. We send those to the people planning events, and nothing else.</p></div>
+      <form class="sub-form" data-subscribe action="https://conferencevenues.us8.list-manage.com/subscribe/post?u=cbdec96862600286c6b1444dd&amp;id=fd4e158c05" method="POST" target="_blank">
+        <input type="hidden" name="u" value="cbdec96862600286c6b1444dd">
+        <input type="hidden" name="id" value="fd4e158c05">
+        <input type="text" name="b_cbdec96862600286c6b1444dd_fd4e158c05" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" value="">
+        <label class="sr-only" for="footer-sub-email">Work email</label>
+        <div class="sub-row">
+          <input id="footer-sub-email" type="email" name="EMAIL" required placeholder="Your work email" autocomplete="email">
+          <button type="submit" class="btn btn--teal">Send me offers <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <p class="sub-ok" data-form-success hidden>Thank you, you are on the list. We will be in touch the next time we have something worth sharing.</p>
+        <p class="sub-fine">Occasional emails. Unsubscribe anytime. We use your email only for CVBS updates.</p>
+      </form>
     </div>
-    <div class="footer__base">
-      <span>&copy; 2026 Conference Venues and Booking Services</span>
-      <span>Worldwide Venue Finding Solutions</span>
+    <div class="footer-grid">
+      <div>
+        <img src="assets/img/logo.png" alt="CVBS" width="42" height="36">
+        <p class="fnote">A free, worldwide venue finding service for conferences, events, group accommodation and corporate stays. Run on relationships since 1989.</p>
+        <div class="footer-contact" style="margin-top:1.4rem">
+          <a href="tel:0414784999"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg> 0414 784 999</a>
+          <a href="mailto:karen@conferencevenues.com.au"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> karen@conferencevenues.com.au</a>
+        </div>
+      </div>
+      <div><h4>Services</h4><ul><li><a href="conference-venue-finding.html">Conference venue finding</a></li><li><a href="group-accommodation.html">Group accommodation</a></li><li><a href="events.html">Product launches & events</a></li><li><a href="corporate-accommodation.html">Corporate accommodation</a></li></ul></div><div><h4>Company</h4><ul><li><a href="how-it-works.html">How it works</a></li><li><a href="destinations.html">Destinations</a></li><li><a href="about.html">About</a></li><li><a href="results.html">Client stories</a></li><li><a href="how-we-are-paid.html">How we're paid</a></li><li><a href="faq.html">FAQ</a></li></ul></div><div><h4>More</h4><ul><li><a href="offers.html">Current offers</a></li><li><a href="blog-index.html">Blog</a></li><li><a href="contact.html">Contact</a></li><li><a href="submit-a-brief.html">Get My Shortlist</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Conference Venues and Booking Services. Worldwide Venue Finding Solutions.</span>
+      <span class="footer-legal"><a href="privacy.html">Privacy</a> <a href="terms.html">Terms</a></span>
+      <span class="footer-credit">Designed &amp; built by <a href="https://theserviceedit.com" target="_blank" rel="noopener">The Service Edit</a></span>
     </div>
   </div>
 </footer>
+<script>/* Footer sign-up: same Mailchimp JSONP as assets/js/site.js, which this page does not load. */
+(function(){var f=document.querySelector('.site-footer [data-subscribe]');if(!f)return;
+f.addEventListener('submit',function(e){e.preventDefault();var em=f.querySelector('input[type="email"]');
+if(em&&!em.checkValidity()){em.reportValidity();return;}var hp=f.querySelector('input[name^="b_"]');if(hp&&hp.value)return;
+var b=f.querySelector('button[type="submit"]'),bh=b?b.innerHTML:'';if(b){b.disabled=true;b.textContent='Sending\u2026';}
+var cb='mcjsonp'+Date.now()+Math.floor(Math.random()*1e5),s=document.createElement('script'),t;
+function end(ok){clearTimeout(t);try{delete window[cb]}catch(x){window[cb]=undefined}if(s.parentNode)s.parentNode.removeChild(s);
+if(ok){var r=f.querySelector('.sub-row'),fi=f.querySelector('.sub-fine'),o=f.querySelector('[data-form-success]');if(r)r.style.display='none';if(fi)fi.style.display='none';if(o)o.hidden=false;}
+else if(b){b.disabled=false;b.innerHTML=bh;alertless();}}
+function alertless(){var m=f.querySelector('.sub-err');if(!m){m=document.createElement('p');m.className='sub-fine sub-err';m.setAttribute('role','alert');f.appendChild(m);}m.textContent='We could not add your email. Please try again.';}
+window[cb]=function(d){end(d&&(d.result==='success'||/already subscribed/i.test(d.msg||'')));};
+s.onerror=function(){end(false)};t=setTimeout(function(){end(false)},12000);
+s.src=f.action.replace(/&amp;/g,'&')+'&EMAIL='+encodeURIComponent(em.value)+'&c='+cb;document.head.appendChild(s);});})();
+</script>
+
 
 <script>
   // hamburger
