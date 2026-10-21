@@ -67,3 +67,16 @@ preferred supplier of any hotel group." Do not remove that line, and do not move
 these marks under any heading using the words partner, preferred, accredited or
 official. Never use the Marriott Bonvoy mark: Bonvoy is a loyalty programme and
 displaying it asserts a corporate relationship that does not exist.
+
+## Added 22 Oct 2026: Hyatt, Crystalbrook Collection, Salter Brothers Hospitality
+
+Supplied by Mel as flat files on white. Knocked out to transparent with a
+luminance-to-alpha pass (anti-aliased edges kept), trimmed to the artwork, and a
+white copy made in `white/` for the homepage navy strip. Hyatt keeps its brand
+blue on light grounds.
+
+- Homepage navy strip (`index.html` .grp-strip): all three. --h: hyatt 24, crystalbrook 24, salter-brothers 50.
+- `results.html` "Some of the hotel groups we source through": all three, sized in that page's own style block.
+- Venue visits band: Hyatt only (Park Hyatt Sydney is walked). Crystalbrook and
+  Salter Brothers stay OUT of this band until a room inside them has a published
+  venue visit record, per the rule above.
